@@ -1,15 +1,9 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Clock1 from "./widgets/clock-1/Clock1";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Chrome New Tab Extension
-      </header>
-    </div>
-  );
+  return <Clock1 />;
 }
 
 export default App;

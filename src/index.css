@@ -4,10 +4,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --theme-bg: white;
-  --theme-clr: black;
   background-color: var(--theme-bg);
   color: var(--theme-clr);
+}
+
+:root {
+  --theme-bg: white;
+  --theme-clr: black;
+  --widget-background: #ffffff;
 }
 
 * {
@@ -18,8 +22,9 @@ body {
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
-  body {
+  :root {
     --theme-bg: #282c34;
     --theme-clr: white;
+    --widget-background: #2e2e2e;
   }
 }
