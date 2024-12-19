@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Calendar1.css";
 
 const getMonthName = (date: Date) => {
@@ -11,6 +11,14 @@ const getWeekName = (date: Date) => {
 
 export default function Calendar1() {
   const [currentDate, setCurrentDate] = useState(new Date());
+
+  useEffect(() => {
+    const intervalRef = setInterval(() => {
+      setCurrentDate(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalRef);
+  }, []);
 
   return (
     <div className="calendar-1__container">
