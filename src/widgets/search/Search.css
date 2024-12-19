@@ -1,5 +1,4 @@
 .search__container {
-  --input-text-color: black;
   --input-caret-color: #015ce0;
 
   height: 52px;
@@ -19,7 +18,7 @@
   width: 100%;
   outline: none;
   font-size: 1.8rem;
-  color: var(--input-text-color);
+  color: var(--theme-clr);
   caret-color: var(--input-caret-color);
 }
 
@@ -30,7 +29,6 @@
 
 @media (prefers-color-scheme: dark) {
   .search__container {
-    --input-text-color: white;
     --input-caret-color: #71ccff;
   }
   .search-icon__container {

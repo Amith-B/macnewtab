@@ -10,6 +10,7 @@ body {
 
 :root {
   --theme-bg: #efefee;
+  --theme-bg-with-opacity: #efefee9e;
   --theme-clr: black;
   --theme-shadow: #adadad;
   --theme-border: #c6c6c6;
@@ -26,6 +27,7 @@ body {
 @media (prefers-color-scheme: dark) {
   :root {
     --theme-bg: #2e2d2c;
+    --theme-bg-with-opacity: #2e2d2c9e;
     --theme-clr: white;
     --theme-shadow: black;
     --theme-border: #585856;
