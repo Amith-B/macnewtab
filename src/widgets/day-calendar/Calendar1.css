@@ -5,7 +5,7 @@
   --calendar-date-text-color: #272727;
 
   background-color: var(--calendar-background);
-  box-shadow: 0px 0px 4px black;
+  box-shadow: 0px 0px 4px var(--theme-shadow);
   padding: 12px;
   width: 12.5rem;
   height: 12.5rem;
@@ -39,7 +39,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .calendar-1__bottom-section {
+  .calendar-1__container {
     --calendar-date-text-color: #dfdfdf;
   }
 }

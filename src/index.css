@@ -9,8 +9,9 @@ body {
 }
 
 :root {
-  --theme-bg: white;
+  --theme-bg: #efefee;
   --theme-clr: black;
+  --theme-shadow: #adadad;
   --widget-background: #ffffff;
 }
 
@@ -23,8 +24,9 @@ body {
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --theme-bg: #282c34;
+    --theme-bg: #2e2d2c;
     --theme-clr: white;
+    --theme-shadow: black;
     --widget-background: #2e2e2e;
   }
 }

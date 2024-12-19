@@ -5,7 +5,7 @@
 
 .clock-1__bezel {
   background-color: var(--clock-background);
-  box-shadow: 0px 0px 4px black;
+  box-shadow: 0px 0px 4px var(--theme-shadow);
   padding: 12px;
   width: 12.5rem;
   height: 12.5rem;
