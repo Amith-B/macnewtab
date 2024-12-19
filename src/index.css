@@ -12,6 +12,7 @@ body {
   --theme-bg: #efefee;
   --theme-clr: black;
   --theme-shadow: #adadad;
+  --theme-border: #c6c6c6;
   --widget-background: #ffffff;
 }
 
@@ -27,6 +28,7 @@ body {
     --theme-bg: #2e2d2c;
     --theme-clr: white;
     --theme-shadow: black;
+    --theme-border: #585856;
     --widget-background: #2e2e2e;
   }
 }
