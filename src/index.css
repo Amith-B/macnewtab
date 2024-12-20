@@ -4,8 +4,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--theme-bg);
-  color: var(--theme-clr);
 }
 
 html,
@@ -15,29 +13,8 @@ body,
   width: 100%;
 }
 
-:root {
-  --theme-bg: #efefee;
-  --theme-bg-with-opacity: #efefee9e;
-  --theme-clr: black;
-  --theme-shadow: #adadad;
-  --theme-border: #c6c6c6;
-  --widget-background: #ffffff;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
   scroll-behavior: smooth;
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --theme-bg: #2e2d2c;
-    --theme-bg-with-opacity: #2e2d2c9e;
-    --theme-clr: white;
-    --theme-shadow: black;
-    --theme-border: #585856;
-    --widget-background: #2e2e2e;
-  }
 }

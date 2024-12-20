@@ -1,0 +1,92 @@
+.settings__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings__overlay.visible {
+  pointer-events: auto;
+}
+
+.settings__container {
+  max-width: 840px;
+  width: 100%;
+  height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--theme-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  transform: translate(160vh, 5vh) scaleY(0.1);
+  transform-origin: bottom right;
+}
+
+.settings__container.animate {
+  transition: transform 0.6s cubic-bezier(0.3, 0.61, 0.355, 1);
+}
+
+.settings__overlay.visible .settings__container {
+  transform: translate(0, 0) scaleY(1);
+}
+
+.settings__side-panel {
+  width: 200px;
+  height: 100%;
+  backdrop-filter: blur(60px) saturate(150%);
+  -webkit-backdrop-filter: blur(60px) saturate(150%);
+  padding: 18px 20px;
+}
+
+.settings__menu-content {
+  flex-grow: 1;
+  height: 100%;
+  background-color: var(--theme-bg);
+}
+
+.settings__window-manager {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.settings__window-manager-button {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.settings__window-manager-button svg {
+  opacity: 0;
+}
+.settings__window-manager-button:hover svg {
+  opacity: 1;
+}
+
+.settings__window-close {
+  background-color: #fe5f57;
+}
+
+.settings__window-minimize {
+  background-color: #febc2e;
+}
+
+.settings__window-expand {
+  background-color: var(--window-expand-bg);
+  pointer-events: none;
+}

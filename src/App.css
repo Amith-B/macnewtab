@@ -1,9 +1,40 @@
 .App {
   height: 100%;
   width: 100%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--theme-bg);
+  color: var(--theme-clr);
+}
+
+.App.theme-system,
+.App.theme-light {
+  --theme-bg: #efefee;
+  --theme-bg-with-opacity: #efefee9e;
+  --theme-clr: black;
+  --theme-shadow: #adadad;
+  --theme-border: #c6c6c6;
+  --widget-background: #ffffff;
+
+  --window-expand-bg: #959595;
+  --active-window-indicator: #2c2c2c;
+}
+
+@media (prefers-color-scheme: dark) {
+  .App.theme-system,
+  .App.theme-dark {
+    --theme-bg: #2e2d2c;
+    --theme-bg-with-opacity: #2e2d2c9e;
+    --theme-clr: white;
+    --theme-shadow: black;
+    --theme-border: #585856;
+    --widget-background: #2e2e2e;
+
+    --window-expand-bg: #878787;
+    --active-window-indicator: #c4c5c5;
+  }
 }
 
 .main-content {
@@ -24,6 +55,31 @@
   flex-direction: column;
   gap: 24px;
   align-self: center;
+}
+
+.settings-icon {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.settings-icon.settings-active::after {
+  content: " ";
+  width: 5px;
+  height: 5px;
+  display: block;
+  border-radius: 50%;
+  margin: auto;
+  margin-top: 6px;
+  background-color: var(--active-window-indicator);
 }
 
 @media screen and (max-width: 1080px) {

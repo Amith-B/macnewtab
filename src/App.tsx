@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 import Clock1 from "./widgets/clock-1/Clock1";
 import Calendar1 from "./widgets/day-calendar/Calendar1";
@@ -8,10 +8,15 @@ import {
   SEARCH_ENGINE_LOCAL_STORAGE_KEY,
   searchEngineKeys,
 } from "./static/searchEngine";
-import Provider from "./context/provider";
+import { ReactComponent as SettingsIcon } from "./assets/settings.svg";
+import { AppContext } from "./context/provider";
+import Settings from "./components/Settings";
 
 function App() {
   const [searchEngine, setSearchEngine] = useState("");
+  const [settingsVisible, setSettingsVisible] = useState(false);
+  const [settingsActive, setSettingsActive] = useState(false);
+  const { theme } = useContext(AppContext);
 
   useEffect(() => {
     const defaultSearchEngine = localStorage.getItem(
@@ -31,23 +36,36 @@ function App() {
   };
 
   return (
-    <Provider>
-      <div className="App">
-        <div className="main-content">
-          <div className="section-1">
-            <Clock1 />
-            <Calendar1 />
-          </div>
-          <div className="section-2">
-            <Search selectedSearchEngine={searchEngine} />
-            <SearchEngineSwitcher
-              selectedSearchEngine={searchEngine}
-              onSelectedEngineChange={handleSearchEngineChange}
-            />
-          </div>
+    <div className={`App theme-${theme}`}>
+      <div className="main-content">
+        <div className="section-1">
+          <Clock1 />
+          <Calendar1 />
+        </div>
+        <div className="section-2">
+          <Search selectedSearchEngine={searchEngine} />
+          <SearchEngineSwitcher
+            selectedSearchEngine={searchEngine}
+            onSelectedEngineChange={handleSearchEngineChange}
+          />
         </div>
       </div>
-    </Provider>
+      <button
+        className={
+          "settings-icon" +
+          (settingsActive || settingsVisible ? " settings-active" : "")
+        }
+        onClick={() => setSettingsVisible(true)}
+      >
+        <SettingsIcon />
+      </button>
+      <Settings
+        open={settingsVisible}
+        onClose={() => setSettingsVisible(false)}
+        animate={settingsActive}
+        onAnimationToggle={setSettingsActive}
+      />
+    </div>
   );
 }
 
