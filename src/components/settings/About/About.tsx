@@ -2,5 +2,43 @@ import React from "react";
 import "./About.css";
 
 export default function About() {
-  return <div className="about__container">About Content</div>;
+  return (
+    <div className="about__container">
+      <div className="about__info-container">
+        <div className="about__row-item">
+          Extension Name
+          <div>Mac New Tab</div>
+        </div>
+        <div className="about__row-item">
+          Version
+          <div>{process.env.REACT_APP_VERSION}</div>
+        </div>
+        <div className="about__row-item">
+          Github
+          <a href="https://github.com/Amith-B/macnewtab">Amith-B/macnewtab</a>
+        </div>
+        <div className="about__row-item">
+          Bug Report Link
+          <a href="https://github.com/Amith-B/macnewtab">
+            Amith-B/macnewtab/issues
+          </a>
+        </div>
+        <div className="about__row-item">
+          Developer Info
+          <div>
+            Amith B(<a href="mailto:amithbr6@gmail.com">amithbr6@gmail.com</a>)
+          </div>
+        </div>
+        <div className="about__row-item">
+          Supported Browsers
+          <div>Chrome</div>
+        </div>
+        <div className="about__row-item">
+          Third-Party Libraries Used
+          <div>React 19</div>
+        </div>
+      </div>
+      &copy; 2025 Amith B. All Rights Reserved.
+    </div>
+  );
 }

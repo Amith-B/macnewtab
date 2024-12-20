@@ -16,6 +16,8 @@
   --theme-clr: #272727;
   --theme-shadow: #adadad;
   --theme-border: #c6c6c6;
+  --theme-link-clr: #4b4bff;
+
   --widget-background: #ffffff;
 
   --window-expand-bg: #959595;
@@ -45,6 +47,8 @@
     --theme-clr: #dfdfdf;
     --theme-shadow: black;
     --theme-border: #585856;
+    --theme-link-clr: #9ba6ff;
+
     --widget-background: #2e2e2e;
 
     --window-expand-bg: #878787;
