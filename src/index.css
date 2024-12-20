@@ -8,6 +8,13 @@ body {
   color: var(--theme-clr);
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
 :root {
   --theme-bg: #efefee;
   --theme-bg-with-opacity: #efefee9e;
