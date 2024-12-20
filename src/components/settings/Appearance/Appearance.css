@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 1rem;
 }
 
 .appearance__theme-selection {
@@ -44,6 +45,7 @@
 
 .appearance__theme-option .appearance__theme-label {
   opacity: 0.8;
+  font-size: 0.75rem;
 }
 
 .appearance__theme-option.selected .appearance__theme-label {
