@@ -66,7 +66,7 @@ export default function Clock1() {
           };
 
           return (
-            <div className="hour-number" style={numberStyle}>
+            <div key={hour} className="hour-number" style={numberStyle}>
               {hour + 1}
             </div>
           );

@@ -35,6 +35,7 @@ export default function Appearance() {
         <div className="appearance__theme-selection">
           {THEME_LIST.map((item) => (
             <button
+              key={item.key}
               className={
                 "appearance__theme-option" +
                 (theme === item.key ? " selected" : "")
