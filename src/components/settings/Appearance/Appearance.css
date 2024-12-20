@@ -6,6 +6,16 @@
 }
 
 .appearance__theme-selection-container {
+  border-bottom: 1px solid var(--theme-border);
+  padding-bottom: 12px;
+}
+
+.appearance__wallpaper-selection-container {
+  padding: 12px 0;
+}
+
+.appearance__theme-selection-container,
+.appearance__wallpaper-selection-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -51,4 +61,31 @@
 .appearance__theme-option.selected .appearance__theme-label {
   opacity: 1;
   font-weight: bold;
+}
+
+.image-picker {
+  display: inline-block;
+  position: relative;
+  font-size: 0.875rem;
+}
+
+.file-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  background-color: var(--theme-button-bg);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.file-label span {
+  color: var(--theme-clr);
+  font-weight: bold;
+}
+
+.image-input {
+  display: none;
 }

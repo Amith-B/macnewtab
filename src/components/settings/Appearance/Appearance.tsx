@@ -4,7 +4,29 @@ import { THEME_LIST } from "../../../static/theme";
 import { AppContext } from "../../../context/provider";
 
 export default function Appearance() {
-  const { theme, handleThemeChange } = useContext(AppContext);
+  const { theme, handleThemeChange, setBackgroundImage } =
+    useContext(AppContext);
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target?.files?.[0];
+    if (!selectedFile) return;
+
+    const fileReader = new FileReader();
+
+    fileReader.onload = (loadEvent) => {
+      const imgElement = new Image();
+      imgElement.onload = () => {
+        const imageUrl = loadEvent.target?.result;
+        setBackgroundImage(imageUrl as string);
+      };
+
+      if (imgElement) {
+        imgElement.src = loadEvent?.target?.result as any;
+      }
+    };
+
+    fileReader.readAsDataURL(selectedFile);
+  };
 
   return (
     <div className="appearance__container">
@@ -27,6 +49,21 @@ export default function Appearance() {
               <div className="appearance__theme-label">{item.title}</div>
             </button>
           ))}
+        </div>
+      </div>
+      <div className="appearance__wallpaper-selection-container">
+        Upload Wallpaper
+        <div className="image-picker">
+          <label htmlFor="file-input" className="file-label">
+            <span>Choose File</span>
+            <input
+              type="file"
+              id="file-input"
+              className="image-input"
+              accept="image/*"
+              onChange={handleFileUpload}
+            />
+          </label>
         </div>
       </div>
     </div>

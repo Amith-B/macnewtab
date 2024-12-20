@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  CSSProperties,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import "./App.css";
 import Clock1 from "./widgets/clock-1/Clock1";
 import Calendar1 from "./widgets/day-calendar/Calendar1";
@@ -16,7 +22,7 @@ function App() {
   const [searchEngine, setSearchEngine] = useState("");
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [settingsActive, setSettingsActive] = useState(false);
-  const { theme } = useContext(AppContext);
+  const { theme, backgroundImage } = useContext(AppContext);
 
   useEffect(() => {
     const defaultSearchEngine = localStorage.getItem(
@@ -35,8 +41,19 @@ function App() {
     setSearchEngine(val);
   };
 
+  const bgStyle: CSSProperties & Record<string, string> = useMemo(
+    () => ({
+      ...(backgroundImage
+        ? {
+            "--bg-image": `url(${backgroundImage})`,
+          }
+        : {}),
+    }),
+    [backgroundImage]
+  );
+
   return (
-    <div className={`App theme-${theme}`}>
+    <div className={`App theme-${theme}`} style={bgStyle}>
       <div className="main-content">
         <div className="section-1">
           <Clock1 />

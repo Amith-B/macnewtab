@@ -7,6 +7,9 @@
   justify-content: center;
   background-color: var(--theme-bg);
   color: var(--theme-clr);
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center center;
 }
 
 .App.theme-system,
@@ -17,6 +20,7 @@
   --theme-shadow: #adadad;
   --theme-border: #c6c6c6;
   --theme-link-clr: #4b4bff;
+  --theme-button-bg: #fdfdfd;
 
   --widget-background: #ffffff;
 
@@ -48,6 +52,7 @@
     --theme-shadow: black;
     --theme-border: #585856;
     --theme-link-clr: #9ba6ff;
+    --theme-button-bg: #656665;
 
     --widget-background: #2e2e2e;
 
