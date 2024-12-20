@@ -20,7 +20,7 @@ function App() {
     if (defaultSearchEngine && searchEngineKeys.includes(defaultSearchEngine)) {
       setSearchEngine(defaultSearchEngine);
     } else {
-      setSearchEngine("google");
+      setSearchEngine(searchEngineKeys[0]);
     }
   }, []);
 
