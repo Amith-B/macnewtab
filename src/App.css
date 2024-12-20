@@ -12,7 +12,7 @@
 .App.theme-system,
 .App.theme-light {
   --theme-bg: #efefee;
-  --theme-bg-with-opacity: #efefee9e;
+  --theme-bg-with-opacity: #efeeee9e;
   --theme-clr: #272727;
   --theme-shadow: #adadad;
   --theme-border: #c6c6c6;
@@ -32,6 +32,9 @@
 
   --search-engine-tile-indicator-bg: #d2d2d0;
   --search-engine-tile-icon-clr: #595958;
+
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: #3d3d3d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -58,6 +61,9 @@
 
     --search-engine-tile-indicator-bg: #555657;
     --search-engine-tile-icon-clr: #e6f0f7;
+
+    --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.7);
+    --settings-side-panel-text-color: white;
   }
 
   .App.theme-system .search-engine-switcher__tile-selection-indicator.selected,

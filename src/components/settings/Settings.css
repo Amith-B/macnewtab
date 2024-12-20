@@ -39,15 +39,23 @@
 .settings__side-panel {
   width: 200px;
   height: 100%;
-  backdrop-filter: blur(60px) saturate(150%);
-  -webkit-backdrop-filter: blur(60px) saturate(150%);
-  padding: 18px 20px;
+  backdrop-filter: var(--settings-side-panel-blur);
+  -webkit-backdrop-filter: var(--settings-side-panel-blur);
+  padding: 18px 10px;
 }
 
 .settings__menu-content {
   flex-grow: 1;
   height: 100%;
   background-color: var(--theme-bg);
+  padding: 18px 24px;
+}
+
+.settings__menu-content-title {
+  color: var(--theme-clr);
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 24px;
 }
 
 .settings__window-manager {
@@ -56,6 +64,7 @@
   display: flex;
   flex-direction: row;
   gap: 8px;
+  padding: 0px 10px;
 }
 
 .settings__window-manager-button {
@@ -89,4 +98,30 @@
 .settings__window-expand {
   background-color: var(--window-expand-bg);
   pointer-events: none;
+}
+
+.settings_menu-item {
+  padding: 4px 8px;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  color: var(--settings-side-panel-text-color);
+  font-weight: 600;
+  font-size: 0.813rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 4px;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.settings_menu-item svg {
+  width: 26px;
+  height: 26px;
+}
+
+.settings_menu-item.selected {
+  color: white;
+  background-color: #2c93ffc2;
 }

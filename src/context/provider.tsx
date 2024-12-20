@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactNode, createContext } from "react";
-import { THEME_LIST, THEME_LOCAL_STORAGE_KEY } from "../static/theme";
+import { THEME_KEYS, THEME_LOCAL_STORAGE_KEY } from "../static/theme";
 
 export const AppContext = createContext({
   date: new Date(),
@@ -18,7 +18,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
     const defaultTheme = localStorage.getItem(THEME_LOCAL_STORAGE_KEY);
 
-    if (defaultTheme && THEME_LIST.includes(defaultTheme)) {
+    if (defaultTheme && THEME_KEYS.includes(defaultTheme)) {
       setTheme(defaultTheme);
     } else {
       setTheme("system");

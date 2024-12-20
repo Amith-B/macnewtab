@@ -10,7 +10,7 @@ import {
 } from "./static/searchEngine";
 import { ReactComponent as SettingsIcon } from "./assets/settings.svg";
 import { AppContext } from "./context/provider";
-import Settings from "./components/Settings";
+import Settings from "./components/settings/Settings";
 
 function App() {
   const [searchEngine, setSearchEngine] = useState("");
