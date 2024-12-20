@@ -4,7 +4,7 @@ import { THEME_LIST } from "../../../static/theme";
 import { AppContext } from "../../../context/provider";
 
 export default function Appearance() {
-  const { theme, handleThemeChange, setBackgroundImage } =
+  const { theme, handleThemeChange, handleWallpaperChange } =
     useContext(AppContext);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +17,7 @@ export default function Appearance() {
       const imgElement = new Image();
       imgElement.onload = () => {
         const imageUrl = loadEvent.target?.result;
-        setBackgroundImage(imageUrl as string);
+        handleWallpaperChange(imageUrl as string);
       };
 
       if (imgElement) {

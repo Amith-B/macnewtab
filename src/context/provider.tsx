@@ -7,7 +7,7 @@ export const AppContext = createContext({
   theme: "system",
   handleThemeChange: (val: string) => {},
   backgroundImage: "",
-  setBackgroundImage: (val: string) => {},
+  handleWallpaperChange: (val: string) => {},
 });
 
 export default function AppProvider({ children }: { children: ReactNode }) {
@@ -34,13 +34,14 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     return () => clearInterval(intervalRef);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem(BG_IMAGE_LOCAL_STORAGE_KEY, backgroundImage);
-  }, [backgroundImage]);
-
   const handleThemeChange = (val: string) => {
     localStorage.setItem(THEME_LOCAL_STORAGE_KEY, val);
     setTheme(val);
+  };
+
+  const handleWallpaperChange = (val: string) => {
+    localStorage.setItem(BG_IMAGE_LOCAL_STORAGE_KEY, val);
+    setBackgroundImage(val);
   };
 
   return (
@@ -50,7 +51,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         theme,
         handleThemeChange,
         backgroundImage,
-        setBackgroundImage,
+        handleWallpaperChange,
       }}
     >
       {children}
