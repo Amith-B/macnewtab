@@ -6,6 +6,20 @@
   width: 100%;
 }
 
+.about__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-size: 1rem;
+}
+
+.about__content svg {
+  width: 46px;
+  height: 46px;
+}
+
 .about__row-item {
   display: flex;
   flex-direction: row;
