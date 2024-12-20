@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Calendar1.css";
+import { AppContext } from "../../context/provider";
 
 const getMonthName = (date: Date) => {
   return new Intl.DateTimeFormat("en-US", { month: "short" }).format(date);
@@ -12,13 +13,11 @@ const getWeekName = (date: Date) => {
 export default function Calendar1() {
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  useEffect(() => {
-    const intervalRef = setInterval(() => {
-      setCurrentDate(new Date());
-    }, 1000);
+  const { date } = useContext(AppContext);
 
-    return () => clearInterval(intervalRef);
-  }, []);
+  useEffect(() => {
+    setCurrentDate(date);
+  }, [date]);
 
   return (
     <div className="calendar-1__container">

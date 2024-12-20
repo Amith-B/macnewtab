@@ -8,6 +8,7 @@ import {
   SEARCH_ENGINE_LOCAL_STORAGE_KEY,
   searchEngineKeys,
 } from "./static/searchEngine";
+import Provider from "./context/provider";
 
 function App() {
   const [searchEngine, setSearchEngine] = useState("");
@@ -30,21 +31,23 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="main-content">
-        <div className="section-1">
-          <Clock1 />
-          <Calendar1 />
-        </div>
-        <div className="section-2">
-          <Search selectedSearchEngine={searchEngine} />
-          <SearchEngineSwitcher
-            selectedSearchEngine={searchEngine}
-            onSelectedEngineChange={handleSearchEngineChange}
-          />
+    <Provider>
+      <div className="App">
+        <div className="main-content">
+          <div className="section-1">
+            <Clock1 />
+            <Calendar1 />
+          </div>
+          <div className="section-2">
+            <Search selectedSearchEngine={searchEngine} />
+            <SearchEngineSwitcher
+              selectedSearchEngine={searchEngine}
+              onSelectedEngineChange={handleSearchEngineChange}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </Provider>
   );
 }
 

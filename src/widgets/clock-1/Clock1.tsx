@@ -1,9 +1,16 @@
-import React, { CSSProperties, useEffect, useMemo, useState } from "react";
+import React, {
+  CSSProperties,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import "./Clock1.css";
 import { ReactComponent as HourHand } from "./hour-hand.svg";
 import { ReactComponent as MinHand } from "./min-hand.svg";
 import { ReactComponent as SecHand } from "./sec-hand.svg";
 import { ReactComponent as SecSticks } from "./sec-sticks.svg";
+import { AppContext } from "../../context/provider";
 
 const currentDate = new Date();
 const hourNumbers = Array.from(Array(12).keys());
@@ -12,6 +19,8 @@ export default function Clock1() {
   const [hr, setHr] = useState(currentDate.getHours());
   const [min, setMin] = useState(currentDate.getMinutes());
   const [sec, setSec] = useState(currentDate.getSeconds());
+
+  const { date } = useContext(AppContext);
 
   const hrStyle: CSSProperties & Record<string, string> = useMemo(() => {
     return {
@@ -32,16 +41,10 @@ export default function Clock1() {
   }, [sec]);
 
   useEffect(() => {
-    const intervalRef = setInterval(() => {
-      const newDate = new Date();
-
-      setHr(newDate.getHours());
-      setMin(newDate.getMinutes());
-      setSec(newDate.getSeconds());
-    }, 1000);
-
-    return () => clearInterval(intervalRef);
-  }, []);
+    setHr(date.getHours());
+    setMin(date.getMinutes());
+    setSec(date.getSeconds());
+  }, [date]);
 
   return (
     <div className="clock-1__container clock-1__bezel">
