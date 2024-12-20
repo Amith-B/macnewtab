@@ -13,7 +13,7 @@
 .App.theme-light {
   --theme-bg: #efefee;
   --theme-bg-with-opacity: #efefee9e;
-  --theme-clr: black;
+  --theme-clr: #272727;
   --theme-shadow: #adadad;
   --theme-border: #c6c6c6;
   --widget-background: #ffffff;
@@ -39,7 +39,7 @@
   .App.theme-dark {
     --theme-bg: #2e2d2c;
     --theme-bg-with-opacity: #2e2d2c9e;
-    --theme-clr: white;
+    --theme-clr: #dfdfdf;
     --theme-shadow: black;
     --theme-border: #585856;
     --widget-background: #2e2e2e;
