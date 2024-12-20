@@ -20,6 +20,18 @@
 
   --window-expand-bg: #959595;
   --active-window-indicator: #2c2c2c;
+
+  --calendar-date-text-color: #272727;
+
+  --clock-1-background: #b3b2b3;
+  --clock-1-dial-background: #ffffff;
+
+  --input-caret-color: #015ce0;
+
+  --input-search-icon-color: #6c6d6b;
+
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #595958;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,6 +46,23 @@
 
     --window-expand-bg: #878787;
     --active-window-indicator: #c4c5c5;
+
+    --calendar-date-text-color: #dfdfdf;
+
+    --clock-1-background: #24272b;
+    --clock-1-dial-background: #ffffff;
+
+    --input-caret-color: #71ccff;
+
+    --input-search-icon-color: #a6a6a5;
+
+    --search-engine-tile-indicator-bg: #555657;
+    --search-engine-tile-icon-clr: #e6f0f7;
+  }
+
+  .App.theme-system .search-engine-switcher__tile-selection-indicator.selected,
+  .App.theme-dark .search-engine-switcher__tile-selection-indicator.selected {
+    --search-engine-tile-icon-clr: white;
   }
 }
 

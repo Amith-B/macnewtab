@@ -1,6 +1,4 @@
 .search__container {
-  --input-caret-color: #015ce0;
-
   height: 52px;
   padding: 10px;
   background: var(--theme-bg);
@@ -24,14 +22,5 @@
 
 .search-icon__container {
   height: 100%;
-  color: #6c6d6b;
-}
-
-@media (prefers-color-scheme: dark) {
-  .search__container {
-    --input-caret-color: #71ccff;
-  }
-  .search-icon__container {
-    color: #a6a6a5;
-  }
+  color: var(--input-search-icon-color);
 }

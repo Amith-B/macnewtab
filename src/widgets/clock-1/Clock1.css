@@ -1,10 +1,5 @@
-.clock-1__container {
-  --clock-background: #b3b2b3;
-  --clock-dial-background: #ffffff;
-}
-
 .clock-1__bezel {
-  background-color: var(--clock-background);
+  background-color: var(--clock-1-background);
   box-shadow: 0px 0px 4px var(--theme-shadow);
   padding: 12px;
   width: 12.5rem;
@@ -13,7 +8,7 @@
 }
 
 .clock-1__dial {
-  background-color: var(--clock-dial-background);
+  background-color: var(--clock-1-dial-background);
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -38,11 +33,4 @@
   --hour-number-rotation: calc(var(--hour-counter) * 30deg);
   transform: rotate(var(--hour-number-rotation)) translateY(-64px)
     rotate(calc(1turn - var(--hour-number-rotation)));
-}
-
-@media (prefers-color-scheme: dark) {
-  .clock-1__container {
-    --clock-background: #24272b;
-    --clock-dial-background: #ffffff;
-  }
 }

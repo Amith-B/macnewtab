@@ -2,7 +2,6 @@
   --calendar-background: var(--widget-background);
   --calendar-week-text-color: #ff453a;
   --calendar-month-text-color: #a1a1a1;
-  --calendar-date-text-color: #272727;
 
   background-color: var(--calendar-background);
   box-shadow: 0px 0px 4px var(--theme-shadow);
@@ -36,10 +35,4 @@
   color: var(--calendar-date-text-color);
   font-size: 8rem;
   line-height: 0.8;
-}
-
-@media (prefers-color-scheme: dark) {
-  .calendar-1__container {
-    --calendar-date-text-color: #dfdfdf;
-  }
 }
