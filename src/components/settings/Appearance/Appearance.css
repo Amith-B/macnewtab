@@ -23,6 +23,10 @@
   align-items: center;
   gap: 6px;
   font-size: 0.75rem;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: var(--theme-clr);
 }
 
 .appearance__theme-image {

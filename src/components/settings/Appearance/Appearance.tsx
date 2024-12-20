@@ -12,16 +12,20 @@ export default function Appearance() {
         Appearance
         <div className="appearance__theme-selection">
           {THEME_LIST.map((item) => (
-            <div
+            <button
               className={
                 "appearance__theme-option" +
                 (theme === item.key ? " selected" : "")
               }
               onClick={() => handleThemeChange(item.key)}
             >
-              <img src={item.image} className="appearance__theme-image" />
+              <img
+                alt={item.title}
+                src={item.image}
+                className="appearance__theme-image"
+              />
               <div className="appearance__theme-label">{item.title}</div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
