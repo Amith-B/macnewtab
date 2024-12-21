@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./Appearance.css";
 import { THEME_LIST } from "../../../static/theme";
 import { AppContext } from "../../../context/provider";
+import { ReactComponent as DeleteIcon } from "./delete.svg";
 
 export default function Appearance() {
   const { theme, handleThemeChange, handleWallpaperChange } =
@@ -54,17 +55,25 @@ export default function Appearance() {
       </div>
       <div className="appearance__wallpaper-selection-container">
         Upload Wallpaper
-        <div className="image-picker">
-          <label htmlFor="file-input" className="file-label">
-            <span>Choose File</span>
-            <input
-              type="file"
-              id="file-input"
-              className="image-input"
-              accept="image/*"
-              onChange={handleFileUpload}
-            />
-          </label>
+        <div className="appearance__wallpaper-actions-container">
+          <div className="image-picker">
+            <label htmlFor="file-input" className="file-label">
+              <span>Choose File</span>
+              <input
+                type="file"
+                id="file-input"
+                className="image-input"
+                accept="image/*"
+                onChange={handleFileUpload}
+              />
+            </label>
+          </div>
+          <button
+            className="appearance__wallpaper-delete"
+            onClick={() => handleWallpaperChange("")}
+          >
+            <DeleteIcon />
+          </button>
         </div>
       </div>
     </div>

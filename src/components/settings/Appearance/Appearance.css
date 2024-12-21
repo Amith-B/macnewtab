@@ -19,7 +19,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 
 .appearance__theme-selection {
@@ -88,4 +89,27 @@
 
 .image-input {
   display: none;
+}
+
+.appearance__wallpaper-actions-container {
+  display: flex;
+  gap: 8px;
+}
+
+.appearance__wallpaper-delete {
+  background: var(--theme-button-bg);
+  border-radius: 6px;
+  height: 24px;
+  width: 24px;
+  outline: none;
+  border: none;
+  color: var(--theme-clr);
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.appearance__wallpaper-delete svg {
+  width: 100%;
+  height: 100%;
 }
