@@ -40,6 +40,10 @@ export default function About() {
             <div>Chrome</div>
           </div>
           <div className="about__row-item">
+            Permissions Needed
+            <div>topSites (to access top visited sites)</div>
+          </div>
+          <div className="about__row-item">
             Third-Party Libraries Used
             <div>React 19</div>
           </div>

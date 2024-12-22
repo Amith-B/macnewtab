@@ -3,7 +3,7 @@
   "name": "Mac New Tab",
   "version": "1.0.0",
   "description": "A Simple New Tab (browser's home page) inspired by Mac OS design.",
-  "permissions": [],
+  "permissions": ["topSites"],
   "icons": {
     "16": "logo_16.png",
     "32": "logo_32.png",

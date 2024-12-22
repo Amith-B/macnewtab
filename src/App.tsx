@@ -1,5 +1,6 @@
 import React, {
   CSSProperties,
+  memo,
   useContext,
   useEffect,
   useMemo,
@@ -17,8 +18,9 @@ import {
 import { ReactComponent as SettingsIcon } from "./assets/settings.svg";
 import { AppContext } from "./context/provider";
 import Settings from "./components/settings/Settings";
+import TopSites from "./components/topsites/TopSites";
 
-function App() {
+const App = memo(function App() {
   const [searchEngine, setSearchEngine] = useState("");
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [settingsActive, setSettingsActive] = useState(false);
@@ -75,6 +77,7 @@ function App() {
         </div>
         <div className="section-2">
           <h1 className="greeting">Good {greeting}!</h1>
+          <TopSites />
           <Search selectedSearchEngine={searchEngine} />
           <SearchEngineSwitcher
             selectedSearchEngine={searchEngine}
@@ -99,6 +102,6 @@ function App() {
       />
     </div>
   );
-}
+});
 
 export default App;
