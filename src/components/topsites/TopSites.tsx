@@ -136,6 +136,7 @@ const TopSites = memo(function TopSites() {
         >
           {topSites.map((item, idx) => (
             <a
+              rel="noreferrer"
               className="top-site__item"
               href={item.url}
               target={separatePageSite ? "_blank" : "_self"}
