@@ -18,11 +18,13 @@ export default function About() {
           </div>
           <div className="about__row-item">
             Github
-            <a href="https://github.com/Amith-B/macnewtab">Amith-B/macnewtab</a>
+            <a href="https://github.com/Amith-B/macnewtab" target="_blank">
+              Amith-B/macnewtab
+            </a>
           </div>
           <div className="about__row-item">
             Bug Report Link
-            <a href="https://github.com/Amith-B/macnewtab">
+            <a href="https://github.com/Amith-B/macnewtab" target="_blank">
               Amith-B/macnewtab/issues
             </a>
           </div>
