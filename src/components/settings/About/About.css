@@ -13,6 +13,7 @@
   align-items: center;
   gap: 16px;
   font-size: 1rem;
+  padding-bottom: 16px;
 }
 
 .about__content svg {
@@ -42,4 +43,5 @@
   justify-content: space-between;
   align-items: center;
   height: calc(100% - 60px);
+  overflow: auto;
 }
