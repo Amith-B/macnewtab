@@ -1,6 +1,10 @@
 # This is a simple new tab (browser's home page) inspired by Mac OS design., created using React
 
-<!-- ![Screenshot](./docs/images/macnewtab.jpg) -->
+![Screenshot1](./docs/images/1.jpeg)
+![Screenshot2](./docs/images/2.jpeg)
+![Screenshot3](./docs/images/3.jpeg)
+![Screenshot4](./docs/images/4.jpeg)
+![Screenshot5](./docs/images/5.jpeg)
 
 ## Install Packages with: `yarn install`
 
