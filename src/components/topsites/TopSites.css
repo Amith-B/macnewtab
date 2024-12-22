@@ -59,7 +59,7 @@
   width: 24px;
   top: 0;
   background-color: var(--theme-button-bg);
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: none;
   outline: none;
   cursor: pointer;
   color: var(--theme-clr);
