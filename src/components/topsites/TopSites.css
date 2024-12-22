@@ -11,7 +11,8 @@
   display: flex;
   gap: 20px;
   padding: 0 26px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--theme-bg-blur);
+  -webkit-backdrop-filter: var(--theme-bg-blur);
   overflow-x: auto;
   white-space: nowrap;
 }

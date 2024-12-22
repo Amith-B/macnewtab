@@ -13,6 +13,8 @@
   display: flex;
   gap: 16px;
   color: var(--theme-clr);
+  backdrop-filter: var(--theme-bg-blur);
+  -webkit-backdrop-filter: var(--theme-bg-blur);
 }
 
 .search-engine-switcher__title {
