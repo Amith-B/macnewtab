@@ -21,6 +21,7 @@
   --theme-border: #c6c6c6;
   --theme-link-clr: #4b4bff;
   --theme-button-bg: #fdfdfd;
+  --theme-toggle-bg: #ccc;
   --theme-bg-blur: blur(60px) saturate(150%);
 
   --widget-background: #ffffff;
@@ -54,6 +55,7 @@
     --theme-border: #585856;
     --theme-link-clr: #9ba6ff;
     --theme-button-bg: #656665;
+    --theme-toggle-bg: #656665;
     --theme-bg-blur: blur(60px) saturate(150%);
 
     --widget-background: #2e2e2e;
