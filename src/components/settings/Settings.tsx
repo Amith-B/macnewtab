@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import "./Settings.css";
 import { ReactComponent as CloseIcon } from "./close-icon.svg";
 import { ReactComponent as MinimizeIcon } from "./minimize-icon.svg";
+import { ReactComponent as GeneralIcon } from "./general.svg";
 import { ReactComponent as AppearanceIcon } from "./appearance.svg";
 import { ReactComponent as AboutIcon } from "./about.svg";
 import Appearance from "./Appearance/Appearance";
@@ -12,7 +13,7 @@ export const SETTINGS_MENU = [
   {
     key: "general",
     title: "General",
-    icon: AboutIcon,
+    icon: GeneralIcon,
     content: General,
   },
   {
