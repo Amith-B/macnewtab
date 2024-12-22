@@ -6,8 +6,15 @@ import { ReactComponent as AppearanceIcon } from "./appearance.svg";
 import { ReactComponent as AboutIcon } from "./about.svg";
 import Appearance from "./Appearance/Appearance";
 import About from "./About/About";
+import General from "./general/General";
 
 export const SETTINGS_MENU = [
+  {
+    key: "general",
+    title: "General",
+    icon: AboutIcon,
+    content: General,
+  },
   {
     key: "appearance",
     title: "Appearance",

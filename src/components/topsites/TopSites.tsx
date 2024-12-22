@@ -1,8 +1,9 @@
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo, useContext, useEffect, useRef, useState } from "react";
 import "./TopSites.css";
 import { ReactComponent as LeftArrow } from "./left-arrow.svg";
 import { ReactComponent as RightArrow } from "./right-arrow.svg";
 import EmptySiteImage from "./empty-site-image.png";
+import { AppContext } from "../../context/provider";
 
 const SITE_IMAGE_URL = "https://www.google.com/s2/favicons?sz=64&domain=";
 const FALLBACK_SITE_IMAGE = EmptySiteImage;
@@ -33,6 +34,7 @@ const TopSites = memo(function TopSites() {
 
   const [isOverflowLeft, setIsOverflowLeft] = useState(false);
   const [isOverflowRight, setIsOverflowRight] = useState(true);
+  const { separatePageSite } = useContext(AppContext);
 
   const replaceLowResImages = (
     topVisitedSites: chrome.topSites.MostVisitedURL[]
@@ -136,7 +138,7 @@ const TopSites = memo(function TopSites() {
             <a
               className="top-site__item"
               href={item.url}
-              target="_blank"
+              target={separatePageSite ? "_blank" : "_self"}
               title={item.title}
               key={idx}
             >

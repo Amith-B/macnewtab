@@ -24,7 +24,14 @@ const App = memo(function App() {
   const [searchEngine, setSearchEngine] = useState("");
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [settingsActive, setSettingsActive] = useState(false);
-  const { theme, backgroundImage, date } = useContext(AppContext);
+  const {
+    theme,
+    backgroundImage,
+    date,
+    showGreeting,
+    showVisitedSites,
+    showSearchEngines,
+  } = useContext(AppContext);
 
   useEffect(() => {
     const defaultSearchEngine = localStorage.getItem(
@@ -76,13 +83,15 @@ const App = memo(function App() {
           <Calendar1 />
         </div>
         <div className="section-2">
-          <h1 className="greeting">Good {greeting}!</h1>
-          <TopSites />
+          {showGreeting && <h1 className="greeting">Good {greeting}!</h1>}
+          {showVisitedSites && <TopSites />}
           <Search selectedSearchEngine={searchEngine} />
-          <SearchEngineSwitcher
-            selectedSearchEngine={searchEngine}
-            onSelectedEngineChange={handleSearchEngineChange}
-          />
+          {showSearchEngines && (
+            <SearchEngineSwitcher
+              selectedSearchEngine={searchEngine}
+              onSelectedEngineChange={handleSearchEngineChange}
+            />
+          )}
         </div>
       </div>
       <button
