@@ -126,6 +126,16 @@
   background-color: var(--active-window-indicator);
 }
 
+.greeting {
+  color: var(--theme-clr);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.App.has-bg .greeting {
+  text-shadow: 1px 1px 2px var(--theme-shadow);
+}
+
 @media screen and (max-width: 1080px) {
   .main-content {
     gap: 50px;

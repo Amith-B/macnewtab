@@ -22,7 +22,7 @@ function App() {
   const [searchEngine, setSearchEngine] = useState("");
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [settingsActive, setSettingsActive] = useState(false);
-  const { theme, backgroundImage } = useContext(AppContext);
+  const { theme, backgroundImage, date } = useContext(AppContext);
 
   useEffect(() => {
     const defaultSearchEngine = localStorage.getItem(
@@ -52,14 +52,29 @@ function App() {
     [backgroundImage]
   );
 
+  const greeting = useMemo(() => {
+    const hour = date.getHours();
+    if (hour < 12) {
+      return "Morning";
+    } else if (hour < 17) {
+      return "Afternoon";
+    } else {
+      return "Evening";
+    }
+  }, [date.getHours()]);
+
   return (
-    <div className={`App theme-${theme}`} style={bgStyle}>
+    <div
+      className={`App theme-${theme}` + (backgroundImage ? " has-bg" : "")}
+      style={bgStyle}
+    >
       <div className="main-content">
         <div className="section-1">
           <Clock1 />
           <Calendar1 />
         </div>
         <div className="section-2">
+          <h1 className="greeting">Good {greeting}!</h1>
           <Search selectedSearchEngine={searchEngine} />
           <SearchEngineSwitcher
             selectedSearchEngine={searchEngine}
