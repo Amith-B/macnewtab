@@ -53,22 +53,40 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     const defaultShowGreeting = localStorage.getItem(
       SHOW_GREETING_LOCAL_STORAGE_KEY
     );
-    setShowGreeeting(defaultShowGreeting === "true");
+    setShowGreeeting(
+      defaultShowGreeting === "true"
+        ? true
+        : defaultShowGreeting === "false"
+        ? false
+        : true
+    );
 
     const defaultShowVisitedSites = localStorage.getItem(
       SHOW_VISITED_SITE_LOCAL_STORAGE_KEY
     );
-    setShowVisitedSites(defaultShowVisitedSites === "true");
+    setShowVisitedSites(
+      defaultShowVisitedSites === "true"
+        ? true
+        : defaultShowVisitedSites === "false"
+        ? false
+        : true
+    );
 
     const defaultSeparatePageSite = localStorage.getItem(
       SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY
     );
-    setSeparatePageSite(defaultSeparatePageSite === "true");
+    setSeparatePageSite(defaultSeparatePageSite === "true" ? true : false);
 
     const defaultShowSearchEngines = localStorage.getItem(
       SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY
     );
-    setShowSearchEngines(defaultShowSearchEngines === "true");
+    setShowSearchEngines(
+      defaultShowSearchEngines === "true"
+        ? true
+        : defaultShowSearchEngines === "false"
+        ? false
+        : true
+    );
 
     return () => clearInterval(intervalRef);
   }, []);
