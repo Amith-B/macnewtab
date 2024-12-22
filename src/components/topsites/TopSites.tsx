@@ -1,5 +1,7 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import "./TopSites.css";
+import { ReactComponent as LeftArrow } from "./left-arrow.svg";
+import { ReactComponent as RightArrow } from "./right-arrow.svg";
 import EmptySiteImage from "./empty-site-image.png";
 
 const SITE_IMAGE_URL = "https://www.google.com/s2/favicons?sz=64&domain=";
@@ -28,6 +30,9 @@ const TopSites = memo(function TopSites() {
   const [topSites, setTopSites] = useState<
     Array<chrome.topSites.MostVisitedURL & { siteImage: string }>
   >([]);
+
+  const [isOverflowLeft, setIsOverflowLeft] = useState(false);
+  const [isOverflowRight, setIsOverflowRight] = useState(true);
 
   const replaceLowResImages = (
     topVisitedSites: chrome.topSites.MostVisitedURL[]
@@ -91,27 +96,68 @@ const TopSites = memo(function TopSites() {
     }
   }, []);
 
-  return !!topSites.length ? (
-    <div className="top-sites__container">
-      {topSites.map((item, idx) => (
-        <a
-          className="top-site__item"
-          href={item.url}
-          target="_blank"
-          title={item.title}
-          key={idx}
+  useEffect(() => {
+    checkOverflow();
+  }, [topSites]);
+
+  const containerRef = useRef(null);
+
+  const checkOverflow = () => {
+    const container = containerRef.current as unknown as HTMLDivElement;
+    if (!container) return;
+    setIsOverflowLeft(container.scrollLeft > 0);
+    setIsOverflowRight(
+      container.scrollLeft < container.scrollWidth - container.clientWidth
+    );
+  };
+
+  const scroll = (direction: number) => {
+    const container = containerRef.current as unknown as HTMLDivElement;
+    if (!container) return;
+    container.scrollLeft += direction * 100;
+  };
+
+  return (
+    <div className="top-sites__container-wrapper">
+      <button
+        className="top-site__arrow arrow-left"
+        onClick={() => scroll(-1)}
+        disabled={!isOverflowLeft}
+      >
+        <LeftArrow />
+      </button>
+      {!!topSites.length && (
+        <div
+          className="top-sites__container"
+          ref={containerRef}
+          onScroll={checkOverflow}
         >
-          <img
-            className="top-site__icon"
-            src={item.siteImage}
-            alt={item.title}
-          />
-          <span className="top-site__title">{item.title}</span>
-        </a>
-      ))}
+          {topSites.map((item, idx) => (
+            <a
+              className="top-site__item"
+              href={item.url}
+              target="_blank"
+              title={item.title}
+              key={idx}
+            >
+              <img
+                className="top-site__icon"
+                src={item.siteImage}
+                alt={item.title}
+              />
+              <span className="top-site__title">{item.title}</span>
+            </a>
+          ))}
+        </div>
+      )}
+      <button
+        className="top-site__arrow arrow-right"
+        onClick={() => scroll(1)}
+        disabled={!isOverflowRight}
+      >
+        <RightArrow />
+      </button>
     </div>
-  ) : (
-    <></>
   );
 });
 
