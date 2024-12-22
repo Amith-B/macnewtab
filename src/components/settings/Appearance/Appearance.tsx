@@ -4,6 +4,8 @@ import { THEME_LIST } from "../../../static/theme";
 import { AppContext } from "../../../context/provider";
 import { ReactComponent as DeleteIcon } from "./delete.svg";
 
+const MAX_FILE_SIZE_MB = 1;
+
 export default function Appearance() {
   const { theme, handleThemeChange, handleWallpaperChange } =
     useContext(AppContext);
@@ -11,6 +13,13 @@ export default function Appearance() {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target?.files?.[0];
     if (!selectedFile) return;
+
+    if (selectedFile.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+      alert(
+        `The image is too large! Please upload an image smaller than ${MAX_FILE_SIZE_MB} MB.`
+      );
+      return;
+    }
 
     const fileReader = new FileReader();
 

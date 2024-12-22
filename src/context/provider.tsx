@@ -1,6 +1,5 @@
 import { useState, useEffect, ReactNode, createContext } from "react";
 import { THEME_KEYS, THEME_LOCAL_STORAGE_KEY } from "../static/theme";
-import { BG_IMAGE_LOCAL_STORAGE_KEY } from "../static/backgroundImage";
 import {
   SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY,
   SHOW_GREETING_LOCAL_STORAGE_KEY,
@@ -23,6 +22,69 @@ export const AppContext = createContext({
   showSearchEngines: true,
   handleShowSearchEnginesChange: (_: boolean) => {},
 });
+
+const openDatabase = (): Promise<IDBDatabase> => {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("WallpaperDB", 1);
+
+    request.onupgradeneeded = (event) => {
+      const db = (event.target as IDBOpenDBRequest).result;
+      if (!db.objectStoreNames.contains("wallpapers")) {
+        db.createObjectStore("wallpapers", { keyPath: "id" });
+      }
+    };
+
+    request.onsuccess = (event) => {
+      resolve((event.target as IDBOpenDBRequest).result);
+    };
+
+    request.onerror = (event) => {
+      reject((event.target as IDBOpenDBRequest).error);
+    };
+  });
+};
+
+const saveImageToIndexedDB = async (base64Image: string): Promise<void> => {
+  const db = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("wallpapers", "readwrite");
+    const store = transaction.objectStore("wallpapers");
+    store.put({ id: "customWallpaper", base64: base64Image });
+
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () => reject(transaction.error);
+  });
+};
+
+const fetchImageFromIndexedDB = async (): Promise<string | null> => {
+  const db = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("wallpapers", "readonly");
+    const store = transaction.objectStore("wallpapers");
+    const request = store.get("customWallpaper");
+
+    request.onsuccess = () => {
+      const result = request.result as
+        | { id: string; base64: string }
+        | undefined;
+      resolve(result?.base64 || null);
+    };
+
+    request.onerror = () => reject(request.error);
+  });
+};
+
+const deleteImageFromIndexedDB = async (): Promise<void> => {
+  const db = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("wallpapers", "readwrite");
+    const store = transaction.objectStore("wallpapers");
+    store.delete("customWallpaper");
+
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () => reject(transaction.error);
+  });
+};
 
 export default function AppProvider({ children }: { children: ReactNode }) {
   const [date, setDate] = useState(new Date());
@@ -47,8 +109,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setTheme("system");
     }
 
-    const defaultWallpaper = localStorage.getItem(BG_IMAGE_LOCAL_STORAGE_KEY);
-    setBackgroundImage(defaultWallpaper || "");
+    handleLoadWallpaper();
 
     const defaultShowGreeting = localStorage.getItem(
       SHOW_GREETING_LOCAL_STORAGE_KEY
@@ -97,8 +158,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const handleWallpaperChange = (val: string) => {
-    localStorage.setItem(BG_IMAGE_LOCAL_STORAGE_KEY, val);
-    setBackgroundImage(val);
+    if (val) {
+      handleSaveWallpaper(val);
+    } else {
+      handleDeleteWallpaper();
+    }
   };
 
   const handleShowGreeetingChange = (val: boolean) => {
@@ -119,6 +183,23 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const handleShowSearchEnginesChange = (val: boolean) => {
     localStorage.setItem(SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY, String(val));
     setShowSearchEngines(val);
+  };
+
+  const handleSaveWallpaper = async (base64Image: string) => {
+    await saveImageToIndexedDB(base64Image);
+    setBackgroundImage(base64Image);
+  };
+
+  const handleLoadWallpaper = async () => {
+    const base64Image = await fetchImageFromIndexedDB();
+    if (base64Image) {
+      setBackgroundImage(base64Image);
+    }
+  };
+
+  const handleDeleteWallpaper = async () => {
+    await deleteImageFromIndexedDB();
+    setBackgroundImage("");
   };
 
   return (
