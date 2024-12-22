@@ -24,7 +24,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  transform: translate(160vh, 5vh) scaleY(0.1);
+  transform: translate(200vh, 5vh) scaleY(0.1);
   transform-origin: bottom right;
 }
 
