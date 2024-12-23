@@ -6,6 +6,7 @@ import {
   SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY,
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
+import { BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY } from "../static/bookmarkAlert";
 
 export const AppContext = createContext({
   date: new Date(),
@@ -148,6 +149,22 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         ? false
         : true
     );
+
+    const bookmarkAlertShown = localStorage.getItem(
+      BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY
+    );
+
+    if (!bookmarkAlertShown) {
+      const isMac = navigator.userAgent.toLowerCase().includes("mac");
+      setTimeout(() => {
+        alert(
+          isMac
+            ? "Use Cmd + Shift + B to toggle the bookmark bar."
+            : "Use Ctrl + Shift + B to toggle the bookmark bar."
+        );
+        localStorage.setItem(BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY, "true");
+      }, 1000);
+    }
 
     return () => clearInterval(intervalRef);
   }, []);
