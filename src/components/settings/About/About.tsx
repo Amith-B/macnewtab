@@ -30,7 +30,7 @@ export default function About() {
             Bug Report Link
             <a
               rel="noreferrer"
-              href="https://github.com/Amith-B/macnewtab"
+              href="https://github.com/Amith-B/macnewtab/issues"
               target="_blank"
             >
               Amith-B/macnewtab/issues
