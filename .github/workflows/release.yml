@@ -1,0 +1,45 @@
+name: Build and Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16" # Replace with the Node.js version your project requires
+
+      # Step 3: Install Yarn globally
+      - name: Install Yarn
+        run: npm install --global yarn
+
+      # Step 4: Install dependencies with Yarn
+      - name: Install dependencies
+        run: yarn install
+
+      # Step 5: Build the project
+      - name: Build project
+        run: yarn build
+
+      # Step 6: Zip the build folder
+      - name: Zip build folder
+        run: zip -r build.zip build
+
+      # Step 7: Upload build folder as a release asset
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./build.zip # Path to the zipped build folder
+          asset_name: build.zip # Name of the asset in the release
+          asset_content_type: application/zip
