@@ -16,6 +16,11 @@
   font-weight: 600;
 }
 
+.general__row-item.disabled {
+  opacity: 0.5;
+  filter: saturate(0);
+}
+
 .general__container .general__row-item:last-child {
   border-bottom: none;
 }

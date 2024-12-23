@@ -35,7 +35,9 @@ const General = memo(function General() {
           }
         />
       </div>
-      <div className="general__row-item">
+      <div
+        className={"general__row-item" + (!showVisitedSites ? " disabled" : "")}
+      >
         Open Visited Sites On Separate Page
         <Toggle
           id={"separate-page-toggle"}
