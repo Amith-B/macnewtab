@@ -1,4 +1,4 @@
-import { memo, useContext, useState } from "react";
+import { memo, useContext } from "react";
 import Toggle from "../../toggle/Toggle";
 import "./General.css";
 import { AppContext } from "../../../context/provider";
