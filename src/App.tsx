@@ -70,7 +70,7 @@ const App = memo(function App() {
     } else {
       return "Evening";
     }
-  }, [date.getHours()]);
+  }, [date]);
 
   return (
     <div
