@@ -14,4 +14,4 @@
 
 #### Once the build is generated in build folder, this folder can be used to load the extension in `chrome://extensions/` with developer mode.
 
-## Chrome extension link: 
+## Chrome extension link: [https://chromewebstore.google.com/detail/noteit/hjcoohfjnikkaaglpndoaeacjjdfbjcd](https://chromewebstore.google.com/detail/mac-new-tab/mohppegbiigoahehdihbgmabkflajklj?authuser=0&hl=en)
