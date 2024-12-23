@@ -60,7 +60,7 @@ export default function About() {
           </div>
         </div>
       </div>
-      &copy; 2025 Amith B. All Rights Reserved.
+      &copy; 2024 - 2025 Amith B. All Rights Reserved.
     </div>
   );
 }
