@@ -62,7 +62,7 @@ const General = memo(function General() {
       <div className="general__row-item">
         Switch Calendar to Month View
         <Toggle
-          id={"search-engine-toggle"}
+          id={"month-view-toggle"}
           isChecked={showMonthView}
           handleToggleChange={() => handleShowMonthViewChange(!showMonthView)}
         />
