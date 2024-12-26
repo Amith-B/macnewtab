@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./Calendar1.css";
 import { AppContext } from "../../context/provider";
 
@@ -11,21 +11,15 @@ const getWeekName = (date: Date) => {
 };
 
 export default function Calendar1() {
-  const [currentDate, setCurrentDate] = useState(new Date());
-
   const { date } = useContext(AppContext);
-
-  useEffect(() => {
-    setCurrentDate(date);
-  }, [date]);
 
   return (
     <div className="calendar-1__container">
       <div className="calendar-1__top-section">
-        <div className="calendar-1__week">{getWeekName(currentDate)}</div>
-        <div className="calendar-1__month">{getMonthName(currentDate)}</div>
+        <div className="calendar-1__week">{getWeekName(date)}</div>
+        <div className="calendar-1__month">{getMonthName(date)}</div>
       </div>
-      <div className="calendar-1__bottom-section">{currentDate.getDate()}</div>
+      <div className="calendar-1__bottom-section">{date.getDate()}</div>
     </div>
   );
 }
