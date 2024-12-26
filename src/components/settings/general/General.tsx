@@ -13,6 +13,8 @@ const General = memo(function General() {
     handleSeparatePageSiteChange,
     showSearchEngines,
     handleShowSearchEnginesChange,
+    showMonthView,
+    handleShowMonthViewChange,
   } = useContext(AppContext);
 
   return (
@@ -55,6 +57,14 @@ const General = memo(function General() {
           handleToggleChange={() =>
             handleShowSearchEnginesChange(!showSearchEngines)
           }
+        />
+      </div>
+      <div className="general__row-item">
+        Switch Calendar to Month View
+        <Toggle
+          id={"search-engine-toggle"}
+          isChecked={showMonthView}
+          handleToggleChange={() => handleShowMonthViewChange(!showMonthView)}
         />
       </div>
     </div>

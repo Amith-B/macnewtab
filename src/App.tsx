@@ -9,6 +9,7 @@ import React, {
 import "./App.css";
 import Clock1 from "./widgets/clock-1/Clock1";
 import Calendar1 from "./widgets/day-calendar/Calendar1";
+import Calendar from "./widgets/calendar/Calendar";
 import Search from "./widgets/search/Search";
 import SearchEngineSwitcher from "./widgets/search-engine-switcher/SearchEngineSwitcher";
 import {
@@ -31,6 +32,7 @@ const App = memo(function App() {
     showGreeting,
     showVisitedSites,
     showSearchEngines,
+    showMonthView,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -80,7 +82,7 @@ const App = memo(function App() {
       <div className="main-content">
         <div className="section-1">
           <Clock1 />
-          <Calendar1 />
+          {showMonthView ? <Calendar /> : <Calendar1 />}
         </div>
         <div className="section-2">
           {showGreeting && <h1 className="greeting">Good {greeting}!</h1>}

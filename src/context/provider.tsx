@@ -3,6 +3,7 @@ import { THEME_KEYS, THEME_LOCAL_STORAGE_KEY } from "../static/theme";
 import {
   SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY,
   SHOW_GREETING_LOCAL_STORAGE_KEY,
+  SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY,
   SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY,
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
@@ -22,6 +23,8 @@ export const AppContext = createContext({
   handleSeparatePageSiteChange: (_: boolean) => {},
   showSearchEngines: true,
   handleShowSearchEnginesChange: (_: boolean) => {},
+  showMonthView: false,
+  handleShowMonthViewChange: (_: boolean) => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -96,6 +99,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [showVisitedSites, setShowVisitedSites] = useState(true);
   const [separatePageSite, setSeparatePageSite] = useState(false);
   const [showSearchEngines, setShowSearchEngines] = useState(true);
+  const [showMonthView, setShowMonthView] = useState(true);
 
   useEffect(() => {
     const intervalRef = setInterval(() => {
@@ -137,7 +141,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     const defaultSeparatePageSite = localStorage.getItem(
       SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY
     );
-    setSeparatePageSite(defaultSeparatePageSite === "true" ? true : false);
+    setSeparatePageSite(defaultSeparatePageSite === "true");
 
     const defaultShowSearchEngines = localStorage.getItem(
       SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY
@@ -149,6 +153,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         ? false
         : true
     );
+
+    const defaultMonthView = localStorage.getItem(
+      SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY
+    );
+    setShowMonthView(defaultMonthView === "true");
 
     const bookmarkAlertShown = localStorage.getItem(
       BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY
@@ -202,6 +211,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setShowSearchEngines(val);
   };
 
+  const handleShowMonthViewChange = (val: boolean) => {
+    localStorage.setItem(SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY, String(val));
+    setShowMonthView(val);
+  };
+
   const handleSaveWallpaper = async (base64Image: string) => {
     await saveImageToIndexedDB(base64Image);
     setBackgroundImage(base64Image);
@@ -235,6 +249,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleSeparatePageSiteChange,
         showSearchEngines,
         handleShowSearchEnginesChange,
+        showMonthView,
+        handleShowMonthViewChange,
       }}
     >
       {children}
