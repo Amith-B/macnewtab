@@ -51,5 +51,5 @@
   border-radius: 50%;
   width: 22px;
   height: 22px;
-  color: white;
+  color: white !important;
 }
