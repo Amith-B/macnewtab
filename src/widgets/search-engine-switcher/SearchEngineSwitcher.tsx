@@ -1,6 +1,7 @@
 import React from "react";
 import "./SearchEngineSwitcher.css";
 import { searchEngineList } from "../../static/searchEngine";
+import Translation from "../../locale/Translation";
 
 export default function SearchEngineSwitcher({
   selectedSearchEngine,
@@ -11,7 +12,9 @@ export default function SearchEngineSwitcher({
 }) {
   return (
     <div className="search-engine-switcher__container">
-      <div className="search-engine-switcher__title">Search With</div>
+      <div className="search-engine-switcher__title">
+        {<Translation value="search_with" />}
+      </div>
       <div className="search-engine-switcher__divider-vertical"></div>
       <div className="search-engine-switcher__tile-group">
         {searchEngineList.map((item) => {

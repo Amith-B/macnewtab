@@ -1,6 +1,7 @@
 import React from "react";
 import "./About.css";
 import { ReactComponent as ExtensionLogo } from "../../../assets/extension-logo.svg";
+import Translation from "../../../locale/Translation";
 
 export default function About() {
   return (
@@ -9,7 +10,7 @@ export default function About() {
         <ExtensionLogo />
         <div className="about__info-container">
           <div className="about__row-item">
-            Extension Name
+            <Translation value="extension_name" />
             <div>Mac New Tab</div>
           </div>
           <div className="about__row-item">
@@ -17,7 +18,7 @@ export default function About() {
             <div>{process.env.REACT_APP_VERSION}</div>
           </div>
           <div className="about__row-item">
-            Github
+            <Translation value="github" />
             <a
               rel="noreferrer"
               href="https://github.com/Amith-B/macnewtab"
@@ -27,7 +28,7 @@ export default function About() {
             </a>
           </div>
           <div className="about__row-item">
-            Bug Report Link
+            <Translation value="bug_report_link" />
             <a
               rel="noreferrer"
               href="https://github.com/Amith-B/macnewtab/issues"
@@ -37,7 +38,7 @@ export default function About() {
             </a>
           </div>
           <div className="about__row-item">
-            Developer Info
+            <Translation value="developer_info" />
             <div>
               Amith B(
               <a rel="noreferrer" href="mailto:amithbr6@gmail.com">
@@ -47,20 +48,22 @@ export default function About() {
             </div>
           </div>
           <div className="about__row-item">
-            Supported Browsers
+            <Translation value="supported_browsers" />
             <div>Chrome</div>
           </div>
           <div className="about__row-item">
-            Permissions Needed
-            <div>topSites (to access top visited sites)</div>
+            <Translation value="permissions_needed" />
+            <div>
+              topSites (<Translation value="permission_description" />)
+            </div>
           </div>
           <div className="about__row-item">
-            Third-Party Libraries Used
+            <Translation value="third_party_libraries" />
             <div>React 19</div>
           </div>
         </div>
       </div>
-      &copy; 2024 - 2025 Amith B. All Rights Reserved.
+      &copy; 2024 - 2025 {<Translation value="copyright" />}
     </div>
   );
 }

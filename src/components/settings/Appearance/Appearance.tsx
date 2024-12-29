@@ -3,6 +3,7 @@ import "./Appearance.css";
 import { THEME_LIST } from "../../../static/theme";
 import { AppContext } from "../../../context/provider";
 import { ReactComponent as DeleteIcon } from "./delete.svg";
+import Translation from "../../../locale/Translation";
 
 const MAX_FILE_SIZE_MB = 1;
 
@@ -41,7 +42,7 @@ export default function Appearance() {
   return (
     <div className="appearance__container">
       <div className="appearance__theme-selection-container">
-        Appearance
+        <Translation value="appearance" />
         <div className="appearance__theme-selection">
           {THEME_LIST.map((item) => (
             <button
@@ -53,7 +54,7 @@ export default function Appearance() {
               onClick={() => handleThemeChange(item.key)}
             >
               <img
-                alt={item.title}
+                alt={item.key}
                 src={item.image}
                 className="appearance__theme-image"
               />
@@ -63,11 +64,13 @@ export default function Appearance() {
         </div>
       </div>
       <div className="appearance__wallpaper-selection-container">
-        Upload Wallpaper
+        <Translation value="upload_wallpaper" />
         <div className="appearance__wallpaper-actions-container">
           <div className="image-picker">
             <label htmlFor="file-input" className="file-label">
-              <span>Choose File</span>
+              <span>
+                <Translation value="choose_file" />
+              </span>
               <input
                 type="file"
                 id="file-input"

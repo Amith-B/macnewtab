@@ -2,6 +2,9 @@ import { memo, useContext } from "react";
 import Toggle from "../../toggle/Toggle";
 import "./General.css";
 import { AppContext } from "../../../context/provider";
+import Translation from "../../../locale/Translation";
+import { Select } from "../../select/Select";
+import { languageOptions, languages } from "../../../locale/languages";
 
 const General = memo(function General() {
   const {
@@ -15,12 +18,14 @@ const General = memo(function General() {
     handleShowSearchEnginesChange,
     showMonthView,
     handleShowMonthViewChange,
+    locale,
+    handleLocaleChange,
   } = useContext(AppContext);
 
   return (
     <div className="general__container">
       <div className="general__row-item">
-        Show Greetings
+        <Translation value="show_greetings" />
         <Toggle
           id={"greeting-toggle"}
           isChecked={showGreeting}
@@ -28,7 +33,7 @@ const General = memo(function General() {
         />
       </div>
       <div className="general__row-item">
-        Show Top Visited Sites
+        <Translation value="show_top_visited_sites" />
         <Toggle
           id={"visit-toggle"}
           isChecked={showVisitedSites}
@@ -40,7 +45,7 @@ const General = memo(function General() {
       <div
         className={"general__row-item" + (!showVisitedSites ? " disabled" : "")}
       >
-        Open Visited Sites On Separate Page
+        <Translation value="open_visited_sites_on_separate_page" />
         <Toggle
           id={"separate-page-toggle"}
           isChecked={separatePageSite}
@@ -50,7 +55,7 @@ const General = memo(function General() {
         />
       </div>
       <div className="general__row-item">
-        Show Search Engines
+        <Translation value="show_search_engines" />
         <Toggle
           id={"search-engine-toggle"}
           isChecked={showSearchEngines}
@@ -60,11 +65,22 @@ const General = memo(function General() {
         />
       </div>
       <div className="general__row-item">
-        Switch Calendar to Month View
+        <Translation value="switch_calendar_to_month_view" />
         <Toggle
           id={"month-view-toggle"}
           isChecked={showMonthView}
           handleToggleChange={() => handleShowMonthViewChange(!showMonthView)}
+        />
+      </div>
+
+      <div className="general__row-item">
+        <Translation value="language" />
+        <Select
+          options={languageOptions}
+          value={locale}
+          onChange={(event) =>
+            handleLocaleChange(event.target.value as typeof languages)
+          }
         />
       </div>
     </div>

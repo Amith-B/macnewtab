@@ -20,6 +20,7 @@ import { ReactComponent as SettingsIcon } from "./assets/settings.svg";
 import { AppContext } from "./context/provider";
 import Settings from "./components/settings/Settings";
 import TopSites from "./components/topsites/TopSites";
+import Translation from "./locale/Translation";
 
 const App = memo(function App() {
   const [searchEngine, setSearchEngine] = useState("");
@@ -33,6 +34,7 @@ const App = memo(function App() {
     showVisitedSites,
     showSearchEngines,
     showMonthView,
+    locale,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -66,11 +68,11 @@ const App = memo(function App() {
   const greeting = useMemo(() => {
     const hour = date.getHours();
     if (hour < 12) {
-      return "Morning";
+      return "morning";
     } else if (hour < 17) {
-      return "Afternoon";
+      return "afternoon";
     } else {
-      return "Evening";
+      return "evening";
     }
   }, [date]);
 
@@ -78,6 +80,7 @@ const App = memo(function App() {
     <div
       className={`App theme-${theme}` + (backgroundImage ? " has-bg" : "")}
       style={bgStyle}
+      lang={locale}
     >
       <div className="main-content">
         <div className="section-1">
@@ -85,7 +88,11 @@ const App = memo(function App() {
           {showMonthView ? <Calendar /> : <Calendar1 />}
         </div>
         <div className="section-2">
-          {showGreeting && <h1 className="greeting">Good {greeting}!</h1>}
+          {showGreeting && (
+            <h1 className="greeting">
+              <Translation value={greeting} />!
+            </h1>
+          )}
           {showVisitedSites && <TopSites />}
           <Search selectedSearchEngine={searchEngine} />
           {showSearchEngines && (

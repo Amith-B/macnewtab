@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import "./Calendar.css";
 import { AppContext } from "../../context/provider";
+import Translation from "../../locale/Translation";
+import { translation } from "../../locale/languages";
 
 const getMonthName = (date: Date) => {
   return new Intl.DateTimeFormat("en-US", { month: "long" }).format(date);
@@ -46,11 +48,15 @@ export default function Calendar() {
     return generateDateArray(year, month);
   }, [year, month]);
 
-  const monthTitle = getMonthName(date).toUpperCase();
+  const monthKey = getMonthName(
+    date
+  ).toLowerCase() as keyof (typeof translation)["en"];
 
   return (
     <div className="calendar__container">
-      <div className="calendar__month-label">{monthTitle}</div>
+      <div className="calendar__month-label">
+        {<Translation value={monthKey} />}
+      </div>
       <div className="calendar__week-container">
         {weeks.map((week, idx) => (
           <div className="calendar__column-item" key={week + idx}>
@@ -63,7 +69,7 @@ export default function Calendar() {
               "calendar__column-item" +
               (currentDate === item ? " current-date" : "")
             }
-            key={monthTitle + idx + item}
+            key={monthKey + idx + item}
           >
             {item}
           </div>

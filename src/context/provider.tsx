@@ -8,10 +8,14 @@ import {
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
 import { BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY } from "../static/bookmarkAlert";
+import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
+import { languages } from "../locale/languages";
 
 export const AppContext = createContext({
   date: new Date(),
   theme: "system",
+  locale: "en" as typeof languages,
+  handleLocaleChange: (_: typeof languages) => {},
   handleThemeChange: (_: string) => {},
   backgroundImage: "",
   handleWallpaperChange: (_: string) => {},
@@ -95,6 +99,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState("system");
   const [backgroundImage, setBackgroundImage] = useState("");
 
+  const [locale, setLocale] = useState<typeof languages>("en");
+
   const [showGreeting, setShowGreeeting] = useState(true);
   const [showVisitedSites, setShowVisitedSites] = useState(true);
   const [separatePageSite, setSeparatePageSite] = useState(false);
@@ -158,6 +164,15 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY
     );
     setShowMonthView(defaultMonthView === "true");
+
+    const defaultLocale = localStorage.getItem(
+      SELECTED_LOCALE_LOCAL_STORAGE_KEY
+    );
+    setLocale(
+      (languages.includes(String(defaultLocale))
+        ? String(defaultLocale)
+        : "en") as typeof languages
+    );
 
     const bookmarkAlertShown = localStorage.getItem(
       BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY
@@ -233,6 +248,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setBackgroundImage("");
   };
 
+  const handleLocaleChange = (val: typeof languages) => {
+    localStorage.setItem(SELECTED_LOCALE_LOCAL_STORAGE_KEY, val);
+    setLocale(val);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -251,6 +271,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleShowSearchEnginesChange,
         showMonthView,
         handleShowMonthViewChange,
+        locale,
+        handleLocaleChange,
       }}
     >
       {children}

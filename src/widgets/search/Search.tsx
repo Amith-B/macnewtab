@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ReactComponent as SearchIcon } from "./search-icon.svg";
 import "./Search.css";
 import { searchEngineList } from "../../static/searchEngine";
+import { AppContext } from "../../context/provider";
+import { translation } from "../../locale/languages";
 
 export default function Search({
   selectedSearchEngine,
@@ -9,6 +11,7 @@ export default function Search({
   selectedSearchEngine: string;
 }) {
   const [searchString, setSearchString] = useState("");
+  const { locale } = useContext(AppContext);
 
   const handleKeyDown = (evt: React.KeyboardEvent) => {
     if (evt.key === "Enter") {
@@ -29,7 +32,7 @@ export default function Search({
       <input
         value={searchString}
         onChange={(e) => setSearchString(e.target.value)}
-        placeholder="Search"
+        placeholder={translation[locale]["search"]}
         onKeyDown={handleKeyDown}
       />
     </div>
