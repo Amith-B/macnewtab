@@ -13,13 +13,14 @@
   display: flex;
   gap: 16px;
   color: var(--theme-clr);
+  width: 100%;
   backdrop-filter: var(--theme-bg-blur);
   -webkit-backdrop-filter: var(--theme-bg-blur);
 }
 
 .search-engine-switcher__title {
   border-radius: 10px;
-  height: 120px;
+  height: 50px;
   display: flex;
   align-items: center;
   font-size: 1rem;
@@ -27,7 +28,7 @@
   align-self: center;
 }
 .search-engine-switcher__divider-vertical {
-  height: 120px;
+  height: 50px;
   width: 2px;
   border-radius: 2px;
   background-color: var(--theme-border);

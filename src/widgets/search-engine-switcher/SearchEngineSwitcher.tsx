@@ -2,6 +2,7 @@ import React from "react";
 import "./SearchEngineSwitcher.css";
 import { searchEngineList } from "../../static/searchEngine";
 import Translation from "../../locale/Translation";
+import { translation } from "../../locale/languages";
 
 export default function SearchEngineSwitcher({
   selectedSearchEngine,
@@ -33,7 +34,11 @@ export default function SearchEngineSwitcher({
               >
                 <Icon />
               </div>
-              {item.title}
+              {item.title || (
+                <Translation
+                  value={item.key as keyof (typeof translation)["en"]}
+                />
+              )}
             </button>
           );
         })}

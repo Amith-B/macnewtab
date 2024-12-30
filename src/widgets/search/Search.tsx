@@ -15,13 +15,12 @@ export default function Search({
 
   const handleKeyDown = (evt: React.KeyboardEvent) => {
     if (evt.key === "Enter") {
-      const searchEngineUrl = searchEngineList.find(
+      const searchSelection = searchEngineList.find(
         (item) => item.key === selectedSearchEngine
-      )?.url;
+      );
 
       if (searchString.trim() !== "") {
-        var searchUrl = searchEngineUrl + encodeURIComponent(searchString);
-        window.location.href = searchUrl;
+        searchSelection?.searchFunction(searchString);
       }
     }
   };

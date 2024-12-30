@@ -1,39 +1,29 @@
-import { ReactComponent as GoogleIcon } from "./search-engine-icons/google.svg";
-import { ReactComponent as BraveIcon } from "./search-engine-icons/brave.svg";
-import { ReactComponent as BingIcon } from "./search-engine-icons/bing.svg";
+import { ReactComponent as SearchEngineIcon } from "./search-engine-icons/search-engine.svg";
 import { ReactComponent as YoutubeIcon } from "./search-engine-icons/youtube.svg";
-import { ReactComponent as DuckDuckGoIcon } from "./search-engine-icons/duckduckgo.svg";
 
 export const searchEngineList = [
   {
-    key: "google",
-    title: "Google",
-    icon: GoogleIcon,
-    url: "https://www.google.com/search?q=",
-  },
-  {
-    key: "bing",
-    title: "Bing",
-    icon: BingIcon,
-    url: "https://bing.com/?q=",
+    key: "browser_search_engine",
+    icon: SearchEngineIcon,
+    searchFunction: (text: string) => {
+      if (!chrome?.search?.query) {
+        return;
+      }
+
+      chrome.search.query({
+        text,
+      });
+    },
   },
   {
     key: "youtube",
     title: "Youtube",
     icon: YoutubeIcon,
-    url: "https://www.youtube.com/results?search_query=",
-  },
-  {
-    key: "duck",
-    title: "Duck",
-    icon: DuckDuckGoIcon,
-    url: "https://duckduckgo.com/?q=",
-  },
-  {
-    key: "brave",
-    title: "Brave",
-    icon: BraveIcon,
-    url: "https://search.brave.com/search?q=",
+    searchFunction: (text: string) => {
+      window.location.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+        text
+      )}`;
+    },
   },
 ];
 
