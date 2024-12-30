@@ -68,8 +68,6 @@ export const translation = {
     light: "Light",
     system: "System",
 
-    permission_description: "to access top visited sites list",
-
     search: "Search",
 
     browser_search_engine: "Browser Default Search Engine",
@@ -141,8 +139,6 @@ export const translation = {
     dark: "ಕತ್ತಲು",
     light: "ಬೆಳಕು",
     system: "ವ್ಯವಸ್ಥೆ",
-
-    permission_description: "ಟಾಪ್ ಭೇಟಿ ನೀಡಿದ ಸೈಟ್‌ಗಳ ಪಟ್ಟಿಯನ್ನು ಪ್ರವೇಶಿಸಲು",
 
     search: "ಹುಡುಕು",
 
@@ -216,9 +212,6 @@ export const translation = {
     light: "Světlo",
     system: "Systém",
 
-    permission_description:
-      "pro přístup k seznamu nejnavštěvovanějších stránek",
-
     search: "Vyhledávání",
 
     browser_search_engine: "Výchozí vyhledávač prohlížeče",
@@ -290,9 +283,6 @@ export const translation = {
     dark: "Karanlık",
     light: "Işık",
     system: "Sistem",
-
-    permission_description:
-      "en çok ziyaret edilen siteler listesine erişmek için",
 
     search: "Aramak",
 
@@ -366,9 +356,6 @@ export const translation = {
     light: "Ánh sáng",
     system: "Hệ thống",
 
-    permission_description:
-      "để truy cập danh sách các trang web được truy cập hàng đầu",
-
     search: "Tìm kiếm",
 
     browser_search_engine: "Công cụ tìm kiếm mặc định của trình duyệt",
@@ -441,9 +428,6 @@ export const translation = {
     light: "Nur",
     system: "Tizim",
 
-    permission_description:
-      "eng ko'p tashrif buyurilgan saytlar ro'yxatiga kirish uchun",
-
     search: "Qidiruv",
 
     browser_search_engine: "Brauzerning standart qidiruvi",
@@ -514,8 +498,6 @@ export const translation = {
     dark: "黑暗的",
     light: "光",
     system: "系统",
-
-    permission_description: "访问最常访问的网站列表",
 
     search: "搜索",
 
@@ -588,9 +570,6 @@ export const translation = {
     dark: "अँधेरा",
     light: "रोशनी",
     system: "प्रणाली",
-
-    permission_description:
-      "शीर्ष विज़िट की गई साइटों की सूची तक पहुंचने के लिए",
 
     search: "खोज",
 
@@ -665,8 +644,6 @@ export const translation = {
     light: "Leggero",
     system: "Sistema",
 
-    permission_description: "per accedere all'elenco dei siti più visitati",
-
     search: "Ricerca",
 
     browser_search_engine: "Motore di ricerca predefinito del browser",
@@ -739,8 +716,6 @@ export const translation = {
     light: "আলো",
     system: "সিস্টেম",
 
-    permission_description: "শীর্ষ পরিদর্শন সাইট তালিকা অ্যাক্সেস করতে",
-
     search: "অনুসন্ধান করুন",
 
     browser_search_engine: "ব্রাউজার ডিফল্ট সার্চ ইঞ্জিন",
@@ -812,9 +787,6 @@ export const translation = {
     dark: "Escuro",
     light: "Luz",
     system: "Sistema",
-
-    permission_description:
-      "para acessar a lista dos principais sites visitados",
 
     search: "Procurar",
 
@@ -889,9 +861,6 @@ export const translation = {
     light: "Lumière",
     system: "Système",
 
-    permission_description:
-      "pour accéder à la liste des sites les plus visités",
-
     search: "Recherche",
 
     browser_search_engine: "Moteur de recherche par défaut du navigateur",
@@ -963,8 +932,6 @@ export const translation = {
     dark: "Темный",
     light: "Свет",
     system: "Система",
-
-    permission_description: "для доступа к списку самых посещаемых сайтов",
 
     search: "Поиск",
 
@@ -1038,8 +1005,6 @@ export const translation = {
     light: "Luz",
     system: "Sistema",
 
-    permission_description: "para acceder a la lista de sitios más visitados",
-
     search: "Buscar",
 
     browser_search_engine: "Motor de búsqueda predeterminado del navegador",
@@ -1111,8 +1076,6 @@ export const translation = {
     light: "ライト",
     system: "システム",
 
-    permission_description: "よくアクセスするサイトのリストにアクセスするには",
-
     search: "検索",
 
     browser_search_engine: "ブラウザのデフォルトの検索エンジン",
@@ -1183,8 +1146,6 @@ export const translation = {
     dark: "어두운",
     light: "빛",
     system: "체계",
-
-    permission_description: "가장 많이 방문한 사이트 목록에 액세스하려면",
 
     search: "찾다",
 
@@ -1258,9 +1219,6 @@ export const translation = {
     light: "Lampu",
     system: "Sistem",
 
-    permission_description:
-      "untuk mengakses daftar situs yang paling banyak dikunjungi",
-
     search: "Mencari",
 
     browser_search_engine: "Mesin Pencari Default Peramban",
@@ -1332,9 +1290,6 @@ export const translation = {
     dark: "गडद",
     light: "प्रकाश",
     system: "प्रणाली",
-
-    permission_description:
-      "शीर्ष भेट दिलेल्या साइट सूचीमध्ये प्रवेश करण्यासाठी",
 
     search: "शोधा",
 
