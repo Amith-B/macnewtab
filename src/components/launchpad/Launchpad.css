@@ -1,0 +1,100 @@
+.launchpad__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: backdrop-filter 0.5s ease;
+  padding: 80px;
+}
+
+.launchpad__overlay.visible {
+  backdrop-filter: blur(30px) saturate(150%) brightness(0.7);
+  -webkit-backdrop-filter: blur(30px) saturate(150%) brightness(0.7);
+  pointer-events: auto;
+  overflow: auto;
+}
+
+.launchpad__container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto;
+  column-gap: 30px;
+  row-gap: 10px;
+  justify-content: center;
+  transform: scale(1.1);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+.launchpad__overlay.visible .launchpad__container {
+  transform: scale(1);
+  opacity: 1;
+}
+
+@media screen and (max-width: 1320px) {
+  .launchpad__container {
+    grid-template-columns: auto auto auto auto auto auto auto;
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .launchpad__container {
+    grid-template-columns: auto auto auto auto auto auto;
+  }
+}
+
+@media screen and (max-width: 1140px) {
+  .launchpad__container {
+    grid-template-columns: auto auto auto auto auto;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .launchpad__container {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .launchpad__container {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+.launchpad-item {
+  text-decoration: none;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  width: 120px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.launchpad-item:hover .launchpad-item__label {
+  max-width: 160px;
+}
+
+.launchpad-item__logo {
+  width: 70px;
+  height: 70px;
+  background-color: #fcfcfc;
+  border-radius: 12px;
+  padding: 6px;
+}
+.launchpad-item__logo svg {
+  width: 100%;
+  height: 100%;
+}
+
+.launchpad-item__label {
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  transition: max-width 0.5s ease;
+}
