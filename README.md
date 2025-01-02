@@ -1,6 +1,7 @@
 # This is a simple new tab (browser's home page) inspired by Mac OS design., created using React
 
 ![Screenshot1](./docs/images/1.jpeg)
+![Screenshot2](./docs/images/6.jpeg)
 ![Screenshot2](./docs/images/2.jpeg)
 ![Screenshot3](./docs/images/3.jpeg)
 ![Screenshot4](./docs/images/4.jpeg)
