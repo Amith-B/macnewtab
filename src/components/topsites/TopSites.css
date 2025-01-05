@@ -7,6 +7,10 @@
   border: 1px solid var(--theme-border);
 }
 
+.top-sites__container-wrapper ::-webkit-scrollbar {
+  display: none;
+}
+
 .top-sites__container {
   display: flex;
   gap: 20px;
@@ -14,6 +18,7 @@
   backdrop-filter: var(--theme-bg-blur);
   -webkit-backdrop-filter: var(--theme-bg-blur);
   overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
 }
 
