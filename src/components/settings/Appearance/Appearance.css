@@ -3,6 +3,8 @@
   border-radius: 6px;
   padding: 12px;
   background-color: var(--theme-bg-with-opacity);
+  max-height: calc(100% - 60px);
+  overflow: auto;
 }
 
 .appearance__theme-selection-container {

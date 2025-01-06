@@ -4,6 +4,8 @@
   padding: 0 12px;
   background-color: var(--theme-bg-with-opacity);
   width: 100%;
+  max-height: calc(100% - 60px);
+  overflow: auto;
 }
 
 .general__row-item {
