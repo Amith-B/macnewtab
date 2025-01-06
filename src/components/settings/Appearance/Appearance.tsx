@@ -4,6 +4,7 @@ import { THEME_LIST } from "../../../static/theme";
 import { AppContext } from "../../../context/provider";
 import { ReactComponent as DeleteIcon } from "./delete.svg";
 import Translation from "../../../locale/Translation";
+import { WALLPAPER_LIST } from "../../../static/wallpapers";
 
 const MAX_FILE_SIZE_MB = 1;
 
@@ -63,7 +64,7 @@ export default function Appearance() {
           ))}
         </div>
       </div>
-      <div className="appearance__wallpaper-selection-container">
+      <div className="appearance__wallpaper-upload-container">
         <Translation value="upload_wallpaper" />
         <div className="appearance__wallpaper-actions-container">
           <div className="image-picker">
@@ -86,6 +87,24 @@ export default function Appearance() {
           >
             <DeleteIcon />
           </button>
+        </div>
+      </div>
+      <div className="appearance__wallpaper-selection-container">
+        <Translation value="choose_wallpaper" />
+        <div className="appearance__wallpaper-selection-list">
+          {WALLPAPER_LIST.map((item) => (
+            <button
+              key={item.id}
+              className="appearance__wallpaper-option"
+              onClick={() => handleWallpaperChange(item.link)}
+            >
+              <img
+                alt={item.id}
+                src={item.link}
+                className="appearance__wallpaper-image"
+              />
+            </button>
+          ))}
         </div>
       </div>
     </div>

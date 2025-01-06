@@ -71,6 +71,8 @@ export const translation = {
     search: "Search",
 
     browser_search_engine: "Browser Default Search Engine",
+
+    choose_wallpaper: "Choose Wallpaper",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -143,6 +145,8 @@ export const translation = {
     search: "ಹುಡುಕು",
 
     browser_search_engine: "ಬ್ರೌಸರ್ ಡೀಫಾಲ್ಟ್ ಸರ್ಚ್ ಇಂಜಿನ್",
+
+    choose_wallpaper: "ವಾಲ್‌ಪೇಪರ್ ಆಯ್ಕೆಮಾಡಿ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -215,6 +219,8 @@ export const translation = {
     search: "Vyhledávání",
 
     browser_search_engine: "Výchozí vyhledávač prohlížeče",
+
+    choose_wallpaper: "Vyberte Tapeta",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -287,6 +293,8 @@ export const translation = {
     search: "Aramak",
 
     browser_search_engine: "Tarayıcı Varsayılan Arama Motoru",
+
+    choose_wallpaper: "Duvar Kağıdını Seçin",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -359,6 +367,8 @@ export const translation = {
     search: "Tìm kiếm",
 
     browser_search_engine: "Công cụ tìm kiếm mặc định của trình duyệt",
+
+    choose_wallpaper: "Chọn hình nền",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -431,6 +441,8 @@ export const translation = {
     search: "Qidiruv",
 
     browser_search_engine: "Brauzerning standart qidiruvi",
+
+    choose_wallpaper: "Fon rasmi tanlang",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -502,6 +514,8 @@ export const translation = {
     search: "搜索",
 
     browser_search_engine: "浏览器默认搜索引擎",
+
+    choose_wallpaper: "选择壁纸",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -574,6 +588,8 @@ export const translation = {
     search: "खोज",
 
     browser_search_engine: "ब्राउज़र डिफ़ॉल्ट खोज इंजन",
+
+    choose_wallpaper: "वॉलपेपर चुनें",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -647,6 +663,8 @@ export const translation = {
     search: "Ricerca",
 
     browser_search_engine: "Motore di ricerca predefinito del browser",
+
+    choose_wallpaper: "Scegli Sfondo",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -719,6 +737,8 @@ export const translation = {
     search: "অনুসন্ধান করুন",
 
     browser_search_engine: "ব্রাউজার ডিফল্ট সার্চ ইঞ্জিন",
+
+    choose_wallpaper: "ওয়ালপেপার চয়ন করুন",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -791,6 +811,8 @@ export const translation = {
     search: "Procurar",
 
     browser_search_engine: "Mecanismo de pesquisa padrão do navegador",
+
+    choose_wallpaper: "Escolha o papel de parede",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -864,6 +886,8 @@ export const translation = {
     search: "Recherche",
 
     browser_search_engine: "Moteur de recherche par défaut du navigateur",
+
+    choose_wallpaper: "Choisissez le papier peint",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -936,6 +960,8 @@ export const translation = {
     search: "Поиск",
 
     browser_search_engine: "Поисковая система браузера по умолчанию",
+
+    choose_wallpaper: "Выбрать обои",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1008,6 +1034,8 @@ export const translation = {
     search: "Buscar",
 
     browser_search_engine: "Motor de búsqueda predeterminado del navegador",
+
+    choose_wallpaper: "Elegir fondo de pantalla",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1079,6 +1107,8 @@ export const translation = {
     search: "検索",
 
     browser_search_engine: "ブラウザのデフォルトの検索エンジン",
+
+    choose_wallpaper: "壁紙を選択してください",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1150,6 +1180,8 @@ export const translation = {
     search: "찾다",
 
     browser_search_engine: "브라우저 기본 검색 엔진",
+
+    choose_wallpaper: "배경화면 선택",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1222,6 +1254,8 @@ export const translation = {
     search: "Mencari",
 
     browser_search_engine: "Mesin Pencari Default Peramban",
+
+    choose_wallpaper: "Pilih Wallpaper",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1294,6 +1328,8 @@ export const translation = {
     search: "शोधा",
 
     browser_search_engine: "ब्राउझर डीफॉल्ट शोध इंजिन",
+
+    choose_wallpaper: "वॉलपेपर निवडा",
   },
 };
 

@@ -10,11 +10,13 @@
   padding-bottom: 12px;
 }
 
-.appearance__wallpaper-selection-container {
+.appearance__wallpaper-upload-container {
   padding: 12px 0;
+  border-bottom: 1px solid var(--theme-border);
 }
 
 .appearance__theme-selection-container,
+.appearance__wallpaper-upload-container,
 .appearance__wallpaper-selection-container {
   display: flex;
   flex-direction: row;
@@ -113,4 +115,31 @@
 .appearance__wallpaper-delete svg {
   width: 100%;
   height: 100%;
+}
+
+.appearance__wallpaper-selection-container {
+  padding-top: 12px;
+}
+
+.appearance__wallpaper-image {
+  width: 90px;
+  height: 60px;
+  border-radius: 8px;
+  border: 1px solid var(--theme-border);
+  overflow: hidden;
+}
+
+.appearance__wallpaper-option {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.appearance__wallpaper-selection-list {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 360px;
 }
