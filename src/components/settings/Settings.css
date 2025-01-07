@@ -25,7 +25,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  transform: translate(200vh, 5vh) scaleY(0.1);
+  transform: translate(100vh,100vh) scale(.1);
   transform-origin: bottom right;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .settings__overlay.visible .settings__container {
-  transform: translate(0, 0) scaleY(1);
+  transform: translate(0, 0) scale(1);
 }
 
 .settings__side-panel {
