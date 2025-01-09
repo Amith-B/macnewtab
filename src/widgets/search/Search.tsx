@@ -4,6 +4,7 @@ import "./Search.css";
 import { searchEngineList } from "../../static/searchEngine";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
+import { ReactComponent as VoiceSearch } from "../../assets/voice.svg";
 
 export default function Search({
   selectedSearchEngine,
@@ -12,6 +13,7 @@ export default function Search({
 }) {
   const [searchString, setSearchString] = useState("");
   const { locale } = useContext(AppContext);
+  const [animate, setAnimate] = useState(false);
 
   const handleKeyDown = (evt: React.KeyboardEvent) => {
     if (evt.key === "Enter") {
@@ -34,6 +36,9 @@ export default function Search({
         placeholder={translation[locale]["search"]}
         onKeyDown={handleKeyDown}
       />
+      <button className="voice-search" onClick={() => setAnimate(!animate)}>
+        <VoiceSearch className={animate ? "animate" : ""} />
+      </button>
     </div>
   );
 }
