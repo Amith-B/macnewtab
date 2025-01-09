@@ -44,7 +44,8 @@
   transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.voice-search svg.animate {
+.voice-search svg.animate,
+.voice-search:focus-visible svg {
   transform: scale(1.5);
 }
 
