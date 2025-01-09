@@ -87,3 +87,8 @@
 .pulse-4 {
   --pulse-animation-time: 6s;
 }
+
+.hidden-voice-search-button {
+  position: absolute;
+  visibility: hidden;
+}
