@@ -10,8 +10,8 @@ import "./App.css";
 import Clock1 from "./widgets/clock-1/Clock1";
 import Calendar1 from "./widgets/day-calendar/Calendar1";
 import Calendar from "./widgets/calendar/Calendar";
-import Search from "./widgets/search/Search";
-import SearchEngineSwitcher from "./widgets/search-engine-switcher/SearchEngineSwitcher";
+import Search from "./components/search/Search";
+import SearchEngineSwitcher from "./components/search-engine-switcher/SearchEngineSwitcher";
 import {
   SEARCH_ENGINE_LOCAL_STORAGE_KEY,
   searchEngineKeys,
