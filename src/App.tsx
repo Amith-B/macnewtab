@@ -70,6 +70,11 @@ const App = memo(function App() {
 
   const greeting = useMemo(() => {
     const hour = date.getHours();
+
+    if (hour >= 21 || hour < 5) {
+      return "night";
+    }
+
     if (hour < 12) {
       return "morning";
     } else if (hour < 17) {
