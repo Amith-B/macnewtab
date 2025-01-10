@@ -1,5 +1,7 @@
 import { ReactComponent as SearchEngineIcon } from "./search-engine-icons/search-engine.svg";
 import { ReactComponent as YoutubeIcon } from "./search-engine-icons/youtube.svg";
+import { ReactComponent as ChaptGPTIcon } from "./search-engine-icons/chatgpt.svg";
+import { ReactComponent as SpotifyIcon } from "./search-engine-icons/spotify.svg";
 
 export const searchEngineList = [
   {
@@ -21,6 +23,26 @@ export const searchEngineList = [
     icon: YoutubeIcon,
     searchFunction: (text: string) => {
       window.location.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+        text
+      )}`;
+    },
+  },
+  {
+    key: "chatgpt",
+    title: "ChatGPT",
+    icon: ChaptGPTIcon,
+    searchFunction: (text: string) => {
+      window.location.href = `https://chatgpt.com/?q=${encodeURIComponent(
+        text
+      )}`;
+    },
+  },
+  {
+    key: "spotify",
+    title: "Spotify",
+    icon: SpotifyIcon,
+    searchFunction: (text: string) => {
+      window.location.href = `https://open.spotify.com/search/${encodeURIComponent(
         text
       )}`;
     },
