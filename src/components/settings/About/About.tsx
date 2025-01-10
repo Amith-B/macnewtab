@@ -57,7 +57,7 @@ export default function About() {
           </div>
           <div className="about__row-item">
             <Translation value="third_party_libraries" />
-            <div>React 19</div>
+            <div>React 19, react-speech-recognition</div>
           </div>
         </div>
       </div>
