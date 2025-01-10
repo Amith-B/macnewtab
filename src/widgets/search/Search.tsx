@@ -2,6 +2,7 @@ import React, {
   ChangeEvent,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -9,7 +10,7 @@ import { ReactComponent as SearchIcon } from "./search-icon.svg";
 import "./Search.css";
 import { searchEngineList } from "../../static/searchEngine";
 import { AppContext } from "../../context/provider";
-import { translation } from "../../locale/languages";
+import { languageOptions, translation } from "../../locale/languages";
 import { ReactComponent as VoiceSearch } from "../../assets/voice.svg";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -52,6 +53,13 @@ export default function Search({
     }
   }, [listening]);
 
+  const voiceSearchLanguage = useMemo(() => {
+    return (
+      languageOptions.find((item) => item.value === locale)
+        ?.voiceSearchLanguage || "en-US"
+    );
+  }, [locale]);
+
   const handleKeyDown = (evt: React.KeyboardEvent) => {
     if (evt.key === "Enter") {
       triggerSearch(searchString, selectedSearchEngine);
@@ -71,7 +79,7 @@ export default function Search({
       listenerRef.current = "abort";
       return;
     }
-    SpeechRecognition.startListening();
+    SpeechRecognition.startListening({ language: voiceSearchLanguage });
   };
 
   const triggerVoiceSearch = () => {

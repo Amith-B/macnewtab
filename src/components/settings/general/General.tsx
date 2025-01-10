@@ -1,4 +1,4 @@
-import { memo, useContext } from "react";
+import { memo, useContext, useMemo } from "react";
 import Toggle from "../../toggle/Toggle";
 import "./General.css";
 import { AppContext } from "../../../context/provider";
@@ -21,6 +21,10 @@ const General = memo(function General() {
     locale,
     handleLocaleChange,
   } = useContext(AppContext);
+
+  const selectedLanguageDetails = useMemo(() => {
+    return languageOptions.find((item) => item.value === locale);
+  }, [locale]);
 
   return (
     <div className="general__container">
@@ -73,15 +77,23 @@ const General = memo(function General() {
         />
       </div>
 
-      <div className="general__row-item">
-        <Translation value="language" />
-        <Select
-          options={languageOptions}
-          value={locale}
-          onChange={(event) =>
-            handleLocaleChange(event.target.value as typeof languages)
-          }
-        />
+      <div className="general__row-item with-description">
+        <div className="language-selection-row">
+          <Translation value="language" />
+          <Select
+            options={languageOptions}
+            value={locale}
+            onChange={(event) =>
+              handleLocaleChange(event.target.value as typeof languages)
+            }
+          />
+        </div>
+
+        {!selectedLanguageDetails?.voiceSearchLanguage && (
+          <div className="voice-search-warning">
+            <Translation value="voice_search_warning" />
+          </div>
+        )}
       </div>
     </div>
   );

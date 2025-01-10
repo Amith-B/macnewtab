@@ -73,6 +73,9 @@ export const translation = {
     browser_search_engine: "Browser Default Search Engine",
 
     choose_wallpaper: "Choose Wallpaper",
+
+    voice_search_warning:
+      "Voice search is not supported for this language. It will default to English for this language.",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -147,6 +150,8 @@ export const translation = {
     browser_search_engine: "ಬ್ರೌಸರ್ ಡೀಫಾಲ್ಟ್ ಸರ್ಚ್ ಇಂಜಿನ್",
 
     choose_wallpaper: "ವಾಲ್‌ಪೇಪರ್ ಆಯ್ಕೆಮಾಡಿ",
+
+    voice_search_warning: "ಈ ಭಾಷೆಗೆ ಧ್ವನಿ ಹುಡುಕಾಟವು ಬೆಂಬಲಿತವಾಗಿಲ್ಲ.",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -221,6 +226,9 @@ export const translation = {
     browser_search_engine: "Výchozí vyhledávač prohlížeče",
 
     choose_wallpaper: "Vyberte Tapeta",
+
+    voice_search_warning:
+      "Hlasové vyhledávání není pro tento jazyk podporováno.",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -295,6 +303,8 @@ export const translation = {
     browser_search_engine: "Tarayıcı Varsayılan Arama Motoru",
 
     choose_wallpaper: "Duvar Kağıdını Seçin",
+
+    voice_search_warning: "Bu dil için sesli arama desteklenmiyor.",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -369,6 +379,9 @@ export const translation = {
     browser_search_engine: "Công cụ tìm kiếm mặc định của trình duyệt",
 
     choose_wallpaper: "Chọn hình nền",
+
+    voice_search_warning:
+      "Tìm kiếm bằng giọng nói không được hỗ trợ cho ngôn ngữ này.",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -443,6 +456,8 @@ export const translation = {
     browser_search_engine: "Brauzerning standart qidiruvi",
 
     choose_wallpaper: "Fon rasmi tanlang",
+
+    voice_search_warning: "Bu tilda ovozli qidiruv ishlamaydi.",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -516,6 +531,8 @@ export const translation = {
     browser_search_engine: "浏览器默认搜索引擎",
 
     choose_wallpaper: "选择壁纸",
+
+    voice_search_warning: "该语言不支持语音搜索",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -590,6 +607,8 @@ export const translation = {
     browser_search_engine: "ब्राउज़र डिफ़ॉल्ट खोज इंजन",
 
     choose_wallpaper: "वॉलपेपर चुनें",
+
+    voice_search_warning: "इस भाषा के लिए ध्वनि खोज समर्थित नहीं है.",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -665,6 +684,9 @@ export const translation = {
     browser_search_engine: "Motore di ricerca predefinito del browser",
 
     choose_wallpaper: "Scegli Sfondo",
+
+    voice_search_warning:
+      "La ricerca vocale non è supportata per questa lingua.",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -739,6 +761,8 @@ export const translation = {
     browser_search_engine: "ব্রাউজার ডিফল্ট সার্চ ইঞ্জিন",
 
     choose_wallpaper: "ওয়ালপেপার চয়ন করুন",
+
+    voice_search_warning: "এই ভাষার জন্য ভয়েস অনুসন্ধান সমর্থিত নয়।",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -813,6 +837,9 @@ export const translation = {
     browser_search_engine: "Mecanismo de pesquisa padrão do navegador",
 
     choose_wallpaper: "Escolha o papel de parede",
+
+    voice_search_warning:
+      "A pesquisa por voz não é compatível com este idioma.",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -888,6 +915,9 @@ export const translation = {
     browser_search_engine: "Moteur de recherche par défaut du navigateur",
 
     choose_wallpaper: "Choisissez le papier peint",
+
+    voice_search_warning:
+      "La recherche vocale n'est pas prise en charge pour cette langue.",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -962,6 +992,8 @@ export const translation = {
     browser_search_engine: "Поисковая система браузера по умолчанию",
 
     choose_wallpaper: "Выбрать обои",
+
+    voice_search_warning: "Голосовой поиск не поддерживается для этого языка.",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1036,6 +1068,9 @@ export const translation = {
     browser_search_engine: "Motor de búsqueda predeterminado del navegador",
 
     choose_wallpaper: "Elegir fondo de pantalla",
+
+    voice_search_warning:
+      "La búsqueda por voz no es compatible con este idioma.",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1109,6 +1144,8 @@ export const translation = {
     browser_search_engine: "ブラウザのデフォルトの検索エンジン",
 
     choose_wallpaper: "壁紙を選択してください",
+
+    voice_search_warning: "この言語では音声検索がサポートされていません",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1182,6 +1219,8 @@ export const translation = {
     browser_search_engine: "브라우저 기본 검색 엔진",
 
     choose_wallpaper: "배경화면 선택",
+
+    voice_search_warning: "이 언어에서는 음성 검색이 지원되지 않습니다.",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1256,6 +1295,8 @@ export const translation = {
     browser_search_engine: "Mesin Pencari Default Peramban",
 
     choose_wallpaper: "Pilih Wallpaper",
+
+    voice_search_warning: "Penelusuran suara tidak didukung untuk bahasa ini.",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1330,6 +1371,8 @@ export const translation = {
     browser_search_engine: "ब्राउझर डीफॉल्ट शोध इंजिन",
 
     choose_wallpaper: "वॉलपेपर निवडा",
+
+    voice_search_warning: "या भाषेसाठी व्हॉइस शोध समर्थित नाही.",
   },
 };
 
@@ -1338,22 +1381,22 @@ export const languages = Object.keys(
 ) as unknown as keyof typeof translation;
 
 export const languageOptions = [
-  { label: "English", value: "en" },
-  { label: "Kannada", value: "kn" },
-  { label: "Portuguese", value: "pt" },
-  { label: "Chinese", value: "zh" },
-  { label: "Russian", value: "ru" },
-  { label: "Vietnamese", value: "vi" },
-  { label: "Hindi", value: "hi" },
-  { label: "Turkish", value: "tr" },
-  { label: "Spanish", value: "es" },
-  { label: "Korean", value: "ko" },
-  { label: "Italian", value: "it" },
-  { label: "French", value: "fr" },
-  { label: "Czech", value: "cs" },
-  { label: "Bengali", value: "bn" },
-  { label: "Japanese", value: "ja" },
-  { label: "Uzbek", value: "uz" },
-  { label: "Marathi", value: "mr" },
-  { label: "Indonesian", value: "id" },
+  { label: "English", value: "en", voiceSearchLanguage: "en-US" },
+  { label: "Kannada", value: "kn", voiceSearchLanguage: "" },
+  { label: "Portuguese", value: "pt", voiceSearchLanguage: "pt-PT" },
+  { label: "Chinese", value: "zh", voiceSearchLanguage: "zh-CN" },
+  { label: "Russian", value: "ru", voiceSearchLanguage: "ru" },
+  { label: "Vietnamese", value: "vi", voiceSearchLanguage: "" },
+  { label: "Hindi", value: "hi", voiceSearchLanguage: "" },
+  { label: "Turkish", value: "tr", voiceSearchLanguage: "tr" },
+  { label: "Spanish", value: "es", voiceSearchLanguage: "es-ES" },
+  { label: "Korean", value: "ko", voiceSearchLanguage: "ko" },
+  { label: "Italian", value: "it", voiceSearchLanguage: "it-IT" },
+  { label: "French", value: "fr", voiceSearchLanguage: "fr-FR" },
+  { label: "Czech", value: "cs", voiceSearchLanguage: "cs" },
+  { label: "Bengali", value: "bn", voiceSearchLanguage: "" },
+  { label: "Japanese", value: "ja", voiceSearchLanguage: "ja" },
+  { label: "Uzbek", value: "uz", voiceSearchLanguage: "" },
+  { label: "Marathi", value: "mr", voiceSearchLanguage: "" },
+  { label: "Indonesian", value: "id", voiceSearchLanguage: "id" },
 ];

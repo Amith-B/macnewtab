@@ -9,13 +9,17 @@
 }
 
 .general__row-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   padding: 12px 0;
   border-bottom: 1px solid var(--theme-border);
   font-size: 0.875rem;
   font-weight: 600;
+}
+
+.general__row-item:not(.with-description),
+.language-selection-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .general__row-item.disabled {
@@ -25,4 +29,9 @@
 
 .general__container .general__row-item:last-child {
   border-bottom: none;
+}
+
+.voice-search-warning {
+  color: #ff5d59;
+  font-size: 0.688rem;
 }
