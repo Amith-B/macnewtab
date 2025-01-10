@@ -10,7 +10,7 @@ export default function Toggle({
   id: string;
 }) {
   return (
-    <div className="toggle">
+    <div className="toggle accessible">
       <input
         type="checkbox"
         id={id}

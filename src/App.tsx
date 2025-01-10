@@ -107,7 +107,7 @@ const App = memo(function App() {
         </div>
       </div>
       <button
-        className="launchpad-icon"
+        className="launchpad-icon accessible"
         onClick={() => {
           setLaunchpadVisible(!launchpadVisible);
           setSettingsVisible(false);
@@ -117,7 +117,7 @@ const App = memo(function App() {
       </button>
       <button
         className={
-          "settings-icon" +
+          "settings-icon accessible" +
           (settingsActive || settingsVisible ? " settings-active" : "")
         }
         onClick={() => {

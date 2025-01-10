@@ -23,7 +23,7 @@ export default function SearchEngineSwitcher({
           return (
             <button
               key={item.key}
-              className="search-engine-switcher__tile-container"
+              className="search-engine-switcher__tile-container accessible"
               onClick={() => onSelectedEngineChange(item.key)}
             >
               <div

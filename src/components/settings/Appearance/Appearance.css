@@ -92,7 +92,9 @@
 }
 
 .image-input {
-  display: none;
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 .appearance__wallpaper-actions-container {

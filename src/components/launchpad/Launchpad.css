@@ -17,6 +17,14 @@
   overflow: auto;
 }
 
+.launchpad__overlay.modal-accessible {
+  visibility: visible;
+}
+
+.launchpad__overlay.modal-inaccessible {
+  visibility: hidden;
+}
+
 .launchpad__container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto;

@@ -67,7 +67,7 @@ export default function Appearance() {
       <div className="appearance__wallpaper-upload-container">
         <Translation value="upload_wallpaper" />
         <div className="appearance__wallpaper-actions-container">
-          <div className="image-picker">
+          <div className="image-picker accessible">
             <label htmlFor="file-input" className="file-label">
               <span>
                 <Translation value="choose_file" />

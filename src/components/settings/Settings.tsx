@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./Settings.css";
 import { ReactComponent as CloseIcon } from "./close-icon.svg";
 import { ReactComponent as MinimizeIcon } from "./minimize-icon.svg";
@@ -43,14 +43,32 @@ export default function Settings({
   onAnimationToggle: (val: boolean) => void;
 }) {
   const [selectedMenu, setSelectedMenu] = useState(SETTINGS_MENU[0]);
+  const [modalAccessible, setModalAccessible] = useState(false);
 
   const Content = useMemo(() => {
     return selectedMenu.content;
   }, [selectedMenu]);
 
+  // this is to prevent keyboard accessibility when modal is closed
+  useEffect(() => {
+    if (open) {
+      setModalAccessible(true);
+    } else {
+      const timerRef = setTimeout(() => {
+        setModalAccessible(false);
+      }, 600);
+
+      return () => clearTimeout(timerRef);
+    }
+  }, [open]);
+
   return (
     <div
-      className={"settings__overlay" + (open ? " visible" : "")}
+      className={
+        "settings__overlay" +
+        (open ? " visible" : "") +
+        (modalAccessible ? " modal-accessible" : " modal-inaccessible")
+      }
       onClick={() => {
         onAnimationToggle(true);
         onClose();

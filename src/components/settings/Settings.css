@@ -11,6 +11,14 @@
   z-index: 10;
 }
 
+.settings__overlay.modal-accessible {
+  visibility: visible;
+}
+
+.settings__overlay.modal-inaccessible {
+  visibility: hidden;
+}
+
 .settings__overlay.visible {
   pointer-events: auto;
 }
@@ -25,7 +33,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  transform: translate(100vh,100vh) scale(.1);
+  transform: translate(100vh, 100vh) scale(0.1);
   transform-origin: bottom right;
 }
 
