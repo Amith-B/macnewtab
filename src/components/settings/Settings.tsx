@@ -4,11 +4,13 @@ import { ReactComponent as CloseIcon } from "./close-icon.svg";
 import { ReactComponent as MinimizeIcon } from "./minimize-icon.svg";
 import { ReactComponent as GeneralIcon } from "./general.svg";
 import { ReactComponent as AppearanceIcon } from "./appearance.svg";
+import { ReactComponent as DockIcon } from "./dock.svg";
 import { ReactComponent as AboutIcon } from "./about.svg";
 import Appearance from "./Appearance/Appearance";
 import About from "./About/About";
 import General from "./general/General";
 import Translation from "../../locale/Translation";
+import Dock from "./Dock/Dock";
 
 export const SETTINGS_MENU = [
   {
@@ -24,6 +26,12 @@ export const SETTINGS_MENU = [
     content: Appearance,
   },
   {
+    key: "dock",
+    title: <Translation value="dock" />,
+    icon: DockIcon,
+    content: Dock,
+  },
+  {
     key: "about",
     title: <Translation value="about" />,
     icon: AboutIcon,
@@ -36,11 +44,13 @@ export default function Settings({
   onClose,
   animate,
   onAnimationToggle,
+  withinDock,
 }: {
   open: boolean;
   onClose: () => void;
   animate: boolean;
   onAnimationToggle: (val: boolean) => void;
+  withinDock: boolean;
 }) {
   const [selectedMenu, setSelectedMenu] = useState(SETTINGS_MENU[0]);
   const [modalAccessible, setModalAccessible] = useState(false);
@@ -75,7 +85,11 @@ export default function Settings({
       }}
     >
       <div
-        className={"settings__container" + (animate ? " animate" : "")}
+        className={
+          "settings__container" +
+          (animate ? " animate" : "") +
+          (withinDock ? " within-dock" : "")
+        }
         onClick={(evt) => evt.stopPropagation()}
       >
         <div className="settings__side-panel">

@@ -16,19 +16,14 @@ import {
   SEARCH_ENGINE_LOCAL_STORAGE_KEY,
   searchEngineKeys,
 } from "./static/searchEngine";
-import { ReactComponent as SettingsIcon } from "./assets/settings.svg";
-import { ReactComponent as LaunchpadIcon } from "./assets/launchpad.svg";
 import { AppContext } from "./context/provider";
-import Settings from "./components/settings/Settings";
 import TopSites from "./components/topsites/TopSites";
 import Translation from "./locale/Translation";
-import Launchpad from "./components/launchpad/Launchpad";
+import Dock from "./components/dock/Dock";
 
 const App = memo(function App() {
   const [searchEngine, setSearchEngine] = useState("");
-  const [settingsVisible, setSettingsVisible] = useState(false);
-  const [launchpadVisible, setLaunchpadVisible] = useState(false);
-  const [settingsActive, setSettingsActive] = useState(false);
+
   const {
     theme,
     backgroundImage,
@@ -111,37 +106,7 @@ const App = memo(function App() {
           )}
         </div>
       </div>
-      <button
-        className="launchpad-icon accessible"
-        onClick={() => {
-          setLaunchpadVisible(!launchpadVisible);
-          setSettingsVisible(false);
-        }}
-      >
-        <LaunchpadIcon />
-      </button>
-      <button
-        className={
-          "settings-icon accessible" +
-          (settingsActive || settingsVisible ? " settings-active" : "")
-        }
-        onClick={() => {
-          setSettingsVisible(true);
-          setLaunchpadVisible(false);
-        }}
-      >
-        <SettingsIcon />
-      </button>
-      <Settings
-        open={settingsVisible}
-        onClose={() => setSettingsVisible(false)}
-        animate={settingsActive}
-        onAnimationToggle={setSettingsActive}
-      />
-      <Launchpad
-        visible={launchpadVisible}
-        onClose={() => setLaunchpadVisible(false)}
-      />
+      <Dock />
     </div>
   );
 });

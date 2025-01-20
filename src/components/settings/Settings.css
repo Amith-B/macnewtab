@@ -33,8 +33,13 @@
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  transform: translate(100vh, 100vh) scale(0.1);
+  transform: translate(100vw, 100vh) scale(0.1);
   transform-origin: bottom right;
+}
+
+.settings__container.within-dock {
+  transform: translate(0, 100vh) scale(0.1);
+  transform-origin: bottom left;
 }
 
 .settings__container.animate {

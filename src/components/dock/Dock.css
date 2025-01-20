@@ -1,0 +1,90 @@
+.launchpad-icon {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 11;
+}
+
+.launchpad-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dock-container:not(.center) .launchpad-icon {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+}
+
+.dock-container:not(.center) .settings-icon {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+}
+
+.settings-icon {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.dock-container.center {
+  position: absolute;
+  bottom: 20px;
+  height: 62px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 8px;
+  border-radius: 16px;
+  backdrop-filter: var(--theme-bg-blur-30);
+  border: 1px solid #9696967a;
+}
+
+.vertical-divider {
+  width: 2px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: var(--theme-border);
+}
+
+.dock-site__item {
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dock-site__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dock-container.center .settings-icon,
+.dock-container.center .launchpad-icon,
+.dock-container.center .dock-site__item {
+  width: 44px;
+  height: 44px;
+}
+
+.dock-container.center .dock-site__icon {
+  width: 34px;
+  height: 34px;
+}

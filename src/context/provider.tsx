@@ -10,11 +10,19 @@ import {
 import { BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY } from "../static/bookmarkAlert";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
 import { languages } from "../locale/languages";
+import {
+  DOCK_SITES_LOCAL_STORAGE_KEY,
+  dockBarDefaultSites,
+} from "../static/dockSites";
+
+type DockBarSites = Array<{ title: string; url: string; siteImage: string }>;
 
 export const AppContext = createContext({
   date: new Date(),
   theme: "system",
   locale: "en" as typeof languages,
+  dockBarSites: [] as DockBarSites,
+  handleDockSitesChange: (_: DockBarSites) => {},
   handleLocaleChange: (_: typeof languages) => {},
   handleThemeChange: (_: string) => {},
   backgroundImage: "",
@@ -106,6 +114,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [separatePageSite, setSeparatePageSite] = useState(false);
   const [showSearchEngines, setShowSearchEngines] = useState(true);
   const [showMonthView, setShowMonthView] = useState(true);
+  const [dockBarSites, setDockBarSites] = useState<DockBarSites>([]);
 
   useEffect(() => {
     const intervalRef = setInterval(() => {
@@ -177,6 +186,24 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     const bookmarkAlertShown = localStorage.getItem(
       BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY
     );
+
+    try {
+      const storedDockSites = localStorage.getItem(
+        DOCK_SITES_LOCAL_STORAGE_KEY
+      );
+
+      if (storedDockSites) {
+        const parsedList = JSON.parse(storedDockSites);
+
+        if (Array.isArray(parsedList)) {
+          setDockBarSites(parsedList);
+        }
+      } else {
+        setDockBarSites(dockBarDefaultSites);
+      }
+    } catch (_) {
+      setDockBarSites(dockBarDefaultSites);
+    }
 
     if (!bookmarkAlertShown) {
       const isMac = navigator.userAgent.toLowerCase().includes("mac");
@@ -253,6 +280,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setLocale(val);
   };
 
+  const handleDockSitesChange = (val: DockBarSites) => {
+    localStorage.setItem(DOCK_SITES_LOCAL_STORAGE_KEY, JSON.stringify(val));
+    setDockBarSites(val);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -273,6 +305,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleShowMonthViewChange,
         locale,
         handleLocaleChange,
+        dockBarSites,
+        handleDockSitesChange,
       }}
     >
       {children}

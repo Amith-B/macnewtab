@@ -77,6 +77,8 @@ export const translation = {
 
     voice_search_warning:
       "Voice search is not supported for this language. It will default to English for this language.",
+
+    dock: "Dock",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -154,6 +156,8 @@ export const translation = {
     choose_wallpaper: "ವಾಲ್‌ಪೇಪರ್ ಆಯ್ಕೆಮಾಡಿ",
 
     voice_search_warning: "ಈ ಭಾಷೆಗೆ ಧ್ವನಿ ಹುಡುಕಾಟವು ಬೆಂಬಲಿತವಾಗಿಲ್ಲ.",
+
+    dock: "ಡಾಕ್",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -232,6 +236,8 @@ export const translation = {
 
     voice_search_warning:
       "Hlasové vyhledávání není pro tento jazyk podporováno.",
+
+    dock: "Dok",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -309,6 +315,8 @@ export const translation = {
     choose_wallpaper: "Duvar Kağıdını Seçin",
 
     voice_search_warning: "Bu dil için sesli arama desteklenmiyor.",
+
+    dock: "Rıhtım",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -387,6 +395,8 @@ export const translation = {
 
     voice_search_warning:
       "Tìm kiếm bằng giọng nói không được hỗ trợ cho ngôn ngữ này.",
+
+    dock: "bến tàu",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -464,6 +474,8 @@ export const translation = {
     choose_wallpaper: "Fon rasmi tanlang",
 
     voice_search_warning: "Bu tilda ovozli qidiruv ishlamaydi.",
+
+    dock: "Dok",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -540,6 +552,8 @@ export const translation = {
     choose_wallpaper: "选择壁纸",
 
     voice_search_warning: "该语言不支持语音搜索",
+
+    dock: "码头",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -617,6 +631,8 @@ export const translation = {
     choose_wallpaper: "वॉलपेपर चुनें",
 
     voice_search_warning: "इस भाषा के लिए ध्वनि खोज समर्थित नहीं है.",
+
+    dock: "गोदी",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -696,6 +712,8 @@ export const translation = {
 
     voice_search_warning:
       "La ricerca vocale non è supportata per questa lingua.",
+
+    dock: "Dock",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -773,6 +791,8 @@ export const translation = {
     choose_wallpaper: "ওয়ালপেপার চয়ন করুন",
 
     voice_search_warning: "এই ভাষার জন্য ভয়েস অনুসন্ধান সমর্থিত নয়।",
+
+    dock: "ডক",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -851,6 +871,8 @@ export const translation = {
 
     voice_search_warning:
       "A pesquisa por voz não é compatível com este idioma.",
+
+    dock: "Doca",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -930,6 +952,8 @@ export const translation = {
 
     voice_search_warning:
       "La recherche vocale n'est pas prise en charge pour cette langue.",
+
+    dock: "Quai",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1007,6 +1031,8 @@ export const translation = {
     choose_wallpaper: "Выбрать обои",
 
     voice_search_warning: "Голосовой поиск не поддерживается для этого языка.",
+
+    dock: "Док",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1085,6 +1111,8 @@ export const translation = {
 
     voice_search_warning:
       "La búsqueda por voz no es compatible con este idioma.",
+
+    dock: "Muelle",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1161,6 +1189,8 @@ export const translation = {
     choose_wallpaper: "壁紙を選択してください",
 
     voice_search_warning: "この言語では音声検索がサポートされていません",
+
+    dock: "ドック",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1237,6 +1267,8 @@ export const translation = {
     choose_wallpaper: "배경화면 선택",
 
     voice_search_warning: "이 언어에서는 음성 검색이 지원되지 않습니다.",
+
+    dock: "독",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1314,6 +1346,8 @@ export const translation = {
     choose_wallpaper: "Pilih Wallpaper",
 
     voice_search_warning: "Penelusuran suara tidak didukung untuk bahasa ini.",
+
+    dock: "Dermaga",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1391,6 +1425,8 @@ export const translation = {
     choose_wallpaper: "वॉलपेपर निवडा",
 
     voice_search_warning: "या भाषेसाठी व्हॉइस शोध समर्थित नाही.",
+
+    dock: "डॉक",
   },
 };
 
