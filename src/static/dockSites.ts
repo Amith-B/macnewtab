@@ -1,5 +1,7 @@
 export const DOCK_SITES_LOCAL_STORAGE_KEY = "dock_sites";
 
+export const DOCK_SITES_MAX_LIMIT = 10;
+
 export const dockBarDefaultSites = [
   {
     title: "YouTube",

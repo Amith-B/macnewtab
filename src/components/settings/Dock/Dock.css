@@ -102,3 +102,7 @@
   width: 100%;
   height: 100%;
 }
+
+.maximum-limit-warning {
+  color: #ff5d59;
+}

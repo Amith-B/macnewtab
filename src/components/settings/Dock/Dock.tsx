@@ -9,6 +9,7 @@ import "./Dock.css";
 import { AppContext } from "../../../context/provider";
 import { List, arrayMove } from "react-movable";
 import { ReactComponent as DeleteIcon } from "../delete-icon.svg";
+import { DOCK_SITES_MAX_LIMIT } from "../../../static/dockSites";
 
 export default memo(function Dock() {
   const [changesActive, setChangesActive] = useState(false);
@@ -29,6 +30,9 @@ export default memo(function Dock() {
   };
 
   const handleAdd = () => {
+    if (currentDockSites.length === DOCK_SITES_MAX_LIMIT) {
+      return;
+    }
     setChangesActive(true);
     const updatedDockSites = [...currentDockSites];
     updatedDockSites.push({ title: "", url: "" });
@@ -74,6 +78,9 @@ export default memo(function Dock() {
           </button>
         )}
       </div>
+      {currentDockSites.length === DOCK_SITES_MAX_LIMIT && (
+        <p className="maximum-limit-warning">Maximum limit reached</p>
+      )}
       <div
         className={
           "dock-links__list-container" +
