@@ -4,8 +4,8 @@ export const DOCK_SITES_MAX_LIMIT = 10;
 
 export const dockBarDefaultSites = [
   {
-    title: "Google",
-    url: "https://www.google.com/",
+    title: "Gemini",
+    url: "https://gemini.google.com/?hl=en-IN",
   },
   {
     title: "ChatGPT",
