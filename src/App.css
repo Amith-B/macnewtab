@@ -117,7 +117,7 @@ body:has(.App.theme-light) {
 }
 
 .accessible:focus-visible,
-.accessible:focus-within,
+.accessible:has(input:focus-visible),
 button:focus-visible {
   outline: 2px solid rgb(83 83 255);
   outline-offset: 0px;
