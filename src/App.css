@@ -12,8 +12,15 @@
   background-position: center center;
 }
 
+body {
+  background-color: var(--theme-bg);
+  color: var(--theme-clr);
+}
+
 .App.theme-system,
-.App.theme-light {
+body:has(.App.theme-system),
+.App.theme-light,
+body:has(.App.theme-light) {
   --theme-bg: #efefee;
   --theme-bg-with-opacity: #efeeee9e;
   --theme-clr: #272727;
@@ -48,7 +55,9 @@
 
 @media (prefers-color-scheme: dark) {
   .App.theme-system,
-  .App.theme-dark {
+  body:has(.App.theme-system),
+  .App.theme-dark,
+  body:has(.App.theme-dark) {
     --theme-bg: #2e2d2c;
     --theme-bg-with-opacity: #2e2d2c9e;
     --theme-clr: #dfdfdf;

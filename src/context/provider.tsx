@@ -15,7 +15,7 @@ import {
   dockBarDefaultSites,
 } from "../static/dockSites";
 
-type DockBarSites = Array<{ title: string; url: string; siteImage: string }>;
+type DockBarSites = Array<{ title: string; url: string }>;
 
 export const AppContext = createContext({
   date: new Date(),

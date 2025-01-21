@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./Appearance.css";
 import { THEME_LIST } from "../../../static/theme";
 import { AppContext } from "../../../context/provider";
-import { ReactComponent as DeleteIcon } from "./delete.svg";
+import { ReactComponent as DeleteIcon } from "../delete-icon.svg";
 import Translation from "../../../locale/Translation";
 import { WALLPAPER_LIST } from "../../../static/wallpapers";
 

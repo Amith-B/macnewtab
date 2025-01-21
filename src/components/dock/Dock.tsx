@@ -6,6 +6,8 @@ import Launchpad from "../launchpad/Launchpad";
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
 
+const SITE_IMAGE_URL = "https://www.google.com/s2/favicons?sz=64&domain=";
+
 export default function Dock() {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
@@ -36,22 +38,26 @@ export default function Dock() {
           <SettingsIcon />
         </button>
         <div className="vertical-divider"></div>
-        {dockBarSites.map((item, idx) => (
-          <a
-            rel="noreferrer"
-            className="dock-site__item"
-            href={item.url}
-            target="_self"
-            title={item.title}
-            key={idx}
-          >
-            <img
-              className="dock-site__icon"
-              src={item.siteImage}
-              alt={item.title}
-            />
-          </a>
-        ))}
+        {dockBarSites.map((item, idx) => {
+          const siteURL = new URL(item.url);
+
+          return (
+            <a
+              rel="noreferrer"
+              className="dock-site__item"
+              href={item.url}
+              target="_self"
+              title={item.title}
+              key={idx}
+            >
+              <img
+                className="dock-site__icon"
+                src={SITE_IMAGE_URL + siteURL.hostname}
+                alt={item.title}
+              />
+            </a>
+          );
+        })}
       </div>
       <Settings
         withinDock={showDocBar}

@@ -1,7 +1,5 @@
 export const DOCK_SITES_LOCAL_STORAGE_KEY = "dock_sites";
 
-const SITE_IMAGE_URL = "https://www.google.com/s2/favicons?sz=64&domain=";
-
 export const dockBarDefaultSites = [
   {
     title: "YouTube",
@@ -19,11 +17,4 @@ export const dockBarDefaultSites = [
     title: "ChatGPT",
     url: "https://chat.openai.com/",
   },
-].map((item) => {
-  const siteURL = new URL(item.url);
-
-  return {
-    ...item,
-    siteImage: SITE_IMAGE_URL + siteURL.hostname,
-  };
-});
+];
