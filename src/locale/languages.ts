@@ -79,6 +79,11 @@ export const translation = {
       "Voice search is not supported for this language. It will default to English for this language.",
 
     dock: "Dock",
+
+    add: "Add",
+    done: "Done",
+    dock_max_limit: "Maximum limit reached",
+    add_dock_links: "Add Links to Dock",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -158,6 +163,11 @@ export const translation = {
     voice_search_warning: "ಈ ಭಾಷೆಗೆ ಧ್ವನಿ ಹುಡುಕಾಟವು ಬೆಂಬಲಿತವಾಗಿಲ್ಲ.",
 
     dock: "ಡಾಕ್",
+
+    add: "ಸೇರಿಸಿ",
+    done: "ಮುಗಿದಿದೆ",
+    dock_max_limit: "ಗರಿಷ್ಠ ಮಿತಿಯನ್ನು ತಲುಪಿದೆ",
+    add_dock_links: "ಡಾಕ್‌ಗೆ ಲಿಂಕ್‌ಗಳನ್ನು ಸೇರಿಸಿ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -238,6 +248,11 @@ export const translation = {
       "Hlasové vyhledávání není pro tento jazyk podporováno.",
 
     dock: "Dok",
+
+    add: "Přidat",
+    done: "Hotovo",
+    dock_max_limit: "Bylo dosaženo maximálního limitu",
+    add_dock_links: "Přidat odkazy do Docku",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -317,6 +332,11 @@ export const translation = {
     voice_search_warning: "Bu dil için sesli arama desteklenmiyor.",
 
     dock: "Rıhtım",
+
+    add: "Eklemek",
+    done: "Tamamlamak",
+    dock_max_limit: "Maksimum sınıra ulaşıldı",
+    add_dock_links: "Dock'a Bağlantı Ekle",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -397,6 +417,11 @@ export const translation = {
       "Tìm kiếm bằng giọng nói không được hỗ trợ cho ngôn ngữ này.",
 
     dock: "bến tàu",
+
+    add: "Thêm vào",
+    done: "Xong",
+    dock_max_limit: "Đã đạt đến giới hạn tối đa",
+    add_dock_links: "Thêm liên kết vào Dock",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -476,6 +501,11 @@ export const translation = {
     voice_search_warning: "Bu tilda ovozli qidiruv ishlamaydi.",
 
     dock: "Dok",
+
+    add: "Qo'shish",
+    done: "Bajarildi",
+    dock_max_limit: "Maksimal chegaraga yetdi",
+    add_dock_links: "Dock-ga havolalar qo'shing",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -554,6 +584,11 @@ export const translation = {
     voice_search_warning: "该语言不支持语音搜索",
 
     dock: "码头",
+
+    add: "添加",
+    done: "完毕",
+    dock_max_limit: "达到最大限制",
+    add_dock_links: "添加链接到 Dock",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -633,6 +668,11 @@ export const translation = {
     voice_search_warning: "इस भाषा के लिए ध्वनि खोज समर्थित नहीं है.",
 
     dock: "गोदी",
+
+    add: "जोड़ना",
+    done: "हो गया",
+    dock_max_limit: "अधिकतम सीमा तक पहुंच गया",
+    add_dock_links: "डॉक में लिंक जोड़ें",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -714,6 +754,11 @@ export const translation = {
       "La ricerca vocale non è supportata per questa lingua.",
 
     dock: "Dock",
+
+    add: "Aggiungere",
+    done: "Fatto",
+    dock_max_limit: "Limite massimo raggiunto",
+    add_dock_links: "Aggiungi collegamenti al Dock",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -793,6 +838,11 @@ export const translation = {
     voice_search_warning: "এই ভাষার জন্য ভয়েস অনুসন্ধান সমর্থিত নয়।",
 
     dock: "ডক",
+
+    add: "যোগ করুন",
+    done: "সম্পন্ন",
+    dock_max_limit: "সর্বোচ্চ সীমা পৌঁছেছে",
+    add_dock_links: "ডক লিঙ্ক যোগ করুন",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -873,6 +923,11 @@ export const translation = {
       "A pesquisa por voz não é compatível com este idioma.",
 
     dock: "Doca",
+
+    add: "Adicionar",
+    done: "Feito",
+    dock_max_limit: "Limite máximo atingido",
+    add_dock_links: "Adicionar links ao Dock",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -954,6 +1009,11 @@ export const translation = {
       "La recherche vocale n'est pas prise en charge pour cette langue.",
 
     dock: "Quai",
+
+    add: "Ajouter",
+    done: "Fait",
+    dock_max_limit: "Limite maximale atteinte",
+    add_dock_links: "Ajouter des liens au Dock",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1033,6 +1093,11 @@ export const translation = {
     voice_search_warning: "Голосовой поиск не поддерживается для этого языка.",
 
     dock: "Док",
+
+    add: "Добавлять",
+    done: "Сделанный",
+    dock_max_limit: "Достигнут максимальный лимит",
+    add_dock_links: "Добавить ссылки в док",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1113,6 +1178,11 @@ export const translation = {
       "La búsqueda por voz no es compatible con este idioma.",
 
     dock: "Muelle",
+
+    add: "Agregar",
+    done: "Hecho",
+    dock_max_limit: "Límite máximo alcanzado",
+    add_dock_links: "Agregar enlaces al muelle",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1191,6 +1261,11 @@ export const translation = {
     voice_search_warning: "この言語では音声検索がサポートされていません",
 
     dock: "ドック",
+
+    add: "追加",
+    done: "終わり",
+    dock_max_limit: "上限に達しました",
+    add_dock_links: "リンクをドックに追加",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1269,6 +1344,11 @@ export const translation = {
     voice_search_warning: "이 언어에서는 음성 검색이 지원되지 않습니다.",
 
     dock: "독",
+
+    add: "추가하다",
+    done: "완료",
+    dock_max_limit: "최대 한도에 도달했습니다.",
+    add_dock_links: "Dock에 링크 추가",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1348,6 +1428,11 @@ export const translation = {
     voice_search_warning: "Penelusuran suara tidak didukung untuk bahasa ini.",
 
     dock: "Dermaga",
+
+    add: "Menambahkan",
+    done: "Selesai",
+    dock_max_limit: "Batas maksimum tercapai",
+    add_dock_links: "Tambahkan Tautan ke Dock",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1427,6 +1512,11 @@ export const translation = {
     voice_search_warning: "या भाषेसाठी व्हॉइस शोध समर्थित नाही.",
 
     dock: "डॉक",
+
+    add: "ॲड",
+    done: "झाले",
+    dock_max_limit: "कमाल मर्यादा गाठली",
+    add_dock_links: "डॉकमध्ये लिंक्स जोडा",
   },
 };
 
