@@ -99,6 +99,7 @@ export default function Settings({
               onClick={() => {
                 onAnimationToggle(false);
                 onClose();
+                setSelectedMenu(SETTINGS_MENU[0]);
               }}
             >
               <CloseIcon />
