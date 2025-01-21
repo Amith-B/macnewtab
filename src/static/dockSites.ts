@@ -4,19 +4,19 @@ export const DOCK_SITES_MAX_LIMIT = 10;
 
 export const dockBarDefaultSites = [
   {
-    title: "YouTube",
-    url: "https://www.youtube.com/",
-  },
-  {
-    title: "Instagram",
-    url: "https://www.instagram.com/",
-  },
-  {
-    title: "Facebook",
-    url: "https://www.facebook.com",
+    title: "Google",
+    url: "https://www.google.com/",
   },
   {
     title: "ChatGPT",
     url: "https://chat.openai.com/",
+  },
+  {
+    title: "Copilot",
+    url: "https://copilot.microsoft.com/",
+  },
+  {
+    title: "Meta AI",
+    url: "https://www.meta.ai/",
   },
 ];
