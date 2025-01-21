@@ -20,7 +20,8 @@ export default function Dock() {
     <>
       <div className={"dock-container" + (showDocBar ? " center" : "")}>
         <button
-          className="launchpad-icon accessible"
+          className="launchpad-icon accessible tooltip"
+          data-label="Launchpad"
           onClick={() => {
             setLaunchpadVisible(!launchpadVisible);
             setSettingsVisible(false);
@@ -29,7 +30,8 @@ export default function Dock() {
           <LaunchpadIcon />
         </button>
         <button
-          className="settings-icon accessible"
+          className="settings-icon accessible tooltip"
+          data-label="Settings"
           onClick={() => {
             setSettingsVisible(true);
             setLaunchpadVisible(false);
@@ -44,7 +46,8 @@ export default function Dock() {
           return (
             <a
               rel="noreferrer"
-              className="dock-site__item"
+              className="dock-site__item tooltip"
+              data-label={item.title}
               href={item.url}
               target="_self"
               title={item.title}
