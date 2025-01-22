@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactElement } from "react";
 import "./Select.css";
 
 export const Select = ({
@@ -6,7 +6,7 @@ export const Select = ({
   value,
   onChange,
 }: {
-  options: Array<{ value: string; label: string }>;
+  options: Array<{ value: string; label: string | ReactElement }>;
   value: string;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
 }) => {

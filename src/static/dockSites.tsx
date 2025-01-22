@@ -1,3 +1,5 @@
+import Translation from "../locale/Translation";
+
 export const DOCK_SITES_LOCAL_STORAGE_KEY = "dock_sites";
 export const DOCK_POSITION_LOCAL_STORAGE_KEY = "dock_position";
 
@@ -23,9 +25,9 @@ export const dockBarDefaultSites = [
 ];
 
 export const dockPositions = [
-  { label: "Left", value: "left" },
-  { label: "Bottom", value: "bottom" },
-  { label: "Right", value: "right" },
+  { label: <Translation value="left" />, value: "left" },
+  { label: <Translation value="bottom" />, value: "bottom" },
+  { label: <Translation value="right" />, value: "right" },
 ];
 
 export const dockPositionsList = dockPositions.map(({ value }) => value);

@@ -84,8 +84,7 @@ export default memo(function Dock() {
           "dock-links__position" + (!currentDockSites.length ? " disabled" : "")
         }
       >
-        {/* <Translation value="position" /> */}
-        <p>Position On Screen</p>
+        <Translation value="position_on_screen" />
         <Select
           options={dockPositions}
           value={dockPosition}

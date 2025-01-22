@@ -84,6 +84,11 @@ export const translation = {
     done: "Done",
     dock_max_limit: "Maximum limit reached",
     add_dock_links: "Add Links to Dock",
+
+    position_on_screen: "Position On Screen",
+    left: "Left",
+    bottom: "Bottom",
+    right: "Right",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -168,6 +173,11 @@ export const translation = {
     done: "ಮುಗಿದಿದೆ",
     dock_max_limit: "ಗರಿಷ್ಠ ಮಿತಿಯನ್ನು ತಲುಪಿದೆ",
     add_dock_links: "ಡಾಕ್‌ಗೆ ಲಿಂಕ್‌ಗಳನ್ನು ಸೇರಿಸಿ",
+
+    position_on_screen: "ಪರದೆಯ ಮೇಲೆ ಸ್ಥಾನ",
+    left: "ಎಡಕ್ಕೆ",
+    bottom: "ಕೆಳಗೆ",
+    right: "ಬಲ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -253,6 +263,11 @@ export const translation = {
     done: "Hotovo",
     dock_max_limit: "Bylo dosaženo maximálního limitu",
     add_dock_links: "Přidat odkazy do Docku",
+
+    position_on_screen: "Pozice Na Obrazovce",
+    left: "Vlevo",
+    bottom: "Dno",
+    right: "Pravá strana",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -337,6 +352,11 @@ export const translation = {
     done: "Tamamlamak",
     dock_max_limit: "Maksimum sınıra ulaşıldı",
     add_dock_links: "Dock'a Bağlantı Ekle",
+
+    position_on_screen: "Ekrandaki Konum",
+    left: "Sol",
+    bottom: "Alt",
+    right: "Sağ Taraf",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -422,6 +442,11 @@ export const translation = {
     done: "Xong",
     dock_max_limit: "Đã đạt đến giới hạn tối đa",
     add_dock_links: "Thêm liên kết vào Dock",
+
+    position_on_screen: "Vị trí trên màn hình",
+    left: "Bên trái",
+    bottom: "Đáy",
+    right: "Bên phải",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -506,6 +531,11 @@ export const translation = {
     done: "Bajarildi",
     dock_max_limit: "Maksimal chegaraga yetdi",
     add_dock_links: "Dock-ga havolalar qo'shing",
+
+    position_on_screen: "Ekrandagi joylashuv",
+    left: "Chapga",
+    bottom: "Pastki",
+    right: "O'ng tomon",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -589,6 +619,11 @@ export const translation = {
     done: "完毕",
     dock_max_limit: "达到最大限制",
     add_dock_links: "添加链接到 Dock",
+
+    position_on_screen: "屏幕上的位置",
+    left: "左边",
+    bottom: "底部",
+    right: "右侧",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -673,6 +708,11 @@ export const translation = {
     done: "हो गया",
     dock_max_limit: "अधिकतम सीमा तक पहुंच गया",
     add_dock_links: "डॉक में लिंक जोड़ें",
+
+    position_on_screen: "स्क्रीन पर स्थिति",
+    left: "बाएं",
+    bottom: "तल",
+    right: "दाहिनी ओर",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -759,6 +799,11 @@ export const translation = {
     done: "Fatto",
     dock_max_limit: "Limite massimo raggiunto",
     add_dock_links: "Aggiungi collegamenti al Dock",
+
+    position_on_screen: "Posizione sullo schermo",
+    left: "Sinistra",
+    bottom: "Metter il fondo a",
+    right: "Lato destro",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -843,6 +888,11 @@ export const translation = {
     done: "সম্পন্ন",
     dock_max_limit: "সর্বোচ্চ সীমা পৌঁছেছে",
     add_dock_links: "ডক লিঙ্ক যোগ করুন",
+
+    position_on_screen: "স্ক্রিনে অবস্থান",
+    left: "বাম",
+    bottom: "নীচে",
+    right: "ডান দিক",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -928,6 +978,11 @@ export const translation = {
     done: "Feito",
     dock_max_limit: "Limite máximo atingido",
     add_dock_links: "Adicionar links ao Dock",
+
+    position_on_screen: "Posição na tela",
+    left: "Esquerda",
+    bottom: "Fundo",
+    right: "Lado direito",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1014,6 +1069,11 @@ export const translation = {
     done: "Fait",
     dock_max_limit: "Limite maximale atteinte",
     add_dock_links: "Ajouter des liens au Dock",
+
+    position_on_screen: "Position à l'écran",
+    left: "Gauche",
+    bottom: "Bas",
+    right: "Côté droit",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1098,6 +1158,11 @@ export const translation = {
     done: "Сделанный",
     dock_max_limit: "Достигнут максимальный лимит",
     add_dock_links: "Добавить ссылки в док",
+
+    position_on_screen: "Положение на экране",
+    left: "Левый",
+    bottom: "Нижний",
+    right: "Правая сторона",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1183,6 +1248,11 @@ export const translation = {
     done: "Hecho",
     dock_max_limit: "Límite máximo alcanzado",
     add_dock_links: "Agregar enlaces al muelle",
+
+    position_on_screen: "Posición en pantalla",
+    left: "Izquierda",
+    bottom: "Abajo",
+    right: "Lado derecho",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1266,6 +1336,11 @@ export const translation = {
     done: "終わり",
     dock_max_limit: "上限に達しました",
     add_dock_links: "リンクをドックに追加",
+
+    position_on_screen: "画面上の位置",
+    left: "左",
+    bottom: "底",
+    right: "右側",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1349,6 +1424,11 @@ export const translation = {
     done: "완료",
     dock_max_limit: "최대 한도에 도달했습니다.",
     add_dock_links: "Dock에 링크 추가",
+
+    position_on_screen: "화면상의 위치",
+    left: "왼쪽",
+    bottom: "맨 아래",
+    right: "오른쪽",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1433,6 +1513,11 @@ export const translation = {
     done: "Selesai",
     dock_max_limit: "Batas maksimum tercapai",
     add_dock_links: "Tambahkan Tautan ke Dock",
+
+    position_on_screen: "Posisi Di Layar",
+    left: "Kiri",
+    bottom: "Dasar",
+    right: "Sisi Kanan",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1517,6 +1602,11 @@ export const translation = {
     done: "झाले",
     dock_max_limit: "कमाल मर्यादा गाठली",
     add_dock_links: "डॉकमध्ये लिंक्स जोडा",
+
+    position_on_screen: "स्क्रीनवर स्थान",
+    left: "बाकी",
+    bottom: "तळ",
+    right: "उजवी बाजू",
   },
 };
 
