@@ -51,6 +51,7 @@
   border-radius: 16px;
   backdrop-filter: var(--theme-bg-blur-30);
   border: 1px solid #9696967a;
+  background-color: var(--theme-bg-dock);
 }
 
 .vertical-divider {

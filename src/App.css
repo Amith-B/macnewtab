@@ -23,6 +23,7 @@ body:has(.App.theme-system),
 body:has(.App.theme-light) {
   --theme-bg: #efefee;
   --theme-bg-with-opacity: #efeeee9e;
+  --theme-bg-dock: #efeeee6b;
   --theme-clr: #272727;
   --theme-shadow: #adadad;
   --theme-border: #c6c6c6;
@@ -60,6 +61,7 @@ body:has(.App.theme-light) {
   body:has(.App.theme-dark) {
     --theme-bg: #2e2d2c;
     --theme-bg-with-opacity: #2e2d2c9e;
+    --theme-bg-dock: transparent;
     --theme-clr: #dfdfdf;
     --theme-shadow: black;
     --theme-border: #585856;
