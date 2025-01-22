@@ -106,3 +106,19 @@
 .maximum-limit-warning {
   color: #ff5d59;
 }
+
+.dock-links__position {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--theme-border);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.dock-links__position.disabled {
+  opacity: 0.5;
+  filter: saturate(0);
+  pointer-events: none;
+}

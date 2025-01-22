@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import "./Settings.css";
 import { ReactComponent as CloseIcon } from "./close-icon.svg";
 import { ReactComponent as MinimizeIcon } from "./minimize-icon.svg";
@@ -11,6 +11,7 @@ import About from "./About/About";
 import General from "./general/General";
 import Translation from "../../locale/Translation";
 import Dock from "./Dock/Dock";
+import { AppContext } from "../../context/provider";
 
 export const SETTINGS_MENU = [
   {
@@ -42,18 +43,15 @@ export const SETTINGS_MENU = [
 export default function Settings({
   open,
   onClose,
-  animate,
-  onAnimationToggle,
   withinDock,
 }: {
   open: boolean;
   onClose: () => void;
-  animate: boolean;
-  onAnimationToggle: (val: boolean) => void;
   withinDock: boolean;
 }) {
   const [selectedMenu, setSelectedMenu] = useState(SETTINGS_MENU[0]);
   const [modalAccessible, setModalAccessible] = useState(false);
+  const { dockPosition } = useContext(AppContext);
 
   const Content = useMemo(() => {
     return selectedMenu.content;
@@ -80,14 +78,12 @@ export default function Settings({
         (modalAccessible ? " modal-accessible" : " modal-inaccessible")
       }
       onClick={() => {
-        onAnimationToggle(true);
         onClose();
       }}
     >
       <div
         className={
-          "settings__container" +
-          (animate ? " animate" : "") +
+          `settings__container dock-position-${dockPosition}` +
           (withinDock ? " within-dock" : "")
         }
         onClick={(evt) => evt.stopPropagation()}
@@ -97,7 +93,6 @@ export default function Settings({
             <button
               className="settings__window-manager-button settings__window-close"
               onClick={() => {
-                onAnimationToggle(false);
                 onClose();
                 setSelectedMenu(SETTINGS_MENU[0]);
               }}
@@ -106,10 +101,7 @@ export default function Settings({
             </button>
             <button
               className="settings__window-manager-button settings__window-minimize"
-              onClick={() => {
-                onAnimationToggle(true);
-                onClose();
-              }}
+              onClick={onClose}
             >
               <MinimizeIcon />
             </button>

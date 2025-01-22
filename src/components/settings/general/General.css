@@ -25,6 +25,7 @@
 .general__row-item.disabled {
   opacity: 0.5;
   filter: saturate(0);
+  pointer-events: none;
 }
 
 .general__container .general__row-item:last-child {

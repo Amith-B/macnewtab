@@ -1,4 +1,5 @@
 export const DOCK_SITES_LOCAL_STORAGE_KEY = "dock_sites";
+export const DOCK_POSITION_LOCAL_STORAGE_KEY = "dock_position";
 
 export const DOCK_SITES_MAX_LIMIT = 10;
 
@@ -20,3 +21,13 @@ export const dockBarDefaultSites = [
     url: "https://www.meta.ai/",
   },
 ];
+
+export const dockPositions = [
+  { label: "Left", value: "left" },
+  { label: "Bottom", value: "bottom" },
+  { label: "Right", value: "right" },
+];
+
+export const dockPositionsList = dockPositions.map(({ value }) => value);
+
+export type DockPosition = "left" | "bottom" | "right";

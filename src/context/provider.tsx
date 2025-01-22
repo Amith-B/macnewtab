@@ -11,8 +11,11 @@ import { BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY } from "../static/bookmarkAlert"
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
 import { languages } from "../locale/languages";
 import {
+  DOCK_POSITION_LOCAL_STORAGE_KEY,
   DOCK_SITES_LOCAL_STORAGE_KEY,
   dockBarDefaultSites,
+  DockPosition,
+  dockPositionsList,
 } from "../static/dockSites";
 
 type DockBarSites = Array<{ title: string; url: string }>;
@@ -20,6 +23,8 @@ type DockBarSites = Array<{ title: string; url: string }>;
 export const AppContext = createContext({
   date: new Date(),
   theme: "system",
+  dockPosition: "bottom",
+  handleDockPositionChange: (_: DockPosition) => {},
   locale: "en" as typeof languages,
   dockBarSites: [] as DockBarSites,
   handleDockSitesChange: (_: DockBarSites) => {},
@@ -116,6 +121,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [showMonthView, setShowMonthView] = useState(true);
   const [dockBarSites, setDockBarSites] = useState<DockBarSites>([]);
 
+  const [dockPosition, setDockPosition] = useState<DockPosition>("bottom");
+
   useEffect(() => {
     const intervalRef = setInterval(() => {
       setDate(new Date());
@@ -183,8 +190,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         : "en") as typeof languages
     );
 
-    const bookmarkAlertShown = localStorage.getItem(
-      BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY
+    const dockPosition =
+      localStorage.getItem(DOCK_POSITION_LOCAL_STORAGE_KEY) || "bottom";
+
+    setDockPosition(
+      dockPositionsList.includes(dockPosition || "")
+        ? (dockPosition as DockPosition)
+        : "bottom"
     );
 
     try {
@@ -204,6 +216,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     } catch (_) {
       setDockBarSites(dockBarDefaultSites);
     }
+
+    const bookmarkAlertShown = localStorage.getItem(
+      BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY
+    );
 
     if (!bookmarkAlertShown) {
       const isMac = navigator.userAgent.toLowerCase().includes("mac");
@@ -285,6 +301,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setDockBarSites(val);
   };
 
+  const handleDockPositionChange = (val: DockPosition) => {
+    localStorage.setItem(DOCK_POSITION_LOCAL_STORAGE_KEY, val);
+    setDockPosition(val);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -307,6 +328,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleLocaleChange,
         dockBarSites,
         handleDockSitesChange,
+        dockPosition,
+        handleDockPositionChange,
       }}
     >
       {children}

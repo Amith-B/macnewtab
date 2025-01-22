@@ -9,12 +9,22 @@ import "./Dock.css";
 import { AppContext } from "../../../context/provider";
 import { List, arrayMove } from "react-movable";
 import { ReactComponent as DeleteIcon } from "../delete-icon.svg";
-import { DOCK_SITES_MAX_LIMIT } from "../../../static/dockSites";
+import {
+  DOCK_SITES_MAX_LIMIT,
+  DockPosition,
+  dockPositions,
+} from "../../../static/dockSites";
 import Translation from "../../../locale/Translation";
+import { Select } from "../../select/Select";
 
 export default memo(function Dock() {
   const [changesActive, setChangesActive] = useState(false);
-  const { dockBarSites, handleDockSitesChange } = useContext(AppContext);
+  const {
+    dockBarSites,
+    handleDockSitesChange,
+    dockPosition,
+    handleDockPositionChange,
+  } = useContext(AppContext);
   const [currentDockSites, setCurrentDockSites] = useState(dockBarSites);
 
   useEffect(() => {
@@ -69,6 +79,21 @@ export default memo(function Dock() {
 
   return (
     <div className="dock-links__container">
+      <div
+        className={
+          "dock-links__position" + (!currentDockSites.length ? " disabled" : "")
+        }
+      >
+        {/* <Translation value="position" /> */}
+        <p>Position On Screen</p>
+        <Select
+          options={dockPositions}
+          value={dockPosition}
+          onChange={(event) =>
+            handleDockPositionChange(event.target.value as DockPosition)
+          }
+        />
+      </div>
       <div>
         <button className="dock-links__add" onClick={handleAdd}>
           <Translation value="add" />
@@ -133,10 +158,7 @@ export default memo(function Dock() {
             )}
           />
         ) : (
-          <p>
-            {" "}
-            <Translation value="add_dock_links" />
-          </p>
+          <Translation value="add_dock_links" />
         )}
       </div>
     </div>

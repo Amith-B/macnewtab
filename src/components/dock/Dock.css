@@ -41,7 +41,6 @@
 
 .dock-container.center {
   position: absolute;
-  bottom: 20px;
   height: 62px;
   margin: 0 auto;
   display: flex;
@@ -54,11 +53,35 @@
   background-color: var(--theme-bg-dock);
 }
 
-.vertical-divider {
+.dock-divider {
   width: 2px;
   height: 100%;
   border-radius: 10px;
   background-color: var(--theme-border);
+}
+
+.dock-container.center.bottom {
+  bottom: 20px;
+}
+
+.dock-container.center.right {
+  right: 20px;
+  flex-direction: column;
+  width: 62px;
+  height: fit-content;
+}
+
+.dock-container.center.left {
+  left: 20px;
+  flex-direction: column;
+  width: 62px;
+  height: fit-content;
+}
+
+.dock-container.center.right .dock-divider,
+.dock-container.center.left .dock-divider {
+  height: 2px;
+  width: 100%;
 }
 
 .dock-site__item {

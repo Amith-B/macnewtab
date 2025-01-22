@@ -173,6 +173,31 @@ button:focus-visible {
   border-right: 1px solid var(--theme-border);
 }
 
+/* TODO: tooltip left positioning not working as expected
+to be revisited in future */
+.tooltip-left:hover::after,
+.tooltip-left:hover::before {
+  display: none;
+}
+
+.tooltip-right:hover::after {
+  left: unset;
+  bottom: unset;
+  top: 50%;
+  transform: translateY(-50%) translateX(19px);
+}
+
+.tooltip-right.with-link:hover::after {
+  transform: translateY(-50%) translateX(63px);
+}
+
+.tooltip-right:hover::before {
+  left: unset;
+  bottom: unset;
+  top: 50%;
+  transform: translateY(-50%) translateX(56px) rotate(135deg);
+}
+
 @media screen and (max-width: 1080px) {
   .main-content {
     gap: 50px;

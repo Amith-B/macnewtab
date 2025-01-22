@@ -8,19 +8,30 @@ import { AppContext } from "../../context/provider";
 
 const SITE_IMAGE_URL = "https://www.google.com/s2/favicons?sz=64&domain=";
 
+const TooltipPosition: Record<string, string> = {
+  left: "right",
+  right: "left",
+  bottom: "top",
+};
+
 export default function Dock() {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
-  const [settingsActive, setSettingsActive] = useState(false);
-  const { dockBarSites } = useContext(AppContext);
+  const { dockBarSites, dockPosition } = useContext(AppContext);
 
   const showDocBar = !!dockBarSites.length;
 
   return (
     <>
-      <div className={"dock-container" + (showDocBar ? " center" : "")}>
+      <div
+        className={
+          `dock-container ${dockPosition}` + (showDocBar ? " center" : "")
+        }
+      >
         <button
-          className="launchpad-icon accessible tooltip"
+          className={`launchpad-icon accessible tooltip tooltip-${
+            TooltipPosition[dockPosition] || "top"
+          }`}
           data-label="Launchpad"
           onClick={() => {
             setLaunchpadVisible(!launchpadVisible);
@@ -30,7 +41,9 @@ export default function Dock() {
           <LaunchpadIcon />
         </button>
         <button
-          className="settings-icon accessible tooltip"
+          className={`settings-icon accessible tooltip tooltip-${
+            TooltipPosition[dockPosition] || "top"
+          }`}
           data-label="Settings"
           onClick={() => {
             setSettingsVisible(true);
@@ -39,14 +52,16 @@ export default function Dock() {
         >
           <SettingsIcon />
         </button>
-        <div className="vertical-divider"></div>
+        <div className="dock-divider"></div>
         {dockBarSites.map((item, idx) => {
           const siteURL = new URL(item.url);
 
           return (
             <a
               rel="noreferrer"
-              className="dock-site__item tooltip"
+              className={`dock-site__item tooltip with-link tooltip-${
+                TooltipPosition[dockPosition] || "top"
+              }`}
               data-label={item.title}
               href={item.url}
               target="_self"
@@ -66,8 +81,6 @@ export default function Dock() {
         withinDock={showDocBar}
         open={settingsVisible}
         onClose={() => setSettingsVisible(false)}
-        animate={settingsActive}
-        onAnimationToggle={setSettingsActive}
       />
       <Launchpad
         visible={launchpadVisible}
