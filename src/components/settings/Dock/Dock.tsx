@@ -130,7 +130,11 @@ export default memo(function Dock() {
               </div>
             )}
             renderItem={({ value, props, index }) => (
-              <div className="dock-link-input__container" {...props}>
+              <div
+                className="dock-link-input__container"
+                {...props}
+                key={value.title ? value.title : index}
+              >
                 <div className="dock-link-input-group">
                   <div className="input__container">
                     <input
