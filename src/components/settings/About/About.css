@@ -46,4 +46,5 @@
   align-items: center;
   height: calc(100% - 60px);
   overflow: auto;
+  font-size: 0.75rem;
 }

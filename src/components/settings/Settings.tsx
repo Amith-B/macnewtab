@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import "./Settings.css";
 import { ReactComponent as CloseIcon } from "./close-icon.svg";
 import { ReactComponent as MinimizeIcon } from "./minimize-icon.svg";
@@ -53,6 +53,39 @@ export default function Settings({
   const [modalAccessible, setModalAccessible] = useState(false);
   const { dockPosition } = useContext(AppContext);
 
+  const [position, setPosition] = useState({ x: "unset", y: "unset" });
+  const modalRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const offset = useRef({ x: 0, y: 0 });
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!modalRef.current) return;
+
+    isDragging.current = true;
+    offset.current = {
+      x: e.clientX - modalRef.current.getBoundingClientRect().left,
+      y: e.clientY - modalRef.current.getBoundingClientRect().top,
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging.current) return;
+
+    setPosition({
+      x: `${e.clientX - offset.current.x}px`,
+      y: `${e.clientY - offset.current.y}px`,
+    });
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+  };
+
   const Content = useMemo(() => {
     return selectedMenu.content;
   }, [selectedMenu]);
@@ -64,6 +97,7 @@ export default function Settings({
     } else {
       const timerRef = setTimeout(() => {
         setModalAccessible(false);
+        setPosition({ x: "unset", y: "unset" });
       }, 600);
 
       return () => clearTimeout(timerRef);
@@ -87,8 +121,14 @@ export default function Settings({
           (withinDock ? " within-dock" : "")
         }
         onClick={(evt) => evt.stopPropagation()}
+        ref={modalRef}
+        style={{
+          position: "absolute",
+          left: position.x,
+          top: position.y,
+        }}
       >
-        <div className="settings__side-panel">
+        <div className="settings__side-panel" onMouseDown={handleMouseDown}>
           <div className="settings__window-manager">
             <button
               className="settings__window-manager-button settings__window-close"
