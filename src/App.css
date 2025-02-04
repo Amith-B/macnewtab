@@ -98,6 +98,41 @@ body:has(.App.theme-light) {
   }
 }
 
+.App.theme-system,
+body:has(.App.theme-system) {
+  --theme-bg: #673147;
+  --theme-bg-with-opacity: #67314789;
+  --theme-bg-dock: #67314791;
+  --theme-clr: white;
+  --theme-shadow: #adadad;
+  --theme-border: #c6c6c6;
+  --theme-link-clr: #4b4bff;
+  --theme-button-bg: #673147;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+
+  --widget-background: #ffffff;
+
+  --window-expand-bg: #673147;
+  --active-window-indicator: #673147;
+
+  --calendar-date-text-color: #272727;
+
+  --clock-1-background: #b3b2b3;
+  --clock-1-dial-background: #ffffff;
+
+  --input-caret-color: #015ce0;
+
+  --input-search-icon-color: #6c6d6b;
+
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #673147;
+
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: #3d3d3d;
+}
+
 .main-content {
   display: grid;
   grid-template-columns: auto auto;
