@@ -24,6 +24,21 @@ export default function Launchpad({
     }
   }, [visible]);
 
+  useEffect(() => {
+    if (!visible) {
+      return;
+    }
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [visible, onClose]);
+
   return (
     <div
       className={

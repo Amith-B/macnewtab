@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
 import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
 import Settings from "../settings/Settings";
@@ -18,6 +18,11 @@ export default function Dock() {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
   const { dockBarSites, dockPosition } = useContext(AppContext);
+
+  const handleLaunchpadClose = useCallback(
+    () => setLaunchpadVisible(false),
+    []
+  );
 
   const showDocBar = !!dockBarSites.length;
 
@@ -82,10 +87,7 @@ export default function Dock() {
         open={settingsVisible}
         onClose={() => setSettingsVisible(false)}
       />
-      <Launchpad
-        visible={launchpadVisible}
-        onClose={() => setLaunchpadVisible(false)}
-      />
+      <Launchpad visible={launchpadVisible} onClose={handleLaunchpadClose} />
     </>
   );
 }
