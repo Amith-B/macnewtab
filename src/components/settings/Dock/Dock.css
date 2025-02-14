@@ -116,9 +116,3 @@
   font-size: 0.875rem;
   font-weight: 600;
 }
-
-.dock-links__position.disabled {
-  opacity: 0.5;
-  filter: saturate(0);
-  pointer-events: none;
-}

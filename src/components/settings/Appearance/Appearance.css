@@ -13,14 +13,16 @@
   padding-bottom: 12px;
 }
 
-.appearance__wallpaper-upload-container {
+.appearance__wallpaper-upload-container,
+.appearance__theme-color-selection-container {
   padding: 12px 0;
   border-bottom: 1px solid var(--theme-border);
 }
 
 .appearance__theme-selection-container,
 .appearance__wallpaper-upload-container,
-.appearance__wallpaper-selection-container {
+.appearance__wallpaper-selection-container,
+.appearance__theme-color-selection-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -147,4 +149,39 @@
   flex-wrap: wrap;
   justify-content: flex-end;
   max-width: 360px;
+}
+
+.appearance__theme-color-selection {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.appearance__theme-color-option {
+  border: 0;
+  outline: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--theme-bg);
+}
+
+.appearance__theme-color-option.selected {
+  outline: 2px solid var(--theme-selection-color);
+}
+
+.appearance__theme-color-option.theme-none {
+  background: linear-gradient(
+    45deg,
+    transparent 44%,
+    red 46%,
+    red 54%,
+    transparent 56%
+  );
+  border: 1px solid black;
+}
+
+.appearance__theme-color-option.theme-none.selected {
+  border: none;
 }

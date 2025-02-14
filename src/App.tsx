@@ -26,6 +26,7 @@ const App = memo(function App() {
 
   const {
     theme,
+    themeColor,
     backgroundImage,
     date,
     showGreeting,
@@ -81,7 +82,9 @@ const App = memo(function App() {
 
   return (
     <div
-      className={`App theme-${theme}` + (backgroundImage ? " has-bg" : "")}
+      className={
+        `App theme-${themeColor || theme}` + (backgroundImage ? " has-bg" : "")
+      }
       style={bgStyle}
       lang={locale}
     >

@@ -4,11 +4,29 @@ import SystemThemeImage from "./theme-images/system.png";
 import Translation from "../locale/Translation";
 
 export const THEME_LOCAL_STORAGE_KEY = "default_theme";
+export const THEME_COLOR_LOCAL_STORAGE_KEY = "theme_color";
 
 export const THEME_LIST = [
-  { title: <Translation value="light" />, key: "light", image: LightThemeImage },
+  {
+    title: <Translation value="light" />,
+    key: "light",
+    image: LightThemeImage,
+  },
   { title: <Translation value="dark" />, key: "dark", image: DarkThemeImage },
-  { title: <Translation value="system" />, key: "system", image: SystemThemeImage },
+  {
+    title: <Translation value="system" />,
+    key: "system",
+    image: SystemThemeImage,
+  },
 ];
 
 export const THEME_KEYS = THEME_LIST.map((item) => item.key);
+
+export const THEME_COLOR_KEYS = [
+  "orange",
+  "pink",
+  "red",
+  "purple",
+  "blue",
+  "brown",
+];

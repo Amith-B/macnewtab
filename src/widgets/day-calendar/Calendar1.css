@@ -1,7 +1,5 @@
 .calendar-1__container {
   --calendar-background: var(--widget-background);
-  --calendar-week-text-color: #ff453a;
-  --calendar-month-text-color: #a1a1a1;
 
   background-color: var(--calendar-background);
   box-shadow: 0px 0px 4px var(--theme-shadow);
@@ -29,11 +27,11 @@
 }
 
 .calendar-1__week {
-  color: var(--calendar-week-text-color);
+  color: var(--calendar-1-week-text-color);
 }
 
 .calendar-1__month {
-  color: var(--calendar-month-text-color);
+  color: var(--calendar-1-month-text-color);
 }
 
 .calendar-1__bottom-section {

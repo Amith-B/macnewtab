@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./Appearance.css";
-import { THEME_LIST } from "../../../static/theme";
+import { THEME_COLOR_KEYS, THEME_LIST } from "../../../static/theme";
 import { AppContext } from "../../../context/provider";
 import { ReactComponent as DeleteIcon } from "../delete-icon.svg";
 import Translation from "../../../locale/Translation";
@@ -9,8 +9,13 @@ import { WALLPAPER_LIST } from "../../../static/wallpapers";
 const MAX_FILE_SIZE_MB = 1;
 
 export default function Appearance() {
-  const { theme, handleThemeChange, handleWallpaperChange } =
-    useContext(AppContext);
+  const {
+    theme,
+    themeColor,
+    handleThemeChange,
+    handleThemeColorChange,
+    handleWallpaperChange,
+  } = useContext(AppContext);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target?.files?.[0];
@@ -42,7 +47,12 @@ export default function Appearance() {
 
   return (
     <div className="appearance__container">
-      <div className="appearance__theme-selection-container">
+      <div
+        className={
+          "appearance__theme-selection-container" +
+          (themeColor ? " disabled" : "")
+        }
+      >
         <Translation value="appearance" />
         <div className="appearance__theme-selection">
           {THEME_LIST.map((item) => (
@@ -61,6 +71,28 @@ export default function Appearance() {
               />
               <div className="appearance__theme-label">{item.title}</div>
             </button>
+          ))}
+        </div>
+      </div>
+      <div className="appearance__theme-color-selection-container">
+        <Translation value="theme" />
+        <div className="appearance__theme-color-selection">
+          <button
+            className={
+              "appearance__theme-color-option theme-none" +
+              (!themeColor ? " selected" : "")
+            }
+            onClick={() => handleThemeColorChange("")}
+          ></button>
+          {THEME_COLOR_KEYS.map((item) => (
+            <button
+              key={item}
+              className={
+                `appearance__theme-color-option theme-${item}` +
+                (themeColor === item ? " selected" : "")
+              }
+              onClick={() => handleThemeColorChange(item)}
+            ></button>
           ))}
         </div>
       </div>

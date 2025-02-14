@@ -89,6 +89,8 @@ export const translation = {
     left: "Left",
     bottom: "Bottom",
     right: "Right",
+
+    theme: "Theme",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -178,6 +180,8 @@ export const translation = {
     left: "ಎಡಕ್ಕೆ",
     bottom: "ಕೆಳಗೆ",
     right: "ಬಲ",
+
+    theme: "ಬಣ್ಣ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -268,6 +272,8 @@ export const translation = {
     left: "Vlevo",
     bottom: "Dno",
     right: "Pravá strana",
+
+    theme: "Barva",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -357,6 +363,8 @@ export const translation = {
     left: "Sol",
     bottom: "Alt",
     right: "Sağ Taraf",
+
+    theme: "Renk",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -447,6 +455,8 @@ export const translation = {
     left: "Bên trái",
     bottom: "Đáy",
     right: "Bên phải",
+
+    theme: "Màu sắc",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -536,6 +546,8 @@ export const translation = {
     left: "Chapga",
     bottom: "Pastki",
     right: "O'ng tomon",
+
+    theme: "Rang",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -624,6 +636,8 @@ export const translation = {
     left: "左边",
     bottom: "底部",
     right: "右侧",
+
+    theme: "颜色",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -713,6 +727,8 @@ export const translation = {
     left: "बाएं",
     bottom: "तल",
     right: "दाहिनी ओर",
+
+    theme: "रंग",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -804,6 +820,8 @@ export const translation = {
     left: "Sinistra",
     bottom: "Metter il fondo a",
     right: "Lato destro",
+
+    theme: "Colore",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -893,6 +911,8 @@ export const translation = {
     left: "বাম",
     bottom: "নীচে",
     right: "ডান দিক",
+
+    theme: "রঙ",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -983,6 +1003,8 @@ export const translation = {
     left: "Esquerda",
     bottom: "Fundo",
     right: "Lado direito",
+
+    theme: "Cor",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1074,6 +1096,8 @@ export const translation = {
     left: "Gauche",
     bottom: "Bas",
     right: "Côté droit",
+
+    theme: "Couleur",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1163,6 +1187,8 @@ export const translation = {
     left: "Левый",
     bottom: "Нижний",
     right: "Правая сторона",
+
+    theme: "Цвет",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1253,6 +1279,8 @@ export const translation = {
     left: "Izquierda",
     bottom: "Abajo",
     right: "Lado derecho",
+
+    theme: "Color",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1341,6 +1369,8 @@ export const translation = {
     left: "左",
     bottom: "底",
     right: "右側",
+
+    theme: "色",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1429,6 +1459,8 @@ export const translation = {
     left: "왼쪽",
     bottom: "맨 아래",
     right: "오른쪽",
+
+    theme: "색상",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1518,6 +1550,8 @@ export const translation = {
     left: "Kiri",
     bottom: "Dasar",
     right: "Sisi Kanan",
+
+    theme: "Warna",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1607,6 +1641,8 @@ export const translation = {
     left: "बाकी",
     bottom: "तळ",
     right: "उजवी बाजू",
+
+    theme: "रंग",
   },
 };
 

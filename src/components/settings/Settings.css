@@ -145,5 +145,5 @@
 
 .settings_menu-item.selected {
   color: white;
-  background-color: #2c93ffc2;
+  background-color: var(--theme-selection-color);
 }
