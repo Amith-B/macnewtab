@@ -22,7 +22,9 @@ body:has(.App.theme-system),
 .App.theme-light,
 body:has(.App.theme-light) {
   --theme-bg: #efefee;
+  --theme-bg-secondary: #efefee;
   --theme-bg-with-opacity: #efeeee9e;
+  --theme-selection-color: #0883fd;
   --theme-bg-dock: #efeeee6b;
   --theme-clr: #272727;
   --theme-shadow: #adadad;
@@ -32,6 +34,11 @@ body:has(.App.theme-light) {
   --theme-toggle-bg: #ccc;
   --theme-bg-blur: blur(60px) saturate(150%);
   --theme-bg-blur-30: blur(30px) saturate(150%);
+
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #a1a1a1;
+  --calendar-month-text-color: #ff3b31;
+  --calendar-sunday-text-color: #a1a1a1;
 
   --widget-background: #ffffff;
 
@@ -60,6 +67,8 @@ body:has(.App.theme-light) {
   .App.theme-dark,
   body:has(.App.theme-dark) {
     --theme-bg: #2e2d2c;
+    --theme-bg-secondary: #2e2d2c;
+    --theme-selection-color: #0883fd;
     --theme-bg-with-opacity: #2e2d2c9e;
     --theme-bg-dock: #0000002b;
     --theme-clr: #dfdfdf;
@@ -70,6 +79,11 @@ body:has(.App.theme-light) {
     --theme-toggle-bg: #656665;
     --theme-bg-blur: blur(60px) saturate(150%);
     --theme-bg-blur-30: blur(30px) saturate(150%);
+
+    --calendar-1-week-text-color: #ff453a;
+    --calendar-1-month-text-color: #a1a1a1;
+    --calendar-month-text-color: #ff3b31;
+    --calendar-sunday-text-color: #a1a1a1;
 
     --widget-background: #2e2e2e;
 
@@ -96,6 +110,210 @@ body:has(.App.theme-light) {
   .App.theme-dark .search-engine-switcher__tile-selection-indicator.selected {
     --search-engine-tile-icon-clr: white;
   }
+}
+
+.App.theme-blue,
+.appearance__theme-color-option.theme-blue,
+body:has(.App.theme-blue) {
+  --theme-bg: #528cd9;
+  --theme-bg-secondary: #a5e6ff;
+  --theme-bg-with-opacity: #a5e6ff52;
+  --theme-selection-color: #0052bf;
+  --theme-bg-dock: #a5e6ff75;
+  --theme-clr: black;
+  --theme-shadow: #adadad;
+  --theme-border: #c6c6c6;
+  --theme-link-clr: #4b4bff;
+  --theme-button-bg: #5d9ef3;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #7c7c7c;
+  --calendar-month-text-color: #ff3b31;
+  --calendar-sunday-text-color: #7c7c7c;
+  --widget-background: #88deff;
+  --window-expand-bg: #528cd9;
+  --active-window-indicator: #528cd9;
+  --calendar-date-text-color: #272727;
+  --clock-1-background: #5fa0f7;
+  --clock-1-dial-background: #ffffff;
+  --input-caret-color: #015ce0;
+  --input-search-icon-color: #6c6d6b;
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #3a5e8f;
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: #3d3d3d;
+}
+
+.App.theme-red,
+.appearance__theme-color-option.theme-red,
+body:has(.App.theme-red) {
+  --theme-bg: #d95252;
+  --theme-bg-secondary: #ffa5a5;
+  --theme-bg-with-opacity: #ffa5a552;
+  --theme-selection-color: #bf0000;
+  --theme-bg-dock: #ffa5a575;
+  --theme-clr: black;
+  --theme-shadow: #adadad;
+  --theme-border: #c6c6c6;
+  --theme-link-clr: #4b4bff;
+  --theme-button-bg: #f35d5d;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: white;
+  --calendar-month-text-color: #ff3b31;
+  --calendar-sunday-text-color: white;
+  --widget-background: #ff8888;
+  --window-expand-bg: #d95252;
+  --active-window-indicator: #d95252;
+  --calendar-date-text-color: #272727;
+  --clock-1-background: #f75f5f;
+  --clock-1-dial-background: #ffffff;
+  --input-caret-color: #015ce0;
+  --input-search-icon-color: #6c6d6b;
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #8f3a3a;
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: white;
+}
+
+.App.theme-orange,
+.appearance__theme-color-option.theme-orange,
+body:has(.App.theme-orange) {
+  --theme-bg: #d99b52;
+  --theme-bg-secondary: #ffd8a5;
+  --theme-bg-with-opacity: #ffdea552;
+  --theme-selection-color: #bf6600;
+  --theme-bg-dock: #ffd1a575;
+  --theme-clr: black;
+  --theme-shadow: #adadad;
+  --theme-border: #777474;
+  --theme-link-clr: #4b4bff;
+  --theme-button-bg: #f3995d;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #737373;
+  --calendar-month-text-color: #ff3b31;
+  --calendar-sunday-text-color: #737373;
+  --widget-background: #ffc288;
+  --window-expand-bg: #d99752;
+  --active-window-indicator: #d98b52;
+  --calendar-date-text-color: #272727;
+  --clock-1-background: #f7b75f;
+  --clock-1-dial-background: #ffffff;
+  --input-caret-color: #015ce0;
+  --input-search-icon-color: #6c6d6b;
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #8f683a;
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: white;
+}
+
+.App.theme-purple,
+.appearance__theme-color-option.theme-purple,
+body:has(.App.theme-purple) {
+  --theme-bg: #ebeaff;
+  --theme-bg-secondary: #e5e4ff;
+  --theme-bg-with-opacity: #a8a5ff52;
+  --theme-selection-color: #4f4eac;
+  --theme-bg-dock: #cac8ff75;
+  --theme-clr: black;
+  --theme-shadow: #adadad;
+  --theme-border: #777474;
+  --theme-link-clr: #4b4bff;
+  --theme-button-bg: #b6b8ff;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #7c7c7c;
+  --calendar-month-text-color: #ff3b31;
+  --calendar-sunday-text-color: #7c7c7c;
+  --widget-background: #d5ceff;
+  --window-expand-bg: #bfc0ff;
+  --active-window-indicator: #cecbff;
+  --calendar-date-text-color: #272727;
+  --clock-1-background: #515876;
+  --clock-1-dial-background: #ffffff;
+  --input-caret-color: #c5bafd;
+  --input-search-icon-color: #6c6d6b;
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #655da3;
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: white;
+}
+
+.App.theme-pink,
+.appearance__theme-color-option.theme-pink,
+body:has(.App.theme-pink) {
+  --theme-bg: #ffeaf3;
+  --theme-bg-secondary: #ffe4ef;
+  --theme-bg-with-opacity: #ffa5c952;
+  --theme-selection-color: #ac4e77;
+  --theme-bg-dock: #ffc8de75;
+  --theme-clr: black;
+  --theme-shadow: #adadad;
+  --theme-border: #777474;
+  --theme-link-clr: #4b4bff;
+  --theme-button-bg: #ffb6d9;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #6a6a6a;
+  --calendar-month-text-color: #ff3b31;
+  --calendar-sunday-text-color: #6a6a6a;
+  --widget-background: #ffcedd;
+  --window-expand-bg: #ffbfdd;
+  --active-window-indicator: #ffcbdd;
+  --calendar-date-text-color: #272727;
+  --clock-1-background: #76515e;
+  --clock-1-dial-background: #ffffff;
+  --input-caret-color: #fdbad8;
+  --input-search-icon-color: #6c6d6b;
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #a35d7f;
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: white;
+}
+
+.App.theme-brown,
+.appearance__theme-color-option.theme-brown,
+body:has(.App.theme-brown) {
+  --theme-bg: #fff3ea;
+  --theme-bg-secondary: #ffeee4;
+  --theme-bg-with-opacity: #ffc9a552;
+  --theme-selection-color: #ac764e;
+  --theme-bg-dock: #ffe1c875;
+  --theme-clr: black;
+  --theme-shadow: #adadad;
+  --theme-border: #c6c6c6;
+  --theme-link-clr: #4b4bff;
+  --theme-button-bg: #ffcfb6;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #7c7c7c;
+  --calendar-month-text-color: #ff3b31;
+  --calendar-sunday-text-color: #7c7c7c;
+  --widget-background: #ffdfce;
+  --window-expand-bg: #ffd9bf;
+  --active-window-indicator: #ffe2cb;
+  --calendar-date-text-color: #272727;
+  --clock-1-background: #765e51;
+  --clock-1-dial-background: #ffffff;
+  --input-caret-color: #fdc6ba;
+  --input-search-icon-color: #6c6d6b;
+  --search-engine-tile-indicator-bg: #d2d1d0;
+  --search-engine-tile-icon-clr: #a3765d;
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: white;
 }
 
 .main-content {
@@ -180,6 +398,12 @@ to be revisited in future */
 .tooltip-right:hover::after,
 .tooltip-right:hover::before {
   display: none;
+}
+
+.disabled {
+  opacity: 0.5;
+  filter: saturate(0);
+  pointer-events: none;
 }
 
 @media screen and (max-width: 1080px) {

@@ -1,7 +1,7 @@
 .search__container {
   height: 52px;
   padding: 10px;
-  background: var(--theme-bg);
+  background: var(--theme-bg-secondary);
   border-radius: 16px;
   display: flex;
   align-items: center;

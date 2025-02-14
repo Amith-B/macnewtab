@@ -1,5 +1,9 @@
 import { useState, useEffect, ReactNode, createContext } from "react";
-import { THEME_KEYS, THEME_LOCAL_STORAGE_KEY } from "../static/theme";
+import {
+  THEME_KEYS,
+  THEME_LOCAL_STORAGE_KEY,
+  THEME_COLOR_LOCAL_STORAGE_KEY,
+} from "../static/theme";
 import {
   SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY,
   SHOW_GREETING_LOCAL_STORAGE_KEY,
@@ -23,6 +27,7 @@ type DockBarSites = Array<{ title: string; url: string }>;
 export const AppContext = createContext({
   date: new Date(),
   theme: "system",
+  themeColor: "",
   dockPosition: "bottom",
   handleDockPositionChange: (_: DockPosition) => {},
   locale: "en" as typeof languages,
@@ -30,6 +35,7 @@ export const AppContext = createContext({
   handleDockSitesChange: (_: DockBarSites) => {},
   handleLocaleChange: (_: typeof languages) => {},
   handleThemeChange: (_: string) => {},
+  handleThemeColorChange: (_: string) => {},
   backgroundImage: "",
   handleWallpaperChange: (_: string) => {},
   showGreeting: true,
@@ -110,6 +116,7 @@ const deleteImageFromIndexedDB = async (): Promise<void> => {
 export default function AppProvider({ children }: { children: ReactNode }) {
   const [date, setDate] = useState(new Date());
   const [theme, setTheme] = useState("system");
+  const [themeColor, setThemeColor] = useState("");
   const [backgroundImage, setBackgroundImage] = useState("");
 
   const [locale, setLocale] = useState<typeof languages>("en");
@@ -134,6 +141,16 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setTheme(defaultTheme);
     } else {
       setTheme("system");
+    }
+
+    const defaultThemeColor = localStorage.getItem(
+      THEME_COLOR_LOCAL_STORAGE_KEY
+    );
+
+    if (defaultThemeColor) {
+      setThemeColor(defaultThemeColor);
+    } else {
+      setThemeColor("");
     }
 
     handleLoadWallpaper();
@@ -241,6 +258,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setTheme(val);
   };
 
+  const handleThemeColorChange = (val: string) => {
+    localStorage.setItem(THEME_COLOR_LOCAL_STORAGE_KEY, val);
+    setThemeColor(val);
+  };
+
   const handleWallpaperChange = (val: string) => {
     if (val) {
       handleSaveWallpaper(val);
@@ -311,7 +333,9 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       value={{
         date,
         theme,
+        themeColor,
         handleThemeChange,
+        handleThemeColorChange,
         backgroundImage,
         handleWallpaperChange,
         showGreeting,

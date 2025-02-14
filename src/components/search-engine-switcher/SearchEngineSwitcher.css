@@ -62,7 +62,7 @@
 }
 
 .search-engine-switcher__tile-selection-indicator.selected {
-  background-color: #0883fd;
+  background-color: var(--theme-selection-color);
   --search-engine-tile-icon-clr: white;
 }
 
