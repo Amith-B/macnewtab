@@ -58,7 +58,7 @@ export default function Dock() {
           <SettingsIcon />
         </button>
         <div className="dock-divider"></div>
-        {dockBarSites.map((item, idx) => {
+        {dockBarSites.map((item) => {
           const siteURL = new URL(item.url);
 
           return (
@@ -71,7 +71,7 @@ export default function Dock() {
               href={item.url}
               target="_self"
               title={item.title}
-              key={idx}
+              key={item.id}
             >
               <img
                 className="dock-site__icon"

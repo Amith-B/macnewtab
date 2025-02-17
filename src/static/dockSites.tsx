@@ -1,4 +1,5 @@
 import Translation from "../locale/Translation";
+import { generateRandomId } from "../utils/random";
 
 export const DOCK_SITES_LOCAL_STORAGE_KEY = "dock_sites";
 export const DOCK_POSITION_LOCAL_STORAGE_KEY = "dock_position";
@@ -9,18 +10,22 @@ export const dockBarDefaultSites = [
   {
     title: "Gemini",
     url: "https://gemini.google.com/?hl=en-IN",
+    id: generateRandomId(),
   },
   {
     title: "ChatGPT",
     url: "https://chat.openai.com/",
+    id: generateRandomId(),
   },
   {
     title: "Copilot",
     url: "https://copilot.microsoft.com/",
+    id: generateRandomId(),
   },
   {
     title: "Meta AI",
     url: "https://www.meta.ai/",
+    id: generateRandomId(),
   },
 ];
 

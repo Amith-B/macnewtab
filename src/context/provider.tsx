@@ -21,8 +21,9 @@ import {
   DockPosition,
   dockPositionsList,
 } from "../static/dockSites";
+import { generateRandomId } from "../utils/random";
 
-type DockBarSites = Array<{ title: string; url: string }>;
+type DockBarSites = Array<{ title: string; url: string; id: string }>;
 
 export const AppContext = createContext({
   date: new Date(),
@@ -222,7 +223,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       );
 
       if (storedDockSites) {
-        const parsedList = JSON.parse(storedDockSites);
+        let parsedList = JSON.parse(storedDockSites) as DockBarSites;
+
+        parsedList = parsedList.map((item) => ({
+          ...item,
+          id: item.id || generateRandomId(),
+        }));
 
         if (Array.isArray(parsedList)) {
           setDockBarSites(parsedList);

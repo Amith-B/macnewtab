@@ -16,6 +16,7 @@ import {
 } from "../../../static/dockSites";
 import Translation from "../../../locale/Translation";
 import { Select } from "../../select/Select";
+import { generateRandomId } from "../../../utils/random";
 
 export default memo(function Dock() {
   const [changesActive, setChangesActive] = useState(false);
@@ -46,7 +47,7 @@ export default memo(function Dock() {
     }
     setChangesActive(true);
     const updatedDockSites = [...currentDockSites];
-    updatedDockSites.push({ title: "", url: "" });
+    updatedDockSites.push({ title: "", url: "", id: generateRandomId() });
     setCurrentDockSites(updatedDockSites);
   };
 
@@ -133,7 +134,7 @@ export default memo(function Dock() {
               <div
                 className="dock-link-input__container"
                 {...props}
-                key={value.title ? value.title : index}
+                key={value.id}
               >
                 <div className="dock-link-input-group">
                   <div className="input__container">
