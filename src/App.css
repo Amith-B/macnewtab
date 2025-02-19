@@ -61,6 +61,52 @@ body:has(.App.theme-light) {
   --settings-side-panel-text-color: #3d3d3d;
 }
 
+.App.theme-dark,
+body:has(.App.theme-dark) {
+  --theme-bg: #2e2d2c;
+  --theme-bg-secondary: #2e2d2c;
+  --theme-selection-color: #0883fd;
+  --theme-bg-with-opacity: #2e2d2c9e;
+  --theme-bg-dock: #0000002b;
+  --theme-clr: #dfdfdf;
+  --theme-shadow: black;
+  --theme-border: #585856;
+  --theme-link-clr: #9ba6ff;
+  --theme-button-bg: #656665;
+  --theme-toggle-bg: #656665;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #a1a1a1;
+  --calendar-month-text-color: #ff3b31;
+  --calendar-sunday-text-color: #a1a1a1;
+
+  --widget-background: #2e2e2e;
+
+  --window-expand-bg: #878787;
+  --active-window-indicator: #c4c5c5;
+
+  --calendar-date-text-color: #dfdfdf;
+
+  --clock-1-background: #24272b;
+  --clock-1-dial-background: #ffffff;
+
+  --input-caret-color: #71ccff;
+
+  --input-search-icon-color: #a6a6a5;
+
+  --search-engine-tile-indicator-bg: #555657;
+  --search-engine-tile-icon-clr: #e6f0f7;
+
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.7);
+  --settings-side-panel-text-color: white;
+}
+
+.App.theme-dark .search-engine-switcher__tile-selection-indicator.selected {
+  --search-engine-tile-icon-clr: white;
+}
+
 @media (prefers-color-scheme: dark) {
   .App.theme-system,
   body:has(.App.theme-system),
