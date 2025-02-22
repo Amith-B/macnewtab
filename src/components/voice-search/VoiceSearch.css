@@ -26,11 +26,16 @@
   height: 30%;
   position: absolute;
   transform: translate(1px, 1px);
+  transition: transform 5s ease;
   color: #4d4c4c;
 }
 
 .blobs.animate {
   transform: scale(1.5);
+}
+
+.blobs.animate .mic-icon {
+  transform: translate(0px, 0px);
 }
 
 .blobs svg {
