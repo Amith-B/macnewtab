@@ -1,0 +1,187 @@
+.blob-palette {
+  --blob-1: #f42491;
+  --blob-2: #006cff;
+  --blob-3: #31ffa4;
+  --blob-4: white;
+  --shape-1: "M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z";
+  --shape-2: "M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z";
+  --shape-3: "M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z";
+  --shape-4: "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z";
+  --shape-5: "M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z";
+  --shape-6: "M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z";
+}
+.blobs {
+  width: 40px;
+  height: 40px;
+  transform: scale(1.2);
+  transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blobs .mic-icon {
+  width: 30%;
+  height: 30%;
+  position: absolute;
+  transform: translate(1px, 1px);
+  color: #4d4c4c;
+}
+
+.blobs.animate {
+  transform: scale(1.5);
+}
+
+.blobs svg {
+  position: relative;
+  height: 100%;
+  z-index: 2;
+}
+
+.blobs .blob {
+  transform-origin: 50% 50%;
+  opacity: 0.7;
+}
+
+.blobs.animate .blob {
+  animation: rotate 25s infinite alternate ease-in-out;
+}
+
+.blobs .blob path {
+  d: path(var(--shape-1));
+  transform-origin: 50% 50%;
+  transform: scale(0.8);
+  transition: fill 800ms ease;
+}
+
+.blobs.animate .blob path {
+  animation: blob-anim-1 5s infinite alternate
+    cubic-bezier(0.45, 0.2, 0.55, 0.8);
+}
+
+.blobs .blob.alt {
+  animation-direction: alternate-reverse;
+  opacity: 0.3;
+}
+.blobs .blob-1 path {
+  fill: var(--blob-1);
+  filter: blur(1rem);
+}
+.blobs .blob-2 {
+  animation-duration: 18s;
+  animation-direction: alternate-reverse;
+}
+.blobs .blob-2 path {
+  fill: var(--blob-2);
+  d: path(var(--shape-3));
+  animation-duration: 7s;
+  filter: blur(0.75rem);
+  transform: scale(0.78);
+}
+
+.blobs.animate .blob-2 path {
+  animation-name: blob-anim-2;
+}
+
+.blobs .blob-2.alt {
+  animation-direction: alternate;
+}
+.blobs .blob-3 {
+  animation-duration: 23s;
+}
+.blobs .blob-3 path {
+  fill: var(--blob-3);
+  d: path(var(--shape-2));
+  animation-duration: 6s;
+  filter: blur(0.5rem);
+  transform: scale(0.76);
+}
+.blobs.animate .blob-3 path {
+  animation-name: blob-anim-3;
+}
+
+.blobs .blob-4 {
+  animation-duration: 31s;
+  animation-direction: alternate-reverse;
+  opacity: 0.9;
+}
+.blobs .blob-4 path {
+  fill: var(--blob-4);
+  d: path(var(--shape-4));
+  animation-duration: 10s;
+  filter: blur(10rem);
+  transform: scale(0.5);
+}
+.blobs.animate .blob-4 path {
+  animation-name: blob-anim-4;
+}
+
+.blobs .blob-4.alt {
+  animation-direction: alternate;
+  opacity: 0.8;
+}
+@keyframes blob-anim-1 {
+  0% {
+    d: path(var(--shape-1));
+  }
+  30% {
+    d: path(var(--shape-2));
+  }
+  70% {
+    d: path(var(--shape-3));
+  }
+  100% {
+    d: path(var(--shape-4));
+  }
+}
+@keyframes blob-anim-2 {
+  0% {
+    d: path(var(--shape-3));
+  }
+  40% {
+    d: path(var(--shape-5));
+  }
+  80% {
+    d: path(var(--shape-2));
+  }
+  100% {
+    d: path(var(--shape-6));
+  }
+}
+@keyframes blob-anim-3 {
+  0% {
+    d: path(var(--shape-2));
+  }
+  35% {
+    d: path(var(--shape-4));
+  }
+  75% {
+    d: path(var(--shape-6));
+  }
+  100% {
+    d: path(var(--shape-3));
+  }
+}
+@keyframes blob-anim-4 {
+  0% {
+    d: path(var(--shape-4));
+  }
+  30% {
+    d: path(var(--shape-6));
+  }
+  70% {
+    d: path(var(--shape-2));
+  }
+  100% {
+    d: path(var(--shape-5));
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

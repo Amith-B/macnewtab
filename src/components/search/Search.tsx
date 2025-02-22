@@ -11,10 +11,10 @@ import "./Search.css";
 import { searchEngineList } from "../../static/searchEngine";
 import { AppContext } from "../../context/provider";
 import { languageOptions, translation } from "../../locale/languages";
-import { ReactComponent as VoiceSearch } from "../../assets/voice.svg";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import VoiceSearch from "../voice-search/VoiceSearch";
 
 const triggerSearch = (searchString: string, selectedSearchEngine: string) => {
   const searchSelection = searchEngineList.find(
@@ -98,7 +98,7 @@ export default function Search({
       {browserSupportsSpeechRecognition && (
         <>
           <button className="voice-search" onClick={handleVoiceSearch}>
-            <VoiceSearch className={listening ? "animate" : ""} />
+            <VoiceSearch animate={listening} />
           </button>
           <button
             ref={hiddenButtonRef}

@@ -36,57 +36,11 @@
   margin-right: 8px;
   height: 40px;
 }
-
-.voice-search svg {
-  height: 40px;
-  width: 40px;
-  transform: scale(1);
-  transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+.voice-search:focus-visible {
+  outline: none;
 }
-
-.voice-search svg.animate,
-.voice-search:focus-visible svg {
+.voice-search:focus-visible .blobs {
   transform: scale(1.5);
-}
-
-.voice-search svg.animate .pulse {
-  animation: pulse var(--pulse-animation-time) infinite linear;
-  transform-origin: 50%;
-}
-
-@keyframes pulse {
-  0% {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
-  50% {
-    transform: rotate(180deg);
-    opacity: 0.8;
-  }
-  100% {
-    transform: rotate(360deg);
-    opacity: 1;
-  }
-}
-
-.pulse-0 {
-  --pulse-animation-time: 20s;
-}
-
-.pulse-1 {
-  --pulse-animation-time: 4s;
-}
-
-.pulse-2 {
-  --pulse-animation-time: 4.3s;
-}
-
-.pulse-3 {
-  --pulse-animation-time: 5s;
-}
-
-.pulse-4 {
-  --pulse-animation-time: 6s;
 }
 
 .hidden-voice-search-button {
