@@ -466,3 +466,49 @@ to be revisited in future */
     flex-direction: row;
   }
 }
+
+@media screen and (max-width: 816px) {
+  body {
+    zoom: 80%;
+  }
+}
+
+@media screen and (max-width: 646px) {
+  body {
+    zoom: 70%;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  body {
+    zoom: 60%;
+  }
+}
+
+@media screen and (max-width: 516px) {
+  body {
+    zoom: 60%;
+  }
+
+  .section-2 {
+    max-width: 520px;
+  }
+
+  .search__container {
+    min-width: 520px;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  body {
+    zoom: 50%;
+  }
+
+  .section-2 {
+    max-width: 520px;
+  }
+
+  .search__container {
+    min-width: 520px;
+  }
+}
