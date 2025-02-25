@@ -128,7 +128,10 @@ export default function Settings({
           top: position.y,
         }}
       >
-        <div className="settings__side-panel" onMouseDown={handleMouseDown}>
+        <div
+          className="settings__side-panel grabbable"
+          onMouseDown={handleMouseDown}
+        >
           <div className="settings__window-manager">
             <button
               className="settings__window-manager-button settings__window-close"

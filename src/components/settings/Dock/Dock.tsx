@@ -132,7 +132,7 @@ export default memo(function Dock() {
             )}
             renderItem={({ value, props, index }) => (
               <div
-                className="dock-link-input__container"
+                className="dock-link-input__container grabbable"
                 {...props}
                 key={value.id}
               >

@@ -63,7 +63,6 @@
   backdrop-filter: var(--settings-side-panel-blur);
   -webkit-backdrop-filter: var(--settings-side-panel-blur);
   padding: 18px 10px;
-  cursor: move;
 }
 
 .settings__menu-content {

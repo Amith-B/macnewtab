@@ -452,6 +452,15 @@ to be revisited in future */
   pointer-events: none;
 }
 
+.grabbable {
+  cursor: move;
+  cursor: grab;
+}
+
+.grabbable:active {
+  cursor: grabbing;
+}
+
 @media screen and (max-width: 1080px) {
   .main-content {
     gap: 50px;
