@@ -491,11 +491,11 @@ to be revisited in future */
   }
 
   .section-2 {
-    max-width: 520px;
+    max-width: 520px !important;
   }
 
   .search__container {
-    min-width: 520px;
+    min-width: 520px !important;
   }
 }
 
@@ -505,10 +505,10 @@ to be revisited in future */
   }
 
   .section-2 {
-    max-width: 520px;
+    max-width: 520px !important;
   }
 
   .search__container {
-    min-width: 520px;
+    min-width: 520px !important;
   }
 }
