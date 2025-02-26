@@ -9,6 +9,7 @@ import "./Dock.css";
 import { AppContext } from "../../../context/provider";
 import { List, arrayMove } from "react-movable";
 import { ReactComponent as DeleteIcon } from "../delete-icon.svg";
+import { ReactComponent as DraggableIcon } from "./draggable.svg";
 import {
   DOCK_SITES_MAX_LIMIT,
   DockPosition,
@@ -132,11 +133,18 @@ export default memo(function Dock() {
             )}
             renderItem={({ value, props, index }) => (
               <div
-                className="dock-link-input__container grabbable"
+                className="dock-link-input__container draggable"
                 {...props}
                 key={value.id}
               >
                 <div className="dock-link-input-group">
+                  <DraggableIcon
+                    className="draggable-indicator"
+                    style={{
+                      height: "16px",
+                      width: "fit-content",
+                    }}
+                  />
                   <div className="input__container">
                     <input
                       value={value.title}

@@ -452,12 +452,12 @@ to be revisited in future */
   pointer-events: none;
 }
 
-.grabbable {
+.draggable {
   cursor: move;
   cursor: grab;
 }
 
-.grabbable:active {
+.draggable:active {
   cursor: grabbing;
 }
 

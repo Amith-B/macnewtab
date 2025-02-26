@@ -129,7 +129,7 @@ export default function Settings({
         }}
       >
         <div
-          className="settings__side-panel grabbable"
+          className="settings__side-panel draggable"
           onMouseDown={handleMouseDown}
         >
           <div className="settings__window-manager">

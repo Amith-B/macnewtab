@@ -46,12 +46,13 @@
 }
 
 .dock-link-input__container {
+  position: relative;
   z-index: 10;
   font-weight: 600;
   background-color: var(--theme-bg);
   border: 1px solid var(--theme-border);
   border-radius: 4px;
-  padding: 12px;
+  padding: 12px 16px;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
@@ -114,4 +115,14 @@
   border-bottom: 1px solid var(--theme-border);
   font-size: 0.875rem;
   font-weight: 600;
+}
+
+.draggable-indicator {
+  visibility: hidden;
+  position: absolute;
+  left: 3px;
+}
+
+.dock-link-input__container:hover .draggable-indicator {
+  visibility: visible;
 }
