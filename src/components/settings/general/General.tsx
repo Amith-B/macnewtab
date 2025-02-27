@@ -26,6 +26,10 @@ const General = memo(function General() {
     return languageOptions.find((item) => item.value === locale);
   }, [locale]);
 
+  const isMac = useMemo(() => {
+    return navigator.userAgent.toLowerCase().includes("mac");
+  }, []);
+
   return (
     <div className="general__container">
       <div className="general__row-item">
@@ -94,6 +98,11 @@ const General = memo(function General() {
             <Translation value="voice_search_warning" />
           </div>
         )}
+      </div>
+
+      <div className="general__row-item">
+        <Translation value="toggle_bookmark" />
+        <code>{isMac ? "Cmd + Shift + B" : "Ctrl + Shift + B"}</code>
       </div>
     </div>
   );

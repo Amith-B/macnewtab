@@ -91,6 +91,8 @@ export const translation = {
     right: "Right",
 
     theme: "Theme",
+
+    toggle_bookmark: "Toggle Bookmark",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -182,6 +184,8 @@ export const translation = {
     right: "ಬಲ",
 
     theme: "ಬಣ್ಣ",
+
+    toggle_bookmark: "ಬುಕ್ಮಾರ್ಕ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಿ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -274,6 +278,8 @@ export const translation = {
     right: "Pravá strana",
 
     theme: "Barva",
+
+    toggle_bookmark: "Přepněte záložku",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -365,6 +371,8 @@ export const translation = {
     right: "Sağ Taraf",
 
     theme: "Renk",
+
+    toggle_bookmark: "Bookmark'ı değiştirin",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -457,6 +465,8 @@ export const translation = {
     right: "Bên phải",
 
     theme: "Màu sắc",
+
+    toggle_bookmark: "Chuyển đổi dấu trang",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -548,6 +558,8 @@ export const translation = {
     right: "O'ng tomon",
 
     theme: "Rang",
+
+    toggle_bookmark: "Xatcho'pni almashtiring",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -638,6 +650,8 @@ export const translation = {
     right: "右侧",
 
     theme: "颜色",
+
+    toggle_bookmark: "切换书签",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -729,6 +743,8 @@ export const translation = {
     right: "दाहिनी ओर",
 
     theme: "रंग",
+
+    toggle_bookmark: "टॉगल बुकमार्क",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -822,6 +838,8 @@ export const translation = {
     right: "Lato destro",
 
     theme: "Colore",
+
+    toggle_bookmark: "Attiva segnalibro",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -913,6 +931,8 @@ export const translation = {
     right: "ডান দিক",
 
     theme: "রঙ",
+
+    toggle_bookmark: "টগল বুকমার্ক",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1005,6 +1025,8 @@ export const translation = {
     right: "Lado direito",
 
     theme: "Cor",
+
+    toggle_bookmark: "Alterar marcador",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1098,6 +1120,8 @@ export const translation = {
     right: "Côté droit",
 
     theme: "Couleur",
+
+    toggle_bookmark: "Mettre en signet à basculer",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1189,6 +1213,8 @@ export const translation = {
     right: "Правая сторона",
 
     theme: "Цвет",
+
+    toggle_bookmark: "Переверните закладку",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1281,6 +1307,8 @@ export const translation = {
     right: "Lado derecho",
 
     theme: "Color",
+
+    toggle_bookmark: "Marcador de marcadores",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1371,6 +1399,8 @@ export const translation = {
     right: "右側",
 
     theme: "色",
+
+    toggle_bookmark: "トグルブックマーク",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1461,6 +1491,8 @@ export const translation = {
     right: "오른쪽",
 
     theme: "색상",
+
+    toggle_bookmark: "토글 북마크",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1552,6 +1584,8 @@ export const translation = {
     right: "Sisi Kanan",
 
     theme: "Warna",
+
+    toggle_bookmark: "Toggle Bookmark",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1643,6 +1677,8 @@ export const translation = {
     right: "उजवी बाजू",
 
     theme: "रंग",
+
+    toggle_bookmark: "टॉगल बुकमार्क",
   },
 };
 
