@@ -59,6 +59,16 @@ export default function About() {
             <Translation value="third_party_libraries" />
             <div>React 19, react-speech-recognition</div>
           </div>
+          <div className="about__row-item">
+            <Translation value="write_review" />
+            <a
+              rel="noreferrer"
+              href="https://chromewebstore.google.com/detail/Mac%20New%20Tab/mohppegbiigoahehdihbgmabkflajklj/reviews/my-review"
+              target="_blank"
+            >
+              chromewebstore/macnewtab
+            </a>
+          </div>
         </div>
       </div>
       &copy; 2024 - 2025 {<Translation value="copyright" />}

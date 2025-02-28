@@ -93,6 +93,8 @@ export const translation = {
     theme: "Theme",
 
     toggle_bookmark: "Toggle Bookmark",
+
+    write_review: "Write a Review",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -186,6 +188,8 @@ export const translation = {
     theme: "ಬಣ್ಣ",
 
     toggle_bookmark: "ಬುಕ್ಮಾರ್ಕ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಿ",
+
+    write_review: "ವಿಮರ್ಶೆಯನ್ನು ಬರೆಯಿರಿ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -280,6 +284,8 @@ export const translation = {
     theme: "Barva",
 
     toggle_bookmark: "Přepněte záložku",
+
+    write_review: "Napište recenzi",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -373,6 +379,8 @@ export const translation = {
     theme: "Renk",
 
     toggle_bookmark: "Bookmark'ı değiştirin",
+
+    write_review: "Bir İnceleme Yazın",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -467,6 +475,8 @@ export const translation = {
     theme: "Màu sắc",
 
     toggle_bookmark: "Chuyển đổi dấu trang",
+
+    write_review: "Viết một đánh giá",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -560,6 +570,8 @@ export const translation = {
     theme: "Rang",
 
     toggle_bookmark: "Xatcho'pni almashtiring",
+
+    write_review: "Sharh yozing",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -652,6 +664,8 @@ export const translation = {
     theme: "颜色",
 
     toggle_bookmark: "切换书签",
+
+    write_review: "写评论",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -745,6 +759,8 @@ export const translation = {
     theme: "रंग",
 
     toggle_bookmark: "टॉगल बुकमार्क",
+
+    write_review: "एक समीक्षा लिखे",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -840,6 +856,8 @@ export const translation = {
     theme: "Colore",
 
     toggle_bookmark: "Attiva segnalibro",
+
+    write_review: "Scrivi una recensione",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -933,6 +951,8 @@ export const translation = {
     theme: "রঙ",
 
     toggle_bookmark: "টগল বুকমার্ক",
+
+    write_review: "একটি পর্যালোচনা লিখুন",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1027,6 +1047,8 @@ export const translation = {
     theme: "Cor",
 
     toggle_bookmark: "Alterar marcador",
+
+    write_review: "Escreva uma resenha",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1122,6 +1144,8 @@ export const translation = {
     theme: "Couleur",
 
     toggle_bookmark: "Mettre en signet à basculer",
+
+    write_review: "Rédiger une critique",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1215,6 +1239,8 @@ export const translation = {
     theme: "Цвет",
 
     toggle_bookmark: "Переверните закладку",
+
+    write_review: "Напишите обзор",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1309,6 +1335,8 @@ export const translation = {
     theme: "Color",
 
     toggle_bookmark: "Marcador de marcadores",
+
+    write_review: "Escribe una reseña",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1401,6 +1429,8 @@ export const translation = {
     theme: "色",
 
     toggle_bookmark: "トグルブックマーク",
+
+    write_review: "レビューを書いてください",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1493,6 +1523,8 @@ export const translation = {
     theme: "색상",
 
     toggle_bookmark: "토글 북마크",
+
+    write_review: "리뷰를 작성하십시오",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1586,6 +1618,8 @@ export const translation = {
     theme: "Warna",
 
     toggle_bookmark: "Toggle Bookmark",
+
+    write_review: "Tulis ulasan",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1679,6 +1713,8 @@ export const translation = {
     theme: "रंग",
 
     toggle_bookmark: "टॉगल बुकमार्क",
+
+    write_review: "एक पुनरावलोकन लिहा",
   },
 };
 
