@@ -48,7 +48,7 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 - Access favorite links quickly with a customizable **dock bar** and **Launchpad overlay**.
 
 ### 🌍 Multi-Language Support
-- Supports **20+ languages**, including English, Kannada, Hindi, Spanish, French, and more.
+- Supports **15+ languages**, including English, Kannada, Hindi, Spanish, French, and more.
 
 ## 🛠 Installation & Running Locally
 
