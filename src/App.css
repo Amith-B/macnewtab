@@ -161,16 +161,16 @@ body:has(.App.theme-dark) {
 .App.theme-blue,
 .appearance__theme-color-option.theme-blue,
 body:has(.App.theme-blue) {
-  --theme-bg: #528cd9;
-  --theme-bg-secondary: #a5e6ff;
-  --theme-bg-with-opacity: #a5e6ff52;
+  --theme-bg: #c9e0ff;
+  --theme-bg-secondary: #b1d2ff;
+  --theme-bg-with-opacity: #9be3ff52;
   --theme-selection-color: #0052bf;
   --theme-bg-dock: #a5e6ff75;
   --theme-clr: black;
   --theme-shadow: #adadad;
-  --theme-border: #c6c6c6;
+  --theme-border: #727272;
   --theme-link-clr: #4b4bff;
-  --theme-button-bg: #5d9ef3;
+  --theme-button-bg: #7eb6ff;
   --theme-toggle-bg: #ccc;
   --theme-bg-blur: blur(60px) saturate(150%);
   --theme-bg-blur-30: blur(30px) saturate(150%);
@@ -178,7 +178,7 @@ body:has(.App.theme-blue) {
   --calendar-1-month-text-color: #7c7c7c;
   --calendar-month-text-color: #ff3b31;
   --calendar-sunday-text-color: #7c7c7c;
-  --widget-background: #88deff;
+  --widget-background: #accfff;
   --window-expand-bg: #528cd9;
   --active-window-indicator: #528cd9;
   --calendar-date-text-color: #272727;
@@ -195,50 +195,50 @@ body:has(.App.theme-blue) {
 .App.theme-red,
 .appearance__theme-color-option.theme-red,
 body:has(.App.theme-red) {
-  --theme-bg: #d95252;
-  --theme-bg-secondary: #ffa5a5;
+  --theme-bg: #ffe0e0;
+  --theme-bg-secondary: #ffc1c1;
   --theme-bg-with-opacity: #ffa5a552;
-  --theme-selection-color: #bf0000;
+  --theme-selection-color: #f10202;
   --theme-bg-dock: #ffa5a575;
   --theme-clr: black;
   --theme-shadow: #adadad;
   --theme-border: #c6c6c6;
   --theme-link-clr: #4b4bff;
-  --theme-button-bg: #f35d5d;
+  --theme-button-bg: #ff6464;
   --theme-toggle-bg: #ccc;
   --theme-bg-blur: blur(60px) saturate(150%);
   --theme-bg-blur-30: blur(30px) saturate(150%);
-  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-week-text-color: #ff493e;
   --calendar-1-month-text-color: white;
-  --calendar-month-text-color: #ff3b31;
-  --calendar-sunday-text-color: white;
-  --widget-background: #ff8888;
-  --window-expand-bg: #d95252;
-  --active-window-indicator: #d95252;
+  --calendar-month-text-color: black;
+  --calendar-sunday-text-color: #666666;
+  --widget-background: #ffc8c8;
+  --window-expand-bg: #ffb9b9;
+  --active-window-indicator: #dd4646;
   --calendar-date-text-color: #272727;
-  --clock-1-background: #f75f5f;
+  --clock-1-background: #ff8f8f;
   --clock-1-dial-background: #ffffff;
   --input-caret-color: #015ce0;
   --input-search-icon-color: #6c6d6b;
   --search-engine-tile-indicator-bg: #d2d2d0;
   --search-engine-tile-icon-clr: #8f3a3a;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
-  --settings-side-panel-text-color: white;
+  --settings-side-panel-text-color: black;
 }
 
 .App.theme-orange,
 .appearance__theme-color-option.theme-orange,
 body:has(.App.theme-orange) {
-  --theme-bg: #d99b52;
-  --theme-bg-secondary: #ffd8a5;
-  --theme-bg-with-opacity: #ffdea552;
-  --theme-selection-color: #bf6600;
-  --theme-bg-dock: #ffd1a575;
+  --theme-bg: #ffd9c7;
+  --theme-bg-secondary: #ffd1ba;
+  --theme-bg-with-opacity: #efad8c6b;
+  --theme-selection-color: #ea4e00;
+  --theme-bg-dock: #ffbc9b75;
   --theme-clr: black;
   --theme-shadow: #adadad;
   --theme-border: #777474;
   --theme-link-clr: #4b4bff;
-  --theme-button-bg: #f3995d;
+  --theme-button-bg: #fd9763;
   --theme-toggle-bg: #ccc;
   --theme-bg-blur: blur(60px) saturate(150%);
   --theme-bg-blur-30: blur(30px) saturate(150%);
@@ -246,18 +246,18 @@ body:has(.App.theme-orange) {
   --calendar-1-month-text-color: #737373;
   --calendar-month-text-color: #ff3b31;
   --calendar-sunday-text-color: #737373;
-  --widget-background: #ffc288;
-  --window-expand-bg: #d99752;
-  --active-window-indicator: #d98b52;
+  --widget-background: #ffc8ac;
+  --window-expand-bg: #dc8154;
+  --active-window-indicator: #d87e51;
   --calendar-date-text-color: #272727;
-  --clock-1-background: #f7b75f;
+  --clock-1-background: #d8926f;
   --clock-1-dial-background: #ffffff;
   --input-caret-color: #015ce0;
   --input-search-icon-color: #6c6d6b;
   --search-engine-tile-indicator-bg: #d2d2d0;
-  --search-engine-tile-icon-clr: #8f683a;
+  --search-engine-tile-icon-clr: #865841;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
-  --settings-side-panel-text-color: white;
+  --settings-side-panel-text-color: black;
 }
 
 .App.theme-purple,
