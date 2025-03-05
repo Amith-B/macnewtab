@@ -164,11 +164,11 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: var(--theme-bg);
+  background: linear-gradient(45deg, var(--theme-selection-color) 50%, var(--theme-bg) 0%);
 }
 
 .appearance__theme-color-option.selected {
-  outline: 2px solid var(--theme-selection-color);
+  outline: 2px solid black;
 }
 
 .appearance__theme-color-option.theme-none {
