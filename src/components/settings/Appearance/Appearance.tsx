@@ -124,6 +124,10 @@ export default function Appearance() {
       <div className="appearance__wallpaper-selection-container">
         <Translation value="choose_wallpaper" />
         <div className="appearance__wallpaper-selection-list">
+          <button
+            className="appearance__wallpaper-option wallpaper-none"
+            onClick={() => handleWallpaperChange("")}
+          ></button>
           {WALLPAPER_LIST.map((item) => (
             <button
               key={item.id}

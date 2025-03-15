@@ -164,7 +164,11 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: linear-gradient(45deg, var(--theme-selection-color) 50%, var(--theme-bg) 0%);
+  background: linear-gradient(
+    45deg,
+    var(--theme-selection-color) 50%,
+    var(--theme-bg) 0%
+  );
 }
 
 .appearance__theme-color-option.selected {
@@ -184,4 +188,18 @@
 
 .appearance__theme-color-option.theme-none.selected {
   border: none;
+}
+
+.wallpaper-none {
+  background: linear-gradient(
+    30deg,
+    transparent 48%,
+    red 41%,
+    red 52%,
+    transparent 54%
+  );
+  width: 90px;
+  height: 60px;
+  border-radius: 8px;
+  border: 1px solid var(--theme-border);
 }

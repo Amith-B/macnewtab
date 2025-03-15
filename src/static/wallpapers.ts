@@ -7,6 +7,8 @@ import Wallpaper6 from "../assets/wallpapers/6.jpg";
 import Wallpaper7 from "../assets/wallpapers/7.jpg";
 import Wallpaper8 from "../assets/wallpapers/8.jpg";
 import Wallpaper9 from "../assets/wallpapers/9.jpg";
+import Wallpaper10 from "../assets/wallpapers/10.jpg";
+import Wallpaper11 from "../assets/wallpapers/11.jpg";
 
 export const WALLPAPER_LIST = [
   {
@@ -44,5 +46,13 @@ export const WALLPAPER_LIST = [
   {
     id: "9",
     link: Wallpaper9,
+  },
+  {
+    id: "10",
+    link: Wallpaper10,
+  },
+  {
+    id: "11",
+    link: Wallpaper11,
   },
 ];
