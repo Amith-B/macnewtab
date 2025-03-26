@@ -1,0 +1,151 @@
+.todo-dialog__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.todo-dialog__overlay.modal-accessible {
+  visibility: visible;
+}
+
+.todo-dialog__overlay.modal-inaccessible {
+  visibility: hidden;
+}
+
+.todo-dialog__overlay.visible {
+  pointer-events: auto;
+}
+
+.todo-dialog__container {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--theme-border);
+  width: 360px;
+  max-height: min(80vh, 460px);
+  background-color: var(--theme-bg);
+  padding: 24px;
+  transform: translate(-100vw, -100vh) scale(0.1);
+  transform-origin: bottom right;
+  transition: transform 0.6s cubic-bezier(0.3, 0.61, 0.355, 1);
+}
+
+.todo-dialog__container.within-dock {
+  transform: translate(0, 100vh) scale(0.1);
+  transform-origin: bottom left;
+}
+
+.todo-dialog__container.within-dock.dock-position-left {
+  transform: translate(-100vw, 0) scale(0.1);
+  transform-origin: left 20%;
+}
+
+.todo-dialog__container.within-dock.dock-position-right {
+  transform: translate(100vw, 0) scale(0.1);
+  transform-origin: right 20%;
+}
+
+.todo-dialog__overlay.visible .todo-dialog__container {
+  transform: translate(0, 0) scale(1);
+}
+
+.todo-dialog__header {
+  font-size: 1.2rem;
+  margin: 0 auto 12px auto;
+  width: fit-content;
+}
+
+.todo-dialog-input__controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.todo-dialog__container .todo-dialog-input__container {
+  height: 36px;
+  width: 100%;
+  padding: 10px;
+  background: var(--theme-bg-secondary);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--theme-border);
+}
+
+.todo-dialog-input__container input {
+  height: 100%;
+  border: none;
+  background: inherit;
+  width: 100%;
+  outline: none;
+  font-size: 0.875rem;
+  color: var(--theme-clr);
+  caret-color: var(--input-caret-color);
+}
+
+.todo-dialog-input-button {
+  background: var(--theme-button-bg);
+  border-radius: 6px;
+  height: 36px;
+  width: 36px;
+  outline: none;
+  border: none;
+  color: var(--theme-clr);
+  align-self: center;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+  font-size: 1.6rem;
+}
+
+.todo-list-item {
+  align-items: center;
+  background-color: var(--theme-bg);
+  border: 1px solid var(--theme-border);
+  border-radius: 4px;
+  display: flex;
+  font-weight: 600;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 6px 12px;
+  gap: 8px;
+  background-color: var(--theme-bg-with-opacity);
+}
+
+.todo-list-title__container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+  word-break: break-word;
+}
+
+.todo-list-title__container.checked {
+  text-decoration: line-through;
+}
+
+.todo-list-item__delete {
+  background: var(--theme-button-bg);
+  border-radius: 6px;
+  height: 24px;
+  width: 24px;
+  min-width: 24px;
+  outline: none;
+  border: none;
+  color: var(--theme-clr);
+  align-self: center;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.todo-list {
+  max-height: calc(min(80vh, 460px) - 132px);
+  overflow: auto;
+}

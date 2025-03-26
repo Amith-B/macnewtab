@@ -446,6 +446,16 @@ to be revisited in future */
   display: none;
 }
 
+.tooltip-bottom:hover::after {
+  top: calc(100% + 30px);
+  bottom: unset;
+}
+
+.tooltip-bottom:hover::before {
+  top: calc(100% + 21px);
+  transform: translateX(-50%) translateY(-14px) rotate(225deg);
+}
+
 .disabled {
   opacity: 0.5;
   filter: saturate(0);

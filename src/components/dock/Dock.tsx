@@ -1,8 +1,10 @@
 import { useCallback, useContext, useState } from "react";
 import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
 import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
+import { ReactComponent as TodoIcon } from "../../assets/todo.svg";
 import Settings from "../settings/Settings";
 import Launchpad from "../launchpad/Launchpad";
+import TodoDialog from "../todo/Todo";
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
 
@@ -12,12 +14,15 @@ const TooltipPosition: Record<string, string> = {
   left: "right",
   right: "left",
   bottom: "top",
+  top: "bottom",
 };
 
 export default function Dock() {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
-  const { dockBarSites, dockPosition } = useContext(AppContext);
+  const [todoDialogOpen, setTodoDialogOpen] = useState(false);
+  const { dockBarSites, dockPosition, todoListVisbility } =
+    useContext(AppContext);
 
   const handleLaunchpadClose = useCallback(
     () => setLaunchpadVisible(false),
@@ -45,6 +50,17 @@ export default function Dock() {
         >
           <LaunchpadIcon />
         </button>
+        {todoListVisbility && (
+          <button
+            className={`todo-button accessible tooltip tooltip-${
+              TooltipPosition[showDocBar ? dockPosition : "top"] || "top"
+            }`}
+            data-label="Todo List"
+            onClick={() => setTodoDialogOpen(true)}
+          >
+            <TodoIcon />
+          </button>
+        )}
         <button
           className={`settings-icon accessible tooltip tooltip-${
             TooltipPosition[dockPosition] || "top"
@@ -95,6 +111,11 @@ export default function Dock() {
         onClose={() => setSettingsVisible(false)}
       />
       <Launchpad visible={launchpadVisible} onClose={handleLaunchpadClose} />
+      <TodoDialog
+        withinDock={showDocBar}
+        open={todoDialogOpen}
+        onClose={() => setTodoDialogOpen(false)}
+      />
     </>
   );
 }

@@ -8,7 +8,7 @@ import React, {
 import "./Dock.css";
 import { AppContext } from "../../../context/provider";
 import { List, arrayMove } from "react-movable";
-import { ReactComponent as DeleteIcon } from "../delete-icon.svg";
+import { ReactComponent as DeleteIcon } from "../../../assets/delete-icon.svg";
 import { ReactComponent as DraggableIcon } from "./draggable.svg";
 import {
   DOCK_SITES_MAX_LIMIT,
@@ -18,6 +18,7 @@ import {
 import Translation from "../../../locale/Translation";
 import { Select } from "../../select/Select";
 import { generateRandomId } from "../../../utils/random";
+import Toggle from "../../toggle/Toggle";
 
 export default memo(function Dock() {
   const [changesActive, setChangesActive] = useState(false);
@@ -26,6 +27,8 @@ export default memo(function Dock() {
     handleDockSitesChange,
     dockPosition,
     handleDockPositionChange,
+    todoListVisbility,
+    handleTodoListVisbility,
   } = useContext(AppContext);
   const [currentDockSites, setCurrentDockSites] = useState(dockBarSites);
 
@@ -81,6 +84,21 @@ export default memo(function Dock() {
 
   return (
     <div className="dock-links__container">
+      <div className={"todo-dock__toggle"}>
+        <span>
+          <h3 className="todo-dock-toggle-title">
+            <Translation value="todo_toggle_title" />
+          </h3>
+          <h4 className="todo-dock-toggle-description">
+            <Translation value="todo_toggle_description" />
+          </h4>
+        </span>
+        <Toggle
+          id={"todo-dock-toggle"}
+          isChecked={todoListVisbility}
+          handleToggleChange={() => handleTodoListVisbility(!todoListVisbility)}
+        />
+      </div>
       <div
         className={
           "dock-links__position" + (!currentDockSites.length ? " disabled" : "")

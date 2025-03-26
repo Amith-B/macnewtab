@@ -22,8 +22,14 @@ import {
   dockPositionsList,
 } from "../static/dockSites";
 import { generateRandomId } from "../utils/random";
+import {
+  TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY,
+  TODO_LIST_LOCAL_STORAGE_KEY,
+  TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
+} from "../static/todo";
 
 type DockBarSites = Array<{ title: string; url: string; id: string }>;
+type TodoList = Array<{ content: string; id: string; checked: boolean }>;
 
 export const AppContext = createContext({
   date: new Date(),
@@ -49,6 +55,13 @@ export const AppContext = createContext({
   handleShowSearchEnginesChange: (_: boolean) => {},
   showMonthView: false,
   handleShowMonthViewChange: (_: boolean) => {},
+  todoList: [] as TodoList,
+  handleAddTodoList: (_: string) => {},
+  handleTodoItemChecked: (_id: string, _checked: boolean) => {},
+  handleTodoItemDelete: (_: string) => {},
+  todoListVisbility: true,
+  handleTodoListVisbility: (_: boolean) => {},
+  handleClearCompletedTodoList: () => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -130,6 +143,9 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [dockBarSites, setDockBarSites] = useState<DockBarSites>([]);
 
   const [dockPosition, setDockPosition] = useState<DockPosition>("bottom");
+  const [todoList, setTodoList] = useState<TodoList>([]);
+
+  const [todoListVisbility, setTodoListVisbility] = useState(false);
 
   useEffect(() => {
     const intervalRef = setInterval(() => {
@@ -256,8 +272,69 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       }, 1000);
     }
 
+    const defaultTodoDockVisibility = localStorage.getItem(
+      TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY
+    );
+    setTodoListVisbility(
+      defaultTodoDockVisibility === "true"
+        ? true
+        : defaultTodoDockVisibility === "false"
+        ? false
+        : true
+    );
+
+    const request = new Promise<string | null>((resolve) => {
+      const todoList = localStorage.getItem(TODO_LIST_LOCAL_STORAGE_KEY);
+
+      resolve(todoList);
+    });
+
+    request.then((todoList: string | null) => {
+      try {
+        if (todoList) {
+          let parsedList = JSON.parse(todoList) as TodoList;
+
+          parsedList = parsedList.map((item) => ({
+            ...item,
+            id: item.id || generateRandomId(),
+          }));
+
+          if (Array.isArray(parsedList)) {
+            setTodoList(parsedList);
+          }
+        } else {
+          setTodoList([]);
+        }
+      } catch (_) {
+        setTodoList([]);
+      }
+    });
+
     return () => clearInterval(intervalRef);
   }, []);
+
+  const handleClearCompletedTodoList = () => {
+    const todoSavedDate = localStorage.getItem(
+      TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY
+    );
+
+    const currentDate = new Date();
+    const formatedCurrentDate = `${currentDate.getDate()}_${currentDate.getMonth()}_${currentDate.getFullYear()}`;
+
+    if (
+      todoSavedDate &&
+      todoSavedDate.split("_").length === 3 &&
+      todoSavedDate !== formatedCurrentDate
+    ) {
+      const updatedTodoList = todoList.filter((item) => !item.checked);
+      handleTodoListUpdate(updatedTodoList);
+    }
+
+    localStorage.setItem(
+      TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
+      formatedCurrentDate
+    );
+  };
 
   const handleThemeChange = (val: string) => {
     localStorage.setItem(THEME_LOCAL_STORAGE_KEY, val);
@@ -334,6 +411,54 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setDockPosition(val);
   };
 
+  const handleAddTodoList = (content: string) => {
+    const updatedTodoList = [
+      {
+        checked: false,
+        id: generateRandomId(),
+        content,
+      },
+      ...todoList,
+    ] as TodoList;
+
+    handleTodoListUpdate(updatedTodoList);
+    handleClearCompletedTodoList();
+  };
+
+  const handleTodoItemChecked = (id: string, checked: boolean) => {
+    const updatedTodoList = todoList.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          checked,
+        };
+      }
+
+      return item;
+    });
+
+    handleTodoListUpdate(updatedTodoList);
+    handleClearCompletedTodoList();
+  };
+
+  const handleTodoItemDelete = (id: string) => {
+    const updatedTodoList = todoList.filter((item) => {
+      return item.id !== id;
+    });
+    handleTodoListUpdate(updatedTodoList);
+    handleClearCompletedTodoList();
+  };
+
+  const handleTodoListVisbility = (val: boolean) => {
+    localStorage.setItem(TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY, String(val));
+    setTodoListVisbility(val);
+  };
+
+  const handleTodoListUpdate = (list: TodoList) => {
+    setTodoList(list);
+    localStorage.setItem(TODO_LIST_LOCAL_STORAGE_KEY, JSON.stringify(list));
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -360,6 +485,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleDockSitesChange,
         dockPosition,
         handleDockPositionChange,
+        todoList,
+        handleAddTodoList,
+        handleTodoItemChecked,
+        todoListVisbility,
+        handleTodoListVisbility,
+        handleTodoItemDelete,
+        handleClearCompletedTodoList,
       }}
     >
       {children}

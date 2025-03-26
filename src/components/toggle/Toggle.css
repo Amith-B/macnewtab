@@ -36,7 +36,7 @@
 }
 
 .toggle-checkbox:checked + .toggle-label {
-  background-color: #0d83fe;
+  background-color: var(--theme-selection-color);
 }
 
 .toggle-checkbox:checked + .toggle-label .toggle-inner {

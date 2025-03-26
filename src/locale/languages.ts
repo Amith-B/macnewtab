@@ -95,6 +95,11 @@ export const translation = {
     toggle_bookmark: "Toggle Bookmark",
 
     write_review: "Write a Review",
+
+    todo: "Todo List",
+    todo_toggle_title: "Show Todo List",
+    todo_toggle_description:
+      "Checked todo items are automatically deleted next day",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -190,6 +195,11 @@ export const translation = {
     toggle_bookmark: "ಬುಕ್ಮಾರ್ಕ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಿ",
 
     write_review: "ವಿಮರ್ಶೆಯನ್ನು ಬರೆಯಿರಿ",
+
+    todo: "TODO ಪಟ್ಟಿ",
+    todo_toggle_title: "ಟೊಡೊ ಪಟ್ಟಿಯನ್ನು ತೋರಿಸಿ",
+    todo_toggle_description:
+      "ಪರಿಶೀಲಿಸಿದ ಟೊಡೊ ವಸ್ತುಗಳನ್ನು ಮರುದಿನ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -286,6 +296,11 @@ export const translation = {
     toggle_bookmark: "Přepněte záložku",
 
     write_review: "Napište recenzi",
+
+    todo: "Seznam Todo",
+    todo_toggle_title: "Zobrazit seznam Todo",
+    todo_toggle_description:
+      "Zkontrolované položky Todo jsou příští den automaticky smazány",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -381,6 +396,11 @@ export const translation = {
     toggle_bookmark: "Bookmark'ı değiştirin",
 
     write_review: "Bir İnceleme Yazın",
+
+    todo: "Todo Listesi",
+    todo_toggle_title: "Todo listesini göster",
+    todo_toggle_description:
+      "Kontrol edilen Todo öğeleri ertesi gün otomatik olarak silinir",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -477,6 +497,11 @@ export const translation = {
     toggle_bookmark: "Chuyển đổi dấu trang",
 
     write_review: "Viết một đánh giá",
+
+    todo: "Danh sách việc cần làm",
+    todo_toggle_title: "Hiển thị danh sách TODO",
+    todo_toggle_description:
+      "Các mặt hàng đã kiểm tra sẽ tự động bị xóa vào ngày hôm sau",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -572,6 +597,11 @@ export const translation = {
     toggle_bookmark: "Xatcho'pni almashtiring",
 
     write_review: "Sharh yozing",
+
+    todo: "Todo ro'yxati",
+    todo_toggle_title: "Todo ro'yxatini ko'rsatish",
+    todo_toggle_description:
+      "Tekshirilgan todo elementlari keyingi kun avtomatik ravishda o'chiriladi",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -666,6 +696,10 @@ export const translation = {
     toggle_bookmark: "切换书签",
 
     write_review: "写评论",
+
+    todo: "待办事项清单",
+    todo_toggle_title: "展示托多列表",
+    todo_toggle_description: "检查的托多商品第二天将自动删除",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -761,6 +795,11 @@ export const translation = {
     toggle_bookmark: "टॉगल बुकमार्क",
 
     write_review: "एक समीक्षा लिखे",
+
+    todo: "करने के लिए सूची",
+    todo_toggle_title: "टोडो सूची दिखाएं",
+    todo_toggle_description:
+      "चेक किए गए टोडो आइटम स्वचालित रूप से अगले दिन हटा दिए जाते हैं",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -858,6 +897,11 @@ export const translation = {
     toggle_bookmark: "Attiva segnalibro",
 
     write_review: "Scrivi una recensione",
+
+    todo: "Elenco Todo",
+    todo_toggle_title: "Mostra elenco TODO",
+    todo_toggle_description:
+      "Gli articoli controllati vengono eliminati automaticamente il giorno successivo",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -953,6 +997,11 @@ export const translation = {
     toggle_bookmark: "টগল বুকমার্ক",
 
     write_review: "একটি পর্যালোচনা লিখুন",
+
+    todo: "টোডো তালিকা",
+    todo_toggle_title: "টোডো তালিকা দেখান",
+    todo_toggle_description:
+      "চেক করা টোডো আইটেমগুলি পরের দিন স্বয়ংক্রিয়ভাবে মুছে ফেলা হয়",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1049,6 +1098,11 @@ export const translation = {
     toggle_bookmark: "Alterar marcador",
 
     write_review: "Escreva uma resenha",
+
+    todo: "Lista de tarefas",
+    todo_toggle_title: "Mostre a lista de tarefas",
+    todo_toggle_description:
+      "Os itens verificados para TODO são excluídos automaticamente no dia seguinte",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1146,6 +1200,11 @@ export const translation = {
     toggle_bookmark: "Mettre en signet à basculer",
 
     write_review: "Rédiger une critique",
+
+    todo: "Liste de TOD",
+    todo_toggle_title: "Afficher la liste des TODO",
+    todo_toggle_description:
+      "Les éléments TODO cochés sont automatiquement supprimés le lendemain",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1241,6 +1300,11 @@ export const translation = {
     toggle_bookmark: "Переверните закладку",
 
     write_review: "Напишите обзор",
+
+    todo: "Список Тодо",
+    todo_toggle_title: "Показать список Тодо",
+    todo_toggle_description:
+      "Проверенные элементы TODO автоматически удалены на следующий день",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1337,6 +1401,11 @@ export const translation = {
     toggle_bookmark: "Marcador de marcadores",
 
     write_review: "Escribe una reseña",
+
+    todo: "Lista de tareas",
+    todo_toggle_title: "Mostrar lista de TODO",
+    todo_toggle_description:
+      "Los artículos de TODO verificados se eliminan automáticamente al día siguiente",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1431,6 +1500,11 @@ export const translation = {
     toggle_bookmark: "トグルブックマーク",
 
     write_review: "レビューを書いてください",
+
+    todo: "TODOリスト",
+    todo_toggle_title: "TODOリストを表示します",
+    todo_toggle_description:
+      "チェックされたTODOアイテムは、翌日自動的に削除されます",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1525,6 +1599,10 @@ export const translation = {
     toggle_bookmark: "토글 북마크",
 
     write_review: "리뷰를 작성하십시오",
+
+    todo: "TODO 목록",
+    todo_toggle_title: "TODO 목록을 표시하십시오",
+    todo_toggle_description: "확인 된 할 일 품목은 다음날 자동으로 삭제됩니다",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1620,6 +1698,11 @@ export const translation = {
     toggle_bookmark: "Toggle Bookmark",
 
     write_review: "Tulis ulasan",
+
+    todo: "Daftar TODO",
+    todo_toggle_title: "Tampilkan daftar todo",
+    todo_toggle_description:
+      "Item todo yang diperiksa secara otomatis dihapus hari berikutnya",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1715,6 +1798,11 @@ export const translation = {
     toggle_bookmark: "टॉगल बुकमार्क",
 
     write_review: "एक पुनरावलोकन लिहा",
+
+    todo: "टोडो यादी",
+    todo_toggle_title: "टोडो यादी दर्शवा",
+    todo_toggle_description:
+      "चेक केलेल्या टोडो आयटम दुसर्‍या दिवशी स्वयंचलितपणे हटविले जातात",
   },
 };
 

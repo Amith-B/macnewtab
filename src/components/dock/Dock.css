@@ -113,3 +113,25 @@
   width: 34px;
   height: 34px;
 }
+
+.todo-button {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.todo-button svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dock-container:not(.center) .todo-button {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+}
