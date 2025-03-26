@@ -59,7 +59,14 @@ export default function Dock() {
         </button>
         <div className="dock-divider"></div>
         {dockBarSites.map((item) => {
-          const siteURL = new URL(item.url);
+          let siteURL;
+          let siteURLHasError = false;
+
+          try {
+            siteURL = new URL(item.url);
+          } catch (error) {
+            siteURLHasError = true;
+          }
 
           return (
             <a
@@ -68,14 +75,14 @@ export default function Dock() {
                 TooltipPosition[dockPosition] || "top"
               }`}
               data-label={item.title}
-              href={item.url}
+              href={!siteURLHasError ? item.url : "https://google.com"}
               target="_self"
               title={item.title}
               key={item.id}
             >
               <img
                 className="dock-site__icon"
-                src={SITE_IMAGE_URL + siteURL.hostname}
+                src={SITE_IMAGE_URL + siteURL?.hostname}
                 alt={item.title}
               />
             </a>
