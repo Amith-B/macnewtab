@@ -1,6 +1,6 @@
 .search__container {
   height: 52px;
-  padding: 10px;
+  padding: 4px 10px;
   background: var(--theme-bg-secondary);
   border-radius: 16px;
   display: flex;

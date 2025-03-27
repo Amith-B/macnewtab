@@ -5,6 +5,7 @@ import Checkbox from "../checkbox/Checkbox";
 import { ReactComponent as DeleteIcon } from "../../assets/delete-icon.svg";
 import linkify from "../../utils/linkify";
 import Translation from "../../locale/Translation";
+import { translation } from "../../locale/languages";
 
 export default function TodoDialog({
   open,
@@ -18,6 +19,7 @@ export default function TodoDialog({
   const [modalAccessible, setModalAccessible] = useState(false);
   const [todoInput, setTodoInput] = useState("");
   const {
+    locale,
     dockPosition,
     todoList,
     handleAddTodoList,
@@ -96,7 +98,7 @@ export default function TodoDialog({
         <div className="todo-dialog-input__controls">
           <div className="todo-dialog-input__container">
             <input
-              placeholder="Add to list"
+              placeholder={translation[locale]["add_to_list"]}
               ref={inputRef}
               value={todoInput}
               onChange={(event) => setTodoInput(event.target.value)}

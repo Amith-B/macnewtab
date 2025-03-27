@@ -70,7 +70,7 @@
 .todo-dialog__container .todo-dialog-input__container {
   height: 36px;
   width: 100%;
-  padding: 10px;
+  padding: 4px 10px;
   background: var(--theme-bg-secondary);
   border-radius: 6px;
   display: flex;
