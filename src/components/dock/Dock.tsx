@@ -76,12 +76,26 @@ export default function Dock() {
         <div className="dock-divider"></div>
         {dockBarSites.map((item) => {
           let siteURL;
-          let siteURLHasError = false;
+
+          let anchorProps = {};
 
           try {
             siteURL = new URL(item.url);
+            anchorProps = {
+              href: item.url,
+              target: "_self",
+            };
           } catch (error) {
-            siteURLHasError = true;
+            anchorProps = {
+              onClick: () => {
+                if (!chrome?.search?.query) {
+                  return;
+                }
+                chrome.search.query({
+                  text: item.url,
+                });
+              },
+            };
           }
 
           return (
@@ -91,10 +105,9 @@ export default function Dock() {
                 TooltipPosition[dockPosition] || "top"
               }`}
               data-label={item.title}
-              href={!siteURLHasError ? item.url : "https://google.com"}
-              target="_self"
               title={item.title}
               key={item.id}
+              {...anchorProps}
             >
               <img
                 className="dock-site__icon"

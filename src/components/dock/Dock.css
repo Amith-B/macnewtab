@@ -95,6 +95,10 @@
   justify-content: center;
 }
 
+.dock-site__item.with-link {
+  cursor: pointer;
+}
+
 .dock-site__icon {
   width: 40px;
   height: 40px;
