@@ -471,6 +471,10 @@ to be revisited in future */
   cursor: grabbing;
 }
 
+.non-draggable {
+  cursor: auto;
+}
+
 @media screen and (max-width: 1080px) {
   .main-content {
     gap: 50px;

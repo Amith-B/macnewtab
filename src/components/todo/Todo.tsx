@@ -28,6 +28,10 @@ export default function TodoDialog({
     handleClearCompletedTodoList,
   } = useContext(AppContext);
   const inputRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: "unset", y: "unset" });
+  const isDragging = useRef(false);
+  const offset = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     if (open) {
@@ -39,30 +43,25 @@ export default function TodoDialog({
         }
       }, 300);
 
-      return () => clearTimeout(timerRef);
+      const handleEsc = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          onClose();
+        }
+      };
+      document.addEventListener("keydown", handleEsc);
+      return () => {
+        clearTimeout(timerRef);
+        document.removeEventListener("keydown", handleEsc);
+      };
     } else {
       const timerRef = setTimeout(() => {
         setModalAccessible(false);
-      }, 600);
+        setPosition({ x: "unset", y: "unset" });
+      }, 200);
 
       return () => clearTimeout(timerRef);
     }
     // eslint-disable-next-line
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) {
-      return;
-    }
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-    document.addEventListener("keydown", handleEsc);
-    return () => {
-      document.removeEventListener("keydown", handleEsc);
-    };
   }, [open, onClose]);
 
   const handleKeyDown = (evt: React.KeyboardEvent) => {
@@ -76,6 +75,34 @@ export default function TodoDialog({
     handleAddTodoList(val);
   };
 
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!modalRef.current) return;
+
+    isDragging.current = true;
+    offset.current = {
+      x: e.clientX - modalRef.current.getBoundingClientRect().left,
+      y: e.clientY - modalRef.current.getBoundingClientRect().top,
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging.current) return;
+
+    setPosition({
+      x: `${e.clientX - offset.current.x}px`,
+      y: `${e.clientY - offset.current.y}px`,
+    });
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+  };
+
   return (
     <div
       className={
@@ -87,15 +114,25 @@ export default function TodoDialog({
     >
       <div
         className={
-          `todo-dialog__container dock-position-${dockPosition}` +
+          `todo-dialog__container draggable dock-position-${dockPosition}` +
           (withinDock ? " within-dock" : "")
         }
         onClick={(evt) => evt.stopPropagation()}
+        ref={modalRef}
+        style={{
+          position: "absolute",
+          left: position.x,
+          top: position.y,
+        }}
+        onMouseDown={handleMouseDown}
       >
         <h2 className="todo-dialog__header">
           <Translation value="todo" />
         </h2>
-        <div className="todo-dialog-input__controls">
+        <div
+          className="todo-dialog-input__controls non-draggable"
+          onMouseDown={(evt) => evt.stopPropagation()}
+        >
           <div className="todo-dialog-input__container">
             <input
               placeholder={translation[locale]["add_to_list"]}
@@ -112,7 +149,10 @@ export default function TodoDialog({
             +
           </button>
         </div>
-        <div className="todo-list">
+        <div
+          className="todo-list non-draggable"
+          onMouseDown={(evt) => evt.stopPropagation()}
+        >
           {todoList.map((item) => {
             return (
               <div className="todo-list-item" key={item.id}>

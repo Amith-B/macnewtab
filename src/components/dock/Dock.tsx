@@ -29,6 +29,8 @@ export default function Dock() {
     []
   );
 
+  const handleTodoClose = useCallback(() => setTodoDialogOpen(false), []);
+
   const showDocBar = !!dockBarSites.length;
 
   return (
@@ -127,7 +129,7 @@ export default function Dock() {
       <TodoDialog
         withinDock={showDocBar}
         open={todoDialogOpen}
-        onClose={() => setTodoDialogOpen(false)}
+        onClose={handleTodoClose}
       />
     </>
   );
