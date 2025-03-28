@@ -63,6 +63,7 @@ export const AppContext = createContext({
   todoListVisbility: true,
   handleTodoListVisbility: (_: boolean) => {},
   handleClearCompletedTodoList: () => {},
+  groupTodosByCheckedStatus: () => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -460,6 +461,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(TODO_LIST_LOCAL_STORAGE_KEY, JSON.stringify(list));
   };
 
+  const groupTodosByCheckedStatus = () => {
+    const uncheckedItems = todoList.filter((todo) => !todo.checked);
+    const checkedItems = todoList.filter((todo) => todo.checked);
+
+    handleTodoListUpdate([...uncheckedItems, ...checkedItems]);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -493,7 +501,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleTodoListVisbility,
         handleTodoItemDelete,
         handleClearCompletedTodoList,
-        handleTodoListUpdate
+        handleTodoListUpdate,
+        groupTodosByCheckedStatus,
       }}
     >
       {children}

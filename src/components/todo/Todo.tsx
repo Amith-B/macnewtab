@@ -162,7 +162,7 @@ export default function TodoDialog({
             </div>
           )}
           renderItem={({ value: item, props }) => (
-            <div className="todo-list-item draggable" key={item.id} {...props}>
+            <div className="todo-list-item draggable" {...props} key={item.id}>
               <div
                 className={
                   "todo-list-title__container" +

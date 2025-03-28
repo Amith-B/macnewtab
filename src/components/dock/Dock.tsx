@@ -21,8 +21,12 @@ export default function Dock() {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
   const [todoDialogOpen, setTodoDialogOpen] = useState(false);
-  const { dockBarSites, dockPosition, todoListVisbility } =
-    useContext(AppContext);
+  const {
+    dockBarSites,
+    dockPosition,
+    todoListVisbility,
+    groupTodosByCheckedStatus,
+  } = useContext(AppContext);
 
   const handleLaunchpadClose = useCallback(
     () => setLaunchpadVisible(false),
@@ -58,7 +62,10 @@ export default function Dock() {
               TooltipPosition[showDocBar ? dockPosition : "top"] || "top"
             }`}
             data-label="Todo List"
-            onClick={() => setTodoDialogOpen(true)}
+            onClick={() => {
+              groupTodosByCheckedStatus();
+              setTodoDialogOpen(true);
+            }}
           >
             <TodoIcon />
           </button>
