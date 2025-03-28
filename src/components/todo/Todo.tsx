@@ -67,14 +67,16 @@ export default function TodoDialog({
   }, [open, onClose]);
 
   const handleKeyDown = (evt: React.KeyboardEvent) => {
-    if (evt.key === "Enter") {
+    if (evt.key === "Enter" && !!todoInput) {
       handleAddToList(todoInput);
     }
   };
 
   const handleAddToList = (val: string) => {
     setTodoInput("");
-    handleAddTodoList(val);
+    if (!!val) {
+      handleAddTodoList(val);
+    }
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
