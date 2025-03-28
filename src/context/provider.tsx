@@ -59,6 +59,7 @@ export const AppContext = createContext({
   handleAddTodoList: (_: string) => {},
   handleTodoItemChecked: (_id: string, _checked: boolean) => {},
   handleTodoItemDelete: (_: string) => {},
+  handleTodoListUpdate: (_: TodoList) => {},
   todoListVisbility: true,
   handleTodoListVisbility: (_: boolean) => {},
   handleClearCompletedTodoList: () => {},
@@ -492,6 +493,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleTodoListVisbility,
         handleTodoItemDelete,
         handleClearCompletedTodoList,
+        handleTodoListUpdate
       }}
     >
       {children}

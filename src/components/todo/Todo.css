@@ -30,7 +30,7 @@
   width: 360px;
   max-height: min(80vh, 460px);
   background-color: var(--theme-bg);
-  padding: 24px;
+  padding-bottom: 24px;
   transform: translate(-100vw, -100vh) scale(0.1);
   transform-origin: bottom right;
   transition: transform 0.6s cubic-bezier(0.3, 0.61, 0.355, 1);
@@ -57,14 +57,16 @@
 
 .todo-dialog__header {
   font-size: 1.2rem;
-  margin: 0 auto 12px auto;
-  width: fit-content;
+  padding: 24px 0 12px 0;
+  width: 100%;
+  text-align: center;
 }
 
 .todo-dialog-input__controls {
   display: flex;
   gap: 8px;
   margin-bottom: 12px;
+  padding: 0 24px;
 }
 
 .todo-dialog__container .todo-dialog-input__container {
@@ -116,6 +118,7 @@
   padding: 6px 12px;
   gap: 8px;
   background-color: var(--theme-bg-with-opacity);
+  z-index: 10;
 }
 
 .todo-list-title__container {
@@ -148,4 +151,5 @@
 .todo-list {
   max-height: calc(min(80vh, 460px) - 132px);
   overflow: auto;
+  padding: 0 24px;
 }

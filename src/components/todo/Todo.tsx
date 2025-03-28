@@ -6,6 +6,7 @@ import { ReactComponent as DeleteIcon } from "../../assets/delete-icon.svg";
 import linkify from "../../utils/linkify";
 import Translation from "../../locale/Translation";
 import { translation } from "../../locale/languages";
+import { arrayMove, List } from "react-movable";
 
 export default function TodoDialog({
   open,
@@ -26,6 +27,7 @@ export default function TodoDialog({
     handleTodoItemChecked,
     handleTodoItemDelete,
     handleClearCompletedTodoList,
+    handleTodoListUpdate,
   } = useContext(AppContext);
   const inputRef = useRef(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -114,7 +116,7 @@ export default function TodoDialog({
     >
       <div
         className={
-          `todo-dialog__container draggable dock-position-${dockPosition}` +
+          `todo-dialog__container dock-position-${dockPosition}` +
           (withinDock ? " within-dock" : "")
         }
         onClick={(evt) => evt.stopPropagation()}
@@ -124,15 +126,14 @@ export default function TodoDialog({
           left: position.x,
           top: position.y,
         }}
-        onMouseDown={handleMouseDown}
       >
-        <h2 className="todo-dialog__header">
+        <h2
+          className="todo-dialog__header draggable"
+          onMouseDown={handleMouseDown}
+        >
           <Translation value="todo" />
         </h2>
-        <div
-          className="todo-dialog-input__controls non-draggable"
-          onMouseDown={(evt) => evt.stopPropagation()}
-        >
+        <div className="todo-dialog-input__controls">
           <div className="todo-dialog-input__container">
             <input
               placeholder={translation[locale]["add_to_list"]}
@@ -149,37 +150,42 @@ export default function TodoDialog({
             +
           </button>
         </div>
-        <div
-          className="todo-list non-draggable"
-          onMouseDown={(evt) => evt.stopPropagation()}
-        >
-          {todoList.map((item) => {
-            return (
-              <div className="todo-list-item" key={item.id}>
-                <div
-                  className={
-                    "todo-list-title__container" +
-                    (item.checked ? " checked" : "")
-                  }
-                >
-                  <Checkbox
-                    checked={item.checked}
-                    onChange={(e) => {
-                      handleTodoItemChecked(item.id, e.target.checked);
-                    }}
-                  />
-                  <span>{linkify(item.content)}</span>
-                </div>
-                <button
-                  className="todo-list-item__delete"
-                  onClick={() => handleTodoItemDelete(item.id)}
-                >
-                  <DeleteIcon />
-                </button>
+        <List
+          lockVertically
+          values={todoList}
+          onChange={({ oldIndex, newIndex }) => {
+            handleTodoListUpdate(arrayMove(todoList, oldIndex, newIndex));
+          }}
+          renderList={({ children, props }) => (
+            <div className="todo-list" {...props}>
+              {children}
+            </div>
+          )}
+          renderItem={({ value: item, props }) => (
+            <div className="todo-list-item draggable" key={item.id} {...props}>
+              <div
+                className={
+                  "todo-list-title__container" +
+                  (item.checked ? " checked" : "")
+                }
+              >
+                <Checkbox
+                  checked={item.checked}
+                  onChange={(e) => {
+                    handleTodoItemChecked(item.id, e.target.checked);
+                  }}
+                />
+                <span>{linkify(item.content)}</span>
               </div>
-            );
-          })}
-        </div>
+              <button
+                className="todo-list-item__delete"
+                onClick={() => handleTodoItemDelete(item.id)}
+              >
+                <DeleteIcon />
+              </button>
+            </div>
+          )}
+        />
       </div>
     </div>
   );
