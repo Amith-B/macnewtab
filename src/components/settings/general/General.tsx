@@ -18,6 +18,8 @@ const General = memo(function General() {
     handleShowSearchEnginesChange,
     showMonthView,
     handleShowMonthViewChange,
+    showClockAndCalendar,
+    handleShowClockAndCalendarChange,
     locale,
     handleLocaleChange,
   } = useContext(AppContext);
@@ -72,12 +74,27 @@ const General = memo(function General() {
           }
         />
       </div>
-      <div className="general__row-item">
+      <div
+        className={
+          "general__row-item" + (!showClockAndCalendar ? " disabled" : "")
+        }
+      >
         <Translation value="switch_calendar_to_month_view" />
         <Toggle
           id={"month-view-toggle"}
           isChecked={showMonthView}
           handleToggleChange={() => handleShowMonthViewChange(!showMonthView)}
+        />
+      </div>
+
+      <div className="general__row-item">
+        <Translation value="show_clock_and_calendar" />
+        <Toggle
+          id={"clock-and-calendar-toggle"}
+          isChecked={showClockAndCalendar}
+          handleToggleChange={() =>
+            handleShowClockAndCalendarChange(!showClockAndCalendar)
+          }
         />
       </div>
 
