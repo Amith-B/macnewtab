@@ -168,6 +168,23 @@ export default function Settings({
               );
             })}
           </div>
+
+          <a
+            className="buy-me-coffee"
+            href="https://www.buymeacoffee.com/amithb"
+            target="_blank"
+            rel="noreferrer"
+            onMouseDown={(evt) => evt.stopPropagation()}
+          >
+            <img
+              src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+              alt="Buy Me A Coffee"
+              style={{
+                height: "inherit",
+                width: "inherit",
+              }}
+            />
+          </a>
         </div>
         <div className="settings__menu-content">
           <div className="settings__menu-content-title">
