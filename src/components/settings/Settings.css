@@ -63,6 +63,8 @@
   backdrop-filter: var(--settings-side-panel-blur);
   -webkit-backdrop-filter: var(--settings-side-panel-blur);
   padding: 18px 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .settings__menu-content {
@@ -145,4 +147,15 @@
 .settings_menu-item.selected {
   color: white;
   background-color: var(--theme-selection-color);
+}
+
+.settings__menu {
+  height: 100%;
+  overflow: auto;
+  margin-bottom: 12px;
+}
+
+.buy-me-coffee {
+  padding: 0 8px;
+  width: 100%;
 }
