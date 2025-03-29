@@ -34,6 +34,7 @@ const App = memo(function App() {
     showSearchEngines,
     showMonthView,
     locale,
+    showClockAndCalendar,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -88,11 +89,17 @@ const App = memo(function App() {
       style={bgStyle}
       lang={locale}
     >
-      <div className="main-content">
-        <div className="section-1">
-          <Clock1 />
-          {showMonthView ? <Calendar /> : <Calendar1 />}
-        </div>
+      <div
+        className={
+          "main-content" + (showClockAndCalendar ? " has-clock-calendar" : "")
+        }
+      >
+        {showClockAndCalendar && (
+          <div className="section-1">
+            <Clock1 />
+            {showMonthView ? <Calendar /> : <Calendar1 />}
+          </div>
+        )}
         <div className="section-2">
           {showGreeting && (
             <h1 className="greeting">

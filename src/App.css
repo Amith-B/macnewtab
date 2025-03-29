@@ -365,6 +365,9 @@ body:has(.App.theme-brown) {
 .main-content {
   display: grid;
   grid-template-columns: auto auto;
+}
+
+.main-content.has-clock-calendar {
   gap: 100px;
 }
 
@@ -476,7 +479,7 @@ to be revisited in future */
 }
 
 @media screen and (max-width: 1080px) {
-  .main-content {
+  .main-content.has-clock-calendar {
     gap: 50px;
   }
 }

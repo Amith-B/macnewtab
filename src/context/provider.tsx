@@ -6,6 +6,7 @@ import {
 } from "../static/theme";
 import {
   SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY,
+  SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY,
   SHOW_GREETING_LOCAL_STORAGE_KEY,
   SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY,
   SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY,
@@ -55,6 +56,8 @@ export const AppContext = createContext({
   handleShowSearchEnginesChange: (_: boolean) => {},
   showMonthView: false,
   handleShowMonthViewChange: (_: boolean) => {},
+  showClockAndCalendar: true,
+  handleShowClockAndCalendarChange: (_: boolean) => {},
   todoList: [] as TodoList,
   handleAddTodoList: (_: string) => {},
   handleTodoItemChecked: (_id: string, _checked: boolean) => {},
@@ -138,6 +141,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<typeof languages>("en");
 
   const [showGreeting, setShowGreeeting] = useState(true);
+  const [showClockAndCalendar, setShowClockAndCalendar] = useState(true);
   const [showVisitedSites, setShowVisitedSites] = useState(true);
   const [separatePageSite, setSeparatePageSite] = useState(false);
   const [showSearchEngines, setShowSearchEngines] = useState(true);
@@ -150,10 +154,16 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [todoListVisbility, setTodoListVisbility] = useState(false);
 
   useEffect(() => {
-    const intervalRef = setInterval(() => {
-      setDate(new Date());
-    }, 1000);
+    if (showClockAndCalendar) {
+      const intervalRef = setInterval(() => {
+        setDate(new Date());
+      }, 1000);
 
+      return () => clearInterval(intervalRef);
+    }
+  }, [showClockAndCalendar]);
+
+  useEffect(() => {
     const defaultTheme = localStorage.getItem(THEME_LOCAL_STORAGE_KEY);
 
     if (defaultTheme && THEME_KEYS.includes(defaultTheme)) {
@@ -224,6 +234,17 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       (languages.includes(String(defaultLocale))
         ? String(defaultLocale)
         : "en") as typeof languages
+    );
+
+    const defaultShowClockAndCalendar = localStorage.getItem(
+      SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY
+    );
+    setShowClockAndCalendar(
+      defaultShowClockAndCalendar === "true"
+        ? true
+        : defaultShowClockAndCalendar === "false"
+        ? false
+        : true
     );
 
     const dockPosition =
@@ -311,8 +332,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         setTodoList([]);
       }
     });
-
-    return () => clearInterval(intervalRef);
   }, []);
 
   const handleClearCompletedTodoList = () => {
@@ -468,6 +487,14 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     handleTodoListUpdate([...uncheckedItems, ...checkedItems]);
   };
 
+  const handleShowClockAndCalendarChange = (val: boolean) => {
+    localStorage.setItem(
+      SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY,
+      String(val)
+    );
+    setShowClockAndCalendar(val);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -488,6 +515,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleShowSearchEnginesChange,
         showMonthView,
         handleShowMonthViewChange,
+        showClockAndCalendar,
+        handleShowClockAndCalendarChange,
         locale,
         handleLocaleChange,
         dockBarSites,

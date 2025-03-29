@@ -4,6 +4,7 @@ export const translation = {
     show_top_visited_sites: "Show Top Visited Sites",
     open_visited_sites_on_separate_page: "Open Visited Sites On Separate Page",
     show_search_engines: "Show Search Engines",
+    show_clock_and_calendar: "Show Clock And Calendar Widgets",
     switch_calendar_to_month_view: "Switch Calendar to Month View",
     general: "General",
     appearance: "Appearance",
@@ -108,6 +109,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "ಭೇಟಿ ನೀಡಿದ ಸೈಟ್‌ಗಳನ್ನು ಪ್ರತ್ಯೇಕ ಪುಟದಲ್ಲಿ ತೆರೆಯಿರಿ",
     show_search_engines: "ಹುಡುಕಾಟ ಇಂಜಿನ್ಗಳನ್ನು ತೋರಿಸಿ",
+    show_clock_and_calendar: "ಗಡಿಯಾರ ಮತ್ತು ಕ್ಯಾಲೆಂಡರ್ ವಿಜೆಟ್‌ಗಳನ್ನು ತೋರಿಸಿ",
     switch_calendar_to_month_view: "ಕ್ಯಾಲೆಂಡರ್ ಅನ್ನು ತಿಂಗಳ ವೀಕ್ಷಣೆಗೆ ಬದಲಾಯಿಸಿ",
     general: "ಸಾಮಾನ್ಯ",
     appearance: "ಗೋಚರತೆ",
@@ -209,6 +211,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "Otevřete navštívené stránky na samostatné stránce",
     show_search_engines: "Zobrazit vyhledávače",
+    show_clock_and_calendar: "Zobrazit widgety hodin a kalendáře",
     switch_calendar_to_month_view: "Přepněte kalendář do zobrazení měsíce",
     general: "Generál",
     appearance: "Vzhled",
@@ -311,6 +314,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "Ziyaret Edilen Siteleri Ayrı Sayfada Açma",
     show_search_engines: "Arama Motorlarını Göster",
+    show_clock_and_calendar: "Saat ve takvim widget'larını göster",
     switch_calendar_to_month_view: "Takvimi Ay Görünümüne Geç",
     general: "Genel",
     appearance: "Dış görünüş",
@@ -412,6 +416,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "Mở các trang đã truy cập trên trang riêng",
     show_search_engines: "Hiển thị công cụ tìm kiếm",
+    show_clock_and_calendar: "Hiển thị các tiện ích đồng hồ và lịch",
     switch_calendar_to_month_view: "Chuyển Lịch sang Chế độ xem theo tháng",
     general: "Tổng quan",
     appearance: "Vẻ bề ngoài",
@@ -514,6 +519,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "Alohida sahifada tashrif buyurilgan saytlarni oching",
     show_search_engines: "Qidiruv mexanizmlarini ko'rsatish",
+    show_clock_and_calendar: "Soat va taqvim vidjetlarini namoyish eting",
     switch_calendar_to_month_view: "Taqvimni Oy ko‘rinishiga o‘tkazing",
     general: "General",
     appearance: "Tashqi ko'rinish",
@@ -614,6 +620,7 @@ export const translation = {
     show_top_visited_sites: "显示最常访问的网站",
     open_visited_sites_on_separate_page: "在单独的页面上打开访问过的网站",
     show_search_engines: "显示搜索引擎",
+    show_clock_and_calendar: "显示时钟和日历小部件",
     switch_calendar_to_month_view: "将日历切换到月视图",
     general: "一般的",
     appearance: "外貌",
@@ -714,6 +721,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "विज़िट की गई साइटें अलग पृष्ठ पर खोलें",
     show_search_engines: "खोज इंजन दिखाएँ",
+    show_clock_and_calendar: "घड़ी और कैलेंडर विजेट दिखाएं",
     switch_calendar_to_month_view: "कैलेंडर को माह दृश्य में बदलें",
     general: "सामान्य",
     appearance: "उपस्थिति",
@@ -815,6 +823,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "Apri i siti visitati in una pagina separata",
     show_search_engines: "Mostra motori di ricerca",
+    show_clock_and_calendar: "Mostra i widget dell'orologio e del calendario",
     switch_calendar_to_month_view:
       "Passa dal calendario alla visualizzazione mensile",
     general: "Generale",
@@ -918,6 +927,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "পৃথক পৃষ্ঠায় পরিদর্শন করা সাইটগুলি খুলুন",
     show_search_engines: "সার্চ ইঞ্জিন দেখান",
+    show_clock_and_calendar: "ঘড়ি এবং ক্যালেন্ডার উইজেটগুলি দেখান",
     switch_calendar_to_month_view: "ক্যালেন্ডারকে মাস ভিউতে পরিবর্তন করুন",
     general: "সাধারণ",
     appearance: "চেহারা",
@@ -1019,6 +1029,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "Abra os sites visitados em uma página separada",
     show_search_engines: "Mostrar motores de busca",
+    show_clock_and_calendar: "Mostrar relógio e widgets de calendário",
     switch_calendar_to_month_view: "Mudar calendário para visualização mensal",
     general: "Em geral",
     appearance: "Aparência",
@@ -1121,6 +1132,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "Ouvrir les sites visités sur une page séparée",
     show_search_engines: "Afficher les moteurs de recherche",
+    show_clock_and_calendar: "Montrer des widgets d'horloge et de calendrier",
     switch_calendar_to_month_view:
       "Basculer le calendrier vers la vue mensuelle",
     general: "Général",
@@ -1224,6 +1236,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "Открыть посещенные сайты на отдельной странице",
     show_search_engines: "Показать поисковые системы",
+    show_clock_and_calendar: "Показать часы и виджеты календаря",
     switch_calendar_to_month_view: "Переключить календарь на просмотр месяца",
     general: "Общий",
     appearance: "Появление",
@@ -1325,6 +1338,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "Abrir sitios visitados en una página separada",
     show_search_engines: "Mostrar motores de búsqueda",
+    show_clock_and_calendar: "Mostrar reloj y widgets de calendario",
     switch_calendar_to_month_view: "Cambiar calendario a vista mensual",
     general: "General",
     appearance: "Apariencia",
@@ -1426,6 +1440,7 @@ export const translation = {
     show_top_visited_sites: "よくアクセスしたサイトを表示",
     open_visited_sites_on_separate_page: "訪問したサイトを別のページで開く",
     show_search_engines: "検索エンジンを表示",
+    show_clock_and_calendar: "時計とカレンダーのウィジェットを表示します",
     switch_calendar_to_month_view: "カレンダーを月表示に切り替える",
     general: "一般的な",
     appearance: "外観",
@@ -1526,6 +1541,7 @@ export const translation = {
     show_top_visited_sites: "가장 많이 방문한 사이트 표시",
     open_visited_sites_on_separate_page: "별도의 페이지에서 방문한 사이트 열기",
     show_search_engines: "검색 엔진 표시",
+    show_clock_and_calendar: "시계와 캘린더 위젯을 표시하십시오",
     switch_calendar_to_month_view: "달력을 월별 보기로 전환",
     general: "일반적인",
     appearance: "모습",
@@ -1626,6 +1642,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "Buka Situs yang Dikunjungi Di Halaman Terpisah",
     show_search_engines: "Tampilkan Mesin Pencari",
+    show_clock_and_calendar: "Tampilkan Widget Jam dan Kalender",
     switch_calendar_to_month_view: "Alihkan Kalender ke Tampilan Bulan",
     general: "Umum",
     appearance: "Penampilan",
@@ -1727,6 +1744,7 @@ export const translation = {
     open_visited_sites_on_separate_page:
       "स्वतंत्र पृष्ठावर भेट दिलेल्या साइट उघडा",
     show_search_engines: "शोध इंजिन दाखवा",
+    show_clock_and_calendar: "घड्याळ आणि कॅलेंडर विजेट दर्शवा",
     switch_calendar_to_month_view: "कॅलेंडर महिना दृश्यावर स्विच करा",
     general: "सामान्य",
     appearance: "देखावा",
