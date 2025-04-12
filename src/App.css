@@ -52,7 +52,7 @@ body:has(.App.theme-light) {
 
   --input-caret-color: #015ce0;
 
-  --input-search-icon-color: #6c6d6b;
+  --input-search-icon-color: #545454;
 
   --search-engine-tile-indicator-bg: #d2d2d0;
   --search-engine-tile-icon-clr: #595958;
@@ -185,7 +185,7 @@ body:has(.App.theme-blue) {
   --clock-1-background: #5fa0f7;
   --clock-1-dial-background: #ffffff;
   --input-caret-color: #015ce0;
-  --input-search-icon-color: #6c6d6b;
+  --input-search-icon-color: #545454;
   --search-engine-tile-indicator-bg: #d2d2d0;
   --search-engine-tile-icon-clr: #3a5e8f;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
@@ -219,7 +219,7 @@ body:has(.App.theme-red) {
   --clock-1-background: #ff8f8f;
   --clock-1-dial-background: #ffffff;
   --input-caret-color: #015ce0;
-  --input-search-icon-color: #6c6d6b;
+  --input-search-icon-color: #545454;
   --search-engine-tile-indicator-bg: #d2d2d0;
   --search-engine-tile-icon-clr: #8f3a3a;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
@@ -253,7 +253,7 @@ body:has(.App.theme-orange) {
   --clock-1-background: #d8926f;
   --clock-1-dial-background: #ffffff;
   --input-caret-color: #015ce0;
-  --input-search-icon-color: #6c6d6b;
+  --input-search-icon-color: #545454;
   --search-engine-tile-indicator-bg: #d2d2d0;
   --search-engine-tile-icon-clr: #865841;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
@@ -287,7 +287,7 @@ body:has(.App.theme-purple) {
   --clock-1-background: #515876;
   --clock-1-dial-background: #ffffff;
   --input-caret-color: #c5bafd;
-  --input-search-icon-color: #6c6d6b;
+  --input-search-icon-color: #545454;
   --search-engine-tile-indicator-bg: #d2d2d0;
   --search-engine-tile-icon-clr: #655da3;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
@@ -321,7 +321,7 @@ body:has(.App.theme-pink) {
   --clock-1-background: #76515e;
   --clock-1-dial-background: #ffffff;
   --input-caret-color: #fdbad8;
-  --input-search-icon-color: #6c6d6b;
+  --input-search-icon-color: #545454;
   --search-engine-tile-indicator-bg: #d2d2d0;
   --search-engine-tile-icon-clr: #a35d7f;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
@@ -355,7 +355,7 @@ body:has(.App.theme-brown) {
   --clock-1-background: #765e51;
   --clock-1-dial-background: #ffffff;
   --input-caret-color: #fdc6ba;
-  --input-search-icon-color: #6c6d6b;
+  --input-search-icon-color: #545454;
   --search-engine-tile-indicator-bg: #d2d1d0;
   --search-engine-tile-icon-clr: #a3765d;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
