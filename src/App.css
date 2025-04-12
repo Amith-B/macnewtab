@@ -24,6 +24,7 @@ body:has(.App.theme-light) {
   --theme-bg: #efefee;
   --theme-bg-secondary: #efefee;
   --theme-bg-with-opacity: #efeeee9e;
+  --theme-bg-with-opacity-50: #efeeee93;
   --theme-selection-color: #0883fd;
   --theme-bg-dock: #efeeee6b;
   --theme-clr: #272727;
@@ -67,6 +68,7 @@ body:has(.App.theme-dark) {
   --theme-bg-secondary: #2e2d2c;
   --theme-selection-color: #0883fd;
   --theme-bg-with-opacity: #2e2d2c9e;
+  --theme-bg-with-opacity-50: #2e2d2cbf;
   --theme-bg-dock: #0000002b;
   --theme-clr: #dfdfdf;
   --theme-shadow: rgba(0, 0, 0, 0.747);
@@ -116,6 +118,7 @@ body:has(.App.theme-dark) {
     --theme-bg-secondary: #2e2d2c;
     --theme-selection-color: #0883fd;
     --theme-bg-with-opacity: #2e2d2c9e;
+    --theme-bg-with-opacity-50: #2e2d2cb3;
     --theme-bg-dock: #0000002b;
     --theme-clr: #dfdfdf;
     --theme-shadow: rgba(0, 0, 0, 0.617);
@@ -164,6 +167,7 @@ body:has(.App.theme-blue) {
   --theme-bg: #c9e0ff;
   --theme-bg-secondary: #b1d2ff;
   --theme-bg-with-opacity: #9be3ff52;
+  --theme-bg-with-opacity-50: #9be3ff9b;
   --theme-selection-color: #0052bf;
   --theme-bg-dock: #a5e6ff75;
   --theme-clr: black;
@@ -198,6 +202,7 @@ body:has(.App.theme-red) {
   --theme-bg: #ffe0e0;
   --theme-bg-secondary: #ffc1c1;
   --theme-bg-with-opacity: #ffa5a552;
+  --theme-bg-with-opacity-50: #ffa5a58a;
   --theme-selection-color: #f10202;
   --theme-bg-dock: #ffa5a575;
   --theme-clr: black;
@@ -232,6 +237,7 @@ body:has(.App.theme-orange) {
   --theme-bg: #ffd9c7;
   --theme-bg-secondary: #ffd1ba;
   --theme-bg-with-opacity: #efad8c6b;
+  --theme-bg-with-opacity-50: #efad8c97;
   --theme-selection-color: #ea4e00;
   --theme-bg-dock: #ffbc9b75;
   --theme-clr: black;
@@ -266,6 +272,7 @@ body:has(.App.theme-purple) {
   --theme-bg: #ebeaff;
   --theme-bg-secondary: #e5e4ff;
   --theme-bg-with-opacity: #a8a5ff52;
+  --theme-bg-with-opacity-50: #a8a5ff87;
   --theme-selection-color: #4f4eac;
   --theme-bg-dock: #cac8ff75;
   --theme-clr: black;
@@ -300,6 +307,7 @@ body:has(.App.theme-pink) {
   --theme-bg: #ffeaf3;
   --theme-bg-secondary: #ffe4ef;
   --theme-bg-with-opacity: #ffa5c952;
+  --theme-bg-with-opacity-50: #ffa5c97e;
   --theme-selection-color: #ac4e77;
   --theme-bg-dock: #ffc8de75;
   --theme-clr: black;
@@ -334,6 +342,7 @@ body:has(.App.theme-brown) {
   --theme-bg: #fff3ea;
   --theme-bg-secondary: #ffeee4;
   --theme-bg-with-opacity: #ffc9a552;
+  --theme-bg-with-opacity-50: #ffc9a57b;
   --theme-selection-color: #ac764e;
   --theme-bg-dock: #ffe1c875;
   --theme-clr: black;
