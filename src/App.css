@@ -27,7 +27,7 @@ body:has(.App.theme-light) {
   --theme-selection-color: #0883fd;
   --theme-bg-dock: #efeeee6b;
   --theme-clr: #272727;
-  --theme-shadow: #adadad;
+  --theme-shadow: #adadada3;
   --theme-border: #c6c6c6;
   --theme-link-clr: #4b4bff;
   --theme-button-bg: #fdfdfd;
@@ -69,7 +69,7 @@ body:has(.App.theme-dark) {
   --theme-bg-with-opacity: #2e2d2c9e;
   --theme-bg-dock: #0000002b;
   --theme-clr: #dfdfdf;
-  --theme-shadow: black;
+  --theme-shadow: rgba(0, 0, 0, 0.747);
   --theme-border: #585856;
   --theme-link-clr: #9ba6ff;
   --theme-button-bg: #656665;
@@ -118,7 +118,7 @@ body:has(.App.theme-dark) {
     --theme-bg-with-opacity: #2e2d2c9e;
     --theme-bg-dock: #0000002b;
     --theme-clr: #dfdfdf;
-    --theme-shadow: black;
+    --theme-shadow: rgba(0, 0, 0, 0.617);
     --theme-border: #585856;
     --theme-link-clr: #9ba6ff;
     --theme-button-bg: #656665;
@@ -167,7 +167,7 @@ body:has(.App.theme-blue) {
   --theme-selection-color: #0052bf;
   --theme-bg-dock: #a5e6ff75;
   --theme-clr: black;
-  --theme-shadow: #adadad;
+  --theme-shadow: #adadad97;
   --theme-border: #727272;
   --theme-link-clr: #4b4bff;
   --theme-button-bg: #7eb6ff;
@@ -201,7 +201,7 @@ body:has(.App.theme-red) {
   --theme-selection-color: #f10202;
   --theme-bg-dock: #ffa5a575;
   --theme-clr: black;
-  --theme-shadow: #adadad;
+  --theme-shadow: #adadad97;
   --theme-border: #c6c6c6;
   --theme-link-clr: #4b4bff;
   --theme-button-bg: #ff6464;
@@ -235,7 +235,7 @@ body:has(.App.theme-orange) {
   --theme-selection-color: #ea4e00;
   --theme-bg-dock: #ffbc9b75;
   --theme-clr: black;
-  --theme-shadow: #adadad;
+  --theme-shadow: #adadad97;
   --theme-border: #777474;
   --theme-link-clr: #4b4bff;
   --theme-button-bg: #fd9763;
@@ -269,7 +269,7 @@ body:has(.App.theme-purple) {
   --theme-selection-color: #4f4eac;
   --theme-bg-dock: #cac8ff75;
   --theme-clr: black;
-  --theme-shadow: #adadad;
+  --theme-shadow: #adadad97;
   --theme-border: #777474;
   --theme-link-clr: #4b4bff;
   --theme-button-bg: #b6b8ff;
@@ -303,7 +303,7 @@ body:has(.App.theme-pink) {
   --theme-selection-color: #ac4e77;
   --theme-bg-dock: #ffc8de75;
   --theme-clr: black;
-  --theme-shadow: #adadad;
+  --theme-shadow: #adadad97;
   --theme-border: #777474;
   --theme-link-clr: #4b4bff;
   --theme-button-bg: #ffb6d9;
@@ -337,7 +337,7 @@ body:has(.App.theme-brown) {
   --theme-selection-color: #ac764e;
   --theme-bg-dock: #ffe1c875;
   --theme-clr: black;
-  --theme-shadow: #adadad;
+  --theme-shadow: #adadad97;
   --theme-border: #c6c6c6;
   --theme-link-clr: #4b4bff;
   --theme-button-bg: #ffcfb6;
@@ -490,6 +490,10 @@ to be revisited in future */
   }
   .section-1 {
     flex-direction: row;
+  }
+
+  .main-content.has-clock-calendar {
+    gap: 24px;
   }
 }
 
