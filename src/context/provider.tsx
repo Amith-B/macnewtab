@@ -132,6 +132,16 @@ const deleteImageFromIndexedDB = async (): Promise<void> => {
   });
 };
 
+const getLocalstorageDataWithPromise = (
+  localStorageKey: string
+): Promise<string | null> => {
+  return new Promise<string | null>((resolve) => {
+    const todoList = localStorage.getItem(localStorageKey);
+
+    resolve(todoList);
+  });
+};
+
 export default function AppProvider({ children }: { children: ReactNode }) {
   const [date, setDate] = useState(new Date());
   const [theme, setTheme] = useState("system");
@@ -162,6 +172,46 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       return () => clearInterval(intervalRef);
     }
   }, [showClockAndCalendar]);
+
+  useEffect(() => {
+    let timeoutRef: NodeJS.Timeout;
+
+    const getList = () => {
+      const request = getLocalstorageDataWithPromise(
+        TODO_LIST_LOCAL_STORAGE_KEY
+      );
+
+      request.then((todoList: string | null) => {
+        try {
+          if (todoList) {
+            let parsedList = JSON.parse(todoList) as TodoList;
+
+            parsedList = parsedList.map((item) => ({
+              ...item,
+              id: item.id || generateRandomId(),
+            }));
+
+            if (Array.isArray(parsedList)) {
+              setTodoList(parsedList);
+            }
+          } else {
+            setTodoList([]);
+          }
+        } catch (_) {
+          setTodoList([]);
+        }
+        if (todoListVisbility) {
+          timeoutRef = setTimeout(() => {
+            getList();
+          }, 5000);
+        }
+      });
+    };
+
+    getList();
+
+    return () => clearTimeout(timeoutRef);
+  }, [todoListVisbility]);
 
   useEffect(() => {
     const defaultTheme = localStorage.getItem(THEME_LOCAL_STORAGE_KEY);
@@ -305,33 +355,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         ? false
         : true
     );
-
-    const request = new Promise<string | null>((resolve) => {
-      const todoList = localStorage.getItem(TODO_LIST_LOCAL_STORAGE_KEY);
-
-      resolve(todoList);
-    });
-
-    request.then((todoList: string | null) => {
-      try {
-        if (todoList) {
-          let parsedList = JSON.parse(todoList) as TodoList;
-
-          parsedList = parsedList.map((item) => ({
-            ...item,
-            id: item.id || generateRandomId(),
-          }));
-
-          if (Array.isArray(parsedList)) {
-            setTodoList(parsedList);
-          }
-        } else {
-          setTodoList([]);
-        }
-      } catch (_) {
-        setTodoList([]);
-      }
-    });
   }, []);
 
   const handleClearCompletedTodoList = () => {
