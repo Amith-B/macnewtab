@@ -102,6 +102,8 @@ export const translation = {
     todo_toggle_description:
       "Checked todo items are automatically deleted next day",
     add_to_list: "Add to list",
+
+    wallpaper_blur: "Blur Wallpaper",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -204,6 +206,8 @@ export const translation = {
     todo_toggle_description:
       "ಪರಿಶೀಲಿಸಿದ ಟೊಡೊ ವಸ್ತುಗಳನ್ನು ಮರುದಿನ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ",
     add_to_list: "ಪಟ್ಟಿಗೆ ಸೇರಿಸಿ",
+
+    wallpaper_blur: "ವಾಲ್‌ಪೇಪರ್ ಅನ್ನು ಮಸುಕುಗೊಳಿಸಿ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -307,6 +311,8 @@ export const translation = {
     todo_toggle_description:
       "Zkontrolované položky Todo jsou příští den automaticky smazány",
     add_to_list: "Přidat do seznamu",
+
+    wallpaper_blur: "Tapeta rozmazání",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -409,6 +415,8 @@ export const translation = {
     todo_toggle_description:
       "Kontrol edilen Todo öğeleri ertesi gün otomatik olarak silinir",
     add_to_list: "Listeye Ekle",
+
+    wallpaper_blur: "Bulanık duvar kağıdı",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -512,6 +520,8 @@ export const translation = {
     todo_toggle_description:
       "Các mặt hàng đã kiểm tra sẽ tự động bị xóa vào ngày hôm sau",
     add_to_list: "Thêm vào danh sách",
+
+    wallpaper_blur: "Hình nền mờ",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -614,6 +624,8 @@ export const translation = {
     todo_toggle_description:
       "Tekshirilgan todo elementlari keyingi kun avtomatik ravishda o'chiriladi",
     add_to_list: "Ro'yxatga qo'shing",
+
+    wallpaper_blur: "Blur fon rasmi",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -714,6 +726,8 @@ export const translation = {
     todo_toggle_title: "展示托多列表",
     todo_toggle_description: "检查的托多商品第二天将自动删除",
     add_to_list: "添加到列表",
+
+    wallpaper_blur: "模糊的壁纸",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -816,6 +830,8 @@ export const translation = {
     todo_toggle_description:
       "चेक किए गए टोडो आइटम स्वचालित रूप से अगले दिन हटा दिए जाते हैं",
     add_to_list: "सूची में शामिल",
+
+    wallpaper_blur: "धब्बा वॉलपेपर",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -920,6 +936,8 @@ export const translation = {
     todo_toggle_description:
       "Gli articoli controllati vengono eliminati automaticamente il giorno successivo",
     add_to_list: "Aggiungi all'elenco",
+
+    wallpaper_blur: "Sfondo sfocato",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1022,6 +1040,8 @@ export const translation = {
     todo_toggle_description:
       "চেক করা টোডো আইটেমগুলি পরের দিন স্বয়ংক্রিয়ভাবে মুছে ফেলা হয়",
     add_to_list: "তালিকায় যুক্ত করুন",
+
+    wallpaper_blur: "ঝাপসা ওয়ালপেপার",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1125,6 +1145,8 @@ export const translation = {
     todo_toggle_description:
       "Os itens verificados para TODO são excluídos automaticamente no dia seguinte",
     add_to_list: "Adicione à lista",
+
+    wallpaper_blur: "Papel de parede borrado",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1229,6 +1251,8 @@ export const translation = {
     todo_toggle_description:
       "Les éléments TODO cochés sont automatiquement supprimés le lendemain",
     add_to_list: "Ajouter à la liste",
+
+    wallpaper_blur: "Fond d'écran flou",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1331,6 +1355,8 @@ export const translation = {
     todo_toggle_description:
       "Проверенные элементы TODO автоматически удалены на следующий день",
     add_to_list: "Добавить в список",
+
+    wallpaper_blur: "Размытые обои",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1434,6 +1460,8 @@ export const translation = {
     todo_toggle_description:
       "Los artículos de TODO verificados se eliminan automáticamente al día siguiente",
     add_to_list: "Agregar a la lista",
+
+    wallpaper_blur: "Fondo de pantalla de borrón",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1535,6 +1563,8 @@ export const translation = {
     todo_toggle_description:
       "チェックされたTODOアイテムは、翌日自動的に削除されます",
     add_to_list: "リストに追加します",
+
+    wallpaper_blur: "ぼんやりした壁紙",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1635,6 +1665,8 @@ export const translation = {
     todo_toggle_title: "TODO 목록을 표시하십시오",
     todo_toggle_description: "확인 된 할 일 품목은 다음날 자동으로 삭제됩니다",
     add_to_list: "목록에 추가하십시오",
+
+    wallpaper_blur: "블러 벽지",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1737,6 +1769,8 @@ export const translation = {
     todo_toggle_description:
       "Item todo yang diperiksa secara otomatis dihapus hari berikutnya",
     add_to_list: "Tambahkan ke daftar",
+
+    wallpaper_blur: "Wallpaper kabur",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1839,6 +1873,8 @@ export const translation = {
     todo_toggle_description:
       "चेक केलेल्या टोडो आयटम दुसर्‍या दिवशी स्वयंचलितपणे हटविले जातात",
     add_to_list: "यादीमध्ये जोडा",
+
+    wallpaper_blur: "ब्लर वॉलपेपर",
   },
 };
 

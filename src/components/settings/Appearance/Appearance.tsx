@@ -102,7 +102,7 @@ export default function Appearance() {
       </div>
 
       <div className="appearance__wallpaper-blur-container">
-        Wallpaper Blur
+        <Translation value="wallpaper_blur" />
         <div
           className={
             "appearance__wallpaper-blur-input" +
