@@ -28,6 +28,7 @@ const App = memo(function App() {
     theme,
     themeColor,
     backgroundImage,
+    wallpaperBlur,
     date,
     showGreeting,
     showVisitedSites,
@@ -89,6 +90,12 @@ const App = memo(function App() {
       style={bgStyle}
       lang={locale}
     >
+      {wallpaperBlur !== 0 && (
+        <div
+          className="wallpaper-blur-container"
+          style={{ backdropFilter: `blur(${wallpaperBlur}px)` }}
+        ></div>
+      )}
       <div
         className={
           "main-content" + (showClockAndCalendar ? " has-clock-calendar" : "")

@@ -56,3 +56,5 @@ export const WALLPAPER_LIST = [
     link: Wallpaper11,
   },
 ];
+
+export const WALLPAPER_BLUR_LOCAL_STORAGE_KEY = "wallpaper_blur";

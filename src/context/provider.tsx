@@ -28,6 +28,7 @@ import {
   TODO_LIST_LOCAL_STORAGE_KEY,
   TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
 } from "../static/todo";
+import { WALLPAPER_BLUR_LOCAL_STORAGE_KEY } from "../static/wallpapers";
 
 type DockBarSites = Array<{ title: string; url: string; id: string }>;
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
@@ -67,6 +68,8 @@ export const AppContext = createContext({
   handleTodoListVisbility: (_: boolean) => {},
   handleClearCompletedTodoList: () => {},
   groupTodosByCheckedStatus: () => {},
+  wallpaperBlur: 0,
+  handleWallpaperBlur: (_: number) => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -147,6 +150,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState("system");
   const [themeColor, setThemeColor] = useState("");
   const [backgroundImage, setBackgroundImage] = useState("");
+  const [wallpaperBlur, setWallpaperBlur] = useState(0);
 
   const [locale, setLocale] = useState<typeof languages>("en");
 
@@ -304,6 +308,18 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       dockPositionsList.includes(dockPosition || "")
         ? (dockPosition as DockPosition)
         : "bottom"
+    );
+
+    const wallpaperBlurValue = parseInt(
+      localStorage.getItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY) || "0"
+    );
+
+    setWallpaperBlur(
+      !isNaN(wallpaperBlurValue) &&
+        wallpaperBlurValue <= 50 &&
+        wallpaperBlurValue >= 0
+        ? wallpaperBlurValue
+        : 0
     );
 
     try {
@@ -518,6 +534,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setShowClockAndCalendar(val);
   };
 
+  const handleWallpaperBlur = (val: number) => {
+    localStorage.setItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY, String(val));
+    setWallpaperBlur(val);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -528,6 +549,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleThemeColorChange,
         backgroundImage,
         handleWallpaperChange,
+        wallpaperBlur,
+        handleWallpaperBlur,
         showGreeting,
         handleShowGreeetingChange,
         showVisitedSites,

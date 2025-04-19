@@ -14,7 +14,8 @@
 }
 
 .appearance__wallpaper-upload-container,
-.appearance__theme-color-selection-container {
+.appearance__theme-color-selection-container,
+.appearance__wallpaper-blur-container {
   padding: 12px 0;
   border-bottom: 1px solid var(--theme-border);
 }
@@ -22,7 +23,8 @@
 .appearance__theme-selection-container,
 .appearance__wallpaper-upload-container,
 .appearance__wallpaper-selection-container,
-.appearance__theme-color-selection-container {
+.appearance__theme-color-selection-container,
+.appearance__wallpaper-blur-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -151,7 +153,8 @@
   max-width: 360px;
 }
 
-.appearance__theme-color-selection {
+.appearance__theme-color-selection,
+.appearance__wallpaper-blur-input {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

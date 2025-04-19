@@ -5,6 +5,7 @@ import { AppContext } from "../../../context/provider";
 import { ReactComponent as DeleteIcon } from "../delete-icon.svg";
 import Translation from "../../../locale/Translation";
 import { WALLPAPER_LIST } from "../../../static/wallpapers";
+import Slider from "../../slider/Slider";
 
 const MAX_FILE_SIZE_MB = 1;
 
@@ -12,6 +13,9 @@ export default function Appearance() {
   const {
     theme,
     themeColor,
+    backgroundImage,
+    wallpaperBlur,
+    handleWallpaperBlur,
     handleThemeChange,
     handleThemeColorChange,
     handleWallpaperChange,
@@ -94,6 +98,34 @@ export default function Appearance() {
               onClick={() => handleThemeColorChange(item)}
             ></button>
           ))}
+        </div>
+      </div>
+
+      <div className="appearance__wallpaper-blur-container">
+        Wallpaper Blur
+        <div
+          className={
+            "appearance__wallpaper-blur-input" +
+            (!backgroundImage ? " disabled" : "")
+          }
+          style={{
+            width: "100%",
+            maxWidth: "200px",
+            justifyContent: "space-between",
+          }}
+        >
+          <Slider
+            value={wallpaperBlur}
+            min={0}
+            max={50}
+            onChange={(event) => {
+              handleWallpaperBlur(parseInt(event.target.value));
+            }}
+            style={{
+              maxWidth: "160px",
+            }}
+          />
+          <span>{wallpaperBlur}</span>
         </div>
       </div>
       <div className="appearance__wallpaper-upload-container">
