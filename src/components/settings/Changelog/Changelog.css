@@ -1,0 +1,37 @@
+.changelog-container {
+  padding: 12px;
+  font-family: sans-serif;
+  background: var(--theme-bg-with-opacity);
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+  max-height: calc(100% - 60px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: var(--theme-clr);
+}
+
+.changelog-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.changelog-content h2 {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--theme-border);
+  padding-bottom: 4px;
+}
+
+.changelog-content h2:first-child {
+  margin-top: 0.8rem;
+}
+
+.changelog-content p {
+  margin: 0.5em 0;
+}
+
+.changelog-content li {
+  margin-left: 1.5rem;
+  line-height: 1.6;
+  max-width: 500px;
+}

@@ -59,6 +59,7 @@
 
 .settings__side-panel {
   width: 200px;
+  max-width: 200px;
   height: 100%;
   backdrop-filter: var(--settings-side-panel-blur);
   -webkit-backdrop-filter: var(--settings-side-panel-blur);

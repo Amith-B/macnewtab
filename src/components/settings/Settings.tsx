@@ -6,11 +6,13 @@ import { ReactComponent as GeneralIcon } from "./general.svg";
 import { ReactComponent as AppearanceIcon } from "./appearance.svg";
 import { ReactComponent as DockIcon } from "./dock.svg";
 import { ReactComponent as AboutIcon } from "./about.svg";
+import { ReactComponent as ChangelogIcon } from "./changelog.svg";
 import Appearance from "./Appearance/Appearance";
 import About from "./About/About";
 import General from "./general/General";
 import Translation from "../../locale/Translation";
 import Dock from "./Dock/Dock";
+import Changelog from "./Changelog/Changelog";
 import { AppContext } from "../../context/provider";
 
 export const SETTINGS_MENU = [
@@ -37,6 +39,12 @@ export const SETTINGS_MENU = [
     title: <Translation value="about" />,
     icon: AboutIcon,
     content: About,
+  },
+  {
+    key: "changelog",
+    title: <Translation value="changelog" />,
+    icon: ChangelogIcon,
+    content: Changelog,
   },
 ];
 
