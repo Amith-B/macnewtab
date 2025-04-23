@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "node ./scripts/updateVersion.js;react-scripts build",
+    "build": "node ./scripts/updateVersion.js;yarn generate-changelog;react-scripts build",
     "generate-changelog": "node ./scripts/generateChangeLog.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

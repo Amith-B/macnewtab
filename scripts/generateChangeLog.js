@@ -95,7 +95,7 @@ function generateChangelog() {
   }
 
   fs.writeFileSync(
-    "CHANGELOG.md",
+    "public/CHANGELOG.md",
     changelogEntries.reverse().join("\n\n") + "\n"
   );
   console.log("✅ CHANGELOG.md generated.");
