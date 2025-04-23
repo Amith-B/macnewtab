@@ -50,7 +50,7 @@ function getCommitsBetween(fromCommit, toCommit) {
 }
 
 function getCommitDate(commit) {
-  return execSync(`git show -s --format=%ci ${commit}`, {
+  return execSync(`git show -s --format=%cd --date=short ${commit}`, {
     encoding: "utf8",
   }).trim();
 }
