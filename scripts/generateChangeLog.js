@@ -1,6 +1,7 @@
 const { execSync } = require("child_process");
 const fs = require("fs");
 
+const MAX_COMMIT_HISTORY = 20;
 const IGNORED_KEYWORDS = [
   "package version",
   "readme",
@@ -96,7 +97,7 @@ function generateChangelog() {
 
   fs.writeFileSync(
     "public/CHANGELOG.md",
-    changelogEntries.reverse().join("\n\n") + "\n"
+    changelogEntries.reverse().slice(0, MAX_COMMIT_HISTORY).join("\n\n") + "\n"
   );
   console.log("✅ CHANGELOG.md generated.");
 }
