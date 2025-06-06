@@ -1,4 +1,4 @@
-import React, {
+import {
   CSSProperties,
   memo,
   useContext,
@@ -20,6 +20,7 @@ import { AppContext } from "./context/provider";
 import TopSites from "./components/topsites/TopSites";
 import Translation from "./locale/Translation";
 import Dock from "./components/dock/Dock";
+import TabManager from "./components/tab-manager/TabManager";
 
 const App = memo(function App() {
   const [searchEngine, setSearchEngine] = useState("");
@@ -36,6 +37,7 @@ const App = memo(function App() {
     showMonthView,
     locale,
     showClockAndCalendar,
+    showTabManager,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -124,6 +126,7 @@ const App = memo(function App() {
         </div>
       </div>
       <Dock />
+      {showTabManager && <TabManager />}
     </div>
   );
 });

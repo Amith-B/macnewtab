@@ -106,6 +106,13 @@ export const translation = {
     wallpaper_blur: "Blur Wallpaper",
 
     changelog: "Changelog",
+
+    tab_manager: "Tab Manager",
+    window: "Window",
+    tabs: "Tabs",
+    search_tabs: "Search Tabs",
+
+    show_tab_manager: "Show Tab Manager",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -212,6 +219,13 @@ export const translation = {
     wallpaper_blur: "ವಾಲ್‌ಪೇಪರ್ ಅನ್ನು ಮಸುಕುಗೊಳಿಸಿ",
 
     changelog: "ಬದಲಾವಣೆ ಪಟ್ಟಿ",
+
+    tab_manager: "ಟ್ಯಾಬ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+    window: "ಕಿಟಕಿ",
+    tabs: "ಬ್ರೌಸರ್ ಟ್ಯಾಬ್‌ಗಳು",
+    search_tabs: "ಟ್ಯಾಬ್ ಹುಡುಕಾಟ",
+
+    show_tab_manager: "TAB ವ್ಯವಸ್ಥಾಪಕವನ್ನು ತೋರಿಸಿ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -319,6 +333,13 @@ export const translation = {
     wallpaper_blur: "Tapeta rozmazání",
 
     changelog: "Seznam ChangeLog",
+
+    tab_manager: "Správa karet",
+    window: "Okno",
+    tabs: "Karty prohlížeče",
+    search_tabs: "Vyhledávání na kartě",
+
+    show_tab_manager: "Zobrazit správce Tab",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -425,6 +446,13 @@ export const translation = {
     wallpaper_blur: "Bulanık duvar kağıdı",
 
     changelog: "Changelog Listesi",
+
+    tab_manager: "Sekmeleri Yönetin",
+    window: "Pencere",
+    tabs: "Tarayıcı sekmeleri",
+    search_tabs: "Sekme arama",
+
+    show_tab_manager: "Sekme Yöneticisini Göster",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -532,6 +560,13 @@ export const translation = {
     wallpaper_blur: "Hình nền mờ",
 
     changelog: "Danh sách thay đổi",
+
+    tab_manager: "Quản lý tab",
+    window: "Cửa sổ",
+    tabs: "Tab trình duyệt",
+    search_tabs: "Tìm kiếm tab",
+
+    show_tab_manager: "Hiển thị trình quản lý tab",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -638,6 +673,13 @@ export const translation = {
     wallpaper_blur: "Blur fon rasmi",
 
     changelog: "Changelog ro'yxati",
+
+    tab_manager: "Yorliqlarni boshqarish",
+    window: "Deraza",
+    tabs: "Brauzer yorliqlari",
+    search_tabs: "Yorliqni qidirish",
+
+    show_tab_manager: "Tab menejerini ko'rsatish",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -742,6 +784,13 @@ export const translation = {
     wallpaper_blur: "模糊的壁纸",
 
     changelog: "ChangElog列表",
+
+    tab_manager: "管理选项卡",
+    window: "窗户",
+    tabs: "浏览器选项卡",
+    search_tabs: "选项卡搜索",
+
+    show_tab_manager: "显示选项卡管理器",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -848,6 +897,13 @@ export const translation = {
     wallpaper_blur: "धब्बा वॉलपेपर",
 
     changelog: "चेंलोग सूची",
+
+    tab_manager: "टैब प्रबंधित करें",
+    window: "खिड़की",
+    tabs: "ब्राउज़र टैब",
+    search_tabs: "टैब खोज",
+
+    show_tab_manager: "शो टैब मैनेजर",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -956,6 +1012,13 @@ export const translation = {
     wallpaper_blur: "Sfondo sfocato",
 
     changelog: "Elenco Changelog",
+
+    tab_manager: "Gestisci le schede",
+    window: "Finestra",
+    tabs: "Schede browser",
+    search_tabs: "Scheda Cerca",
+
+    show_tab_manager: "Show Scheda Manager",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1062,6 +1125,13 @@ export const translation = {
     wallpaper_blur: "ঝাপসা ওয়ালপেপার",
 
     changelog: "চেঞ্জলগ তালিকা",
+
+    tab_manager: "ট্যাব পরিচালনা করুন",
+    window: "উইন্ডো",
+    tabs: "ব্রাউজার ট্যাব",
+    search_tabs: "ট্যাব অনুসন্ধান",
+
+    show_tab_manager: "ট্যাব ম্যানেজার দেখান",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1169,6 +1239,13 @@ export const translation = {
     wallpaper_blur: "Papel de parede borrado",
 
     changelog: "Lista de Changelog",
+
+    tab_manager: "Gerenciar guias",
+    window: "Janela",
+    tabs: "Guias do navegador",
+    search_tabs: "Pesquisa de guia",
+
+    show_tab_manager: "Mostrar gerente de guia",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1277,6 +1354,13 @@ export const translation = {
     wallpaper_blur: "Fond d'écran flou",
 
     changelog: "Liste des modifications",
+
+    tab_manager: "Gérer les onglets",
+    window: "Fenêtre",
+    tabs: "Onglets de navigateur",
+    search_tabs: "Recherche d'onglet",
+
+    show_tab_manager: "Afficher le gestionnaire d'onglet",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1383,6 +1467,13 @@ export const translation = {
     wallpaper_blur: "Размытые обои",
 
     changelog: "Список изменений",
+
+    tab_manager: "Управление вкладками",
+    window: "Окно",
+    tabs: "Вкладки браузера",
+    search_tabs: "Поиск вкладок",
+
+    show_tab_manager: "Показать менеджер вкладок",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1490,6 +1581,13 @@ export const translation = {
     wallpaper_blur: "Fondo de pantalla de borrón",
 
     changelog: "Lista de ChangeLog",
+
+    tab_manager: "Administrar pestañas",
+    window: "Ventana",
+    tabs: "Pestañas del navegador",
+    search_tabs: "Búsqueda de pestañas",
+
+    show_tab_manager: "Show Tab Manager",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1595,6 +1693,13 @@ export const translation = {
     wallpaper_blur: "ぼんやりした壁紙",
 
     changelog: "Changelogリスト",
+
+    tab_manager: "タブを管理します",
+    window: "ウィンドウ",
+    tabs: "ブラウザタブ",
+    search_tabs: "タブ検索",
+
+    show_tab_manager: "タブマネージャーを表示します",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1699,6 +1804,13 @@ export const translation = {
     wallpaper_blur: "블러 벽지",
 
     changelog: "ChangeLog 목록",
+
+    tab_manager: "탭을 관리합니다",
+    window: "창문",
+    tabs: "브라우저 탭",
+    search_tabs: "탭 검색",
+
+    show_tab_manager: "탭 관리자 표시",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1805,6 +1917,13 @@ export const translation = {
     wallpaper_blur: "Wallpaper kabur",
 
     changelog: "Daftar Changelog",
+
+    tab_manager: "Kelola tab",
+    window: "Jendela",
+    tabs: "Tab Browser",
+    search_tabs: "Pencarian tab",
+
+    show_tab_manager: "Tampilkan Tab Manager",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -1911,6 +2030,13 @@ export const translation = {
     wallpaper_blur: "ब्लर वॉलपेपर",
 
     changelog: "चेंजलॉग यादी",
+
+    tab_manager: "टॅब व्यवस्थापित करा",
+    window: "विंडो",
+    tabs: "ब्राउझर टॅब",
+    search_tabs: "टॅब शोध",
+
+    show_tab_manager: "टॅब व्यवस्थापक दर्शवा",
   },
 };
 

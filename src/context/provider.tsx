@@ -10,6 +10,7 @@ import {
   SHOW_GREETING_LOCAL_STORAGE_KEY,
   SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY,
   SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY,
+  SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY,
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
 import { BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY } from "../static/bookmarkAlert";
@@ -59,6 +60,8 @@ export const AppContext = createContext({
   handleShowMonthViewChange: (_: boolean) => {},
   showClockAndCalendar: true,
   handleShowClockAndCalendarChange: (_: boolean) => {},
+  showTabManager: true,
+  handleShowTabManagerChange: (_: boolean) => {},
   todoList: [] as TodoList,
   handleAddTodoList: (_: string) => {},
   handleTodoItemChecked: (_id: string, _checked: boolean) => {},
@@ -156,6 +159,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
   const [showGreeting, setShowGreeeting] = useState(true);
   const [showClockAndCalendar, setShowClockAndCalendar] = useState(true);
+  const [showTabManager, setShowTabManager] = useState(true);
   const [showVisitedSites, setShowVisitedSites] = useState(true);
   const [separatePageSite, setSeparatePageSite] = useState(false);
   const [showSearchEngines, setShowSearchEngines] = useState(true);
@@ -297,6 +301,17 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       defaultShowClockAndCalendar === "true"
         ? true
         : defaultShowClockAndCalendar === "false"
+        ? false
+        : true
+    );
+
+    const defaultShowTabManager = localStorage.getItem(
+      SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY
+    );
+    setShowTabManager(
+      defaultShowTabManager === "true"
+        ? true
+        : defaultShowTabManager === "false"
         ? false
         : true
     );
@@ -534,6 +549,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setShowClockAndCalendar(val);
   };
 
+  const handleShowTabManagerChange = (val: boolean) => {
+    localStorage.setItem(SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY, String(val));
+    setShowTabManager(val);
+  };
+
   const handleWallpaperBlur = (val: number) => {
     localStorage.setItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY, String(val));
     setWallpaperBlur(val);
@@ -563,6 +583,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleShowMonthViewChange,
         showClockAndCalendar,
         handleShowClockAndCalendarChange,
+        showTabManager,
+        handleShowTabManagerChange,
         locale,
         handleLocaleChange,
         dockBarSites,

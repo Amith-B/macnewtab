@@ -20,6 +20,8 @@ const General = memo(function General() {
     handleShowMonthViewChange,
     showClockAndCalendar,
     handleShowClockAndCalendarChange,
+    showTabManager,
+    handleShowTabManagerChange,
     locale,
     handleLocaleChange,
   } = useContext(AppContext);
@@ -95,6 +97,15 @@ const General = memo(function General() {
           handleToggleChange={() =>
             handleShowClockAndCalendarChange(!showClockAndCalendar)
           }
+        />
+      </div>
+
+      <div className="general__row-item">
+        <Translation value="show_tab_manager" />
+        <Toggle
+          id={"tab-manager-toggle"}
+          isChecked={showTabManager}
+          handleToggleChange={() => handleShowTabManagerChange(!showTabManager)}
         />
       </div>
 
