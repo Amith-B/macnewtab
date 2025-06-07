@@ -7,6 +7,7 @@ interface SliderProps extends React.HTMLAttributes<HTMLDivElement> {
   min?: number;
   max?: number;
   step?: number;
+  name?: string;
 }
 
 const Slider: React.FC<SliderProps> = ({
@@ -15,6 +16,7 @@ const Slider: React.FC<SliderProps> = ({
   min = 0,
   max = 100,
   step = 1,
+  name = "slider",
   ...rest
 }) => {
   const sliderRef = useRef<HTMLInputElement>(null);
@@ -29,6 +31,8 @@ const Slider: React.FC<SliderProps> = ({
   return (
     <div className="macos-slider-container" {...rest}>
       <input
+        id={rest.id}
+        name={name}
         type="range"
         ref={sliderRef}
         className="macos-slider"

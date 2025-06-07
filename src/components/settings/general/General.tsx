@@ -40,6 +40,7 @@ const General = memo(function General() {
         <Translation value="show_greetings" />
         <Toggle
           id={"greeting-toggle"}
+          name="greeting toggle"
           isChecked={showGreeting}
           handleToggleChange={() => handleShowGreeetingChange(!showGreeting)}
         />
@@ -48,6 +49,7 @@ const General = memo(function General() {
         <Translation value="show_top_visited_sites" />
         <Toggle
           id={"visit-toggle"}
+          name="Visited sites toggle"
           isChecked={showVisitedSites}
           handleToggleChange={() =>
             handleShowVisitedSitesChange(!showVisitedSites)
@@ -60,6 +62,7 @@ const General = memo(function General() {
         <Translation value="open_visited_sites_on_separate_page" />
         <Toggle
           id={"separate-page-toggle"}
+          name="Separate page on link click toggle"
           isChecked={separatePageSite}
           handleToggleChange={() =>
             handleSeparatePageSiteChange(!separatePageSite)
@@ -70,6 +73,7 @@ const General = memo(function General() {
         <Translation value="show_search_engines" />
         <Toggle
           id={"search-engine-toggle"}
+          name="Search engine options toggle"
           isChecked={showSearchEngines}
           handleToggleChange={() =>
             handleShowSearchEnginesChange(!showSearchEngines)
@@ -84,6 +88,7 @@ const General = memo(function General() {
         <Translation value="switch_calendar_to_month_view" />
         <Toggle
           id={"month-view-toggle"}
+          name="Month view toggle"
           isChecked={showMonthView}
           handleToggleChange={() => handleShowMonthViewChange(!showMonthView)}
         />
@@ -93,6 +98,7 @@ const General = memo(function General() {
         <Translation value="show_clock_and_calendar" />
         <Toggle
           id={"clock-and-calendar-toggle"}
+          name="Clock and calendar toggle"
           isChecked={showClockAndCalendar}
           handleToggleChange={() =>
             handleShowClockAndCalendarChange(!showClockAndCalendar)
@@ -104,6 +110,7 @@ const General = memo(function General() {
         <Translation value="show_tab_manager" />
         <Toggle
           id={"tab-manager-toggle"}
+          name="Tab manager toggle"
           isChecked={showTabManager}
           handleToggleChange={() => handleShowTabManagerChange(!showTabManager)}
         />
@@ -113,6 +120,8 @@ const General = memo(function General() {
         <div className="language-selection-row">
           <Translation value="language" />
           <Select
+            id="language-select-menu"
+            name="Language select menu"
             options={languageOptions}
             value={locale}
             onChange={(event) =>

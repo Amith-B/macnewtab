@@ -16,22 +16,6 @@
   margin-right: 8px;
 }
 
-.dock-links__add,
-.dock-links__done {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 8px;
-  background-color: var(--theme-button-bg);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  font-size: 0.75rem;
-  color: inherit;
-  font-weight: inherit;
-  width: min-content;
-}
-
 .dock-links__list-container {
   width: 100%;
   height: 100%;

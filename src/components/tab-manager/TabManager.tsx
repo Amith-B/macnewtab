@@ -50,6 +50,29 @@ export default function TabManager() {
   useEffect(() => {
     if (open) {
       handleUpdateTabList();
+      setSearch("");
+
+      const handleTabUpdate = (
+        _tabId: number,
+        _tabChange: chrome.tabs.TabChangeInfo,
+        tab: chrome.tabs.Tab
+      ) => {
+        if (tab.status === "complete") {
+          handleUpdateTabList();
+        }
+      };
+
+      const handleTabRemove = () => {
+        handleUpdateTabList();
+      };
+
+      chrome.tabs.onUpdated.addListener(handleTabUpdate);
+      chrome.tabs.onRemoved.addListener(handleTabRemove);
+
+      return () => {
+        chrome.tabs.onUpdated.removeListener(handleTabUpdate);
+        chrome.tabs.onRemoved.removeListener(handleTabRemove);
+      };
     }
   }, [open]);
 
@@ -66,27 +89,61 @@ export default function TabManager() {
     if (!id) {
       return;
     }
-    chrome?.tabs?.remove(id);
-    setTimeout(() => {
-      handleUpdateTabList();
-    }, 200);
+    try {
+      chrome?.tabs?.remove(id);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleUpdateTabList = () => {
-    chrome?.tabs?.query({}, (tabs: chrome.tabs.Tab[]) => {
-      setTabList(tabs);
-    });
+    try {
+      chrome?.tabs?.query({}, (tabs: chrome.tabs.Tab[]) => {
+        setTabList(tabs);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleFocusTab = (tab: chrome.tabs.Tab) => {
     if (tab.id) {
-      chrome?.tabs?.update(tab.id, { active: true });
-      chrome?.windows?.update(tab.windowId, { focused: true });
+      try {
+        chrome?.tabs?.update(tab.id, { active: true });
+        chrome?.windows?.update(tab.windowId, { focused: true });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
   const handleSearch = (evt: ChangeEvent<HTMLInputElement>) => {
     setSearch(evt.target.value);
+  };
+
+  const handleCloseAll = async () => {
+    try {
+      const [currentTab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+
+      const tabGroups = Object.values(groupedTabs);
+
+      const tabsToClose = [];
+      for (let i = 0; i < tabGroups.length; i++) {
+        for (let j = 0; j < tabGroups[i].length; j++) {
+          const tab = tabGroups[i][j];
+          if (tab.id && tab.id !== currentTab?.id) {
+            tabsToClose.push(tab.id);
+          }
+        }
+      }
+
+      await chrome.tabs.remove(tabsToClose);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -103,10 +160,21 @@ export default function TabManager() {
         </h2>
         <div className="tab-manager__search-container">
           <input
+            id="search-tabs"
+            name="Search Tabs"
             value={search}
             placeholder={translation[locale]["search_tabs"]}
             onChange={handleSearch}
           />
+        </div>
+        <div className="tab-manager__cta">
+          <button className="button" onClick={handleCloseAll}>
+            {debouncedSearch ? (
+              <Translation value="close_filtered" />
+            ) : (
+              <Translation value="close_all" />
+            )}
+          </button>
         </div>
         <div className="tab-manager__tab-list-container">
           {Object.entries(groupedTabs).map(

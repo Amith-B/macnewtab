@@ -90,6 +90,8 @@ export default function Search({
     <div className="search__container">
       <SearchIcon className="search-icon__container" />
       <input
+        id="search-web"
+        name="Search web"
         value={transcript || searchString}
         onChange={handleInput}
         placeholder={translation[locale]["search"]}

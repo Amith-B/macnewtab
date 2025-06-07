@@ -118,6 +118,8 @@ export default function Appearance() {
             value={wallpaperBlur}
             min={0}
             max={50}
+            id="blur-slider"
+            name="Blur slider"
             onChange={(event) => {
               handleWallpaperBlur(parseInt(event.target.value));
             }}
@@ -141,6 +143,7 @@ export default function Appearance() {
                 id="file-input"
                 className="image-input"
                 accept="image/*"
+                name="upload image"
                 onChange={handleFileUpload}
               />
             </label>

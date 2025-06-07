@@ -138,6 +138,8 @@ export default function TodoDialog({
         <div className="todo-dialog-input__controls">
           <div className="todo-dialog-input__container">
             <input
+              id="todo-input"
+              name="Todo Input"
               placeholder={translation[locale]["add_to_list"]}
               ref={inputRef}
               value={todoInput}

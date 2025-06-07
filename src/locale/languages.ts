@@ -113,6 +113,9 @@ export const translation = {
     search_tabs: "Search Tabs",
 
     show_tab_manager: "Show Tab Manager",
+
+    close_all: "Close All",
+    close_filtered: "Close Filtered",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -226,6 +229,9 @@ export const translation = {
     search_tabs: "ಟ್ಯಾಬ್ ಹುಡುಕಾಟ",
 
     show_tab_manager: "TAB ವ್ಯವಸ್ಥಾಪಕವನ್ನು ತೋರಿಸಿ",
+
+    close_all: "ಎಲ್ಲವನ್ನು ಮುಚ್ಚಿ",
+    close_filtered: "ಕ್ಲೋಸ್ ಫಿಲ್ಟರ್",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -340,6 +346,9 @@ export const translation = {
     search_tabs: "Vyhledávání na kartě",
 
     show_tab_manager: "Zobrazit správce Tab",
+
+    close_all: "Zavřete všechny",
+    close_filtered: "Zavřete filtrovány",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -453,6 +462,9 @@ export const translation = {
     search_tabs: "Sekme arama",
 
     show_tab_manager: "Sekme Yöneticisini Göster",
+
+    close_all: "Hepsini kapat",
+    close_filtered: "Yakın filtrelenmiş",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -567,6 +579,9 @@ export const translation = {
     search_tabs: "Tìm kiếm tab",
 
     show_tab_manager: "Hiển thị trình quản lý tab",
+
+    close_all: "Đóng tất cả",
+    close_filtered: "Đóng được lọc",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -680,6 +695,9 @@ export const translation = {
     search_tabs: "Yorliqni qidirish",
 
     show_tab_manager: "Tab menejerini ko'rsatish",
+
+    close_all: "Hammasini yaqin",
+    close_filtered: "Filtrni yoping",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -791,6 +809,9 @@ export const translation = {
     search_tabs: "选项卡搜索",
 
     show_tab_manager: "显示选项卡管理器",
+
+    close_all: "关闭全部",
+    close_filtered: "关闭过滤",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -904,6 +925,9 @@ export const translation = {
     search_tabs: "टैब खोज",
 
     show_tab_manager: "शो टैब मैनेजर",
+
+    close_all: "सभी को बंद कर देना",
+    close_filtered: "बंद फ़िल्टर किया हुआ",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1019,6 +1043,9 @@ export const translation = {
     search_tabs: "Scheda Cerca",
 
     show_tab_manager: "Show Scheda Manager",
+
+    close_all: "Chiudi tutto",
+    close_filtered: "Chiuso filtrato",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1132,6 +1159,9 @@ export const translation = {
     search_tabs: "ট্যাব অনুসন্ধান",
 
     show_tab_manager: "ট্যাব ম্যানেজার দেখান",
+
+    close_all: "সব বন্ধ",
+    close_filtered: "ফিল্টার বন্ধ",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1246,6 +1276,9 @@ export const translation = {
     search_tabs: "Pesquisa de guia",
 
     show_tab_manager: "Mostrar gerente de guia",
+
+    close_all: "Feche tudo",
+    close_filtered: "Filtrado próximo",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1361,6 +1394,9 @@ export const translation = {
     search_tabs: "Recherche d'onglet",
 
     show_tab_manager: "Afficher le gestionnaire d'onglet",
+
+    close_all: "Fermer tous",
+    close_filtered: "Fermer filtré",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1474,6 +1510,9 @@ export const translation = {
     search_tabs: "Поиск вкладок",
 
     show_tab_manager: "Показать менеджер вкладок",
+
+    close_all: "Закрыть все",
+    close_filtered: "Близко отфильтрован",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1588,6 +1627,9 @@ export const translation = {
     search_tabs: "Búsqueda de pestañas",
 
     show_tab_manager: "Show Tab Manager",
+
+    close_all: "Cerrar todo",
+    close_filtered: "Cerrar filtrado",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1700,6 +1742,9 @@ export const translation = {
     search_tabs: "タブ検索",
 
     show_tab_manager: "タブマネージャーを表示します",
+
+    close_all: "すべてを閉じます",
+    close_filtered: "フィルタリングを閉じます",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1811,6 +1856,9 @@ export const translation = {
     search_tabs: "탭 검색",
 
     show_tab_manager: "탭 관리자 표시",
+
+    close_all: "모두 닫으십시오",
+    close_filtered: "필터링 된 닫기",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1924,6 +1972,9 @@ export const translation = {
     search_tabs: "Pencarian tab",
 
     show_tab_manager: "Tampilkan Tab Manager",
+
+    close_all: "Tutup semua",
+    close_filtered: "Tutup difilter",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -2037,6 +2088,9 @@ export const translation = {
     search_tabs: "टॅब शोध",
 
     show_tab_manager: "टॅब व्यवस्थापक दर्शवा",
+
+    close_all: "सर्व बंद करा",
+    close_filtered: "बंद फिल्टर",
   },
 };
 

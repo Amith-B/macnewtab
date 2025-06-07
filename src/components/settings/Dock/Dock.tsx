@@ -106,6 +106,8 @@ export default memo(function Dock() {
       >
         <Translation value="position_on_screen" />
         <Select
+          id="dock-position-menu"
+          name="Dock position menu"
           options={dockPositions}
           value={dockPosition}
           onChange={(event) =>
@@ -114,11 +116,11 @@ export default memo(function Dock() {
         />
       </div>
       <div>
-        <button className="dock-links__add" onClick={handleAdd}>
+        <button className="dock-links__add button" onClick={handleAdd}>
           <Translation value="add" />
         </button>
         {changesActive && (
-          <button className="dock-links__done" onClick={handleDone}>
+          <button className="dock-links__done button" onClick={handleDone}>
             <Translation value="done" />
           </button>
         )}
@@ -165,6 +167,8 @@ export default memo(function Dock() {
                   />
                   <div className="input__container">
                     <input
+                      id="dock-title"
+                      name="Dock link title"
                       value={value.title}
                       placeholder="Example"
                       onChange={(event) => handleInput(event, "title", index)}
@@ -172,6 +176,8 @@ export default memo(function Dock() {
                   </div>
                   <div className="input__container">
                     <input
+                      id="dock-link"
+                      name="Dock Link"
                       value={value.url}
                       placeholder="https://example.com"
                       onChange={(event) => handleInput(event, "url", index)}
