@@ -1,4 +1,11 @@
-import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { ReactComponent as CloseIcon } from "./close-icon.svg";
 import EmptySiteImage from "./empty-site-image.png";
 import "./TabManager.css";
@@ -35,6 +42,8 @@ export default function TabManager() {
   const [tabList, setTabList] = useState<chrome.tabs.Tab[]>([]);
   const { locale } = useContext(AppContext);
 
+  const searchRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     const timerRef = setTimeout(() => {
       setDebouncedSearch(search);
@@ -49,6 +58,8 @@ export default function TabManager() {
 
   useEffect(() => {
     if (open) {
+      searchRef.current && searchRef.current.focus();
+
       handleUpdateTabList();
       setSearch("");
 
@@ -66,15 +77,23 @@ export default function TabManager() {
         handleUpdateTabList();
       };
 
+      const handleEsc = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          setOpen(false);
+        }
+      };
+
       chrome.tabs.onUpdated.addListener(handleTabUpdate);
       chrome.tabs.onRemoved.addListener(handleTabRemove);
+      document.addEventListener("keydown", handleEsc);
 
       return () => {
         chrome.tabs.onUpdated.removeListener(handleTabUpdate);
         chrome.tabs.onRemoved.removeListener(handleTabRemove);
+        document.removeEventListener("keydown", handleEsc);
       };
     }
-  }, [open]);
+  }, [open, searchRef]);
 
   const handleOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.stopPropagation();
@@ -114,6 +133,15 @@ export default function TabManager() {
       } catch (error) {
         console.error(error);
       }
+    }
+  };
+
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    tab: chrome.tabs.Tab
+  ) => {
+    if (event.key === "Enter") {
+      handleFocusTab(tab);
     }
   };
 
@@ -162,13 +190,19 @@ export default function TabManager() {
           <input
             id="search-tabs"
             name="Search Tabs"
+            ref={searchRef}
             value={search}
             placeholder={translation[locale]["search_tabs"]}
             onChange={handleSearch}
+            tabIndex={open ? 0 : -1}
           />
         </div>
         <div className="tab-manager__cta">
-          <button className="button" onClick={handleCloseAll}>
+          <button
+            className="button"
+            onClick={handleCloseAll}
+            tabIndex={open ? 0 : -1}
+          >
             {debouncedSearch ? (
               <Translation value="close_filtered" />
             ) : (
@@ -189,6 +223,8 @@ export default function TabManager() {
                     <div
                       className="tab-manager__tab-list"
                       key={tab.id}
+                      tabIndex={open ? 0 : -1}
+                      onKeyDown={(event) => handleKeyDown(event, tab)}
                       onClick={() => handleFocusTab(tab)}
                     >
                       <div className="tab-manager__tab-info">
@@ -198,16 +234,25 @@ export default function TabManager() {
                           alt={tab.title}
                         />
                         <div>
-                          <h4 className="tab-manager__tab-title">
+                          <h4
+                            className="tab-manager__tab-title"
+                            title={tab.title}
+                          >
                             {tab.title}
                           </h4>
-                          <h5 className="tab-manager__tab-description">
+                          <h5
+                            className="tab-manager__tab-description"
+                            title={tab.url}
+                          >
                             {tab.url}
                           </h5>
                         </div>
                       </div>
                       <button
                         className="tab-manager__tab-close"
+                        onKeyDown={(event) =>
+                          event.key === "Enter" && event.stopPropagation()
+                        }
                         onClick={(event) => handleRemoveTab(event, tab.id)}
                       >
                         <CloseIcon />
