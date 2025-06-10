@@ -47,8 +47,13 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 ### 📱 Launchpad & Dock
 - Access favorite links quickly with a customizable **dock bar** and **Launchpad overlay**.
 
-### 📝 Daily To-Do List (New!)
+### 📝 Daily To-Do List
 Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and manage daily items directly from your **new tab**.
+
+### 🗂️ Seamless Tab Management (New!)
+- Stay in control of your browser with a built-in Tab Manager—beautifully integrated into the side panel
+- Instantly search through all open tabs, Switch to any tab with a click, Close tabs directly from the list
+- Easily toggle the panel with a subtle notch on the screen’s edge
 
 ### 🌍 Multi-Language Support
 - Supports **15+ languages**, including English, Kannada, Hindi, Spanish, French, and more.
