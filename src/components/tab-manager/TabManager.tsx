@@ -7,6 +7,8 @@ import {
   useState,
 } from "react";
 import { ReactComponent as CloseIcon } from "./close-icon.svg";
+import { ReactComponent as MutedIcon } from "./muted.svg";
+import { ReactComponent as UnmutedIcon } from "./unmuted.svg";
 import EmptySiteImage from "./empty-site-image.png";
 import "./TabManager.css";
 import Translation from "../../locale/Translation";
@@ -95,6 +97,16 @@ export default function TabManager() {
     }
   }, [open, searchRef]);
 
+  const hasAllTabsMmuted = useMemo(() => {
+    return tabList
+      .filter((tab) => tab.audible)
+      .every((tab) => tab.mutedInfo?.muted);
+  }, [tabList]);
+
+  const hasAudibleTab = useMemo(() => {
+    return tabList.some((tab) => tab.audible);
+  }, [tabList]);
+
   const handleOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.stopPropagation();
     setOpen(true);
@@ -134,6 +146,31 @@ export default function TabManager() {
         console.error(error);
       }
     }
+  };
+
+  const handleToggleMute = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    tab: chrome.tabs.Tab
+  ) => {
+    event.stopPropagation();
+
+    if (tab.id && tab.mutedInfo) {
+      try {
+        chrome?.tabs?.update(tab.id, { muted: !tab.mutedInfo.muted });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  const handleToggleMuteOrUnmuteAll = () => {
+    const updateMuteState = !hasAllTabsMmuted;
+
+    tabList.forEach((tab) => {
+      if (tab.audible && tab.id) {
+        chrome?.tabs?.update(tab.id, { muted: updateMuteState });
+      }
+    });
   };
 
   const handleKeyDown = (
@@ -198,6 +235,15 @@ export default function TabManager() {
           />
         </div>
         <div className="tab-manager__cta">
+          {hasAudibleTab && (
+            <button
+              className="button"
+              onClick={handleToggleMuteOrUnmuteAll}
+              tabIndex={open ? 0 : -1}
+            >
+              {hasAllTabsMmuted ? "Unmute All" : "Mute All"}
+            </button>
+          )}
           <button
             className="button"
             onClick={handleCloseAll}
@@ -221,7 +267,10 @@ export default function TabManager() {
                   </h2>
                   {groupedTabList.map((tab) => (
                     <div
-                      className="tab-manager__tab-list"
+                      className={
+                        "tab-manager__tab-list" +
+                        (tab.audible ? " has-mute-button" : "")
+                      }
                       key={tab.id}
                       tabIndex={open ? 0 : -1}
                       onKeyDown={(event) => handleKeyDown(event, tab)}
@@ -248,6 +297,21 @@ export default function TabManager() {
                           </h5>
                         </div>
                       </div>
+                      {tab.audible && (
+                        <button
+                          className="tab-manager__tab-toggle-mute"
+                          onKeyDown={(event) =>
+                            event.key === "Enter" && event.stopPropagation()
+                          }
+                          onClick={(event) => handleToggleMute(event, tab)}
+                        >
+                          {tab.mutedInfo?.muted ? (
+                            <MutedIcon />
+                          ) : (
+                            <UnmutedIcon />
+                          )}
+                        </button>
+                      )}
                       <button
                         className="tab-manager__tab-close"
                         onKeyDown={(event) =>
