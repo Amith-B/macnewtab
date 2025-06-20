@@ -241,7 +241,11 @@ export default function TabManager() {
               onClick={handleToggleMuteOrUnmuteAll}
               tabIndex={open ? 0 : -1}
             >
-              {hasAllTabsMmuted ? "Unmute All" : "Mute All"}
+              {hasAllTabsMmuted ? (
+                <Translation value="unmute_all" />
+              ) : (
+                <Translation value="mute_all" />
+              )}
             </button>
           )}
           <button

@@ -116,6 +116,9 @@ export const translation = {
 
     close_all: "Close All",
     close_filtered: "Close Filtered",
+
+    mute_all: "Mute All",
+    unmute_all: "Unmute All",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -232,6 +235,9 @@ export const translation = {
 
     close_all: "ಎಲ್ಲವನ್ನು ಮುಚ್ಚಿ",
     close_filtered: "ಕ್ಲೋಸ್ ಫಿಲ್ಟರ್",
+
+    mute_all: "ಎಲ್ಲವನ್ನೂ ಮ್ಯೂಟ್ ಮಾಡಿ",
+    unmute_all: "ಎಲ್ಲಾ ಅನ್ಮುಟ್",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -349,6 +355,9 @@ export const translation = {
 
     close_all: "Zavřete všechny",
     close_filtered: "Zavřete filtrovány",
+
+    mute_all: "Ztlumit vše",
+    unmute_all: "Zobrazení všeho",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -465,6 +474,9 @@ export const translation = {
 
     close_all: "Hepsini kapat",
     close_filtered: "Yakın filtrelenmiş",
+
+    mute_all: "Sesle Sesle",
+    unmute_all: "Hepsini çıkar",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -582,6 +594,9 @@ export const translation = {
 
     close_all: "Đóng tất cả",
     close_filtered: "Đóng được lọc",
+
+    mute_all: "Tắt tiếng tất cả",
+    unmute_all: "Không xoay được tất cả",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -698,6 +713,9 @@ export const translation = {
 
     close_all: "Hammasini yaqin",
     close_filtered: "Filtrni yoping",
+
+    mute_all: "Ovoz berish",
+    unmute_all: "Barchasini yoqimsiz",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -812,6 +830,9 @@ export const translation = {
 
     close_all: "关闭全部",
     close_filtered: "关闭过滤",
+
+    mute_all: "静音",
+    unmute_all: "取消静音",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -928,6 +949,9 @@ export const translation = {
 
     close_all: "सभी को बंद कर देना",
     close_filtered: "बंद फ़िल्टर किया हुआ",
+
+    mute_all: "मूक सभी",
+    unmute_all: "सभी को कम करें",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1046,6 +1070,9 @@ export const translation = {
 
     close_all: "Chiudi tutto",
     close_filtered: "Chiuso filtrato",
+
+    mute_all: "Mute tutto",
+    unmute_all: "Sgraturare tutto",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1162,6 +1189,9 @@ export const translation = {
 
     close_all: "সব বন্ধ",
     close_filtered: "ফিল্টার বন্ধ",
+
+    mute_all: "সমস্ত নিঃশব্দ",
+    unmute_all: "আনমুট সব",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1279,6 +1309,9 @@ export const translation = {
 
     close_all: "Feche tudo",
     close_filtered: "Filtrado próximo",
+
+    mute_all: "Mudo tudo",
+    unmute_all: "Lear tudo",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1397,6 +1430,9 @@ export const translation = {
 
     close_all: "Fermer tous",
     close_filtered: "Fermer filtré",
+
+    mute_all: "Muet tout",
+    unmute_all: "Réactivation à tous",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1513,6 +1549,9 @@ export const translation = {
 
     close_all: "Закрыть все",
     close_filtered: "Близко отфильтрован",
+
+    mute_all: "Морет все",
+    unmute_all: "Включил все",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1630,6 +1669,9 @@ export const translation = {
 
     close_all: "Cerrar todo",
     close_filtered: "Cerrar filtrado",
+
+    mute_all: "Silenciar todo",
+    unmute_all: "Inmerso todo",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1745,6 +1787,9 @@ export const translation = {
 
     close_all: "すべてを閉じます",
     close_filtered: "フィルタリングを閉じます",
+
+    mute_all: "すべてをミュートします",
+    unmute_all: "すべてのミュートを解除します",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1859,6 +1904,9 @@ export const translation = {
 
     close_all: "모두 닫으십시오",
     close_filtered: "필터링 된 닫기",
+
+    mute_all: "모두 음소거",
+    unmute_all: "모든 것을 해제하십시오",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -1975,6 +2023,9 @@ export const translation = {
 
     close_all: "Tutup semua",
     close_filtered: "Tutup difilter",
+
+    mute_all: "Bisu semua",
+    unmute_all: "Buka semua",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -2091,6 +2142,9 @@ export const translation = {
 
     close_all: "सर्व बंद करा",
     close_filtered: "बंद फिल्टर",
+
+    mute_all: "सर्व नि: शब्द",
+    unmute_all: "सर्व सशब्द",
   },
 };
 
