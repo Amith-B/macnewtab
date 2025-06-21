@@ -211,6 +211,40 @@ export default function TabManager() {
     }
   };
 
+  const handleMergeAllTabs = () => {
+    try {
+      chrome?.windows?.getAll({ populate: true }, function (windows) {
+        if (windows.length <= 1) return;
+
+        const mainWindow = windows[0];
+        const mainWindowId = mainWindow.id;
+
+        if (!mainWindowId) return;
+
+        windows.slice(1).forEach((window) => {
+          if (!window.id) {
+            return;
+          }
+          window?.tabs?.forEach((tab) => {
+            if (tab?.id) {
+              chrome.tabs.move(tab.id, { windowId: mainWindowId, index: -1 });
+            }
+          });
+
+          chrome.windows.remove(window.id);
+        });
+
+        chrome.windows.update(mainWindowId, { focused: true });
+
+        setTimeout(() => {
+          handleUpdateTabList();
+        }, 10);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <aside
       className={"tab-manager__overlay" + (open ? " open" : "")}
@@ -235,9 +269,18 @@ export default function TabManager() {
           />
         </div>
         <div className="tab-manager__cta">
+          {Object.keys(groupedTabs).length > 1 && (
+            <button
+              className="button break-word"
+              onClick={handleMergeAllTabs}
+              tabIndex={open ? 0 : -1}
+            >
+              <Translation value="merge_all" />
+            </button>
+          )}
           {hasAudibleTab && (
             <button
-              className="button"
+              className="button break-word"
               onClick={handleToggleMuteOrUnmuteAll}
               tabIndex={open ? 0 : -1}
             >
@@ -249,7 +292,7 @@ export default function TabManager() {
             </button>
           )}
           <button
-            className="button"
+            className="button break-word"
             onClick={handleCloseAll}
             tabIndex={open ? 0 : -1}
           >

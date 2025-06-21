@@ -23,6 +23,8 @@
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   padding: 18px;
+  display: flex;
+  flex-direction: column;
 }
 
 .tab-manager__header {
@@ -79,7 +81,6 @@
 }
 
 .tab-manager__tab-list-container {
-  height: calc(100% - 114px);
   overflow-y: auto;
 }
 

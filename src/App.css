@@ -513,6 +513,10 @@ to be revisited in future */
   width: fit-content;
 }
 
+.break-word {
+  word-break: break-word;
+}
+
 @media screen and (max-width: 1080px) {
   .main-content.has-clock-calendar {
     gap: 50px;

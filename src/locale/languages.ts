@@ -119,6 +119,7 @@ export const translation = {
 
     mute_all: "Mute All",
     unmute_all: "Unmute All",
+    merge_all: "Merge All",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -238,6 +239,8 @@ export const translation = {
 
     mute_all: "ಎಲ್ಲವನ್ನೂ ಮ್ಯೂಟ್ ಮಾಡಿ",
     unmute_all: "ಎಲ್ಲಾ ಅನ್ಮುಟ್",
+
+    merge_all: "ಎಲ್ಲವನ್ನು ವಿಲೀನಗೊಳಿಸಿ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -358,6 +361,8 @@ export const translation = {
 
     mute_all: "Ztlumit vše",
     unmute_all: "Zobrazení všeho",
+
+    merge_all: "Sloučit všechny",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -477,6 +482,8 @@ export const translation = {
 
     mute_all: "Sesle Sesle",
     unmute_all: "Hepsini çıkar",
+
+    merge_all: "Hepsini birleştirmek",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -597,6 +604,8 @@ export const translation = {
 
     mute_all: "Tắt tiếng tất cả",
     unmute_all: "Không xoay được tất cả",
+
+    merge_all: "Hợp nhất tất cả",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -716,6 +725,8 @@ export const translation = {
 
     mute_all: "Ovoz berish",
     unmute_all: "Barchasini yoqimsiz",
+
+    merge_all: "Barchasini birlashtirish",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -833,6 +844,8 @@ export const translation = {
 
     mute_all: "静音",
     unmute_all: "取消静音",
+
+    merge_all: "合并全部",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -952,6 +965,8 @@ export const translation = {
 
     mute_all: "मूक सभी",
     unmute_all: "सभी को कम करें",
+
+    merge_all: "सभी को मर्ज करें",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1073,6 +1088,8 @@ export const translation = {
 
     mute_all: "Mute tutto",
     unmute_all: "Sgraturare tutto",
+
+    merge_all: "Unire tutto",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1192,6 +1209,8 @@ export const translation = {
 
     mute_all: "সমস্ত নিঃশব্দ",
     unmute_all: "আনমুট সব",
+
+    merge_all: "সমস্ত মার্জ",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1312,6 +1331,8 @@ export const translation = {
 
     mute_all: "Mudo tudo",
     unmute_all: "Lear tudo",
+
+    merge_all: "Mesclar tudo",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1433,6 +1454,8 @@ export const translation = {
 
     mute_all: "Muet tout",
     unmute_all: "Réactivation à tous",
+
+    merge_all: "Fusionner tout",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1552,6 +1575,8 @@ export const translation = {
 
     mute_all: "Морет все",
     unmute_all: "Включил все",
+
+    merge_all: "Объединить все",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1672,6 +1697,8 @@ export const translation = {
 
     mute_all: "Silenciar todo",
     unmute_all: "Inmerso todo",
+
+    merge_all: "Fusionar todo",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1790,6 +1817,8 @@ export const translation = {
 
     mute_all: "すべてをミュートします",
     unmute_all: "すべてのミュートを解除します",
+
+    merge_all: "すべてをマージします",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1907,6 +1936,8 @@ export const translation = {
 
     mute_all: "모두 음소거",
     unmute_all: "모든 것을 해제하십시오",
+
+    merge_all: "모두 합병하십시오",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -2026,6 +2057,8 @@ export const translation = {
 
     mute_all: "Bisu semua",
     unmute_all: "Buka semua",
+
+    merge_all: "Gabungkan semuanya",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -2145,6 +2178,8 @@ export const translation = {
 
     mute_all: "सर्व नि: शब्द",
     unmute_all: "सर्व सशब्द",
+
+    merge_all: "सर्व विलीनीकरण",
   },
 };
 
