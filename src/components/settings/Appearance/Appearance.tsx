@@ -7,7 +7,7 @@ import Translation from "../../../locale/Translation";
 import { WALLPAPER_LIST } from "../../../static/wallpapers";
 import Slider from "../../slider/Slider";
 
-const MAX_FILE_SIZE_MB = 1;
+const FILE_SIZE_WARNING = 10;
 
 export default function Appearance() {
   const {
@@ -25,11 +25,10 @@ export default function Appearance() {
     const selectedFile = event.target?.files?.[0];
     if (!selectedFile) return;
 
-    if (selectedFile.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+    if (selectedFile.size > FILE_SIZE_WARNING * 1024 * 1024) {
       alert(
-        `The image is too large! Please upload an image smaller than ${MAX_FILE_SIZE_MB} MB.`
+        `Warning: The image is too large! This may slow down the loading of your new tab. To ensure smooth performance, please upload an image or GIF smaller than ${FILE_SIZE_WARNING} MB.`
       );
-      return;
     }
 
     const fileReader = new FileReader();

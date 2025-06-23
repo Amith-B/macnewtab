@@ -96,14 +96,19 @@ const openDatabase = (): Promise<IDBDatabase> => {
   });
 };
 
-const saveImageToIndexedDB = async (base64Image: string): Promise<void> => {
+const saveImageToIndexedDB = async (base64Image: string): Promise<string> => {
   const db = await openDatabase();
+  const blob = await fetch(base64Image).then((res) => res.blob());
+
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("wallpapers", "readwrite");
     const store = transaction.objectStore("wallpapers");
-    store.put({ id: "customWallpaper", base64: base64Image });
+    store.put({ id: "customWallpaper", imageBlob: blob });
 
-    transaction.oncomplete = () => resolve();
+    transaction.oncomplete = () => {
+      const url = URL.createObjectURL(blob);
+      resolve(url);
+    };
     transaction.onerror = () => reject(transaction.error);
   });
 };
@@ -117,9 +122,15 @@ const fetchImageFromIndexedDB = async (): Promise<string | null> => {
 
     request.onsuccess = () => {
       const result = request.result as
-        | { id: string; base64: string }
+        | { id: string; base64?: string; imageBlob?: Blob }
         | undefined;
-      resolve(result?.base64 || null);
+
+      if (result?.imageBlob) {
+        const url = URL.createObjectURL(result.imageBlob);
+        resolve(url);
+      } else {
+        resolve(result?.base64 || null);
+      }
     };
 
     request.onerror = () => reject(request.error);
@@ -455,14 +466,14 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const handleSaveWallpaper = async (base64Image: string) => {
-    await saveImageToIndexedDB(base64Image);
-    setBackgroundImage(base64Image);
+    const blobURL = await saveImageToIndexedDB(base64Image);
+    setBackgroundImage(blobURL);
   };
 
   const handleLoadWallpaper = async () => {
-    const base64Image = await fetchImageFromIndexedDB();
-    if (base64Image) {
-      setBackgroundImage(base64Image);
+    const blobURL = await fetchImageFromIndexedDB();
+    if (blobURL) {
+      setBackgroundImage(blobURL);
     }
   };
 
