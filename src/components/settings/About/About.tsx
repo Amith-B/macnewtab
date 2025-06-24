@@ -63,7 +63,7 @@ export default function About() {
             <Translation value="write_review" />
             <a
               rel="noreferrer"
-              href="https://chromewebstore.google.com/detail/Mac%20New%20Tab/mohppegbiigoahehdihbgmabkflajklj/reviews/my-review"
+              href="https://chromewebstore.google.com/detail/mac-new-tab/mohppegbiigoahehdihbgmabkflajklj/reviews"
               target="_blank"
             >
               chromewebstore/macnewtab
