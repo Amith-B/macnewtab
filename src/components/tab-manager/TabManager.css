@@ -194,6 +194,7 @@
 
 .tab-manager__search-container {
   height: 26px;
+  min-height: 26px;
   padding: 0 6px;
   background: var(--theme-bg);
   border-radius: 4px;
