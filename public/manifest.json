@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Mac New Tab",
-  "version": "1.26.0",
+  "version": "1.26.1",
   "description": "A Simple New Tab (browser's home page) inspired by Mac OS design.",
   "permissions": [
     "topSites",

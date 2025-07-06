@@ -91,7 +91,7 @@ export default function Dock() {
 
   useEffect(() => {
     const container = containerRef.current as unknown as HTMLDivElement;
-    if (!container) return;
+    if (!container || typeof ResizeObserver === "undefined") return;
 
     const observer = new ResizeObserver(() => {
       checkOverflowButtonVisibility();
