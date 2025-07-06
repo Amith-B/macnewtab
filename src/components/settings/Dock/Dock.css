@@ -87,10 +87,6 @@
   height: 100%;
 }
 
-.maximum-limit-warning {
-  color: #ff5d59;
-}
-
 .dock-links__position,
 .todo-dock__toggle {
   display: flex;

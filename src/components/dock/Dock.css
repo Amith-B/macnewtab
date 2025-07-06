@@ -52,13 +52,72 @@
   border: 1px solid #9696967a;
   background-color: var(--theme-bg-dock);
   z-index: 1;
+  max-width: calc(100vw - 120px);
+}
+
+.dock-links-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  overflow: auto;
+}
+
+.dock-links-container::-webkit-scrollbar {
+  display: none;
+}
+
+.dock-arrow {
+  height: 100%;
+  width: 24px;
+  min-width: 24px;
+  background-color: var(--theme-bg);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--theme-clr);
+  border-radius: 8px;
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: none;
+}
+
+.dock-arrow.visible {
+  opacity: 1;
+  pointer-events: initial;
+  cursor: pointer;
+}
+
+.dock-arrow svg {
+  width: 10px;
+  height: 100%;
+}
+
+.dock-container:not(.bottom) .dock-arrow {
+  height: 24px;
+  min-height: 24px;
+  width: 100%;
+}
+
+.dock-container:not(.bottom) .dock-arrow svg {
+  transform: rotate(90deg);
+  width: 100%;
+  height: 10px;
+}
+
+.dock-container:not(.bottom) .dock-links-container {
+  flex-direction: column;
+}
+
+.dock-container:not(.bottom) {
+  max-height: calc(100vh - 120px);
+  max-width: unset;
 }
 
 .dock-divider {
   width: 2px;
   height: 100%;
   border-radius: 10px;
-  background-color: var(--theme-border);
+  background-color: var(--theme-clr);
 }
 
 .dock-container.center.bottom {
@@ -111,6 +170,8 @@
 .dock-container.center .dock-site__item {
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .dock-container.center .dock-site__icon {
@@ -121,6 +182,8 @@
 .todo-button {
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
   margin: 0;
   outline: none;

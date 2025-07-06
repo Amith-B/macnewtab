@@ -85,13 +85,13 @@ export default function TabManager() {
         }
       };
 
-      chrome.tabs.onUpdated.addListener(handleTabUpdate);
-      chrome.tabs.onRemoved.addListener(handleTabRemove);
+      chrome.tabs?.onUpdated.addListener(handleTabUpdate);
+      chrome.tabs?.onRemoved.addListener(handleTabRemove);
       document.addEventListener("keydown", handleEsc);
 
       return () => {
-        chrome.tabs.onUpdated.removeListener(handleTabUpdate);
-        chrome.tabs.onRemoved.removeListener(handleTabRemove);
+        chrome.tabs?.onUpdated.removeListener(handleTabUpdate);
+        chrome.tabs?.onRemoved.removeListener(handleTabRemove);
         document.removeEventListener("keydown", handleEsc);
       };
     }

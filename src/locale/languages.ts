@@ -83,7 +83,6 @@ export const translation = {
 
     add: "Add",
     done: "Done",
-    dock_max_limit: "Maximum limit reached",
     add_dock_links: "Add Links to Dock",
 
     position_on_screen: "Position On Screen",
@@ -203,7 +202,6 @@ export const translation = {
 
     add: "ಸೇರಿಸಿ",
     done: "ಮುಗಿದಿದೆ",
-    dock_max_limit: "ಗರಿಷ್ಠ ಮಿತಿಯನ್ನು ತಲುಪಿದೆ",
     add_dock_links: "ಡಾಕ್‌ಗೆ ಲಿಂಕ್‌ಗಳನ್ನು ಸೇರಿಸಿ",
 
     position_on_screen: "ಪರದೆಯ ಮೇಲೆ ಸ್ಥಾನ",
@@ -325,7 +323,6 @@ export const translation = {
 
     add: "Přidat",
     done: "Hotovo",
-    dock_max_limit: "Bylo dosaženo maximálního limitu",
     add_dock_links: "Přidat odkazy do Docku",
 
     position_on_screen: "Pozice Na Obrazovce",
@@ -446,7 +443,6 @@ export const translation = {
 
     add: "Eklemek",
     done: "Tamamlamak",
-    dock_max_limit: "Maksimum sınıra ulaşıldı",
     add_dock_links: "Dock'a Bağlantı Ekle",
 
     position_on_screen: "Ekrandaki Konum",
@@ -568,7 +564,6 @@ export const translation = {
 
     add: "Thêm vào",
     done: "Xong",
-    dock_max_limit: "Đã đạt đến giới hạn tối đa",
     add_dock_links: "Thêm liên kết vào Dock",
 
     position_on_screen: "Vị trí trên màn hình",
@@ -689,7 +684,6 @@ export const translation = {
 
     add: "Qo'shish",
     done: "Bajarildi",
-    dock_max_limit: "Maksimal chegaraga yetdi",
     add_dock_links: "Dock-ga havolalar qo'shing",
 
     position_on_screen: "Ekrandagi joylashuv",
@@ -809,7 +803,6 @@ export const translation = {
 
     add: "添加",
     done: "完毕",
-    dock_max_limit: "达到最大限制",
     add_dock_links: "添加链接到 Dock",
 
     position_on_screen: "屏幕上的位置",
@@ -929,7 +922,6 @@ export const translation = {
 
     add: "जोड़ना",
     done: "हो गया",
-    dock_max_limit: "अधिकतम सीमा तक पहुंच गया",
     add_dock_links: "डॉक में लिंक जोड़ें",
 
     position_on_screen: "स्क्रीन पर स्थिति",
@@ -1052,7 +1044,6 @@ export const translation = {
 
     add: "Aggiungere",
     done: "Fatto",
-    dock_max_limit: "Limite massimo raggiunto",
     add_dock_links: "Aggiungi collegamenti al Dock",
 
     position_on_screen: "Posizione sullo schermo",
@@ -1173,7 +1164,6 @@ export const translation = {
 
     add: "যোগ করুন",
     done: "সম্পন্ন",
-    dock_max_limit: "সর্বোচ্চ সীমা পৌঁছেছে",
     add_dock_links: "ডক লিঙ্ক যোগ করুন",
 
     position_on_screen: "স্ক্রিনে অবস্থান",
@@ -1295,7 +1285,6 @@ export const translation = {
 
     add: "Adicionar",
     done: "Feito",
-    dock_max_limit: "Limite máximo atingido",
     add_dock_links: "Adicionar links ao Dock",
 
     position_on_screen: "Posição na tela",
@@ -1418,7 +1407,6 @@ export const translation = {
 
     add: "Ajouter",
     done: "Fait",
-    dock_max_limit: "Limite maximale atteinte",
     add_dock_links: "Ajouter des liens au Dock",
 
     position_on_screen: "Position à l'écran",
@@ -1539,7 +1527,6 @@ export const translation = {
 
     add: "Добавлять",
     done: "Сделанный",
-    dock_max_limit: "Достигнут максимальный лимит",
     add_dock_links: "Добавить ссылки в док",
 
     position_on_screen: "Положение на экране",
@@ -1661,7 +1648,6 @@ export const translation = {
 
     add: "Agregar",
     done: "Hecho",
-    dock_max_limit: "Límite máximo alcanzado",
     add_dock_links: "Agregar enlaces al muelle",
 
     position_on_screen: "Posición en pantalla",
@@ -1781,7 +1767,6 @@ export const translation = {
 
     add: "追加",
     done: "終わり",
-    dock_max_limit: "上限に達しました",
     add_dock_links: "リンクをドックに追加",
 
     position_on_screen: "画面上の位置",
@@ -1901,7 +1886,6 @@ export const translation = {
 
     add: "추가하다",
     done: "완료",
-    dock_max_limit: "최대 한도에 도달했습니다.",
     add_dock_links: "Dock에 링크 추가",
 
     position_on_screen: "화면상의 위치",
@@ -2021,7 +2005,6 @@ export const translation = {
 
     add: "Menambahkan",
     done: "Selesai",
-    dock_max_limit: "Batas maksimum tercapai",
     add_dock_links: "Tambahkan Tautan ke Dock",
 
     position_on_screen: "Posisi Di Layar",
@@ -2142,7 +2125,6 @@ export const translation = {
 
     add: "ॲड",
     done: "झाले",
-    dock_max_limit: "कमाल मर्यादा गाठली",
     add_dock_links: "डॉकमध्ये लिंक्स जोडा",
 
     position_on_screen: "स्क्रीनवर स्थान",

@@ -10,11 +10,7 @@ import { AppContext } from "../../../context/provider";
 import { List, arrayMove } from "react-movable";
 import { ReactComponent as DeleteIcon } from "../../../assets/delete-icon.svg";
 import { ReactComponent as DraggableIcon } from "./draggable.svg";
-import {
-  DOCK_SITES_MAX_LIMIT,
-  DockPosition,
-  dockPositions,
-} from "../../../static/dockSites";
+import { DockPosition, dockPositions } from "../../../static/dockSites";
 import Translation from "../../../locale/Translation";
 import { Select } from "../../select/Select";
 import { generateRandomId } from "../../../utils/random";
@@ -46,9 +42,6 @@ export default memo(function Dock() {
   };
 
   const handleAdd = () => {
-    if (currentDockSites.length === DOCK_SITES_MAX_LIMIT) {
-      return;
-    }
     setChangesActive(true);
     const updatedDockSites = [...currentDockSites];
     updatedDockSites.push({ title: "", url: "", id: generateRandomId() });
@@ -125,11 +118,6 @@ export default memo(function Dock() {
           </button>
         )}
       </div>
-      {currentDockSites.length === DOCK_SITES_MAX_LIMIT && (
-        <p className="maximum-limit-warning">
-          <Translation value="dock_max_limit" />
-        </p>
-      )}
       <div
         className={
           "dock-links__list-container" +

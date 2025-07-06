@@ -1,7 +1,7 @@
-import React, { memo, useContext, useEffect, useRef, useState } from "react";
+import { memo, useContext, useEffect, useRef, useState } from "react";
 import "./TopSites.css";
-import { ReactComponent as LeftArrow } from "./left-arrow.svg";
-import { ReactComponent as RightArrow } from "./right-arrow.svg";
+import { ReactComponent as LeftArrow } from "../../assets/left-arrow.svg";
+import { ReactComponent as RightArrow } from "../../assets/right-arrow.svg";
 import EmptySiteImage from "./empty-site-image.png";
 import { AppContext } from "../../context/provider";
 

@@ -1,6 +1,8 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
 import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
+import { ReactComponent as LeftArrow } from "../../assets/left-arrow.svg";
+import { ReactComponent as RightArrow } from "../../assets/right-arrow.svg";
 import { ReactComponent as TodoIcon } from "../../assets/todo.svg";
 import Settings from "../settings/Settings";
 import Launchpad from "../launchpad/Launchpad";
@@ -21,6 +23,9 @@ export default function Dock() {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
   const [todoDialogOpen, setTodoDialogOpen] = useState(false);
+  const [isOverflowLeft, setIsOverflowLeft] = useState(false);
+  const [isOverflowRight, setIsOverflowRight] = useState(false);
+  const [isOverflowButtonVisible, setIsOverflowButtonVisible] = useState(false);
   const {
     dockBarSites,
     dockPosition,
@@ -34,6 +39,82 @@ export default function Dock() {
   );
 
   const handleTodoClose = useCallback(() => setTodoDialogOpen(false), []);
+
+  const containerRef = useRef(null);
+
+  const checkOverflowButtonVisibility = useCallback(() => {
+    const container = containerRef.current as unknown as HTMLDivElement;
+    if (!container) return;
+
+    if (dockPosition === "bottom") {
+      setIsOverflowButtonVisible(container.clientWidth < container.scrollWidth);
+    } else {
+      setIsOverflowButtonVisible(
+        container.clientHeight < container.scrollHeight
+      );
+    }
+  }, [containerRef, dockPosition]);
+
+  const checkOverflow = useCallback(() => {
+    const container = containerRef.current as unknown as HTMLDivElement;
+    if (!container) return;
+
+    let overflowLeft = false;
+    let overflowRight = false;
+
+    if (dockPosition === "bottom") {
+      overflowLeft = container.scrollLeft > 0;
+      overflowRight =
+        Math.round(container.scrollLeft) <
+        container.scrollWidth - container.clientWidth;
+    } else {
+      overflowLeft = container.scrollTop > 0;
+      overflowRight =
+        Math.round(container.scrollTop) <
+        container.scrollHeight - container.clientHeight;
+    }
+
+    setIsOverflowLeft(overflowLeft);
+    setIsOverflowRight(overflowRight);
+  }, [containerRef, dockPosition]);
+
+  useEffect(() => {
+    checkOverflowButtonVisibility();
+    checkOverflow();
+  }, [
+    dockPosition,
+    containerRef,
+    dockBarSites.length,
+    checkOverflowButtonVisibility,
+    checkOverflow,
+  ]);
+
+  useEffect(() => {
+    const container = containerRef.current as unknown as HTMLDivElement;
+    if (!container) return;
+
+    const observer = new ResizeObserver(() => {
+      checkOverflowButtonVisibility();
+      checkOverflow();
+    });
+
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [containerRef, checkOverflowButtonVisibility, checkOverflow]);
+
+  const scroll = (direction: number) => {
+    const container = containerRef.current as unknown as HTMLDivElement;
+    if (!container) return;
+
+    if (dockPosition === "bottom") {
+      container.scrollLeft += direction * 400;
+    } else {
+      container.scrollTop += direction * 400;
+    }
+  };
 
   const showDocBar = !!dockBarSites.length;
 
@@ -83,49 +164,73 @@ export default function Dock() {
           <SettingsIcon />
         </button>
         <div className="dock-divider"></div>
-        {dockBarSites.map((item) => {
-          let siteURL;
+        {isOverflowButtonVisible && (
+          <button
+            className={
+              "dock-arrow arrow-left" + (isOverflowLeft ? " visible" : "")
+            }
+            onClick={() => scroll(-1)}
+          >
+            <LeftArrow />
+          </button>
+        )}
+        <div
+          className="dock-links-container"
+          ref={containerRef}
+          onScroll={checkOverflow}
+        >
+          {dockBarSites.map((item) => {
+            let siteURL;
 
-          let anchorProps = {};
+            let anchorProps = {};
 
-          try {
-            siteURL = new URL(item.url);
-            anchorProps = {
-              href: item.url,
-              target: "_self",
-            };
-          } catch (error) {
-            anchorProps = {
-              onClick: () => {
-                if (!chrome?.search?.query) {
-                  return;
-                }
-                chrome.search.query({
-                  text: item.url,
-                });
-              },
-            };
-          }
+            try {
+              siteURL = new URL(item.url);
+              anchorProps = {
+                href: item.url,
+                target: "_self",
+              };
+            } catch (error) {
+              anchorProps = {
+                onClick: () => {
+                  if (!chrome?.search?.query) {
+                    return;
+                  }
+                  chrome.search.query({
+                    text: item.url,
+                  });
+                },
+              };
+            }
 
-          return (
-            <a
-              rel="noreferrer"
-              className={`dock-site__item tooltip with-link tooltip-${
-                TooltipPosition[dockPosition] || "top"
-              }`}
-              data-label={item.title}
-              title={item.title}
-              key={item.id}
-              {...anchorProps}
-            >
-              <img
-                className="dock-site__icon"
-                src={SITE_IMAGE_URL + siteURL?.hostname}
-                alt={item.title}
-              />
-            </a>
-          );
-        })}
+            return (
+              <a
+                rel="noreferrer"
+                className="dock-site__item with-link"
+                data-label={item.title}
+                title={item.title}
+                key={item.id}
+                {...anchorProps}
+              >
+                <img
+                  className="dock-site__icon"
+                  src={SITE_IMAGE_URL + siteURL?.hostname}
+                  alt={item.title}
+                />
+              </a>
+            );
+          })}
+        </div>
+        {isOverflowButtonVisible && (
+          <button
+            className={
+              "dock-arrow arrow-right" + (isOverflowRight ? " visible" : "")
+            }
+            onClick={() => scroll(1)}
+          >
+            <RightArrow />
+          </button>
+        )}
       </div>
       <Settings
         withinDock={showDocBar}
