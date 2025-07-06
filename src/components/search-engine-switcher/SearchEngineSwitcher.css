@@ -61,6 +61,11 @@
   transition: background-color ease 0.1s;
 }
 
+.search-engine-switcher__tile-selection-indicator svg {
+  width: 100%;
+  height: 100%;
+}
+
 .search-engine-switcher__tile-selection-indicator.selected {
   background-color: var(--theme-selection-color);
   --search-engine-tile-icon-clr: white;
