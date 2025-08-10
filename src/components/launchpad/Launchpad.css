@@ -70,7 +70,8 @@
   }
 }
 
-.launchpad-item {
+.launchpad-item,
+.bookmark-item {
   text-decoration: none;
   width: fit-content;
   display: flex;
@@ -98,11 +99,95 @@
   height: 100%;
 }
 
-.launchpad-item__label {
+.launchpad-item__label,
+.bookmark-item__label {
   color: white;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100px;
   transition: max-width 0.5s ease;
+}
+
+.launchpad__tab {
+  position: sticky;
+  top: -24px;
+  margin: 0 auto;
+  width: fit-content;
+  z-index: 2;
+  border: 1px solid var(--theme-border);
+  padding: 2px;
+  border-radius: 4px;
+  background-color: var(--theme-bg);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  transform: translateY(-38px);
+}
+
+.launchpad__tab__button {
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  color: var(--theme-clr);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.launchpad__tab__button.selected {
+  background: var(--launchpad-tab-selected-bg);
+}
+
+.launchpad__overlay.visible .launchpad__tab {
+  transform: translateY(-32px) scale(1);
+  opacity: 1;
+}
+
+.launchpad__bookmarks__container {
+  transform: scale(1.1);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.bookmark-group {
+  padding-left: 12px;
+  margin: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid rgb(227, 227, 227);
+  border-radius: 12px;
+  color: white;
+}
+
+.bookmark-item {
+  text-decoration: none;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  width: 120px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.bookmark-item__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bookmark-group-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.launchpad__overlay.visible .launchpad__bookmarks__container {
+  transform: scale(1);
+  opacity: 1;
 }

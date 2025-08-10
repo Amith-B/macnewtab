@@ -119,6 +119,11 @@ export const translation = {
     mute_all: "Mute All",
     unmute_all: "Unmute All",
     merge_all: "Merge All",
+    bookmark_toggle: "Show Bookmarks in Launchpad",
+    bookmark_toggle_description:
+      "You can toggle browser default bookmark with:",
+    google_apps: "Google Apps",
+    bookmarks: "Bookmarks",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -239,6 +244,12 @@ export const translation = {
     unmute_all: "ಎಲ್ಲಾ ಅನ್ಮುಟ್",
 
     merge_all: "ಎಲ್ಲವನ್ನು ವಿಲೀನಗೊಳಿಸಿ",
+
+    bookmark_toggle: "ಲಾಂಚ್‌ಪ್ಯಾಡ್‌ನಲ್ಲಿ ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳನ್ನು ತೋರಿಸಿ",
+    bookmark_toggle_description:
+      "ನೀವು ಬ್ರೌಸರ್ ಡೀಫಾಲ್ಟ್ ಬುಕ್‌ಮಾರ್ಕ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಬಹುದು:",
+    google_apps: "ಗೂಗಲ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು",
+    bookmarks: "ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳು",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -360,6 +371,11 @@ export const translation = {
     unmute_all: "Zobrazení všeho",
 
     merge_all: "Sloučit všechny",
+
+    bookmark_toggle: "Zobrazit záložky v Launchpad",
+    bookmark_toggle_description: "Výchozí záložka prohlížeče můžete přepínat:",
+    google_apps: "Google Apps",
+    bookmarks: "Záložky",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -480,6 +496,12 @@ export const translation = {
     unmute_all: "Hepsini çıkar",
 
     merge_all: "Hepsini birleştirmek",
+
+    bookmark_toggle: "Launchpad'de yer işaretlerini göster",
+    bookmark_toggle_description:
+      "Tarayıcı varsayılan yer işaretini şu şekilde değiştirebilirsiniz:",
+    google_apps: "Google Apps",
+    bookmarks: "Yer imleri",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -601,6 +623,12 @@ export const translation = {
     unmute_all: "Không xoay được tất cả",
 
     merge_all: "Hợp nhất tất cả",
+
+    bookmark_toggle: "Hiển thị dấu trang trong Launchpad",
+    bookmark_toggle_description:
+      "Bạn có thể chuyển đổi dấu trang mặc định của trình duyệt với:",
+    google_apps: "Ứng dụng Google",
+    bookmarks: "Dấu trang",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -721,6 +749,12 @@ export const translation = {
     unmute_all: "Barchasini yoqimsiz",
 
     merge_all: "Barchasini birlashtirish",
+
+    bookmark_toggle: "OnePadda xatcho'plarni ko'rsatish",
+    bookmark_toggle_description:
+      "Siz brauzerning standart bazasini almashtirishingiz mumkin:",
+    google_apps: "Google Apps",
+    bookmarks: "Xatcho'plar",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -839,6 +873,11 @@ export const translation = {
     unmute_all: "取消静音",
 
     merge_all: "合并全部",
+
+    bookmark_toggle: "在Launchpad中显示书签",
+    bookmark_toggle_description: "您可以使用以下方式切换浏览器默认书签：",
+    google_apps: "Google应用程序",
+    bookmarks: "书签",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -959,6 +998,12 @@ export const translation = {
     unmute_all: "सभी को कम करें",
 
     merge_all: "सभी को मर्ज करें",
+
+    bookmark_toggle: "लॉन्चपैड में बुकमार्क दिखाएं",
+    bookmark_toggle_description:
+      "आप ब्राउज़र डिफ़ॉल्ट बुकमार्क के साथ टॉगल कर सकते हैं:",
+    google_apps: "Google Apps",
+    bookmarks: "बुकमार्क",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1081,6 +1126,12 @@ export const translation = {
     unmute_all: "Sgraturare tutto",
 
     merge_all: "Unire tutto",
+
+    bookmark_toggle: "Mostra segnalibri in Launchpad",
+    bookmark_toggle_description:
+      "È possibile attivare segnalibri predefiniti del browser con:",
+    google_apps: "App Google",
+    bookmarks: "Segnalibri",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1201,6 +1252,12 @@ export const translation = {
     unmute_all: "আনমুট সব",
 
     merge_all: "সমস্ত মার্জ",
+
+    bookmark_toggle: "লঞ্চপ্যাডে বুকমার্কগুলি দেখান",
+    bookmark_toggle_description:
+      "আপনি ব্রাউজার ডিফল্ট বুকমার্ক টগল করতে পারেন:",
+    google_apps: "গুগল অ্যাপস",
+    bookmarks: "বুকমার্কস",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1322,6 +1379,12 @@ export const translation = {
     unmute_all: "Lear tudo",
 
     merge_all: "Mesclar tudo",
+
+    bookmark_toggle: "Mostrar marcadores no Launchpad",
+    bookmark_toggle_description:
+      "Você pode alternar o marcador padrão do navegador com:",
+    google_apps: "Google Apps",
+    bookmarks: "Marcadores",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1444,6 +1507,12 @@ export const translation = {
     unmute_all: "Réactivation à tous",
 
     merge_all: "Fusionner tout",
+
+    bookmark_toggle: "Afficher les signets dans Launchpad",
+    bookmark_toggle_description:
+      "Vous pouvez basculer le bibliothèque par défaut du navigateur avec:",
+    google_apps: "Google Apps",
+    bookmarks: "Signets",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1564,6 +1633,12 @@ export const translation = {
     unmute_all: "Включил все",
 
     merge_all: "Объединить все",
+
+    bookmark_toggle: "Показать закладки в Launchpad",
+    bookmark_toggle_description:
+      "Вы можете переключить браузер по умолчанию закладки с:",
+    google_apps: "Google Apps",
+    bookmarks: "Закладки",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1685,6 +1760,12 @@ export const translation = {
     unmute_all: "Inmerso todo",
 
     merge_all: "Fusionar todo",
+
+    bookmark_toggle: "Mostrar marcadores en la plataforma de lanzamiento",
+    bookmark_toggle_description:
+      "Puede alternar el marcador predeterminado del navegador con:",
+    google_apps: "Aplicaciones de Google",
+    bookmarks: "Marcadores",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1804,6 +1885,12 @@ export const translation = {
     unmute_all: "すべてのミュートを解除します",
 
     merge_all: "すべてをマージします",
+
+    bookmark_toggle: "LaunchPadでブックマークを表示します",
+    bookmark_toggle_description:
+      "ブラウザのデフォルトのブックマークを次のように切り替えることができます。",
+    google_apps: "Googleアプリ",
+    bookmarks: "ブックマーク",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -1922,6 +2009,12 @@ export const translation = {
     unmute_all: "모든 것을 해제하십시오",
 
     merge_all: "모두 합병하십시오",
+
+    bookmark_toggle: "LaunchPad에서 북마크를 표시하십시오",
+    bookmark_toggle_description:
+      "브라우저 기본 북마크를 다음과 같이 토글 할 수 있습니다.",
+    google_apps: "Google Apps",
+    bookmarks: "북마크",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -2042,6 +2135,12 @@ export const translation = {
     unmute_all: "Buka semua",
 
     merge_all: "Gabungkan semuanya",
+
+    bookmark_toggle: "Tampilkan Bookmark di Launchpad",
+    bookmark_toggle_description:
+      "Anda dapat beralih bookmark default browser dengan:",
+    google_apps: "Aplikasi Google",
+    bookmarks: "Bookmark",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -2162,6 +2261,11 @@ export const translation = {
     unmute_all: "सर्व सशब्द",
 
     merge_all: "सर्व विलीनीकरण",
+
+    bookmark_toggle: "लॉन्चपॅड मध्ये बुकमार्क दर्शवा",
+    bookmark_toggle_description: "आपण ब्राउझर डीफॉल्ट बुकमार्क टॉगल करू शकता:",
+    google_apps: "Google अॅप्स",
+    bookmarks: "बुकमार्क",
   },
 };
 

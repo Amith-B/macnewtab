@@ -60,6 +60,8 @@ body:has(.App.theme-light) {
 
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: #3d3d3d;
+
+  --launchpad-tab-selected-bg: #bcbcbc;
 }
 
 .App.theme-dark,
@@ -103,6 +105,8 @@ body:has(.App.theme-dark) {
 
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.7);
   --settings-side-panel-text-color: white;
+
+  --launchpad-tab-selected-bg: #ffffff5c;
 }
 
 .App.theme-dark .search-engine-switcher__tile-selection-indicator.selected {
@@ -153,6 +157,8 @@ body:has(.App.theme-dark) {
 
     --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.7);
     --settings-side-panel-text-color: white;
+
+    --launchpad-tab-selected-bg: #ffffff5c;
   }
 
   .App.theme-system .search-engine-switcher__tile-selection-indicator.selected,
@@ -194,6 +200,7 @@ body:has(.App.theme-blue) {
   --search-engine-tile-icon-clr: #3a5e8f;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: #3d3d3d;
+  --launchpad-tab-selected-bg: #81b7ff;
 }
 
 .App.theme-red,
@@ -229,6 +236,7 @@ body:has(.App.theme-red) {
   --search-engine-tile-icon-clr: #8f3a3a;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --launchpad-tab-selected-bg: #ffa8a8;
 }
 
 .App.theme-orange,
@@ -264,6 +272,7 @@ body:has(.App.theme-orange) {
   --search-engine-tile-icon-clr: #865841;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --launchpad-tab-selected-bg: #ff9f6f;
 }
 
 .App.theme-purple,
@@ -299,6 +308,7 @@ body:has(.App.theme-purple) {
   --search-engine-tile-icon-clr: #655da3;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: white;
+  --launchpad-tab-selected-bg: #a7a7ff;
 }
 
 .App.theme-pink,
@@ -334,6 +344,7 @@ body:has(.App.theme-pink) {
   --search-engine-tile-icon-clr: #a35d7f;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: white;
+  --launchpad-tab-selected-bg: #ffabd1;
 }
 
 .App.theme-brown,
@@ -369,6 +380,7 @@ body:has(.App.theme-brown) {
   --search-engine-tile-icon-clr: #a3765d;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: white;
+  --launchpad-tab-selected-bg: #ffc69b;
 }
 
 .main-content {

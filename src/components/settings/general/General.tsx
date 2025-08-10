@@ -24,6 +24,8 @@ const General = memo(function General() {
     handleShowTabManagerChange,
     locale,
     handleLocaleChange,
+    bookmarksVisible,
+    handleBookmarkVisbility,
   } = useContext(AppContext);
 
   const selectedLanguageDetails = useMemo(() => {
@@ -137,9 +139,22 @@ const General = memo(function General() {
         )}
       </div>
 
-      <div className="general__row-item">
-        <Translation value="toggle_bookmark" />
-        <code>{isMac ? "Cmd + Shift + B" : "Ctrl + Shift + B"}</code>
+      <div className="general__row-item with-description">
+        <div className="bookmark-toggle-row">
+          <Translation value="bookmark_toggle" />
+          <Toggle
+            id={"bookmark-toggle"}
+            name="Bookmark toggle"
+            isChecked={bookmarksVisible}
+            handleToggleChange={() =>
+              handleBookmarkVisbility(!bookmarksVisible)
+            }
+          />
+        </div>
+        <div className="bookmark-toggle-description">
+          <Translation value="bookmark_toggle_description" />{" "}
+          <code>{isMac ? "Cmd + Shift + B" : "Ctrl + Shift + B"}</code>
+        </div>
       </div>
     </div>
   );

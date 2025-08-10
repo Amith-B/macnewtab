@@ -13,7 +13,7 @@ import {
   SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY,
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
-import { BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY } from "../static/bookmarkAlert";
+import { BOOKMARK_TOGGLE_STORAGE_KEY } from "../static/bookmarks";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
 import { languages } from "../locale/languages";
 import {
@@ -73,6 +73,8 @@ export const AppContext = createContext({
   groupTodosByCheckedStatus: () => {},
   wallpaperBlur: 0,
   handleWallpaperBlur: (_: number) => {},
+  bookmarksVisible: false,
+  handleBookmarkVisbility: (_: boolean) => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -181,6 +183,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [todoList, setTodoList] = useState<TodoList>([]);
 
   const [todoListVisbility, setTodoListVisbility] = useState(false);
+  const [bookmarksVisible, setBookmarksVisible] = useState(false);
 
   useEffect(() => {
     if (showClockAndCalendar) {
@@ -371,21 +374,9 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setDockBarSites(dockBarDefaultSites);
     }
 
-    const bookmarkAlertShown = localStorage.getItem(
-      BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY
-    );
+    const bookmarksEnabled = localStorage.getItem(BOOKMARK_TOGGLE_STORAGE_KEY);
 
-    if (!bookmarkAlertShown) {
-      const isMac = navigator.userAgent.toLowerCase().includes("mac");
-      setTimeout(() => {
-        alert(
-          isMac
-            ? "Use Cmd + Shift + B to toggle the bookmark bar."
-            : "Use Ctrl + Shift + B to toggle the bookmark bar."
-        );
-        localStorage.setItem(BOOKMARK_ALERT_SHOWN_LOCAL_STORAGE_KEY, "true");
-      }, 1000);
-    }
+    setBookmarksVisible(bookmarksEnabled === "true");
 
     const defaultTodoDockVisibility = localStorage.getItem(
       TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY
@@ -570,6 +561,27 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setWallpaperBlur(val);
   };
 
+  const handleBookmarkVisbility = async (val: boolean) => {
+    if (val) {
+      const hasBookmarkPermission = await new Promise((resolve) =>
+        chrome.permissions.contains({ permissions: ["bookmarks"] }, resolve)
+      );
+
+      if (!hasBookmarkPermission) {
+        const permissionGranted = await new Promise((resolve) =>
+          chrome.permissions.request({ permissions: ["bookmarks"] }, resolve)
+        );
+
+        if (!permissionGranted) {
+          return;
+        }
+      }
+    }
+
+    localStorage.setItem(BOOKMARK_TOGGLE_STORAGE_KEY, String(val));
+    setBookmarksVisible(val);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -611,6 +623,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleClearCompletedTodoList,
         handleTodoListUpdate,
         groupTodosByCheckedStatus,
+        bookmarksVisible,
+        handleBookmarkVisbility,
       }}
     >
       {children}

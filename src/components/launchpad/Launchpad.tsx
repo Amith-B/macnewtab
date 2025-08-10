@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { launchpadList } from "../../static/launchpad";
 import "./Launchpad.css";
+import { AppContext } from "../../context/provider";
+import Translation from "../../locale/Translation";
 
 export default function Launchpad({
   visible,
@@ -10,6 +12,32 @@ export default function Launchpad({
   onClose: () => void;
 }) {
   const [modalAccessible, setModalAccessible] = useState(false);
+  const [selectedTab, setSelectedTab] = useState<"google_apps" | "bookmarks">(
+    "google_apps"
+  );
+  const { bookmarksVisible } = useContext(AppContext);
+  const [bookmarksTree, setBookmarksTree] = useState<
+    chrome.bookmarks.BookmarkTreeNode[]
+  >([]);
+
+  useEffect(() => {
+    if (bookmarksVisible && visible) {
+      chrome.bookmarks.getTree().then((tree) => {
+        const rootTree = tree[0].children || [];
+        if (rootTree.length) {
+          setBookmarksTree(rootTree);
+          setSelectedTab("bookmarks");
+        }
+      });
+    } else {
+      const timeoutRef = setTimeout(() => {
+        setBookmarksTree([]);
+        setSelectedTab("google_apps");
+      }, 500);
+
+      return () => clearTimeout(timeoutRef);
+    }
+  }, [bookmarksVisible, visible]);
 
   // this is to prevent keyboard accessibility when modal is closed
   useEffect(() => {
@@ -39,6 +67,13 @@ export default function Launchpad({
     };
   }, [visible, onClose]);
 
+  const handleTabSelect =
+    (tabId: "google_apps" | "bookmarks") =>
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      event.stopPropagation();
+      setSelectedTab(tabId);
+    };
+
   return (
     <div
       className={
@@ -48,19 +83,81 @@ export default function Launchpad({
       }
       onClick={onClose}
     >
-      <div className="launchpad__container">
-        {launchpadList.map((item, idx) => (
-          <a
-            href={item.href}
-            className="launchpad-item"
-            key={idx}
-            title={item.label}
+      {!!bookmarksTree.length && (
+        <div className="launchpad__tab">
+          <button
+            className={
+              "launchpad__tab__button" +
+              (selectedTab === "google_apps" ? " selected" : "")
+            }
+            onClick={handleTabSelect("google_apps")}
           >
-            <div className="launchpad-item__logo">{<item.icon />}</div>
-            <span className="launchpad-item__label">{item.label}</span>
-          </a>
-        ))}
-      </div>
+            <Translation value="google_apps" />
+          </button>
+          <button
+            className={
+              "launchpad__tab__button" +
+              (selectedTab === "bookmarks" ? " selected" : "")
+            }
+            onClick={handleTabSelect("bookmarks")}
+          >
+            <Translation value="bookmarks" />
+          </button>
+        </div>
+      )}
+      {selectedTab === "google_apps" && (
+        <div className="launchpad__container">
+          {launchpadList.map((item, idx) => (
+            <a
+              href={item.href}
+              className="launchpad-item"
+              key={idx}
+              title={item.label}
+            >
+              <div className="launchpad-item__logo">{<item.icon />}</div>
+              <span className="launchpad-item__label">{item.label}</span>
+            </a>
+          ))}
+        </div>
+      )}
+
+      {selectedTab === "bookmarks" && (
+        <div className="launchpad__bookmarks__container">
+          {bookmarksTree.map((item) => (
+            <BookmarkGroup data={item} />
+          ))}
+        </div>
+      )}
     </div>
+  );
+}
+
+const SITE_IMAGE_URL = "https://www.google.com/s2/favicons?sz=64&domain=";
+
+function BookmarkGroup({ data }: { data: chrome.bookmarks.BookmarkTreeNode }) {
+  if (data?.children?.length) {
+    return (
+      <fieldset className="bookmark-group">
+        <legend className="bookmark-group-title">{data.title}</legend>
+        {data.children.map((item) => (
+          <BookmarkGroup data={item} />
+        ))}
+      </fieldset>
+    );
+  }
+  return (
+    <a
+      href={data.url}
+      className="bookmark-item"
+      key={data.id}
+      title={data.title}
+    >
+      <img
+        className="bookmark-item__icon"
+        src={SITE_IMAGE_URL + data.url}
+        alt={data.title}
+      />
+      <span className="bookmark-item__label">{data.title}</span>
+    </a>
   );
 }
