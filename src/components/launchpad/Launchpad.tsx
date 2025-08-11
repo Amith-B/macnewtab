@@ -1,8 +1,43 @@
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import { launchpadList } from "../../static/launchpad";
 import "./Launchpad.css";
 import { AppContext } from "../../context/provider";
 import Translation from "../../locale/Translation";
+import { translation } from "../../locale/languages";
+
+function filterBookmarksTree(
+  nodes: chrome.bookmarks.BookmarkTreeNode[],
+  searchTerm: string
+): chrome.bookmarks.BookmarkTreeNode[] {
+  const lowerSearch = searchTerm.toLowerCase();
+
+  function filterNode(
+    node: chrome.bookmarks.BookmarkTreeNode
+  ): chrome.bookmarks.BookmarkTreeNode | null {
+    const matches =
+      (node.title && node.title.toLowerCase().includes(lowerSearch)) ||
+      (node.url && node.url.toLowerCase().includes(lowerSearch));
+
+    let filteredChildren: chrome.bookmarks.BookmarkTreeNode[] = [];
+    if (node.children && node.children.length > 0) {
+      filteredChildren = node.children
+        .map(filterNode)
+        .filter(
+          (child): child is chrome.bookmarks.BookmarkTreeNode => child !== null
+        );
+    }
+
+    if (matches || filteredChildren.length > 0) {
+      return { ...node, children: filteredChildren };
+    }
+
+    return null;
+  }
+
+  return nodes
+    .map(filterNode)
+    .filter((node): node is chrome.bookmarks.BookmarkTreeNode => node !== null);
+}
 
 export default function Launchpad({
   visible,
@@ -12,10 +47,12 @@ export default function Launchpad({
   onClose: () => void;
 }) {
   const [modalAccessible, setModalAccessible] = useState(false);
+  const [search, setSearch] = useState("");
+  const [searchDebouncedValue, setSearchDebouncedValue] = useState("");
   const [selectedTab, setSelectedTab] = useState<"google_apps" | "bookmarks">(
     "google_apps"
   );
-  const { bookmarksVisible } = useContext(AppContext);
+  const { bookmarksVisible, locale } = useContext(AppContext);
   const [bookmarksTree, setBookmarksTree] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
@@ -38,6 +75,36 @@ export default function Launchpad({
       return () => clearTimeout(timeoutRef);
     }
   }, [bookmarksVisible, visible]);
+
+  useEffect(() => {
+    const timeoutRef = setTimeout(() => {
+      setSearchDebouncedValue(search);
+    }, 200);
+
+    return () => clearTimeout(timeoutRef);
+  }, [search]);
+
+  const filteredLaunchpadList = useMemo(() => {
+    const searchStr = searchDebouncedValue.trim().toLowerCase();
+
+    if (searchStr === "") {
+      return launchpadList;
+    }
+    return launchpadList.filter(
+      (item) =>
+        item.label.toLowerCase().includes(searchStr) ||
+        item.href.toLowerCase().includes(searchStr)
+    );
+  }, [searchDebouncedValue]);
+
+  const filteredBookmarksTree = useMemo(() => {
+    const searchStr = searchDebouncedValue.trim();
+
+    if (searchStr === "") {
+      return bookmarksTree;
+    }
+    return filterBookmarksTree(bookmarksTree, searchStr);
+  }, [bookmarksTree, searchDebouncedValue]);
 
   // this is to prevent keyboard accessibility when modal is closed
   useEffect(() => {
@@ -74,6 +141,10 @@ export default function Launchpad({
       setSelectedTab(tabId);
     };
 
+  const handleSearch = (evt: ChangeEvent<HTMLInputElement>) => {
+    setSearch(evt.target.value);
+  };
+
   return (
     <div
       className={
@@ -105,9 +176,19 @@ export default function Launchpad({
           </button>
         </div>
       )}
+      <div className="launchpad__search-container">
+        <input
+          id="search-launchpad"
+          name="Search launchpad"
+          value={search}
+          placeholder={translation[locale]["search"]}
+          onChange={handleSearch}
+          onClick={(evt) => evt.stopPropagation()}
+        />
+      </div>
       {selectedTab === "google_apps" && (
         <div className="launchpad__container">
-          {launchpadList.map((item, idx) => (
+          {filteredLaunchpadList.map((item, idx) => (
             <a
               href={item.href}
               className="launchpad-item"
@@ -123,7 +204,7 @@ export default function Launchpad({
 
       {selectedTab === "bookmarks" && (
         <div className="launchpad__bookmarks__container">
-          {bookmarksTree.map((item) => (
+          {filteredBookmarksTree.map((item) => (
             <BookmarkGroup data={item} />
           ))}
         </div>

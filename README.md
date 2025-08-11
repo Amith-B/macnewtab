@@ -15,6 +15,10 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
   <img src="./docs/images/5.jpeg" width="45%">
 </p>
 
+<p align="center">
+  <img src="./docs/images/7.jpeg" width="45%"> 
+</p>
+
 ## 🚀 Features
 
 ### 🌟 Elegant Widgets
@@ -33,6 +37,11 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 - Navigate to your most-visited sites quickly.
 - Customize whether links open in the same tab or a new one.
 
+### 📚 Bookmark Manager (New!)
+- Browse and search through all your saved bookmarks in a clean, macOS-inspired interface.
+- Quickly open any bookmark with a single click.
+- Organized in a launchpad for easy access without leaving the new tab.
+
 ### 🎨 Customizable Themes & Wallpapers
 - Toggle between **dark mode, light mode, or system mode**.
 - Choose theme colors.
@@ -50,7 +59,7 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 ### 📝 Daily To-Do List
 Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and manage daily items directly from your **new tab**.
 
-### 🗂️ Seamless Tab Management (New!)
+### 🗂️ Seamless Tab Management
 - Stay in control of your browser with a built-in Tab Manager—beautifully integrated into the side panel
 - Instantly search through all open tabs, Switch to any tab with a click, Close tabs directly from the list
 - Easily toggle the panel with a subtle notch on the screen’s edge
