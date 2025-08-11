@@ -53,7 +53,7 @@ export default function About() {
           </div>
           <div className="about__row-item">
             <Translation value="permissions_needed" />
-            <div>topSites, search, storage, tabs, bookmarks</div>
+            <div>topSites, search, storage, tabs, bookmarks, favicon</div>
           </div>
           <div className="about__row-item">
             <Translation value="third_party_libraries" />

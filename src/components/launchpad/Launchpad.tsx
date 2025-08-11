@@ -4,6 +4,10 @@ import "./Launchpad.css";
 import { AppContext } from "../../context/provider";
 import Translation from "../../locale/Translation";
 import { translation } from "../../locale/languages";
+import { FAVICON_URL, faviconURL } from "../../utils/favicon";
+import EmptySiteImage from "../../assets/empty-site-image.png";
+
+const FALLBACK_SITE_IMAGE = EmptySiteImage;
 
 function filterBookmarksTree(
   nodes: chrome.bookmarks.BookmarkTreeNode[],
@@ -213,8 +217,6 @@ export default function Launchpad({
   );
 }
 
-const SITE_IMAGE_URL = "https://www.google.com/s2/favicons?sz=64&domain=";
-
 function BookmarkGroup({ data }: { data: chrome.bookmarks.BookmarkTreeNode }) {
   if (data?.children?.length) {
     return (
@@ -240,8 +242,15 @@ function BookmarkGroup({ data }: { data: chrome.bookmarks.BookmarkTreeNode }) {
     >
       <img
         className="bookmark-item__icon"
-        src={SITE_IMAGE_URL + data.url}
+        src={faviconURL(data.url, "40")}
         alt={data.title}
+        onError={({ currentTarget }) => {
+          currentTarget.src = FAVICON_URL + data.url;
+          currentTarget.onerror = () => {
+            currentTarget.src = FALLBACK_SITE_IMAGE;
+            currentTarget.onerror = null;
+          };
+        }}
       />
       <span className="bookmark-item__label">{data.title}</span>
     </a>

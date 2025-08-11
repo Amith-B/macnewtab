@@ -7,7 +7,8 @@
     "topSites",
     "search",
     "storage",
-    "tabs"
+    "tabs",
+    "favicon"
   ],
   "optional_permissions": [
     "bookmarks"

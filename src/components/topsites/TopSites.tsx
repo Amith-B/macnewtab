@@ -2,10 +2,10 @@ import { memo, useContext, useEffect, useRef, useState } from "react";
 import "./TopSites.css";
 import { ReactComponent as LeftArrow } from "../../assets/left-arrow.svg";
 import { ReactComponent as RightArrow } from "../../assets/right-arrow.svg";
-import EmptySiteImage from "./empty-site-image.png";
+import EmptySiteImage from "../../assets/empty-site-image.png";
 import { AppContext } from "../../context/provider";
+import { FAVICON_URL, faviconURL } from "../../utils/favicon";
 
-const SITE_IMAGE_URL = "https://www.google.com/s2/favicons?sz=64&domain=";
 const FALLBACK_SITE_IMAGE = EmptySiteImage;
 
 const topSitesDefaultList = [
@@ -29,52 +29,18 @@ const topSitesDefaultList = [
 
 const TopSites = memo(function TopSites() {
   const [topSites, setTopSites] = useState<
-    Array<chrome.topSites.MostVisitedURL & { siteImage: string }>
+    Array<chrome.topSites.MostVisitedURL>
   >([]);
 
   const [isOverflowLeft, setIsOverflowLeft] = useState(false);
   const [isOverflowRight, setIsOverflowRight] = useState(true);
   const { separatePageSite } = useContext(AppContext);
 
-  const replaceLowResImages = (
-    topVisitedSites: chrome.topSites.MostVisitedURL[]
-  ) => {
-    topVisitedSites.forEach((item, idx) => {
-      const siteURL = new URL(item.url);
-      const img = new Image();
-      img.src = SITE_IMAGE_URL + siteURL.hostname;
-      img.onload = () => {
-        if (img.width < 18 || img.height < 18) {
-          setTopSites((prevState) => {
-            const updatedList = [...prevState];
-            updatedList[idx] = {
-              ...updatedList[idx],
-              siteImage: FALLBACK_SITE_IMAGE,
-            };
-
-            return updatedList;
-          });
-        }
-      };
-    });
-  };
-
   useEffect(() => {
     async function fetchTopSites() {
       try {
         const topVisitedSites = await chrome.topSites.get();
-        setTopSites(
-          topVisitedSites.map((item) => {
-            const siteURL = new URL(item.url);
-
-            return {
-              ...item,
-              siteImage: SITE_IMAGE_URL + siteURL.hostname,
-            };
-          })
-        );
-
-        replaceLowResImages(topVisitedSites);
+        setTopSites(topVisitedSites);
       } catch (e) {
         console.error(e);
       }
@@ -83,18 +49,7 @@ const TopSites = memo(function TopSites() {
     if (chrome && chrome.topSites) {
       fetchTopSites();
     } else {
-      setTopSites(
-        topSitesDefaultList.map((item) => {
-          const siteURL = new URL(item.url);
-
-          return {
-            ...item,
-            siteImage: SITE_IMAGE_URL + siteURL.hostname,
-          };
-        })
-      );
-
-      replaceLowResImages(topSitesDefaultList);
+      setTopSites(topSitesDefaultList);
     }
   }, []);
 
@@ -145,7 +100,14 @@ const TopSites = memo(function TopSites() {
             >
               <img
                 className="top-site__icon"
-                src={item.siteImage}
+                src={faviconURL(item.url)}
+                onError={({ currentTarget }) => {
+                  currentTarget.src = FAVICON_URL + item.url;
+                  currentTarget.onerror = () => {
+                    currentTarget.src = FALLBACK_SITE_IMAGE;
+                    currentTarget.onerror = null;
+                  };
+                }}
                 alt={item.title}
               />
               <span className="top-site__title">{item.title}</span>
