@@ -226,6 +226,11 @@ function BookmarkGroup({ data }: { data: chrome.bookmarks.BookmarkTreeNode }) {
       </fieldset>
     );
   }
+
+  if (!data.url) {
+    return null;
+  }
+
   return (
     <a
       href={data.url}
