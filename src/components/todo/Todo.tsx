@@ -182,7 +182,7 @@ export default function TodoDialog({
                 <span>{linkify(item.content)}</span>
               </div>
               <button
-                className="todo-list-item__delete"
+                className="todo-list-item__delete button-icon"
                 onClick={() => handleTodoItemDelete(item.id)}
               >
                 <DeleteIcon />

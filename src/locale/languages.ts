@@ -124,6 +124,12 @@ export const translation = {
       "You can toggle browser default bookmark with:",
     google_apps: "Google Apps",
     bookmarks: "Bookmarks",
+
+    delete_bookmark: "Delete bookmark",
+    delete_bookmark_confirm:
+      "Are you sure you want to delete this bookmark? This action cannot be undone.",
+    delete: "Delete",
+    keep: "Keep",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -250,6 +256,12 @@ export const translation = {
       "ನೀವು ಬ್ರೌಸರ್ ಡೀಫಾಲ್ಟ್ ಬುಕ್‌ಮಾರ್ಕ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಬಹುದು:",
     google_apps: "ಗೂಗಲ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು",
     bookmarks: "ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳು",
+
+    delete_bookmark: "ಬುಕ್ಮಾರ್ಕ್ ಅಳಿಸಿ",
+    delete_bookmark_confirm:
+      "ಈ ಬುಕ್‌ಮಾರ್ಕ್ ಅನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ? ",
+    delete: "ಅಳಿಸು",
+    keep: "ಇರಿಸು",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -376,6 +388,11 @@ export const translation = {
     bookmark_toggle_description: "Výchozí záložka prohlížeče můžete přepínat:",
     google_apps: "Google Apps",
     bookmarks: "Záložky",
+
+    delete_bookmark: "Odstranit záložku",
+    delete_bookmark_confirm: "Jste si jisti, že chcete tuto záložku smazat? ",
+    delete: "Vymazat",
+    keep: "Udržet",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -502,6 +519,12 @@ export const translation = {
       "Tarayıcı varsayılan yer işaretini şu şekilde değiştirebilirsiniz:",
     google_apps: "Google Apps",
     bookmarks: "Yer imleri",
+
+    delete_bookmark: "Yer imi Sil",
+    delete_bookmark_confirm:
+      "Bu yer işaretini silmek istediğinizden emin misiniz? ",
+    delete: "Silmek",
+    keep: "Kale",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -629,6 +652,11 @@ export const translation = {
       "Bạn có thể chuyển đổi dấu trang mặc định của trình duyệt với:",
     google_apps: "Ứng dụng Google",
     bookmarks: "Dấu trang",
+
+    delete_bookmark: "Xóa dấu trang",
+    delete_bookmark_confirm: "Bạn có chắc là bạn muốn xóa dấu trang này? ",
+    delete: "Xóa bỏ",
+    keep: "Giữ",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -755,6 +783,12 @@ export const translation = {
       "Siz brauzerning standart bazasini almashtirishingiz mumkin:",
     google_apps: "Google Apps",
     bookmarks: "Xatcho'plar",
+
+    delete_bookmark: "Bookmarkni o'chirish",
+    delete_bookmark_confirm:
+      "Haqiqatan ham ushbu xatcho'pni yo'q qilmoqchimisiz? ",
+    delete: "O'chirmoq",
+    keep: "Saqlamoq",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -878,6 +912,11 @@ export const translation = {
     bookmark_toggle_description: "您可以使用以下方式切换浏览器默认书签：",
     google_apps: "Google应用程序",
     bookmarks: "书签",
+
+    delete_bookmark: "删除书签",
+    delete_bookmark_confirm: "您确定要删除此书签吗？",
+    delete: "删除",
+    keep: "保持",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -1004,6 +1043,12 @@ export const translation = {
       "आप ब्राउज़र डिफ़ॉल्ट बुकमार्क के साथ टॉगल कर सकते हैं:",
     google_apps: "Google Apps",
     bookmarks: "बुकमार्क",
+
+    delete_bookmark: "बुकमार्क हटाएं",
+    delete_bookmark_confirm:
+      "क्या आप सुनिश्चित हैं कि आप इस बुकमार्क को हटाना चाहते हैं? ",
+    delete: "मिटाना",
+    keep: "रखना",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1132,6 +1177,12 @@ export const translation = {
       "È possibile attivare segnalibri predefiniti del browser con:",
     google_apps: "App Google",
     bookmarks: "Segnalibri",
+
+    delete_bookmark: "Elimina il segnalibro",
+    delete_bookmark_confirm:
+      "Sei sicuro di voler eliminare questo segnalibro? ",
+    delete: "Eliminare",
+    keep: "Mantenere",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1258,6 +1309,12 @@ export const translation = {
       "আপনি ব্রাউজার ডিফল্ট বুকমার্ক টগল করতে পারেন:",
     google_apps: "গুগল অ্যাপস",
     bookmarks: "বুকমার্কস",
+
+    delete_bookmark: "বুকমার্ক মুছুন",
+    delete_bookmark_confirm:
+      "আপনি কি নিশ্চিত যে আপনি এই বুকমার্কটি মুছতে চান? ",
+    delete: "মুছুন",
+    keep: "রাখুন",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1385,6 +1442,12 @@ export const translation = {
       "Você pode alternar o marcador padrão do navegador com:",
     google_apps: "Google Apps",
     bookmarks: "Marcadores",
+
+    delete_bookmark: "Exclua marcador",
+    delete_bookmark_confirm:
+      "Tem certeza de que deseja excluir este marcador? ",
+    delete: "Excluir",
+    keep: "Manter",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1513,6 +1576,11 @@ export const translation = {
       "Vous pouvez basculer le bibliothèque par défaut du navigateur avec:",
     google_apps: "Google Apps",
     bookmarks: "Signets",
+
+    delete_bookmark: "Supprimer le signet",
+    delete_bookmark_confirm: "Êtes-vous sûr de vouloir supprimer ce signet? ",
+    delete: "Supprimer",
+    keep: "Garder",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1639,6 +1707,11 @@ export const translation = {
       "Вы можете переключить браузер по умолчанию закладки с:",
     google_apps: "Google Apps",
     bookmarks: "Закладки",
+
+    delete_bookmark: "Удалить закладку",
+    delete_bookmark_confirm: "Вы уверены, что хотите удалить эту закладку? ",
+    delete: "Удалить",
+    keep: "Держать",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1766,6 +1839,12 @@ export const translation = {
       "Puede alternar el marcador predeterminado del navegador con:",
     google_apps: "Aplicaciones de Google",
     bookmarks: "Marcadores",
+
+    delete_bookmark: "Eliminar marcador",
+    delete_bookmark_confirm:
+      "¿Estás seguro de que quieres eliminar este marcador? ",
+    delete: "Borrar",
+    keep: "Mantener",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -1891,6 +1970,11 @@ export const translation = {
       "ブラウザのデフォルトのブックマークを次のように切り替えることができます。",
     google_apps: "Googleアプリ",
     bookmarks: "ブックマーク",
+
+    delete_bookmark: "ブックマークを削除します",
+    delete_bookmark_confirm: "このブックマークを削除したいですか？",
+    delete: "消去",
+    keep: "保つ",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -2015,6 +2099,11 @@ export const translation = {
       "브라우저 기본 북마크를 다음과 같이 토글 할 수 있습니다.",
     google_apps: "Google Apps",
     bookmarks: "북마크",
+
+    delete_bookmark: "북마크를 삭제하십시오",
+    delete_bookmark_confirm: "이 북마크를 삭제 하시겠습니까? ",
+    delete: "삭제",
+    keep: "유지하다",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -2141,6 +2230,11 @@ export const translation = {
       "Anda dapat beralih bookmark default browser dengan:",
     google_apps: "Aplikasi Google",
     bookmarks: "Bookmark",
+
+    delete_bookmark: "Hapus Bookmark",
+    delete_bookmark_confirm: "Anda yakin ingin menghapus bookmark ini? ",
+    delete: "Menghapus",
+    keep: "Menyimpan",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -2266,6 +2360,12 @@ export const translation = {
     bookmark_toggle_description: "आपण ब्राउझर डीफॉल्ट बुकमार्क टॉगल करू शकता:",
     google_apps: "Google अॅप्स",
     bookmarks: "बुकमार्क",
+
+    delete_bookmark: "बुकमार्क हटवा",
+    delete_bookmark_confirm:
+      "आपणास खात्री आहे की आपण हा बुकमार्क हटवू इच्छिता? ",
+    delete: "हटवा",
+    keep: "ठेवा",
   },
 };
 

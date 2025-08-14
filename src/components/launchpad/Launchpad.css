@@ -226,3 +226,18 @@
   transform: scale(1);
   opacity: 1;
 }
+
+.bookmark-item {
+  position: relative;
+}
+
+.bookmark-item__delete {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.bookmark-item:hover .bookmark-item__delete {
+  display: block;
+}

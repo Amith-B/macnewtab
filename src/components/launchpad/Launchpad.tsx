@@ -6,6 +6,8 @@ import Translation from "../../locale/Translation";
 import { translation } from "../../locale/languages";
 import { FAVICON_URL, faviconURL } from "../../utils/favicon";
 import EmptySiteImage from "../../assets/empty-site-image.png";
+import { ReactComponent as DeleteIcon } from "../../assets/delete-icon.svg";
+import ConfirmDialog from "../confirm/ConfirmDialog";
 
 const FALLBACK_SITE_IMAGE = EmptySiteImage;
 
@@ -60,16 +62,11 @@ export default function Launchpad({
   const [bookmarksTree, setBookmarksTree] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
+  const [bookmarkIdToBeDeleted, setBookmarkIdToBeDeleted] = useState("");
 
   useEffect(() => {
     if (bookmarksVisible && visible) {
-      chrome.bookmarks.getTree().then((tree) => {
-        const rootTree = tree[0].children || [];
-        if (rootTree.length) {
-          setBookmarksTree(rootTree);
-          setSelectedTab("bookmarks");
-        }
-      });
+      refreshBookmark();
     } else {
       const timeoutRef = setTimeout(() => {
         setBookmarksTree([]);
@@ -149,6 +146,27 @@ export default function Launchpad({
     setSearch(evt.target.value);
   };
 
+  const handleBookmarkRemove = (bookmarkId: string) => {
+    setBookmarkIdToBeDeleted(bookmarkId);
+  };
+
+  const refreshBookmark = () => {
+    chrome.bookmarks.getTree().then((tree) => {
+      const rootTree = tree[0].children || [];
+      if (rootTree.length) {
+        setBookmarksTree(rootTree);
+        setSelectedTab("bookmarks");
+      }
+    });
+  };
+
+  const handleConfirmDelete = () => {
+    chrome.bookmarks.remove(bookmarkIdToBeDeleted).then(() => {
+      refreshBookmark();
+      setBookmarkIdToBeDeleted("");
+    });
+  };
+
   return (
     <div
       className={
@@ -207,23 +225,43 @@ export default function Launchpad({
       )}
 
       {selectedTab === "bookmarks" && (
-        <div className="launchpad__bookmarks__container">
-          {filteredBookmarksTree.map((item) => (
-            <BookmarkGroup data={item} />
-          ))}
-        </div>
+        <>
+          <div className="launchpad__bookmarks__container">
+            {filteredBookmarksTree.map((item) => (
+              <BookmarkGroup
+                data={item}
+                onBookmarkRemove={handleBookmarkRemove}
+              />
+            ))}
+          </div>
+          <ConfirmDialog
+            open={!!bookmarkIdToBeDeleted}
+            title={<Translation value="delete_bookmark" />}
+            description={<Translation value="delete_bookmark_confirm" />}
+            confirmText={<Translation value="delete" />}
+            cancelText={<Translation value="keep" />}
+            onConfirm={handleConfirmDelete}
+            onCancel={() => setBookmarkIdToBeDeleted("")}
+          />
+        </>
       )}
     </div>
   );
 }
 
-function BookmarkGroup({ data }: { data: chrome.bookmarks.BookmarkTreeNode }) {
+function BookmarkGroup({
+  data,
+  onBookmarkRemove,
+}: {
+  data: chrome.bookmarks.BookmarkTreeNode;
+  onBookmarkRemove: (id: string) => void;
+}) {
   if (data?.children?.length) {
     return (
       <fieldset className="bookmark-group">
         <legend className="bookmark-group-title">{data.title}</legend>
         {data.children.map((item) => (
-          <BookmarkGroup data={item} />
+          <BookmarkGroup data={item} onBookmarkRemove={onBookmarkRemove} />
         ))}
       </fieldset>
     );
@@ -233,6 +271,15 @@ function BookmarkGroup({ data }: { data: chrome.bookmarks.BookmarkTreeNode }) {
     return null;
   }
 
+  const handleBookmarkDelete = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    bookmarkId: string
+  ) => {
+    event.stopPropagation();
+    event.preventDefault();
+    onBookmarkRemove(bookmarkId);
+  };
+
   return (
     <a
       href={data.url}
@@ -240,6 +287,12 @@ function BookmarkGroup({ data }: { data: chrome.bookmarks.BookmarkTreeNode }) {
       key={data.id}
       title={data.title}
     >
+      <button
+        className="bookmark-item__delete button-icon"
+        onClick={(event) => handleBookmarkDelete(event, data.id)}
+      >
+        <DeleteIcon />
+      </button>
       <img
         className="bookmark-item__icon"
         src={faviconURL(data.url, "40")}
