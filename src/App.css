@@ -527,6 +527,7 @@ to be revisited in future */
 
 .button-primary {
   background-color: var(--theme-selection-color);
+  color: white;
 }
 
 .button-icon {
