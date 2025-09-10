@@ -112,6 +112,8 @@ export const translation = {
     search_tabs: "Search Tabs",
 
     show_tab_manager: "Show Tab Manager",
+    show_sticky_notes: "Show Sticky Notes",
+    sticky_note_placeholder: "Type your note here...",
 
     close_all: "Close All",
     close_filtered: "Close Filtered",
@@ -242,6 +244,8 @@ export const translation = {
     search_tabs: "ಟ್ಯಾಬ್ ಹುಡುಕಾಟ",
 
     show_tab_manager: "TAB ವ್ಯವಸ್ಥಾಪಕವನ್ನು ತೋರಿಸಿ",
+    show_sticky_notes: "ಸ್ಟಿಕಿ ನೋಟ್‌ಗಳನ್ನು ತೋರಿಸಿ",
+    sticky_note_placeholder: "ನಿಮ್ಮ ಟಿಪ್ಪಣಿಯನ್ನು ಇಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ...",
 
     close_all: "ಎಲ್ಲವನ್ನು ಮುಚ್ಚಿ",
     close_filtered: "ಕ್ಲೋಸ್ ಫಿಲ್ಟರ್",
@@ -375,6 +379,8 @@ export const translation = {
     search_tabs: "Vyhledávání na kartě",
 
     show_tab_manager: "Zobrazit správce Tab",
+    show_sticky_notes: "Zobrazit lepící poznámky",
+    sticky_note_placeholder: "Zde napište svou poznámku...",
 
     close_all: "Zavřete všechny",
     close_filtered: "Zavřete filtrovány",
@@ -505,6 +511,8 @@ export const translation = {
     search_tabs: "Sekme arama",
 
     show_tab_manager: "Sekme Yöneticisini Göster",
+    show_sticky_notes: "Yapışkan Notları Göster",
+    sticky_note_placeholder: "Notunuzu buraya yazın...",
 
     close_all: "Hepsini kapat",
     close_filtered: "Yakın filtrelenmiş",
@@ -638,6 +646,8 @@ export const translation = {
     search_tabs: "Tìm kiếm tab",
 
     show_tab_manager: "Hiển thị trình quản lý tab",
+    show_sticky_notes: "Hiển thị ghi chú dính",
+    sticky_note_placeholder: "Nhập ghi chú của bạn ở đây...",
 
     close_all: "Đóng tất cả",
     close_filtered: "Đóng được lọc",
@@ -769,6 +779,8 @@ export const translation = {
     search_tabs: "Yorliqni qidirish",
 
     show_tab_manager: "Tab menejerini ko'rsatish",
+    show_sticky_notes: "Yopishqoq eslatmalarni ko'rsatish",
+    sticky_note_placeholder: "Eslatmangizni shu yerga yozing...",
 
     close_all: "Hammasini yaqin",
     close_filtered: "Filtrni yoping",
@@ -899,6 +911,8 @@ export const translation = {
     search_tabs: "选项卡搜索",
 
     show_tab_manager: "显示选项卡管理器",
+    show_sticky_notes: "显示便签",
+    sticky_note_placeholder: "在此输入您的笔记...",
 
     close_all: "关闭全部",
     close_filtered: "关闭过滤",
@@ -1029,6 +1043,8 @@ export const translation = {
     search_tabs: "टैब खोज",
 
     show_tab_manager: "शो टैब मैनेजर",
+    show_sticky_notes: "स्टिकी नोट्स दिखाएं",
+    sticky_note_placeholder: "अपना नोट यहाँ टाइप करें...",
 
     close_all: "सभी को बंद कर देना",
     close_filtered: "बंद फ़िल्टर किया हुआ",
@@ -1163,6 +1179,8 @@ export const translation = {
     search_tabs: "Scheda Cerca",
 
     show_tab_manager: "Show Scheda Manager",
+    show_sticky_notes: "Mostra note adesive",
+    sticky_note_placeholder: "Digita la tua nota qui...",
 
     close_all: "Chiudi tutto",
     close_filtered: "Chiuso filtrato",
@@ -1295,6 +1313,8 @@ export const translation = {
     search_tabs: "ট্যাব অনুসন্ধান",
 
     show_tab_manager: "ট্যাব ম্যানেজার দেখান",
+    show_sticky_notes: "স্টিকি নোট দেখান",
+    sticky_note_placeholder: "এখানে আপনার নোট টাইপ করুন...",
 
     close_all: "সব বন্ধ",
     close_filtered: "ফিল্টার বন্ধ",
@@ -1428,6 +1448,8 @@ export const translation = {
     search_tabs: "Pesquisa de guia",
 
     show_tab_manager: "Mostrar gerente de guia",
+    show_sticky_notes: "Mostrar notas adesivas",
+    sticky_note_placeholder: "Digite sua nota aqui...",
 
     close_all: "Feche tudo",
     close_filtered: "Filtrado próximo",
@@ -1562,6 +1584,8 @@ export const translation = {
     search_tabs: "Recherche d'onglet",
 
     show_tab_manager: "Afficher le gestionnaire d'onglet",
+    show_sticky_notes: "Afficher les notes autocollantes",
+    sticky_note_placeholder: "Tapez votre note ici...",
 
     close_all: "Fermer tous",
     close_filtered: "Fermer filtré",
@@ -1693,6 +1717,8 @@ export const translation = {
     search_tabs: "Поиск вкладок",
 
     show_tab_manager: "Показать менеджер вкладок",
+    show_sticky_notes: "Показать стикеры",
+    sticky_note_placeholder: "Введите вашу заметку здесь...",
 
     close_all: "Закрыть все",
     close_filtered: "Близко отфильтрован",
@@ -1825,6 +1851,8 @@ export const translation = {
     search_tabs: "Búsqueda de pestañas",
 
     show_tab_manager: "Show Tab Manager",
+    show_sticky_notes: "Mostrar notas adhesivas",
+    sticky_note_placeholder: "Escribe tu nota aquí...",
 
     close_all: "Cerrar todo",
     close_filtered: "Cerrar filtrado",
@@ -1956,6 +1984,8 @@ export const translation = {
     search_tabs: "タブ検索",
 
     show_tab_manager: "タブマネージャーを表示します",
+    show_sticky_notes: "付箋を表示",
+    sticky_note_placeholder: "ここにメモを入力してください...",
 
     close_all: "すべてを閉じます",
     close_filtered: "フィルタリングを閉じます",
@@ -2085,6 +2115,8 @@ export const translation = {
     search_tabs: "탭 검색",
 
     show_tab_manager: "탭 관리자 표시",
+    show_sticky_notes: "스티키 노트 표시",
+    sticky_note_placeholder: "여기에 메모를 입력하세요...",
 
     close_all: "모두 닫으십시오",
     close_filtered: "필터링 된 닫기",
@@ -2216,6 +2248,8 @@ export const translation = {
     search_tabs: "Pencarian tab",
 
     show_tab_manager: "Tampilkan Tab Manager",
+    show_sticky_notes: "Tampilkan Catatan Tempel",
+    sticky_note_placeholder: "Ketik catatan Anda di sini...",
 
     close_all: "Tutup semua",
     close_filtered: "Tutup difilter",
@@ -2347,6 +2381,8 @@ export const translation = {
     search_tabs: "टॅब शोध",
 
     show_tab_manager: "टॅब व्यवस्थापक दर्शवा",
+    show_sticky_notes: "स्टिकी नोट्स दाखवा",
+    sticky_note_placeholder: "तुमची नोंद इथे टाइप करा...",
 
     close_all: "सर्व बंद करा",
     close_filtered: "बंद फिल्टर",

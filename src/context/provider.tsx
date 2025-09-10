@@ -30,6 +30,7 @@ import {
   TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
 } from "../static/todo";
 import { WALLPAPER_BLUR_LOCAL_STORAGE_KEY } from "../static/wallpapers";
+import { SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY } from "../static/stickyNotes";
 
 type DockBarSites = Array<{ title: string; url: string; id: string }>;
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
@@ -75,6 +76,8 @@ export const AppContext = createContext({
   handleWallpaperBlur: (_: number) => {},
   bookmarksVisible: false,
   handleBookmarkVisbility: (_: boolean) => {},
+  showStickyNotes: true,
+  handleShowStickyNotesChange: (_: boolean) => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -184,6 +187,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
   const [todoListVisbility, setTodoListVisbility] = useState(false);
   const [bookmarksVisible, setBookmarksVisible] = useState(false);
+  const [showStickyNotes, setShowStickyNotes] = useState(true);
 
   useEffect(() => {
     if (showClockAndCalendar) {
@@ -388,6 +392,17 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         ? false
         : true
     );
+
+    const defaultShowStickyNotes = localStorage.getItem(
+      SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY
+    );
+    setShowStickyNotes(
+      defaultShowStickyNotes === "true"
+        ? true
+        : defaultShowStickyNotes === "false"
+        ? false
+        : true
+    );
   }, []);
 
   const handleClearCompletedTodoList = () => {
@@ -582,6 +597,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setBookmarksVisible(val);
   };
 
+  const handleShowStickyNotesChange = (val: boolean) => {
+    localStorage.setItem(SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY, String(val));
+    setShowStickyNotes(val);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -625,6 +645,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         groupTodosByCheckedStatus,
         bookmarksVisible,
         handleBookmarkVisbility,
+        showStickyNotes,
+        handleShowStickyNotesChange,
       }}
     >
       {children}

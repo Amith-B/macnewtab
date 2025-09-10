@@ -1,0 +1,108 @@
+.sticky-notes-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.sticky-note {
+  position: absolute;
+  width: 200px;
+  min-height: 200px;
+  padding: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  cursor: move;
+  pointer-events: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: transform 0.1s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sticky-note:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
+.sticky-note.dragging {
+  transform: rotate(2deg) scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.note-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 8px 0 8px;
+  height: 24px;
+}
+
+.delete-note-btn {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease;
+}
+
+.delete-note-btn:hover {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff0000;
+  transform: scale(1.1);
+}
+
+.note-content {
+  width: 100%;
+  height: calc(100% - 32px);
+  min-height: 160px;
+  border: none;
+  background: transparent;
+  resize: none;
+  outline: none;
+  padding: 0 12px 12px 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: inherit;
+  cursor: text;
+}
+
+.note-content::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  font-style: italic;
+}
+
+.note-content:focus {
+  cursor: text;
+}
+
+/* Animation for new notes */
+@keyframes noteAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.sticky-note {
+  animation: noteAppear 0.3s ease-out;
+}

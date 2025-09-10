@@ -21,6 +21,7 @@ import TopSites from "./components/topsites/TopSites";
 import Translation from "./locale/Translation";
 import Dock from "./components/dock/Dock";
 import TabManager from "./components/tab-manager/TabManager";
+import StickyNotes from "./components/sticky-notes/StickyNotes";
 
 const App = memo(function App() {
   const [searchEngine, setSearchEngine] = useState("");
@@ -38,6 +39,7 @@ const App = memo(function App() {
     locale,
     showClockAndCalendar,
     showTabManager,
+    showStickyNotes,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -127,6 +129,7 @@ const App = memo(function App() {
       </div>
       <Dock />
       {showTabManager && <TabManager />}
+      {showStickyNotes && <StickyNotes />}
     </div>
   );
 });

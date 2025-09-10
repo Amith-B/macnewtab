@@ -4,6 +4,7 @@ import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
 import { ReactComponent as LeftArrow } from "../../assets/left-arrow.svg";
 import { ReactComponent as RightArrow } from "../../assets/right-arrow.svg";
 import { ReactComponent as TodoIcon } from "../../assets/todo.svg";
+import { ReactComponent as StickyNotesIcon } from "../../assets/sticky-notes.svg";
 import Settings from "../settings/Settings";
 import Launchpad from "../launchpad/Launchpad";
 import TodoDialog from "../todo/Todo";
@@ -31,6 +32,7 @@ export default function Dock() {
     dockPosition,
     todoListVisbility,
     groupTodosByCheckedStatus,
+    showStickyNotes,
   } = useContext(AppContext);
 
   const handleLaunchpadClose = useCallback(
@@ -149,6 +151,19 @@ export default function Dock() {
             }}
           >
             <TodoIcon />
+          </button>
+        )}
+        {showStickyNotes && (
+          <button
+            className={`sticky-notes-button accessible tooltip tooltip-${
+              TooltipPosition[showDocBar ? dockPosition : "top"] || "top"
+            }`}
+            data-label="Add Sticky Note"
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent("createStickyNote"));
+            }}
+          >
+            <StickyNotesIcon />
           </button>
         )}
         <button
