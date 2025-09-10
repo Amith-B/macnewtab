@@ -53,7 +53,14 @@ const StickyNotes: React.FC = () => {
     // Listen for localStorage changes from other tabs
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === STICKY_NOTES_KEY && e.newValue) {
-        setNotes(JSON.parse(e.newValue));
+        try {
+          setNotes(JSON.parse(e.newValue));
+        } catch (error) {
+          console.error(
+            "Failed to parse sticky notes from storage event",
+            error
+          );
+        }
       }
     };
 

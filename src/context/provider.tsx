@@ -200,8 +200,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   }, [showClockAndCalendar]);
 
   useEffect(() => {
-    let timeoutRef: NodeJS.Timeout;
-
     const getList = () => {
       const request = getLocalstorageDataWithPromise(
         TODO_LIST_LOCAL_STORAGE_KEY
@@ -226,17 +224,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         } catch (_) {
           setTodoList([]);
         }
-        if (todoListVisbility) {
-          timeoutRef = setTimeout(() => {
-            getList();
-          }, 5000);
-        }
       });
     };
 
     getList();
-
-    return () => clearTimeout(timeoutRef);
   }, [todoListVisbility]);
 
   useEffect(() => {
@@ -403,6 +394,22 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         ? false
         : true
     );
+
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === TODO_LIST_LOCAL_STORAGE_KEY && e.newValue) {
+        try {
+          setTodoList(JSON.parse(e.newValue));
+        } catch (error) {
+          console.error("Failed to parse todo list from storage event", error);
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   const handleClearCompletedTodoList = () => {
