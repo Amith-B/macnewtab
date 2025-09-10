@@ -49,6 +49,19 @@ const StickyNotes: React.FC = () => {
     if (savedNotes) {
       setNotes(JSON.parse(savedNotes));
     }
+
+    // Listen for localStorage changes from other tabs
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === STICKY_NOTES_KEY && e.newValue) {
+        setNotes(JSON.parse(e.newValue));
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   const saveNotes = (updatedNotes: Note[]) => {
@@ -57,8 +70,12 @@ const StickyNotes: React.FC = () => {
   };
 
   const createNote = () => {
+    // Get fresh data from localStorage to avoid conflicts
+    const currentNotes = localStorage.getItem(STICKY_NOTES_KEY);
+    const existingNotes = currentNotes ? JSON.parse(currentNotes) : [];
+
     const newNote: Note = {
-      id: Date.now().toString(),
+      id: Date.now().toString() + Math.random().toString(36).slice(2, 11),
       content: "",
       x: Math.random() * 300 + 50,
       y: Math.random() * 200 + 100,
@@ -66,7 +83,7 @@ const StickyNotes: React.FC = () => {
       timestamp: Date.now(),
     };
 
-    const updatedNotes = [...notes, newNote];
+    const updatedNotes = [...existingNotes, newNote];
     saveNotes(updatedNotes);
   };
 
@@ -84,14 +101,22 @@ const StickyNotes: React.FC = () => {
   });
 
   const updateNote = (id: string, content: string) => {
-    const updatedNotes = notes.map((note) =>
+    // Get fresh data from localStorage to avoid conflicts
+    const currentNotes = localStorage.getItem(STICKY_NOTES_KEY);
+    const existingNotes = currentNotes ? JSON.parse(currentNotes) : [];
+
+    const updatedNotes = existingNotes.map((note: Note) =>
       note.id === id ? { ...note, content, timestamp: Date.now() } : note
     );
     saveNotes(updatedNotes);
   };
 
   const deleteNote = (id: string) => {
-    const updatedNotes = notes.filter((note) => note.id !== id);
+    // Get fresh data from localStorage to avoid conflicts
+    const currentNotes = localStorage.getItem(STICKY_NOTES_KEY);
+    const existingNotes = currentNotes ? JSON.parse(currentNotes) : [];
+
+    const updatedNotes = existingNotes.filter((note: Note) => note.id !== id);
     saveNotes(updatedNotes);
   };
 
@@ -128,7 +153,24 @@ const StickyNotes: React.FC = () => {
 
   const handleMouseUp = () => {
     if (draggedNote) {
-      localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(notes));
+      // Get fresh data and update the specific note position
+      const currentNotes = localStorage.getItem(STICKY_NOTES_KEY);
+      const existingNotes = currentNotes ? JSON.parse(currentNotes) : [];
+
+      const draggedNoteData = notes.find((n) => n.id === draggedNote);
+      if (draggedNoteData) {
+        const updatedNotes = existingNotes.map((note: Note) =>
+          note.id === draggedNote
+            ? {
+                ...note,
+                x: draggedNoteData.x,
+                y: draggedNoteData.y,
+                timestamp: Date.now(),
+              }
+            : note
+        );
+        localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(updatedNotes));
+      }
       setDraggedNote(null);
     }
   };
