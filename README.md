@@ -68,7 +68,7 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 
 Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and manage daily items directly from your **new tab**.
 
-### :spiral_note_pad: Sticky Notes (New!)
+### 🗒️ Sticky Notes (New!)
 
 - Create colorful, draggable **sticky notes** directly on your new tab page
 - **Drag and drop** notes anywhere on the screen for perfect organization
