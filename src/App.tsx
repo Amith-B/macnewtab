@@ -1,11 +1,4 @@
-import {
-  CSSProperties,
-  memo,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { CSSProperties, useContext, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import Clock1 from "./widgets/clock-1/Clock1";
 import Calendar1 from "./widgets/day-calendar/Calendar1";
@@ -23,15 +16,15 @@ import Dock from "./components/dock/Dock";
 import TabManager from "./components/tab-manager/TabManager";
 import StickyNotes from "./components/sticky-notes/StickyNotes";
 
-const App = memo(function App() {
+const App = function App() {
   const [searchEngine, setSearchEngine] = useState("");
+  const [date, setDate] = useState(new Date());
 
   const {
     theme,
     themeColor,
     backgroundImage,
     wallpaperBlur,
-    date,
     showGreeting,
     showVisitedSites,
     showSearchEngines,
@@ -41,6 +34,16 @@ const App = memo(function App() {
     showTabManager,
     showStickyNotes,
   } = useContext(AppContext);
+
+  useEffect(() => {
+    if (showClockAndCalendar) {
+      const intervalRef = setInterval(() => {
+        setDate(new Date());
+      }, 1000);
+
+      return () => clearInterval(intervalRef);
+    }
+  }, [showClockAndCalendar]);
 
   useEffect(() => {
     const defaultSearchEngine = localStorage.getItem(
@@ -107,8 +110,12 @@ const App = memo(function App() {
       >
         {showClockAndCalendar && (
           <div className="section-1">
-            <Clock1 />
-            {showMonthView ? <Calendar /> : <Calendar1 />}
+            <Clock1 date={date} />
+            {showMonthView ? (
+              <Calendar date={date} />
+            ) : (
+              <Calendar1 date={date} />
+            )}
           </div>
         )}
         <div className="section-2">
@@ -132,6 +139,6 @@ const App = memo(function App() {
       {showStickyNotes && <StickyNotes />}
     </div>
   );
-});
+};
 
 export default App;

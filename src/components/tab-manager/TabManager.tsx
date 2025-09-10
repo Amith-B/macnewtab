@@ -1,5 +1,6 @@
 import {
   ChangeEvent,
+  memo,
   useContext,
   useEffect,
   useMemo,
@@ -37,7 +38,7 @@ const getGroupedTabs = (tabs: chrome.tabs.Tab[], search: string) => {
   }, {});
 };
 
-export default function TabManager() {
+const TabManager = memo(() => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -381,4 +382,6 @@ export default function TabManager() {
       </button>
     </aside>
   );
-}
+});
+
+export default TabManager;

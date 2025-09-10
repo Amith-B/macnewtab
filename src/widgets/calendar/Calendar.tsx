@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import "./Calendar.css";
-import { AppContext } from "../../context/provider";
-import Translation from "../../locale/Translation";
 import { translation } from "../../locale/languages";
+import { AppContext } from "../../context/provider";
 
 const getMonthName = (date: Date) => {
   return new Intl.DateTimeFormat("en-US", { month: "long" }).format(date);
@@ -32,9 +31,9 @@ function generateDateArray(year: number, month: number) {
   return resultArray;
 }
 
-export default function Calendar() {
+export default function Calendar({ date }: { date: Date }) {
   const [weeks, setWeeks] = useState<string[]>([]);
-  const { date } = useContext(AppContext);
+  const { locale } = useContext(AppContext);
 
   useEffect(() => {
     setWeeks(getSingleLetterWeekNames());
@@ -55,7 +54,7 @@ export default function Calendar() {
   return (
     <div className="calendar__container">
       <div className="calendar__month-label">
-        {<Translation value={monthKey} />}
+        {translation[locale]?.[monthKey]}
       </div>
       <div className="calendar__week-container">
         {weeks.map((week, idx) => (

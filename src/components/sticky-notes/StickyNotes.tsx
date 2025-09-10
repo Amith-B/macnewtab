@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext, memo } from "react";
 import "./StickyNotes.css";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
@@ -37,7 +37,7 @@ const noteColors = [
   "#E1D5E7", // Thistle
 ];
 
-const StickyNotes: React.FC = () => {
+const StickyNotes: React.FC = memo(() => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [draggedNote, setDraggedNote] = useState<string | null>(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -236,6 +236,6 @@ const StickyNotes: React.FC = () => {
       ))}
     </div>
   );
-};
+});
 
 export default StickyNotes;

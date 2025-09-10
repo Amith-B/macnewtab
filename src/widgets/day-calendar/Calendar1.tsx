@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import "./Calendar1.css";
-import { AppContext } from "../../context/provider";
-import Translation from "../../locale/Translation";
 import { translation } from "../../locale/languages";
+import { AppContext } from "../../context/provider";
 
 const getMonthName = (date: Date): keyof (typeof translation)["en"] => {
   return new Intl.DateTimeFormat("en-US", { month: "short" })
@@ -16,17 +15,17 @@ const getWeekName = (date: Date): keyof (typeof translation)["en"] => {
     .toLowerCase() as keyof (typeof translation)["en"];
 };
 
-export default function Calendar1() {
-  const { date } = useContext(AppContext);
+export default function Calendar1({ date }: { date: Date }) {
+  const { locale } = useContext(AppContext);
 
   return (
     <div className="calendar-1__container">
       <div className="calendar-1__top-section">
         <div className="calendar-1__week">
-          {<Translation value={getWeekName(date)} />}
+          {translation[locale]?.[getWeekName(date)]}
         </div>
         <div className="calendar-1__month">
-          {<Translation value={getMonthName(date)} />}
+          {translation[locale]?.[getMonthName(date)]}
         </div>
       </div>
       <div className="calendar-1__bottom-section">{date.getDate()}</div>

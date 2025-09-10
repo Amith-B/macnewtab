@@ -36,7 +36,6 @@ type DockBarSites = Array<{ title: string; url: string; id: string }>;
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
 
 export const AppContext = createContext({
-  date: new Date(),
   theme: "system",
   themeColor: "",
   dockPosition: "bottom",
@@ -165,7 +164,6 @@ const getLocalstorageDataWithPromise = (
 };
 
 export default function AppProvider({ children }: { children: ReactNode }) {
-  const [date, setDate] = useState(new Date());
   const [theme, setTheme] = useState("system");
   const [themeColor, setThemeColor] = useState("");
   const [backgroundImage, setBackgroundImage] = useState("");
@@ -188,16 +186,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [todoListVisbility, setTodoListVisbility] = useState(false);
   const [bookmarksVisible, setBookmarksVisible] = useState(false);
   const [showStickyNotes, setShowStickyNotes] = useState(true);
-
-  useEffect(() => {
-    if (showClockAndCalendar) {
-      const intervalRef = setInterval(() => {
-        setDate(new Date());
-      }, 1000);
-
-      return () => clearInterval(intervalRef);
-    }
-  }, [showClockAndCalendar]);
 
   useEffect(() => {
     const getList = () => {
@@ -612,7 +600,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   return (
     <AppContext.Provider
       value={{
-        date,
         theme,
         themeColor,
         handleThemeChange,

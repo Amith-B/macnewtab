@@ -1,4 +1,11 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
 import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
 import { ReactComponent as LeftArrow } from "../../assets/left-arrow.svg";
@@ -20,7 +27,7 @@ const TooltipPosition: Record<string, string> = {
   top: "bottom",
 };
 
-export default function Dock() {
+const Dock = memo(() => {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
   const [todoDialogOpen, setTodoDialogOpen] = useState(false);
@@ -260,4 +267,6 @@ export default function Dock() {
       />
     </>
   );
-}
+});
+
+export default Dock;

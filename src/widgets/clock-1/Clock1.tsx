@@ -1,26 +1,17 @@
-import React, {
-  CSSProperties,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { CSSProperties, useEffect, useMemo, useState } from "react";
 import "./Clock1.css";
 import { ReactComponent as HourHand } from "./hour-hand.svg";
 import { ReactComponent as MinHand } from "./min-hand.svg";
 import { ReactComponent as SecHand } from "./sec-hand.svg";
 import { ReactComponent as SecSticks } from "./sec-sticks.svg";
-import { AppContext } from "../../context/provider";
 
 const currentDate = new Date();
 const hourNumbers = Array.from(Array(12).keys());
 
-export default function Clock1() {
+export default function Clock1({ date }: { date: Date }) {
   const [hr, setHr] = useState(currentDate.getHours());
   const [min, setMin] = useState(currentDate.getMinutes());
   const [sec, setSec] = useState(currentDate.getSeconds());
-
-  const { date } = useContext(AppContext);
 
   const hrStyle: CSSProperties & Record<string, string> = useMemo(() => {
     return {
