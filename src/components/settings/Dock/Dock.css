@@ -88,7 +88,8 @@
 }
 
 .dock-links__position,
-.todo-dock__toggle {
+.todo-dock__toggle,
+.sticky-notes-dock__toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;

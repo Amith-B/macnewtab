@@ -26,8 +26,6 @@ const General = memo(function General() {
     handleLocaleChange,
     bookmarksVisible,
     handleBookmarkVisbility,
-    showStickyNotes,
-    handleShowStickyNotesChange,
   } = useContext(AppContext);
 
   const selectedLanguageDetails = useMemo(() => {
@@ -117,18 +115,6 @@ const General = memo(function General() {
           name="Tab manager toggle"
           isChecked={showTabManager}
           handleToggleChange={() => handleShowTabManagerChange(!showTabManager)}
-        />
-      </div>
-
-      <div className="general__row-item">
-        <Translation value="show_sticky_notes" />
-        <Toggle
-          id={"sticky-notes-toggle"}
-          name="Sticky notes toggle"
-          isChecked={showStickyNotes}
-          handleToggleChange={() =>
-            handleShowStickyNotesChange(!showStickyNotes)
-          }
         />
       </div>
 
