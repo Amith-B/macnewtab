@@ -22,9 +22,11 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 ## 🚀 Features
 
 ### 🌟 Elegant Widgets
+
 - Display an **analog clock**, **date**, and **personalized greetings**—just like macOS.
 
 ### 🔍 Powerful Search
+
 - Search effortlessly with an intuitive input bar.
 - Choose between:
   - Your **browser’s default search engine**
@@ -34,52 +36,73 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 - If a URL is detected, it directly redirects instead of searching (browser search only).
 
 ### ⚡ Quick Access to Favorites
+
 - Navigate to your most-visited sites quickly.
 - Customize whether links open in the same tab or a new one.
 
 ### 📚 Bookmark Manager (New!)
+
 - Browse and search through all your saved bookmarks in a clean, macOS-inspired interface.
 - Quickly open any bookmark with a single click.
 - Organized in a launchpad for easy access without leaving the new tab.
 
 ### 🎨 Customizable Themes & Wallpapers
+
 - Toggle between **dark mode, light mode, or system mode**.
 - Choose theme colors.
 - Set a **custom wallpaper** or pick from a **stunning collection**.
 
 ### 📅 Toggle Calendar Views
+
 - Switch between **month view** and **date view**.
 
 ### 🗣️ Voice Search
+
 - Activate voice search with a Siri-like button for hands-free browsing.
 
 ### 📱 Launchpad & Dock
+
 - Access favorite links quickly with a customizable **dock bar** and **Launchpad overlay**.
 
 ### 📝 Daily To-Do List
+
 Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and manage daily items directly from your **new tab**.
 
+### :spiral_note_pad: Sticky Notes (New!)
+
+- Create colorful, draggable **sticky notes** directly on your new tab page
+- **Drag and drop** notes anywhere on the screen for perfect organization
+- **Auto-save** - all notes persist across browser sessions
+- **Quick access** - create new notes instantly from the dock
+- **Editable content** - click to type and edit your notes on the fly
+- Perfect for quick reminders, ideas, and temporary notes
+
 ### 🗂️ Seamless Tab Management
+
 - Stay in control of your browser with a built-in Tab Manager—beautifully integrated into the side panel
 - Instantly search through all open tabs, Switch to any tab with a click, Close tabs directly from the list
 - Easily toggle the panel with a subtle notch on the screen’s edge
 
 ### 🌍 Multi-Language Support
+
 - Supports **15+ languages**, including English, Kannada, Hindi, Spanish, French, and more.
 
 ## 🛠 Installation & Running Locally
 
 ### Install Packages
+
 ```sh
 yarn install
 ```
 
 ### To Run the Project
+
 ```sh
 yarn start
 ```
 
 ### To Build
+
 ```sh
 yarn build
 ```
@@ -87,9 +110,9 @@ yarn build
 #### Once the build is generated in the `build` folder, this folder can be used to load the extension in `chrome://extensions/` with Developer Mode enabled.
 
 ## Chrome Extension Link
+
 [Install from Chrome Web Store](https://chromewebstore.google.com/detail/mac-new-tab/mohppegbiigoahehdihbgmabkflajklj?authuser=0&hl=en)
 
 ---
 
 Enjoy the elegance of macOS design right in your browser! ✨
-
