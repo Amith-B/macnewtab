@@ -31,44 +31,48 @@ import {
 } from "../static/todo";
 import { WALLPAPER_BLUR_LOCAL_STORAGE_KEY } from "../static/wallpapers";
 import { SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY } from "../static/stickyNotes";
+import {
+  getLocalstorageDataWithPromise,
+  useLocalStorage,
+} from "../utils/localStorage";
 
 type DockBarSites = Array<{ title: string; url: string; id: string }>;
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
 
 export const AppContext = createContext({
   theme: "system",
+  setTheme: (_: string) => {},
   themeColor: "",
+  setThemeColor: (_: string) => {},
   dockPosition: "bottom",
-  handleDockPositionChange: (_: DockPosition) => {},
+  setDockPosition: (_: DockPosition) => {},
   locale: "en" as typeof languages,
+  setLocale: (_: typeof languages) => {},
   dockBarSites: [] as DockBarSites,
   handleDockSitesChange: (_: DockBarSites) => {},
-  handleLocaleChange: (_: typeof languages) => {},
-  handleThemeChange: (_: string) => {},
-  handleThemeColorChange: (_: string) => {},
   backgroundImage: "",
   handleWallpaperChange: (_: string) => {},
   showGreeting: true,
-  handleShowGreeetingChange: (_: boolean) => {},
+  setShowGreeeting: (_: boolean) => {},
   showVisitedSites: true,
-  handleShowVisitedSitesChange: (_: boolean) => {},
+  setShowVisitedSites: (_: boolean) => {},
   separatePageSite: false,
-  handleSeparatePageSiteChange: (_: boolean) => {},
+  setSeparatePageSite: (_: boolean) => {},
   showSearchEngines: true,
-  handleShowSearchEnginesChange: (_: boolean) => {},
+  setShowSearchEngines: (_: boolean) => {},
   showMonthView: false,
-  handleShowMonthViewChange: (_: boolean) => {},
+  setShowMonthView: (_: boolean) => {},
   showClockAndCalendar: true,
-  handleShowClockAndCalendarChange: (_: boolean) => {},
+  setShowClockAndCalendar: (_: boolean) => {},
   showTabManager: true,
-  handleShowTabManagerChange: (_: boolean) => {},
+  setShowTabManager: (_: boolean) => {},
   todoList: [] as TodoList,
   handleAddTodoList: (_: string) => {},
   handleTodoItemChecked: (_id: string, _checked: boolean) => {},
   handleTodoItemDelete: (_: string) => {},
-  handleTodoListUpdate: (_: TodoList) => {},
+  setTodoList: (_: TodoList) => {},
   todoListVisbility: true,
-  handleTodoListVisbility: (_: boolean) => {},
+  setTodoListVisbility: (_: boolean) => {},
   handleClearCompletedTodoList: () => {},
   groupTodosByCheckedStatus: () => {},
   wallpaperBlur: 0,
@@ -76,7 +80,7 @@ export const AppContext = createContext({
   bookmarksVisible: false,
   handleBookmarkVisbility: (_: boolean) => {},
   showStickyNotes: true,
-  handleShowStickyNotesChange: (_: boolean) => {},
+  setShowStickyNotes: (_: boolean) => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -153,39 +157,80 @@ const deleteImageFromIndexedDB = async (): Promise<void> => {
   });
 };
 
-const getLocalstorageDataWithPromise = (
-  localStorageKey: string
-): Promise<string | null> => {
-  return new Promise<string | null>((resolve) => {
-    const todoList = localStorage.getItem(localStorageKey);
-
-    resolve(todoList);
-  });
-};
-
 export default function AppProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState("system");
-  const [themeColor, setThemeColor] = useState("");
   const [backgroundImage, setBackgroundImage] = useState("");
   const [wallpaperBlur, setWallpaperBlur] = useState(0);
 
-  const [locale, setLocale] = useState<typeof languages>("en");
+  const [locale, setLocale] = useLocalStorage<typeof languages>(
+    SELECTED_LOCALE_LOCAL_STORAGE_KEY,
+    "en",
+    (val) => {
+      return languages.includes(String(val));
+    }
+  );
 
-  const [showGreeting, setShowGreeeting] = useState(true);
-  const [showClockAndCalendar, setShowClockAndCalendar] = useState(true);
-  const [showTabManager, setShowTabManager] = useState(true);
-  const [showVisitedSites, setShowVisitedSites] = useState(true);
-  const [separatePageSite, setSeparatePageSite] = useState(false);
-  const [showSearchEngines, setShowSearchEngines] = useState(true);
-  const [showMonthView, setShowMonthView] = useState(true);
+  const [theme, setTheme] = useLocalStorage(
+    THEME_LOCAL_STORAGE_KEY,
+    "system",
+    (val) => {
+      return THEME_KEYS.includes(val);
+    }
+  );
+  const [themeColor, setThemeColor] = useLocalStorage(
+    THEME_COLOR_LOCAL_STORAGE_KEY,
+    ""
+  );
+  const [showGreeting, setShowGreeeting] = useLocalStorage(
+    SHOW_GREETING_LOCAL_STORAGE_KEY,
+    true
+  );
+  const [showClockAndCalendar, setShowClockAndCalendar] = useLocalStorage(
+    SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY,
+    true
+  );
+  const [showTabManager, setShowTabManager] = useLocalStorage(
+    SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY,
+    true
+  );
+  const [showVisitedSites, setShowVisitedSites] = useLocalStorage(
+    SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
+    true
+  );
+  const [separatePageSite, setSeparatePageSite] = useLocalStorage(
+    SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY,
+    false
+  );
+  const [showSearchEngines, setShowSearchEngines] = useLocalStorage(
+    SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY,
+    true
+  );
+  const [showMonthView, setShowMonthView] = useLocalStorage(
+    SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY,
+    false
+  );
   const [dockBarSites, setDockBarSites] = useState<DockBarSites>([]);
 
-  const [dockPosition, setDockPosition] = useState<DockPosition>("bottom");
+  const [dockPosition, setDockPosition] = useLocalStorage<DockPosition>(
+    DOCK_POSITION_LOCAL_STORAGE_KEY,
+    "bottom",
+    (val) => {
+      return dockPositionsList.includes(val || "");
+    }
+  );
   const [todoList, setTodoList] = useState<TodoList>([]);
 
-  const [todoListVisbility, setTodoListVisbility] = useState(false);
-  const [bookmarksVisible, setBookmarksVisible] = useState(false);
-  const [showStickyNotes, setShowStickyNotes] = useState(true);
+  const [todoListVisbility, setTodoListVisbility] = useLocalStorage(
+    TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY,
+    true
+  );
+  const [bookmarksVisible, setBookmarksVisible] = useLocalStorage(
+    BOOKMARK_TOGGLE_STORAGE_KEY,
+    false
+  );
+  const [showStickyNotes, setShowStickyNotes] = useLocalStorage(
+    SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
+    true
+  );
 
   useEffect(() => {
     const getList = () => {
@@ -219,108 +264,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   }, [todoListVisbility]);
 
   useEffect(() => {
-    const defaultTheme = localStorage.getItem(THEME_LOCAL_STORAGE_KEY);
-
-    if (defaultTheme && THEME_KEYS.includes(defaultTheme)) {
-      setTheme(defaultTheme);
-    } else {
-      setTheme("system");
-    }
-
-    const defaultThemeColor = localStorage.getItem(
-      THEME_COLOR_LOCAL_STORAGE_KEY
-    );
-
-    if (defaultThemeColor) {
-      setThemeColor(defaultThemeColor);
-    } else {
-      setThemeColor("");
-    }
-
     handleLoadWallpaper();
-
-    const defaultShowGreeting = localStorage.getItem(
-      SHOW_GREETING_LOCAL_STORAGE_KEY
-    );
-    setShowGreeeting(
-      defaultShowGreeting === "true"
-        ? true
-        : defaultShowGreeting === "false"
-        ? false
-        : true
-    );
-
-    const defaultShowVisitedSites = localStorage.getItem(
-      SHOW_VISITED_SITE_LOCAL_STORAGE_KEY
-    );
-    setShowVisitedSites(
-      defaultShowVisitedSites === "true"
-        ? true
-        : defaultShowVisitedSites === "false"
-        ? false
-        : true
-    );
-
-    const defaultSeparatePageSite = localStorage.getItem(
-      SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY
-    );
-    setSeparatePageSite(defaultSeparatePageSite === "true");
-
-    const defaultShowSearchEngines = localStorage.getItem(
-      SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY
-    );
-    setShowSearchEngines(
-      defaultShowSearchEngines === "true"
-        ? true
-        : defaultShowSearchEngines === "false"
-        ? false
-        : true
-    );
-
-    const defaultMonthView = localStorage.getItem(
-      SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY
-    );
-    setShowMonthView(defaultMonthView === "true");
-
-    const defaultLocale = localStorage.getItem(
-      SELECTED_LOCALE_LOCAL_STORAGE_KEY
-    );
-    setLocale(
-      (languages.includes(String(defaultLocale))
-        ? String(defaultLocale)
-        : "en") as typeof languages
-    );
-
-    const defaultShowClockAndCalendar = localStorage.getItem(
-      SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY
-    );
-    setShowClockAndCalendar(
-      defaultShowClockAndCalendar === "true"
-        ? true
-        : defaultShowClockAndCalendar === "false"
-        ? false
-        : true
-    );
-
-    const defaultShowTabManager = localStorage.getItem(
-      SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY
-    );
-    setShowTabManager(
-      defaultShowTabManager === "true"
-        ? true
-        : defaultShowTabManager === "false"
-        ? false
-        : true
-    );
-
-    const dockPosition =
-      localStorage.getItem(DOCK_POSITION_LOCAL_STORAGE_KEY) || "bottom";
-
-    setDockPosition(
-      dockPositionsList.includes(dockPosition || "")
-        ? (dockPosition as DockPosition)
-        : "bottom"
-    );
 
     const wallpaperBlurValue = parseInt(
       localStorage.getItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY) || "0"
@@ -357,32 +301,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setDockBarSites(dockBarDefaultSites);
     }
 
-    const bookmarksEnabled = localStorage.getItem(BOOKMARK_TOGGLE_STORAGE_KEY);
-
-    setBookmarksVisible(bookmarksEnabled === "true");
-
-    const defaultTodoDockVisibility = localStorage.getItem(
-      TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY
-    );
-    setTodoListVisbility(
-      defaultTodoDockVisibility === "true"
-        ? true
-        : defaultTodoDockVisibility === "false"
-        ? false
-        : true
-    );
-
-    const defaultShowStickyNotes = localStorage.getItem(
-      SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY
-    );
-    setShowStickyNotes(
-      defaultShowStickyNotes === "true"
-        ? true
-        : defaultShowStickyNotes === "false"
-        ? false
-        : true
-    );
-
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === TODO_LIST_LOCAL_STORAGE_KEY && e.newValue) {
         try {
@@ -414,7 +332,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       todoSavedDate !== formatedCurrentDate
     ) {
       const updatedTodoList = todoList.filter((item) => !item.checked);
-      handleTodoListUpdate(updatedTodoList);
+      setTodoList(updatedTodoList);
     }
 
     localStorage.setItem(
@@ -423,47 +341,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     );
   };
 
-  const handleThemeChange = (val: string) => {
-    localStorage.setItem(THEME_LOCAL_STORAGE_KEY, val);
-    setTheme(val);
-  };
-
-  const handleThemeColorChange = (val: string) => {
-    localStorage.setItem(THEME_COLOR_LOCAL_STORAGE_KEY, val);
-    setThemeColor(val);
-  };
-
   const handleWallpaperChange = (val: string) => {
     if (val) {
       handleSaveWallpaper(val);
     } else {
       handleDeleteWallpaper();
     }
-  };
-
-  const handleShowGreeetingChange = (val: boolean) => {
-    localStorage.setItem(SHOW_GREETING_LOCAL_STORAGE_KEY, String(val));
-    setShowGreeeting(val);
-  };
-
-  const handleShowVisitedSitesChange = (val: boolean) => {
-    localStorage.setItem(SHOW_VISITED_SITE_LOCAL_STORAGE_KEY, String(val));
-    setShowVisitedSites(val);
-  };
-
-  const handleSeparatePageSiteChange = (val: boolean) => {
-    localStorage.setItem(SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY, String(val));
-    setSeparatePageSite(val);
-  };
-
-  const handleShowSearchEnginesChange = (val: boolean) => {
-    localStorage.setItem(SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY, String(val));
-    setShowSearchEngines(val);
-  };
-
-  const handleShowMonthViewChange = (val: boolean) => {
-    localStorage.setItem(SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY, String(val));
-    setShowMonthView(val);
   };
 
   const handleSaveWallpaper = async (base64Image: string) => {
@@ -483,21 +366,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setBackgroundImage("");
   };
 
-  const handleLocaleChange = (val: typeof languages) => {
-    localStorage.setItem(SELECTED_LOCALE_LOCAL_STORAGE_KEY, val);
-    setLocale(val);
-  };
-
-  const handleDockSitesChange = (val: DockBarSites) => {
-    localStorage.setItem(DOCK_SITES_LOCAL_STORAGE_KEY, JSON.stringify(val));
-    setDockBarSites(val);
-  };
-
-  const handleDockPositionChange = (val: DockPosition) => {
-    localStorage.setItem(DOCK_POSITION_LOCAL_STORAGE_KEY, val);
-    setDockPosition(val);
-  };
-
   const handleAddTodoList = (content: string) => {
     const updatedTodoList = [
       {
@@ -508,7 +376,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       ...todoList,
     ] as TodoList;
 
-    handleTodoListUpdate(updatedTodoList);
+    setTodoList(updatedTodoList);
     handleClearCompletedTodoList();
   };
 
@@ -524,7 +392,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       return item;
     });
 
-    handleTodoListUpdate(updatedTodoList);
+    setTodoList(updatedTodoList);
     handleClearCompletedTodoList();
   };
 
@@ -532,43 +400,25 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     const updatedTodoList = todoList.filter((item) => {
       return item.id !== id;
     });
-    handleTodoListUpdate(updatedTodoList);
+    setTodoList(updatedTodoList);
     handleClearCompletedTodoList();
-  };
-
-  const handleTodoListVisbility = (val: boolean) => {
-    localStorage.setItem(TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY, String(val));
-    setTodoListVisbility(val);
-  };
-
-  const handleTodoListUpdate = (list: TodoList) => {
-    setTodoList(list);
-    localStorage.setItem(TODO_LIST_LOCAL_STORAGE_KEY, JSON.stringify(list));
   };
 
   const groupTodosByCheckedStatus = () => {
     const uncheckedItems = todoList.filter((todo) => !todo.checked);
     const checkedItems = todoList.filter((todo) => todo.checked);
 
-    handleTodoListUpdate([...uncheckedItems, ...checkedItems]);
-  };
-
-  const handleShowClockAndCalendarChange = (val: boolean) => {
-    localStorage.setItem(
-      SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY,
-      String(val)
-    );
-    setShowClockAndCalendar(val);
-  };
-
-  const handleShowTabManagerChange = (val: boolean) => {
-    localStorage.setItem(SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY, String(val));
-    setShowTabManager(val);
+    setTodoList([...uncheckedItems, ...checkedItems]);
   };
 
   const handleWallpaperBlur = (val: number) => {
     localStorage.setItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY, String(val));
     setWallpaperBlur(val);
+  };
+
+  const handleDockSitesChange = (val: DockBarSites) => {
+    localStorage.setItem(DOCK_SITES_LOCAL_STORAGE_KEY, JSON.stringify(val));
+    setDockBarSites(val);
   };
 
   const handleBookmarkVisbility = async (val: boolean) => {
@@ -592,55 +442,50 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setBookmarksVisible(val);
   };
 
-  const handleShowStickyNotesChange = (val: boolean) => {
-    localStorage.setItem(SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY, String(val));
-    setShowStickyNotes(val);
-  };
-
   return (
     <AppContext.Provider
       value={{
         theme,
+        setTheme,
         themeColor,
-        handleThemeChange,
-        handleThemeColorChange,
+        setThemeColor,
         backgroundImage,
         handleWallpaperChange,
         wallpaperBlur,
         handleWallpaperBlur,
         showGreeting,
-        handleShowGreeetingChange,
+        setShowGreeeting,
         showVisitedSites,
-        handleShowVisitedSitesChange,
+        setShowVisitedSites,
         separatePageSite,
-        handleSeparatePageSiteChange,
+        setSeparatePageSite,
         showSearchEngines,
-        handleShowSearchEnginesChange,
+        setShowSearchEngines,
         showMonthView,
-        handleShowMonthViewChange,
+        setShowMonthView,
         showClockAndCalendar,
-        handleShowClockAndCalendarChange,
+        setShowClockAndCalendar,
         showTabManager,
-        handleShowTabManagerChange,
+        setShowTabManager,
         locale,
-        handleLocaleChange,
+        setLocale,
         dockBarSites,
         handleDockSitesChange,
         dockPosition,
-        handleDockPositionChange,
+        setDockPosition,
         todoList,
         handleAddTodoList,
         handleTodoItemChecked,
         todoListVisbility,
-        handleTodoListVisbility,
+        setTodoListVisbility,
         handleTodoItemDelete,
         handleClearCompletedTodoList,
-        handleTodoListUpdate,
+        setTodoList,
         groupTodosByCheckedStatus,
         bookmarksVisible,
         handleBookmarkVisbility,
         showStickyNotes,
-        handleShowStickyNotesChange,
+        setShowStickyNotes,
       }}
     >
       {children}

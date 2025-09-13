@@ -22,11 +22,11 @@ export default memo(function Dock() {
     dockBarSites,
     handleDockSitesChange,
     dockPosition,
-    handleDockPositionChange,
+    setDockPosition,
     todoListVisbility,
-    handleTodoListVisbility,
+    setTodoListVisbility,
     showStickyNotes,
-    handleShowStickyNotesChange,
+    setShowStickyNotes,
   } = useContext(AppContext);
   const [currentDockSites, setCurrentDockSites] = useState(dockBarSites);
 
@@ -91,7 +91,7 @@ export default memo(function Dock() {
         <Toggle
           id={"todo-dock-toggle"}
           isChecked={todoListVisbility}
-          handleToggleChange={() => handleTodoListVisbility(!todoListVisbility)}
+          handleToggleChange={() => setTodoListVisbility(!todoListVisbility)}
         />
       </div>
       <div className="sticky-notes-dock__toggle">
@@ -101,7 +101,7 @@ export default memo(function Dock() {
           name="Sticky notes toggle"
           isChecked={showStickyNotes}
           handleToggleChange={() =>
-            handleShowStickyNotesChange(!showStickyNotes)
+            setShowStickyNotes(!showStickyNotes)
           }
         />
       </div>
@@ -117,7 +117,7 @@ export default memo(function Dock() {
           options={dockPositions}
           value={dockPosition}
           onChange={(event) =>
-            handleDockPositionChange(event.target.value as DockPosition)
+            setDockPosition(event.target.value as DockPosition)
           }
         />
       </div>

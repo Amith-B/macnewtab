@@ -16,8 +16,8 @@ export default function Appearance() {
     backgroundImage,
     wallpaperBlur,
     handleWallpaperBlur,
-    handleThemeChange,
-    handleThemeColorChange,
+    setTheme,
+    setThemeColor,
     handleWallpaperChange,
   } = useContext(AppContext);
 
@@ -65,7 +65,7 @@ export default function Appearance() {
                 "appearance__theme-option" +
                 (theme === item.key ? " selected" : "")
               }
-              onClick={() => handleThemeChange(item.key)}
+              onClick={() => setTheme(item.key)}
             >
               <img
                 alt={item.key}
@@ -85,7 +85,7 @@ export default function Appearance() {
               "appearance__theme-color-option theme-none" +
               (!themeColor ? " selected" : "")
             }
-            onClick={() => handleThemeColorChange("")}
+            onClick={() => setThemeColor("")}
           ></button>
           {THEME_COLOR_KEYS.map((item) => (
             <button
@@ -94,7 +94,7 @@ export default function Appearance() {
                 `appearance__theme-color-option theme-${item}` +
                 (themeColor === item ? " selected" : "")
               }
-              onClick={() => handleThemeColorChange(item)}
+              onClick={() => setThemeColor(item)}
             ></button>
           ))}
         </div>

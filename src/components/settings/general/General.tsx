@@ -9,21 +9,21 @@ import { languageOptions, languages } from "../../../locale/languages";
 const General = memo(function General() {
   const {
     showGreeting,
-    handleShowGreeetingChange,
+    setShowGreeeting,
     showVisitedSites,
-    handleShowVisitedSitesChange,
+    setShowVisitedSites,
     separatePageSite,
-    handleSeparatePageSiteChange,
+    setSeparatePageSite,
     showSearchEngines,
-    handleShowSearchEnginesChange,
+    setShowSearchEngines,
     showMonthView,
-    handleShowMonthViewChange,
+    setShowMonthView,
     showClockAndCalendar,
-    handleShowClockAndCalendarChange,
+    setShowClockAndCalendar,
     showTabManager,
-    handleShowTabManagerChange,
+    setShowTabManager,
     locale,
-    handleLocaleChange,
+    setLocale,
     bookmarksVisible,
     handleBookmarkVisbility,
   } = useContext(AppContext);
@@ -44,7 +44,7 @@ const General = memo(function General() {
           id={"greeting-toggle"}
           name="greeting toggle"
           isChecked={showGreeting}
-          handleToggleChange={() => handleShowGreeetingChange(!showGreeting)}
+          handleToggleChange={() => setShowGreeeting(!showGreeting)}
         />
       </div>
       <div className="general__row-item">
@@ -54,7 +54,7 @@ const General = memo(function General() {
           name="Visited sites toggle"
           isChecked={showVisitedSites}
           handleToggleChange={() =>
-            handleShowVisitedSitesChange(!showVisitedSites)
+            setShowVisitedSites(!showVisitedSites)
           }
         />
       </div>
@@ -67,7 +67,7 @@ const General = memo(function General() {
           name="Separate page on link click toggle"
           isChecked={separatePageSite}
           handleToggleChange={() =>
-            handleSeparatePageSiteChange(!separatePageSite)
+            setSeparatePageSite(!separatePageSite)
           }
         />
       </div>
@@ -78,7 +78,7 @@ const General = memo(function General() {
           name="Search engine options toggle"
           isChecked={showSearchEngines}
           handleToggleChange={() =>
-            handleShowSearchEnginesChange(!showSearchEngines)
+            setShowSearchEngines(!showSearchEngines)
           }
         />
       </div>
@@ -92,7 +92,7 @@ const General = memo(function General() {
           id={"month-view-toggle"}
           name="Month view toggle"
           isChecked={showMonthView}
-          handleToggleChange={() => handleShowMonthViewChange(!showMonthView)}
+          handleToggleChange={() => setShowMonthView(!showMonthView)}
         />
       </div>
 
@@ -103,7 +103,7 @@ const General = memo(function General() {
           name="Clock and calendar toggle"
           isChecked={showClockAndCalendar}
           handleToggleChange={() =>
-            handleShowClockAndCalendarChange(!showClockAndCalendar)
+            setShowClockAndCalendar(!showClockAndCalendar)
           }
         />
       </div>
@@ -114,7 +114,7 @@ const General = memo(function General() {
           id={"tab-manager-toggle"}
           name="Tab manager toggle"
           isChecked={showTabManager}
-          handleToggleChange={() => handleShowTabManagerChange(!showTabManager)}
+          handleToggleChange={() => setShowTabManager(!showTabManager)}
         />
       </div>
 
@@ -127,7 +127,7 @@ const General = memo(function General() {
             options={languageOptions}
             value={locale}
             onChange={(event) =>
-              handleLocaleChange(event.target.value as typeof languages)
+              setLocale(event.target.value as typeof languages)
             }
           />
         </div>

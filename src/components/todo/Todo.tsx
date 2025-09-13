@@ -27,7 +27,7 @@ export default function TodoDialog({
     handleTodoItemChecked,
     handleTodoItemDelete,
     handleClearCompletedTodoList,
-    handleTodoListUpdate,
+    setTodoList,
   } = useContext(AppContext);
   const inputRef = useRef(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -158,7 +158,7 @@ export default function TodoDialog({
           lockVertically
           values={todoList}
           onChange={({ oldIndex, newIndex }) => {
-            handleTodoListUpdate(arrayMove(todoList, oldIndex, newIndex));
+            setTodoList(arrayMove(todoList, oldIndex, newIndex));
           }}
           renderList={({ children, props }) => (
             <div className="todo-list" {...props}>
