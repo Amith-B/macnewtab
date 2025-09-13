@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16" # Replace with the Node.js version your project requires
+          node-version: "18" # Replace with the Node.js version your project requires
 
       # Step 3: Install Yarn globally
       - name: Install Yarn
