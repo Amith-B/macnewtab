@@ -9,8 +9,53 @@ import Wallpaper8 from "../assets/wallpapers/8.jpg";
 import Wallpaper9 from "../assets/wallpapers/9.jpg";
 import Wallpaper10 from "../assets/wallpapers/10.jpg";
 import Wallpaper11 from "../assets/wallpapers/11.jpg";
+import Wallpaper12 from "../assets/wallpapers/12.jpg";
+import Wallpaper13 from "../assets/wallpapers/13.jpg";
+import Wallpaper14 from "../assets/wallpapers/14.jpg";
+import Wallpaper15 from "../assets/wallpapers/15.jpg";
+import Wallpaper16 from "../assets/wallpapers/16.jpg";
+import Wallpaper17 from "../assets/wallpapers/17.jpg";
+import Wallpaper18 from "../assets/wallpapers/18.gif";
+import Wallpaper19 from "../assets/wallpapers/19.jpg";
+import Wallpaper20 from "../assets/wallpapers/20.jpg";
 
 export const WALLPAPER_LIST = [
+  {
+    id: "12",
+    link: Wallpaper12,
+  },
+  {
+    id: "13",
+    link: Wallpaper13,
+  },
+  {
+    id: "14",
+    link: Wallpaper14,
+  },
+  {
+    id: "15",
+    link: Wallpaper15,
+  },
+  {
+    id: "16",
+    link: Wallpaper16,
+  },
+  {
+    id: "17",
+    link: Wallpaper17,
+  },
+  {
+    id: "18",
+    link: Wallpaper18,
+  },
+  {
+    id: "19",
+    link: Wallpaper19,
+  },
+  {
+    id: "20",
+    link: Wallpaper20,
+  },
   {
     id: "1",
     link: Wallpaper1,
