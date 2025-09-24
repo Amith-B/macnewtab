@@ -67,6 +67,7 @@ export const AppContext = createContext({
   showTabManager: true,
   setShowTabManager: (_: boolean) => {},
   todoList: [] as TodoList,
+  handleTodoListUpdate: (_: TodoList) => {},
   handleAddTodoList: (_: string) => {},
   handleTodoItemChecked: (_id: string, _checked: boolean) => {},
   handleTodoItemDelete: (_: string) => {},
@@ -376,7 +377,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       ...todoList,
     ] as TodoList;
 
-    setTodoList(updatedTodoList);
+    handleTodoListUpdate(updatedTodoList);
     handleClearCompletedTodoList();
   };
 
@@ -392,7 +393,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       return item;
     });
 
-    setTodoList(updatedTodoList);
+    handleTodoListUpdate(updatedTodoList);
     handleClearCompletedTodoList();
   };
 
@@ -400,7 +401,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     const updatedTodoList = todoList.filter((item) => {
       return item.id !== id;
     });
-    setTodoList(updatedTodoList);
+    handleTodoListUpdate(updatedTodoList);
     handleClearCompletedTodoList();
   };
 
@@ -408,12 +409,17 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     const uncheckedItems = todoList.filter((todo) => !todo.checked);
     const checkedItems = todoList.filter((todo) => todo.checked);
 
-    setTodoList([...uncheckedItems, ...checkedItems]);
+    handleTodoListUpdate([...uncheckedItems, ...checkedItems]);
   };
 
   const handleWallpaperBlur = (val: number) => {
     localStorage.setItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY, String(val));
     setWallpaperBlur(val);
+  };
+
+  const handleTodoListUpdate = (list: TodoList) => {
+    setTodoList(list);
+    localStorage.setItem(TODO_LIST_LOCAL_STORAGE_KEY, JSON.stringify(list));
   };
 
   const handleDockSitesChange = (val: DockBarSites) => {
@@ -478,6 +484,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleTodoItemChecked,
         todoListVisbility,
         setTodoListVisbility,
+        handleTodoListUpdate,
         handleTodoItemDelete,
         handleClearCompletedTodoList,
         setTodoList,
