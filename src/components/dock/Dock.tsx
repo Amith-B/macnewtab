@@ -205,14 +205,22 @@ const Dock = memo(() => {
             let siteURL;
 
             let anchorProps = {};
+            let url = item.url;
 
             try {
-              siteURL = new URL(item.url);
+              siteURL = new URL(url);
               anchorProps = {
-                href: item.url,
+                href: url,
                 target: "_self",
               };
             } catch (error) {
+              if (!/^https?:\/\//i.test(url)) {
+                url = "https://" + url;
+                try {
+                  siteURL = new URL(url);
+                } catch (_) {}
+              }
+
               anchorProps = {
                 onClick: () => {
                   if (!chrome?.search?.query) {
