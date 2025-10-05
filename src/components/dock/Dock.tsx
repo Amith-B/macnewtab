@@ -18,7 +18,7 @@ import TodoDialog from "../todo/Todo";
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
 
-const SITE_IMAGE_URL = "https://www.google.com/s2/favicons?sz=64&domain=";
+const SITE_IMAGE_URL = "https://favicone.com/";
 
 const TooltipPosition: Record<string, string> = {
   left: "right",
@@ -236,7 +236,7 @@ const Dock = memo(() => {
               >
                 <img
                   className="dock-site__icon"
-                  src={SITE_IMAGE_URL + siteURL?.hostname}
+                  src={`${SITE_IMAGE_URL}${siteURL?.hostname}?s=32`}
                   alt={item.title}
                 />
               </a>
