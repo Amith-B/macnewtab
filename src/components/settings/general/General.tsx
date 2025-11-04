@@ -26,6 +26,9 @@ const General = memo(function General() {
     setLocale,
     bookmarksVisible,
     handleBookmarkVisbility,
+    isWidgetsAwayFromDock,
+    setIsWidgetsAwayFromDock,
+    dockBarSites,
   } = useContext(AppContext);
 
   const selectedLanguageDetails = useMemo(() => {
@@ -53,9 +56,7 @@ const General = memo(function General() {
           id={"visit-toggle"}
           name="Visited sites toggle"
           isChecked={showVisitedSites}
-          handleToggleChange={() =>
-            setShowVisitedSites(!showVisitedSites)
-          }
+          handleToggleChange={() => setShowVisitedSites(!showVisitedSites)}
         />
       </div>
       <div
@@ -66,9 +67,7 @@ const General = memo(function General() {
           id={"separate-page-toggle"}
           name="Separate page on link click toggle"
           isChecked={separatePageSite}
-          handleToggleChange={() =>
-            setSeparatePageSite(!separatePageSite)
-          }
+          handleToggleChange={() => setSeparatePageSite(!separatePageSite)}
         />
       </div>
       <div className="general__row-item">
@@ -77,9 +76,7 @@ const General = memo(function General() {
           id={"search-engine-toggle"}
           name="Search engine options toggle"
           isChecked={showSearchEngines}
-          handleToggleChange={() =>
-            setShowSearchEngines(!showSearchEngines)
-          }
+          handleToggleChange={() => setShowSearchEngines(!showSearchEngines)}
         />
       </div>
       <div
@@ -155,6 +152,22 @@ const General = memo(function General() {
           <Translation value="bookmark_toggle_description" />{" "}
           <code>{isMac ? "Cmd + Shift + B" : "Ctrl + Shift + B"}</code>
         </div>
+      </div>
+
+      <div
+        className={
+          "general__row-item" + (!dockBarSites.length ? " disabled" : "")
+        }
+      >
+        <Translation value="center_widgets_away_from_dock" />
+        <Toggle
+          id={"center-widgets-away-from-dock"}
+          name="Center widgets away from dock toggle"
+          isChecked={isWidgetsAwayFromDock}
+          handleToggleChange={() =>
+            setIsWidgetsAwayFromDock(!isWidgetsAwayFromDock)
+          }
+        />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import {
   THEME_COLOR_LOCAL_STORAGE_KEY,
 } from "../static/theme";
 import {
+  CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY,
   SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY,
   SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY,
   SHOW_GREETING_LOCAL_STORAGE_KEY,
@@ -82,6 +83,8 @@ export const AppContext = createContext({
   handleBookmarkVisbility: (_: boolean) => {},
   showStickyNotes: true,
   setShowStickyNotes: (_: boolean) => {},
+  isWidgetsAwayFromDock: false,
+  setIsWidgetsAwayFromDock: (_: boolean) => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -231,6 +234,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [showStickyNotes, setShowStickyNotes] = useLocalStorage(
     SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
     true
+  );
+
+  const [isWidgetsAwayFromDock, setIsWidgetsAwayFromDock] = useLocalStorage(
+    CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY,
+    false
   );
 
   useEffect(() => {
@@ -493,6 +501,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleBookmarkVisbility,
         showStickyNotes,
         setShowStickyNotes,
+        isWidgetsAwayFromDock,
+        setIsWidgetsAwayFromDock,
       }}
     >
       {children}

@@ -132,6 +132,8 @@ export const translation = {
       "Are you sure you want to delete this bookmark? This action cannot be undone.",
     delete: "Delete",
     keep: "Keep",
+
+    center_widgets_away_from_dock: "Shift center widgets away from dock",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -266,6 +268,8 @@ export const translation = {
       "ಈ ಬುಕ್‌ಮಾರ್ಕ್ ಅನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ? ",
     delete: "ಅಳಿಸು",
     keep: "ಇರಿಸು",
+
+    center_widgets_away_from_dock: "ಡಾಕ್‌ನಿಂದ ಸೆಂಟರ್ ವಿಜೆಟ್‌ಗಳನ್ನು ಶಿಫ್ಟ್ ಮಾಡಿ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -399,6 +403,8 @@ export const translation = {
     delete_bookmark_confirm: "Jste si jisti, že chcete tuto záložku smazat? ",
     delete: "Vymazat",
     keep: "Udržet",
+
+    center_widgets_away_from_dock: "Přesuňte středové widgety z doku",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -533,6 +539,9 @@ export const translation = {
       "Bu yer işaretini silmek istediğinizden emin misiniz? ",
     delete: "Silmek",
     keep: "Kale",
+
+    center_widgets_away_from_dock:
+      "Ortadaki widget'ları dock'tan uzağa taşıyın",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -667,6 +676,9 @@ export const translation = {
     delete_bookmark_confirm: "Bạn có chắc là bạn muốn xóa dấu trang này? ",
     delete: "Xóa bỏ",
     keep: "Giữ",
+
+    center_widgets_away_from_dock:
+      "Di chuyển các widget trung tâm ra khỏi dock",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -801,6 +813,8 @@ export const translation = {
       "Haqiqatan ham ushbu xatcho'pni yo'q qilmoqchimisiz? ",
     delete: "O'chirmoq",
     keep: "Saqlamoq",
+
+    center_widgets_away_from_dock: "Shift markazi vidjetlar dokdan uzoqda",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -931,6 +945,8 @@ export const translation = {
     delete_bookmark_confirm: "您确定要删除此书签吗？",
     delete: "删除",
     keep: "保持",
+
+    center_widgets_away_from_dock: "将中心小部件移离底座",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -1065,6 +1081,8 @@ export const translation = {
       "क्या आप सुनिश्चित हैं कि आप इस बुकमार्क को हटाना चाहते हैं? ",
     delete: "मिटाना",
     keep: "रखना",
+
+    center_widgets_away_from_dock: "केंद्र विजेट्स को डॉक से दूर शिफ्ट करें",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1201,6 +1219,8 @@ export const translation = {
       "Sei sicuro di voler eliminare questo segnalibro? ",
     delete: "Eliminare",
     keep: "Mantenere",
+
+    center_widgets_away_from_dock: "Sposta i widget centrali lontano dal dock",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1335,6 +1355,8 @@ export const translation = {
       "আপনি কি নিশ্চিত যে আপনি এই বুকমার্কটি মুছতে চান? ",
     delete: "মুছুন",
     keep: "রাখুন",
+
+    center_widgets_away_from_dock: "কেন্দ্রের উইজেটগুলি ডক থেকে দূরে সরান৷",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1470,6 +1492,9 @@ export const translation = {
       "Tem certeza de que deseja excluir este marcador? ",
     delete: "Excluir",
     keep: "Manter",
+
+    center_widgets_away_from_dock:
+      "Desloque os widgets centrais para fora do dock",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1605,6 +1630,8 @@ export const translation = {
     delete_bookmark_confirm: "Êtes-vous sûr de vouloir supprimer ce signet? ",
     delete: "Supprimer",
     keep: "Garder",
+
+    center_widgets_away_from_dock: "Déplacer les widgets centraux du dock",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1738,6 +1765,9 @@ export const translation = {
     delete_bookmark_confirm: "Вы уверены, что хотите удалить эту закладку? ",
     delete: "Удалить",
     keep: "Держать",
+
+    center_widgets_away_from_dock:
+      "Сместить центральные виджеты подальше от дока",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1873,6 +1903,8 @@ export const translation = {
       "¿Estás seguro de que quieres eliminar este marcador? ",
     delete: "Borrar",
     keep: "Mantener",
+
+    center_widgets_away_from_dock: "Aleje los widgets del centro del muelle",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -2005,6 +2037,8 @@ export const translation = {
     delete_bookmark_confirm: "このブックマークを削除したいですか？",
     delete: "消去",
     keep: "保つ",
+
+    center_widgets_away_from_dock: "中央のウィジェットをドックから遠ざける",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -2136,6 +2170,8 @@ export const translation = {
     delete_bookmark_confirm: "이 북마크를 삭제 하시겠습니까? ",
     delete: "삭제",
     keep: "유지하다",
+
+    center_widgets_away_from_dock: "중앙 위젯을 도크에서 멀리 이동",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -2269,6 +2305,8 @@ export const translation = {
     delete_bookmark_confirm: "Anda yakin ingin menghapus bookmark ini? ",
     delete: "Menghapus",
     keep: "Menyimpan",
+
+    center_widgets_away_from_dock: "Geser widget tengah menjauh dari dok",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -2402,6 +2440,8 @@ export const translation = {
       "आपणास खात्री आहे की आपण हा बुकमार्क हटवू इच्छिता? ",
     delete: "हटवा",
     keep: "ठेवा",
+
+    center_widgets_away_from_dock: "केंद्र विजेट डॉकपासून दूर हलवा",
   },
 };
 

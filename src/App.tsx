@@ -33,6 +33,9 @@ const App = function App() {
     showClockAndCalendar,
     showTabManager,
     showStickyNotes,
+    dockPosition,
+    isWidgetsAwayFromDock,
+    dockBarSites,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -105,7 +108,10 @@ const App = function App() {
       )}
       <div
         className={
-          "main-content" + (showClockAndCalendar ? " has-clock-calendar" : "")
+          "main-content" +
+          (showClockAndCalendar ? " has-clock-calendar" : "") +
+          (isWidgetsAwayFromDock ? " widgets-away-from-dock" : "") +
+          (!!dockBarSites.length ? ` dock-${dockPosition}` : "")
         }
       >
         {showClockAndCalendar && (

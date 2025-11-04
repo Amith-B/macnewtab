@@ -550,6 +550,18 @@ to be revisited in future */
   word-break: break-word;
 }
 
+.main-content.widgets-away-from-dock.dock-bottom {
+  padding-bottom: 82px;
+}
+
+.main-content.widgets-away-from-dock.dock-right {
+  padding-right: 82px;
+}
+
+.main-content.widgets-away-from-dock.dock-left {
+  padding-left: 82px;
+}
+
 @media screen and (max-width: 1080px) {
   .main-content.has-clock-calendar {
     gap: 50px;

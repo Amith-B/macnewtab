@@ -6,3 +6,4 @@ export const SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY = "show_month_view";
 export const SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY =
   "show_clock_and_calendar";
 export const SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY = "show_tab_manager";
+export const CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY = "center_widgets_away_from_dock";
