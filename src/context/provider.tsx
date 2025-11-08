@@ -36,6 +36,17 @@ import {
   getLocalstorageDataWithPromise,
   useLocalStorage,
 } from "../utils/localStorage";
+import {
+  GOOGLE_USER_LOCAL_STORAGE_KEY,
+  GOOGLE_AUTH_TOKEN_LOCAL_STORAGE_KEY,
+  SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
+} from "../static/googleSettings";
+import {
+  GoogleUser,
+  getGoogleAuthToken,
+  removeGoogleAuthToken,
+  fetchGoogleUserProfile,
+} from "../utils/googleAuth";
 
 type DockBarSites = Array<{ title: string; url: string; id: string }>;
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
@@ -85,6 +96,12 @@ export const AppContext = createContext({
   setShowStickyNotes: (_: boolean) => {},
   isWidgetsAwayFromDock: false,
   setIsWidgetsAwayFromDock: (_: boolean) => {},
+  googleUser: null as GoogleUser | null,
+  googleAuthToken: "",
+  handleGoogleSignIn: async () => {},
+  handleGoogleSignOut: async () => {},
+  showGoogleCalendar: false,
+  setShowGoogleCalendar: (_: boolean) => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -241,6 +258,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     false
   );
 
+  const [googleUser, setGoogleUser] = useState<GoogleUser | null>(null);
+  const [googleAuthToken, setGoogleAuthToken] = useState("");
+  const [showGoogleCalendar, setShowGoogleCalendar] = useLocalStorage(
+    SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
+    true
+  );
+
   useEffect(() => {
     const getList = () => {
       const request = getLocalstorageDataWithPromise(
@@ -271,6 +295,26 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
     getList();
   }, [todoListVisbility]);
+
+  useEffect(() => {
+    const loadGoogleUser = async () => {
+      try {
+        const storedUser = localStorage.getItem(GOOGLE_USER_LOCAL_STORAGE_KEY);
+        const storedToken = localStorage.getItem(
+          GOOGLE_AUTH_TOKEN_LOCAL_STORAGE_KEY
+        );
+
+        if (storedUser && storedToken) {
+          setGoogleUser(JSON.parse(storedUser));
+          setGoogleAuthToken(storedToken);
+        }
+      } catch (error) {
+        console.error("Failed to load Google user:", error);
+      }
+    };
+
+    loadGoogleUser();
+  }, []);
 
   useEffect(() => {
     handleLoadWallpaper();
@@ -456,6 +500,43 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setBookmarksVisible(val);
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const token = await getGoogleAuthToken();
+      const userProfile = await fetchGoogleUserProfile(token);
+
+      setGoogleUser(userProfile);
+      setGoogleAuthToken(token);
+
+      localStorage.setItem(
+        GOOGLE_USER_LOCAL_STORAGE_KEY,
+        JSON.stringify(userProfile)
+      );
+      localStorage.setItem(GOOGLE_AUTH_TOKEN_LOCAL_STORAGE_KEY, token);
+    } catch (error) {
+      console.error("Google sign in failed:", error);
+      throw error;
+    }
+  };
+
+  const handleGoogleSignOut = async () => {
+    try {
+      if (googleAuthToken) {
+        await removeGoogleAuthToken(googleAuthToken);
+      }
+
+      setGoogleUser(null);
+      setGoogleAuthToken("");
+      setShowGoogleCalendar(false);
+
+      localStorage.removeItem(GOOGLE_USER_LOCAL_STORAGE_KEY);
+      localStorage.removeItem(GOOGLE_AUTH_TOKEN_LOCAL_STORAGE_KEY);
+    } catch (error) {
+      console.error("Google sign out failed:", error);
+      throw error;
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -503,6 +584,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         setShowStickyNotes,
         isWidgetsAwayFromDock,
         setIsWidgetsAwayFromDock,
+        googleUser,
+        googleAuthToken,
+        handleGoogleSignIn,
+        handleGoogleSignOut,
+        showGoogleCalendar,
+        setShowGoogleCalendar,
       }}
     >
       {children}

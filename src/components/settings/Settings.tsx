@@ -7,9 +7,11 @@ import { ReactComponent as AppearanceIcon } from "./appearance.svg";
 import { ReactComponent as DockIcon } from "./dock.svg";
 import { ReactComponent as AboutIcon } from "./about.svg";
 import { ReactComponent as ChangelogIcon } from "./changelog.svg";
+import { ReactComponent as LoggedOutIcon } from "./logged-out.svg";
 import Appearance from "./Appearance/Appearance";
 import About from "./About/About";
 import General from "./general/General";
+import GoogleAccount from "./Account/GoogleAccount";
 import Translation from "../../locale/Translation";
 import Dock from "./Dock/Dock";
 import Changelog from "./Changelog/Changelog";
@@ -47,6 +49,14 @@ export const SETTINGS_MENU = [
     content: Changelog,
   },
 ];
+
+const ACCOUNT_MENU = {
+  key: "account",
+  title: <Translation value="sign_in" />,
+  subtitle: <Translation value="with_google_account" />,
+  icon: LoggedOutIcon,
+  content: GoogleAccount,
+};
 
 export default function Settings({
   open,
@@ -159,6 +169,22 @@ export default function Settings({
             <button className="settings__window-manager-button settings__window-expand"></button>
           </div>
           <div className="settings__menu">
+            <button
+              key="account"
+              className={
+                "settings_menu-item account" +
+                (selectedMenu.key === "account" ? " selected" : "")
+              }
+              onClick={() => setSelectedMenu(ACCOUNT_MENU)}
+            >
+              <div className="account-icon">
+                <LoggedOutIcon />
+              </div>
+              <div className="title-group">
+                <h4>{ACCOUNT_MENU.title}</h4>
+                <h5>{ACCOUNT_MENU.subtitle}</h5>
+              </div>
+            </button>
             {SETTINGS_MENU.map((item) => {
               const MenuIcon = item.icon;
               return (

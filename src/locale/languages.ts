@@ -134,6 +134,9 @@ export const translation = {
     keep: "Keep",
 
     center_widgets_away_from_dock: "Shift center widgets away from dock",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -270,6 +273,9 @@ export const translation = {
     keep: "ಇರಿಸು",
 
     center_widgets_away_from_dock: "ಡಾಕ್‌ನಿಂದ ಸೆಂಟರ್ ವಿಜೆಟ್‌ಗಳನ್ನು ಶಿಫ್ಟ್ ಮಾಡಿ",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -405,6 +411,9 @@ export const translation = {
     keep: "Udržet",
 
     center_widgets_away_from_dock: "Přesuňte středové widgety z doku",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -542,6 +551,9 @@ export const translation = {
 
     center_widgets_away_from_dock:
       "Ortadaki widget'ları dock'tan uzağa taşıyın",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -679,6 +691,9 @@ export const translation = {
 
     center_widgets_away_from_dock:
       "Di chuyển các widget trung tâm ra khỏi dock",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -815,6 +830,9 @@ export const translation = {
     keep: "Saqlamoq",
 
     center_widgets_away_from_dock: "Shift markazi vidjetlar dokdan uzoqda",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -947,6 +965,9 @@ export const translation = {
     keep: "保持",
 
     center_widgets_away_from_dock: "将中心小部件移离底座",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -1083,6 +1104,9 @@ export const translation = {
     keep: "रखना",
 
     center_widgets_away_from_dock: "केंद्र विजेट्स को डॉक से दूर शिफ्ट करें",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1221,6 +1245,9 @@ export const translation = {
     keep: "Mantenere",
 
     center_widgets_away_from_dock: "Sposta i widget centrali lontano dal dock",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1357,6 +1384,9 @@ export const translation = {
     keep: "রাখুন",
 
     center_widgets_away_from_dock: "কেন্দ্রের উইজেটগুলি ডক থেকে দূরে সরান৷",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1495,6 +1525,9 @@ export const translation = {
 
     center_widgets_away_from_dock:
       "Desloque os widgets centrais para fora do dock",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1632,6 +1665,9 @@ export const translation = {
     keep: "Garder",
 
     center_widgets_away_from_dock: "Déplacer les widgets centraux du dock",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1768,6 +1804,9 @@ export const translation = {
 
     center_widgets_away_from_dock:
       "Сместить центральные виджеты подальше от дока",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1905,6 +1944,9 @@ export const translation = {
     keep: "Mantener",
 
     center_widgets_away_from_dock: "Aleje los widgets del centro del muelle",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -2039,6 +2081,9 @@ export const translation = {
     keep: "保つ",
 
     center_widgets_away_from_dock: "中央のウィジェットをドックから遠ざける",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -2172,6 +2217,9 @@ export const translation = {
     keep: "유지하다",
 
     center_widgets_away_from_dock: "중앙 위젯을 도크에서 멀리 이동",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -2307,6 +2355,9 @@ export const translation = {
     keep: "Menyimpan",
 
     center_widgets_away_from_dock: "Geser widget tengah menjauh dari dok",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -2442,6 +2493,9 @@ export const translation = {
     keep: "ठेवा",
 
     center_widgets_away_from_dock: "केंद्र विजेट डॉकपासून दूर हलवा",
+
+    sign_in: "Sign in",
+    with_google_account: "with your Google Account",
   },
 };
 

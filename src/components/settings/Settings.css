@@ -140,7 +140,7 @@
   cursor: pointer;
 }
 
-.settings_menu-item svg {
+.settings_menu-item:not(.account) svg {
   width: 26px;
   height: 26px;
 }
@@ -159,4 +159,50 @@
 .buy-me-coffee {
   padding: 0px 30px;
   width: 100%;
+}
+
+.settings_menu-item.account {
+  margin-bottom: 12px;
+}
+
+.settings_menu-item.account .account-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.settings_menu-item.account .account-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.settings_menu-item.account .title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.title-group * {
+  text-align: left;
+}
+
+.title-group h4 {
+  margin: 0;
+  font-size: 0.813rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.title-group h5 {
+  margin: 0;
+  font-size: 0.725rem;
+  font-weight: 400;
+}
+
+.settings_menu-item.selected .title-group h4 {
+  color: white;
+}
+
+.settings_menu-item.selected .title-group h5 {
+  color: rgb(215, 215, 215);
 }
