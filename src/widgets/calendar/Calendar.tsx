@@ -7,6 +7,7 @@ import {
   GoogleCalendarEvent,
 } from "../../utils/googleAuth";
 import { convertCalendarEvents, groupEventsByDate } from "../../utils/calendar";
+import Events from "../events/Events";
 
 const getMonthName = (date: Date) => {
   return new Intl.DateTimeFormat("en-US", { month: "long" }).format(date);
@@ -38,51 +39,9 @@ function generateDateArray(year: number, month: number) {
 
 export default function Calendar({ date }: { date: Date }) {
   const [weeks, setWeeks] = useState<string[]>([]);
-  const [calendarEvents, setCalendarEvents] = useState<GoogleCalendarEvent[]>([
-    {
-      id: "e08h3dp793rdgder0au469khqo",
-      htmlLink:
-        "https://www.google.com/calendar/event?eid=ZTA4aDNkcDc5M3JkZ2RlcjBhdTQ2OWtocW8gYW1pdGhicjZAbQ",
-      summary: "Train to KSR BENGALURU (SBC)",
-      description:
-        "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DPwBVvUhgcL7zM2knAhCLUJg48MY0hulWA\n",
-      location: "SAGAR JAMBAGARU (SRF)",
-      start: {
-        dateTime: "2025-11-11T21:17:00+05:30",
-      },
-      end: {
-        dateTime: "2025-11-12T04:50:00+05:30",
-      },
-    },
-    {
-      id: "61h64ob36kp6cb9k6soj8b9kcdh3abb265hmabb274s3gd1hclh3gc9l6g_20251113",
-      htmlLink:
-        "https://www.google.com/calendar/event?eid=NjFoNjRvYjM2a3A2Y2I5azZzb2o4YjlrY2RoM2FiYjI2NWhtYWJiMjc0czNnZDFoY2xoM2djOWw2Z18yMDI1MTExMyBhbWl0aGJyNkBt",
-      summary: "Mutual fund Automatic payment",
-      description: "Mutual fund Automatic payment",
-      start: {
-        date: "2025-11-13",
-      },
-      end: {
-        date: "2025-11-14",
-      },
-    },
-    {
-      id: "lcorqg52o81r57n5nej180jr3g",
-      htmlLink:
-        "https://www.google.com/calendar/event?eid=bGNvcnFnNTJvODFyNTduNW5lajE4MGpyM2cgYW1pdGhicjZAbQ",
-      summary: "Train to KSR BENGALURU (SBC)",
-      description:
-        "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DOyRNwjSZv-TYpsZ36sJDgzYYoIdhnqc4U\n",
-      location: "SAGAR JAMBAGARU (SRF)",
-      start: {
-        dateTime: "2025-11-19T21:17:00+05:30",
-      },
-      end: {
-        dateTime: "2025-11-20T04:50:00+05:30",
-      },
-    },
-  ]);
+  const [calendarEvents, setCalendarEvents] = useState<GoogleCalendarEvent[]>(
+    []
+  );
   const { locale, showGoogleCalendar, googleAuthToken } =
     useContext(AppContext);
 
@@ -96,7 +55,6 @@ export default function Calendar({ date }: { date: Date }) {
     }
 
     fetchGoogleCalendarEvents(googleAuthToken).then((events) => {
-      console.log("Fetched events:", events);
       setCalendarEvents(events);
     });
   }, [showGoogleCalendar, googleAuthToken]);
@@ -128,26 +86,26 @@ export default function Calendar({ date }: { date: Date }) {
     >
       <div className="calendar__date__container">
         <div className="calendar__date">
-        <div className="calendar__month-label">
-          {translation[locale]?.[monthKey]}
-        </div>
-        <div className="calendar__week-container">
-          {weeks.map((week, idx) => (
-            <div className="calendar__column-item" key={week + idx}>
-              {week}
-            </div>
-          ))}
-          {dateList.map((item, idx) => (
-            <div
-              className={
-                "calendar__column-item" +
-                (currentDate === item ? " current-date" : "")
-              }
-              key={monthKey + idx + item}
-            >
-              {item}
-            </div>
-          ))}
+          <div className="calendar__month-label">
+            {translation[locale]?.[monthKey]}
+          </div>
+          <div className="calendar__week-container">
+            {weeks.map((week, idx) => (
+              <div className="calendar__column-item" key={week + idx}>
+                {week}
+              </div>
+            ))}
+            {dateList.map((item, idx) => (
+              <div
+                className={
+                  "calendar__column-item" +
+                  (currentDate === item ? " current-date" : "")
+                }
+                key={monthKey + idx + item}
+              >
+                {item}
+              </div>
+            ))}
           </div>
         </div>
         <div className="calendar__event">
