@@ -176,3 +176,14 @@ export function getFormattedTimeString(
 
   return formattedTime;
 }
+
+export function isToday(dateString: string): boolean {
+  const givenDate = new Date(dateString);
+  const today = new Date();
+
+  return (
+    givenDate.getFullYear() === today.getFullYear() &&
+    givenDate.getMonth() === today.getMonth() &&
+    givenDate.getDate() === today.getDate()
+  );
+}
