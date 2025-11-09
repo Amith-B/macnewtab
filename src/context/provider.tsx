@@ -38,7 +38,6 @@ import {
 } from "../utils/localStorage";
 import {
   GOOGLE_USER_LOCAL_STORAGE_KEY,
-  GOOGLE_AUTH_TOKEN_LOCAL_STORAGE_KEY,
   SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
   SHOW_EVENTS_CALENDAR_LOCAL_STORAGE_KEY,
 } from "../static/googleSettings";
@@ -305,13 +304,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     const loadGoogleUser = async () => {
       try {
         const storedUser = localStorage.getItem(GOOGLE_USER_LOCAL_STORAGE_KEY);
-        const storedToken = localStorage.getItem(
-          GOOGLE_AUTH_TOKEN_LOCAL_STORAGE_KEY
-        );
+        const token = await getGoogleAuthToken();
 
-        if (storedUser && storedToken) {
+        if (storedUser && token) {
           setGoogleUser(JSON.parse(storedUser));
-          setGoogleAuthToken(storedToken);
+          setGoogleAuthToken(token);
         }
       } catch (error) {
         console.error("Failed to load Google user:", error);
@@ -517,7 +514,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         GOOGLE_USER_LOCAL_STORAGE_KEY,
         JSON.stringify(userProfile)
       );
-      localStorage.setItem(GOOGLE_AUTH_TOKEN_LOCAL_STORAGE_KEY, token);
     } catch (error) {
       console.error("Google sign in failed:", error);
       throw error;
@@ -535,7 +531,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setShowGoogleCalendar(false);
 
       localStorage.removeItem(GOOGLE_USER_LOCAL_STORAGE_KEY);
-      localStorage.removeItem(GOOGLE_AUTH_TOKEN_LOCAL_STORAGE_KEY);
     } catch (error) {
       console.error("Google sign out failed:", error);
       throw error;

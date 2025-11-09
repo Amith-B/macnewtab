@@ -1,7 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Calendar1.css";
 import { translation } from "../../locale/languages";
 import { AppContext } from "../../context/provider";
+import {
+  fetchGoogleCalendarEvents,
+  GoogleCalendarEvent,
+} from "../../utils/googleAuth";
 
 const getMonthName = (date: Date): keyof (typeof translation)["en"] => {
   return new Intl.DateTimeFormat("en-US", { month: "short" })
@@ -16,7 +20,22 @@ const getWeekName = (date: Date): keyof (typeof translation)["en"] => {
 };
 
 export default function Calendar1({ date }: { date: Date }) {
-  const { locale } = useContext(AppContext);
+  const { locale, showGoogleCalendar, googleAuthToken } =
+    useContext(AppContext);
+  const [calendarEvents, setCalendarEvents] = useState<GoogleCalendarEvent[]>(
+    []
+  );
+
+  useEffect(() => {
+    if (!showGoogleCalendar || !googleAuthToken) {
+      return;
+    }
+
+    fetchGoogleCalendarEvents(googleAuthToken).then((events) => {
+      console.log("Fetched events:", events);
+      setCalendarEvents(events);
+    });
+  }, [showGoogleCalendar, googleAuthToken]);
 
   return (
     <div className="calendar-1__container">

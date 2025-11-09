@@ -2,6 +2,10 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import "./Calendar.css";
 import { translation } from "../../locale/languages";
 import { AppContext } from "../../context/provider";
+import {
+  fetchGoogleCalendarEvents,
+  GoogleCalendarEvent,
+} from "../../utils/googleAuth";
 
 const getMonthName = (date: Date) => {
   return new Intl.DateTimeFormat("en-US", { month: "long" }).format(date);
@@ -33,11 +37,26 @@ function generateDateArray(year: number, month: number) {
 
 export default function Calendar({ date }: { date: Date }) {
   const [weeks, setWeeks] = useState<string[]>([]);
-  const { locale } = useContext(AppContext);
+  const [calendarEvents, setCalendarEvents] = useState<GoogleCalendarEvent[]>(
+    []
+  );
+  const { locale, showGoogleCalendar, googleAuthToken } =
+    useContext(AppContext);
 
   useEffect(() => {
     setWeeks(getSingleLetterWeekNames());
   }, []);
+
+  useEffect(() => {
+    if (!showGoogleCalendar || !googleAuthToken) {
+      return;
+    }
+
+    fetchGoogleCalendarEvents(googleAuthToken).then((events) => {
+      console.log("Fetched events:", events);
+      setCalendarEvents(events);
+    });
+  }, [showGoogleCalendar, googleAuthToken]);
 
   const year = date.getFullYear();
   const month = date.getMonth();

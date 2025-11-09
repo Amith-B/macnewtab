@@ -78,7 +78,7 @@ export const fetchGoogleUserProfile = async (
 // Fetch calendar events from Google Calendar API
 export const fetchGoogleCalendarEvents = async (
   token: string,
-  maxResults: number = 10
+  maxResults: number = 100
 ): Promise<GoogleCalendarEvent[]> => {
   const now = new Date();
   const timeMin = now.toISOString();
