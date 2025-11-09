@@ -1,17 +1,41 @@
 .calendar-1__container {
   --calendar-background: var(--widget-background);
+  position: relative;
+  height: 12.5rem;
+  min-width: 12.5rem;
+}
 
+.calendar-1__date__container {
+  position: absolute;
   background-color: var(--calendar-background);
   box-shadow: 0px 0px 4px var(--theme-shadow);
+  transition: width 0.3s ease;
   padding: 12px;
   width: 12.5rem;
   height: 12.5rem;
   border-radius: 24px;
   display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  gap: 16px;
+  z-index: 2;
+}
+
+.calendar-1__date {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  height: calc(12.5rem - 24px);
+  width: calc(12.5rem - 24px);
+  min-width: calc(12.5rem - 24px);
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  font-weight: bold;
+  z-index: 2;
+  background-color: var(--calendar-background);
+}
+
+.calendar-1__container.has-events:hover .calendar-1__date__container {
+  width: 26rem;
 }
 
 .calendar-1__top-section {
@@ -38,4 +62,23 @@
   color: var(--calendar-date-text-color);
   font-size: 8rem;
   line-height: 0.8;
+}
+
+.calendar-1__event {
+  min-width: 12rem;
+  height: 100%;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1;
+}
+
+.calendar-1__event::-webkit-scrollbar {
+  display: none;
+}
+
+.calendar-1__container.has-events:hover .calendar-1__event {
+  opacity: 1;
+  transform: translateX(0%);
 }
