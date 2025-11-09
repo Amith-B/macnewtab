@@ -1,0 +1,59 @@
+.events__date-label {
+  color: var(--calendar-events-date-text-color);
+  font-weight: bold;
+  font-size: 0.813rem;
+}
+
+.event__item {
+  border-radius: 4px;
+  background-color: #363f40;
+  padding: 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.event__type__indicator {
+  min-width: 4px;
+  border-radius: 2px;
+  background: #9fe1e7;
+}
+
+.events__date-group {
+  margin-bottom: 16px;
+}
+
+.events__date-label,
+.event__item {
+  margin-bottom: 8px;
+}
+
+.event__item-title {
+  font-weight: bold;
+  font-size: 0.813rem;
+  color: #9fe1e7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.event__item-location {
+  opacity: 0.6;
+  font-size: 0.813rem;
+  color: #9fe1e7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.event__item-time {
+  font-size: 0.625rem;
+  color: #9fe1e7;
+  opacity: 0.6;
+}
+
+.event__summary {
+  width: calc(12.5rem - 24px);
+}

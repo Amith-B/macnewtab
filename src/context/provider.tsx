@@ -260,7 +260,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     false
   );
 
-  const [googleUser, setGoogleUser] = useState<GoogleUser | null>(null);
+  const [googleUser, setGoogleUser] = useState<GoogleUser | null>({
+    id: "117637264453944830445",
+    email: "amithbr6@gmail.com",
+    name: "Amith B",
+    picture:
+      "https://lh3.googleusercontent.com/a/ACg8ocInvnyf85RsU6odKJ0XdAiZtvBnZONMMTXAX7jZvmbEXIs6Z4qE=s96-c",
+  });
   const [googleAuthToken, setGoogleAuthToken] = useState("");
   const [showGoogleCalendar, setShowGoogleCalendar] = useLocalStorage(
     SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,

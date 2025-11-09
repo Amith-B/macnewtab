@@ -2523,3 +2523,24 @@ export const languageOptions = [
   { label: "Marathi", value: "mr", voiceSearchLanguage: "" },
   { label: "Indonesian", value: "id", voiceSearchLanguage: "id" },
 ];
+
+export const languageLocaleMap: Record<keyof typeof translation, string> = {
+  en: "en-US", // English
+  kn: "kn-IN", // Kannada
+  cs: "cs-CZ", // Czech
+  tr: "tr-TR", // Turkish
+  vi: "vi-VN", // Vietnamese
+  uz: "uz-UZ", // Uzbek
+  zh: "zh-CN", // Chinese (Simplified)
+  hi: "hi-IN", // Hindi
+  it: "it-IT", // Italian
+  bn: "bn-IN", // Bengali
+  pt: "pt-PT", // Portuguese
+  fr: "fr-FR", // French
+  ru: "ru-RU", // Russian
+  es: "es-ES", // Spanish
+  ja: "ja-JP", // Japanese
+  ko: "ko-KR", // Korean
+  id: "id-ID", // Indonesian
+  mr: "mr-IN", // Marathi
+};

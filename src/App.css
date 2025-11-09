@@ -39,6 +39,7 @@ body:has(.App.theme-light) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #a1a1a1;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #a1a1a1;
 
   --widget-background: #ffffff;
@@ -84,6 +85,7 @@ body:has(.App.theme-dark) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #a1a1a1;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #a1a1a1;
 
   --widget-background: #2e2e2e;
@@ -136,6 +138,7 @@ body:has(.App.theme-dark) {
     --calendar-1-week-text-color: #ff453a;
     --calendar-1-month-text-color: #a1a1a1;
     --calendar-month-text-color: #ff3b31;
+    --calendar-events-date-text-color: #ff3b31;
     --calendar-sunday-text-color: #a1a1a1;
 
     --widget-background: #2e2e2e;
@@ -187,6 +190,7 @@ body:has(.App.theme-blue) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #7c7c7c;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #7c7c7c;
   --widget-background: #accfff;
   --window-expand-bg: #528cd9;
@@ -223,6 +227,7 @@ body:has(.App.theme-red) {
   --calendar-1-week-text-color: #ff493e;
   --calendar-1-month-text-color: white;
   --calendar-month-text-color: black;
+  --calendaevents-dateth-text-color: black;
   --calendar-sunday-text-color: #666666;
   --widget-background: #ffc8c8;
   --window-expand-bg: #ffb9b9;
@@ -259,6 +264,7 @@ body:has(.App.theme-orange) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #737373;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #737373;
   --widget-background: #ffc8ac;
   --window-expand-bg: #dc8154;
@@ -295,6 +301,7 @@ body:has(.App.theme-purple) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #7c7c7c;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #7c7c7c;
   --widget-background: #d5ceff;
   --window-expand-bg: #bfc0ff;
@@ -331,6 +338,7 @@ body:has(.App.theme-pink) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #6a6a6a;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #6a6a6a;
   --widget-background: #ffcedd;
   --window-expand-bg: #ffbfdd;
@@ -367,6 +375,7 @@ body:has(.App.theme-brown) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #7c7c7c;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #7c7c7c;
   --widget-background: #ffdfce;
   --window-expand-bg: #ffd9bf;

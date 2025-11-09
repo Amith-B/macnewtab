@@ -1,18 +1,33 @@
 .calendar__container {
   --calendar-background: var(--widget-background);
   --calendar-current-date-text-color: #ff453a;
+  position: relative;
+  height: 12.5rem;
+  min-width: 12.5rem;
+}
 
+.calendar__date__container {
+  position: absolute;
   background-color: var(--calendar-background);
   box-shadow: 0px 0px 4px var(--theme-shadow);
   padding: 12px;
-  width: 12.5rem;
   height: 12.5rem;
+  width: 12.5rem;
   border-radius: 24px;
+  transition: width 0.3s ease;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 6px;
+  flex-direction: row;
+  gap: 16px;
+  z-index: 2;
+}
+
+.calendar__container.has-events:hover .calendar__date__container {
+  width: 26rem;
+}
+
+.calendar__week-container {
+  align-self: flex-start;
+  width: 11rem;
 }
 
 .calendar__month-label {
@@ -50,4 +65,33 @@
   width: 22px;
   height: 22px;
   color: white !important;
+}
+
+.calendar__date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 2;
+  background-color: var(--calendar-background);
+}
+
+.calendar__event {
+  min-width: 12rem;
+  height: 100%;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1;
+}
+
+.calendar__event::-webkit-scrollbar {
+  display: none;
+}
+
+.calendar__container.has-events:hover .calendar__event {
+  opacity: 1;
+  transform: translateX(0%);
 }

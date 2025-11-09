@@ -17,6 +17,7 @@ export interface GoogleUser {
 export interface GoogleCalendarEvent {
   id: string;
   summary: string;
+  htmlLink?: string;
   start: {
     dateTime?: string;
     date?: string;
@@ -27,6 +28,7 @@ export interface GoogleCalendarEvent {
   };
   description?: string;
   location?: string;
+  recurringEventId?: string;
 }
 
 // Get OAuth token using Chrome Identity API
