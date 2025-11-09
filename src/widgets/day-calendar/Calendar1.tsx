@@ -50,7 +50,7 @@ export default function Calendar1({ date }: { date: Date }) {
     <div
       className={
         "calendar-1__container" +
-        (calendarEvents.length > 0 ? " has-events" : "")
+        (showGoogleCalendar && calendarEvents.length > 0 ? " has-events" : "")
       }
     >
       <div className="calendar-1__date__container">
