@@ -21,10 +21,12 @@ export interface GoogleCalendarEvent {
   start: {
     dateTime?: string;
     date?: string;
+    timeZone?: string;
   };
   end: {
     dateTime?: string;
     date?: string;
+    timeZone?: string;
   };
   description?: string;
   location?: string;

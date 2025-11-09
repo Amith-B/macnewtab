@@ -66,6 +66,14 @@ export default function Calendar({ date }: { date: Date }) {
     return eventGroup;
   }, [calendarEvents]);
 
+  const eventGroupDateSet = useMemo(() => {
+    const dateSet = new Set<string>();
+    eventGroup.forEach((group) => {
+      dateSet.add(group.date);
+    });
+    return dateSet;
+  }, [eventGroup]);
+
   const year = date.getFullYear();
   const month = date.getMonth();
   const currentDate = date.getDate();
@@ -96,17 +104,27 @@ export default function Calendar({ date }: { date: Date }) {
                 {week}
               </div>
             ))}
-            {dateList.map((item, idx) => (
+            {dateList.map((item, idx) => {
+              const isCurrentDate = currentDate === item;
+              const hasEvent = item
+                ? eventGroupDateSet.has(
+                    new Date(year, month, item).toISOString().split("T")[0]
+                  )
+                : false;
+
+              return (
               <div
                 className={
                   "calendar__column-item" +
-                  (currentDate === item ? " current-date" : "")
+                    (isCurrentDate ? " current-date" : "") +
+                    (hasEvent ? " has-event" : "")
                 }
                 key={monthKey + idx + item}
               >
                 {item}
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
         <div className="calendar__event">
