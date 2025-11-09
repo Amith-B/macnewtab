@@ -170,7 +170,8 @@
   height: 40px;
 }
 
-.settings_menu-item.account .account-icon svg {
+.settings_menu-item.account .account-icon svg,
+.settings_menu-item.account .account-icon img {
   width: 100%;
   height: 100%;
 }

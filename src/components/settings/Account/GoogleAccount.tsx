@@ -3,6 +3,7 @@ import "./GoogleAccount.css";
 import { AppContext } from "../../../context/provider";
 import Translation from "../../../locale/Translation";
 import { getIdentityPermissionAccess } from "../../../utils/googleAuth";
+import Toggle from "../../toggle/Toggle";
 
 const GoogleAccount = memo(function Google() {
   const {
@@ -11,6 +12,8 @@ const GoogleAccount = memo(function Google() {
     handleGoogleSignOut,
     showGoogleCalendar,
     setShowGoogleCalendar,
+    showEventsCalendarWidget,
+    setShowEventsCalendarWidget,
   } = useContext(AppContext);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -44,21 +47,26 @@ const GoogleAccount = memo(function Google() {
   return (
     <div className="google__container">
       {!googleUser ? (
-        <button
-          className="google__sign-in-button"
-          onClick={handleSignIn}
-          disabled={isLoading}
-        >
-          {
-            isLoading
-              ? "Signing In"
-              : // <Translation value="signing_in" />
-                "Sign in with Google"
-            // <Translation value="sign_in_with_google" />
-          }
-        </button>
+        <>
+          <p className="google-signin_description">
+            To access Google Calendar, please sign in with your Google account.
+          </p>
+          <button
+            className="google__sign-in-button button"
+            onClick={handleSignIn}
+            disabled={isLoading}
+          >
+            {
+              isLoading
+                ? "Signing In"
+                : // <Translation value="signing_in" />
+                  "Sign in with Google"
+              // <Translation value="sign_in_with_google" />
+            }
+          </button>
+        </>
       ) : (
-        <div className="google__user-info">
+        <div className="google__container-signed-in">
           <div className="google__user-details">
             {googleUser.picture && (
               <img
@@ -72,8 +80,32 @@ const GoogleAccount = memo(function Google() {
               <div className="google__user-email">{googleUser.email}</div>
             </div>
           </div>
+          <div className="google__user-settings">
+            <div className="google__user-settings-row-item">
+              Show Calendar Events
+              <Toggle
+                id={"calendar-events-toggle"}
+                name="Calendar events toggle"
+                isChecked={showGoogleCalendar}
+                handleToggleChange={() =>
+                  setShowGoogleCalendar(!showGoogleCalendar)
+                }
+              />
+            </div>
+            <div className="google__user-settings-row-item">
+              Show Events Calendar Widget
+              <Toggle
+                id={"show-events-toggle"}
+                name="Events calendar toggle"
+                isChecked={showEventsCalendarWidget}
+                handleToggleChange={() =>
+                  setShowEventsCalendarWidget(!showEventsCalendarWidget)
+                }
+              />
+            </div>
+          </div>
           <button
-            className="google__sign-out-button"
+            className="google__sign-out-button button"
             onClick={handleSignOut}
             disabled={isLoading}
           >

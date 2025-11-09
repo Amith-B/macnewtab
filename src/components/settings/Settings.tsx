@@ -69,7 +69,7 @@ export default function Settings({
 }) {
   const [selectedMenu, setSelectedMenu] = useState(SETTINGS_MENU[0]);
   const [modalAccessible, setModalAccessible] = useState(false);
-  const { dockPosition } = useContext(AppContext);
+  const { dockPosition, googleUser } = useContext(AppContext);
 
   const [position, setPosition] = useState({ x: "unset", y: "unset" });
   const modalRef = useRef<HTMLDivElement>(null);
@@ -178,11 +178,21 @@ export default function Settings({
               onClick={() => setSelectedMenu(ACCOUNT_MENU)}
             >
               <div className="account-icon">
-                <LoggedOutIcon />
+                {googleUser?.picture ? (
+                  <img
+                    src={googleUser.picture}
+                    alt={googleUser.name}
+                    className="google__user-avatar"
+                  />
+                ) : (
+                  <LoggedOutIcon />
+                )}
               </div>
               <div className="title-group">
-                <h4>{ACCOUNT_MENU.title}</h4>
-                <h5>{ACCOUNT_MENU.subtitle}</h5>
+                <h4>
+                  {googleUser?.name ? googleUser.name : ACCOUNT_MENU.title}
+                </h4>
+                <h5>{googleUser ? "Google Account" : ACCOUNT_MENU.subtitle}</h5>
               </div>
             </button>
             {SETTINGS_MENU.map((item) => {
@@ -221,9 +231,9 @@ export default function Settings({
           </a>
         </div>
         <div className="settings__menu-content">
-          <div className="settings__menu-content-title">
-            {selectedMenu.title}
-          </div>
+          <h1 className="settings__menu-content-title">
+            {googleUser ? "Google Account" : selectedMenu.title}
+          </h1>
           <Content />
         </div>
       </div>

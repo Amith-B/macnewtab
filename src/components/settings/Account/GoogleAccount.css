@@ -1,0 +1,71 @@
+.google-signin_description {
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+}
+
+.google__container {
+  height: calc(100% - 60px);
+}
+
+.google__container-signed-in {
+  height: 100%;
+}
+
+.google__container-signed-in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.google__user-details,
+.google__user-settings {
+  margin-bottom: 12px;
+}
+
+.google__user-details,
+.google__user-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.google__user-avatar {
+  width: 100px;
+  height: 100px;
+}
+
+.google__user-avatar,
+.google__user-name {
+  margin-bottom: 4px;
+}
+
+.google__sign-out-button {
+  align-self: flex-start;
+}
+
+.google__user-settings {
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  padding: 0 12px;
+  background-color: var(--theme-bg-with-opacity);
+  width: 100%;
+  max-height: calc(100% - 60px);
+  overflow: auto;
+}
+
+.google__user-settings-row-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--theme-border);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.google__user-settings .google__user-settings-row-item:last-child {
+  border-bottom: none;
+}
+
+.google__user-settings-row-item:not(.with-description) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
