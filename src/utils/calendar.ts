@@ -29,8 +29,9 @@ export function convertCalendarEvents(
 
     // Case 1: All-day event (date present)
     if (start.date && end.date) {
-      const startDate = new Date(start.date + "T00:00:00+05:30");
-      const endDate = new Date(end.date + "T00:00:00+05:30");
+      // Parse dates as local dates (YYYY-MM-DD format from Google Calendar)
+      const startDate = new Date(start.date + "T00:00:00");
+      const endDate = new Date(end.date + "T00:00:00");
 
       for (
         let d = new Date(startDate);
@@ -54,12 +55,31 @@ export function convertCalendarEvents(
       const startDateTime = new Date(start.dateTime);
       const endDateTime = new Date(end.dateTime);
 
-      const startDay = startDateTime.toLocaleDateString("en-CA", {
-        timeZone: "Asia/Kolkata",
-      });
-      const endDay = endDateTime.toLocaleDateString("en-CA", {
-        timeZone: "Asia/Kolkata",
-      });
+      // Use the event's timezone if provided, otherwise use local timezone
+      const timeZone = start.timeZone || undefined;
+
+      // Get date strings in the event's timezone (YYYY-MM-DD format)
+      const startDay = timeZone
+        ? new Date(startDateTime.toLocaleString("en-US", { timeZone }))
+            .toISOString()
+            .split("T")[0]
+        : `${startDateTime.getFullYear()}-${String(
+            startDateTime.getMonth() + 1
+          ).padStart(2, "0")}-${String(startDateTime.getDate()).padStart(
+            2,
+            "0"
+          )}`;
+
+      const endDay = timeZone
+        ? new Date(endDateTime.toLocaleString("en-US", { timeZone }))
+            .toISOString()
+            .split("T")[0]
+        : `${endDateTime.getFullYear()}-${String(
+            endDateTime.getMonth() + 1
+          ).padStart(2, "0")}-${String(endDateTime.getDate()).padStart(
+            2,
+            "0"
+          )}`;
 
       if (startDay === endDay) {
         // same-day event
@@ -75,14 +95,18 @@ export function convertCalendarEvents(
         });
       } else {
         // multi-day time-based event
+        const startDateObj = new Date(startDay + "T00:00:00");
+        const endDateObj = new Date(endDay + "T00:00:00");
+
         for (
-          let d = new Date(startDay + "T00:00:00+05:30");
-          d <= new Date(endDay + "T00:00:00+05:30");
+          let d = new Date(startDateObj);
+          d <= endDateObj;
           d.setDate(d.getDate() + 1)
         ) {
-          const currentDay = d.toLocaleDateString("en-CA", {
-            timeZone: "Asia/Kolkata",
-          });
+          const currentDay = `${d.getFullYear()}-${String(
+            d.getMonth() + 1
+          ).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
           if (currentDay === startDay) {
             eventList.push({
               date: startDateTime.toISOString(),
@@ -129,9 +153,12 @@ export function groupEventsByDate(events: CalendarEvents): Array<{
   const groups: Record<string, CalendarEvents> = {};
 
   for (const e of events) {
-    const localDate = new Date(e.date).toLocaleDateString("en-CA", {
-      timeZone: "Asia/Kolkata",
-    });
+    // Convert to local date in YYYY-MM-DD format
+    const eventDate = new Date(e.date);
+    const localDate = `${eventDate.getFullYear()}-${String(
+      eventDate.getMonth() + 1
+    ).padStart(2, "0")}-${String(eventDate.getDate()).padStart(2, "0")}`;
+
     if (!groups[localDate]) groups[localDate] = [];
     groups[localDate].push(e);
   }

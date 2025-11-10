@@ -108,7 +108,9 @@ export default function Calendar({ date }: { date: Date }) {
               const isCurrentDate = currentDate === item;
               const hasEvent = item
                 ? eventGroupDateSet.has(
-                    new Date(year, month, item).toISOString().split("T")[0]
+                    `${year}-${String(month + 1).padStart(2, "0")}-${String(
+                      item
+                    ).padStart(2, "0")}`
                   )
                 : false;
 
