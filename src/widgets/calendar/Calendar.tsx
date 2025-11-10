@@ -8,6 +8,7 @@ import {
 } from "../../utils/googleAuth";
 import { convertCalendarEvents, groupEventsByDate } from "../../utils/calendar";
 import Events from "../events/Events";
+import { ReactComponent as ExpandableIcon } from "../../assets/expandable.svg";
 
 const getMonthName = (date: Date) => {
   return new Intl.DateTimeFormat("en-US", { month: "long" }).format(date);
@@ -97,6 +98,9 @@ export default function Calendar({ date }: { date: Date }) {
         (showGoogleCalendar && calendarEvents.length > 0 ? " has-events" : "")
       }
     >
+      <div className="calendar__event-expand-icon">
+        <ExpandableIcon />
+      </div>
       <div className="calendar__date__container">
         <div className="calendar__date">
           <div className="calendar__month-label">
