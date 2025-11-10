@@ -46,6 +46,13 @@ export default function Calendar1({ date }: { date: Date }) {
     return eventGroup;
   }, [calendarEvents]);
 
+  const hasEventsToday = useMemo(() => {
+    const todayString = `${date.getFullYear()}-${String(
+      date.getMonth() + 1
+    ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+    return eventGroup.some((group) => group.date === todayString);
+  }, [eventGroup, date]);
+
   return (
     <div
       className={
@@ -64,6 +71,7 @@ export default function Calendar1({ date }: { date: Date }) {
             </div>
           </div>
           <div className="calendar-1__bottom-section">{date.getDate()}</div>
+          {hasEventsToday && <div className="calendar-1__event-indicator" />}
         </div>
         <div className="calendar-1__event">
           <Events eventGroup={eventGroup} />

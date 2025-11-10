@@ -82,3 +82,30 @@
   opacity: 1;
   transform: translateX(0%);
 }
+
+.calendar-1__event-indicator {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--theme-primary, #4285f4);
+  animation: calendar-1-glow 2s ease-in-out infinite;
+  z-index: 3;
+}
+
+@keyframes calendar-1-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 4px var(--theme-primary, #4285f4),
+      0 0 8px var(--theme-primary, #4285f4);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 8px var(--theme-primary, #4285f4),
+      0 0 16px var(--theme-primary, #4285f4),
+      0 0 24px var(--theme-primary, #4285f4);
+    opacity: 0.8;
+  }
+}
