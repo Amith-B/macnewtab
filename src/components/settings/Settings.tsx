@@ -238,7 +238,7 @@ export default function Settings({
         </div>
         <div className="settings__menu-content">
           <h1 className="settings__menu-content-title">
-            {googleUser ? (
+            {googleUser && selectedMenu.key === "account" ? (
               <Translation value="google_account" />
             ) : (
               selectedMenu.title
