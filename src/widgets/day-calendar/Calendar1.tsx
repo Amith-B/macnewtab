@@ -34,7 +34,6 @@ export default function Calendar1({ date }: { date: Date }) {
     }
 
     fetchGoogleCalendarEvents(googleAuthToken).then((events) => {
-      console.log("Fetched events:", events);
       setCalendarEvents(events);
     });
   }, [showGoogleCalendar, googleAuthToken]);
