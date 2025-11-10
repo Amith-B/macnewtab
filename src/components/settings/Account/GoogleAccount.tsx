@@ -12,8 +12,6 @@ const GoogleAccount = memo(function Google() {
     handleGoogleSignOut,
     showGoogleCalendar,
     setShowGoogleCalendar,
-    showEventsCalendarWidget,
-    setShowEventsCalendarWidget,
   } = useContext(AppContext);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -81,27 +79,22 @@ const GoogleAccount = memo(function Google() {
             </div>
           </div>
           <div className="google__user-settings">
-            <div className="google__user-settings-row-item">
-              Show Calendar Events
-              <Toggle
-                id={"calendar-events-toggle"}
-                name="Calendar events toggle"
-                isChecked={showGoogleCalendar}
-                handleToggleChange={() =>
-                  setShowGoogleCalendar(!showGoogleCalendar)
-                }
-              />
-            </div>
-            <div className="google__user-settings-row-item">
-              Show Events Calendar Widget
-              <Toggle
-                id={"show-events-toggle"}
-                name="Events calendar toggle"
-                isChecked={showEventsCalendarWidget}
-                handleToggleChange={() =>
-                  setShowEventsCalendarWidget(!showEventsCalendarWidget)
-                }
-              />
+            <div className="google__user-settings-row-item with-description">
+              <div className="calendar-events-toggle-row">
+                Show Calendar Events
+                <Toggle
+                  id={"calendar-events-toggle"}
+                  name="Calendar events toggle"
+                  isChecked={showGoogleCalendar}
+                  handleToggleChange={() =>
+                    setShowGoogleCalendar(!showGoogleCalendar)
+                  }
+                />
+              </div>
+              <div className="calendar-events-toggle-description">
+                Once enabled, hover over the calendar to expand and see upcoming
+                events for the next 30 days
+              </div>
             </div>
           </div>
           <button

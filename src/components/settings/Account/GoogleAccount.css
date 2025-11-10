@@ -64,8 +64,16 @@
   border-bottom: none;
 }
 
-.google__user-settings-row-item:not(.with-description) {
+.google__user-settings-row-item:not(.with-description),
+.calendar-events-toggle-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.calendar-events-toggle-description {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: grey;
+  max-width: calc(100% - 60px);
 }

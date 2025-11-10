@@ -39,7 +39,6 @@ import {
 import {
   GOOGLE_USER_LOCAL_STORAGE_KEY,
   SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
-  SHOW_EVENTS_CALENDAR_LOCAL_STORAGE_KEY,
 } from "../static/googleSettings";
 import {
   GoogleUser,
@@ -102,8 +101,6 @@ export const AppContext = createContext({
   handleGoogleSignOut: async () => {},
   showGoogleCalendar: true,
   setShowGoogleCalendar: (_: boolean) => {},
-  showEventsCalendarWidget: false,
-  setShowEventsCalendarWidget: (_: boolean) => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -266,8 +263,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
     true
   );
-  const [showEventsCalendarWidget, setShowEventsCalendarWidget] =
-    useLocalStorage(SHOW_EVENTS_CALENDAR_LOCAL_STORAGE_KEY, false);
 
   useEffect(() => {
     const getList = () => {
@@ -590,8 +585,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleGoogleSignOut,
         showGoogleCalendar,
         setShowGoogleCalendar,
-        showEventsCalendarWidget,
-        setShowEventsCalendarWidget,
       }}
     >
       {children}
