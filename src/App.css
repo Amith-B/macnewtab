@@ -218,7 +218,7 @@ body:has(.App.theme-blue) {
   --settings-side-panel-text-color: #3d3d3d;
 
   --launchpad-tab-selected-bg: #81b7ff;
-  --calendar-has-event-bg-color: #f1f9ff;
+  --calendar-has-event-bg-color: #19354a;
   --calendar-events-banner-background-color: #2a4f6799;
   --calendar-events-banner-text-color: #f1f9ff;
 }
