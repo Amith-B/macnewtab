@@ -39,11 +39,15 @@ export default function Calendar1({ date }: { date: Date }) {
   }, [showGoogleCalendar, googleAuthToken]);
 
   const eventGroup = useMemo(() => {
+    if (!showGoogleCalendar) {
+      return [];
+    }
+
     const eventList = convertCalendarEvents(calendarEvents);
     const eventGroup = groupEventsByDate(eventList);
 
     return eventGroup;
-  }, [calendarEvents]);
+  }, [calendarEvents, showGoogleCalendar]);
 
   const hasEventsToday = useMemo(() => {
     const todayString = `${date.getFullYear()}-${String(

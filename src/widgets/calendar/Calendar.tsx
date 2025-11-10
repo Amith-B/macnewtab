@@ -60,11 +60,15 @@ export default function Calendar({ date }: { date: Date }) {
   }, [showGoogleCalendar, googleAuthToken]);
 
   const eventGroup = useMemo(() => {
+    if (!showGoogleCalendar) {
+      return [];
+    }
+
     const eventList = convertCalendarEvents(calendarEvents);
     const eventGroup = groupEventsByDate(eventList);
 
     return eventGroup;
-  }, [calendarEvents]);
+  }, [calendarEvents, showGoogleCalendar]);
 
   const eventGroupDateSet = useMemo(() => {
     const dateSet = new Set<string>();
@@ -115,16 +119,16 @@ export default function Calendar({ date }: { date: Date }) {
                 : false;
 
               return (
-              <div
-                className={
-                  "calendar__column-item" +
+                <div
+                  className={
+                    "calendar__column-item" +
                     (isCurrentDate ? " current-date" : "") +
                     (hasEvent ? " has-event" : "")
-                }
-                key={monthKey + idx + item}
-              >
-                {item}
-              </div>
+                  }
+                  key={monthKey + idx + item}
+                >
+                  {item}
+                </div>
               );
             })}
           </div>
