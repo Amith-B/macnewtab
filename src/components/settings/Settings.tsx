@@ -192,7 +192,13 @@ export default function Settings({
                 <h4>
                   {googleUser?.name ? googleUser.name : ACCOUNT_MENU.title}
                 </h4>
-                <h5>{googleUser ? "Google Account" : ACCOUNT_MENU.subtitle}</h5>
+                <h5>
+                  {googleUser ? (
+                    <Translation value="google_account" />
+                  ) : (
+                    ACCOUNT_MENU.subtitle
+                  )}
+                </h5>
               </div>
             </button>
             {SETTINGS_MENU.map((item) => {
@@ -232,7 +238,11 @@ export default function Settings({
         </div>
         <div className="settings__menu-content">
           <h1 className="settings__menu-content-title">
-            {googleUser ? "Google Account" : selectedMenu.title}
+            {googleUser ? (
+              <Translation value="google_account" />
+            ) : (
+              selectedMenu.title
+            )}
           </h1>
           <Content />
         </div>

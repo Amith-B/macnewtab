@@ -9,6 +9,7 @@ import "./Events.css";
 import { AppContext } from "../../context/provider";
 import { ReactComponent as LocationIcon } from "./location.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
+import Translation from "../../locale/Translation";
 
 export default function Events({
   eventGroup,
@@ -37,7 +38,9 @@ export default function Events({
               locale
             )}
           </div>
-          <h2 className="event__item-no-event">No events today</h2>
+          <h2 className="event__item-no-event">
+            <Translation value="no_events_today" />
+          </h2>
         </div>
       )}
 
@@ -99,7 +102,9 @@ export default function Events({
                   </p>
                 )}
                 {event.eventType === "all_day" && (
-                  <p className="event__item-time">all-day</p>
+                  <p className="event__item-time">
+                    <Translation value="all_day" />
+                  </p>
                 )}
               </div>
             </div>

@@ -47,20 +47,18 @@ const GoogleAccount = memo(function Google() {
       {!googleUser ? (
         <>
           <p className="google-signin_description">
-            To access Google Calendar, please sign in with your Google account.
+            <Translation value="sign_in_description" />
           </p>
           <button
             className="google__sign-in-button button"
             onClick={handleSignIn}
             disabled={isLoading}
           >
-            {
-              isLoading
-                ? "Signing In"
-                : // <Translation value="signing_in" />
-                  "Sign in with Google"
-              // <Translation value="sign_in_with_google" />
-            }
+            {isLoading ? (
+              <Translation value="signing_in" />
+            ) : (
+              <Translation value="sign_in_with_google" />
+            )}
           </button>
         </>
       ) : (
@@ -81,7 +79,7 @@ const GoogleAccount = memo(function Google() {
           <div className="google__user-settings">
             <div className="google__user-settings-row-item with-description">
               <div className="calendar-events-toggle-row">
-                Show Calendar Events
+                <Translation value="show_calendar_events" />
                 <Toggle
                   id={"calendar-events-toggle"}
                   name="Calendar events toggle"
@@ -92,8 +90,7 @@ const GoogleAccount = memo(function Google() {
                 />
               </div>
               <div className="calendar-events-toggle-description">
-                Once enabled, hover over the calendar to expand and see upcoming
-                events for the next 30 days
+                <Translation value="show_calendar_events_description" />
               </div>
             </div>
           </div>
@@ -102,13 +99,11 @@ const GoogleAccount = memo(function Google() {
             onClick={handleSignOut}
             disabled={isLoading}
           >
-            {
-              isLoading
-                ? "Signing Out"
-                : //   <Translation value="signing_out" />
-                  "Sign Out"
-              //   <Translation value="sign_out" />
-            }
+            {isLoading ? (
+              <Translation value="signing_out" />
+            ) : (
+              <Translation value="sign_out" />
+            )}
           </button>
         </div>
       )}
