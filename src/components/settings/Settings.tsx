@@ -7,9 +7,11 @@ import { ReactComponent as AppearanceIcon } from "./appearance.svg";
 import { ReactComponent as DockIcon } from "./dock.svg";
 import { ReactComponent as AboutIcon } from "./about.svg";
 import { ReactComponent as ChangelogIcon } from "./changelog.svg";
+import { ReactComponent as LoggedOutIcon } from "./logged-out.svg";
 import Appearance from "./Appearance/Appearance";
 import About from "./About/About";
 import General from "./general/General";
+import GoogleAccount from "./Account/GoogleAccount";
 import Translation from "../../locale/Translation";
 import Dock from "./Dock/Dock";
 import Changelog from "./Changelog/Changelog";
@@ -48,6 +50,14 @@ export const SETTINGS_MENU = [
   },
 ];
 
+const ACCOUNT_MENU = {
+  key: "account",
+  title: <Translation value="sign_in" />,
+  subtitle: <Translation value="with_google_account" />,
+  icon: LoggedOutIcon,
+  content: GoogleAccount,
+};
+
 export default function Settings({
   open,
   onClose,
@@ -59,7 +69,7 @@ export default function Settings({
 }) {
   const [selectedMenu, setSelectedMenu] = useState(SETTINGS_MENU[0]);
   const [modalAccessible, setModalAccessible] = useState(false);
-  const { dockPosition } = useContext(AppContext);
+  const { dockPosition, googleUser } = useContext(AppContext);
 
   const [position, setPosition] = useState({ x: "unset", y: "unset" });
   const modalRef = useRef<HTMLDivElement>(null);
@@ -159,6 +169,38 @@ export default function Settings({
             <button className="settings__window-manager-button settings__window-expand"></button>
           </div>
           <div className="settings__menu">
+            <button
+              key="account"
+              className={
+                "settings_menu-item account" +
+                (selectedMenu.key === "account" ? " selected" : "")
+              }
+              onClick={() => setSelectedMenu(ACCOUNT_MENU)}
+            >
+              <div className="account-icon">
+                {googleUser?.picture ? (
+                  <img
+                    src={googleUser.picture}
+                    alt={googleUser.name}
+                    className="google__user-avatar"
+                  />
+                ) : (
+                  <LoggedOutIcon />
+                )}
+              </div>
+              <div className="title-group">
+                <h4>
+                  {googleUser?.name ? googleUser.name : ACCOUNT_MENU.title}
+                </h4>
+                <h5>
+                  {googleUser ? (
+                    <Translation value="google_account" />
+                  ) : (
+                    ACCOUNT_MENU.subtitle
+                  )}
+                </h5>
+              </div>
+            </button>
             {SETTINGS_MENU.map((item) => {
               const MenuIcon = item.icon;
               return (
@@ -195,9 +237,13 @@ export default function Settings({
           </a>
         </div>
         <div className="settings__menu-content">
-          <div className="settings__menu-content-title">
-            {selectedMenu.title}
-          </div>
+          <h1 className="settings__menu-content-title">
+            {googleUser && selectedMenu.key === "account" ? (
+              <Translation value="google_account" />
+            ) : (
+              selectedMenu.title
+            )}
+          </h1>
           <Content />
         </div>
       </div>

@@ -2,6 +2,13 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import "./Calendar.css";
 import { translation } from "../../locale/languages";
 import { AppContext } from "../../context/provider";
+import {
+  fetchGoogleCalendarEvents,
+  GoogleCalendarEvent,
+} from "../../utils/googleAuth";
+import { convertCalendarEvents, groupEventsByDate } from "../../utils/calendar";
+import Events from "../events/Events";
+import { ReactComponent as ExpandableIcon } from "../../assets/expandable.svg";
 
 const getMonthName = (date: Date) => {
   return new Intl.DateTimeFormat("en-US", { month: "long" }).format(date);
@@ -33,11 +40,44 @@ function generateDateArray(year: number, month: number) {
 
 export default function Calendar({ date }: { date: Date }) {
   const [weeks, setWeeks] = useState<string[]>([]);
-  const { locale } = useContext(AppContext);
+  const [calendarEvents, setCalendarEvents] = useState<GoogleCalendarEvent[]>(
+    []
+  );
+  const { locale, showGoogleCalendar, googleAuthToken } =
+    useContext(AppContext);
 
   useEffect(() => {
     setWeeks(getSingleLetterWeekNames());
   }, []);
+
+  useEffect(() => {
+    if (!showGoogleCalendar || !googleAuthToken) {
+      return;
+    }
+
+    fetchGoogleCalendarEvents(googleAuthToken).then((events) => {
+      setCalendarEvents(events);
+    });
+  }, [showGoogleCalendar, googleAuthToken]);
+
+  const eventGroup = useMemo(() => {
+    if (!showGoogleCalendar) {
+      return [];
+    }
+
+    const eventList = convertCalendarEvents(calendarEvents);
+    const eventGroup = groupEventsByDate(eventList);
+
+    return eventGroup;
+  }, [calendarEvents, showGoogleCalendar]);
+
+  const eventGroupDateSet = useMemo(() => {
+    const dateSet = new Set<string>();
+    eventGroup.forEach((group) => {
+      dateSet.add(group.date);
+    });
+    return dateSet;
+  }, [eventGroup]);
 
   const year = date.getFullYear();
   const month = date.getMonth();
@@ -52,27 +92,54 @@ export default function Calendar({ date }: { date: Date }) {
   ).toLowerCase() as keyof (typeof translation)["en"];
 
   return (
-    <div className="calendar__container">
-      <div className="calendar__month-label">
-        {translation[locale]?.[monthKey]}
+    <div
+      className={
+        "calendar__container" +
+        (showGoogleCalendar && calendarEvents.length > 0 ? " has-events" : "")
+      }
+    >
+      <div className="calendar__event-expand-icon">
+        <ExpandableIcon />
       </div>
-      <div className="calendar__week-container">
-        {weeks.map((week, idx) => (
-          <div className="calendar__column-item" key={week + idx}>
-            {week}
+      <div className="calendar__date__container">
+        <div className="calendar__date">
+          <div className="calendar__month-label">
+            {translation[locale]?.[monthKey]}
           </div>
-        ))}
-        {dateList.map((item, idx) => (
-          <div
-            className={
-              "calendar__column-item" +
-              (currentDate === item ? " current-date" : "")
-            }
-            key={monthKey + idx + item}
-          >
-            {item}
+          <div className="calendar__week-container">
+            {weeks.map((week, idx) => (
+              <div className="calendar__column-item" key={week + idx}>
+                {week}
+              </div>
+            ))}
+            {dateList.map((item, idx) => {
+              const isCurrentDate = currentDate === item;
+              const hasEvent = item
+                ? eventGroupDateSet.has(
+                    `${year}-${String(month + 1).padStart(2, "0")}-${String(
+                      item
+                    ).padStart(2, "0")}`
+                  )
+                : false;
+
+              return (
+                <div
+                  className={
+                    "calendar__column-item" +
+                    (isCurrentDate ? " current-date" : "") +
+                    (hasEvent ? " has-event" : "")
+                  }
+                  key={monthKey + idx + item}
+                >
+                  {item}
+                </div>
+              );
+            })}
           </div>
-        ))}
+        </div>
+        <div className="calendar__event">
+          <Events eventGroup={eventGroup} />
+        </div>
       </div>
     </div>
   );

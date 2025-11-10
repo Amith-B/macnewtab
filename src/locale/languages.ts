@@ -134,6 +134,21 @@ export const translation = {
     keep: "Keep",
 
     center_widgets_away_from_dock: "Shift center widgets away from dock",
+
+    sign_in: "Sign In",
+    signing_in: "Signing In",
+    sign_out: "Sign Out",
+    signing_out: "Signing Out",
+    sign_in_with_google: "Sign in with Google",
+    with_google_account: "with your Google Account",
+    sign_in_description:
+      "To access Google Calendar, please sign in with your Google account.",
+    google_account: "Google Account",
+    show_calendar_events: "Show Calendar Events",
+    show_calendar_events_description:
+      "Once enabled, hover over the calendar to expand and see upcoming events for the next 30 days",
+    no_events_today: "No events today",
+    all_day: "all-day",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -270,6 +285,21 @@ export const translation = {
     keep: "ಇರಿಸು",
 
     center_widgets_away_from_dock: "ಡಾಕ್‌ನಿಂದ ಸೆಂಟರ್ ವಿಜೆಟ್‌ಗಳನ್ನು ಶಿಫ್ಟ್ ಮಾಡಿ",
+
+    sign_in: "ಸೈನ್ ಇನ್ ಮಾಡಿ",
+    signing_in: "ಸೈನ್ ಇನ್ ಆಗುತ್ತಿದೆ",
+    sign_out: "ಸೈನ್ ಔಟ್ ಮಾಡಿ",
+    signing_out: "ಸೈನ್ ಔಟ್ ಆಗುತ್ತಿದೆ",
+    sign_in_with_google: "Google ನೊಂದಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡಿ",
+    with_google_account: "ನಿಮ್ಮ Google ಖಾತೆಯೊಂದಿಗೆ",
+    sign_in_description:
+      "Google ಕ್ಯಾಲೆಂಡರ್ ಅನ್ನು ಪ್ರವೇಶಿಸಲು, ದಯವಿಟ್ಟು ನಿಮ್ಮ Google ಖಾತೆಯೊಂದಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡಿ.",
+    google_account: "Google ಖಾತೆ",
+    show_calendar_events: "ಕ್ಯಾಲೆಂಡರ್ ಈವೆಂಟ್‌ಗಳನ್ನು ತೋರಿಸಿ",
+    show_calendar_events_description:
+      "ಸಕ್ರಿಯಗೊಳಿಸಿದ ನಂತರ, ಮುಂದಿನ 30 ದಿನಗಳವರೆಗೆ ಮುಂಬರುವ ಈವೆಂಟ್‌ಗಳನ್ನು ವಿಸ್ತರಿಸಲು ಮತ್ತು ನೋಡಲು ಕ್ಯಾಲೆಂಡರ್ ಮೇಲೆ ಸುಳಿದಾಡಿ",
+    no_events_today: "ಇಂದು ಯಾವುದೇ ಕಾರ್ಯಕ್ರಮಗಳಿಲ್ಲ",
+    all_day: "ಇಡೀ ದಿನ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -405,6 +435,21 @@ export const translation = {
     keep: "Udržet",
 
     center_widgets_away_from_dock: "Přesuňte středové widgety z doku",
+
+    sign_in: "Přihlaste se",
+    signing_in: "Přihlašování",
+    sign_out: "Odhlásit se",
+    signing_out: "Odhlašování",
+    sign_in_with_google: "Přihlaste se pomocí Google",
+    with_google_account: "s vaším účtem Google",
+    sign_in_description:
+      "Chcete-li získat přístup ke Kalendáři Google, přihlaste se pomocí svého účtu Google.",
+    google_account: "účet Google",
+    show_calendar_events: "Zobrazit události kalendáře",
+    show_calendar_events_description:
+      "Po aktivaci kalendář rozbalíte a zobrazíte nadcházející události na příštích 30 dní",
+    no_events_today: "Dnes žádné akce",
+    all_day: "celodenní",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -542,6 +587,21 @@ export const translation = {
 
     center_widgets_away_from_dock:
       "Ortadaki widget'ları dock'tan uzağa taşıyın",
+
+    sign_in: "Oturum aç",
+    signing_in: "Oturum Açma",
+    sign_out: "Oturumu Kapat",
+    signing_out: "Çıkış Yapılıyor",
+    sign_in_with_google: "Google ile oturum açın",
+    with_google_account: "Google Hesabınızla",
+    sign_in_description:
+      "Google Takvim'e erişmek için lütfen Google hesabınızla oturum açın.",
+    google_account: "Google Hesabı",
+    show_calendar_events: "Takvim Etkinliklerini Göster",
+    show_calendar_events_description:
+      "Etkinleştirildikten sonra, önümüzdeki 30 gün için yaklaşan etkinlikleri genişletmek ve görmek için takvimin üzerine gelin",
+    no_events_today: "Bugün etkinlik yok",
+    all_day: "tüm gün",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -679,6 +739,21 @@ export const translation = {
 
     center_widgets_away_from_dock:
       "Di chuyển các widget trung tâm ra khỏi dock",
+
+    sign_in: "Đăng nhập",
+    signing_in: "Đăng nhập",
+    sign_out: "Đăng xuất",
+    signing_out: "Đăng xuất",
+    sign_in_with_google: "Đăng nhập bằng Google",
+    with_google_account: "bằng Tài khoản Google của bạn",
+    sign_in_description:
+      "Để truy cập Lịch Google, vui lòng đăng nhập bằng tài khoản Google của bạn.",
+    google_account: "Tài khoản Google",
+    show_calendar_events: "Hiển thị sự kiện trên lịch",
+    show_calendar_events_description:
+      "Sau khi được bật, hãy di chuột qua lịch để mở rộng và xem các sự kiện sắp tới trong 30 ngày tiếp theo",
+    no_events_today: "Không có sự kiện nào hôm nay",
+    all_day: "cả ngày",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -815,6 +890,21 @@ export const translation = {
     keep: "Saqlamoq",
 
     center_widgets_away_from_dock: "Shift markazi vidjetlar dokdan uzoqda",
+
+    sign_in: "Tizimga kirish",
+    signing_in: "Imzo",
+    sign_out: "Tizimdan chiqish",
+    signing_out: "Ro'yxatdan o'tish",
+    sign_in_with_google: "Google bilan tizimga kiring",
+    with_google_account: "Google hisobingiz bilan",
+    sign_in_description:
+      "Google taqvimiga kirish uchun Google hisob qaydnomangiz bilan tizimga kiring.",
+    google_account: "Google hisobi",
+    show_calendar_events: "Kalendar voqealarni ko'rsating",
+    show_calendar_events_description:
+      "Bir marta yoqilganda, kalendarni kengaytirish va keyingi 30 kun davomida bo'lajak tadbirlarni ko'rish",
+    no_events_today: "Bugun hech qanday voqea yo'q",
+    all_day: "kunduzgi",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -947,6 +1037,20 @@ export const translation = {
     keep: "保持",
 
     center_widgets_away_from_dock: "将中心小部件移离底座",
+
+    sign_in: "登入",
+    signing_in: "登录",
+    sign_out: "登出",
+    signing_out: "退出",
+    sign_in_with_google: "使用 Google 登录",
+    with_google_account: "使用您的 Google 帐户",
+    sign_in_description: "要访问 Google 日历，请使用您的 Google 帐户登录。",
+    google_account: "谷歌帐户",
+    show_calendar_events: "显示日历活动",
+    show_calendar_events_description:
+      "启用后，将鼠标悬停在日历上即可展开并查看未来 30 天内即将发生的活动",
+    no_events_today: "今天没有活动",
+    all_day: "全天",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -1083,6 +1187,21 @@ export const translation = {
     keep: "रखना",
 
     center_widgets_away_from_dock: "केंद्र विजेट्स को डॉक से दूर शिफ्ट करें",
+
+    sign_in: "दाखिल करना",
+    signing_in: "इन कर रहे हैं",
+    sign_out: "साइन आउट",
+    signing_out: "साइन आउट करना",
+    sign_in_with_google: "Google से साइन इन करें",
+    with_google_account: "आपके Google खाते के साथ",
+    sign_in_description:
+      "Google कैलेंडर तक पहुंचने के लिए, कृपया अपने Google खाते से साइन इन करें।",
+    google_account: "गूगल खाता",
+    show_calendar_events: "कैलेंडर ईवेंट दिखाएँ",
+    show_calendar_events_description:
+      "एक बार सक्षम होने पर, अगले 30 दिनों के लिए आगामी घटनाओं को विस्तारित करने और देखने के लिए कैलेंडर पर होवर करें",
+    no_events_today: "आज कोई कार्यक्रम नहीं",
+    all_day: "पूरे दिन",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1221,6 +1340,21 @@ export const translation = {
     keep: "Mantenere",
 
     center_widgets_away_from_dock: "Sposta i widget centrali lontano dal dock",
+
+    sign_in: "Registrazione",
+    signing_in: "Accesso",
+    sign_out: "Disconnessione",
+    signing_out: "Uscita",
+    sign_in_with_google: "Accedi con Google",
+    with_google_account: "con il tuo account Google",
+    sign_in_description:
+      "Per accedere a Google Calendar, accedi con il tuo account Google.",
+    google_account: "Account Google",
+    show_calendar_events: "Mostra eventi del calendario",
+    show_calendar_events_description:
+      "Una volta abilitato, passa il mouse sopra il calendario per espanderlo e vedere i prossimi eventi per i prossimi 30 giorni",
+    no_events_today: "Nessun evento oggi",
+    all_day: "tutto il giorno",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1357,6 +1491,21 @@ export const translation = {
     keep: "রাখুন",
 
     center_widgets_away_from_dock: "কেন্দ্রের উইজেটগুলি ডক থেকে দূরে সরান৷",
+
+    sign_in: "সাইন ইন করুন",
+    signing_in: "সাইন ইন করা হচ্ছে",
+    sign_out: "সাইন আউট",
+    signing_out: "সাইন আউট",
+    sign_in_with_google: "Google দিয়ে সাইন ইন করুন",
+    with_google_account: "আপনার Google অ্যাকাউন্টের সাথে",
+    sign_in_description:
+      "Google ক্যালেন্ডার অ্যাক্সেস করতে, অনুগ্রহ করে আপনার Google অ্যাকাউন্ট দিয়ে সাইন ইন করুন৷",
+    google_account: "Google অ্যাকাউন্ট",
+    show_calendar_events: "ক্যালেন্ডার ইভেন্ট দেখান",
+    show_calendar_events_description:
+      "একবার সক্ষম হয়ে গেলে, প্রসারিত করতে এবং পরবর্তী 30 দিনের জন্য আসন্ন ইভেন্টগুলি দেখতে ক্যালেন্ডারের উপর হোভার করুন৷",
+    no_events_today: "আজ কোন ঘটনা নেই",
+    all_day: "সারাদিন",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1495,6 +1644,21 @@ export const translation = {
 
     center_widgets_away_from_dock:
       "Desloque os widgets centrais para fora do dock",
+
+    sign_in: "Entrar",
+    signing_in: "Fazendo login",
+    sign_out: "Sair",
+    signing_out: "Saindo",
+    sign_in_with_google: "Faça login com o Google",
+    with_google_account: "com sua Conta do Google",
+    sign_in_description:
+      "Para acessar o Google Agenda, faça login com sua conta do Google.",
+    google_account: "Conta do Google",
+    show_calendar_events: "Mostrar eventos do calendário",
+    show_calendar_events_description:
+      "Depois de ativado, passe o mouse sobre o calendário para expandi-lo e ver os próximos eventos dos próximos 30 dias",
+    no_events_today: "Nenhum evento hoje",
+    all_day: "o dia todo",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1632,6 +1796,21 @@ export const translation = {
     keep: "Garder",
 
     center_widgets_away_from_dock: "Déplacer les widgets centraux du dock",
+
+    sign_in: "Se connecter",
+    signing_in: "Connexion",
+    sign_out: "Se déconnecter",
+    signing_out: "Déconnexion",
+    sign_in_with_google: "Connectez-vous avec Google",
+    with_google_account: "avec votre compte Google",
+    sign_in_description:
+      "Pour accéder à Google Agenda, veuillez vous connecter avec votre compte Google.",
+    google_account: "Compte Google",
+    show_calendar_events: "Afficher les événements du calendrier",
+    show_calendar_events_description:
+      "Une fois activé, survolez le calendrier pour le développer et voir les événements à venir pour les 30 prochains jours.",
+    no_events_today: "Aucun événement aujourd'hui",
+    all_day: "toute la journée",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -1768,6 +1947,21 @@ export const translation = {
 
     center_widgets_away_from_dock:
       "Сместить центральные виджеты подальше от дока",
+
+    sign_in: "Войти",
+    signing_in: "Вход в систему",
+    sign_out: "Выход",
+    signing_out: "Выход из системы",
+    sign_in_with_google: "Войти через Google",
+    with_google_account: "с вашей учетной записью Google",
+    sign_in_description:
+      "Чтобы получить доступ к Календарю Google, войдите в свою учетную запись Google.",
+    google_account: "Аккаунт Google",
+    show_calendar_events: "Показать события календаря",
+    show_calendar_events_description:
+      "После включения наведите указатель мыши на календарь, чтобы развернуть его и увидеть предстоящие события на следующие 30 дней.",
+    no_events_today: "Сегодня нет событий",
+    all_day: "весь день",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -1905,6 +2099,21 @@ export const translation = {
     keep: "Mantener",
 
     center_widgets_away_from_dock: "Aleje los widgets del centro del muelle",
+
+    sign_in: "Iniciar sesión",
+    signing_in: "Iniciar sesión",
+    sign_out: "Desconectar",
+    signing_out: "Cerrar sesión",
+    sign_in_with_google: "Iniciar sesión con Google",
+    with_google_account: "con tu cuenta de Google",
+    sign_in_description:
+      "Para acceder a Google Calendar, inicie sesión con su cuenta de Google.",
+    google_account: "Cuenta de Google",
+    show_calendar_events: "Mostrar eventos del calendario",
+    show_calendar_events_description:
+      "Una vez habilitado, pasa el cursor sobre el calendario para expandirlo y ver los próximos eventos de los próximos 30 días.",
+    no_events_today: "No hay eventos hoy",
+    all_day: "todo el día",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -2039,6 +2248,21 @@ export const translation = {
     keep: "保つ",
 
     center_widgets_away_from_dock: "中央のウィジェットをドックから遠ざける",
+
+    sign_in: "サインイン",
+    signing_in: "サインイン",
+    sign_out: "サインアウト",
+    signing_out: "サインアウトする",
+    sign_in_with_google: "Googleでサインイン",
+    with_google_account: "Google アカウントで",
+    sign_in_description:
+      "Google カレンダーにアクセスするには、Google アカウントでサインインしてください。",
+    google_account: "Googleアカウント",
+    show_calendar_events: "カレンダーイベントを表示",
+    show_calendar_events_description:
+      "有効にしたら、カレンダーの上にカーソルを置くと展開され、今後 30 日間の今後のイベントが表示されます",
+    no_events_today: "今日はイベントはありません",
+    all_day: "一日中",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -2172,6 +2396,21 @@ export const translation = {
     keep: "유지하다",
 
     center_widgets_away_from_dock: "중앙 위젯을 도크에서 멀리 이동",
+
+    sign_in: "로그인",
+    signing_in: "로그인",
+    sign_out: "로그아웃",
+    signing_out: "로그아웃",
+    sign_in_with_google: "Google로 로그인",
+    with_google_account: "Google 계정으로",
+    sign_in_description:
+      "Google 캘린더에 액세스하려면 Google 계정으로 로그인하세요.",
+    google_account: "구글 계정",
+    show_calendar_events: "캘린더 이벤트 표시",
+    show_calendar_events_description:
+      "활성화되면 달력 위로 마우스를 가져가서 확장하고 향후 30일 동안 예정된 이벤트를 확인하세요.",
+    no_events_today: "오늘은 이벤트가 없습니다",
+    all_day: "하루 종일",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -2307,6 +2546,21 @@ export const translation = {
     keep: "Menyimpan",
 
     center_widgets_away_from_dock: "Geser widget tengah menjauh dari dok",
+
+    sign_in: "Masuk",
+    signing_in: "Masuk",
+    sign_out: "Keluar",
+    signing_out: "Keluar",
+    sign_in_with_google: "Masuk dengan Google",
+    with_google_account: "dengan Akun Google Anda",
+    sign_in_description:
+      "Untuk mengakses Google Kalender, silakan masuk dengan akun Google Anda.",
+    google_account: "Akun Google",
+    show_calendar_events: "Tampilkan Acara Kalender",
+    show_calendar_events_description:
+      "Setelah diaktifkan, arahkan kursor ke kalender untuk memperluas dan melihat acara mendatang selama 30 hari ke depan",
+    no_events_today: "Tidak ada acara hari ini",
+    all_day: "sepanjang hari",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -2442,6 +2696,21 @@ export const translation = {
     keep: "ठेवा",
 
     center_widgets_away_from_dock: "केंद्र विजेट डॉकपासून दूर हलवा",
+
+    sign_in: "साइन इन करा",
+    signing_in: "साइन इन करत आहे",
+    sign_out: "साइन आउट करा",
+    signing_out: "साइन आउट करत आहे",
+    sign_in_with_google: "Google सह साइन इन करा",
+    with_google_account: "तुमच्या Google खात्यासह",
+    sign_in_description:
+      "Google Calendar मध्ये प्रवेश करण्यासाठी, कृपया तुमच्या Google खात्याने साइन इन करा.",
+    google_account: "Google खाते",
+    show_calendar_events: "कॅलेंडर इव्हेंट दाखवा",
+    show_calendar_events_description:
+      "एकदा सक्षम केल्यानंतर, पुढील 30 दिवसांसाठी आगामी कार्यक्रम विस्तृत करण्यासाठी आणि पहाण्यासाठी कॅलेंडरवर फिरवा",
+    no_events_today: "आज कोणतेही कार्यक्रम नाहीत",
+    all_day: "दिवसभर",
   },
 };
 
@@ -2469,3 +2738,24 @@ export const languageOptions = [
   { label: "Marathi", value: "mr", voiceSearchLanguage: "" },
   { label: "Indonesian", value: "id", voiceSearchLanguage: "id" },
 ];
+
+export const languageLocaleMap: Record<keyof typeof translation, string> = {
+  en: "en-US", // English
+  kn: "kn-IN", // Kannada
+  cs: "cs-CZ", // Czech
+  tr: "tr-TR", // Turkish
+  vi: "vi-VN", // Vietnamese
+  uz: "uz-UZ", // Uzbek
+  zh: "zh-CN", // Chinese (Simplified)
+  hi: "hi-IN", // Hindi
+  it: "it-IT", // Italian
+  bn: "bn-IN", // Bengali
+  pt: "pt-PT", // Portuguese
+  fr: "fr-FR", // French
+  ru: "ru-RU", // Russian
+  es: "es-ES", // Spanish
+  ja: "ja-JP", // Japanese
+  ko: "ko-KR", // Korean
+  id: "id-ID", // Indonesian
+  mr: "mr-IN", // Marathi
+};

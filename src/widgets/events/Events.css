@@ -1,0 +1,94 @@
+.events__date-label {
+  color: var(--theme-clr);
+  font-weight: bold;
+  font-size: 0.813rem;
+}
+
+.events__date-label.current-date {
+  color: var(--calendar-events-current-date-text-color);
+}
+
+.event__item {
+  border-radius: 4px;
+  background-color: var(--calendar-events-banner-background-color);
+  padding: 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  text-decoration: none;
+}
+
+.event__type__indicator {
+  min-width: 4px;
+  border-radius: 2px;
+  background: var(--calendar-events-banner-text-color);
+}
+
+.events__date-group {
+  margin-bottom: 16px;
+}
+
+.events__date-label,
+.event__item {
+  margin-bottom: 8px;
+}
+
+.event__item-title {
+  font-weight: bold;
+  font-size: 0.688rem;
+  color: var(--calendar-events-banner-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.event__item-location {
+  opacity: 0.6;
+  font-size: 0.688rem;
+  color: var(--calendar-events-banner-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.event__item-location svg {
+  min-width: 10px;
+  width: 10px;
+  height: 10px;
+  margin-right: 2px;
+}
+
+.event__item-time {
+  font-size: 0.625rem;
+  color: var(--calendar-events-banner-text-color);
+  opacity: 0.6;
+}
+
+.event__summary {
+  width: calc(12.5rem - 24px);
+}
+
+.event__item-location-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event__recurring-icon svg {
+  width: 12px;
+  height: 12px;
+  color: var(--calendar-events-banner-text-color);
+}
+
+.event__item.recurring-event .event__summary {
+  width: calc(12.5rem - 32px);
+}
+
+.event__item-no-event {
+  font-size: 0.625rem;
+  color: var(--theme-clr);
+}

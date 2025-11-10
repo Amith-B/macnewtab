@@ -68,7 +68,7 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 
 Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and manage daily items directly from your **new tab**.
 
-### 🗒️ Sticky Notes (New!)
+### 🗒️ Sticky Notes
 
 - Create colorful, draggable **sticky notes** directly on your new tab page
 - **Drag and drop** notes anywhere on the screen for perfect organization
@@ -82,6 +82,15 @@ Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and
 - Stay in control of your browser with a built-in Tab Manager—beautifully integrated into the side panel
 - Instantly search through all open tabs, Switch to any tab with a click, Close tabs directly from the list
 - Easily toggle the panel with a subtle notch on the screen’s edge
+
+### 🗓️ Google Calendar Events (New!)
+
+- Seamlessly integrates with Google Calendar using Google Sign-In.
+- Displays your upcoming events for the next 30 days directly on the new tab page.
+- Shows event title, time, and source calendar with a clean macOS-style widget.
+- Clicking an event opens it instantly in Google Calendar.
+- All authentication and data access happen securely through Google APIs — no user data is stored or shared externally.
+- Optionally toggle this widget on or off from the settings panel for a clutter-free experience.
 
 ### 🌍 Multi-Language Support
 

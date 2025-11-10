@@ -39,6 +39,7 @@ body:has(.App.theme-light) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #a1a1a1;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #a1a1a1;
 
   --widget-background: #ffffff;
@@ -62,6 +63,10 @@ body:has(.App.theme-light) {
   --settings-side-panel-text-color: #3d3d3d;
 
   --launchpad-tab-selected-bg: #bcbcbc;
+
+  --calendar-has-event-bg-color: #19354a;
+  --calendar-events-banner-background-color: #83ceff99;
+  --calendar-events-banner-text-color: #19354a;
 }
 
 .App.theme-dark,
@@ -84,6 +89,7 @@ body:has(.App.theme-dark) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #a1a1a1;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #a1a1a1;
 
   --widget-background: #2e2e2e;
@@ -107,6 +113,10 @@ body:has(.App.theme-dark) {
   --settings-side-panel-text-color: white;
 
   --launchpad-tab-selected-bg: #ffffff5c;
+
+  --calendar-has-event-bg-color: #f1f9ff;
+  --calendar-events-banner-background-color: #2a4f6799;
+  --calendar-events-banner-text-color: #f1f9ff;
 }
 
 .App.theme-dark .search-engine-switcher__tile-selection-indicator.selected {
@@ -136,6 +146,7 @@ body:has(.App.theme-dark) {
     --calendar-1-week-text-color: #ff453a;
     --calendar-1-month-text-color: #a1a1a1;
     --calendar-month-text-color: #ff3b31;
+    --calendar-events-current-date-text-color: #ff3b31;
     --calendar-sunday-text-color: #a1a1a1;
 
     --widget-background: #2e2e2e;
@@ -159,6 +170,10 @@ body:has(.App.theme-dark) {
     --settings-side-panel-text-color: white;
 
     --launchpad-tab-selected-bg: #ffffff5c;
+
+    --calendar-has-event-bg-color: #f1f9ff;
+    --calendar-events-banner-background-color: #2a4f6799;
+    --calendar-events-banner-text-color: #f1f9ff;
   }
 
   .App.theme-system .search-engine-switcher__tile-selection-indicator.selected,
@@ -187,6 +202,7 @@ body:has(.App.theme-blue) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #7c7c7c;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #7c7c7c;
   --widget-background: #accfff;
   --window-expand-bg: #528cd9;
@@ -200,7 +216,11 @@ body:has(.App.theme-blue) {
   --search-engine-tile-icon-clr: #3a5e8f;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: #3d3d3d;
+
   --launchpad-tab-selected-bg: #81b7ff;
+  --calendar-has-event-bg-color: #19354a;
+  --calendar-events-banner-background-color: #2a4f6799;
+  --calendar-events-banner-text-color: #f1f9ff;
 }
 
 .App.theme-red,
@@ -223,6 +243,7 @@ body:has(.App.theme-red) {
   --calendar-1-week-text-color: #ff493e;
   --calendar-1-month-text-color: white;
   --calendar-month-text-color: black;
+  --calendaevents-dateth-text-color: black;
   --calendar-sunday-text-color: #666666;
   --widget-background: #ffc8c8;
   --window-expand-bg: #ffb9b9;
@@ -236,7 +257,11 @@ body:has(.App.theme-red) {
   --search-engine-tile-icon-clr: #8f3a3a;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+
   --launchpad-tab-selected-bg: #ffa8a8;
+  --calendar-has-event-bg-color: #19354a;
+  --calendar-events-banner-background-color: #83ceff99;
+  --calendar-events-banner-text-color: #19354a;
 }
 
 .App.theme-orange,
@@ -259,6 +284,7 @@ body:has(.App.theme-orange) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #737373;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #737373;
   --widget-background: #ffc8ac;
   --window-expand-bg: #dc8154;
@@ -272,7 +298,11 @@ body:has(.App.theme-orange) {
   --search-engine-tile-icon-clr: #865841;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+
   --launchpad-tab-selected-bg: #ff9f6f;
+  --calendar-has-event-bg-color: #19354a;
+  --calendar-events-banner-background-color: #83ceff99;
+  --calendar-events-banner-text-color: #19354a;
 }
 
 .App.theme-purple,
@@ -295,6 +325,7 @@ body:has(.App.theme-purple) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #7c7c7c;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #7c7c7c;
   --widget-background: #d5ceff;
   --window-expand-bg: #bfc0ff;
@@ -308,7 +339,11 @@ body:has(.App.theme-purple) {
   --search-engine-tile-icon-clr: #655da3;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: white;
+
   --launchpad-tab-selected-bg: #a7a7ff;
+  --calendar-has-event-bg-color: #19354a;
+  --calendar-events-banner-background-color: #83ceff99;
+  --calendar-events-banner-text-color: #19354a;
 }
 
 .App.theme-pink,
@@ -331,6 +366,7 @@ body:has(.App.theme-pink) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #6a6a6a;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #6a6a6a;
   --widget-background: #ffcedd;
   --window-expand-bg: #ffbfdd;
@@ -344,7 +380,11 @@ body:has(.App.theme-pink) {
   --search-engine-tile-icon-clr: #a35d7f;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: white;
+
   --launchpad-tab-selected-bg: #ffabd1;
+  --calendar-has-event-bg-color: #19354a;
+  --calendar-events-banner-background-color: #83ceff99;
+  --calendar-events-banner-text-color: #19354a;
 }
 
 .App.theme-brown,
@@ -367,6 +407,7 @@ body:has(.App.theme-brown) {
   --calendar-1-week-text-color: #ff453a;
   --calendar-1-month-text-color: #7c7c7c;
   --calendar-month-text-color: #ff3b31;
+  --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #7c7c7c;
   --widget-background: #ffdfce;
   --window-expand-bg: #ffd9bf;
@@ -380,7 +421,11 @@ body:has(.App.theme-brown) {
   --search-engine-tile-icon-clr: #a3765d;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: white;
+
   --launchpad-tab-selected-bg: #ffc69b;
+  --calendar-has-event-bg-color: #19354a;
+  --calendar-events-banner-background-color: #83ceff99;
+  --calendar-events-banner-text-color: #19354a;
 }
 
 .main-content {

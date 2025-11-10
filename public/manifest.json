@@ -11,8 +11,17 @@
     "favicon"
   ],
   "optional_permissions": [
-    "bookmarks"
+    "bookmarks",
+    "identity"
   ],
+  "oauth2": {
+    "client_id": "685848442779-4e9huot0iuj65g65ii7mdb2g855p3eea.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar.readonly",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
   "background": {
     "service_worker": "background.js"
   },
