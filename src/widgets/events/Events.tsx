@@ -55,7 +55,11 @@ export default function Events({
             {getFormattedDateStringForEventsGroup(group.date, locale)}
           </div>
           {group.events.map((event, idx) => (
-            <div
+            <a
+              href={event.htmlLink || undefined}
+              target={event.htmlLink ? "_blank" : undefined}
+              rel="noopener noreferrer"
+              style={{ cursor: event.htmlLink ? "pointer" : "default" }}
               key={idx}
               className={
                 "event__item" + (event.recurringEvent ? " recurring-event" : "")
@@ -107,7 +111,7 @@ export default function Events({
                   </p>
                 )}
               </div>
-            </div>
+            </a>
           ))}
         </div>
       ))}
