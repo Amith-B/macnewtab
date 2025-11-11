@@ -125,3 +125,8 @@ yarn build
 ---
 
 Enjoy the elegance of macOS design right in your browser! ✨
+
+---
+
+**[Privacy Policy](https://amith-b.github.io/macnewtab/privacy.html)**  
+© 2025 macnewtab
