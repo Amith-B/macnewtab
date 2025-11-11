@@ -8,77 +8,144 @@
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           Helvetica, Arial, sans-serif;
-        background-color: #f9fafb;
-        color: #222;
+        background: linear-gradient(180deg, #f5f6f8, #e9ebee);
+        color: #1c1c1c;
         margin: 0;
-        padding: 40px;
-        line-height: 1.6;
+        padding: 60px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        padding: 40px 48px;
         max-width: 800px;
-        margin-inline: auto;
+        width: 100%;
+        line-height: 1.7;
       }
+
       h1 {
+        font-size: 1.8rem;
         color: #111;
+        margin-bottom: 4px;
       }
+
+      .subtitle {
+        color: #666;
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+      }
+
       h2 {
+        font-size: 1.3rem;
         margin-top: 32px;
         color: #333;
       }
+
       p {
         margin-bottom: 16px;
+        color: #222;
       }
+
+      a {
+        color: #007aff;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
       footer {
         margin-top: 40px;
         font-size: 0.9rem;
-        color: #666;
+        color: #777;
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <h1>Privacy Policy</h1>
-    <p><strong>Last updated:</strong> November 2025</p>
+    <div class="card">
+      <h1>Privacy Policy</h1>
+      <p class="subtitle"><strong>Last updated:</strong> November 2025</p>
 
-    <h2>Overview</h2>
-    <p>
-      macNewTab is a Chrome extension that provides a macOS-style new tab
-      experience, including widgets for clock, calendar, search, and quick
-      links. This extension is designed for personal convenience and does not
-      collect or store any personal information from users.
-    </p>
+      <h2>Overview</h2>
+      <p>
+        macNewTab is a Chrome extension that provides a macOS-style new tab
+        experience with widgets for clock, calendar, search, and quick links.
+        This extension is designed purely for personal convenience and does not
+        collect or store any personal information.
+      </p>
 
-    <h2>Google Sign-In</h2>
-    <p>
-      macNewTab uses <strong>Google Sign-In</strong> solely to allow users to
-      access personalized Google service (such as calendar events) directly
-      within the extension. Authentication happens securely through Google's own
-      sign-in interface — the extension does not have access to your password or
-      sensitive credentials.
-    </p>
+      <h2>Google Sign-In</h2>
+      <p>
+        macNewTab uses <strong>Google Sign-In</strong> only to let users access
+        their Google Calendar events securely within the extension. The sign-in
+        process is handled entirely by Google’s own authentication interface.
+        The extension never has access to your password or sensitive
+        credentials.
+      </p>
 
-    <h2>Data Collection and Usage</h2>
-    <p>
-      macNewTab does not collect, store, or share any personal data. All
-      information accessed via Google APIs (if any) is handled within your local
-      browser session and is never transmitted to external servers by this
-      extension.
-    </p>
+      <h2>Permissions</h2>
+      <p>
+        The extension requests only the minimum permissions required to function
+        properly:
+      </p>
+      <ul>
+        <li>
+          <strong>identity</strong> — to allow optional Google Sign-In and
+          identify the logged-in user for displaying their calendar events.
+        </li>
+        <li>
+          <strong>https://www.googleapis.com/auth/calendar.readonly</strong> —
+          to read upcoming events from your Google Calendar (if enabled).
+        </li>
+        <li>
+          <strong>storage</strong> — to locally store small preferences like
+          layout mode, theme, or enabled widgets.
+        </li>
+        <li>
+          <strong>chrome_url_overrides</strong> — to replace the default new tab
+          page with the macOS-style interface.
+        </li>
+      </ul>
+      <p>
+        All data accessed using these permissions stays entirely on your device.
+        macNewTab does <strong>not</strong> send or share any information with
+        external servers.
+      </p>
 
-    <h2>Third-Party Services</h2>
-    <p>
-      The extension relies on official Google APIs and services for
-      authentication and data access. Please review
-      <a href="https://policies.google.com/privacy" target="_blank"
-        >Google’s Privacy Policy</a
-      >
-      for more details on how Google handles your account information.
-    </p>
+      <h2>Data Collection and Usage</h2>
+      <p>
+        macNewTab does not collect, log, or transmit any personal data. Any data
+        retrieved via Google APIs (such as calendar events) is displayed only
+        within your local browser session and not stored or shared externally.
+      </p>
 
-    <h2>Contact</h2>
-    <p>
-      If you have any questions or concerns about this Privacy Policy, please
-      contact the developer via the Chrome Web Store listing or GitHub
-      repository.
-    </p>
+      <h2>Third-Party Services</h2>
+      <p>
+        macNewTab relies solely on official Google APIs and Chrome APIs. For
+        more details on how Google handles your account data, please review
+        <a href="https://policies.google.com/privacy" target="_blank"
+          >Google’s Privacy Policy</a
+        >.
+      </p>
 
-    <footer>&copy; 2025 macNewTab. All rights reserved.</footer>
+      <h2>Contact</h2>
+      <p>
+        For any questions or concerns regarding this Privacy Policy, please
+        contact the developer via the Chrome Web Store listing or through the
+        project’s
+        <a href="https://github.com/amith-b/macnewtab" target="_blank"
+          >GitHub repository</a
+        >.
+      </p>
+
+      <footer>&copy; 2025 macNewTab. All rights reserved.</footer>
+    </div>
   </body>
 </html>
