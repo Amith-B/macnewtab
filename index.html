@@ -3,20 +3,105 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>macnewtab</title>
+    <title>macnewtab Chrome Extension</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(180deg, #e9ecf1, #ffffff);
+        color: #333;
+        text-align: center;
+      }
+
+      header {
+        background: linear-gradient(90deg, #2f3640, #3a3f47);
+        color: white;
+        padding: 40px 20px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.2rem;
+      }
+
+      header p {
+        margin-top: 8px;
+        font-size: 1rem;
+        opacity: 0.9;
+      }
+
+      section {
+        max-width: 800px;
+        margin: 60px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      h2 {
+        color: #1a1a1a;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        display: inline-block;
+      }
+
+      li {
+        background: #f5f6fa;
+        padding: 10px 16px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      a {
+        color: #007aff;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      footer {
+        margin: 40px 0;
+        color: #777;
+        font-size: 0.9rem;
+      }
+    </style>
   </head>
-  <body style="font-family: sans-serif; text-align: center; margin-top: 80px">
-    <h1>macnewtab Chrome Extension</h1>
-    <p>A macOS-inspired new tab experience for Chrome.</p>
+  <body>
+    <header>
+      <h1>macnewtab Chrome Extension</h1>
+      <p>Transform your Chrome new tab into a macOS-inspired experience</p>
+    </header>
 
-    <p>
-      <a href="https://amith-b.github.io/macnewtab/privacy.html"
-        >Privacy Policy</a
-      >
-    </p>
+    <section>
+      <h2>Features</h2>
+      <ul>
+        <li>macOS-style clock and calendar widget</li>
+        <li>Google search bar styled like Spotlight</li>
+        <li>Displays upcoming Google Calendar events (with your permission)</li>
+        <li>Minimal, elegant design with smooth animations</li>
+      </ul>
 
-    <footer style="margin-top: 40px; font-size: 14px; color: gray">
-      © 2025 macnewtab by Amith B
-    </footer>
+      <p style="margin-top: 24px">
+        📘
+        <a href="https://amith-b.github.io/macnewtab/privacy.html"
+          >Privacy Policy</a
+        >
+      </p>
+    </section>
+
+    <footer>© 2025 macnewtab by Amith B</footer>
   </body>
 </html>
