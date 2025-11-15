@@ -499,6 +499,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
   const handleGoogleSignIn = async () => {
     try {
+      await chrome.identity.clearAllCachedAuthTokens();
       const token = await getGoogleAuthToken();
       const userProfile = await fetchGoogleUserProfile(token);
 
