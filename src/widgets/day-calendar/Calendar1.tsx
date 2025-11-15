@@ -23,21 +23,7 @@ const getWeekName = (date: Date): keyof (typeof translation)["en"] => {
 };
 
 export default function Calendar1({ date }: { date: Date }) {
-  const { locale, showGoogleCalendar, googleAuthToken } =
-    useContext(AppContext);
-  const [calendarEvents, setCalendarEvents] = useState<GoogleCalendarEvent[]>(
-    []
-  );
-
-  useEffect(() => {
-    if (!showGoogleCalendar || !googleAuthToken) {
-      return;
-    }
-
-    fetchGoogleCalendarEvents(googleAuthToken).then((events) => {
-      setCalendarEvents(events);
-    });
-  }, [showGoogleCalendar, googleAuthToken]);
+  const { locale, showGoogleCalendar, calendarEvents } = useContext(AppContext);
 
   const eventGroup = useMemo(() => {
     if (!showGoogleCalendar) {

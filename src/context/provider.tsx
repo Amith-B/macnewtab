@@ -37,6 +37,7 @@ import {
   useLocalStorage,
 } from "../utils/localStorage";
 import {
+  GOOGLE_CALENDAR_EVENTS_LOCAL_STORAGE_KEY,
   GOOGLE_USER_LOCAL_STORAGE_KEY,
   SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
 } from "../static/googleSettings";
@@ -45,6 +46,8 @@ import {
   getGoogleAuthToken,
   removeGoogleAuthToken,
   fetchGoogleUserProfile,
+  fetchGoogleCalendarEvents,
+  GoogleCalendarEvent,
 } from "../utils/googleAuth";
 
 type DockBarSites = Array<{ title: string; url: string; id: string }>;
@@ -101,6 +104,8 @@ export const AppContext = createContext({
   handleGoogleSignOut: async () => {},
   showGoogleCalendar: true,
   setShowGoogleCalendar: (_: boolean) => {},
+  calendarEvents: [] as GoogleCalendarEvent[],
+  setCalendarEvents: (_: GoogleCalendarEvent[]) => {},
 });
 
 const openDatabase = (): Promise<IDBDatabase> => {
@@ -264,6 +269,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     true
   );
 
+  const [calendarEvents, setCalendarEvents] = useLocalStorage(
+    GOOGLE_CALENDAR_EVENTS_LOCAL_STORAGE_KEY,
+    [] as GoogleCalendarEvent[],
+    (val) => Array.isArray(val)
+  );
+
   useEffect(() => {
     const getList = () => {
       const request = getLocalstorageDataWithPromise(
@@ -369,6 +380,16 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
+  useEffect(() => {
+    if (!showGoogleCalendar || !googleAuthToken) {
+      return;
+    }
+
+    fetchGoogleCalendarEvents(googleAuthToken).then((events) => {
+      setCalendarEvents(events);
+    });
+  }, [showGoogleCalendar, googleAuthToken]);
 
   const handleClearCompletedTodoList = () => {
     const todoSavedDate = localStorage.getItem(
@@ -588,6 +609,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleGoogleSignOut,
         showGoogleCalendar,
         setShowGoogleCalendar,
+        calendarEvents,
+        setCalendarEvents,
       }}
     >
       {children}

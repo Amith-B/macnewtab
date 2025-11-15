@@ -40,25 +40,11 @@ function generateDateArray(year: number, month: number) {
 
 export default function Calendar({ date }: { date: Date }) {
   const [weeks, setWeeks] = useState<string[]>([]);
-  const [calendarEvents, setCalendarEvents] = useState<GoogleCalendarEvent[]>(
-    []
-  );
-  const { locale, showGoogleCalendar, googleAuthToken } =
-    useContext(AppContext);
+  const { locale, showGoogleCalendar, calendarEvents } = useContext(AppContext);
 
   useEffect(() => {
     setWeeks(getSingleLetterWeekNames());
   }, []);
-
-  useEffect(() => {
-    if (!showGoogleCalendar || !googleAuthToken) {
-      return;
-    }
-
-    fetchGoogleCalendarEvents(googleAuthToken).then((events) => {
-      setCalendarEvents(events);
-    });
-  }, [showGoogleCalendar, googleAuthToken]);
 
   const eventGroup = useMemo(() => {
     if (!showGoogleCalendar) {
