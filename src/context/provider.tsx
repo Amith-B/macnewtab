@@ -299,9 +299,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     const loadGoogleUser = async () => {
       try {
         const storedUser = localStorage.getItem(GOOGLE_USER_LOCAL_STORAGE_KEY);
+        if (!storedUser) {
+          return;
+        }
         const token = await getGoogleAuthToken();
-
-        if (storedUser && token) {
+        if (token) {
           setGoogleUser(JSON.parse(storedUser));
           setGoogleAuthToken(token);
         }
