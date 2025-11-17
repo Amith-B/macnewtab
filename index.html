@@ -33,34 +33,33 @@
       }
 
       section {
-        max-width: 800px;
+        max-width: 850px;
         margin: 60px auto;
         background: white;
         padding: 40px;
         border-radius: 16px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        text-align: left;
       }
 
       h2 {
         color: #1a1a1a;
         font-weight: 600;
         margin-bottom: 16px;
+        text-align: center;
+      }
+
+      p {
+        line-height: 1.6;
       }
 
       ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: left;
-        display: inline-block;
+        padding-left: 20px;
+        margin: 10px 0 20px;
       }
 
       li {
-        background: #f5f6fa;
-        padding: 10px 16px;
-        border-radius: 8px;
-        margin-bottom: 8px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        margin-bottom: 10px;
       }
 
       a {
@@ -81,17 +80,44 @@
   </head>
   <body>
     <header>
-      <h1>macnewtab Chrome Extension</h1>
-      <p>Transform your Chrome new tab into a macOS-inspired experience</p>
+      <h1>macNewTab Chrome Extension</h1>
+      <p>A clean, macOS-inspired new tab experience for Chrome</p>
     </header>
 
     <section>
-      <h2>Features</h2>
+      <h2>About macNewTab</h2>
+      <p>
+        macNewTab is a lightweight Chrome extension that replaces your default new tab 
+        with a modern, macOS-style dashboard. It provides useful information at a glance 
+        and improves your productivity with a clean and elegant interface.
+      </p>
+
+      <h2>Core Features</h2>
       <ul>
-        <li>macOS-style clock and calendar widget</li>
-        <li>Google search bar styled like Spotlight</li>
-        <li>Displays upcoming Google Calendar events (with your permission)</li>
-        <li>Minimal, elegant design with smooth animations</li>
+        <li>macOS-style clock and date widget</li>
+        <li>Spotlight-style search bar for quick Google searches</li>
+        <li>Expandable dashboard showing your upcoming Google Calendar events</li>
+        <li>Minimal, responsive design with subtle macOS-inspired animations</li>
+      </ul>
+
+      <h2>Why macNewTab Uses Google OAuth</h2>
+      <p>
+        macNewTab uses Google Sign-In only to authenticate you securely. After authentication,
+        the extension requests access to your Google Calendar so it can display your upcoming 
+        events directly on the new tab page.
+      </p>
+
+      <p>
+        The extension does <strong>not</strong> store, transmit, or share any user data.  
+        All calendar information is read-only and stays within your browser.  
+        No data is uploaded to any external servers.
+      </p>
+
+      <h2>Data Usage Summary</h2>
+      <ul>
+        <li><strong>Google Sign-In</strong> – Used only for secure user authentication</li>
+        <li><strong>Google Calendar API</strong> – Used only to fetch and display upcoming events</li>
+        <li>No personal data is stored, logged, or shared with any third party</li>
       </ul>
 
       <p>
@@ -100,18 +126,16 @@
           href="https://chromewebstore.google.com/detail/mac-new-tab/mohppegbiigoahehdihbgmabkflajklj"
           target="_blank"
         >
-          Chrome Web Store </a
-        >.
+          Chrome Web Store
+        </a>.
       </p>
 
-      <p style="margin-top: 24px">
-        📘
-        <a href="https://amith-b.github.io/macnewtab/privacy.html"
-          >Privacy Policy</a
-        >
+      <p>
+        📘 Read the full  
+        <a href="https://amith-b.github.io/macnewtab/privacy.html">Privacy Policy</a>
       </p>
     </section>
 
-    <footer>© 2025 macnewtab by Amith B</footer>
+    <footer>© 2025 macNewTab by Amith B</footer>
   </body>
 </html>
