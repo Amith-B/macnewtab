@@ -389,6 +389,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     fetchGoogleCalendarEvents(googleAuthToken).then((events) => {
       setCalendarEvents(events);
     });
+    // eslint-disable-next-line
   }, [showGoogleCalendar, googleAuthToken]);
 
   const handleClearCompletedTodoList = () => {

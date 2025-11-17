@@ -2,10 +2,6 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import "./Calendar.css";
 import { translation } from "../../locale/languages";
 import { AppContext } from "../../context/provider";
-import {
-  fetchGoogleCalendarEvents,
-  GoogleCalendarEvent,
-} from "../../utils/googleAuth";
 import { convertCalendarEvents, groupEventsByDate } from "../../utils/calendar";
 import Events from "../events/Events";
 import { ReactComponent as ExpandableIcon } from "../../assets/expandable.svg";
