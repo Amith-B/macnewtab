@@ -126,6 +126,65 @@
         within your local browser session and not stored or shared externally.
       </p>
 
+      <h2>Data Protection Mechanisms</h2>
+      <p>
+        Since macNewTab does not transmit Google user data (calendar events) to
+        any external server, the primary protection mechanism is the data
+        remaining on your device. We adhere to the following standards to ensure
+        data protection:
+      </p>
+      <ul>
+        <li>
+          <strong>Encryption in Transit:</strong> All communication between the
+          extension and Google's APIs (e.g., fetching calendar events) is done
+          exclusively over secure, encrypted channels using **HTTPS/TLS**.
+        </li>
+        <li>
+          <strong>Data Minimization:</strong> We only request **read-only**
+          access to your calendar data, limiting the scope of access to the
+          minimum required functionality.
+        </li>
+        <li>
+          <strong>Local Storage:</strong> Any temporary or cached calendar data
+          is stored only in your local browser storage, protected by your
+          browser's security measures.
+        </li>
+        <li>
+          <strong>No Credentials Stored:</strong> We utilize Google's secure
+          OAuth 2.0 protocol and do not store or ever have access to your Google
+          password or sensitive account credentials.
+        </li>
+      </ul>
+      <h2>Data Retention and Deletion Policy</h2>
+      <p>
+        macNewTab is designed not to retain any sensitive Google user data on
+        any external servers. Therefore, data retention and deletion are
+        controlled entirely by the user on their device and via Google’s account
+        controls.
+      </p>
+      <ul>
+        <li>
+          <strong>Retention:</strong> Google user data (calendar events) is only
+          retained temporarily in your browser's memory and local storage for
+          the duration of your use of the extension. All local data is deleted
+          automatically upon uninstallation of the extension.
+        </li>
+        <li>
+          <strong>Deletion (Revoking Access):</strong> You can immediately and
+          permanently delete the extension's access to your Google Calendar data
+          at any time by visiting your
+          <a href="https://myaccount.google.com/permissions" target="_blank"
+            >Google Account Security Settings</a
+          >
+          and revoking access for macNewTab.
+        </li>
+        <li>
+          <strong>Deletion (Uninstalling):</strong> Uninstalling the macNewTab
+          Chrome extension automatically and permanently deletes all locally
+          stored preferences, settings, and cached Google user data from your
+          browser.
+        </li>
+      </ul>
       <h2>Third-Party Services</h2>
       <p>
         macNewTab relies solely on official Google APIs and Chrome APIs. For
