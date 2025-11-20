@@ -126,63 +126,77 @@
         within your local browser session and not stored or shared externally.
       </p>
 
-      <h2>Data Protection Mechanisms</h2>
+      <h2>Data Protection Mechanisms for Sensitive Data</h2>
       <p>
-        Since macNewTab does not transmit Google user data (calendar events) to
-        any external server, the primary protection mechanism is the data
-        remaining on your device. We adhere to the following standards to ensure
-        data protection:
+        macNewTab ensures robust security for the Google user data it accesses
+        (Calendar Events). Since the extension <b>does not transmit or store</b>
+        this sensitive data on any external servers controlled by the developer,
+        the following mechanisms are in place:
       </p>
       <ul>
         <li>
-          <strong>Encryption in Transit:</strong> All communication between the
-          extension and Google's APIs (e.g., fetching calendar events) is done
-          exclusively over secure, encrypted channels using **HTTPS/TLS**.
+          <strong>Secure Communication (TLS/HTTPS):</strong> All data fetched
+          from and sent to Google APIs, including the authentication process
+          (OAuth 2.0 via <code>chrome.identity</code>), is transmitted
+          exclusively over <b>secure, encrypted channels</b> using Transport Layer
+          Security (<b>TLS/HTTPS</b>). This prevents eavesdropping and tampering
+          during data transfer.
         </li>
         <li>
-          <strong>Data Minimization:</strong> We only request **read-only**
-          access to your calendar data, limiting the scope of access to the
-          minimum required functionality.
+          <strong>Client-Side Processing:</strong> Sensitive Calendar data is
+          processed and rendered <b>entirely within the user's local browser
+          environment</b>. It remains on the user's device and is secured by the
+          operating system and browser's built-in sandboxing and security
+          features.
         </li>
         <li>
-          <strong>Local Storage:</strong> Any temporary or cached calendar data
-          is stored only in your local browser storage, protected by your
-          browser's security measures.
+          <strong>OAuth 2.0 Compliance:</strong> We adhere strictly to the
+          <b>OAuth 2.0 protocol</b>, ensuring that we never handle or store the
+          user's Google credentials (passwords). We only interact with Google's
+          secure access tokens.
         </li>
         <li>
-          <strong>No Credentials Stored:</strong> We utilize Google's secure
-          OAuth 2.0 protocol and do not store or ever have access to your Google
-          password or sensitive account credentials.
+          <strong>Data Minimization:</strong> The extension is limited to
+          <b>read-only access</b> (<code>calendar.readonly</code>) to Google Calendar data,
+          significantly reducing the security surface area.
         </li>
       </ul>
       <h2>Data Retention and Deletion Policy</h2>
       <p>
-        macNewTab is designed not to retain any sensitive Google user data on
-        any external servers. Therefore, data retention and deletion are
-        controlled entirely by the user on their device and via Google’s account
-        controls.
+        As macNewTab only stores Google user data (calendar events) <b>locally
+        and temporarily</b> within the user's browser, the retention and deletion
+        processes are directly controlled by the user:
       </p>
       <ul>
         <li>
-          <strong>Retention:</strong> Google user data (calendar events) is only
-          retained temporarily in your browser's memory and local storage for
-          the duration of your use of the extension. All local data is deleted
-          automatically upon uninstallation of the extension.
+          <strong>Data Retention:</strong> Google user data is retained <b>only
+          for the duration of the browser session</b> or as a temporary cache in
+          local browser storage to improve performance while the extension is
+          installed. The data is <b>not retained on any external server</b>
+          controlled by macNewTab.
         </li>
         <li>
-          <strong>Deletion (Revoking Access):</strong> You can immediately and
-          permanently delete the extension's access to your Google Calendar data
-          at any time by visiting your
+          <strong>Data Deletion by Uninstallation:</strong> The
+          <b>uninstallation</b> of the macNewTab Chrome extension from the browser
+          will automatically and permanently delete all locally stored Google
+          user data and preferences from the user’s device.
+        </li>
+        <li>
+          <strong>Revocation of Access (Immediate Deletion):</strong> Users can
+          immediately and permanently revoke macNewTab's access to their Google
+          Account and all associated data by visiting the Google Account
+          Security page:
           <a href="https://myaccount.google.com/permissions" target="_blank"
-            >Google Account Security Settings</a
-          >
-          and revoking access for macNewTab.
+            >https://myaccount.google.com/permissions</a
+          >. <b>Revoking access immediately stops all data access and future
+          processing.</b>
         </li>
         <li>
-          <strong>Deletion (Uninstalling):</strong> Uninstalling the macNewTab
-          Chrome extension automatically and permanently deletes all locally
-          stored preferences, settings, and cached Google user data from your
-          browser.
+          <strong>Developer Contact for Deletion:</strong> For any specific
+          concerns or to confirm that all data has been deleted, users can
+          contact the developer via the methods listed in the 'Contact' section.
+          Since we do not store external data, this confirmation relates only to
+          the revocation of access.
         </li>
       </ul>
       <h2>Third-Party Services</h2>
