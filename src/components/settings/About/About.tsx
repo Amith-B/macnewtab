@@ -69,6 +69,26 @@ export default function About() {
               chromewebstore/macnewtab
             </a>
           </div>
+          <div className="about__row-item">
+            <Translation value="home_page" />
+            <a
+              rel="noreferrer"
+              href="https://amith-b.github.io/macnewtab/"
+              target="_blank"
+            >
+              MacNewTab
+            </a>
+          </div>
+          <div className="about__row-item">
+            <Translation value="privacy_policy" />
+            <a
+              rel="noreferrer"
+              href="https://amith-b.github.io/macnewtab/privacy.html"
+              target="_blank"
+            >
+              Privacy Policy
+            </a>
+          </div>
         </div>
       </div>
       &copy; 2024 - 2025 {<Translation value="copyright" />}

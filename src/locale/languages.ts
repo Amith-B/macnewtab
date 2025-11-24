@@ -95,6 +95,8 @@ export const translation = {
     toggle_bookmark: "Toggle Bookmark",
 
     write_review: "Write a Review",
+    home_page: "Home Page",
+    privacy_policy: "Privacy Policy",
 
     todo: "Todo List",
     todo_toggle_title: "Show Todo List",
@@ -244,6 +246,8 @@ export const translation = {
     toggle_bookmark: "ಬುಕ್ಮಾರ್ಕ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಿ",
 
     write_review: "ವಿಮರ್ಶೆಯನ್ನು ಬರೆಯಿರಿ",
+    home_page: "ಮುಖಪುಟ",
+    privacy_policy: "ಗೌಪ್ಯತಾ ನೀತಿ",
 
     todo: "TODO ಪಟ್ಟಿ",
     todo_toggle_title: "ಟೊಡೊ ಪಟ್ಟಿಯನ್ನು ತೋರಿಸಿ",
@@ -396,6 +400,8 @@ export const translation = {
     toggle_bookmark: "Přepněte záložku",
 
     write_review: "Napište recenzi",
+    home_page: "Domovská stránka",
+    privacy_policy: "Zásady ochrany osobních údajů",
 
     todo: "Seznam Todo",
     todo_toggle_title: "Zobrazit seznam Todo",
@@ -545,6 +551,8 @@ export const translation = {
     toggle_bookmark: "Bookmark'ı değiştirin",
 
     write_review: "Bir İnceleme Yazın",
+    home_page: "Ana Sayfa",
+    privacy_policy: "Gizlilik Politikası",
 
     todo: "Todo Listesi",
     todo_toggle_title: "Todo listesini göster",
@@ -698,6 +706,8 @@ export const translation = {
     toggle_bookmark: "Chuyển đổi dấu trang",
 
     write_review: "Viết một đánh giá",
+    home_page: "Trang chủ",
+    privacy_policy: "Chính sách bảo mật",
 
     todo: "Danh sách việc cần làm",
     todo_toggle_title: "Hiển thị danh sách TODO",
@@ -849,6 +859,8 @@ export const translation = {
     toggle_bookmark: "Xatcho'pni almashtiring",
 
     write_review: "Sharh yozing",
+    home_page: "Bosh sahifa",
+    privacy_policy: "Maxfiylik siyosati",
 
     todo: "Todo ro'yxati",
     todo_toggle_title: "Todo ro'yxatini ko'rsatish",
@@ -999,6 +1011,8 @@ export const translation = {
     toggle_bookmark: "切换书签",
 
     write_review: "写评论",
+    home_page: "主页",
+    privacy_policy: "隐私政策",
 
     todo: "待办事项清单",
     todo_toggle_title: "展示托多列表",
@@ -1146,6 +1160,8 @@ export const translation = {
     toggle_bookmark: "टॉगल बुकमार्क",
 
     write_review: "एक समीक्षा लिखे",
+    home_page: "मुख पृष्ठ",
+    privacy_policy: "गोपनीयता नीति",
 
     todo: "करने के लिए सूची",
     todo_toggle_title: "टोडो सूची दिखाएं",
@@ -1299,6 +1315,8 @@ export const translation = {
     toggle_bookmark: "Attiva segnalibro",
 
     write_review: "Scrivi una recensione",
+    home_page: "Pagina iniziale",
+    privacy_policy: "Informativa sulla privacy",
 
     todo: "Elenco Todo",
     todo_toggle_title: "Mostra elenco TODO",
@@ -1450,6 +1468,8 @@ export const translation = {
     toggle_bookmark: "টগল বুকমার্ক",
 
     write_review: "একটি পর্যালোচনা লিখুন",
+    home_page: "হোম পেজ",
+    privacy_policy: "গোপনীয়তা নীতি",
 
     todo: "টোডো তালিকা",
     todo_toggle_title: "টোডো তালিকা দেখান",
@@ -1602,6 +1622,8 @@ export const translation = {
     toggle_bookmark: "Alterar marcador",
 
     write_review: "Escreva uma resenha",
+    home_page: "Página inicial",
+    privacy_policy: "Política de Privacidade",
 
     todo: "Lista de tarefas",
     todo_toggle_title: "Mostre a lista de tarefas",
@@ -1756,6 +1778,8 @@ export const translation = {
     toggle_bookmark: "Mettre en signet à basculer",
 
     write_review: "Rédiger une critique",
+    home_page: "Page d'accueil",
+    privacy_policy: "Politique de confidentialité",
 
     todo: "Liste de TOD",
     todo_toggle_title: "Afficher la liste des TODO",
@@ -1906,6 +1930,8 @@ export const translation = {
     toggle_bookmark: "Переверните закладку",
 
     write_review: "Напишите обзор",
+    home_page: "Домашняя страница",
+    privacy_policy: "Политика конфиденциальности",
 
     todo: "Список Тодо",
     todo_toggle_title: "Показать список Тодо",
@@ -2058,6 +2084,8 @@ export const translation = {
     toggle_bookmark: "Marcador de marcadores",
 
     write_review: "Escribe una reseña",
+    home_page: "Página de inicio",
+    privacy_policy: "Política de privacidad",
 
     todo: "Lista de tareas",
     todo_toggle_title: "Mostrar lista de TODO",
@@ -2208,6 +2236,8 @@ export const translation = {
     toggle_bookmark: "トグルブックマーク",
 
     write_review: "レビューを書いてください",
+    home_page: "ホームページ",
+    privacy_policy: "プライバシーポリシー",
 
     todo: "TODOリスト",
     todo_toggle_title: "TODOリストを表示します",
@@ -2357,6 +2387,8 @@ export const translation = {
     toggle_bookmark: "토글 북마크",
 
     write_review: "리뷰를 작성하십시오",
+    home_page: "홈페이지",
+    privacy_policy: "개인 정보 정책",
 
     todo: "TODO 목록",
     todo_toggle_title: "TODO 목록을 표시하십시오",
@@ -2506,6 +2538,8 @@ export const translation = {
     toggle_bookmark: "Toggle Bookmark",
 
     write_review: "Tulis ulasan",
+    home_page: "Beranda",
+    privacy_policy: "Kebijakan Privasi",
 
     todo: "Daftar TODO",
     todo_toggle_title: "Tampilkan daftar todo",
@@ -2656,6 +2690,8 @@ export const translation = {
     toggle_bookmark: "टॉगल बुकमार्क",
 
     write_review: "एक पुनरावलोकन लिहा",
+    home_page: "मुख्यपृष्ठ",
+    privacy_policy: "गोपनीयता धोरण",
 
     todo: "टोडो यादी",
     todo_toggle_title: "टोडो यादी दर्शवा",
