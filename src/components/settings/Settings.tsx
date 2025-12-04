@@ -8,6 +8,7 @@ import { ReactComponent as DockIcon } from "./dock.svg";
 import { ReactComponent as AboutIcon } from "./about.svg";
 import { ReactComponent as ChangelogIcon } from "./changelog.svg";
 import { ReactComponent as LoggedOutIcon } from "./logged-out.svg";
+import { ReactComponent as DataIcon } from "./data.svg";
 import Appearance from "./Appearance/Appearance";
 import About from "./About/About";
 import General from "./general/General";
@@ -15,6 +16,7 @@ import GoogleAccount from "./Account/GoogleAccount";
 import Translation from "../../locale/Translation";
 import Dock from "./Dock/Dock";
 import Changelog from "./Changelog/Changelog";
+import Data from "./Data/Data";
 import { AppContext } from "../../context/provider";
 
 export const SETTINGS_MENU = [
@@ -47,6 +49,12 @@ export const SETTINGS_MENU = [
     title: <Translation value="changelog" />,
     icon: ChangelogIcon,
     content: Changelog,
+  },
+  {
+    key: "data",
+    title: <Translation value="backup_and_restore" />,
+    icon: DataIcon,
+    content: Data,
   },
 ];
 

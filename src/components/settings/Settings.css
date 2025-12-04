@@ -144,11 +144,14 @@
   border-radius: 8px;
   gap: 8px;
   cursor: pointer;
+  text-align: left;
 }
 
 .settings_menu-item:not(.account) svg {
   width: 26px;
   height: 26px;
+  min-width: 26px;
+  min-height: 26px;
 }
 
 .settings_menu-item.selected {
