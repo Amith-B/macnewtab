@@ -1,6 +1,6 @@
 {
   "name": "macnewtab",
-  "version": "1.35.1",
+  "version": "1.36.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",

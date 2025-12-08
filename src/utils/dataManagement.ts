@@ -29,6 +29,10 @@ import {
   GOOGLE_USER_LOCAL_STORAGE_KEY,
   SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
 } from "../static/googleSettings";
+import {
+  fetchImageFromIndexedDB,
+  saveImageToIndexedDB,
+} from "../utils/db";
 
 const STICKY_NOTES_KEY = "macnewtab_sticky_notes";
 
@@ -57,7 +61,7 @@ const KEYS_TO_EXPORT = [
   STICKY_NOTES_KEY,
 ];
 
-export const exportData = () => {
+export const exportData = async () => {
   const data: Record<string, any> = {};
   KEYS_TO_EXPORT.forEach((key) => {
     const value = localStorage.getItem(key);
@@ -69,6 +73,29 @@ export const exportData = () => {
       }
     }
   });
+
+  try {
+    const wallpaper = await fetchImageFromIndexedDB();
+    if (wallpaper) {
+      // If it's a blob URL, we need to convert it back to base64 for export
+      if (wallpaper.startsWith("blob:")) {
+        const response = await fetch(wallpaper);
+        const blob = await response.blob();
+        const reader = new FileReader();
+        await new Promise((resolve) => {
+          reader.onloadend = () => {
+            data["wallpaper_image"] = reader.result;
+            resolve(null);
+          };
+          reader.readAsDataURL(blob);
+        });
+      } else {
+        data["wallpaper_image"] = wallpaper;
+      }
+    }
+  } catch (error) {
+    console.error("Failed to export wallpaper:", error);
+  }
 
   const blob = new Blob([JSON.stringify(data, null, 2)], {
     type: "application/json",
@@ -86,7 +113,7 @@ export const exportData = () => {
 export const importData = (file: File): Promise<void> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       try {
         const result = e.target?.result as string;
         const data = JSON.parse(result);
@@ -105,6 +132,14 @@ export const importData = (file: File): Promise<void> => {
             }
           }
         });
+
+        if (data["wallpaper_image"]) {
+          try {
+            await saveImageToIndexedDB(data["wallpaper_image"]);
+          } catch (error) {
+            console.error("Failed to import wallpaper:", error);
+          }
+        }
 
         resolve();
       } catch (error) {
