@@ -1,6 +1,6 @@
 // Google OAuth configuration
-export const GOOGLE_CLIENT_ID =
-  "685848442779-bigfu97dhb03jc3ju4buadl23uop006f.apps.googleusercontent.com";
+export const GOOGLE_CLIENT_ID_FOR_EDGE =
+  process.env.REACT_APP_EDGE_CLIENT_ID;
 export const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/userinfo.profile",
   "https://www.googleapis.com/auth/userinfo.email",
@@ -33,12 +33,44 @@ export interface GoogleCalendarEvent {
   recurringEventId?: string;
 }
 
-// Get OAuth token using Chrome Identity API
+// Get OAuth token using Chrome Identity API or Web Auth Flow
 export const getGoogleAuthToken = (): Promise<string> => {
   return new Promise((resolve, reject) => {
+    // Try the standard Chrome Identity API first
     chrome.identity.getAuthToken({ interactive: true }, (token) => {
       if (chrome.runtime.lastError || !token) {
-        reject(chrome.runtime.lastError);
+        // If that fails (e.g. on Edge or dev env with ID mismatch), try Web Auth Flow
+        const redirectUrl = chrome.identity.getRedirectURL();
+        const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${GOOGLE_CLIENT_ID_FOR_EDGE}&response_type=token&redirect_uri=${encodeURIComponent(
+          redirectUrl
+        )}&scope=${encodeURIComponent(GOOGLE_SCOPES)}`;
+
+        chrome.identity.launchWebAuthFlow(
+          {
+            url: authUrl,
+            interactive: true,
+          },
+          (responseUrl) => {
+            try {
+              if (chrome.runtime.lastError || !responseUrl) {
+                reject(chrome.runtime.lastError || new Error("Auth failed"));
+              } else {
+                // Extract token from redirect URL
+                const url = new URL(responseUrl);
+                const params = new URLSearchParams(url.hash.substring(1)); // hash contains the access_token
+                const accessToken = params.get("access_token");
+                if (accessToken) {
+                  resolve(accessToken);
+                } else {
+                  reject(new Error("No access token found"));
+                }
+              }
+            }
+            catch (error) {
+              console.error(error)
+            }
+          }
+        );
       } else {
         resolve(token);
       }
@@ -48,13 +80,18 @@ export const getGoogleAuthToken = (): Promise<string> => {
 
 // Remove cached OAuth token
 export const removeGoogleAuthToken = (token: string): Promise<void> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
+    // Try to remove from cache (chrome.identity)
     chrome.identity.removeCachedAuthToken({ token }, () => {
+      // Even if this fails (e.g. on Edge), we can consider it "removed" locally
+      // but strictly following the API:
       if (chrome.runtime.lastError) {
-        reject(chrome.runtime.lastError);
-      } else {
-        resolve();
+        console.warn(
+          "Failed to remove cached token (expected on Edge):",
+          chrome.runtime.lastError
+        );
       }
+      resolve();
     });
   });
 };
