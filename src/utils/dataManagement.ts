@@ -61,6 +61,18 @@ const KEYS_TO_EXPORT = [
   STICKY_NOTES_KEY,
 ];
 
+// Helper to convert Blob URL to Base64
+const convertBlobUrlToBase64 = async (blobUrl: string): Promise<string> => {
+  const response = await fetch(blobUrl);
+  const blob = await response.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+};
+
 export const exportData = async () => {
   const data: Record<string, any> = {};
   KEYS_TO_EXPORT.forEach((key) => {
@@ -75,26 +87,42 @@ export const exportData = async () => {
   });
 
   try {
+    // Export Wallpaper
     const wallpaper = await fetchImageFromIndexedDB();
     if (wallpaper) {
-      // If it's a blob URL, we need to convert it back to base64 for export
       if (wallpaper.startsWith("blob:")) {
-        const response = await fetch(wallpaper);
-        const blob = await response.blob();
-        const reader = new FileReader();
-        await new Promise((resolve) => {
-          reader.onloadend = () => {
-            data["wallpaper_image"] = reader.result;
-            resolve(null);
-          };
-          reader.readAsDataURL(blob);
-        });
+        data["wallpaper_image"] = await convertBlobUrlToBase64(wallpaper);
       } else {
         data["wallpaper_image"] = wallpaper;
       }
     }
+
+    // Export Custom Dock Icons
+    const dockSitesString = localStorage.getItem(DOCK_SITES_LOCAL_STORAGE_KEY);
+    if (dockSitesString) {
+      const dockSites = JSON.parse(dockSitesString);
+      const dockIcons: Record<string, string> = {};
+
+      for (const site of dockSites) {
+        if (site.hasCustomIcon) {
+          const iconId = `dock_icon_${site.id}`;
+          const iconData = await fetchImageFromIndexedDB(iconId);
+          if (iconData) {
+            if (iconData.startsWith("blob:")) {
+              dockIcons[iconId] = await convertBlobUrlToBase64(iconData);
+            } else {
+              dockIcons[iconId] = iconData;
+            }
+          }
+        }
+      }
+
+      if (Object.keys(dockIcons).length > 0) {
+        data["dock_icons"] = dockIcons;
+      }
+    }
   } catch (error) {
-    console.error("Failed to export wallpaper:", error);
+    console.error("Failed to export data:", error);
   }
 
   const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -133,11 +161,24 @@ export const importData = (file: File): Promise<void> => {
           }
         });
 
+        // Import Wallpaper
         if (data["wallpaper_image"]) {
           try {
             await saveImageToIndexedDB(data["wallpaper_image"]);
           } catch (error) {
             console.error("Failed to import wallpaper:", error);
+          }
+        }
+
+        // Import Custom Dock Icons
+        if (data["dock_icons"]) {
+          try {
+            const dockIcons = data["dock_icons"] as Record<string, string>;
+            for (const [id, base64] of Object.entries(dockIcons)) {
+              await saveImageToIndexedDB(base64, id);
+            }
+          } catch (error) {
+            console.error("Failed to import dock icons:", error);
           }
         }
 

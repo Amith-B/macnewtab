@@ -55,7 +55,12 @@ import {
   deleteImageFromIndexedDB,
 } from "../utils/db";
 
-type DockBarSites = Array<{ title: string; url: string; id: string }>;
+type DockBarSites = Array<{
+  title: string;
+  url: string;
+  id: string;
+  hasCustomIcon?: boolean;
+}>;
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
 
 export const AppContext = createContext({
@@ -112,8 +117,6 @@ export const AppContext = createContext({
   calendarEvents: [] as GoogleCalendarEvent[],
   setCalendarEvents: (_: GoogleCalendarEvent[]) => {},
 });
-
-
 
 export default function AppProvider({ children }: { children: ReactNode }) {
   const [backgroundImage, setBackgroundImage] = useState("");

@@ -84,6 +84,8 @@ export const translation = {
     add: "Add",
     done: "Done",
     add_dock_links: "Add Links to Dock",
+    upload_icon: "Upload Icon",
+    change_icon: "Change Icon",
 
     position_on_screen: "Position On Screen",
     left: "Left",
@@ -245,6 +247,8 @@ export const translation = {
     add: "ಸೇರಿಸಿ",
     done: "ಮುಗಿದಿದೆ",
     add_dock_links: "ಡಾಕ್‌ಗೆ ಲಿಂಕ್‌ಗಳನ್ನು ಸೇರಿಸಿ",
+    upload_icon: "ಐಕಾನ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+    change_icon: "ಐಕಾನ್ ಬದಲಾಯಿಸಿ",
 
     position_on_screen: "ಪರದೆಯ ಮೇಲೆ ಸ್ಥಾನ",
     left: "ಎಡಕ್ಕೆ",
@@ -409,6 +413,8 @@ export const translation = {
     add: "Přidat",
     done: "Hotovo",
     add_dock_links: "Přidat odkazy do Docku",
+    upload_icon: "Nahrát ikonu",
+    change_icon: "Změnit ikonu",
 
     position_on_screen: "Pozice Na Obrazovce",
     left: "Vlevo",
@@ -570,6 +576,8 @@ export const translation = {
     add: "Eklemek",
     done: "Tamamlamak",
     add_dock_links: "Dock'a Bağlantı Ekle",
+    upload_icon: "Simge Yükle",
+    change_icon: "Simgeyi Değiştir",
 
     position_on_screen: "Ekrandaki Konum",
     left: "Sol",
@@ -735,6 +743,8 @@ export const translation = {
     add: "Thêm vào",
     done: "Xong",
     add_dock_links: "Thêm liên kết vào Dock",
+    upload_icon: "Tải lên biểu tượng",
+    change_icon: "Thay đổi biểu tượng",
 
     position_on_screen: "Vị trí trên màn hình",
     left: "Bên trái",
@@ -898,6 +908,8 @@ export const translation = {
     add: "Qo'shish",
     done: "Bajarildi",
     add_dock_links: "Dock-ga havolalar qo'shing",
+    upload_icon: "Belgini yuklash",
+    change_icon: "Belgini o'zgartirish",
 
     position_on_screen: "Ekrandagi joylashuv",
     left: "Chapga",
@@ -1060,6 +1072,8 @@ export const translation = {
     add: "添加",
     done: "完毕",
     add_dock_links: "添加链接到 Dock",
+    upload_icon: "上传图标",
+    change_icon: "更换图标",
 
     position_on_screen: "屏幕上的位置",
     left: "左边",
@@ -1219,6 +1233,8 @@ export const translation = {
     add: "जोड़ना",
     done: "हो गया",
     add_dock_links: "डॉक में लिंक जोड़ें",
+    upload_icon: "आइकन अपलोड करें",
+    change_icon: "आइकन बदलें",
 
     position_on_screen: "स्क्रीन पर स्थिति",
     left: "बाएं",
@@ -1384,6 +1400,8 @@ export const translation = {
     add: "Aggiungere",
     done: "Fatto",
     add_dock_links: "Aggiungi collegamenti al Dock",
+    upload_icon: "Carica icona",
+    change_icon: "Cambia icona",
 
     position_on_screen: "Posizione sullo schermo",
     left: "Sinistra",
@@ -1547,6 +1565,8 @@ export const translation = {
     add: "যোগ করুন",
     done: "সম্পন্ন",
     add_dock_links: "ডক লিঙ্ক যোগ করুন",
+    upload_icon: "আইকন আপলোড করুন",
+    change_icon: "আইকন পরিবর্তন করুন",
 
     position_on_screen: "স্ক্রিনে অবস্থান",
     left: "বাম",
@@ -1711,6 +1731,8 @@ export const translation = {
     add: "Adicionar",
     done: "Feito",
     add_dock_links: "Adicionar links ao Dock",
+    upload_icon: "Carregar ícone",
+    change_icon: "Alterar ícone",
 
     position_on_screen: "Posição na tela",
     left: "Esquerda",
@@ -1877,6 +1899,8 @@ export const translation = {
     add: "Ajouter",
     done: "Fait",
     add_dock_links: "Ajouter des liens au Dock",
+    upload_icon: "Télécharger l'icône",
+    change_icon: "Changer d'icône",
 
     position_on_screen: "Position à l'écran",
     left: "Gauche",
@@ -2039,6 +2063,8 @@ export const translation = {
     add: "Добавлять",
     done: "Сделанный",
     add_dock_links: "Добавить ссылки в док",
+    upload_icon: "Загрузить значок",
+    change_icon: "Изменить значок",
 
     position_on_screen: "Положение на экране",
     left: "Левый",
@@ -2203,6 +2229,8 @@ export const translation = {
     add: "Agregar",
     done: "Hecho",
     add_dock_links: "Agregar enlaces al muelle",
+    upload_icon: "Subir icono",
+    change_icon: "Cambiar icono",
 
     position_on_screen: "Posición en pantalla",
     left: "Izquierda",
@@ -2365,6 +2393,8 @@ export const translation = {
     add: "追加",
     done: "終わり",
     add_dock_links: "リンクをドックに追加",
+    upload_icon: "アイコンをアップロード",
+    change_icon: "アイコンを変更",
 
     position_on_screen: "画面上の位置",
     left: "左",
@@ -2526,6 +2556,8 @@ export const translation = {
     add: "추가하다",
     done: "완료",
     add_dock_links: "Dock에 링크 추가",
+    upload_icon: "아이콘 업로드",
+    change_icon: "아이콘 변경",
 
     position_on_screen: "화면상의 위치",
     left: "왼쪽",
@@ -2687,6 +2719,8 @@ export const translation = {
     add: "Menambahkan",
     done: "Selesai",
     add_dock_links: "Tambahkan Tautan ke Dock",
+    upload_icon: "Unggah Ikon",
+    change_icon: "Ubah Ikon",
 
     position_on_screen: "Posisi Di Layar",
     left: "Kiri",
@@ -2849,6 +2883,8 @@ export const translation = {
     add: "ॲड",
     done: "झाले",
     add_dock_links: "डॉकमध्ये लिंक्स जोडा",
+    upload_icon: "आयकॉन अपलोड करा",
+    change_icon: "आयकॉन बदला",
 
     position_on_screen: "स्क्रीनवर स्थान",
     left: "बाकी",

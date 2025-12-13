@@ -20,7 +20,8 @@ export const openDatabase = (): Promise<IDBDatabase> => {
 };
 
 export const saveImageToIndexedDB = async (
-  base64Image: string
+  base64Image: string,
+  id: string = "customWallpaper"
 ): Promise<string> => {
   const db = await openDatabase();
   const blob = await fetch(base64Image).then((res) => res.blob());
@@ -28,7 +29,7 @@ export const saveImageToIndexedDB = async (
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("wallpapers", "readwrite");
     const store = transaction.objectStore("wallpapers");
-    store.put({ id: "customWallpaper", imageBlob: blob });
+    store.put({ id, imageBlob: blob });
 
     transaction.oncomplete = () => {
       const url = URL.createObjectURL(blob);
@@ -38,12 +39,14 @@ export const saveImageToIndexedDB = async (
   });
 };
 
-export const fetchImageFromIndexedDB = async (): Promise<string | null> => {
+export const fetchImageFromIndexedDB = async (
+  id: string = "customWallpaper"
+): Promise<string | null> => {
   const db = await openDatabase();
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("wallpapers", "readonly");
     const store = transaction.objectStore("wallpapers");
-    const request = store.get("customWallpaper");
+    const request = store.get(id);
 
     request.onsuccess = () => {
       const result = request.result as
@@ -62,12 +65,14 @@ export const fetchImageFromIndexedDB = async (): Promise<string | null> => {
   });
 };
 
-export const deleteImageFromIndexedDB = async (): Promise<void> => {
+export const deleteImageFromIndexedDB = async (
+  id: string = "customWallpaper"
+): Promise<void> => {
   const db = await openDatabase();
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("wallpapers", "readwrite");
     const store = transaction.objectStore("wallpapers");
-    store.delete("customWallpaper");
+    store.delete(id);
 
     transaction.oncomplete = () => resolve();
     transaction.onerror = () => reject(transaction.error);

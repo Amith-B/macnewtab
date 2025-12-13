@@ -17,8 +17,7 @@ import Launchpad from "../launchpad/Launchpad";
 import TodoDialog from "../todo/Todo";
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
-
-const SITE_IMAGE_URL = "https://favicone.com/";
+import { DockIcon } from "./DockIcon";
 
 const TooltipPosition: Record<string, string> = {
   left: "right",
@@ -202,22 +201,18 @@ const Dock = memo(() => {
           onScroll={checkOverflow}
         >
           {dockBarSites.map((item) => {
-            let siteURL;
-
             let anchorProps = {};
-            let url = item.url;
 
             try {
-              siteURL = new URL(url);
+              new URL(item.url);
               anchorProps = {
-                href: url,
+                href: item.url,
                 target: "_self",
               };
             } catch (error) {
-              if (!/^https?:\/\//i.test(url)) {
-                url = "https://" + url;
+              if (!/^https?:\/\//i.test(item.url)) {
                 try {
-                  siteURL = new URL(url);
+                  new URL("https://" + item.url);
                 } catch (_) {}
               }
 
@@ -242,10 +237,11 @@ const Dock = memo(() => {
                 key={item.id}
                 {...anchorProps}
               >
-                <img
-                  className="dock-site__icon"
-                  src={`${SITE_IMAGE_URL}${siteURL?.hostname}?s=32`}
-                  alt={item.title}
+                <DockIcon
+                  id={item.id}
+                  hasCustomIcon={item.hasCustomIcon}
+                  url={item.url}
+                  title={item.title}
                 />
               </a>
             );

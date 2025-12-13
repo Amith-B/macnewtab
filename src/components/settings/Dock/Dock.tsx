@@ -10,11 +10,16 @@ import { AppContext } from "../../../context/provider";
 import { List, arrayMove } from "react-movable";
 import { ReactComponent as DeleteIcon } from "../../../assets/delete-icon.svg";
 import { ReactComponent as DraggableIcon } from "./draggable.svg";
+import { DockIcon } from "../../dock/DockIcon";
 import { DockPosition, dockPositions } from "../../../static/dockSites";
 import Translation from "../../../locale/Translation";
 import { Select } from "../../select/Select";
 import { generateRandomId } from "../../../utils/random";
 import Toggle from "../../toggle/Toggle";
+import {
+  saveImageToIndexedDB,
+  deleteImageFromIndexedDB,
+} from "../../../utils/db";
 
 export default memo(function Dock() {
   const [changesActive, setChangesActive] = useState(false);
@@ -34,7 +39,29 @@ export default memo(function Dock() {
     setCurrentDockSites(dockBarSites);
   }, [dockBarSites]);
 
-  const handleDone = () => {
+  const handleDone = async () => {
+    // Check for deleted items or items with removed custom icons
+    const currentIds = new Set(currentDockSites.map((site) => site.id));
+
+    // 1. Find items that were removed completely
+    for (const originalSite of dockBarSites) {
+      if (!currentIds.has(originalSite.id) && originalSite.hasCustomIcon) {
+        await deleteImageFromIndexedDB(`dock_icon_${originalSite.id}`);
+      }
+    }
+
+    // 2. Find items that exist but had their custom icon removed
+    for (const currentSite of currentDockSites) {
+      const originalSite = dockBarSites.find((s) => s.id === currentSite.id);
+      if (
+        originalSite &&
+        originalSite.hasCustomIcon &&
+        !currentSite.hasCustomIcon
+      ) {
+        await deleteImageFromIndexedDB(`dock_icon_${originalSite.id}`);
+      }
+    }
+
     setChangesActive(false);
     handleDockSitesChange(
       currentDockSites.filter(
@@ -50,10 +77,51 @@ export default memo(function Dock() {
     setCurrentDockSites(updatedDockSites);
   };
 
-  const handleDelete = (idx?: number) => () => {
+  const handleDelete = (idx: number) => () => {
     const updatedDockSites = currentDockSites.filter(
       (_, index) => index !== idx
     );
+    setCurrentDockSites(updatedDockSites);
+    setChangesActive(true);
+  };
+
+  const handleFileUpload = async (
+    e: ChangeEvent<HTMLInputElement>,
+    idx: number
+  ) => {
+    if (!e.target.files || !e.target.files[0]) return;
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = async () => {
+      if (reader.result) {
+        const item = currentDockSites[idx];
+        await saveImageToIndexedDB(
+          reader.result as string,
+          `dock_icon_${item.id}`
+        );
+
+        const updatedDockSites = [...currentDockSites];
+        updatedDockSites[idx] = {
+          ...item,
+          hasCustomIcon: true,
+        };
+        setCurrentDockSites(updatedDockSites);
+        setChangesActive(true);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveCustomIcon = (idx?: number) => {
+    if (idx === undefined) return;
+    const item = currentDockSites[idx];
+
+    const updatedDockSites = [...currentDockSites];
+    updatedDockSites[idx] = {
+      ...item,
+      hasCustomIcon: false,
+    };
     setCurrentDockSites(updatedDockSites);
     setChangesActive(true);
   };
@@ -100,9 +168,7 @@ export default memo(function Dock() {
           id={"sticky-notes-toggle"}
           name="Sticky notes toggle"
           isChecked={showStickyNotes}
-          handleToggleChange={() =>
-            setShowStickyNotes(!showStickyNotes)
-          }
+          handleToggleChange={() => setShowStickyNotes(!showStickyNotes)}
         />
       </div>
       <div
@@ -166,7 +232,15 @@ export default memo(function Dock() {
                       width: "fit-content",
                     }}
                   />
-                  <div className="input__container">
+                  <div className="dock-preview-wrapper">
+                    <DockIcon
+                      id={value.id}
+                      hasCustomIcon={value.hasCustomIcon}
+                      url={value.url}
+                      title={value.title}
+                    />
+                  </div>
+                  <div className="input__container link-title">
                     <input
                       id="dock-title"
                       name="Dock link title"
@@ -184,10 +258,40 @@ export default memo(function Dock() {
                       onChange={(event) => handleInput(event, "url", index)}
                     />
                   </div>
+                  <div className="dock-upload-wrapper">
+                    <label
+                      htmlFor={`file-upload-${index}`}
+                      className={`dock-upload-label button ${
+                        value.hasCustomIcon ? "has-remove" : ""
+                      }`}
+                    >
+                      {value.hasCustomIcon ? (
+                        <Translation value="change_icon" />
+                      ) : (
+                        <Translation value="upload_icon" />
+                      )}
+                    </label>
+                    <input
+                      id={`file-upload-${index}`}
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, index!)}
+                      style={{ display: "none" }}
+                    />
+                    {value.hasCustomIcon && (
+                      <button
+                        className="dock-remove-icon button"
+                        onClick={() => handleRemoveCustomIcon(index!)}
+                        title="Remove custom icon"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
                 </div>
                 <button
                   className="dock-links__delete"
-                  onClick={handleDelete(index)}
+                  onClick={handleDelete(index!)}
                 >
                   <DeleteIcon />
                 </button>

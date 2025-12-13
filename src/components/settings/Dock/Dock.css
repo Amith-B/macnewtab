@@ -41,6 +41,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+}
+
+.dock-preview-wrapper {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dock-preview-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
 }
 
 .dock-link-input-group {
@@ -56,6 +72,10 @@
   border-radius: 4px;
   border: 1px solid var(--theme-border);
   width: 180px;
+}
+
+.input__container.link-title {
+  width: 100px;
 }
 
 .input__container input {
@@ -119,4 +139,56 @@
 
 .dock-link-input__container:hover .draggable-indicator {
   visibility: visible;
+}
+
+.dock-upload-wrapper {
+  min-height: 26px;
+  height: auto;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.dock-upload-label {
+  min-height: 26px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding: 4px 12px;
+  transition: all 0.2s ease;
+  white-space: normal;
+  font-weight: 500 !important;
+  line-height: 1.2;
+}
+
+.dock-upload-label.has-remove {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+  z-index: 1;
+  /* Ensure border doesn't get hidden */
+}
+
+.dock-upload-label:hover {
+  background: var(--theme-border);
+  opacity: 0.8;
+}
+
+.dock-remove-icon {
+  height: auto;
+  width: 26px;
+  min-width: 26px;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.dock-remove-icon:hover {
+  background: rgba(255, 69, 58, 0.1);
+  color: #ff453a;
+  border-color: rgba(255, 69, 58, 0.2);
 }
