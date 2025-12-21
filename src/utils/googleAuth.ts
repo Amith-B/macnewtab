@@ -34,10 +34,12 @@ export interface GoogleCalendarEvent {
 }
 
 // Get OAuth token using Chrome Identity API or Web Auth Flow
-export const getGoogleAuthToken = (): Promise<string> => {
+export const getGoogleAuthToken = (
+  interactive: boolean = true
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     // Try the standard Chrome Identity API first
-    chrome.identity.getAuthToken({ interactive: true }, (token) => {
+    chrome.identity.getAuthToken({ interactive }, (token) => {
       if (chrome.runtime.lastError || !token) {
         // If that fails (e.g. on Edge or dev env with ID mismatch), try Web Auth Flow
         const redirectUrl = chrome.identity.getRedirectURL();
@@ -48,7 +50,7 @@ export const getGoogleAuthToken = (): Promise<string> => {
         chrome.identity.launchWebAuthFlow(
           {
             url: authUrl,
-            interactive: true,
+            interactive,
           },
           (responseUrl) => {
             try {
@@ -67,7 +69,7 @@ export const getGoogleAuthToken = (): Promise<string> => {
               }
             }
             catch (error) {
-              console.error(error)
+              reject(error)
             }
           }
         );

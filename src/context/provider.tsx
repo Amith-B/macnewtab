@@ -249,7 +249,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         if (!storedUser) {
           return;
         }
-        const token = await getGoogleAuthToken();
+        const token = await getGoogleAuthToken(false);
         if (token) {
           setGoogleUser(JSON.parse(storedUser));
           setGoogleAuthToken(token);
@@ -462,7 +462,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       try {
         await chrome.identity.clearAllCachedAuthTokens();
       } catch (error) {}
-      const token = await getGoogleAuthToken();
+      const token = await getGoogleAuthToken(true);
       const userProfile = await fetchGoogleUserProfile(token);
 
       setGoogleUser(userProfile);
