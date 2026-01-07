@@ -1,6 +1,7 @@
 import { CSSProperties, useContext, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import Clock1 from "./widgets/clock-1/Clock1";
+import Clock2 from "./widgets/clock-2/Clock2";
 import Calendar1 from "./widgets/day-calendar/Calendar1";
 import Calendar from "./widgets/calendar/Calendar";
 import Search from "./components/search/Search";
@@ -36,6 +37,7 @@ const App = function App() {
     dockPosition,
     isWidgetsAwayFromDock,
     dockBarSites,
+    useAnalogClock2,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -116,7 +118,7 @@ const App = function App() {
       >
         {showClockAndCalendar && (
           <div className="section-1">
-            <Clock1 date={date} />
+            {useAnalogClock2 ? <Clock2 date={date} /> : <Clock1 date={date} />}
             {showMonthView ? (
               <Calendar date={date} />
             ) : (

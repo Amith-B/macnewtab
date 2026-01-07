@@ -29,6 +29,8 @@ const General = memo(function General() {
     isWidgetsAwayFromDock,
     setIsWidgetsAwayFromDock,
     dockBarSites,
+    useAnalogClock2,
+    setUseAnalogClock2,
   } = useContext(AppContext);
 
   const selectedLanguageDetails = useMemo(() => {
@@ -102,6 +104,20 @@ const General = memo(function General() {
           handleToggleChange={() =>
             setShowClockAndCalendar(!showClockAndCalendar)
           }
+        />
+      </div>
+
+      <div
+        className={
+          "general__row-item" + (!showClockAndCalendar ? " disabled" : "")
+        }
+      >
+        <Translation value="use_analog_clock_2" />
+        <Toggle
+          id={"use-analog-clock-2-toggle"}
+          name="Analog clock 2 toggle"
+          isChecked={useAnalogClock2}
+          handleToggleChange={() => setUseAnalogClock2(!useAnalogClock2)}
         />
       </div>
 

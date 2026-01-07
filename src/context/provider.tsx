@@ -13,6 +13,7 @@ import {
   SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY,
   SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY,
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
+  USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
 import { BOOKMARK_TOGGLE_STORAGE_KEY } from "../static/bookmarks";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
@@ -116,6 +117,8 @@ export const AppContext = createContext({
   setShowGoogleCalendar: (_: boolean) => {},
   calendarEvents: [] as GoogleCalendarEvent[],
   setCalendarEvents: (_: GoogleCalendarEvent[]) => {},
+  useAnalogClock2: false,
+  setUseAnalogClock2: (_: boolean) => {},
 });
 
 export default function AppProvider({ children }: { children: ReactNode }) {
@@ -203,6 +206,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [showGoogleCalendar, setShowGoogleCalendar] = useLocalStorage(
     SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
     true
+  );
+
+  const [useAnalogClock2, setUseAnalogClock2] = useLocalStorage(
+    USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
+    false
   );
 
   const [calendarEvents, setCalendarEvents] = useLocalStorage(
@@ -550,6 +558,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         setShowGoogleCalendar,
         calendarEvents,
         setCalendarEvents,
+        useAnalogClock2,
+        setUseAnalogClock2,
       }}
     >
       {children}
