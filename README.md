@@ -51,6 +51,7 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 - Toggle between **dark mode, light mode, or system mode**.
 - Choose theme colors.
 - Set a **custom wallpaper** or pick from a **stunning collection**.
+- **Dynamic Wallpapers**: Choose from **animated themes** including Nature, Sci-Fi, and Abstract styles.
 
 ### 📅 Toggle Calendar Views
 
@@ -91,6 +92,11 @@ Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and
 - Clicking an event opens it instantly in Google Calendar.
 - All authentication and data access happen securely through Google APIs — no user data is stored or shared externally.
 - Optionally toggle this widget on or off from the settings panel for a clutter-free experience.
+
+### 💾 Backup & Restore
+
+- Never lose your setup! Easily **export** your settings, to-do lists, sticky notes, and custom wallpapers to a JSON file.
+- **Import** your data to restore your dashboard on a new device or browser instance.
 
 ### 🌍 Multi-Language Support
 

@@ -15,16 +15,24 @@
 
 .appearance__wallpaper-upload-container,
 .appearance__theme-color-selection-container,
-.appearance__wallpaper-blur-container {
+.appearance__wallpaper-blur-container,
+.appearance__wallpaper-type-container,
+.appearance__dynamic-theme-container {
   padding: 12px 0;
   border-bottom: 1px solid var(--theme-border);
+}
+
+.appearance__dynamic-theme-container {
+  border-bottom: none;
 }
 
 .appearance__theme-selection-container,
 .appearance__wallpaper-upload-container,
 .appearance__wallpaper-selection-container,
 .appearance__theme-color-selection-container,
-.appearance__wallpaper-blur-container {
+.appearance__wallpaper-blur-container,
+.appearance__wallpaper-type-container,
+.appearance__dynamic-theme-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

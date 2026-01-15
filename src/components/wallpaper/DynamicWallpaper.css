@@ -1,0 +1,375 @@
+.dynamic-wallpaper-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease;
+}
+
+.dynamic-wallpaper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Sunset Theme */
+.sunset-layer {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    #2c3e50 0%,
+    #000000 20%,
+    #fd746c 60%,
+    #ff9068 100%
+  );
+  background-size: 100% 400%;
+  animation: sunset-sky-move 20s ease infinite alternate;
+  position: relative;
+  overflow: hidden;
+}
+
+.sunset-sun {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(to bottom, #fe8c00, #f83600);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 60px rgba(255, 120, 0, 0.6);
+  animation: sunset-sun-glow 4s infinite alternate;
+}
+
+@keyframes sunset-sky-move {
+  0% {
+    background-position: 0% 30%;
+  }
+  100% {
+    background-position: 0% 70%;
+  }
+}
+
+@keyframes sunset-sun-glow {
+  0% {
+    box-shadow: 0 0 60px rgba(255, 100, 0, 0.5),
+      0 0 100px rgba(255, 100, 0, 0.2);
+    transform: translateX(-50%) scale(1);
+  }
+  100% {
+    box-shadow: 0 0 80px rgba(255, 140, 0, 0.8),
+      0 0 140px rgba(255, 140, 0, 0.4);
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+/* Hyper Theme */
+.dynamic-wallpaper.hyper {
+  background: linear-gradient(
+    135deg,
+    #ff0055,
+    #00ffff,
+    #ff00cc,
+    #ffff00,
+    #00ff00
+  );
+  background-size: 600% 600%;
+  animation: hyper-flow 5s linear infinite;
+}
+
+.hyper-layer {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 80%
+  );
+}
+
+@keyframes hyper-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Retro Grid Theme */
+.dynamic-wallpaper.grid {
+  background: #120024;
+  perspective: 100vh;
+  overflow: hidden;
+}
+
+.grid-plane {
+  position: absolute;
+  top: 50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: linear-gradient(rgba(255, 0, 221, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 221, 0.4) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: rotateX(60deg);
+  animation: grid-move 5s linear infinite;
+  box-shadow: 0 0 150px rgba(255, 0, 200, 0.2);
+}
+
+.sun {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(to bottom, #ffea00, #ff0055);
+  border-radius: 50%;
+  box-shadow: 0 0 40px #ff0055;
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 40px;
+  }
+}
+
+/* Matrix Theme */
+.dynamic-wallpaper.matrix {
+  background: black;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+.matrix-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Particles Theme */
+.dynamic-wallpaper.particles {
+  background: #0f172a; /* Slate 900 */
+}
+
+.particles-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Waves Theme */
+.dynamic-wallpaper.waves {
+  background: linear-gradient(180deg, #e0f7fa 0%, #4dd0e1 100%);
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-size: 50% 100%;
+  opacity: 0.8;
+}
+
+/* Simple CSS Waves using border-radius for demonstration if SVG is complex to inline */
+/* Or use a mask/svg background */
+.wave-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 200px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-.2-31.6z' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-size: 50% 100%;
+  animation: wave-move 10s linear infinite;
+}
+
+.wave-layer:nth-child(1) {
+  bottom: 0;
+  opacity: 1;
+  z-index: 3;
+  animation-duration: 10s;
+  animation-delay: 0s;
+  color: #fff;
+}
+
+.wave-layer:nth-child(2) {
+  bottom: 10px;
+  opacity: 0.5;
+  z-index: 2;
+  animation-duration: 15s;
+  animation-delay: -5s;
+}
+
+.wave-layer:nth-child(3) {
+  bottom: 20px;
+  opacity: 0.2;
+  z-index: 1;
+  animation-duration: 20s;
+  animation-delay: -2s;
+}
+
+@keyframes wave-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Space Globes Theme */
+.dynamic-wallpaper.space-globes {
+  background: #000000;
+}
+
+.space-globes-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Clouds Theme */
+.clouds-container {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #c9dbe9 0%, #fff 100%);
+  overflow: hidden;
+}
+.cloud {
+  width: 200px;
+  height: 60px;
+  background: #fff;
+  border-radius: 200px;
+  position: absolute;
+}
+.cloud:before,
+.cloud:after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 100px;
+  height: 80px;
+  top: -15px;
+  left: 10px;
+  border-radius: 100px;
+  transform: rotate(30deg);
+}
+.cloud:after {
+  width: 120px;
+  height: 120px;
+  top: -55px;
+  left: auto;
+  right: 15px;
+}
+.x1 {
+  top: 20%;
+  animation: moveclouds 15s linear infinite;
+  opacity: 0.8;
+}
+.x2 {
+  left: 200px;
+  top: 40%;
+  transform: scale(0.6);
+  opacity: 0.6;
+  animation: moveclouds 25s linear infinite;
+}
+.x3 {
+  left: -250px;
+  top: 10%;
+  transform: scale(0.8);
+  opacity: 0.8;
+  animation: moveclouds 20s linear infinite;
+}
+.x4 {
+  left: 470px;
+  top: 60%;
+  transform: scale(0.75);
+  opacity: 0.75;
+  animation: moveclouds 18s linear infinite;
+}
+.x5 {
+  left: -150px;
+  top: 75%;
+  transform: scale(0.8);
+  opacity: 0.8;
+  animation: moveclouds 20s linear infinite;
+}
+@keyframes moveclouds {
+  0% {
+    margin-left: 110%;
+  }
+  100% {
+    margin-left: -20%;
+  }
+}
+
+/* Fog Theme */
+.fog-container {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+}
+.fog-img {
+  position: absolute;
+  height: 100vh;
+  width: 300vw;
+  background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png")
+    repeat-x;
+  background-size: contain;
+  animation: fog-anim 60s linear infinite;
+}
+.fog-img-second {
+  background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png")
+    repeat-x;
+  background-size: contain;
+  animation: fog-anim 40s linear infinite;
+  z-index: 1;
+  opacity: 0.5;
+}
+@keyframes fog-anim {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-200vw, 0, 0);
+  }
+}
+
+/* Canvas defaults for new themes */
+.plasma-canvas,
+.lava-canvas,
+.hexagons-canvas,
+.cubes-canvas,
+.tunnel-canvas,
+.net-canvas,
+.globe-canvas,
+.circuit-two-canvas,
+.snow-canvas,
+.fireflies-canvas,
+.star-zoom-canvas,
+.circuit-canvas,
+.dna-canvas,
+.wormhole-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

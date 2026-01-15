@@ -43,6 +43,11 @@ import {
   SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
 } from "../static/googleSettings";
 import {
+  WALLPAPER_TYPE_LOCAL_STORAGE_KEY,
+  DYNAMIC_WALLPAPER_THEME_LOCAL_STORAGE_KEY,
+  DynamicWallpaperThemes,
+} from "../static/dynamicWallpaper";
+import {
   GoogleUser,
   getGoogleAuthToken,
   removeGoogleAuthToken,
@@ -119,6 +124,10 @@ export const AppContext = createContext({
   setCalendarEvents: (_: GoogleCalendarEvent[]) => {},
   useAnalogClock2: false,
   setUseAnalogClock2: (_: boolean) => {},
+  wallpaperType: "image",
+  setWallpaperType: (_: string) => {},
+  dynamicWallpaperTheme: "aurora",
+  setDynamicWallpaperTheme: (_: string) => {},
 });
 
 export default function AppProvider({ children }: { children: ReactNode }) {
@@ -211,6 +220,19 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [useAnalogClock2, setUseAnalogClock2] = useLocalStorage(
     USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
     false
+  );
+
+  const [wallpaperType, setWallpaperType] = useLocalStorage(
+    WALLPAPER_TYPE_LOCAL_STORAGE_KEY,
+    "image"
+  );
+
+  const [dynamicWallpaperTheme, setDynamicWallpaperTheme] = useLocalStorage(
+    DYNAMIC_WALLPAPER_THEME_LOCAL_STORAGE_KEY,
+    "sunset",
+    (val) => {
+      return DynamicWallpaperThemes.some((item) => item.value === val);
+    }
   );
 
   const [calendarEvents, setCalendarEvents] = useLocalStorage(
@@ -560,6 +582,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         setCalendarEvents,
         useAnalogClock2,
         setUseAnalogClock2,
+        wallpaperType,
+        setWallpaperType,
+        dynamicWallpaperTheme,
+        setDynamicWallpaperTheme,
       }}
     >
       {children}

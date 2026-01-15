@@ -16,6 +16,7 @@ import Translation from "./locale/Translation";
 import Dock from "./components/dock/Dock";
 import TabManager from "./components/tab-manager/TabManager";
 import StickyNotes from "./components/sticky-notes/StickyNotes";
+import DynamicWallpaper from "./components/wallpaper/DynamicWallpaper";
 
 const App = function App() {
   const [searchEngine, setSearchEngine] = useState("");
@@ -38,6 +39,8 @@ const App = function App() {
     isWidgetsAwayFromDock,
     dockBarSites,
     useAnalogClock2,
+    wallpaperType,
+    dynamicWallpaperTheme,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -69,13 +72,13 @@ const App = function App() {
 
   const bgStyle: CSSProperties & Record<string, string> = useMemo(
     () => ({
-      ...(backgroundImage
+      ...(backgroundImage && wallpaperType === "image"
         ? {
             "--bg-image": `url(${backgroundImage})`,
           }
         : {}),
     }),
-    [backgroundImage]
+    [backgroundImage, wallpaperType]
   );
 
   const greeting = useMemo(() => {
@@ -97,11 +100,16 @@ const App = function App() {
   return (
     <div
       className={
-        `App theme-${themeColor || theme}` + (backgroundImage ? " has-bg" : "")
+        `App theme-${themeColor || theme}` +
+        (backgroundImage ? " has-bg" : "") +
+        (wallpaperType === "dynamic" ? " has-dynamic-bg" : "")
       }
       style={bgStyle}
       lang={locale}
     >
+      {wallpaperType === "dynamic" && (
+        <DynamicWallpaper theme={dynamicWallpaperTheme} />
+      )}
       {wallpaperBlur !== 0 && (
         <div
           className="wallpaper-blur-container"

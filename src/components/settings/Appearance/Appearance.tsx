@@ -6,6 +6,8 @@ import { ReactComponent as DeleteIcon } from "../delete-icon.svg";
 import Translation from "../../../locale/Translation";
 import { WALLPAPER_LIST } from "../../../static/wallpapers";
 import Slider from "../../slider/Slider";
+import { Select } from "../../select/Select";
+import { DynamicWallpaperThemes } from "../../../static/dynamicWallpaper";
 
 const FILE_SIZE_WARNING = 10;
 
@@ -19,6 +21,10 @@ export default function Appearance() {
     setTheme,
     setThemeColor,
     handleWallpaperChange,
+    wallpaperType,
+    setWallpaperType,
+    dynamicWallpaperTheme,
+    setDynamicWallpaperTheme,
   } = useContext(AppContext);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,83 +106,112 @@ export default function Appearance() {
         </div>
       </div>
 
-      <div className="appearance__wallpaper-blur-container">
-        <Translation value="wallpaper_blur" />
-        <div
-          className={
-            "appearance__wallpaper-blur-input" +
-            (!backgroundImage ? " disabled" : "")
-          }
-          style={{
-            width: "100%",
-            maxWidth: "200px",
-            justifyContent: "space-between",
-          }}
-        >
-          <Slider
-            value={wallpaperBlur}
-            min={0}
-            max={50}
-            id="blur-slider"
-            name="Blur slider"
-            onChange={(event) => {
-              handleWallpaperBlur(parseInt(event.target.value));
-            }}
-            style={{
-              maxWidth: "160px",
-            }}
+      <div className="appearance__wallpaper-type-container">
+        <Translation value="wallpaper_type" />
+        <Select
+          id="wallpaper-type-select"
+          name="Wallpaper type select"
+          options={[
+            { value: "image", label: "Image" },
+            { value: "dynamic", label: "Dynamic" },
+          ]}
+          value={wallpaperType}
+          onChange={(event) => setWallpaperType(event.target.value)}
+        />
+      </div>
+
+      {wallpaperType === "dynamic" ? (
+        <div className="appearance__dynamic-theme-container">
+          <Translation value="dynamic_theme" />
+          <Select
+            id="dynamic-theme-select"
+            name="Dynamic theme select"
+            options={DynamicWallpaperThemes}
+            value={dynamicWallpaperTheme}
+            onChange={(event) => setDynamicWallpaperTheme(event.target.value)}
           />
-          <span>{wallpaperBlur}</span>
         </div>
-      </div>
-      <div className="appearance__wallpaper-upload-container">
-        <Translation value="upload_wallpaper" />
-        <div className="appearance__wallpaper-actions-container">
-          <div className="image-picker accessible">
-            <label htmlFor="file-input" className="file-label">
-              <span>
-                <Translation value="choose_file" />
-              </span>
-              <input
-                type="file"
-                id="file-input"
-                className="image-input"
-                accept="image/*"
-                name="upload image"
-                onChange={handleFileUpload}
-              />
-            </label>
-          </div>
-          <button
-            className="appearance__wallpaper-delete"
-            onClick={() => handleWallpaperChange("")}
-          >
-            <DeleteIcon />
-          </button>
-        </div>
-      </div>
-      <div className="appearance__wallpaper-selection-container">
-        <Translation value="choose_wallpaper" />
-        <div className="appearance__wallpaper-selection-list">
-          <button
-            className="appearance__wallpaper-option wallpaper-none"
-            onClick={() => handleWallpaperChange("")}
-          ></button>
-          {WALLPAPER_LIST.map((item) => (
-            <button
-              key={item.id}
-              className="appearance__wallpaper-option"
-              onClick={() => handleWallpaperChange(item.link)}
+      ) : (
+        <>
+          <div className="appearance__wallpaper-blur-container">
+            <Translation value="wallpaper_blur" />
+            <div
+              className={
+                "appearance__wallpaper-blur-input" +
+                (!backgroundImage ? " disabled" : "")
+              }
+              style={{
+                width: "100%",
+                maxWidth: "200px",
+                justifyContent: "space-between",
+              }}
             >
-              <img
-                alt={item.id}
-                src={item.link}
-                className="appearance__wallpaper-image"
+              <Slider
+                value={wallpaperBlur}
+                min={0}
+                max={50}
+                id="blur-slider"
+                name="Blur slider"
+                onChange={(event) => {
+                  handleWallpaperBlur(parseInt(event.target.value));
+                }}
+                style={{
+                  maxWidth: "160px",
+                }}
               />
-            </button>
-          ))}
-        </div>
-      </div>
+              <span>{wallpaperBlur}</span>
+            </div>
+          </div>
+          <div className="appearance__wallpaper-upload-container">
+            <Translation value="upload_wallpaper" />
+            <div className="appearance__wallpaper-actions-container">
+              <div className="image-picker accessible">
+                <label htmlFor="file-input" className="file-label">
+                  <span>
+                    <Translation value="choose_file" />
+                  </span>
+                  <input
+                    type="file"
+                    id="file-input"
+                    className="image-input"
+                    accept="image/*"
+                    name="upload image"
+                    onChange={handleFileUpload}
+                  />
+                </label>
+              </div>
+              <button
+                className="appearance__wallpaper-delete"
+                onClick={() => handleWallpaperChange("")}
+              >
+                <DeleteIcon />
+              </button>
+            </div>
+          </div>
+          <div className="appearance__wallpaper-selection-container">
+            <Translation value="choose_wallpaper" />
+            <div className="appearance__wallpaper-selection-list">
+              <button
+                className="appearance__wallpaper-option wallpaper-none"
+                onClick={() => handleWallpaperChange("")}
+              ></button>
+              {WALLPAPER_LIST.map((item) => (
+                <button
+                  key={item.id}
+                  className="appearance__wallpaper-option"
+                  onClick={() => handleWallpaperChange(item.link)}
+                >
+                  <img
+                    alt={item.id}
+                    src={item.link}
+                    className="appearance__wallpaper-image"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

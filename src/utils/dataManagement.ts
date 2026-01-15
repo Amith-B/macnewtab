@@ -29,6 +29,10 @@ import {
   fetchImageFromIndexedDB,
   saveImageToIndexedDB,
 } from "../utils/db";
+import {
+  WALLPAPER_TYPE_LOCAL_STORAGE_KEY,
+  DYNAMIC_WALLPAPER_THEME_LOCAL_STORAGE_KEY,
+} from "../static/dynamicWallpaper";
 
 const STICKY_NOTES_KEY = "macnewtab_sticky_notes";
 
@@ -53,6 +57,8 @@ const KEYS_TO_EXPORT = [
   SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
   STICKY_NOTES_KEY,
   USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
+  WALLPAPER_TYPE_LOCAL_STORAGE_KEY,
+  DYNAMIC_WALLPAPER_THEME_LOCAL_STORAGE_KEY,
 ];
 
 // Helper to convert Blob URL to Base64

@@ -164,6 +164,8 @@ export const translation = {
     import_confirm: "Are you sure you want to import data? This will overwrite your current settings, todos, and notes. This action cannot be undone.",
     import_failed: "Failed to import data. Please check the file format.",
     use_analog_clock_2: "Use Analog Clock 2",
+    wallpaper_type: "Wallpaper Type",
+    dynamic_theme: "Dynamic Theme",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -330,6 +332,8 @@ export const translation = {
     import_confirm: "ನೀವು ಖಂಡಿತವಾಗಿಯೂ ಡೇಟಾವನ್ನು ಆಮದು ಮಾಡಲು ಬಯಸುವಿರಾ? ಇದು ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಸೆಟ್ಟಿಂಗ್‌ಗಳು, ಮಾಡಬೇಕಾದ ಕೆಲಸಗಳು ಮತ್ತು ಟಿಪ್ಪಣಿಗಳನ್ನು ತಿದ್ದಿ ಬರೆಯುತ್ತದೆ. ಈ ಕ್ರಿಯೆಯನ್ನು ರದ್ದುಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.",
     import_failed: "ಡೇಟಾವನ್ನು ಆಮದು ಮಾಡಲು ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಫೈಲ್ ಫಾರ್ಮ್ಯಾಟ್ ಪರಿಶೀಲಿಸಿ.",
     use_analog_clock_2: "ಅನಲಾಗ್ ಗಡಿಯಾರ 2 ಬಳಸಿ",
+    wallpaper_type: "ವಾಲ್ಪೇಪರ್ ಪ್ರಕಾರ",
+    dynamic_theme: "ಡೈನಾಮಿಕ್ ಥೀಮ್",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -495,6 +499,8 @@ export const translation = {
     import_confirm: "Opravdu chcete importovat data? Tím se přepíší vaše aktuální nastavení, úkoly a poznámky. Tuto akci nelze vrátit zpět.",
     import_failed: "Import dat se nezdařil. Zkontrolujte prosím formát souboru.",
     use_analog_clock_2: "Použít analogové hodiny 2",
+    wallpaper_type: "Typ tapety",
+    dynamic_theme: "Dynamické téma",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -662,6 +668,8 @@ export const translation = {
     import_confirm: "Verileri içe aktarmak istediğinizden emin misiniz? Bu işlem mevcut ayarlarınızın, yapılacaklar listenizin ve notlarınızın üzerine yazacaktır. Bu işlem geri alınamaz.",
     import_failed: "Veriler içe aktarılamadı. Lütfen dosya formatını kontrol edin.",
     use_analog_clock_2: "Analog Saat 2'yi Kullan",
+    wallpaper_type: "Duvar Kağıdı Türü",
+    dynamic_theme: "Dinamik Tema",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -798,6 +806,8 @@ export const translation = {
 
     delete_bookmark: "Xóa dấu trang",
     delete_bookmark_confirm: "Bạn có chắc là bạn muốn xóa dấu trang này? ",
+    wallpaper_type: "Loại hình nền",
+    dynamic_theme: "Chủ đề động",
     delete: "Xóa bỏ",
     keep: "Giữ",
     use_analog_clock_2: "Sử dụng Đồng hồ Analog 2",
@@ -995,6 +1005,8 @@ export const translation = {
     import_confirm: "Ma'lumotlarni import qilmoqchimisiz? Bu sizning joriy sozlamalaringiz, vazifalar va eslatmalaringizni ustidan yozadi. Bu amalni bekor qilib bo'lmaydi.",
     import_failed: "Ma'lumotlarni import qilib bo'lmadi. Iltimos, fayl formatini tekshiring.",
     use_analog_clock_2: "Analog soat 2 dan foydalaning",
+    wallpaper_type: "Fon turi",
+    dynamic_theme: "Dinamik mavzu",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -1156,6 +1168,8 @@ export const translation = {
     import_confirm: "您确定要导入数据吗？这将覆盖您当前的设置、待办事项和便签。此操作无法撤消。",
     import_failed: "导入数据失败。请检查文件格式。",
     use_analog_clock_2: "使用模拟时钟 2",
+    wallpaper_type: "壁纸类型",
+    dynamic_theme: "动态主题",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -1308,7 +1322,7 @@ export const translation = {
     google_account: "गूगल खाता",
     show_calendar_events: "कैलेंडर ईवेंट दिखाएँ",
     show_calendar_events_description:
-      "एक बार सक्षम होने पर, अगले 30 दिनों के लिए आगामी घटनाओं को विस्तारित करने और देखने के लिए कैलेंडर पर होवर करें",
+      "एक बार सक्षम होने पर, कलेंडर को विस्तारित करने और अगले 30 दिनों के लिए आगामी घटनाओं को देखने के लिए कैलेंडर पर होवर करें",
     no_events_today: "आज कोई कार्यक्रम नहीं",
     all_day: "पूरे दिन",
     backup_and_restore: "बैकअप और पुनर्स्थापना",
@@ -1322,6 +1336,8 @@ export const translation = {
     import_confirm: "क्या आप वाकई डेटा आयात करना चाहते हैं? यह आपकी वर्तमान सेटिंग्स, कार्यों और नोट्स को अधिलेखित कर देगा। इस कार्रवाई को पूर्ववत नहीं किया जा सकता है।",
     import_failed: "डेटा आयात करने में विफल। कृपया फ़ाइल प्रारूप की जाँच करें।",
     use_analog_clock_2: "एनालॉग क्लॉक 2 का उपयोग करें",
+    wallpaper_type: "वॉलपेपर प्रकार",
+    dynamic_theme: "गतिशील थीम",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1490,6 +1506,8 @@ export const translation = {
     import_confirm: "Sei sicuro di voler importare i dati? Questo sovrascriverà le tue impostazioni correnti, le cose da fare e le note. Questa azione non può essere annullata.",
     import_failed: "Impossibile importare i dati. Controlla il formato del file.",
     use_analog_clock_2: "Usa l'orologio analogico 2",
+    wallpaper_type: "Tipo di sfondo",
+    dynamic_theme: "Tema dinamico",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -1543,7 +1561,7 @@ export const translation = {
     nov: "নভেম্বর",
     dec: "ডিসেম্বর",
     sunday: "রবিবার",
-    monday: "সোমবার",
+    monday: "সোমबार",
     tuesday: "মঙ্গলবার",
     wednesday: "বুধবার",
     thursday: "বৃহস্পতিবার",
@@ -1656,6 +1674,8 @@ export const translation = {
     import_confirm: "আপনি কি নিশ্চিত যে আপনি ডেটা আমদানি করতে চান? এটি আপনার বর্তমান সেটিংস, করণীয় এবং নোটগুলিকে ওভাররাইট করবে। এই ক্রিয়াটি পূর্বাবস্থায় ফিরিয়ে আনা যাবে না।",
     import_failed: "ডেটা আমদানি করতে ব্যর্থ হয়েছে। অনুগ্রহ করে ফাইল বিন্যাস পরীক্ষা করুন।",
     use_analog_clock_2: "অ্যানালগ ঘড়ি 2 ব্যবহার করুন",
+    wallpaper_type: "ওয়ালপেপার প্রকার",
+    dynamic_theme: "ডায়নামিক থিম",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -1824,6 +1844,8 @@ export const translation = {
     import_confirm: "Tem certeza de que deseja importar dados? Isso substituirá suas configurações atuais, tarefas e notas. Esta ação não pode ser desfeita.",
     import_failed: "Falha ao importar dados. Verifique o formato do arquivo.",
     use_analog_clock_2: "Use Relógio Analógico 2",
+    wallpaper_type: "Tipo de papel de parede",
+    dynamic_theme: "Tema Dinâmico",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -1991,6 +2013,8 @@ export const translation = {
     import_confirm: "Êtes-vous sûr de vouloir importer des données ? Cela écrasera vos paramètres, tâches et notes actuels. Cette action est irréversible.",
     import_failed: "Échec de l'importation des données. Veuillez vérifier le format du fichier.",
     use_analog_clock_2: "Utiliser l'horloge analogique 2",
+    wallpaper_type: "Type de papier peint",
+    dynamic_theme: "Thème dynamique",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -2157,6 +2181,8 @@ export const translation = {
     import_confirm: "Вы уверены, что хотите импортировать данные? Это перезапишет ваши текущие настройки, задачи и заметки. Это действие нельзя отменить.",
     import_failed: "Не удалось импортировать данные. Пожалуйста, проверьте формат файла.",
     use_analog_clock_2: "Использовать аналоговые часы 2",
+    wallpaper_type: "Тип обоев",
+    dynamic_theme: "Динамичная тема",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -2324,6 +2350,8 @@ export const translation = {
     import_confirm: "¿Está seguro de que desea importar datos? Esto sobrescribirá su configuración actual, tareas y notas. Esta acción no se puede deshacer.",
     import_failed: "Error al importar datos. Por favor verifique el formato del archivo.",
     use_analog_clock_2: "Usar reloj analógico 2",
+    wallpaper_type: "Tipo de fondo de pantalla",
+    dynamic_theme: "Tema dinámico",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -2488,6 +2516,8 @@ export const translation = {
     import_confirm: "データをインポートしてもよろしいですか？これにより、現在の設定、ToDo、メモが上書きされます。この操作は元に戻せません。",
     import_failed: "データのインポートに失敗しました。ファイル形式を確認してください。",
     use_analog_clock_2: "アナログ時計2を使用する",
+    wallpaper_type: "壁紙タイプ",
+    dynamic_theme: "ダイナミックなテーマ",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -2651,6 +2681,8 @@ export const translation = {
     import_confirm: "데이터를 가져오시겠습니까? 현재 설정, 할 일 및 메모를 덮어씁니다. 이 작업은 취소할 수 없습니다.",
     import_failed: "데이터를 가져오지 못했습니다. 파일 형식을 확인하십시오.",
     use_analog_clock_2: "아날로그 시계 2 사용",
+    wallpaper_type: "배경 화면 유형",
+    dynamic_theme: "동적 테마",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -2816,6 +2848,8 @@ export const translation = {
     import_confirm: "Apakah Anda yakin ingin mengimpor data? Ini akan menimpa pengaturan, tugas, dan catatan Anda saat ini. Tindakan ini tidak dapat dibatalkan.",
     import_failed: "Gagal mengimpor data. Silakan periksa format file.",
     use_analog_clock_2: "Gunakan Jam Analog 2",
+    wallpaper_type: "Jenis wallpaper",
+    dynamic_theme: "Tema dinamis",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -2981,6 +3015,8 @@ export const translation = {
     import_confirm: "तुम्हाला खात्री आहे की तुम्ही डेटा आयात करू इच्छिता? हे तुमच्या वर्तमान सेटिंग्ज, कार्ये आणि नोट्स ओव्हरराईट करेल. ही क्रिया पूर्ववत केली जाऊ शकत नाही.",
     import_failed: "डेटा आयात करण्यात अयशस्वी. कृपया फाइल फॉरमॅट तपासा.",
     use_analog_clock_2: "अॅनालॉग घड्याळ 2 वापरा",
+    wallpaper_type: "वॉलपेपर प्रकार",
+    dynamic_theme: "डायनॅमिक थीम",
   },
 };
 
