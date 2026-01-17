@@ -55,7 +55,7 @@ const App = function App() {
 
   useEffect(() => {
     const defaultSearchEngine = localStorage.getItem(
-      SEARCH_ENGINE_LOCAL_STORAGE_KEY
+      SEARCH_ENGINE_LOCAL_STORAGE_KEY,
     );
 
     if (defaultSearchEngine && searchEngineKeys.includes(defaultSearchEngine)) {
@@ -78,7 +78,7 @@ const App = function App() {
           }
         : {}),
     }),
-    [backgroundImage, wallpaperType]
+    [backgroundImage, wallpaperType],
   );
 
   const greeting = useMemo(() => {
@@ -110,7 +110,7 @@ const App = function App() {
       {wallpaperType === "dynamic" && (
         <DynamicWallpaper theme={dynamicWallpaperTheme} />
       )}
-      {wallpaperBlur !== 0 && (
+      {wallpaperType !== "dynamic" && wallpaperBlur !== 0 && (
         <div
           className="wallpaper-blur-container"
           style={{ backdropFilter: `blur(${wallpaperBlur}px)` }}
