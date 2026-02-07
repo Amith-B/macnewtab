@@ -32,6 +32,8 @@ export default memo(function Dock() {
     setTodoListVisbility,
     showStickyNotes,
     setShowStickyNotes,
+    showFocusMode,
+    setShowFocusMode,
   } = useContext(AppContext);
   const [currentDockSites, setCurrentDockSites] = useState(dockBarSites);
 
@@ -65,8 +67,8 @@ export default memo(function Dock() {
     setChangesActive(false);
     handleDockSitesChange(
       currentDockSites.filter(
-        ({ title, url }) => !!url.trim() && !!title.trim()
-      )
+        ({ title, url }) => !!url.trim() && !!title.trim(),
+      ),
     );
   };
 
@@ -79,7 +81,7 @@ export default memo(function Dock() {
 
   const handleDelete = (idx: number) => () => {
     const updatedDockSites = currentDockSites.filter(
-      (_, index) => index !== idx
+      (_, index) => index !== idx,
     );
     setCurrentDockSites(updatedDockSites);
     setChangesActive(true);
@@ -87,7 +89,7 @@ export default memo(function Dock() {
 
   const handleFileUpload = async (
     e: ChangeEvent<HTMLInputElement>,
-    idx: number
+    idx: number,
   ) => {
     if (!e.target.files || !e.target.files[0]) return;
     const file = e.target.files[0];
@@ -98,7 +100,7 @@ export default memo(function Dock() {
         const item = currentDockSites[idx];
         await saveImageToIndexedDB(
           reader.result as string,
-          `dock_icon_${item.id}`
+          `dock_icon_${item.id}`,
         );
 
         const updatedDockSites = [...currentDockSites];
@@ -129,7 +131,7 @@ export default memo(function Dock() {
   const handleInput = (
     e: ChangeEvent<HTMLInputElement>,
     key: "title" | "url",
-    idx?: number
+    idx?: number,
   ) => {
     setChangesActive(true);
     const updatedDockSites = currentDockSites.map((item, index) => {
@@ -171,6 +173,15 @@ export default memo(function Dock() {
           handleToggleChange={() => setShowStickyNotes(!showStickyNotes)}
         />
       </div>
+      <div className="focus-mode-dock__toggle">
+        <Translation value="show_focus_mode" />
+        <Toggle
+          id={"focus-mode-toggle"}
+          name="Focus mode toggle"
+          isChecked={showFocusMode}
+          handleToggleChange={() => setShowFocusMode(!showFocusMode)}
+        />
+      </div>
       <div
         className={
           "dock-links__position" + (!currentDockSites.length ? " disabled" : "")
@@ -209,7 +220,7 @@ export default memo(function Dock() {
             values={currentDockSites}
             onChange={({ oldIndex, newIndex }) => {
               setCurrentDockSites(
-                arrayMove(currentDockSites, oldIndex, newIndex)
+                arrayMove(currentDockSites, oldIndex, newIndex),
               );
               setChangesActive(true);
             }}

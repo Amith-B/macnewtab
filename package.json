@@ -1,6 +1,6 @@
 {
   "name": "macnewtab",
-  "version": "1.40.0",
+  "version": "1.40.1",
   "private": true,
   "dependencies": {
     "@types/jest": "^27.0.1",
