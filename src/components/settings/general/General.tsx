@@ -30,6 +30,8 @@ const General = memo(function General() {
     dockBarSites,
     useAnalogClock2,
     setUseAnalogClock2,
+    showFocusMode,
+    setShowFocusMode,
   } = useContext(AppContext);
 
   const selectedLanguageDetails = useMemo(() => {
@@ -127,6 +129,16 @@ const General = memo(function General() {
           name="Tab manager toggle"
           isChecked={showTabManager}
           handleToggleChange={() => setShowTabManager(!showTabManager)}
+        />
+      </div>
+
+      <div className="general__row-item">
+        <Translation value="show_focus_mode" />
+        <Toggle
+          id={"focus-mode-toggle"}
+          name="Focus mode toggle"
+          isChecked={showFocusMode}
+          handleToggleChange={() => setShowFocusMode(!showFocusMode)}
         />
       </div>
 

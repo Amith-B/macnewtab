@@ -1,0 +1,296 @@
+.focus-mode-container {
+  position: absolute;
+  width: 320px;
+  background: rgba(40, 40, 40, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 18px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  color: white;
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  top: 100px;
+  left: 100px;
+  user-select: none;
+}
+
+.focus-header {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: grab;
+  justify-content: space-between;
+}
+
+.focus-header:active {
+  cursor: grabbing;
+}
+
+.focus-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.focus-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.timer-display {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-circle-svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.timer-circle-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 8;
+}
+
+.timer-circle-progress {
+  fill: none;
+  stroke: #a855f7;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.timer-text {
+  position: absolute;
+  font-size: 32px;
+  font-weight: 200;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 2px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.timer-input {
+  position: absolute;
+  font-size: 32px;
+  font-weight: 200;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 2px;
+  background: transparent;
+  border: none;
+  color: white;
+  width: 100px;
+  text-align: center;
+  outline: none;
+  font-family: inherit;
+  z-index: 3;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.focus-controls {
+  display: flex;
+  gap: 16px;
+}
+
+.focus-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.focus-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.focus-btn.primary {
+  background: #a855f7;
+  color: white;
+}
+
+.focus-btn.primary:hover {
+  background: #9333ea;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+}
+
+.sound-controls {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sound-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sound-label {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.sound-select-wrapper {
+  position: relative;
+}
+
+.sound-select {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  padding-right: 15px;
+  appearance: none;
+}
+
+.sound-toggle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sound-toggle.active {
+  background: #a855f7;
+}
+
+.task-section {
+  width: 100%;
+  text-align: left;
+}
+.task-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.current-task {
+  font-size: 14px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  border-left: 3px solid #a855f7;
+}
+
+.close-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+
+.close-btn:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.focus-window-manager {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.focus-window-button {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.focus-window-button svg {
+  opacity: 0;
+  width: 7px; /* Smaller icon as requested */
+  height: 7px;
+}
+
+.focus-window-manager:hover .focus-window-button svg {
+  opacity: 1;
+}
+
+.focus-window-close {
+  background-color: #fe5f57;
+}
+
+.focus-window-minimize {
+  background-color: #febc2e;
+}
+
+.focus-window-expand {
+  background-color: #d1d1d1; /* Disabled gray */
+  pointer-events: none;
+  cursor: default;
+}
+
+.add-task-btn {
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.add-task-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.4);
+}

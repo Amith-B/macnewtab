@@ -69,11 +69,9 @@ const ACCOUNT_MENU = {
 export default function Settings({
   open,
   onClose,
-  withinDock,
 }: {
   open: boolean;
   onClose: () => void;
-  withinDock: boolean;
 }) {
   const [selectedMenu, setSelectedMenu] = useState(SETTINGS_MENU[0]);
   const [modalAccessible, setModalAccessible] = useState(false);
@@ -142,10 +140,7 @@ export default function Settings({
       }}
     >
       <div
-        className={
-          `settings__container dock-position-${dockPosition}` +
-          (withinDock ? " within-dock" : "")
-        }
+        className={`settings__container dock-position-${dockPosition} within-dock`}
         onClick={(evt) => evt.stopPropagation()}
         ref={modalRef}
         style={{

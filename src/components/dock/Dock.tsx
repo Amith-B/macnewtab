@@ -12,9 +12,11 @@ import { ReactComponent as LeftArrow } from "../../assets/left-arrow.svg";
 import { ReactComponent as RightArrow } from "../../assets/right-arrow.svg";
 import { ReactComponent as TodoIcon } from "../../assets/todo.svg";
 import { ReactComponent as StickyNotesIcon } from "../../assets/sticky-notes.svg";
+import { ReactComponent as FocusIcon } from "../../assets/focus.svg";
 import Settings from "../settings/Settings";
 import Launchpad from "../launchpad/Launchpad";
 import TodoDialog from "../todo/Todo";
+import FocusMode from "../focus/FocusMode";
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
 import { DockIcon } from "./DockIcon";
@@ -30,6 +32,7 @@ const Dock = memo(() => {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
   const [todoDialogOpen, setTodoDialogOpen] = useState(false);
+  const [focusModeVisible, setFocusModeVisible] = useState(false);
   const [isOverflowLeft, setIsOverflowLeft] = useState(false);
   const [isOverflowRight, setIsOverflowRight] = useState(false);
   const [isOverflowButtonVisible, setIsOverflowButtonVisible] = useState(false);
@@ -39,11 +42,12 @@ const Dock = memo(() => {
     todoListVisbility,
     groupTodosByCheckedStatus,
     showStickyNotes,
+    showFocusMode,
   } = useContext(AppContext);
 
   const handleLaunchpadClose = useCallback(
     () => setLaunchpadVisible(false),
-    []
+    [],
   );
 
   const handleTodoClose = useCallback(() => setTodoDialogOpen(false), []);
@@ -58,7 +62,7 @@ const Dock = memo(() => {
       setIsOverflowButtonVisible(container.clientWidth < container.scrollWidth);
     } else {
       setIsOverflowButtonVisible(
-        container.clientHeight < container.scrollHeight
+        container.clientHeight < container.scrollHeight,
       );
     }
   }, [containerRef, dockPosition]);
@@ -124,15 +128,11 @@ const Dock = memo(() => {
     }
   };
 
-  const showDocBar = !!dockBarSites.length;
+  const hasLinks = !!dockBarSites.length;
 
   return (
     <>
-      <div
-        className={
-          `dock-container ${dockPosition}` + (showDocBar ? " center" : "")
-        }
-      >
+      <div className={`dock-container ${dockPosition} center`}>
         <button
           className={`launchpad-icon accessible tooltip tooltip-${
             TooltipPosition[dockPosition] || "top"
@@ -148,7 +148,7 @@ const Dock = memo(() => {
         {todoListVisbility && (
           <button
             className={`todo-button accessible tooltip tooltip-${
-              TooltipPosition[showDocBar ? dockPosition : "top"] || "top"
+              TooltipPosition[dockPosition] || "top"
             }`}
             data-label="Todo List"
             onClick={() => {
@@ -162,7 +162,7 @@ const Dock = memo(() => {
         {showStickyNotes && (
           <button
             className={`sticky-notes-button accessible tooltip tooltip-${
-              TooltipPosition[showDocBar ? dockPosition : "top"] || "top"
+              TooltipPosition[dockPosition] || "top"
             }`}
             data-label="Add Sticky Note"
             onClick={() => {
@@ -170,6 +170,19 @@ const Dock = memo(() => {
             }}
           >
             <StickyNotesIcon />
+          </button>
+        )}
+        {showFocusMode && (
+          <button
+            className={`focus-button accessible tooltip tooltip-${
+              TooltipPosition[dockPosition] || "top"
+            }`}
+            data-label="Focus Studio"
+            onClick={() => {
+              setFocusModeVisible(!focusModeVisible);
+            }}
+          >
+            <FocusIcon />
           </button>
         )}
         <button
@@ -184,7 +197,7 @@ const Dock = memo(() => {
         >
           <SettingsIcon />
         </button>
-        <div className="dock-divider"></div>
+        {hasLinks && <div className="dock-divider"></div>}
         {isOverflowButtonVisible && (
           <button
             className={
@@ -195,58 +208,60 @@ const Dock = memo(() => {
             <LeftArrow />
           </button>
         )}
-        <div
-          className="dock-links-container"
-          ref={containerRef}
-          onScroll={checkOverflow}
-        >
-          {dockBarSites.map((item) => {
-            let anchorProps = {};
+        {hasLinks && (
+          <div
+            className="dock-links-container"
+            ref={containerRef}
+            onScroll={checkOverflow}
+          >
+            {dockBarSites.map((item) => {
+              let anchorProps = {};
 
-            try {
-              new URL(item.url);
-              anchorProps = {
-                href: item.url,
-                target: "_self",
-              };
-            } catch (error) {
-              if (!/^https?:\/\//i.test(item.url)) {
-                try {
-                  new URL("https://" + item.url);
-                } catch (_) {}
+              try {
+                new URL(item.url);
+                anchorProps = {
+                  href: item.url,
+                  target: "_self",
+                };
+              } catch (error) {
+                if (!/^https?:\/\//i.test(item.url)) {
+                  try {
+                    new URL("https://" + item.url);
+                  } catch (_) {}
+                }
+
+                anchorProps = {
+                  onClick: () => {
+                    if (!chrome?.search?.query) {
+                      return;
+                    }
+                    chrome.search.query({
+                      text: item.url,
+                    });
+                  },
+                };
               }
 
-              anchorProps = {
-                onClick: () => {
-                  if (!chrome?.search?.query) {
-                    return;
-                  }
-                  chrome.search.query({
-                    text: item.url,
-                  });
-                },
-              };
-            }
-
-            return (
-              <a
-                rel="noreferrer"
-                className="dock-site__item with-link"
-                data-label={item.title}
-                title={item.title}
-                key={item.id}
-                {...anchorProps}
-              >
-                <DockIcon
-                  id={item.id}
-                  hasCustomIcon={item.hasCustomIcon}
-                  url={item.url}
+              return (
+                <a
+                  rel="noreferrer"
+                  className="dock-site__item with-link"
+                  data-label={item.title}
                   title={item.title}
-                />
-              </a>
-            );
-          })}
-        </div>
+                  key={item.id}
+                  {...anchorProps}
+                >
+                  <DockIcon
+                    id={item.id}
+                    hasCustomIcon={item.hasCustomIcon}
+                    url={item.url}
+                    title={item.title}
+                  />
+                </a>
+              );
+            })}
+          </div>
+        )}
         {isOverflowButtonVisible && (
           <button
             className={
@@ -259,15 +274,17 @@ const Dock = memo(() => {
         )}
       </div>
       <Settings
-        withinDock={showDocBar}
         open={settingsVisible}
         onClose={() => setSettingsVisible(false)}
       />
       <Launchpad visible={launchpadVisible} onClose={handleLaunchpadClose} />
-      <TodoDialog
-        withinDock={showDocBar}
-        open={todoDialogOpen}
-        onClose={handleTodoClose}
+      <TodoDialog open={todoDialogOpen} onClose={handleTodoClose} />
+      <FocusMode
+        visible={focusModeVisible}
+        onClose={() => setFocusModeVisible(false)}
+        onOpenTodo={() => {
+          setTodoDialogOpen(true);
+        }}
       />
     </>
   );

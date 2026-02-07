@@ -84,7 +84,7 @@ Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and
 - Instantly search through all open tabs, Switch to any tab with a click, Close tabs directly from the list
 - Easily toggle the panel with a subtle notch on the screen’s edge
 
-### 🗓️ Google Calendar Events (New!)
+### 🗓️ Google Calendar Events
 
 - Seamlessly integrates with Google Calendar using Google Sign-In.
 - Displays your upcoming events for the next 30 days directly on the new tab page.
@@ -93,6 +93,14 @@ Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and
 - All authentication and data access happen securely through Google APIs — no user data is stored or shared externally.
 - Optionally toggle this widget on or off from the settings panel for a clutter-free experience.
 
+### 🍅 Focus Studio (New!)
+
+- Stay productive with a built-in **Pomodoro-style timer**.
+- **Ambient Sounds**: Mask distractions with Brown, Pink, White, Violet, and Blue noise generators.
+- **Task Integration**: Link your timer session to a specific task from your To-Do list.
+- **Visual & Audio Alerts**: Get notified with a gentle chime and notification when your session is complete.
+- Customize your focus duration to match your workflow.
+
 ### 💾 Backup & Restore
 
 - Never lose your setup! Easily **export** your settings, to-do lists, sticky notes, and custom wallpapers to a JSON file.
@@ -100,7 +108,7 @@ Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and
 
 ### 🌍 Multi-Language Support
 
-- Supports **15+ languages**, including English, Kannada, Hindi, Spanish, French, and more.
+- Supports **15+ languages**, including English, Kannada, Hindi, Spanish, French, Chinese, Japanese, Korean, and more.
 
 ## 🛠 Installation & Running Locally
 

@@ -14,6 +14,7 @@ import {
   SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY,
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
   USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
+  SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
 import { BOOKMARK_TOGGLE_STORAGE_KEY } from "../static/bookmarks";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
@@ -112,6 +113,8 @@ export const AppContext = createContext({
   handleBookmarkVisbility: (_: boolean) => {},
   showStickyNotes: true,
   setShowStickyNotes: (_: boolean) => {},
+  showFocusMode: true,
+  setShowFocusMode: (_: boolean) => {},
   isWidgetsAwayFromDock: false,
   setIsWidgetsAwayFromDock: (_: boolean) => {},
   googleUser: null as GoogleUser | null,
@@ -139,7 +142,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     "en",
     (val) => {
       return languages.includes(String(val));
-    }
+    },
   );
 
   const [theme, setTheme] = useLocalStorage(
@@ -147,39 +150,39 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     "system",
     (val) => {
       return THEME_KEYS.includes(val);
-    }
+    },
   );
   const [themeColor, setThemeColor] = useLocalStorage(
     THEME_COLOR_LOCAL_STORAGE_KEY,
-    ""
+    "",
   );
   const [showGreeting, setShowGreeeting] = useLocalStorage(
     SHOW_GREETING_LOCAL_STORAGE_KEY,
-    true
+    true,
   );
   const [showClockAndCalendar, setShowClockAndCalendar] = useLocalStorage(
     SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY,
-    true
+    true,
   );
   const [showTabManager, setShowTabManager] = useLocalStorage(
     SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY,
-    true
+    true,
   );
   const [showVisitedSites, setShowVisitedSites] = useLocalStorage(
     SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
-    true
+    true,
   );
   const [separatePageSite, setSeparatePageSite] = useLocalStorage(
     SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY,
-    false
+    false,
   );
   const [showSearchEngines, setShowSearchEngines] = useLocalStorage(
     SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY,
-    true
+    true,
   );
   const [showMonthView, setShowMonthView] = useLocalStorage(
     SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY,
-    false
+    false,
   );
   const [dockBarSites, setDockBarSites] = useState<DockBarSites>([]);
 
@@ -188,43 +191,48 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     "bottom",
     (val) => {
       return dockPositionsList.includes(val || "");
-    }
+    },
   );
   const [todoList, setTodoList] = useState<TodoList>([]);
 
   const [todoListVisbility, setTodoListVisbility] = useLocalStorage(
     TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY,
-    true
+    true,
   );
   const [bookmarksVisible, setBookmarksVisible] = useLocalStorage(
     BOOKMARK_TOGGLE_STORAGE_KEY,
-    false
+    false,
   );
   const [showStickyNotes, setShowStickyNotes] = useLocalStorage(
     SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
-    true
+    true,
+  );
+
+  const [showFocusMode, setShowFocusMode] = useLocalStorage(
+    SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
+    true,
   );
 
   const [isWidgetsAwayFromDock, setIsWidgetsAwayFromDock] = useLocalStorage(
     CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY,
-    false
+    false,
   );
 
   const [googleUser, setGoogleUser] = useState<GoogleUser | null>(null);
   const [googleAuthToken, setGoogleAuthToken] = useState("");
   const [showGoogleCalendar, setShowGoogleCalendar] = useLocalStorage(
     SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
-    true
+    true,
   );
 
   const [useAnalogClock2, setUseAnalogClock2] = useLocalStorage(
     USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
-    false
+    false,
   );
 
   const [wallpaperType, setWallpaperType] = useLocalStorage(
     WALLPAPER_TYPE_LOCAL_STORAGE_KEY,
-    "image"
+    "image",
   );
 
   const [dynamicWallpaperTheme, setDynamicWallpaperTheme] = useLocalStorage(
@@ -232,19 +240,19 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     "sunset",
     (val) => {
       return DynamicWallpaperThemes.some((item) => item.value === val);
-    }
+    },
   );
 
   const [calendarEvents, setCalendarEvents] = useLocalStorage(
     GOOGLE_CALENDAR_EVENTS_LOCAL_STORAGE_KEY,
     [] as GoogleCalendarEvent[],
-    (val) => Array.isArray(val)
+    (val) => Array.isArray(val),
   );
 
   useEffect(() => {
     const getList = () => {
       const request = getLocalstorageDataWithPromise(
-        TODO_LIST_LOCAL_STORAGE_KEY
+        TODO_LIST_LOCAL_STORAGE_KEY,
       );
 
       request.then((todoList: string | null) => {
@@ -296,7 +304,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     handleLoadWallpaper();
 
     const wallpaperBlurValue = parseInt(
-      localStorage.getItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY) || "0"
+      localStorage.getItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY) || "0",
     );
 
     setWallpaperBlur(
@@ -304,12 +312,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         wallpaperBlurValue <= 50 &&
         wallpaperBlurValue >= 0
         ? wallpaperBlurValue
-        : 0
+        : 0,
     );
 
     try {
       const storedDockSites = localStorage.getItem(
-        DOCK_SITES_LOCAL_STORAGE_KEY
+        DOCK_SITES_LOCAL_STORAGE_KEY,
       );
 
       if (storedDockSites) {
@@ -360,7 +368,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
   const handleClearCompletedTodoList = () => {
     const todoSavedDate = localStorage.getItem(
-      TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY
+      TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
     );
 
     const currentDate = new Date();
@@ -377,7 +385,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
     localStorage.setItem(
       TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
-      formatedCurrentDate
+      formatedCurrentDate,
     );
   };
 
@@ -469,12 +477,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const handleBookmarkVisbility = async (val: boolean) => {
     if (val) {
       const hasBookmarkPermission = await new Promise((resolve) =>
-        chrome.permissions.contains({ permissions: ["bookmarks"] }, resolve)
+        chrome.permissions.contains({ permissions: ["bookmarks"] }, resolve),
       );
 
       if (!hasBookmarkPermission) {
         const permissionGranted = await new Promise((resolve) =>
-          chrome.permissions.request({ permissions: ["bookmarks"] }, resolve)
+          chrome.permissions.request({ permissions: ["bookmarks"] }, resolve),
         );
 
         if (!permissionGranted) {
@@ -500,7 +508,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
       localStorage.setItem(
         GOOGLE_USER_LOCAL_STORAGE_KEY,
-        JSON.stringify(userProfile)
+        JSON.stringify(userProfile),
       );
     } catch (error) {
       console.error("Google sign in failed:", error);
@@ -570,6 +578,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleBookmarkVisbility,
         showStickyNotes,
         setShowStickyNotes,
+        showFocusMode,
+        setShowFocusMode,
         isWidgetsAwayFromDock,
         setIsWidgetsAwayFromDock,
         googleUser,

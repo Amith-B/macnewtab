@@ -11,11 +11,9 @@ import { arrayMove, List } from "react-movable";
 export default function TodoDialog({
   open,
   onClose,
-  withinDock,
 }: {
   open: boolean;
   onClose: () => void;
-  withinDock: boolean;
 }) {
   const [modalAccessible, setModalAccessible] = useState(false);
   const [todoInput, setTodoInput] = useState("");
@@ -117,10 +115,7 @@ export default function TodoDialog({
       onClick={onClose}
     >
       <div
-        className={
-          `todo-dialog__container dock-position-${dockPosition}` +
-          (withinDock ? " within-dock" : "")
-        }
+        className={`todo-dialog__container dock-position-${dockPosition} within-dock`}
         onClick={(evt) => evt.stopPropagation()}
         ref={modalRef}
         style={{
