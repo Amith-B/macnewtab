@@ -49,6 +49,10 @@ import {
   DynamicWallpaperThemes,
 } from "../static/dynamicWallpaper";
 import {
+  INTERACTIVE_WALLPAPER_THEME_LOCAL_STORAGE_KEY,
+  InteractiveWallpaperThemes,
+} from "../static/interactiveThemes";
+import {
   GoogleUser,
   getGoogleAuthToken,
   removeGoogleAuthToken,
@@ -131,6 +135,8 @@ export const AppContext = createContext({
   setWallpaperType: (_: string) => {},
   dynamicWallpaperTheme: "aurora",
   setDynamicWallpaperTheme: (_: string) => {},
+  interactiveWallpaperTheme: "particles",
+  setInteractiveWallpaperTheme: (_: string) => {},
 });
 
 export default function AppProvider({ children }: { children: ReactNode }) {
@@ -242,6 +248,15 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       return DynamicWallpaperThemes.some((item) => item.value === val);
     },
   );
+
+  const [interactiveWallpaperTheme, setInteractiveWallpaperTheme] =
+    useLocalStorage(
+      INTERACTIVE_WALLPAPER_THEME_LOCAL_STORAGE_KEY,
+      "particles",
+      (val) => {
+        return InteractiveWallpaperThemes.some((item) => item.value === val);
+      },
+    );
 
   const [calendarEvents, setCalendarEvents] = useLocalStorage(
     GOOGLE_CALENDAR_EVENTS_LOCAL_STORAGE_KEY,
@@ -596,6 +611,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         setWallpaperType,
         dynamicWallpaperTheme,
         setDynamicWallpaperTheme,
+        interactiveWallpaperTheme,
+        setInteractiveWallpaperTheme,
       }}
     >
       {children}

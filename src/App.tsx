@@ -17,6 +17,7 @@ import Dock from "./components/dock/Dock";
 import TabManager from "./components/tab-manager/TabManager";
 import StickyNotes from "./components/sticky-notes/StickyNotes";
 import DynamicWallpaper from "./components/wallpaper/DynamicWallpaper";
+import InteractiveWallpaper from "./components/wallpaper/InteractiveWallpaper";
 
 const App = function App() {
   const [searchEngine, setSearchEngine] = useState("");
@@ -41,6 +42,7 @@ const App = function App() {
     useAnalogClock2,
     wallpaperType,
     dynamicWallpaperTheme,
+    interactiveWallpaperTheme,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -102,7 +104,8 @@ const App = function App() {
       className={
         `App theme-${themeColor || theme}` +
         (backgroundImage ? " has-bg" : "") +
-        (wallpaperType === "dynamic" ? " has-dynamic-bg" : "")
+        (wallpaperType === "dynamic" ? " has-dynamic-bg" : "") +
+        (wallpaperType === "interactive" ? " has-interactive-bg" : "")
       }
       style={bgStyle}
       lang={locale}
@@ -110,12 +113,17 @@ const App = function App() {
       {wallpaperType === "dynamic" && (
         <DynamicWallpaper theme={dynamicWallpaperTheme} />
       )}
-      {wallpaperType !== "dynamic" && wallpaperBlur !== 0 && (
-        <div
-          className="wallpaper-blur-container"
-          style={{ backdropFilter: `blur(${wallpaperBlur}px)` }}
-        ></div>
+      {wallpaperType === "interactive" && (
+        <InteractiveWallpaper theme={interactiveWallpaperTheme} />
       )}
+      {wallpaperType !== "dynamic" &&
+        wallpaperType !== "interactive" &&
+        wallpaperBlur !== 0 && (
+          <div
+            className="wallpaper-blur-container"
+            style={{ backdropFilter: `blur(${wallpaperBlur}px)` }}
+          ></div>
+        )}
       <div
         className={
           "main-content" +

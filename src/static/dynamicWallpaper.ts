@@ -9,7 +9,6 @@ export const DynamicWallpaperThemes = [
     { value: "matrix", label: "Digital Rain" },
     { value: "particles", label: "Particles" },
     { value: "waves", label: "Waves" },
-    { value: "space-globes", label: "Space Globes" },
 
 
     // Nature

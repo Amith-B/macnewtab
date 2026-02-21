@@ -8,7 +8,6 @@ import GridTheme from "./themes/GridTheme";
 import MatrixTheme from "./themes/MatrixTheme";
 import ParticlesTheme from "./themes/ParticlesTheme";
 import WavesTheme from "./themes/WavesTheme";
-import SpaceGlobesTheme from "./themes/SpaceGlobesTheme";
 // New (Nature)
 import CircuitTwoTheme from "./themes/CircuitTwoTheme";
 import SnowTheme from "./themes/SnowTheme";
@@ -50,8 +49,6 @@ const DynamicWallpaper: React.FC<DynamicWallpaperProps> = memo(({ theme }) => {
         return <ParticlesTheme />;
       case "waves":
         return <WavesTheme />;
-      case "space-globes":
-        return <SpaceGlobesTheme />;
 
       // Nature
       case "circuit-2":

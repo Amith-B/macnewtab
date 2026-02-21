@@ -8,6 +8,7 @@ import { WALLPAPER_LIST } from "../../../static/wallpapers";
 import Slider from "../../slider/Slider";
 import { Select } from "../../select/Select";
 import { DynamicWallpaperThemes } from "../../../static/dynamicWallpaper";
+import { InteractiveWallpaperThemes } from "../../../static/interactiveThemes";
 
 const FILE_SIZE_WARNING = 10;
 
@@ -25,6 +26,8 @@ export default function Appearance() {
     setWallpaperType,
     dynamicWallpaperTheme,
     setDynamicWallpaperTheme,
+    interactiveWallpaperTheme,
+    setInteractiveWallpaperTheme,
   } = useContext(AppContext);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +36,7 @@ export default function Appearance() {
 
     if (selectedFile.size > FILE_SIZE_WARNING * 1024 * 1024) {
       alert(
-        `Warning: The image is too large! This may slow down the loading of your new tab. To ensure smooth performance, please upload an image or GIF smaller than ${FILE_SIZE_WARNING} MB.`
+        `Warning: The image is too large! This may slow down the loading of your new tab. To ensure smooth performance, please upload an image or GIF smaller than ${FILE_SIZE_WARNING} MB.`,
       );
     }
 
@@ -114,6 +117,7 @@ export default function Appearance() {
           options={[
             { value: "image", label: "Image" },
             { value: "dynamic", label: "Dynamic" },
+            { value: "interactive", label: "Interactive" },
           ]}
           value={wallpaperType}
           onChange={(event) => setWallpaperType(event.target.value)}
@@ -129,6 +133,19 @@ export default function Appearance() {
             options={DynamicWallpaperThemes}
             value={dynamicWallpaperTheme}
             onChange={(event) => setDynamicWallpaperTheme(event.target.value)}
+          />
+        </div>
+      ) : wallpaperType === "interactive" ? (
+        <div className="appearance__dynamic-theme-container">
+          <Translation value="interactive_theme" />
+          <Select
+            id="interactive-theme-select"
+            name="Interactive theme select"
+            options={InteractiveWallpaperThemes}
+            value={interactiveWallpaperTheme}
+            onChange={(event) =>
+              setInteractiveWallpaperTheme(event.target.value)
+            }
           />
         </div>
       ) : (
