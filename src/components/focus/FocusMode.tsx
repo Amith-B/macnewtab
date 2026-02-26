@@ -16,8 +16,18 @@ const FocusMode: React.FC<{
     const saved = localStorage.getItem("focus_duration");
     return saved ? parseInt(saved) : DEFAULT_DURATION;
   });
-  const [timeLeft, setTimeLeft] = useState(duration);
-  const [isActive, setIsActive] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const saved = localStorage.getItem("focus_timeLeft");
+    if (saved) {
+      return parseInt(saved);
+    }
+    const savedDuration = localStorage.getItem("focus_duration");
+    return savedDuration ? parseInt(savedDuration) : DEFAULT_DURATION;
+  });
+  const [isActive, setIsActive] = useState(() => {
+    const saved = localStorage.getItem("focus_isActive");
+    return saved ? JSON.parse(saved) : false;
+  });
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState("25");
 
@@ -41,6 +51,16 @@ const FocusMode: React.FC<{
   const currentTask =
     todoList.find((task) => !task.checked)?.content ||
     translation[locale].no_active_tasks;
+
+  // Persist timeLeft to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("focus_timeLeft", timeLeft.toString());
+  }, [timeLeft]);
+
+  // Persist isActive to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("focus_isActive", JSON.stringify(isActive));
+  }, [isActive]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
