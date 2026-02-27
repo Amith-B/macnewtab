@@ -52,15 +52,55 @@ const FocusMode: React.FC<{
     todoList.find((task) => !task.checked)?.content ||
     translation[locale].no_active_tasks;
 
-  // Persist timeLeft to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem("focus_timeLeft", timeLeft.toString());
-  }, [timeLeft]);
-
   // Persist isActive to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("focus_isActive", JSON.stringify(isActive));
   }, [isActive]);
+
+  // Listen for storage changes to sync across tabs
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "focus_timeLeft" && e.newValue) {
+        setTimeLeft(parseInt(e.newValue));
+      }
+
+      if (e.key === "focus_duration" && e.newValue) {
+        setDuration(parseInt(e.newValue));
+      }
+      if (e.key === "focus_isActive" && e.newValue) {
+        const newIsActive = JSON.parse(e.newValue);
+        setIsActive(newIsActive);
+        if (!newIsActive) {
+          // Timer paused on another tab, so update timeLeft from storage
+          const savedTimeLeft = localStorage.getItem("focus_timeLeft");
+          if (savedTimeLeft) {
+            setTimeLeft(parseInt(savedTimeLeft));
+          }
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && isActive) {
+        // Tab is hidden and timer is active, save current time
+        localStorage.setItem("focus_timeLeft", timeLeft.toString());
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [isActive, timeLeft]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -78,10 +118,18 @@ const FocusMode: React.FC<{
     return () => clearInterval(interval);
   }, [isActive, timeLeft]);
 
-  const toggleTimer = () => setIsActive(!isActive);
+  const toggleTimer = () => {
+    if (isActive) {
+      // about to pause
+      localStorage.setItem("focus_timeLeft", timeLeft.toString());
+    }
+    setIsActive(!isActive);
+  };
+
   const resetTimer = () => {
     setIsActive(false);
     setTimeLeft(duration);
+    localStorage.setItem("focus_timeLeft", duration.toString());
   };
 
   const handleTimeClick = () => {
@@ -107,6 +155,7 @@ const FocusMode: React.FC<{
     setDuration(newDuration);
     setTimeLeft(newDuration);
     localStorage.setItem("focus_duration", newDuration.toString());
+    localStorage.setItem("focus_timeLeft", newDuration.toString());
   };
 
   const handleTimeKeyDown = (e: React.KeyboardEvent) => {
@@ -224,6 +273,7 @@ const FocusMode: React.FC<{
   const handleFullClose = () => {
     setIsActive(false);
     setTimeLeft(duration);
+    localStorage.setItem("focus_timeLeft", duration.toString());
 
     // Stop sound
     if (soundEnabled) {
