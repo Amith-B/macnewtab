@@ -14,6 +14,9 @@ export const searchEngineList = [
         window.location.href = url;
       } else {
         if (!chrome?.search?.query) {
+          window.location.href = `https://www.google.com/search?q=${encodeURIComponent(
+            text
+          )}`;
           return;
         }
 

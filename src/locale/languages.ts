@@ -72,7 +72,7 @@ export const translation = {
 
     search: "Search",
 
-    browser_search_engine: "Browser Default Search Engine",
+    browser_search_engine: "Browser",
 
     choose_wallpaper: "Choose Wallpaper",
 
