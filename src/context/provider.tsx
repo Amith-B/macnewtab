@@ -65,6 +65,11 @@ import {
   InteractiveWallpaperThemes,
 } from "../static/interactiveThemes";
 import {
+  QUICK_LINKS_MODE_LOCAL_STORAGE_KEY,
+  QUICK_LINKS_LOCAL_STORAGE_KEY,
+  QuickLinksMode,
+} from "../static/quickLinksSettings";
+import {
   GoogleUser,
   getGoogleAuthToken,
   removeGoogleAuthToken,
@@ -87,6 +92,7 @@ type DockBarSites = Array<{
   id: string;
   hasCustomIcon?: boolean;
 }>;
+type QuickLinksSites = DockBarSites;
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
 
 export const AppContext = createContext({
@@ -152,6 +158,10 @@ export const AppContext = createContext({
   setDynamicWallpaperTheme: (_: string) => {},
   interactiveWallpaperTheme: "particles",
   setInteractiveWallpaperTheme: (_: string) => {},
+  quickLinksMode: "default" as QuickLinksMode,
+  setQuickLinksMode: (_: QuickLinksMode) => {},
+  quickLinks: [] as QuickLinksSites,
+  handleQuickLinksChange: (_: QuickLinksSites) => {},
   showWeather: true,
   setShowWeather: (_: boolean) => {},
   weatherTempUnit: "celsius",
@@ -286,6 +296,14 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       return DynamicWallpaperThemes.some((item) => item.value === val);
     },
   );
+
+  const [quickLinksMode, setQuickLinksMode] = useLocalStorage<QuickLinksMode>(
+    QUICK_LINKS_MODE_LOCAL_STORAGE_KEY,
+    "default",
+    (val) => val === "default" || val === "custom",
+  );
+
+  const [quickLinks, setQuickLinks] = useState<QuickLinksSites>([]);
 
   const [interactiveWallpaperTheme, setInteractiveWallpaperTheme] =
     useLocalStorage(
@@ -508,6 +526,27 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     );
 
     try {
+      const storedQuickLinks = localStorage.getItem(
+        QUICK_LINKS_LOCAL_STORAGE_KEY,
+      );
+
+      if (storedQuickLinks) {
+        let parsedQuickLinks = JSON.parse(storedQuickLinks) as QuickLinksSites;
+
+        parsedQuickLinks = parsedQuickLinks.map((item) => ({
+          ...item,
+          id: item.id || generateRandomId(),
+        }));
+
+        if (Array.isArray(parsedQuickLinks)) {
+          setQuickLinks(parsedQuickLinks);
+        }
+      }
+    } catch (_) {
+      setQuickLinks([]);
+    }
+
+    try {
       const storedDockSites = localStorage.getItem(
         DOCK_SITES_LOCAL_STORAGE_KEY,
       );
@@ -666,6 +705,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setDockBarSites(val);
   };
 
+  const handleQuickLinksChange = (val: QuickLinksSites) => {
+    localStorage.setItem(QUICK_LINKS_LOCAL_STORAGE_KEY, JSON.stringify(val));
+    setQuickLinks(val);
+  };
+
   const handleBookmarkVisbility = async (val: boolean) => {
     if (val) {
       const hasBookmarkPermission = await new Promise((resolve) =>
@@ -790,6 +834,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         setDynamicWallpaperTheme,
         interactiveWallpaperTheme,
         setInteractiveWallpaperTheme,
+        quickLinksMode,
+        setQuickLinksMode,
+        quickLinks,
+        handleQuickLinksChange,
         showWeather,
         setShowWeather,
         weatherTempUnit,

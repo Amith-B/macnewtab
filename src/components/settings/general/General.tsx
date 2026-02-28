@@ -10,10 +10,6 @@ const General = memo(function General() {
   const {
     showGreeting,
     setShowGreeeting,
-    showVisitedSites,
-    setShowVisitedSites,
-    separatePageSite,
-    setSeparatePageSite,
     showSearchEngines,
     setShowSearchEngines,
     showMonthView,
@@ -50,26 +46,6 @@ const General = memo(function General() {
           name="greeting toggle"
           isChecked={showGreeting}
           handleToggleChange={() => setShowGreeeting(!showGreeting)}
-        />
-      </div>
-      <div className="general__row-item">
-        <Translation value="show_top_visited_sites" />
-        <Toggle
-          id={"visit-toggle"}
-          name="Visited sites toggle"
-          isChecked={showVisitedSites}
-          handleToggleChange={() => setShowVisitedSites(!showVisitedSites)}
-        />
-      </div>
-      <div
-        className={"general__row-item" + (!showVisitedSites ? " disabled" : "")}
-      >
-        <Translation value="open_visited_sites_on_separate_page" />
-        <Toggle
-          id={"separate-page-toggle"}
-          name="Separate page on link click toggle"
-          isChecked={separatePageSite}
-          handleToggleChange={() => setSeparatePageSite(!separatePageSite)}
         />
       </div>
       <div className="general__row-item">

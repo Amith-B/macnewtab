@@ -10,12 +10,14 @@ import { ReactComponent as ChangelogIcon } from "./changelog.svg";
 import { ReactComponent as LoggedOutIcon } from "./logged-out.svg";
 import { ReactComponent as DataIcon } from "./data.svg";
 import { ReactComponent as WeatherIcon } from "./weather.svg";
+import { ReactComponent as QuickLinksIcon } from "./quick-links.svg";
 import Appearance from "./Appearance/Appearance";
 import About from "./About/About";
 import General from "./general/General";
 import GoogleAccount from "./Account/GoogleAccount";
 import Translation from "../../locale/Translation";
 import Dock from "./Dock/Dock";
+import QuickLinks from "./QuickLinks/QuickLinks";
 import Changelog from "./Changelog/Changelog";
 import Data from "./Data/Data";
 import WeatherSettings from "./Weather/WeatherSettings";
@@ -45,6 +47,12 @@ export const SETTINGS_MENU = [
     title: <Translation value="dock" />,
     icon: DockIcon,
     content: Dock,
+  },
+  {
+    key: "quick_links",
+    title: <Translation value="quick_links" />,
+    icon: QuickLinksIcon,
+    content: QuickLinks,
   },
   {
     key: "about",

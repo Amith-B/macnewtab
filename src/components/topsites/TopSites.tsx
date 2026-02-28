@@ -5,6 +5,7 @@ import { ReactComponent as RightArrow } from "../../assets/right-arrow.svg";
 import EmptySiteImage from "../../assets/empty-site-image.png";
 import { AppContext } from "../../context/provider";
 import { FAVICON_URL, faviconURL } from "../../utils/favicon";
+import { DockIcon } from "../dock/DockIcon";
 
 const FALLBACK_SITE_IMAGE = EmptySiteImage;
 
@@ -34,9 +35,14 @@ const TopSites = memo(function TopSites() {
 
   const [isOverflowLeft, setIsOverflowLeft] = useState(false);
   const [isOverflowRight, setIsOverflowRight] = useState(true);
-  const { separatePageSite } = useContext(AppContext);
+  const { separatePageSite, quickLinksMode, quickLinks } =
+    useContext(AppContext);
+
+  const isCustomMode = quickLinksMode === "custom";
 
   useEffect(() => {
+    if (isCustomMode) return;
+
     async function fetchTopSites() {
       try {
         const topVisitedSites = await chrome.topSites.get();
@@ -51,11 +57,11 @@ const TopSites = memo(function TopSites() {
     } else {
       setTopSites(topSitesDefaultList);
     }
-  }, []);
+  }, [isCustomMode]);
 
   useEffect(() => {
     checkOverflow();
-  }, [topSites]);
+  }, [topSites, quickLinks, quickLinksMode]);
 
   const containerRef = useRef(null);
 
@@ -64,7 +70,7 @@ const TopSites = memo(function TopSites() {
     if (!container) return;
     setIsOverflowLeft(container.scrollLeft > 0);
     setIsOverflowRight(
-      container.scrollLeft < container.scrollWidth - container.clientWidth
+      container.scrollLeft < container.scrollWidth - container.clientWidth,
     );
   };
 
@@ -73,6 +79,9 @@ const TopSites = memo(function TopSites() {
     if (!container) return;
     container.scrollLeft += direction * 100;
   };
+
+  const linksToRender = isCustomMode ? quickLinks : topSites;
+  const hasLinks = linksToRender.length > 0;
 
   return (
     <div className="top-sites__container-wrapper">
@@ -83,33 +92,43 @@ const TopSites = memo(function TopSites() {
       >
         <LeftArrow />
       </button>
-      {!!topSites.length && (
+      {hasLinks && (
         <div
           className="top-sites__container"
           ref={containerRef}
           onScroll={checkOverflow}
         >
-          {topSites.map((item, idx) => (
+          {linksToRender.map((item, idx) => (
             <a
               rel="noreferrer"
               className="top-site__item"
               href={item.url}
               target={separatePageSite ? "_blank" : "_self"}
               title={item.title}
-              key={idx}
+              key={isCustomMode ? (item as any).id || idx : idx}
             >
-              <img
-                className="top-site__icon"
-                src={faviconURL(item.url)}
-                onError={({ currentTarget }) => {
-                  currentTarget.src = FAVICON_URL + item.url;
-                  currentTarget.onerror = () => {
-                    currentTarget.src = FALLBACK_SITE_IMAGE;
-                    currentTarget.onerror = null;
-                  };
-                }}
-                alt={item.title}
-              />
+              {isCustomMode && (item as any).hasCustomIcon ? (
+                <DockIcon
+                  id={(item as any).id}
+                  hasCustomIcon={true}
+                  url={item.url}
+                  title={item.title}
+                  iconDbPrefix="quick_link_icon"
+                />
+              ) : (
+                <img
+                  className="top-site__icon"
+                  src={faviconURL(item.url)}
+                  onError={({ currentTarget }) => {
+                    currentTarget.src = FAVICON_URL + item.url;
+                    currentTarget.onerror = () => {
+                      currentTarget.src = FALLBACK_SITE_IMAGE;
+                      currentTarget.onerror = null;
+                    };
+                  }}
+                  alt={item.title}
+                />
+              )}
               <span className="top-site__title">{item.title}</span>
             </a>
           ))}

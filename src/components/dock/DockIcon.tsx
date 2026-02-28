@@ -8,10 +8,17 @@ interface DockIconProps {
   hasCustomIcon?: boolean;
   url: string;
   title: string;
+  iconDbPrefix?: string;
 }
 
 export const DockIcon = memo(
-  ({ id, hasCustomIcon, url, title }: DockIconProps) => {
+  ({
+    id,
+    hasCustomIcon,
+    url,
+    title,
+    iconDbPrefix = "dock_icon",
+  }: DockIconProps) => {
     const [iconSrc, setIconSrc] = useState<string>("");
 
     useEffect(() => {
@@ -22,7 +29,9 @@ export const DockIcon = memo(
 
         if (hasCustomIcon) {
           try {
-            const blobUrl = await fetchImageFromIndexedDB(`dock_icon_${id}`);
+            const blobUrl = await fetchImageFromIndexedDB(
+              `${iconDbPrefix}_${id}`,
+            );
             if (blobUrl) {
               src = blobUrl;
             }
@@ -59,12 +68,12 @@ export const DockIcon = memo(
       return () => {
         isMounted = false;
       };
-    }, [id, hasCustomIcon, url]);
+    }, [id, hasCustomIcon, url, iconDbPrefix]);
 
     // Fallback if no src found yet, or valid
     // We can render a placeholder or just empty
     if (!iconSrc) return null;
 
     return <img className="dock-site__icon" src={iconSrc} alt={title} />;
-  }
+  },
 );

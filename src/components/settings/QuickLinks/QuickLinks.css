@@ -1,0 +1,30 @@
+.quick-links__container {
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  padding: 12px;
+  background-color: var(--theme-bg-with-opacity);
+  width: 100%;
+  font-weight: 600;
+  display: flex;
+  height: calc(100% - 60px);
+  width: 100%;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quick-links__toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--theme-border);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.quick-links__mode-description {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: grey;
+  margin-top: 4px;
+}

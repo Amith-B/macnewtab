@@ -41,6 +41,10 @@ import {
   WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
   WEATHER_MANUAL_LOCATION_LOCAL_STORAGE_KEY,
 } from "../static/weatherSettings";
+import {
+  QUICK_LINKS_MODE_LOCAL_STORAGE_KEY,
+  QUICK_LINKS_LOCAL_STORAGE_KEY,
+} from "../static/quickLinksSettings";
 
 const STICKY_NOTES_KEY = "macnewtab_sticky_notes";
 
@@ -73,6 +77,8 @@ const KEYS_TO_EXPORT = [
   WEATHER_LOCATION_LOCAL_STORAGE_KEY,
   WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
   WEATHER_MANUAL_LOCATION_LOCAL_STORAGE_KEY,
+  QUICK_LINKS_MODE_LOCAL_STORAGE_KEY,
+  QUICK_LINKS_LOCAL_STORAGE_KEY,
 ];
 
 // Helper to convert Blob URL to Base64
@@ -135,6 +141,31 @@ export const exportData = async () => {
         data["dock_icons"] = dockIcons;
       }
     }
+
+    // Export Custom Quick Link Icons
+    const quickLinksString = localStorage.getItem(QUICK_LINKS_LOCAL_STORAGE_KEY);
+    if (quickLinksString) {
+      const quickLinksList = JSON.parse(quickLinksString);
+      const quickLinkIcons: Record<string, string> = {};
+
+      for (const link of quickLinksList) {
+        if (link.hasCustomIcon) {
+          const iconId = `quick_link_icon_${link.id}`;
+          const iconData = await fetchImageFromIndexedDB(iconId);
+          if (iconData) {
+            if (iconData.startsWith("blob:")) {
+              quickLinkIcons[iconId] = await convertBlobUrlToBase64(iconData);
+            } else {
+              quickLinkIcons[iconId] = iconData;
+            }
+          }
+        }
+      }
+
+      if (Object.keys(quickLinkIcons).length > 0) {
+        data["quick_link_icons"] = quickLinkIcons;
+      }
+    }
   } catch (error) {
     console.error("Failed to export data:", error);
   }
@@ -193,6 +224,18 @@ export const importData = (file: File): Promise<void> => {
             }
           } catch (error) {
             console.error("Failed to import dock icons:", error);
+          }
+        }
+
+        // Import Custom Quick Link Icons
+        if (data["quick_link_icons"]) {
+          try {
+            const quickLinkIcons = data["quick_link_icons"] as Record<string, string>;
+            for (const [id, base64] of Object.entries(quickLinkIcons)) {
+              await saveImageToIndexedDB(base64, id);
+            }
+          } catch (error) {
+            console.error("Failed to import quick link icons:", error);
           }
         }
 
