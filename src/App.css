@@ -459,6 +459,10 @@ body:has(.App.theme-brown) {
   gap: 24px;
 }
 
+.weather-in-widgets {
+  display: none;
+}
+
 .section-2 {
   max-width: 640px;
   display: flex;
@@ -628,6 +632,14 @@ to be revisited in future */
   }
   .section-1 {
     flex-direction: row;
+  }
+
+  .weather-in-greeting {
+    display: none;
+  }
+
+  .weather-in-widgets {
+    display: block;
   }
 
   .main-content.has-clock-calendar {

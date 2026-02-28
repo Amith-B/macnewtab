@@ -5,6 +5,7 @@ import { AppContext } from "../../../context/provider";
 import Translation from "../../../locale/Translation";
 import { Select } from "../../select/Select";
 import { languageOptions, languages } from "../../../locale/languages";
+
 const General = memo(function General() {
   const {
     showGreeting,

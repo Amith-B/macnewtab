@@ -1,4 +1,10 @@
-import { useState, useEffect, ReactNode, createContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  ReactNode,
+  createContext,
+} from "react";
 import {
   THEME_KEYS,
   THEME_LOCAL_STORAGE_KEY,
@@ -16,6 +22,12 @@ import {
   USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
+import {
+  SHOW_WEATHER_LOCAL_STORAGE_KEY,
+  WEATHER_TEMP_UNIT_LOCAL_STORAGE_KEY,
+  WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
+  WEATHER_MANUAL_LOCATION_LOCAL_STORAGE_KEY,
+} from "../static/weatherSettings";
 import { BOOKMARK_TOGGLE_STORAGE_KEY } from "../static/bookmarks";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
 import { languages } from "../locale/languages";
@@ -65,6 +77,9 @@ import {
   fetchImageFromIndexedDB,
   deleteImageFromIndexedDB,
 } from "../utils/db";
+
+const WEATHER_CACHE_KEY = "macnewtab_weather_cache";
+const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
 
 type DockBarSites = Array<{
   title: string;
@@ -137,6 +152,29 @@ export const AppContext = createContext({
   setDynamicWallpaperTheme: (_: string) => {},
   interactiveWallpaperTheme: "particles",
   setInteractiveWallpaperTheme: (_: string) => {},
+  showWeather: true,
+  setShowWeather: (_: boolean) => {},
+  weatherTempUnit: "celsius",
+  setWeatherTempUnit: (_: string) => {},
+  weatherLocationMode: "auto",
+  setWeatherLocationMode: (_: string) => {},
+  weatherManualLocation: null as {
+    latitude: number;
+    longitude: number;
+    name: string;
+  } | null,
+  setWeatherManualLocation: (
+    _: { latitude: number; longitude: number; name: string } | null,
+  ) => {},
+  weatherData: null as {
+    temperature: number;
+    weatherCode: number;
+    isDay: boolean;
+    windSpeed: number;
+    cityName: string;
+  } | null,
+  weatherLoading: true,
+  weatherError: null as string | null,
 });
 
 export default function AppProvider({ children }: { children: ReactNode }) {
@@ -257,6 +295,145 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         return InteractiveWallpaperThemes.some((item) => item.value === val);
       },
     );
+
+  const [showWeather, setShowWeather] = useLocalStorage(
+    SHOW_WEATHER_LOCAL_STORAGE_KEY,
+    false,
+  );
+
+  const [weatherTempUnit, setWeatherTempUnit] = useLocalStorage(
+    WEATHER_TEMP_UNIT_LOCAL_STORAGE_KEY,
+    "celsius",
+    (val) => val === "celsius" || val === "fahrenheit",
+  );
+
+  const [weatherLocationMode, setWeatherLocationMode] = useLocalStorage(
+    WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
+    "auto",
+    (val) => val === "auto" || val === "manual",
+  );
+
+  const [weatherManualLocation, setWeatherManualLocation] = useLocalStorage<{
+    latitude: number;
+    longitude: number;
+    name: string;
+  } | null>(WEATHER_MANUAL_LOCATION_LOCAL_STORAGE_KEY, null);
+
+  const [weatherData, setWeatherData] = useState<{
+    temperature: number;
+    weatherCode: number;
+    isDay: boolean;
+    windSpeed: number;
+    cityName: string;
+    latitude: number;
+    longitude: number;
+    timestamp: number;
+  } | null>(null);
+  const [weatherLoading, setWeatherLoading] = useState(true);
+  const [weatherError, setWeatherError] = useState<string | null>(null);
+
+  const fetchWeatherData = useCallback(
+    async (lat: number, lon: number) => {
+      try {
+        const tempUnit =
+          weatherTempUnit === "fahrenheit" ? "fahrenheit" : "celsius";
+        const response = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=${tempUnit}&timezone=auto`,
+        );
+        const data = await response.json();
+
+        if (!data.current_weather) {
+          throw new Error("No weather data");
+        }
+
+        let cityName = "";
+        try {
+          const geoRes = await fetch(
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`,
+          );
+          const geoData = await geoRes.json();
+          cityName = geoData.city || geoData.locality || "";
+        } catch {
+          // Ignore geocoding errors
+        }
+
+        const weather = {
+          temperature: Math.round(data.current_weather.temperature),
+          weatherCode: data.current_weather.weathercode,
+          isDay: data.current_weather.is_day === 1,
+          windSpeed: data.current_weather.windspeed,
+          cityName,
+          timestamp: Date.now(),
+          latitude: lat,
+          longitude: lon,
+        };
+
+        localStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify(weather));
+        setWeatherData(weather);
+        setWeatherError(null);
+      } catch {
+        setWeatherError("weather_unavailable");
+      } finally {
+        setWeatherLoading(false);
+      }
+    },
+    [weatherTempUnit],
+  );
+
+  useEffect(() => {
+    if (!showWeather) {
+      setWeatherLoading(false);
+      return;
+    }
+
+    // Try cache first
+    try {
+      const cached = localStorage.getItem(WEATHER_CACHE_KEY);
+      if (cached) {
+        const cachedData = JSON.parse(cached);
+        const age = Date.now() - cachedData.timestamp;
+        if (age < CACHE_DURATION) {
+          setWeatherData(cachedData);
+          setWeatherLoading(false);
+          return;
+        }
+      }
+    } catch {
+      // ignore cache errors
+    }
+
+    // Fetch fresh data
+    if (weatherLocationMode === "manual" && weatherManualLocation) {
+      fetchWeatherData(
+        weatherManualLocation.latitude,
+        weatherManualLocation.longitude,
+      );
+    } else if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          fetchWeatherData(position.coords.latitude, position.coords.longitude);
+        },
+        () => {
+          setWeatherError("weather_location_denied");
+          setWeatherLoading(false);
+        },
+        { timeout: 10000, maximumAge: CACHE_DURATION },
+      );
+    } else {
+      setWeatherError("weather_unavailable");
+      setWeatherLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showWeather, weatherLocationMode, weatherManualLocation]);
+
+  // Re-fetch when temperature unit changes
+  useEffect(() => {
+    if (weatherData?.latitude && weatherData?.longitude) {
+      localStorage.removeItem(WEATHER_CACHE_KEY);
+      fetchWeatherData(weatherData.latitude, weatherData.longitude);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [weatherTempUnit]);
 
   const [calendarEvents, setCalendarEvents] = useLocalStorage(
     GOOGLE_CALENDAR_EVENTS_LOCAL_STORAGE_KEY,
@@ -613,6 +790,17 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         setDynamicWallpaperTheme,
         interactiveWallpaperTheme,
         setInteractiveWallpaperTheme,
+        showWeather,
+        setShowWeather,
+        weatherTempUnit,
+        setWeatherTempUnit,
+        weatherLocationMode,
+        setWeatherLocationMode,
+        weatherManualLocation,
+        setWeatherManualLocation,
+        weatherData,
+        weatherLoading,
+        weatherError,
       }}
     >
       {children}

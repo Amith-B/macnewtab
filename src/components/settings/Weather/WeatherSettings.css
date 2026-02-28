@@ -1,0 +1,101 @@
+.weather-settings__container {
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  padding: 0 12px;
+  background-color: var(--theme-bg-with-opacity);
+  width: 100%;
+  max-height: calc(100% - 60px);
+  overflow: auto;
+}
+
+.weather-settings__row-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--theme-border);
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weather-settings__container .weather-settings__row-item:last-child {
+  border-bottom: none;
+}
+
+.weather-settings__city-search {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--theme-border);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.weather-settings__city-label {
+  margin-bottom: 8px;
+}
+
+.weather-settings__search-input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  background: var(--theme-bg);
+  color: var(--theme-clr);
+  font-size: 0.8125rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.weather-settings__search-input:focus {
+  border-color: var(--theme-selection-color);
+}
+
+.weather-settings__search-results {
+  background: var(--theme-bg);
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  margin-top: 4px;
+  max-height: 180px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 4px;
+}
+
+.weather-settings__search-result-item {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.weather-settings__search-result-item:hover {
+  background: var(--theme-button-bg);
+}
+
+.weather-settings__result-name {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--theme-clr);
+}
+
+.weather-settings__result-detail {
+  font-size: 0.6875rem;
+  color: var(--theme-clr);
+  opacity: 0.6;
+}
+
+.weather-settings__current-city {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--theme-clr);
+  opacity: 0.7;
+  padding: 6px 0;
+}
+
+.weather-settings__searching {
+  font-size: 0.75rem;
+  color: var(--theme-clr);
+  opacity: 0.5;
+  padding: 4px 0;
+}

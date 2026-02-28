@@ -9,6 +9,7 @@ import { ReactComponent as AboutIcon } from "./about.svg";
 import { ReactComponent as ChangelogIcon } from "./changelog.svg";
 import { ReactComponent as LoggedOutIcon } from "./logged-out.svg";
 import { ReactComponent as DataIcon } from "./data.svg";
+import { ReactComponent as WeatherIcon } from "./weather.svg";
 import Appearance from "./Appearance/Appearance";
 import About from "./About/About";
 import General from "./general/General";
@@ -17,6 +18,7 @@ import Translation from "../../locale/Translation";
 import Dock from "./Dock/Dock";
 import Changelog from "./Changelog/Changelog";
 import Data from "./Data/Data";
+import WeatherSettings from "./Weather/WeatherSettings";
 import { AppContext } from "../../context/provider";
 
 export const SETTINGS_MENU = [
@@ -25,6 +27,12 @@ export const SETTINGS_MENU = [
     title: <Translation value="general" />,
     icon: GeneralIcon,
     content: General,
+  },
+  {
+    key: "weather",
+    title: <Translation value="weather" />,
+    icon: WeatherIcon,
+    content: WeatherSettings,
   },
   {
     key: "appearance",

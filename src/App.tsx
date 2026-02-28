@@ -18,6 +18,7 @@ import TabManager from "./components/tab-manager/TabManager";
 import StickyNotes from "./components/sticky-notes/StickyNotes";
 import DynamicWallpaper from "./components/wallpaper/DynamicWallpaper";
 import InteractiveWallpaper from "./components/wallpaper/InteractiveWallpaper";
+import Weather from "./widgets/weather/Weather";
 
 const App = function App() {
   const [searchEngine, setSearchEngine] = useState("");
@@ -43,6 +44,7 @@ const App = function App() {
     wallpaperType,
     dynamicWallpaperTheme,
     interactiveWallpaperTheme,
+    showWeather,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -140,9 +142,19 @@ const App = function App() {
             ) : (
               <Calendar1 date={date} />
             )}
+            {showWeather && (
+              <div className="weather-in-widgets">
+                <Weather />
+              </div>
+            )}
           </div>
         )}
         <div className="section-2">
+          {showWeather && (
+            <div className={showClockAndCalendar ? "weather-in-greeting" : ""}>
+              <Weather />
+            </div>
+          )}
           {showGreeting && (
             <h1 className="greeting">
               <Translation value={greeting} />!
