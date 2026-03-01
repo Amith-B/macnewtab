@@ -45,6 +45,7 @@ import {
   QUICK_LINKS_MODE_LOCAL_STORAGE_KEY,
   QUICK_LINKS_LOCAL_STORAGE_KEY,
 } from "../static/quickLinksSettings";
+import { syncNotesToChrome, Note } from "./stickyNotesSync";
 
 const STICKY_NOTES_KEY = "macnewtab_sticky_notes";
 
@@ -236,6 +237,18 @@ export const importData = (file: File): Promise<void> => {
             }
           } catch (error) {
             console.error("Failed to import quick link icons:", error);
+          }
+        }
+
+        // Sync imported sticky notes to chrome.storage.sync
+        if (data[STICKY_NOTES_KEY]) {
+          try {
+            const importedNotes: Note[] = Array.isArray(data[STICKY_NOTES_KEY])
+              ? data[STICKY_NOTES_KEY]
+              : JSON.parse(data[STICKY_NOTES_KEY]);
+            syncNotesToChrome(importedNotes);
+          } catch (error) {
+            console.error("Failed to sync imported sticky notes:", error);
           }
         }
 
