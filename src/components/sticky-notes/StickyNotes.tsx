@@ -2,15 +2,13 @@ import React, { useState, useEffect, useRef, useContext, memo } from "react";
 import "./StickyNotes.css";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
-
-interface Note {
-  id: string;
-  content: string;
-  x: number;
-  y: number;
-  color: string;
-  timestamp: number;
-}
+import {
+  Note,
+  syncNotesToChrome,
+  loadNotesFromSync,
+  mergeNotes,
+  listenForSyncChanges,
+} from "../../utils/stickyNotesSync";
 
 const STICKY_NOTES_KEY = "macnewtab_sticky_notes";
 
@@ -44,21 +42,43 @@ const StickyNotes: React.FC = memo(() => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { locale } = useContext(AppContext);
 
-  useEffect(() => {
-    const savedNotes = localStorage.getItem(STICKY_NOTES_KEY);
-    if (savedNotes) {
-      setNotes(JSON.parse(savedNotes));
-    }
+  // Track whether initial sync load is complete to avoid overwriting sync data
+  const initialLoadDone = useRef(false);
 
-    // Listen for localStorage changes from other tabs
+  useEffect(() => {
+    const initNotes = async () => {
+      const localNotes = loadLocalNotes();
+      const syncNotes = await loadNotesFromSync();
+
+      // Merge local and sync: latest timestamp wins
+      const merged = mergeNotes(localNotes, syncNotes);
+
+      // Save merged result locally
+      localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(merged));
+      setNotes(merged);
+
+      // Push merged result back to sync (handles migration from localStorage-only)
+      if (merged.length > 0) {
+        syncNotesToChrome(merged);
+      }
+
+      initialLoadDone.current = true;
+    };
+
+    initNotes();
+
+    // Listen for localStorage changes from other tabs (same device)
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === STICKY_NOTES_KEY && e.newValue) {
         try {
-          setNotes(JSON.parse(e.newValue));
+          const updatedNotes = JSON.parse(e.newValue);
+          setNotes(updatedNotes);
+          // Also sync to Chrome for cross-device sync
+          syncNotesToChrome(updatedNotes);
         } catch (error) {
           console.error(
             "Failed to parse sticky notes from storage event",
-            error
+            error,
           );
         }
       }
@@ -66,20 +86,49 @@ const StickyNotes: React.FC = memo(() => {
 
     window.addEventListener("storage", handleStorageChange);
 
+    // Listen for chrome.storage.sync changes from other devices
+    const unsubscribeSync = listenForSyncChanges((remoteNotes) => {
+      if (!initialLoadDone.current) return;
+
+      // Merge remote changes with current local state
+      const currentLocal = loadLocalNotes();
+      const merged = mergeNotes(currentLocal, remoteNotes);
+
+      localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(merged));
+      setNotes(merged);
+    });
+
     return () => {
       window.removeEventListener("storage", handleStorageChange);
+      unsubscribeSync();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  /**
+   * Helper to read notes from localStorage.
+   */
+  const loadLocalNotes = (): Note[] => {
+    const savedNotes = localStorage.getItem(STICKY_NOTES_KEY);
+    if (savedNotes) {
+      try {
+        return JSON.parse(savedNotes);
+      } catch {
+        return [];
+      }
+    }
+    return [];
+  };
 
   const saveNotes = (updatedNotes: Note[]) => {
     localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(updatedNotes));
     setNotes(updatedNotes);
+    syncNotesToChrome(updatedNotes);
   };
 
   const createNote = () => {
     // Get fresh data from localStorage to avoid conflicts
-    const currentNotes = localStorage.getItem(STICKY_NOTES_KEY);
-    const existingNotes = currentNotes ? JSON.parse(currentNotes) : [];
+    const existingNotes = loadLocalNotes();
 
     const newNote: Note = {
       id: Date.now().toString() + Math.random().toString(36).slice(2, 11),
@@ -109,19 +158,17 @@ const StickyNotes: React.FC = memo(() => {
 
   const updateNote = (id: string, content: string) => {
     // Get fresh data from localStorage to avoid conflicts
-    const currentNotes = localStorage.getItem(STICKY_NOTES_KEY);
-    const existingNotes = currentNotes ? JSON.parse(currentNotes) : [];
+    const existingNotes = loadLocalNotes();
 
     const updatedNotes = existingNotes.map((note: Note) =>
-      note.id === id ? { ...note, content, timestamp: Date.now() } : note
+      note.id === id ? { ...note, content, timestamp: Date.now() } : note,
     );
     saveNotes(updatedNotes);
   };
 
   const deleteNote = (id: string) => {
     // Get fresh data from localStorage to avoid conflicts
-    const currentNotes = localStorage.getItem(STICKY_NOTES_KEY);
-    const existingNotes = currentNotes ? JSON.parse(currentNotes) : [];
+    const existingNotes = loadLocalNotes();
 
     const updatedNotes = existingNotes.filter((note: Note) => note.id !== id);
     saveNotes(updatedNotes);
@@ -153,7 +200,7 @@ const StickyNotes: React.FC = memo(() => {
             x: e.clientX - dragOffset.x,
             y: e.clientY - dragOffset.y,
           }
-        : note
+        : note,
     );
     setNotes(updatedNotes);
   };
@@ -161,8 +208,7 @@ const StickyNotes: React.FC = memo(() => {
   const handleMouseUp = () => {
     if (draggedNote) {
       // Get fresh data and update the specific note position
-      const currentNotes = localStorage.getItem(STICKY_NOTES_KEY);
-      const existingNotes = currentNotes ? JSON.parse(currentNotes) : [];
+      const existingNotes = loadLocalNotes();
 
       const draggedNoteData = notes.find((n) => n.id === draggedNote);
       if (draggedNoteData) {
@@ -174,9 +220,10 @@ const StickyNotes: React.FC = memo(() => {
                 y: draggedNoteData.y,
                 timestamp: Date.now(),
               }
-            : note
+            : note,
         );
         localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(updatedNotes));
+        syncNotesToChrome(updatedNotes);
       }
       setDraggedNote(null);
     }
