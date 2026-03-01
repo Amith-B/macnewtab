@@ -31,10 +31,21 @@ const isSyncAvailable = (): boolean => {
     );
 };
 
+// Leave some buffer below the 102,400 byte absolute limit (use ~90KB)
+const MAX_SYNC_BYTES = 90000;
+
+/**
+ * Approximate the byte size of a string (UTF-8).
+ */
+const getByteSize = (str: string): number => {
+    return new Blob([str]).size;
+};
+
 /**
  * Write notes to chrome.storage.sync (debounced).
  * Each note is stored under its own key to stay within the 8KB per-item limit.
  * An index key stores the list of active note IDs.
+ * Implements graceful quota handling: if total size exceeds limit, syncs newest notes first.
  */
 export const syncNotesToChrome = (notes: Note[]): void => {
     if (!isSyncAvailable()) return;
@@ -45,15 +56,20 @@ export const syncNotesToChrome = (notes: Note[]): void => {
 
     debounceTimer = setTimeout(async () => {
         try {
-            const activeIds = notes.map((n) => n.id);
+            // Sort notes by timestamp (newest first) to prioritize syncing recent edits
+            const sortedNotes = [...notes].sort((a, b) => b.timestamp - a.timestamp);
 
-            // Build the object to set
-            const dataToSet: Record<string, any> = {
-                [SYNC_INDEX_KEY]: activeIds,
-            };
+            const activeIds: string[] = [];
+            const dataToSet: Record<string, any> = {};
+            let estimatedTotalBytes = 0;
+            let quotaExceeded = false;
 
-            for (const note of notes) {
-                dataToSet[noteKey(note.id)] = {
+            // Pre-calculate index key size
+            const indexKeySize = getByteSize(SYNC_INDEX_KEY);
+            estimatedTotalBytes += indexKeySize;
+
+            for (const note of sortedNotes) {
+                const notePayload = {
                     id: note.id,
                     content: note.content,
                     x: note.x,
@@ -61,12 +77,35 @@ export const syncNotesToChrome = (notes: Note[]): void => {
                     color: note.color,
                     timestamp: note.timestamp,
                 };
+
+                const notePayloadStr = JSON.stringify(notePayload);
+                const noteKeyStr = noteKey(note.id);
+                // Size = key size + value size + index ID size (approximate)
+                const noteBytes = getByteSize(noteKeyStr) + getByteSize(notePayloadStr) + getByteSize(note.id) + 4; // +4 for quotes/commas in index array
+
+                if (estimatedTotalBytes + noteBytes > MAX_SYNC_BYTES) {
+                    quotaExceeded = true;
+                    break; // Stop adding more notes to stay within quota
+                }
+
+                activeIds.push(note.id);
+                dataToSet[noteKeyStr] = notePayload;
+                estimatedTotalBytes += noteBytes;
+            }
+
+            // Set the index with only the active IDs that fit
+            dataToSet[SYNC_INDEX_KEY] = activeIds;
+
+            if (quotaExceeded) {
+                console.warn(
+                    `Sticky Notes Sync: Quota limit approached. Syncing the ${activeIds.length} most recent notes (out of ${notes.length} total). Older notes remain local-only.`
+                );
             }
 
             // Write all notes + index in one call
             await chrome.storage.sync.set(dataToSet);
 
-            // Clean up stale keys that are no longer in the index
+            // Clean up stale keys that are no longer in the active index
             await cleanupSyncKeys(activeIds);
         } catch (error) {
             console.error("Failed to sync sticky notes to Chrome:", error);
