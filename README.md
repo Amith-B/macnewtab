@@ -25,6 +25,13 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 
 - Display an **analog clock**, **date**, and **personalized greetings**—just like macOS.
 
+### 🌤️ Weather Widget
+
+- View current temperature and conditions directly on your new tab.
+- **Auto Location**: Uses geolocation to automatically fetch weather for your area.
+- **Manual Location**: Pin a specific city to always show its weather without sharing your location.
+- **Customizable**: Toggle between Celsius and Fahrenheit. Privacy-first with no API keys required.
+
 ### 🔍 Powerful Search
 
 - Search effortlessly with an intuitive input bar.
@@ -35,9 +42,12 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
   - **Spotify**
 - If a URL is detected, it directly redirects instead of searching (browser search only).
 
-### ⚡ Quick Access to Favorites
+### ⚡ Quick Links & Favorites
 
-- Navigate to your most-visited sites quickly.
+- Navigate to your most-visited sites or add your own custom links.
+- **Fully Customizable**: Add, edit, or remove links from the settings panel.
+- **Drag & Drop**: Easily rearrange your quick links in any order you prefer.
+- **Custom Icons**: Automatically fetches the site's high-quality favicon, or upload your own custom icon.
 - Customize whether links open in the same tab or a new one.
 
 ### 📚 Bookmark Manager (New!)
