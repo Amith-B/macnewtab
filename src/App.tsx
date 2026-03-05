@@ -76,7 +76,7 @@ const App = function App() {
 
   const bgStyle: CSSProperties & Record<string, string> = useMemo(
     () => ({
-      ...(backgroundImage && wallpaperType === "image"
+      ...(backgroundImage && (wallpaperType === "image" || !wallpaperType)
         ? {
             "--bg-image": `url(${backgroundImage})`,
           }
