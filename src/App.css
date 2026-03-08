@@ -463,6 +463,13 @@ body:has(.App.theme-brown) {
   display: none;
 }
 
+.weather-battery-row {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: stretch;
+}
+
 .section-2 {
   max-width: 640px;
   display: flex;
@@ -640,6 +647,10 @@ to be revisited in future */
 
   .weather-in-widgets {
     display: block;
+  }
+
+  .weather-battery-row {
+    flex-direction: column;
   }
 
   .main-content.has-clock-calendar {

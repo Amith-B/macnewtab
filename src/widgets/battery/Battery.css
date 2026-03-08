@@ -1,0 +1,92 @@
+.battery-widget {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 16px;
+  width: fit-content;
+  min-width: 120px;
+  border-radius: 16px;
+  background: var(--widget-background);
+  color: var(--theme-clr);
+  box-shadow: 0px 0px 4px var(--theme-shadow);
+  cursor: default;
+  user-select: none;
+  gap: 6px;
+}
+
+.battery-widget__arc-container {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.battery-widget__arc-svg {
+  width: 64px;
+  height: 64px;
+  transform: rotate(-90deg);
+}
+
+.battery-widget__arc-bg {
+  fill: none;
+  stroke: var(--theme-clr);
+  opacity: 0.15;
+  stroke-width: 5;
+}
+
+.battery-widget__arc-fill {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: round;
+  transition:
+    stroke-dashoffset 0.6s ease,
+    stroke 0.4s ease;
+}
+
+.battery-widget__icon {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.battery-widget__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.battery-widget__percentage {
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--theme-clr);
+  letter-spacing: -1px;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.battery-widget__status {
+  font-size: 11px;
+  color: var(--theme-clr);
+  opacity: 0.6;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.battery-widget--loading {
+  opacity: 0.9;
+}
+
+.battery-widget--unavailable {
+  opacity: 0.8;
+}
+
+.battery-widget__unavailable-text {
+  font-size: 12px;
+  color: var(--theme-clr);
+  opacity: 0.7;
+  white-space: nowrap;
+}

@@ -27,6 +27,8 @@ const General = memo(function General() {
     dockBarSites,
     useAnalogClock2,
     setUseAnalogClock2,
+    showBattery,
+    setShowBattery,
   } = useContext(AppContext);
 
   const selectedLanguageDetails = useMemo(() => {
@@ -104,6 +106,16 @@ const General = memo(function General() {
           name="Tab manager toggle"
           isChecked={showTabManager}
           handleToggleChange={() => setShowTabManager(!showTabManager)}
+        />
+      </div>
+
+      <div className="general__row-item">
+        <Translation value="show_battery" />
+        <Toggle
+          id={"battery-toggle"}
+          name="Battery widget toggle"
+          isChecked={showBattery}
+          handleToggleChange={() => setShowBattery(!showBattery)}
         />
       </div>
 

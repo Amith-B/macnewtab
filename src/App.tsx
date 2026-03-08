@@ -19,6 +19,7 @@ import StickyNotes from "./components/sticky-notes/StickyNotes";
 import DynamicWallpaper from "./components/wallpaper/DynamicWallpaper";
 import InteractiveWallpaper from "./components/wallpaper/InteractiveWallpaper";
 import Weather from "./widgets/weather/Weather";
+import Battery from "./widgets/battery/Battery";
 
 const App = function App() {
   const [searchEngine, setSearchEngine] = useState("");
@@ -45,6 +46,7 @@ const App = function App() {
     dynamicWallpaperTheme,
     interactiveWallpaperTheme,
     showWeather,
+    showBattery,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -142,17 +144,23 @@ const App = function App() {
             ) : (
               <Calendar1 date={date} />
             )}
-            {showWeather && (
+            {(showWeather || showBattery) && (
               <div className="weather-in-widgets">
-                <Weather />
+                <div className="weather-battery-row">
+                  {showWeather && <Weather />}
+                  {showBattery && <Battery />}
+                </div>
               </div>
             )}
           </div>
         )}
         <div className="section-2">
-          {showWeather && (
+          {(showWeather || showBattery) && (
             <div className={showClockAndCalendar ? "weather-in-greeting" : ""}>
-              <Weather />
+              <div className="weather-battery-row">
+                {showWeather && <Weather />}
+                {showBattery && <Battery />}
+              </div>
             </div>
           )}
           {showGreeting && (

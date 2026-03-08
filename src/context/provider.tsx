@@ -21,6 +21,7 @@ import {
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
   USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
+  SHOW_BATTERY_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
 import {
   SHOW_WEATHER_LOCAL_STORAGE_KEY,
@@ -167,6 +168,8 @@ export const AppContext = createContext({
   setQuickLinksMode: (_: QuickLinksMode) => {},
   quickLinks: [] as QuickLinksSites,
   handleQuickLinksChange: (_: QuickLinksSites) => {},
+  showBattery: true,
+  setShowBattery: (_: boolean) => {},
   showWeather: true,
   setShowWeather: (_: boolean) => {},
   weatherTempUnit: "celsius",
@@ -323,6 +326,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         return InteractiveWallpaperThemes.some((item) => item.value === val);
       },
     );
+
+  const [showBattery, setShowBattery] = useLocalStorage(
+    SHOW_BATTERY_LOCAL_STORAGE_KEY,
+    true,
+  );
 
   const [showWeather, setShowWeather] = useLocalStorage(
     SHOW_WEATHER_LOCAL_STORAGE_KEY,
@@ -850,6 +858,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         setQuickLinksMode,
         quickLinks,
         handleQuickLinksChange,
+        showBattery,
+        setShowBattery,
         showWeather,
         setShowWeather,
         weatherTempUnit,

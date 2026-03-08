@@ -208,6 +208,9 @@ export const translation = {
     quick_links_custom_description: "Show your own custom links",
     enable_sticky_notes_sync: "Sync Sticky Notes",
     enable_sticky_notes_sync_description: "Sync sticky notes across devices using your Chrome account",
+    show_battery: "Show Battery Widget",
+    battery_charging: "Charging",
+    battery_label: "Battery",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -418,6 +421,9 @@ export const translation = {
     quick_links_custom_description: "ನಿಮ್ಮ ಸ್ವಂತ ಕಸ್ಟಮ್ ಲಿಂಕ್‌ಗಳನ್ನು ತೋರಿಸಿ",
     enable_sticky_notes_sync: "ಸ್ಟಿಕಿ ನೋಟ್‌ಗಳನ್ನು ಸಿಂಕ್ ಮಾಡಿ",
     enable_sticky_notes_sync_description: "ನಿಮ್ಮ Chrome ಖಾತೆಯನ್ನು ಬಳಸಿ ಸಾಧನಗಳ ನಡುವೆ ಸ್ಟಿಕಿ ನೋಟ್‌ಗಳನ್ನು ಸಿಂಕ್ ಮಾಡಿ",
+    show_battery: "ಬ್ಯಾಟರಿ ವಿಜೆಟ್ ತೋರಿಸಿ",
+    battery_charging: "ಚಾರ್ಜ್ ಆಗುತ್ತಿದೆ",
+    battery_label: "ಬ್ಯಾಟರಿ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -627,6 +633,9 @@ export const translation = {
     quick_links_custom_description: "Zobrazit vlastní odkazy",
     enable_sticky_notes_sync: "Synchronizovat lepící poznámky",
     enable_sticky_notes_sync_description: "Synchronizujte lepící poznámky mezi zařízeními pomocí účtu Chrome",
+    show_battery: "Zobrazit widget baterie",
+    battery_charging: "Nabíjení",
+    battery_label: "Baterie",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -838,6 +847,9 @@ export const translation = {
     quick_links_custom_description: "Kendi özel bağlantılarınızı gösterin",
     enable_sticky_notes_sync: "Yapışkan Notları Senkronize Et",
     enable_sticky_notes_sync_description: "Chrome hesabınızı kullanarak yapışkan notları cihazlar arasında senkronize edin",
+    show_battery: "Pil Widget'ını Göster",
+    battery_charging: "Şarj oluyor",
+    battery_label: "Pil",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -1049,6 +1061,9 @@ export const translation = {
     quick_links_custom_description: "Hiển thị các liên kết tùy chỉnh của bạn",
     enable_sticky_notes_sync: "Đồng bộ ghi chú dính",
     enable_sticky_notes_sync_description: "Đồng bộ ghi chú dính giữa các thiết bị bằng tài khoản Chrome của bạn",
+    show_battery: "Hiển thị tiện ích pin",
+    battery_charging: "Đang sạc",
+    battery_label: "Pin",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -1259,6 +1274,9 @@ export const translation = {
     quick_links_custom_description: "O'zingizning maxsus havolalaringizni ko'rsating",
     enable_sticky_notes_sync: "Yopishqoq eslatmalarni sinxronlash",
     enable_sticky_notes_sync_description: "Chrome hisobingiz yordamida qurilmalar orasida yopishqoq eslatmalarni sinxronlang",
+    show_battery: "Batareya vidjetini ko'rsatish",
+    battery_charging: "Quvvatlanmoqda",
+    battery_label: "Batareya",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -1464,6 +1482,9 @@ export const translation = {
     quick_links_custom_description: "显示您自己的自定义链接",
     enable_sticky_notes_sync: "同步便签",
     enable_sticky_notes_sync_description: "使用您的 Chrome 帐户在设备之间同步便签",
+    show_battery: "显示电池小部件",
+    battery_charging: "充电中",
+    battery_label: "电池",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -1674,6 +1695,9 @@ export const translation = {
     quick_links_custom_description: "अपने कस्टम लिंक दिखाएं",
     enable_sticky_notes_sync: "स्टिकी नोट्स सिंक करें",
     enable_sticky_notes_sync_description: "अपने Chrome खाते का उपयोग करके उपकरणों के बीच स्टिकी नोट्स सिंक करें",
+    show_battery: "बैटरी विजेट दिखाएं",
+    battery_charging: "चार्ज हो रहा है",
+    battery_label: "बैटरी",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1886,6 +1910,9 @@ export const translation = {
     quick_links_custom_description: "Mostra i tuoi link personalizzati",
     enable_sticky_notes_sync: "Sincronizza note adesive",
     enable_sticky_notes_sync_description: "Sincronizza le note adesive tra i dispositivi utilizzando il tuo account Chrome",
+    show_battery: "Mostra widget batteria",
+    battery_charging: "In carica",
+    battery_label: "Batteria",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -2096,6 +2123,9 @@ export const translation = {
     quick_links_custom_description: "আপনার নিজের কাস্টম লিঙ্কগুলি দেখান",
     enable_sticky_notes_sync: "স্টিকি নোট সিঙ্ক করুন",
     enable_sticky_notes_sync_description: "আপনার Chrome অ্যাকাউন্ট ব্যবহার করে ডিভাইসগুলির মধ্যে স্টিকি নোটগুলি সিঙ্ক করুন",
+    show_battery: "ব্যাটারি উইজেট দেখান",
+    battery_charging: "চার্জ হচ্ছে",
+    battery_label: "ব্যাটারি",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -2308,6 +2338,9 @@ export const translation = {
     quick_links_custom_description: "Mostrar seus links personalizados",
     enable_sticky_notes_sync: "Sincronizar notas adesivas",
     enable_sticky_notes_sync_description: "Sincronize notas adesivas entre dispositivos usando sua conta do Chrome",
+    show_battery: "Mostrar widget de bateria",
+    battery_charging: "Carregando",
+    battery_label: "Bateria",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -2519,6 +2552,9 @@ export const translation = {
     quick_links_custom_description: "Afficher vos liens personnalisés",
     enable_sticky_notes_sync: "Synchroniser les notes autocollantes",
     enable_sticky_notes_sync_description: "Synchronisez les notes autocollantes entre les appareils avec votre compte Chrome",
+    show_battery: "Afficher le widget de batterie",
+    battery_charging: "En charge",
+    battery_label: "Batterie",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -2729,6 +2765,9 @@ export const translation = {
     quick_links_custom_description: "Показать ваши собственные ссылки",
     enable_sticky_notes_sync: "Синхронизировать стикеры",
     enable_sticky_notes_sync_description: "Синхронизируйте стикеры между устройствами с помощью вашей учётной записи Chrome",
+    show_battery: "Показать виджет батареи",
+    battery_charging: "Зарядка",
+    battery_label: "Батарея",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -2940,6 +2979,9 @@ export const translation = {
     quick_links_custom_description: "Mostrar tus enlaces personalizados",
     enable_sticky_notes_sync: "Sincronizar notas adhesivas",
     enable_sticky_notes_sync_description: "Sincronice notas adhesivas entre dispositivos usando su cuenta de Chrome",
+    show_battery: "Mostrar widget de batería",
+    battery_charging: "Cargando",
+    battery_label: "Batería",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -3148,6 +3190,9 @@ export const translation = {
     quick_links_custom_description: "カスタムリンクを表示する",
     enable_sticky_notes_sync: "付箋を同期",
     enable_sticky_notes_sync_description: "Chromeアカウントを使用してデバイス間で付箋を同期します",
+    show_battery: "バッテリーウィジェットを表示",
+    battery_charging: "充電中",
+    battery_label: "バッテリー",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -3355,6 +3400,9 @@ export const translation = {
     quick_links_custom_description: "사용자 지정 링크를 표시합니다",
     enable_sticky_notes_sync: "스티키 노트 동기화",
     enable_sticky_notes_sync_description: "Chrome 계정을 사용하여 기기 간에 스티키 노트를 동기화합니다",
+    show_battery: "배터리 위젯 표시",
+    battery_charging: "충전 중",
+    battery_label: "배터리",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -3564,6 +3612,9 @@ export const translation = {
     quick_links_custom_description: "Tampilkan tautan kustom Anda sendiri",
     enable_sticky_notes_sync: "Sinkronkan Catatan Tempel",
     enable_sticky_notes_sync_description: "Sinkronkan catatan tempel antar perangkat menggunakan akun Chrome Anda",
+    show_battery: "Tampilkan widget baterai",
+    battery_charging: "Mengisi daya",
+    battery_label: "Baterai",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -3773,6 +3824,9 @@ export const translation = {
     quick_links_custom_description: "तुमचे स्वतःचे सानुकूल दुवे दाखवा",
     enable_sticky_notes_sync: "स्टिकी नोट्स सिंक करा",
     enable_sticky_notes_sync_description: "तुमच्या Chrome खात्याचा वापर करून उपकरणांमध्ये स्टिकी नोट्स सिंक करा",
+    show_battery: "बॅटरी विजेट दाखवा",
+    battery_charging: "चार्ज होत आहे",
+    battery_label: "बॅटरी",
   },
 };
 
