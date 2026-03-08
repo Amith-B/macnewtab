@@ -17,6 +17,8 @@ export default memo(function Dock() {
     setTodoListVisbility,
     showStickyNotes,
     setShowStickyNotes,
+    enableStickyNotesSync,
+    setEnableStickyNotesSync,
     showFocusMode,
     setShowFocusMode,
   } = useContext(AppContext);
@@ -45,6 +47,29 @@ export default memo(function Dock() {
           name="Sticky notes toggle"
           isChecked={showStickyNotes}
           handleToggleChange={() => setShowStickyNotes(!showStickyNotes)}
+        />
+      </div>
+      <div
+        className={
+          "sticky-notes-sync-dock__toggle" +
+          (!showStickyNotes ? " disabled" : "")
+        }
+      >
+        <span>
+          <h3 className="todo-dock-toggle-title">
+            <Translation value="enable_sticky_notes_sync" />
+          </h3>
+          <h4 className="todo-dock-toggle-description">
+            <Translation value="enable_sticky_notes_sync_description" />
+          </h4>
+        </span>
+        <Toggle
+          id={"enable-sticky-notes-sync-toggle"}
+          name="Enable sticky notes sync toggle"
+          isChecked={enableStickyNotesSync}
+          handleToggleChange={() =>
+            setEnableStickyNotesSync(!enableStickyNotesSync)
+          }
         />
       </div>
       <div className="focus-mode-dock__toggle">

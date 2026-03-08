@@ -45,7 +45,10 @@ import {
   TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
 } from "../static/todo";
 import { WALLPAPER_BLUR_LOCAL_STORAGE_KEY } from "../static/wallpapers";
-import { SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY } from "../static/stickyNotes";
+import {
+  SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
+  ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY,
+} from "../static/stickyNotes";
 import {
   getLocalstorageDataWithPromise,
   useLocalStorage,
@@ -138,6 +141,8 @@ export const AppContext = createContext({
   handleBookmarkVisbility: (_: boolean) => {},
   showStickyNotes: true,
   setShowStickyNotes: (_: boolean) => {},
+  enableStickyNotesSync: false,
+  setEnableStickyNotesSync: (_: boolean) => {},
   showFocusMode: true,
   setShowFocusMode: (_: boolean) => {},
   isWidgetsAwayFromDock: false,
@@ -260,6 +265,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [showStickyNotes, setShowStickyNotes] = useLocalStorage(
     SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
     true,
+  );
+
+  const [enableStickyNotesSync, setEnableStickyNotesSync] = useLocalStorage(
+    ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY,
+    false,
   );
 
   const [showFocusMode, setShowFocusMode] = useLocalStorage(
@@ -814,6 +824,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         handleBookmarkVisbility,
         showStickyNotes,
         setShowStickyNotes,
+        enableStickyNotesSync,
+        setEnableStickyNotesSync,
         showFocusMode,
         setShowFocusMode,
         isWidgetsAwayFromDock,

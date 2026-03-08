@@ -24,7 +24,10 @@ import {
   TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
 } from "../static/todo";
 import { WALLPAPER_BLUR_LOCAL_STORAGE_KEY } from "../static/wallpapers";
-import { SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY } from "../static/stickyNotes";
+import {
+  SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
+  ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY,
+} from "../static/stickyNotes";
 import {
   fetchImageFromIndexedDB,
   saveImageToIndexedDB,
@@ -80,6 +83,7 @@ const KEYS_TO_EXPORT = [
   WEATHER_MANUAL_LOCATION_LOCAL_STORAGE_KEY,
   QUICK_LINKS_MODE_LOCAL_STORAGE_KEY,
   QUICK_LINKS_LOCAL_STORAGE_KEY,
+  ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY,
 ];
 
 // Helper to convert Blob URL to Base64
@@ -240,8 +244,9 @@ export const importData = (file: File): Promise<void> => {
           }
         }
 
-        // Sync imported sticky notes to chrome.storage.sync
-        if (data[STICKY_NOTES_KEY]) {
+        // Sync imported sticky notes to chrome.storage.sync (only if sync is enabled)
+        const isSyncEnabled = localStorage.getItem(ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY) === "true";
+        if (data[STICKY_NOTES_KEY] && isSyncEnabled) {
           try {
             const importedNotes: Note[] = Array.isArray(data[STICKY_NOTES_KEY])
               ? data[STICKY_NOTES_KEY]

@@ -10,6 +10,7 @@
   width: 100%;
   flex-direction: column;
   gap: 12px;
+  overflow-y: auto;
 }
 
 .dock-links__add {
@@ -112,6 +113,7 @@
 .dock-links__position,
 .todo-dock__toggle,
 .sticky-notes-dock__toggle,
+.sticky-notes-sync-dock__toggle,
 .focus-mode-dock__toggle {
   display: flex;
   align-items: center;
@@ -120,6 +122,11 @@
   border-bottom: 1px solid var(--theme-border);
   font-size: 0.875rem;
   font-weight: 600;
+}
+
+.sticky-notes-sync-dock__toggle.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .todo-dock-toggle-title {

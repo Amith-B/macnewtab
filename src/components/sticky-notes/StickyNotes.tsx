@@ -40,7 +40,7 @@ const StickyNotes: React.FC = memo(() => {
   const [draggedNote, setDraggedNote] = useState<string | null>(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const { locale } = useContext(AppContext);
+  const { locale, enableStickyNotesSync } = useContext(AppContext);
 
   // Track whether initial sync load is complete to avoid overwriting sync data
   const initialLoadDone = useRef(false);
@@ -48,18 +48,23 @@ const StickyNotes: React.FC = memo(() => {
   useEffect(() => {
     const initNotes = async () => {
       const localNotes = loadLocalNotes();
-      const syncNotes = await loadNotesFromSync();
 
-      // Merge local and sync: latest timestamp wins
-      const merged = mergeNotes(localNotes, syncNotes);
+      if (enableStickyNotesSync) {
+        const syncNotes = await loadNotesFromSync();
 
-      // Save merged result locally
-      localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(merged));
-      setNotes(merged);
+        // Merge local and sync: latest timestamp wins
+        const merged = mergeNotes(localNotes, syncNotes);
 
-      // Push merged result back to sync (handles migration from localStorage-only)
-      if (merged.length > 0) {
-        syncNotesToChrome(merged);
+        // Save merged result locally
+        localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(merged));
+        setNotes(merged);
+
+        // Push merged result back to sync (handles migration from localStorage-only)
+        if (merged.length > 0) {
+          syncNotesToChrome(merged);
+        }
+      } else {
+        setNotes(localNotes);
       }
 
       initialLoadDone.current = true;
@@ -74,7 +79,9 @@ const StickyNotes: React.FC = memo(() => {
           const updatedNotes = JSON.parse(e.newValue);
           setNotes(updatedNotes);
           // Also sync to Chrome for cross-device sync
-          syncNotesToChrome(updatedNotes);
+          if (enableStickyNotesSync) {
+            syncNotesToChrome(updatedNotes);
+          }
         } catch (error) {
           console.error(
             "Failed to parse sticky notes from storage event",
@@ -87,23 +94,26 @@ const StickyNotes: React.FC = memo(() => {
     window.addEventListener("storage", handleStorageChange);
 
     // Listen for chrome.storage.sync changes from other devices
-    const unsubscribeSync = listenForSyncChanges((remoteNotes) => {
-      if (!initialLoadDone.current) return;
+    let unsubscribeSync = () => {};
+    if (enableStickyNotesSync) {
+      unsubscribeSync = listenForSyncChanges((remoteNotes) => {
+        if (!initialLoadDone.current) return;
 
-      // Merge remote changes with current local state
-      const currentLocal = loadLocalNotes();
-      const merged = mergeNotes(currentLocal, remoteNotes);
+        // Merge remote changes with current local state
+        const currentLocal = loadLocalNotes();
+        const merged = mergeNotes(currentLocal, remoteNotes);
 
-      localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(merged));
-      setNotes(merged);
-    });
+        localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(merged));
+        setNotes(merged);
+      });
+    }
 
     return () => {
       window.removeEventListener("storage", handleStorageChange);
       unsubscribeSync();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [enableStickyNotesSync]);
 
   /**
    * Helper to read notes from localStorage.
@@ -123,7 +133,9 @@ const StickyNotes: React.FC = memo(() => {
   const saveNotes = (updatedNotes: Note[]) => {
     localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(updatedNotes));
     setNotes(updatedNotes);
-    syncNotesToChrome(updatedNotes);
+    if (enableStickyNotesSync) {
+      syncNotesToChrome(updatedNotes);
+    }
   };
 
   const createNote = () => {
@@ -223,7 +235,9 @@ const StickyNotes: React.FC = memo(() => {
             : note,
         );
         localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(updatedNotes));
-        syncNotesToChrome(updatedNotes);
+        if (enableStickyNotesSync) {
+          syncNotesToChrome(updatedNotes);
+        }
       }
       setDraggedNote(null);
     }

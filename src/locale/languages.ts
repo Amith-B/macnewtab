@@ -206,6 +206,8 @@ export const translation = {
     add_quick_links: "Add Quick Links",
     quick_links_default_description: "Shows your browser's most visited sites",
     quick_links_custom_description: "Show your own custom links",
+    enable_sticky_notes_sync: "Sync Sticky Notes",
+    enable_sticky_notes_sync_description: "Sync sticky notes across devices using your Chrome account",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -414,6 +416,8 @@ export const translation = {
     add_quick_links: "ತ್ವರಿತ ಲಿಂಕ್‌ಗಳನ್ನು ಸೇರಿಸಿ",
     quick_links_default_description: "ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನ ಅತ್ಯಂತ ಭೇಟಿ ನೀಡಿದ ಸೈಟ್‌ಗಳನ್ನು ತೋರಿಸುತ್ತದೆ",
     quick_links_custom_description: "ನಿಮ್ಮ ಸ್ವಂತ ಕಸ್ಟಮ್ ಲಿಂಕ್‌ಗಳನ್ನು ತೋರಿಸಿ",
+    enable_sticky_notes_sync: "ಸ್ಟಿಕಿ ನೋಟ್‌ಗಳನ್ನು ಸಿಂಕ್ ಮಾಡಿ",
+    enable_sticky_notes_sync_description: "ನಿಮ್ಮ Chrome ಖಾತೆಯನ್ನು ಬಳಸಿ ಸಾಧನಗಳ ನಡುವೆ ಸ್ಟಿಕಿ ನೋಟ್‌ಗಳನ್ನು ಸಿಂಕ್ ಮಾಡಿ",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -621,6 +625,8 @@ export const translation = {
     add_quick_links: "Přidat rychlé odkazy",
     quick_links_default_description: "Zobrazí nejnavštěvovanější stránky vašeho prohlížeče",
     quick_links_custom_description: "Zobrazit vlastní odkazy",
+    enable_sticky_notes_sync: "Synchronizovat lepící poznámky",
+    enable_sticky_notes_sync_description: "Synchronizujte lepící poznámky mezi zařízeními pomocí účtu Chrome",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -830,6 +836,8 @@ export const translation = {
     add_quick_links: "Hızlı Bağlantı Ekle",
     quick_links_default_description: "Tarayıcınızın en çok ziyaret edilen sitelerini gösterir",
     quick_links_custom_description: "Kendi özel bağlantılarınızı gösterin",
+    enable_sticky_notes_sync: "Yapışkan Notları Senkronize Et",
+    enable_sticky_notes_sync_description: "Chrome hesabınızı kullanarak yapışkan notları cihazlar arasında senkronize edin",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -1039,6 +1047,8 @@ export const translation = {
     add_quick_links: "Thêm liên kết nhanh",
     quick_links_default_description: "Hiển thị các trang web được truy cập nhiều nhất của trình duyệt",
     quick_links_custom_description: "Hiển thị các liên kết tùy chỉnh của bạn",
+    enable_sticky_notes_sync: "Đồng bộ ghi chú dính",
+    enable_sticky_notes_sync_description: "Đồng bộ ghi chú dính giữa các thiết bị bằng tài khoản Chrome của bạn",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -1247,6 +1257,8 @@ export const translation = {
     add_quick_links: "Tezkor havola qo'shish",
     quick_links_default_description: "Brauzeringizning eng ko'p tashrif buyurilgan saytlarini ko'rsatadi",
     quick_links_custom_description: "O'zingizning maxsus havolalaringizni ko'rsating",
+    enable_sticky_notes_sync: "Yopishqoq eslatmalarni sinxronlash",
+    enable_sticky_notes_sync_description: "Chrome hisobingiz yordamida qurilmalar orasida yopishqoq eslatmalarni sinxronlang",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -1450,6 +1462,8 @@ export const translation = {
     add_quick_links: "添加快捷链接",
     quick_links_default_description: "显示您浏览器中最常访问的网站",
     quick_links_custom_description: "显示您自己的自定义链接",
+    enable_sticky_notes_sync: "同步便签",
+    enable_sticky_notes_sync_description: "使用您的 Chrome 帐户在设备之间同步便签",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -1658,6 +1672,8 @@ export const translation = {
     add_quick_links: "त्वरित लिंक जोड़ें",
     quick_links_default_description: "आपके ब्राउज़र की सबसे अधिक देखी गई साइटें दिखाता है",
     quick_links_custom_description: "अपने कस्टम लिंक दिखाएं",
+    enable_sticky_notes_sync: "स्टिकी नोट्स सिंक करें",
+    enable_sticky_notes_sync_description: "अपने Chrome खाते का उपयोग करके उपकरणों के बीच स्टिकी नोट्स सिंक करें",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1868,6 +1884,8 @@ export const translation = {
     add_quick_links: "Aggiungi link rapidi",
     quick_links_default_description: "Mostra i siti più visitati del tuo browser",
     quick_links_custom_description: "Mostra i tuoi link personalizzati",
+    enable_sticky_notes_sync: "Sincronizza note adesive",
+    enable_sticky_notes_sync_description: "Sincronizza le note adesive tra i dispositivi utilizzando il tuo account Chrome",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -2076,6 +2094,8 @@ export const translation = {
     add_quick_links: "দ্রুত লিঙ্ক যোগ করুন",
     quick_links_default_description: "আপনার ব্রাউজারের সবচেয়ে বেশি পরিদর্শন করা সাইটগুলি দেখায়",
     quick_links_custom_description: "আপনার নিজের কাস্টম লিঙ্কগুলি দেখান",
+    enable_sticky_notes_sync: "স্টিকি নোট সিঙ্ক করুন",
+    enable_sticky_notes_sync_description: "আপনার Chrome অ্যাকাউন্ট ব্যবহার করে ডিভাইসগুলির মধ্যে স্টিকি নোটগুলি সিঙ্ক করুন",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -2286,6 +2306,8 @@ export const translation = {
     add_quick_links: "Adicionar links rápidos",
     quick_links_default_description: "Mostra os sites mais visitados do seu navegador",
     quick_links_custom_description: "Mostrar seus links personalizados",
+    enable_sticky_notes_sync: "Sincronizar notas adesivas",
+    enable_sticky_notes_sync_description: "Sincronize notas adesivas entre dispositivos usando sua conta do Chrome",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -2495,6 +2517,8 @@ export const translation = {
     add_quick_links: "Ajouter des liens rapides",
     quick_links_default_description: "Affiche les sites les plus visités de votre navigateur",
     quick_links_custom_description: "Afficher vos liens personnalisés",
+    enable_sticky_notes_sync: "Synchroniser les notes autocollantes",
+    enable_sticky_notes_sync_description: "Synchronisez les notes autocollantes entre les appareils avec votre compte Chrome",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -2703,6 +2727,8 @@ export const translation = {
     add_quick_links: "Добавить быстрые ссылки",
     quick_links_default_description: "Показывает самые посещаемые сайты вашего браузера",
     quick_links_custom_description: "Показать ваши собственные ссылки",
+    enable_sticky_notes_sync: "Синхронизировать стикеры",
+    enable_sticky_notes_sync_description: "Синхронизируйте стикеры между устройствами с помощью вашей учётной записи Chrome",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -2912,6 +2938,8 @@ export const translation = {
     add_quick_links: "Agregar enlaces rápidos",
     quick_links_default_description: "Muestra los sitios más visitados de tu navegador",
     quick_links_custom_description: "Mostrar tus enlaces personalizados",
+    enable_sticky_notes_sync: "Sincronizar notas adhesivas",
+    enable_sticky_notes_sync_description: "Sincronice notas adhesivas entre dispositivos usando su cuenta de Chrome",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -3118,6 +3146,8 @@ export const translation = {
     add_quick_links: "クイックリンクを追加",
     quick_links_default_description: "ブラウザで最もアクセスしたサイトを表示します",
     quick_links_custom_description: "カスタムリンクを表示する",
+    enable_sticky_notes_sync: "付箋を同期",
+    enable_sticky_notes_sync_description: "Chromeアカウントを使用してデバイス間で付箋を同期します",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -3323,6 +3353,8 @@ export const translation = {
     add_quick_links: "빠른 링크 추가",
     quick_links_default_description: "브라우저에서 가장 많이 방문한 사이트를 표시합니다",
     quick_links_custom_description: "사용자 지정 링크를 표시합니다",
+    enable_sticky_notes_sync: "스티키 노트 동기화",
+    enable_sticky_notes_sync_description: "Chrome 계정을 사용하여 기기 간에 스티키 노트를 동기화합니다",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -3530,6 +3562,8 @@ export const translation = {
     add_quick_links: "Tambah Tautan Cepat",
     quick_links_default_description: "Menampilkan situs yang paling sering dikunjungi di browser Anda",
     quick_links_custom_description: "Tampilkan tautan kustom Anda sendiri",
+    enable_sticky_notes_sync: "Sinkronkan Catatan Tempel",
+    enable_sticky_notes_sync_description: "Sinkronkan catatan tempel antar perangkat menggunakan akun Chrome Anda",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -3737,6 +3771,8 @@ export const translation = {
     add_quick_links: "जलद दुवे जोडा",
     quick_links_default_description: "तुमच्या ब्राउझरच्या सर्वाधिक भेट दिलेल्या साइट्स दाखवतो",
     quick_links_custom_description: "तुमचे स्वतःचे सानुकूल दुवे दाखवा",
+    enable_sticky_notes_sync: "स्टिकी नोट्स सिंक करा",
+    enable_sticky_notes_sync_description: "तुमच्या Chrome खात्याचा वापर करून उपकरणांमध्ये स्टिकी नोट्स सिंक करा",
   },
 };
 

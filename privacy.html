@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,8 +6,9 @@
     <title>Privacy Policy - macNewTab</title>
     <style>
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Helvetica, Arial, sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
         background: linear-gradient(180deg, #f5f6f8, #e9ebee);
         color: #1c1c1c;
         margin: 0;
@@ -71,14 +72,14 @@
   <body>
     <div class="card">
       <h1>Privacy Policy</h1>
-      <p class="subtitle"><strong>Last updated:</strong> November 2025</p>
+      <p class="subtitle"><strong>Last updated:</strong> March 2026</p>
 
       <h2>Overview</h2>
       <p>
-        macNewTab is a Chrome extension that provides a macOS-style new tab
-        experience with widgets for clock, calendar, search, and quick links.
-        This extension is designed purely for personal convenience and does not
-        collect or store any personal information.
+        macNewTab is a Chrome extension providing a macOS-style new tab
+        experience. It includes widgets for clock, calendar, search, notes, and
+        links. This extension is built for personal convenience. It does not
+        store personal information on external servers.
       </p>
 
       <h2>Google Sign-In</h2>
@@ -91,42 +92,48 @@
       </p>
 
       <h2>Permissions</h2>
-      <p>
-        The extension requests only the minimum permissions required to function
-        properly:
-      </p>
+      <p>The extension requests only the minimum permissions required:</p>
       <ul>
         <li>
-          <strong>identity</strong> — to allow optional Google Sign-In and
-          identify the logged-in user for displaying their calendar events.
+          <strong>identity</strong> — for optional Google Sign-In and calendar
+          events.
         </li>
         <li>
           <strong>https://www.googleapis.com/auth/calendar.readonly</strong> —
-          to read upcoming events from your Google Calendar (if enabled).
+          to read your Google Calendar events (if enabled).
         </li>
         <li>
-          <strong>storage</strong> — to locally store small preferences like
-          layout mode, theme, or enabled widgets.
+          <strong>storage</strong> — to save local preferences and
+          <strong>optional</strong> user notes via Chrome Sync.
         </li>
         <li>
           <strong>chrome_url_overrides</strong> — to replace the default new tab
-          page with the macOS-style interface.
+          page.
         </li>
       </ul>
       <p>
-        All data accessed using these permissions stays entirely on your device.
-        macNewTab does <strong>not</strong> send or share any information with
-        external servers.
+        All data stays on your device or your personal Google account. macNewTab
+        does <strong>not</strong> share data with third-party servers.
       </p>
 
       <h2>Data Collection and Usage</h2>
+      <p>macNewTab does not transmit personal data to our servers.</p>
       <p>
-        macNewTab does not collect, log, or transmit any personal data. Any data
-        retrieved via Google APIs (such as calendar events) is displayed only
-        within your local browser session and not stored or shared externally.
+        Any data retrieved via Google APIs (such as calendar events) is
+        displayed only within your local browser session and not stored or
+        shared externally.
+      </p>
+      <p>
+        <strong>Optional User Notes (Website Content):</strong> The notes
+        syncing is <strong>disabled by default</strong>. Syncing is an
+        <strong>opt-in feature</strong>. If enabled, text is saved using
+        <code>chrome.storage.sync</code>. This syncs notes across your devices
+        via your Google account. We do not read or store this text on external
+        servers. Notes are not sold or used for tracking.
       </p>
 
       <h2>Data Protection Mechanisms for Sensitive Data</h2>
+      <p>We ensure security for your Calendar Events and Synced Notes:</p>
       <p>
         macNewTab ensures robust security for the Google user data it accesses
         (Calendar Events). Since the extension <b>does not transmit or store</b>
@@ -138,16 +145,16 @@
           <strong>Secure Communication (TLS/HTTPS):</strong> All data fetched
           from and sent to Google APIs, including the authentication process
           (OAuth 2.0 via <code>chrome.identity</code>), is transmitted
-          exclusively over <b>secure, encrypted channels</b> using Transport Layer
-          Security (<b>TLS/HTTPS</b>). This prevents eavesdropping and tampering
-          during data transfer.
+          exclusively over <b>secure, encrypted channels</b> using Transport
+          Layer Security (<b>TLS/HTTPS</b>). This prevents eavesdropping and
+          tampering during data transfer.
         </li>
         <li>
           <strong>Client-Side Processing:</strong> Sensitive Calendar data is
-          processed and rendered <b>entirely within the user's local browser
-          environment</b>. It remains on the user's device and is secured by the
-          operating system and browser's built-in sandboxing and security
-          features.
+          processed and rendered
+          <b>entirely within the user's local browser environment</b>. It
+          remains on the user's device and is secured by the operating system
+          and browser's built-in sandboxing and security features.
         </li>
         <li>
           <strong>OAuth 2.0 Compliance:</strong> We adhere strictly to the
@@ -157,68 +164,50 @@
         </li>
         <li>
           <strong>Data Minimization:</strong> The extension is limited to
-          <b>read-only access</b> (<code>calendar.readonly</code>) to Google Calendar data,
-          significantly reducing the security surface area.
+          <b>read-only access</b> (<code>calendar.readonly</code>) to Google
+          Calendar data, significantly reducing the security surface area.
         </li>
       </ul>
-      <h2>Data Retention and Deletion Policy</h2>
-      <p>
-        As macNewTab only stores Google user data (calendar events) <b>locally
-        and temporarily</b> within the user's browser, the retention and deletion
-        processes are directly controlled by the user:
-      </p>
+
+      <h2>Data Retention and Deletion</h2>
+      <p>You control your data:</p>
       <ul>
         <li>
-          <strong>Data Retention:</strong> Google user data is retained <b>only
-          for the duration of the browser session</b> or as a temporary cache in
-          local browser storage to improve performance while the extension is
-          installed. The data is <b>not retained on any external server</b>
-          controlled by macNewTab.
+          <strong>Retention:</strong> Google user data is retained
+          <b>only for the duration of the browser session</b> or as a temporary
+          cache in local browser storage to improve performance while the
+          extension is installed. Notes stay in your Chrome Sync data until you
+          delete them. They are <b>not</b> on any developer-controlled servers.
         </li>
         <li>
-          <strong>Data Deletion by Uninstallation:</strong> The
-          <b>uninstallation</b> of the macNewTab Chrome extension from the browser
-          will automatically and permanently delete all locally stored Google
-          user data and preferences from the user’s device.
+          <strong>Uninstallation:</strong> Removing the extension deletes local
+          data. Synced data can be cleared via Chrome Sync settings.
         </li>
         <li>
-          <strong>Revocation of Access (Immediate Deletion):</strong> Users can
-          immediately and permanently revoke macNewTab's access to their Google
-          Account and all associated data by visiting the Google Account
-          Security page:
+          <strong>Revoking Access:</strong> You can stop calendar access at
           <a href="https://myaccount.google.com/permissions" target="_blank"
-            >https://myaccount.google.com/permissions</a
-          >. <b>Revoking access immediately stops all data access and future
-          processing.</b>
-        </li>
-        <li>
-          <strong>Developer Contact for Deletion:</strong> For any specific
-          concerns or to confirm that all data has been deleted, users can
-          contact the developer via the methods listed in the 'Contact' section.
-          Since we do not store external data, this confirmation relates only to
-          the revocation of access.
+            >Google Account Security</a
+          >.
         </li>
       </ul>
+
       <h2>Third-Party Services</h2>
       <p>
-        macNewTab relies solely on official Google APIs and Chrome APIs. For
-        more details on how Google handles your account data, please review
+        We use official Google and Chrome APIs. Review
         <a href="https://policies.google.com/privacy" target="_blank"
           >Google’s Privacy Policy</a
-        >.
+        >
+        for more info.
       </p>
 
       <h2>Contact</h2>
       <p>
-        For any questions or concerns regarding this Privacy Policy, please
-        contact the developer via the Chrome Web Store listing or through the
-        project’s
-        <a href="https://github.com/amith-b/macnewtab" target="_blank"
-          >GitHub repository</a
+        Questions? Contact the developer via the Chrome Web Store or
+        <a href="https://github.com/amith-b/macnewtab" target="_blank">GitHub</a
         >.
       </p>
 
-      <footer>&copy; 2025 macNewTab. All rights reserved.</footer>
+      <footer>&copy; 2026 macNewTab. All rights reserved.</footer>
     </div>
   </body>
 </html>
