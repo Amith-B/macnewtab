@@ -52,6 +52,27 @@
   line-height: 1;
 }
 
+.battery-widget__icon img {
+  filter: brightness(0) invert(1);
+}
+
+.theme-light .battery-widget__icon img,
+.theme-system .battery-widget__icon img,
+.theme-blue .battery-widget__icon img,
+.theme-red .battery-widget__icon img,
+.theme-orange .battery-widget__icon img,
+.theme-purple .battery-widget__icon img,
+.theme-pink .battery-widget__icon img,
+.theme-brown .battery-widget__icon img {
+  filter: brightness(0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .App.theme-system .battery-widget__icon img {
+    filter: brightness(0) invert(1);
+  }
+}
+
 .battery-widget__info {
   display: flex;
   flex-direction: column;
