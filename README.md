@@ -32,6 +32,13 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 - **Manual Location**: Pin a specific city to always show its weather without sharing your location.
 - **Customizable**: Toggle between Celsius and Fahrenheit. Privacy-first with no API keys required.
 
+### 🔋 Battery Widget
+
+- macOS-style battery indicator with a circular progress arc and laptop icon.
+- Displays current **battery percentage** and **charging status** in real time.
+- Arc color adapts based on charge level — green when charging, yellow/amber normally, red when low.
+- Toggle on or off from Settings → General.
+
 ### 🔍 Powerful Search
 
 - Search effortlessly with an intuitive input bar.
