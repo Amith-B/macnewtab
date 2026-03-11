@@ -2,6 +2,8 @@ import { ReactComponent as SearchEngineIcon } from "./search-engine-icons/search
 import { ReactComponent as YoutubeIcon } from "./search-engine-icons/youtube.svg";
 import { ReactComponent as ChaptGPTIcon } from "./search-engine-icons/chatgpt.svg";
 import { ReactComponent as SpotifyIcon } from "./search-engine-icons/spotify.svg";
+import { ReactComponent as GoogleIcon } from "./search-engine-icons/google.svg";
+import { ReactComponent as WikipediaIcon } from "./search-engine-icons/wikipedia.svg";
 
 export const searchEngineList = [
   {
@@ -14,6 +16,7 @@ export const searchEngineList = [
         window.location.href = url;
       } else {
         if (!chrome?.search?.query) {
+          window.location.href = `https://www.google.com/search?q=${encodeURIComponent(text)}`;
           return;
         }
 
@@ -21,6 +24,26 @@ export const searchEngineList = [
           text,
         });
       }
+    },
+  },
+  {
+    key: "google",
+    title: "Google",
+    icon: GoogleIcon,
+    searchFunction: (text: string) => {
+      window.location.href = `https://www.google.com/search?q=${encodeURIComponent(
+        text
+      )}`;
+    },
+  },
+  {
+    key: "wikipedia",
+    title: "Wikipedia",
+    icon: WikipediaIcon,
+    searchFunction: (text: string) => {
+      window.location.href = `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(
+        text
+      )}`;
     },
   },
   {

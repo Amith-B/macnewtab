@@ -6,7 +6,6 @@
   border: 1px solid var(--theme-border);
   padding: 16px;
   border-radius: 16px;
-  width: fit-content;
 }
 
 .search-engine-switcher__container {
@@ -14,6 +13,7 @@
   gap: 16px;
   color: var(--theme-clr);
   width: 100%;
+  max-width: 100%;
   backdrop-filter: var(--theme-bg-blur);
   -webkit-backdrop-filter: var(--theme-bg-blur);
 }
@@ -35,17 +35,33 @@
   align-self: center;
 }
 
+.search-engine-switcher__tile-group-wrapper {
+  position: relative;
+  display: flex;
+  max-width: calc(100vw - 200px); /* adjust width dynamically */
+  overflow: hidden;
+  border-radius: 12px;
+}
+
 .search-engine-switcher__tile-group {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  flex-wrap: wrap;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.search-engine-switcher__tile-group::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 .search-engine-switcher__tile-container {
   font-weight: bold;
   font-size: 0.875rem;
-  min-width: 140px;
+  width: auto;
+  white-space: nowrap;
 }
 
 .search-engine-switcher__tile-selection-indicator {
@@ -79,4 +95,39 @@
   cursor: pointer;
   color: var(--theme-clr);
   padding: 10px;
+}
+
+.search-engine__arrow {
+  position: absolute;
+  z-index: 10;
+  height: 100%;
+  width: 32px;
+  top: 0;
+  background-color: var(--theme-button-bg);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--theme-clr);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-engine__arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.search-engine__arrow:disabled {
+  display: none;
+}
+
+.search-engine__arrow.arrow-left {
+  left: 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-engine__arrow.arrow-right {
+  right: 0;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
 }
