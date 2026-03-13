@@ -174,7 +174,9 @@ export function getFormattedDateStringForEventsGroup(
   language: keyof typeof translation = "en"
 ) {
   const locale = languageLocaleMap[language] || "en-US";
-  const date = new Date(dateString);
+  const date = new Date(
+    dateString.includes("T") ? dateString : `${dateString}T00:00:00`
+  );
 
   const weekday = new Intl.DateTimeFormat(locale, { weekday: "long" }).format(
     date
@@ -205,7 +207,9 @@ export function getFormattedTimeString(
 }
 
 export function isToday(dateString: string): boolean {
-  const givenDate = new Date(dateString);
+  const givenDate = new Date(
+    dateString.includes("T") ? dateString : `${dateString}T00:00:00`,
+  );
   const today = new Date();
 
   return (
