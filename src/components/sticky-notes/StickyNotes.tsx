@@ -9,6 +9,7 @@ import {
   mergeNotes,
   listenForSyncChanges,
 } from "../../utils/stickyNotesSync";
+import { getBodyZoomScale } from "../../utils/zoom";
 
 const STICKY_NOTES_KEY = "macnewtab_sticky_notes";
 
@@ -39,6 +40,7 @@ const StickyNotes: React.FC = memo(() => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [draggedNote, setDraggedNote] = useState<string | null>(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const dragScale = useRef(1);
   const containerRef = useRef<HTMLDivElement>(null);
   const { locale, enableStickyNotesSync } = useContext(AppContext);
 
@@ -196,21 +198,26 @@ const StickyNotes: React.FC = memo(() => {
     if (!note) return;
 
     setDraggedNote(noteId);
+    dragScale.current = getBodyZoomScale();
+    const scale = dragScale.current;
     setDragOffset({
-      x: e.clientX - note.x,
-      y: e.clientY - note.y,
+      x: e.clientX / scale - note.x,
+      y: e.clientY / scale - note.y,
     });
   };
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!draggedNote) return;
+    const scale = dragScale.current || 1;
+    const scaledX = e.clientX / scale;
+    const scaledY = e.clientY / scale;
 
     const updatedNotes = notes.map((note) =>
       note.id === draggedNote
         ? {
             ...note,
-            x: e.clientX - dragOffset.x,
-            y: e.clientY - dragOffset.y,
+            x: scaledX - dragOffset.x,
+            y: scaledY - dragOffset.y,
           }
         : note,
     );

@@ -22,6 +22,7 @@ import Changelog from "./Changelog/Changelog";
 import Data from "./Data/Data";
 import WeatherSettings from "./Weather/WeatherSettings";
 import { AppContext } from "../../context/provider";
+import { getBodyZoomScale } from "../../utils/zoom";
 
 export const SETTINGS_MENU = [
   {
@@ -97,14 +98,21 @@ export default function Settings({
   const modalRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
+  const dragScale = useRef(1);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!modalRef.current) return;
 
     isDragging.current = true;
+    dragScale.current = getBodyZoomScale();
+    const scale = dragScale.current;
     offset.current = {
-      x: e.clientX - modalRef.current.getBoundingClientRect().left,
-      y: e.clientY - modalRef.current.getBoundingClientRect().top,
+      x:
+        e.clientX / scale -
+        modalRef.current.getBoundingClientRect().left / scale,
+      y:
+        e.clientY / scale -
+        modalRef.current.getBoundingClientRect().top / scale,
     };
 
     document.addEventListener("mousemove", handleMouseMove);
@@ -113,10 +121,11 @@ export default function Settings({
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging.current) return;
+    const scale = dragScale.current || 1;
 
     setPosition({
-      x: `${e.clientX - offset.current.x}px`,
-      y: `${e.clientY - offset.current.y}px`,
+      x: `${e.clientX / scale - offset.current.x}px`,
+      y: `${e.clientY / scale - offset.current.y}px`,
     });
   };
 

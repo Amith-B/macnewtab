@@ -7,6 +7,7 @@ import linkify from "../../utils/linkify";
 import Translation from "../../locale/Translation";
 import { translation } from "../../locale/languages";
 import { arrayMove, List } from "react-movable";
+import { getBodyZoomScale } from "../../utils/zoom";
 
 export default function TodoDialog({
   open,
@@ -32,6 +33,7 @@ export default function TodoDialog({
   const [position, setPosition] = useState({ x: "unset", y: "unset" });
   const isDragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
+  const dragScale = useRef(1);
 
   useEffect(() => {
     if (open) {
@@ -81,9 +83,15 @@ export default function TodoDialog({
     if (!modalRef.current) return;
 
     isDragging.current = true;
+    dragScale.current = getBodyZoomScale();
+    const scale = dragScale.current;
     offset.current = {
-      x: e.clientX - modalRef.current.getBoundingClientRect().left,
-      y: e.clientY - modalRef.current.getBoundingClientRect().top,
+      x:
+        e.clientX / scale -
+        modalRef.current.getBoundingClientRect().left / scale,
+      y:
+        e.clientY / scale -
+        modalRef.current.getBoundingClientRect().top / scale,
     };
 
     document.addEventListener("mousemove", handleMouseMove);
@@ -92,10 +100,11 @@ export default function TodoDialog({
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging.current) return;
+    const scale = dragScale.current || 1;
 
     setPosition({
-      x: `${e.clientX - offset.current.x}px`,
-      y: `${e.clientY - offset.current.y}px`,
+      x: `${e.clientX / scale - offset.current.x}px`,
+      y: `${e.clientY / scale - offset.current.y}px`,
     });
   };
 
