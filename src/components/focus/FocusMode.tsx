@@ -4,6 +4,7 @@ import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
 import { ReactComponent as CloseIcon } from "../settings/close-icon.svg";
 import { ReactComponent as MinimizeIcon } from "../settings/minimize-icon.svg";
+import { getBodyZoomScale } from "../../utils/zoom";
 
 const DEFAULT_DURATION = 25 * 60; // 25 minutes
 
@@ -38,6 +39,7 @@ const FocusMode: React.FC<{
   const [position, setPosition] = useState({ x: 100, y: 100 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const dragScale = useRef(1);
 
   const audioContextRef = useRef<AudioContext | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
@@ -319,18 +321,21 @@ const FocusMode: React.FC<{
   const handleMouseDown = (e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest(".focus-controls")) return;
     setIsDragging(true);
+    dragScale.current = getBodyZoomScale();
+    const scale = dragScale.current;
     setDragOffset({
-      x: e.clientX - position.x,
-      y: e.clientY - position.y,
+      x: e.clientX / scale - position.x,
+      y: e.clientY / scale - position.y,
     });
   };
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (isDragging) {
+        const scale = dragScale.current || 1;
         setPosition({
-          x: e.clientX - dragOffset.x,
-          y: e.clientY - dragOffset.y,
+          x: e.clientX / scale - dragOffset.x,
+          y: e.clientY / scale - dragOffset.y,
         });
       }
     };
