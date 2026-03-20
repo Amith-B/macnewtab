@@ -1,4 +1,4 @@
-import { CSSProperties, useContext, useEffect, useMemo, useState } from "react";
+import { CSSProperties, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import Clock1 from "./widgets/clock-1/Clock1";
 import Clock2 from "./widgets/clock-2/Clock2";
@@ -24,6 +24,9 @@ import Battery from "./widgets/battery/Battery";
 const App = function App() {
   const [searchEngine, setSearchEngine] = useState("");
   const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState(new Date());
+
+
 
   const {
     theme,
@@ -51,11 +54,18 @@ const App = function App() {
 
   useEffect(() => {
     if (showClockAndCalendar) {
-      const intervalRef = setInterval(() => {
-        setDate(new Date());
+      const interval = setInterval(() => {
+        const now = new Date();
+        setTime(now);
+        const currentDateStr = now.toDateString();
+        setDate(prev => {
+          if (prev.toDateString() !== currentDateStr) {
+            return now;
+          }
+          return prev;
+        });
       }, 1000);
-
-      return () => clearInterval(intervalRef);
+      return () => clearInterval(interval);
     }
   }, [showClockAndCalendar]);
 
@@ -71,10 +81,10 @@ const App = function App() {
     }
   }, []);
 
-  const handleSearchEngineChange = (val: string) => {
+  const handleSearchEngineChange = useCallback((val: string) => {
     localStorage.setItem(SEARCH_ENGINE_LOCAL_STORAGE_KEY, val);
     setSearchEngine(val);
-  };
+  }, []);
 
   const bgStyle: CSSProperties & Record<string, string> = useMemo(
     () => ({
@@ -138,7 +148,7 @@ const App = function App() {
       >
         {showClockAndCalendar && (
           <div className="section-1">
-            {useAnalogClock2 ? <Clock2 date={date} /> : <Clock1 date={date} />}
+            {useAnalogClock2 ? <Clock2 date={time} /> : <Clock1 date={time} />}
             {showMonthView ? (
               <Calendar date={date} />
             ) : (
