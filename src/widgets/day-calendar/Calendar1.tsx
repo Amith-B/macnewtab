@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, memo } from "react";
 import "./Calendar1.css";
 import { translation } from "../../locale/languages";
 import { AppContext } from "../../context/provider";
@@ -18,7 +18,7 @@ const getWeekName = (date: Date): keyof (typeof translation)["en"] => {
     .toLowerCase() as keyof (typeof translation)["en"];
 };
 
-export default function Calendar1({ date }: { date: Date }) {
+export default memo(function Calendar1({ date }: { date: Date }) {
   const { locale, showGoogleCalendar, calendarEvents } = useContext(AppContext);
 
   const eventGroup = useMemo(() => {
@@ -68,4 +68,4 @@ export default function Calendar1({ date }: { date: Date }) {
       </div>
     </div>
   );
-}
+});

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState, memo } from "react";
 import "./Calendar.css";
 import { translation } from "../../locale/languages";
 import { AppContext } from "../../context/provider";
@@ -34,7 +34,7 @@ function generateDateArray(year: number, month: number) {
   return resultArray;
 }
 
-export default function Calendar({ date }: { date: Date }) {
+export default memo(function Calendar({ date }: { date: Date }) {
   const [weeks, setWeeks] = useState<string[]>([]);
   const { locale, showGoogleCalendar, calendarEvents } = useContext(AppContext);
 
@@ -125,4 +125,4 @@ export default function Calendar({ date }: { date: Date }) {
       </div>
     </div>
   );
-}
+});
