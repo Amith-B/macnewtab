@@ -1,6 +1,6 @@
 {
   "name": "macnewtab",
-  "version": "1.46.4",
+  "version": "1.46.5",
   "private": true,
   "dependencies": {
     "@types/jest": "^27.0.1",
@@ -43,5 +43,14 @@
   "devDependencies": {
     "@types/chrome": "^0.0.287",
     "@types/react-speech-recognition": "^3.9.5"
+  },
+  "resolutions": {
+    "@tootallnate/once": "^3.0.1",
+    "minimatch": "^5.1.8",
+    "nth-check": "^2.0.1",
+    "postcss": "^8.4.31",
+    "serialize-javascript": "^7.0.3",
+    "underscore": "^1.13.8",
+    "webpack-dev-server": "^4.15.2"
   }
 }
