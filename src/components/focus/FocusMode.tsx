@@ -476,7 +476,9 @@ const FocusMode: React.FC<{
         <div className="task-section">
           <div className="task-label">{translation[locale].active_task}</div>
           {todoList.find((task) => !task.checked) ? (
-            <div className="current-task">{currentTask}</div>
+            <div className="current-task" title={currentTask}>
+              {currentTask}
+            </div>
           ) : (
             <button className="add-task-btn" onClick={onOpenTodo}>
               {translation[locale].add_a_task}

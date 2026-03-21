@@ -208,9 +208,12 @@
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   min-height: 40px;
-  display: flex;
-  align-items: center;
   border-left: 3px solid #a855f7;
+  display: block;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .close-btn {
