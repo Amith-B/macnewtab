@@ -151,20 +151,24 @@ export default function Launchpad({
   };
 
   const refreshBookmark = () => {
-    chrome.bookmarks.getTree().then((tree) => {
-      const rootTree = tree[0].children || [];
-      if (rootTree.length) {
-        setBookmarksTree(rootTree);
-        setSelectedTab("bookmarks");
-      }
-    });
+    if (chrome?.bookmarks?.getTree) {
+      chrome.bookmarks.getTree().then((tree) => {
+        const rootTree = tree[0].children || [];
+        if (rootTree.length) {
+          setBookmarksTree(rootTree);
+          setSelectedTab("bookmarks");
+        }
+      });
+    }
   };
 
   const handleConfirmDelete = () => {
-    chrome.bookmarks.remove(bookmarkIdToBeDeleted).then(() => {
-      refreshBookmark();
-      setBookmarkIdToBeDeleted("");
-    });
+    if (chrome?.bookmarks?.remove) {
+      chrome.bookmarks.remove(bookmarkIdToBeDeleted).then(() => {
+        refreshBookmark();
+        setBookmarkIdToBeDeleted("");
+      });
+    }
   };
 
   return (
