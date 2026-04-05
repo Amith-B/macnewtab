@@ -433,6 +433,170 @@ body:has(.App.theme-brown) {
   --calendar-events-banner-text-color: #19354a;
 }
 
+.App.theme-teal,
+.appearance__theme-color-option.theme-teal,
+body:has(.App.theme-teal) {
+  --theme-bg: #dff8f6;
+  --theme-bg-secondary: #d1f2ef;
+  --theme-bg-with-opacity: #8fe4dc52;
+  --theme-bg-with-opacity-50: #8fe4dc8a;
+  --theme-selection-color: #0f8f88;
+  --theme-bg-dock: #a9efe775;
+  --theme-clr: black;
+  --theme-shadow: #adadad97;
+  --theme-border: #6f8f8d;
+  --theme-link-clr: #2363e8;
+  --theme-button-bg: #9ddfd8;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #63706f;
+  --calendar-month-text-color: #0f8f88;
+  --calendar-events-current-date-text-color: #0f8f88;
+  --calendar-sunday-text-color: #63706f;
+  --widget-background: #c7ece8;
+  --window-expand-bg: #8fd6cf;
+  --active-window-indicator: #79c6be;
+  --calendar-date-text-color: #272727;
+  --clock-1-background: #3f8b86;
+  --clock-1-dial-background: #ffffff;
+  --input-caret-color: #0f8f88;
+  --input-search-icon-color: #4d5e5d;
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #2f7b76;
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: black;
+
+  --launchpad-tab-selected-bg: #92dbd4;
+  --calendar-has-event-bg-color: #11484b;
+  --calendar-events-banner-background-color: #0d7f7a99;
+  --calendar-events-banner-text-color: #efffff;
+}
+
+.App.theme-mint,
+.appearance__theme-color-option.theme-mint,
+body:has(.App.theme-mint) {
+  --theme-bg: #edfbe3;
+  --theme-bg-secondary: #e2f8d2;
+  --theme-bg-with-opacity: #b9ef8f52;
+  --theme-bg-with-opacity-50: #b9ef8f85;
+  --theme-selection-color: #4e9a2d;
+  --theme-bg-dock: #caf4aa75;
+  --theme-clr: black;
+  --theme-shadow: #adadad97;
+  --theme-border: #7f9570;
+  --theme-link-clr: #2a59d1;
+  --theme-button-bg: #c8efa8;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #687163;
+  --calendar-month-text-color: #4e9a2d;
+  --calendar-events-current-date-text-color: #4e9a2d;
+  --calendar-sunday-text-color: #687163;
+  --widget-background: #d9f2c1;
+  --window-expand-bg: #b7e38c;
+  --active-window-indicator: #a8d775;
+  --calendar-date-text-color: #272727;
+  --clock-1-background: #6d8f51;
+  --clock-1-dial-background: #ffffff;
+  --input-caret-color: #4e9a2d;
+  --input-search-icon-color: #53604b;
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #62844f;
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: black;
+
+  --launchpad-tab-selected-bg: #b5eb8c;
+  --calendar-has-event-bg-color: #214125;
+  --calendar-events-banner-background-color: #5d943f99;
+  --calendar-events-banner-text-color: #f5ffef;
+}
+
+.App.theme-gold,
+.appearance__theme-color-option.theme-gold,
+body:has(.App.theme-gold) {
+  --theme-bg: #fff4d8;
+  --theme-bg-secondary: #ffedc1;
+  --theme-bg-with-opacity: #ffd36b52;
+  --theme-bg-with-opacity-50: #ffd36b87;
+  --theme-selection-color: #b77900;
+  --theme-bg-dock: #ffe09a75;
+  --theme-clr: black;
+  --theme-shadow: #adadad97;
+  --theme-border: #9d8756;
+  --theme-link-clr: #3154db;
+  --theme-button-bg: #ffd67e;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #766a4f;
+  --calendar-month-text-color: #b77900;
+  --calendar-events-current-date-text-color: #b77900;
+  --calendar-sunday-text-color: #766a4f;
+  --widget-background: #ffe7a8;
+  --window-expand-bg: #ffc85b;
+  --active-window-indicator: #f0ba50;
+  --calendar-date-text-color: #272727;
+  --clock-1-background: #947341;
+  --clock-1-dial-background: #ffffff;
+  --input-caret-color: #b77900;
+  --input-search-icon-color: #625645;
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #977139;
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: black;
+
+  --launchpad-tab-selected-bg: #ffd06e;
+  --calendar-has-event-bg-color: #4d3b17;
+  --calendar-events-banner-background-color: #c58d2299;
+  --calendar-events-banner-text-color: #fff9ef;
+}
+
+.App.theme-rose,
+.appearance__theme-color-option.theme-rose,
+body:has(.App.theme-rose) {
+  --theme-bg: #fff0eb;
+  --theme-bg-secondary: #ffe5dd;
+  --theme-bg-with-opacity: #ffb29a52;
+  --theme-bg-with-opacity-50: #ffb29a87;
+  --theme-selection-color: #d15d43;
+  --theme-bg-dock: #ffc9b875;
+  --theme-clr: black;
+  --theme-shadow: #adadad97;
+  --theme-border: #9a7b72;
+  --theme-link-clr: #3550dd;
+  --theme-button-bg: #ffc0ad;
+  --theme-toggle-bg: #ccc;
+  --theme-bg-blur: blur(60px) saturate(150%);
+  --theme-bg-blur-30: blur(30px) saturate(150%);
+  --calendar-1-week-text-color: #ff453a;
+  --calendar-1-month-text-color: #7d675f;
+  --calendar-month-text-color: #d15d43;
+  --calendar-events-current-date-text-color: #d15d43;
+  --calendar-sunday-text-color: #7d675f;
+  --widget-background: #ffd8ca;
+  --window-expand-bg: #ffb299;
+  --active-window-indicator: #f4a88f;
+  --calendar-date-text-color: #272727;
+  --clock-1-background: #a86d5a;
+  --clock-1-dial-background: #ffffff;
+  --input-caret-color: #d15d43;
+  --input-search-icon-color: #63544f;
+  --search-engine-tile-indicator-bg: #d2d2d0;
+  --search-engine-tile-icon-clr: #a06556;
+  --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
+  --settings-side-panel-text-color: black;
+
+  --launchpad-tab-selected-bg: #ffb79f;
+  --calendar-has-event-bg-color: #5c2f21;
+  --calendar-events-banner-background-color: #d9775f99;
+  --calendar-events-banner-text-color: #fff7f3;
+}
+
 .main-content {
   display: grid;
   grid-template-columns: auto auto;

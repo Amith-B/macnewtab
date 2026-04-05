@@ -29,4 +29,8 @@ export const THEME_COLOR_KEYS = [
   "purple",
   "blue",
   "brown",
+  "teal",
+  "mint",
+  "gold",
+  "rose",
 ];
