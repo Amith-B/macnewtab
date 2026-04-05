@@ -211,6 +211,8 @@ export const translation = {
     show_battery: "Show Battery Widget",
     battery_charging: "Charging",
     battery_label: "Battery",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -424,6 +426,8 @@ export const translation = {
     show_battery: "ಬ್ಯಾಟರಿ ವಿಜೆಟ್ ತೋರಿಸಿ",
     battery_charging: "ಚಾರ್ಜ್ ಆಗುತ್ತಿದೆ",
     battery_label: "ಬ್ಯಾಟರಿ",
+    show_freeform: "Freeform ತೋರಿಸಿ",
+    freeform: "Freeform",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -636,6 +640,8 @@ export const translation = {
     show_battery: "Zobrazit widget baterie",
     battery_charging: "Nabíjení",
     battery_label: "Baterie",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -850,6 +856,8 @@ export const translation = {
     show_battery: "Pil Widget'ını Göster",
     battery_charging: "Şarj oluyor",
     battery_label: "Pil",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -1064,6 +1072,8 @@ export const translation = {
     show_battery: "Hiển thị tiện ích pin",
     battery_charging: "Đang sạc",
     battery_label: "Pin",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -1277,6 +1287,8 @@ export const translation = {
     show_battery: "Batareya vidjetini ko'rsatish",
     battery_charging: "Quvvatlanmoqda",
     battery_label: "Batareya",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -1485,6 +1497,8 @@ export const translation = {
     show_battery: "显示电池小部件",
     battery_charging: "充电中",
     battery_label: "电池",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -1698,6 +1712,8 @@ export const translation = {
     show_battery: "बैटरी विजेट दिखाएं",
     battery_charging: "चार्ज हो रहा है",
     battery_label: "बैटरी",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1913,6 +1929,8 @@ export const translation = {
     show_battery: "Mostra widget batteria",
     battery_charging: "In carica",
     battery_label: "Batteria",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -2126,6 +2144,8 @@ export const translation = {
     show_battery: "ব্যাটারি উইজেট দেখান",
     battery_charging: "চার্জ হচ্ছে",
     battery_label: "ব্যাটারি",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -2341,6 +2361,8 @@ export const translation = {
     show_battery: "Mostrar widget de bateria",
     battery_charging: "Carregando",
     battery_label: "Bateria",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -2555,6 +2577,8 @@ export const translation = {
     show_battery: "Afficher le widget de batterie",
     battery_charging: "En charge",
     battery_label: "Batterie",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -2768,6 +2792,8 @@ export const translation = {
     show_battery: "Показать виджет батареи",
     battery_charging: "Зарядка",
     battery_label: "Батарея",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -2982,6 +3008,8 @@ export const translation = {
     show_battery: "Mostrar widget de batería",
     battery_charging: "Cargando",
     battery_label: "Batería",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -3193,6 +3221,8 @@ export const translation = {
     show_battery: "バッテリーウィジェットを表示",
     battery_charging: "充電中",
     battery_label: "バッテリー",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -3403,6 +3433,8 @@ export const translation = {
     show_battery: "배터리 위젯 표시",
     battery_charging: "충전 중",
     battery_label: "배터리",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -3615,6 +3647,8 @@ export const translation = {
     show_battery: "Tampilkan widget baterai",
     battery_charging: "Mengisi daya",
     battery_label: "Baterai",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -3827,6 +3861,8 @@ export const translation = {
     show_battery: "बॅटरी विजेट दाखवा",
     battery_charging: "चार्ज होत आहे",
     battery_label: "बॅटरी",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   pl: {
     show_greetings: "Pokaż pozdrowienia",
@@ -4040,6 +4076,8 @@ export const translation = {
     show_battery: "Pokaż widżet baterii",
     battery_charging: "Ładowanie",
     battery_label: "Bateria",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
   de: {
     show_greetings: "Grüße anzeigen",
@@ -4252,6 +4290,8 @@ export const translation = {
     show_battery: "Batterie-Widget anzeigen",
     battery_charging: "Lädt",
     battery_label: "Batterie",
+    show_freeform: "Show Freeform",
+    freeform: "Freeform",
   },
 };
 export const languages = Object.keys(

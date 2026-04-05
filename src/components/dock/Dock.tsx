@@ -5,6 +5,8 @@ import {
   useEffect,
   useRef,
   useState,
+  lazy,
+  Suspense,
 } from "react";
 import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
 import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
@@ -12,6 +14,7 @@ import { ReactComponent as LeftArrow } from "../../assets/left-arrow.svg";
 import { ReactComponent as RightArrow } from "../../assets/right-arrow.svg";
 import { ReactComponent as TodoIcon } from "../../assets/todo.svg";
 import { ReactComponent as StickyNotesIcon } from "../../assets/sticky-notes.svg";
+import { ReactComponent as FreeformIcon } from "../../assets/freeform.svg";
 import { ReactComponent as FocusIcon } from "../../assets/focus.svg";
 import Settings from "../settings/Settings";
 import Launchpad from "../launchpad/Launchpad";
@@ -20,6 +23,8 @@ import FocusMode from "../focus/FocusMode";
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
 import { DockIcon } from "./DockIcon";
+
+const FreeformLazy = lazy(() => import("../freeform/Freeform"));
 
 const TooltipPosition: Record<string, string> = {
   left: "right",
@@ -33,6 +38,8 @@ const Dock = memo(() => {
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
   const [todoDialogOpen, setTodoDialogOpen] = useState(false);
   const [focusModeVisible, setFocusModeVisible] = useState(false);
+  const [freeformVisible, setFreeformVisible] = useState(false);
+  const [hasOpenedFreeform, setHasOpenedFreeform] = useState(false);
   const [isOverflowLeft, setIsOverflowLeft] = useState(false);
   const [isOverflowRight, setIsOverflowRight] = useState(false);
   const [isOverflowButtonVisible, setIsOverflowButtonVisible] = useState(false);
@@ -43,6 +50,7 @@ const Dock = memo(() => {
     groupTodosByCheckedStatus,
     showStickyNotes,
     showFocusMode,
+    showFreeform,
   } = useContext(AppContext);
 
   const handleLaunchpadClose = useCallback(
@@ -185,6 +193,20 @@ const Dock = memo(() => {
             <FocusIcon />
           </button>
         )}
+        {showFreeform && (
+          <button
+            className={`freeform-button accessible tooltip tooltip-${
+              TooltipPosition[dockPosition] || "top"
+            }`}
+            data-label="Freeform"
+            onClick={() => {
+              setHasOpenedFreeform(true);
+              setFreeformVisible(!freeformVisible);
+            }}
+          >
+            <FreeformIcon />
+          </button>
+        )}
         <button
           className={`settings-icon accessible tooltip tooltip-${
             TooltipPosition[dockPosition] || "top"
@@ -286,6 +308,14 @@ const Dock = memo(() => {
           setTodoDialogOpen(true);
         }}
       />
+      {hasOpenedFreeform && (
+        <Suspense fallback={null}>
+          <FreeformLazy
+            visible={freeformVisible}
+            onClose={() => setFreeformVisible(false)}
+          />
+        </Suspense>
+      )}
     </>
   );
 });

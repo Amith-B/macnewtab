@@ -21,6 +21,8 @@ export default memo(function Dock() {
     setEnableStickyNotesSync,
     showFocusMode,
     setShowFocusMode,
+    showFreeform,
+    setShowFreeform,
   } = useContext(AppContext);
 
   return (
@@ -79,6 +81,15 @@ export default memo(function Dock() {
           name="Focus mode toggle"
           isChecked={showFocusMode}
           handleToggleChange={() => setShowFocusMode(!showFocusMode)}
+        />
+      </div>
+      <div className="freeform-dock__toggle">
+        <Translation value="show_freeform" />
+        <Toggle
+          id={"freeform-toggle"}
+          name="Freeform toggle"
+          isChecked={showFreeform}
+          handleToggleChange={() => setShowFreeform(!showFreeform)}
         />
       </div>
       <div

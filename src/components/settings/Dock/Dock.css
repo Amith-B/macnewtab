@@ -114,7 +114,8 @@
 .todo-dock__toggle,
 .sticky-notes-dock__toggle,
 .sticky-notes-sync-dock__toggle,
-.focus-mode-dock__toggle {
+.focus-mode-dock__toggle,
+.freeform-dock__toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -180,7 +180,9 @@
 }
 
 .todo-button,
-.sticky-notes-button {
+.sticky-notes-button,
+.focus-button,
+.freeform-button {
   width: 44px;
   height: 44px;
   min-width: 44px;
@@ -193,7 +195,10 @@
   cursor: pointer;
 }
 
-.todo-button svg {
+.todo-button svg,
+.sticky-notes-button svg,
+.focus-button svg,
+.freeform-button svg {
   width: 100%;
   height: 100%;
 }
@@ -204,33 +209,10 @@
   left: 24px;
 }
 
-.sticky-notes-button svg {
-  width: 100%;
-  height: 100%;
-}
-
 .dock-container:not(.center) .sticky-notes-button {
   position: absolute;
   top: 24px;
   right: 24px;
-}
-
-.focus-button {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  padding: 0;
-  margin: 0;
-  outline: none;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.focus-button svg {
-  width: 100%;
-  height: 100%;
 }
 
 .dock-container:not(.center) .focus-button {

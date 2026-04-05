@@ -10,3 +10,4 @@ export const CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY = "center_widgets_away_fr
 export const USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY = "use_analog_clock_2";
 export const SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY = "show_focus_mode";
 export const SHOW_BATTERY_LOCAL_STORAGE_KEY = "show_battery";
+export const SHOW_FREEFORM_LOCAL_STORAGE_KEY = "show_freeform";
