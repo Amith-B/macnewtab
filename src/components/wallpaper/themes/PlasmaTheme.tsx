@@ -11,15 +11,23 @@ const PlasmaTheme: React.FC = () => {
 
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
+    let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     let t = 0;
 
+    // Create the offscreen canvas ONCE and reuse it
+    let wScaled = Math.floor(w / 4);
+    let hScaled = Math.floor(h / 4);
+    const tempCanvas = document.createElement("canvas");
+    tempCanvas.width = wScaled;
+    tempCanvas.height = hScaled;
+    const tempCtx = tempCanvas.getContext("2d");
+
     const animate = () => {
-      if (!ctx) return;
-      // Low res for performance plasma
-      const wScaled = Math.floor(w / 4);
-      const hScaled = Math.floor(h / 4);
-      const imageData = ctx.createImageData(wScaled, hScaled);
+      if (!ctx || !tempCtx) return;
+
+      const imageData = tempCtx.createImageData(wScaled, hScaled);
       const data = imageData.data;
 
       for (let x = 0; x < wScaled; x++) {
@@ -42,22 +50,26 @@ const PlasmaTheme: React.FC = () => {
         }
       }
 
-      // Draw scaled up
-      const tempCanvas = document.createElement("canvas");
-      tempCanvas.width = wScaled;
-      tempCanvas.height = hScaled;
-      tempCanvas.getContext("2d")?.putImageData(imageData, 0, 0);
+      // Draw to reused offscreen canvas, then scale up
+      tempCtx.putImageData(imageData, 0, 0);
 
       ctx.imageSmoothingEnabled = true;
       ctx.drawImage(tempCanvas, 0, 0, w, h);
 
       t += 1; // Speed
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     const handleResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        wScaled = Math.floor(w / 4);
+        hScaled = Math.floor(h / 4);
+        tempCanvas.width = wScaled;
+        tempCanvas.height = hScaled;
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
@@ -65,6 +77,8 @@ const PlasmaTheme: React.FC = () => {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

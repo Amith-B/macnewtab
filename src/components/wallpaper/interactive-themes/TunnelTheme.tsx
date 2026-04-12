@@ -27,6 +27,7 @@ const TunnelTheme: React.FC = () => {
     let mouse = { x: cx, y: cy };
 
     let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const animate = () => {
       if (!ctx) return;
@@ -75,8 +76,11 @@ const TunnelTheme: React.FC = () => {
     };
 
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }, 200);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -92,6 +96,7 @@ const TunnelTheme: React.FC = () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

@@ -107,6 +107,7 @@ const HexagonGridTheme: React.FC = () => {
     };
 
     let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
     const animate = () => {
       if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
@@ -118,11 +119,13 @@ const HexagonGridTheme: React.FC = () => {
       animationId = requestAnimationFrame(animate);
     };
 
-    // Event listeners
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      init();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        init();
+      }, 200);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -147,6 +150,7 @@ const HexagonGridTheme: React.FC = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseout", handleMouseLeave);
       cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

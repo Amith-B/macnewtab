@@ -11,8 +11,10 @@ const FirefliesTheme: React.FC = () => {
 
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
+    let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
-    const fireflies: any[] = [];
+    const fireflies: Firefly[] = [];
     const maxFireflies = 80;
 
     class Firefly {
@@ -70,13 +72,16 @@ const FirefliesTheme: React.FC = () => {
       if (!ctx) return;
       ctx.clearRect(0, 0, w, h);
       fireflies.forEach((f) => f.update());
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     const handleResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-      init();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        init();
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
@@ -85,6 +90,8 @@ const FirefliesTheme: React.FC = () => {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

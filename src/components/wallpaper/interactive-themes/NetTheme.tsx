@@ -45,6 +45,7 @@ const NetTheme: React.FC = () => {
     let mouse = { x: -1000, y: -1000 };
 
     let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const animate = () => {
       if (!ctx) return;
@@ -112,11 +113,11 @@ const NetTheme: React.FC = () => {
     };
 
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      // Re-init? or just leave breakage
-      // For simplicity, just reload window usually, but here we should re-init points
-      // Doing full re-init might reset animation but it's cleaner
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }, 200);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -132,6 +133,7 @@ const NetTheme: React.FC = () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

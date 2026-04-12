@@ -11,9 +11,9 @@ const RipplesTheme: React.FC = () => {
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     // Ripple logic
-    // We can store a list of ripples
     interface Ripple {
       x: number;
       y: number;
@@ -37,12 +37,18 @@ const RipplesTheme: React.FC = () => {
     let frame = 0;
     let animationId: number;
 
-    // Background gradient or color
-    const drawBackground = () => {
-      const grd = ctx.createLinearGradient(0, 0, 0, height);
+    // Cache background gradient — recreate only on resize
+    let bgGradient = createBgGradient();
+
+    function createBgGradient() {
+      const grd = ctx!.createLinearGradient(0, 0, 0, height);
       grd.addColorStop(0, "#001133");
       grd.addColorStop(1, "#003366");
-      ctx.fillStyle = grd;
+      return grd;
+    }
+
+    const drawBackground = () => {
+      ctx.fillStyle = bgGradient;
       ctx.fillRect(0, 0, width, height);
     };
 
@@ -78,8 +84,12 @@ const RipplesTheme: React.FC = () => {
     };
 
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        bgGradient = createBgGradient();
+      }, 200);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -103,6 +113,7 @@ const RipplesTheme: React.FC = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousedown", handleClick);
       cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

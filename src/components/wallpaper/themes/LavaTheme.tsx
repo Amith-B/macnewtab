@@ -11,8 +11,10 @@ const LavaTheme: React.FC = () => {
 
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
+    let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
-    const balls: any[] = [];
+    const balls: { x: number; y: number; vx: number; vy: number; radius: number }[] = [];
     const numBalls = 15;
 
     for (let i = 0; i < numBalls; i++) {
@@ -60,12 +62,15 @@ const LavaTheme: React.FC = () => {
       });
 
       ctx.globalCompositeOperation = "source-over";
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     const handleResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
@@ -73,6 +78,8 @@ const LavaTheme: React.FC = () => {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 
