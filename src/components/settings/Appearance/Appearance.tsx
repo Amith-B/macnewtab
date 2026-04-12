@@ -124,6 +124,12 @@ export default function Appearance() {
         />
       </div>
 
+      {(wallpaperType === "dynamic" || wallpaperType === "interactive") && (
+        <div className="appearance__battery-warning">
+          ℹ️ <Translation value="animated_wallpaper_warning" />
+        </div>
+      )}
+
       {wallpaperType === "dynamic" ? (
         <div className="appearance__dynamic-theme-container">
           <Translation value="dynamic_theme" />

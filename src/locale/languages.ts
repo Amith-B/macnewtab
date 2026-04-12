@@ -211,6 +211,7 @@ export const translation = {
     show_battery: "Show Battery Widget",
     battery_charging: "Charging",
     battery_label: "Battery",
+    animated_wallpaper_warning: "Animated wallpapers may use slightly more battery if the device is running on battery.",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -424,6 +425,7 @@ export const translation = {
     show_battery: "ಬ್ಯಾಟರಿ ವಿಜೆಟ್ ತೋರಿಸಿ",
     battery_charging: "ಚಾರ್ಜ್ ಆಗುತ್ತಿದೆ",
     battery_label: "ಬ್ಯಾಟರಿ",
+    animated_wallpaper_warning: "ಸಾಧನವು ಬ್ಯಾಟರಿಯಲ್ಲಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿದ್ದರೆ ಅನಿಮೇಟೆಡ್ ವಾಲ್‌ಪೇಪರ್‌ಗಳು ಸ್ವಲ್ಪ ಹೆಚ್ಚು ಬ್ಯಾಟರಿಯನ್ನು ಬಳಸಬಹುದು.",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -636,6 +638,7 @@ export const translation = {
     show_battery: "Zobrazit widget baterie",
     battery_charging: "Nabíjení",
     battery_label: "Baterie",
+    animated_wallpaper_warning: "Animované tapety mohou spotřebovat o něco více baterie, pokud zařízení běží na baterii.",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -850,6 +853,7 @@ export const translation = {
     show_battery: "Pil Widget'ını Göster",
     battery_charging: "Şarj oluyor",
     battery_label: "Pil",
+    animated_wallpaper_warning: "Cihaz pille çalışıyorsa hareketli duvar kağıtları biraz daha fazla pil tüketebilir.",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -1064,6 +1068,7 @@ export const translation = {
     show_battery: "Hiển thị tiện ích pin",
     battery_charging: "Đang sạc",
     battery_label: "Pin",
+    animated_wallpaper_warning: "Hình nền động có thể sử dụng nhiều pin hơn một chút nếu thiết bị đang chạy bằng pin.",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -1277,6 +1282,7 @@ export const translation = {
     show_battery: "Batareya vidjetini ko'rsatish",
     battery_charging: "Quvvatlanmoqda",
     battery_label: "Batareya",
+    animated_wallpaper_warning: "Agar qurilma batareyada ishlayotgan bo'lsa, jonlantirilgan fon rasmlari bir oz ko'proq batareya sarflashi mumkin.",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -1485,6 +1491,7 @@ export const translation = {
     show_battery: "显示电池小部件",
     battery_charging: "充电中",
     battery_label: "电池",
+    animated_wallpaper_warning: "如果设备使用电池供电，动态壁纸可能会稍微增加电池消耗。",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -1698,6 +1705,7 @@ export const translation = {
     show_battery: "बैटरी विजेट दिखाएं",
     battery_charging: "चार्ज हो रहा है",
     battery_label: "बैटरी",
+    animated_wallpaper_warning: "यदि डिवाइस बैटरी पर चल रहा है तो एनिमेटेड वॉलपेपर थोड़ी अधिक बैटरी का उपयोग कर सकते हैं।",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -1913,6 +1921,7 @@ export const translation = {
     show_battery: "Mostra widget batteria",
     battery_charging: "In carica",
     battery_label: "Batteria",
+    animated_wallpaper_warning: "Gli sfondi animati potrebbero utilizzare un po' più di batteria se il dispositivo funziona a batteria.",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -2126,6 +2135,7 @@ export const translation = {
     show_battery: "ব্যাটারি উইজেট দেখান",
     battery_charging: "চার্জ হচ্ছে",
     battery_label: "ব্যাটারি",
+    animated_wallpaper_warning: "ডিভাইসটি ব্যাটারিতে চললে অ্যানিমেটেড ওয়ালপেপারগুলি কিছুটা বেশি ব্যাটারি ব্যবহার করতে পারে।",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -2341,6 +2351,7 @@ export const translation = {
     show_battery: "Mostrar widget de bateria",
     battery_charging: "Carregando",
     battery_label: "Bateria",
+    animated_wallpaper_warning: "Papéis de parede animados podem usar um pouco mais de bateria se o dispositivo estiver funcionando com bateria.",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -2555,6 +2566,7 @@ export const translation = {
     show_battery: "Afficher le widget de batterie",
     battery_charging: "En charge",
     battery_label: "Batterie",
+    animated_wallpaper_warning: "Les fonds d'écran animés peuvent consommer un peu plus de batterie si l'appareil fonctionne sur batterie.",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -2768,6 +2780,7 @@ export const translation = {
     show_battery: "Показать виджет батареи",
     battery_charging: "Зарядка",
     battery_label: "Батарея",
+    animated_wallpaper_warning: "Анимированные обои могут потреблять немного больше батареи, если устройство работает от батареи.",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -2982,6 +2995,7 @@ export const translation = {
     show_battery: "Mostrar widget de batería",
     battery_charging: "Cargando",
     battery_label: "Batería",
+    animated_wallpaper_warning: "Los fondos de pantalla animados pueden consumir un poco más de batería si el dispositivo funciona con batería.",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -3193,6 +3207,7 @@ export const translation = {
     show_battery: "バッテリーウィジェットを表示",
     battery_charging: "充電中",
     battery_label: "バッテリー",
+    animated_wallpaper_warning: "デバイスがバッテリーで動作している場合、アニメーションの壁紙は少し多くのバッテリーを消費する可能性があります。",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -3403,6 +3418,7 @@ export const translation = {
     show_battery: "배터리 위젯 표시",
     battery_charging: "충전 중",
     battery_label: "배터리",
+    animated_wallpaper_warning: "기기가 배터리로 실행 중인 경우 애니메이션 배경화면이 배터리를 약간 더 소모할 수 있습니다.",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -3615,6 +3631,7 @@ export const translation = {
     show_battery: "Tampilkan widget baterai",
     battery_charging: "Mengisi daya",
     battery_label: "Baterai",
+    animated_wallpaper_warning: "Gambar latar animasi mungkin menggunakan sedikit lebih banyak baterai jika perangkat berjalan menggunakan baterai.",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -3827,6 +3844,7 @@ export const translation = {
     show_battery: "बॅटरी विजेट दाखवा",
     battery_charging: "चार्ज होत आहे",
     battery_label: "बॅटरी",
+    animated_wallpaper_warning: "डिव्हाइस बॅटरीवर चालत असल्यास ॲनिमेटेड वॉलपेपर थोडी जास्त बॅटरी वापरू शकतात.",
   },
   pl: {
     show_greetings: "Pokaż pozdrowienia",
@@ -4040,6 +4058,7 @@ export const translation = {
     show_battery: "Pokaż widżet baterii",
     battery_charging: "Ładowanie",
     battery_label: "Bateria",
+    animated_wallpaper_warning: "Animowane tapety mogą zużywać nieco więcej baterii, jeśli urządzenie działa na baterii.",
   },
   de: {
     show_greetings: "Grüße anzeigen",
@@ -4252,6 +4271,7 @@ export const translation = {
     show_battery: "Batterie-Widget anzeigen",
     battery_charging: "Lädt",
     battery_label: "Batterie",
+    animated_wallpaper_warning: "Animierte Hintergrundbilder können etwas mehr Akku verbrauchen, wenn das Gerät im Akkubetrieb läuft.",
   },
 };
 export const languages = Object.keys(
