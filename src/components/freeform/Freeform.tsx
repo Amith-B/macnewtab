@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, memo } from "react";
+import React, { useState, useEffect, useRef, useCallback, memo, useContext } from "react";
 import "./Freeform.css";
 import {
   CanvasObject,
@@ -15,6 +15,8 @@ import {
 import { getBodyZoomScale } from "../../utils/zoom";
 import { useHistory } from "./useHistory";
 import { FREEFORM_DATA_LOCAL_STORAGE_KEY } from "../../static/freeformSettings";
+import { AppContext } from "../../context/provider";
+import { translation } from "../../locale/languages";
 
 import { ReactComponent as UndoIcon } from "./icons/undo.svg";
 import { ReactComponent as RedoIcon } from "./icons/redo.svg";
@@ -62,17 +64,17 @@ const STICKY_COLORS = [
   "#E6CCFF",
 ];
 
-const SHAPE_LIST: { type: ShapeType; label: string }[] = [
-  { type: "line", label: "Line" },
-  { type: "arrow", label: "Arrow" },
-  { type: "rectangle", label: "Rect" },
-  { type: "roundedRectangle", label: "Rounded" },
-  { type: "circle", label: "Circle" },
-  { type: "triangle", label: "Triangle" },
-  { type: "diamond", label: "Diamond" },
-  { type: "star", label: "Star" },
-  { type: "pentagon", label: "Pentagon" },
-  { type: "speechBubble", label: "Speech" },
+const SHAPE_LIST: { type: ShapeType; labelKey: string }[] = [
+  { type: "line", labelKey: "freeform_shape_line" },
+  { type: "arrow", labelKey: "freeform_shape_arrow" },
+  { type: "rectangle", labelKey: "freeform_shape_rect" },
+  { type: "roundedRectangle", labelKey: "freeform_shape_rounded" },
+  { type: "circle", labelKey: "freeform_shape_circle" },
+  { type: "triangle", labelKey: "freeform_shape_triangle" },
+  { type: "diamond", labelKey: "freeform_shape_diamond" },
+  { type: "star", labelKey: "freeform_shape_star" },
+  { type: "pentagon", labelKey: "freeform_shape_pentagon" },
+  { type: "speechBubble", labelKey: "freeform_shape_speech" },
 ];
 
 function generateId() {
@@ -418,10 +420,16 @@ function eraseAt(
   const newObjects: CanvasObject[] = [];
 
   for (const obj of objects) {
-    let rx = 0, ry = 0, lw = 0, lh = 0;
-    
+    let rx = 0,
+      ry = 0,
+      lw = 0,
+      lh = 0;
+
     if (obj.type === "stroke") {
-      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      let minX = Infinity,
+        minY = Infinity,
+        maxX = -Infinity,
+        maxY = -Infinity;
       for (const p of obj.points) {
         if (p.x < minX) minX = p.x;
         if (p.y < minY) minY = p.y;
@@ -430,8 +438,8 @@ function eraseAt(
       }
       rx = minX - obj.width;
       ry = minY - obj.width;
-      lw = (maxX - minX) + obj.width * 2;
-      lh = (maxY - minY) + obj.width * 2;
+      lw = maxX - minX + obj.width * 2;
+      lh = maxY - minY + obj.width * 2;
     } else {
       const { x, y, width, height } = obj as any;
       rx = Math.min(x, x + width);
@@ -447,7 +455,9 @@ function eraseAt(
       changed = true;
 
       const newObj = { ...obj } as any;
-      const erasedStrokes = newObj.erasedStrokes ? [...newObj.erasedStrokes] : [];
+      const erasedStrokes = newObj.erasedStrokes
+        ? [...newObj.erasedStrokes]
+        : [];
       newObj.erasedStrokes = erasedStrokes;
 
       if (!activeEraserRef[obj.id]) {
@@ -596,6 +606,8 @@ function drawObjectBase(
   }
 }
 
+type Plan = "basic" | "pro";
+
 // ─── Main Component ────────────────────────────────────────
 const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
   ({ visible, onClose }) => {
@@ -603,6 +615,21 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     const containerRef = useRef<HTMLDivElement>(null);
     const tempCanvasRef = useRef<HTMLCanvasElement | null>(null);
     const imageCacheRef = useRef<Map<string, HTMLImageElement>>(new Map());
+
+    const plan: Plan = "pro" as Plan;
+
+    const isProTool = (id: string) =>
+      ["finePen", "highlighter", "shape", "sticky", "image"].includes(id);
+    const isBasicColor = (c: string) => c === "#000000" || c === "#FFFFFF";
+
+    const [showPricingBanner, setShowPricingBanner] = useState(
+      () => localStorage.getItem("freeform_pricing_banner_dismissed") !== "true",
+    );
+
+    const dismissPricingBanner = () => {
+      localStorage.setItem("freeform_pricing_banner_dismissed", "true");
+      setShowPricingBanner(false);
+    };
 
     const [tool, setTool] = useState<ToolType>("pen");
     const [color, setColor] = useState("#000000");
@@ -633,6 +660,9 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
 
     const { objects, pushState, replaceState, undo, redo, canUndo, canRedo } =
       useHistory(loadData());
+
+    const { locale } = useContext(AppContext);
+    const t = translation[locale];
 
     // Screen → world coords
     const screenToWorld = useCallback(
@@ -682,10 +712,16 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
           // Render offscreen to composite erasing transparency
           const o = obj as any;
           const pad = 80; // High padding for large blurs or strokes that exceed bounds natively
-          
-          let rx = 0, ry = 0, oWidth = 0, oHeight = 0;
+
+          let rx = 0,
+            ry = 0,
+            oWidth = 0,
+            oHeight = 0;
           if (o.type === "stroke") {
-            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            let minX = Infinity,
+              minY = Infinity,
+              maxX = -Infinity,
+              maxY = -Infinity;
             for (const p of o.points) {
               if (p.x < minX) minX = p.x;
               if (p.y < minY) minY = p.y;
@@ -694,8 +730,8 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
             }
             rx = minX - o.width;
             ry = minY - o.width;
-            oWidth = (maxX - minX) + o.width * 2;
-            oHeight = (maxY - minY) + o.width * 2;
+            oWidth = maxX - minX + o.width * 2;
+            oHeight = maxY - minY + o.width * 2;
           } else {
             rx = Math.min(o.x, o.x + o.width);
             ry = Math.min(o.y, o.y + o.height);
@@ -918,6 +954,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
 
         // Middle button or space = pan
         if (e.button === 1) {
+          if (plan === "basic") return;
           isPanningRef.current = true;
           panStartRef.current = { x: e.clientX, y: e.clientY };
           camStartRef.current = { ...camera };
@@ -1018,7 +1055,17 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
           return;
         }
       },
-      [tool, camera, objects, screenToWorld, pushState, replaceState, color, setTool, eraserWidth],
+      [
+        tool,
+        camera,
+        objects,
+        screenToWorld,
+        pushState,
+        replaceState,
+        color,
+        setTool,
+        eraserWidth,
+      ],
     );
 
     const handleMouseMove = useCallback(
@@ -1156,14 +1203,18 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     }, [tool, color, strokeWidth, objects, pushState]);
 
     // Wheel for zoom
-    const handleWheel = useCallback((e: React.WheelEvent) => {
-      e.preventDefault();
-      const delta = e.deltaY > 0 ? 0.9 : 1.1;
-      setCamera((c) => ({
-        ...c,
-        zoom: Math.max(0.1, Math.min(5, c.zoom * delta)),
-      }));
-    }, []);
+    const handleWheel = useCallback(
+      (e: React.WheelEvent) => {
+        e.preventDefault();
+        if (plan === "basic") return;
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        setCamera((c) => ({
+          ...c,
+          zoom: Math.max(0.1, Math.min(5, c.zoom * delta)),
+        }));
+      },
+      [plan],
+    );
 
     // Image paste / upload
     const handleImageUpload = useCallback(() => {
@@ -1202,13 +1253,14 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     }, [objects, pushState, screenToWorld]);
 
     const handleExport = useCallback(() => {
+      if (plan === "basic") return;
       const canvas = canvasRef.current;
       if (!canvas) return;
       const link = document.createElement("a");
       link.download = "freeform-canvas.png";
       link.href = canvas.toDataURL("image/png");
       link.click();
-    }, []);
+    }, [plan]);
 
     const handleClearAll = useCallback(() => {
       pushState([]);
@@ -1263,12 +1315,12 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     const toolList: { id: ToolType; icon: JSX.Element; label: string }[] = [
       {
         id: "select",
-        label: "Select",
+        label: t.freeform_tool_select,
         icon: <SelectIcon width="18" height="18" />,
       },
       {
         id: "pen",
-        label: "Pen",
+        label: t.freeform_tool_pen,
         icon: (
           <PenIcon
             width="18"
@@ -1279,57 +1331,83 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
       },
       {
         id: "finePen",
-        label: "Fine Pen",
+        label: t.freeform_tool_fine_pen,
         icon: <FinePenIcon width="18" height="18" />,
       },
       {
         id: "highlighter",
-        label: "Highlighter",
+        label: t.freeform_tool_highlighter,
         icon: <HighlighterIcon width="18" height="18" />,
       },
       {
         id: "eraser",
-        label: "Eraser",
+        label: t.freeform_tool_eraser,
         icon: <EraserIcon width="18" height="18" />,
       },
-      { id: "text", label: "Text", icon: <TextIcon width="18" height="18" /> },
+      { id: "text", label: t.freeform_tool_text, icon: <TextIcon width="18" height="18" /> },
       {
         id: "shape",
-        label: "Shape",
+        label: t.freeform_tool_shape,
         icon: <ShapesIcon width="18" height="18" />,
       },
       {
         id: "sticky",
-        label: "Sticky",
+        label: t.freeform_tool_sticky,
         icon: <StickyIcon width="18" height="18" />,
       },
       {
         id: "image",
-        label: "Image",
+        label: t.freeform_tool_image,
         icon: <ImageIcon width="18" height="18" />,
       },
     ];
 
     return (
       <div className={`freeform-overlay${visible ? " visible" : ""}`}>
+        {/* Pricing notice banner */}
+        {showPricingBanner && (
+          <div className="freeform-pricing-banner">
+            <span>{t.freeform_pricing_notice}</span>
+            <a
+              href="https://www.buymeacoffee.com/amithb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="freeform-bmc-btn"
+            >
+              <img
+                src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                alt="Buy Me A Coffee"
+                style={{ height: 28, width: "auto" }}
+              />
+            </a>
+            <button
+              className="freeform-pricing-banner-dismiss"
+              onClick={dismissPricingBanner}
+              title={t.freeform_dismiss}
+            >
+              ✕
+            </button>
+          </div>
+        )}
+
         {/* Top Bar */}
         <div className="freeform-topbar">
           <div className="freeform-topbar-left">
             <button
               className="freeform-close-btn"
               onClick={onClose}
-              title="Close"
+              title={t.freeform_close}
             >
               <CloseIcon width="14" height="14" />
             </button>
-            <span className="freeform-title">Freeform</span>
+            <span className="freeform-title">{t.freeform}</span>
           </div>
           <div className="freeform-topbar-right">
             <button
               className="freeform-action-btn"
               onClick={undo}
               disabled={!canUndo}
-              title="Undo"
+              title={t.freeform_undo}
             >
               <UndoIcon width="16" height="16" />
             </button>
@@ -1337,21 +1415,21 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               className="freeform-action-btn"
               onClick={redo}
               disabled={!canRedo}
-              title="Redo"
+              title={t.freeform_redo}
             >
               <RedoIcon width="16" height="16" />
             </button>
             <button
               className="freeform-action-btn"
               onClick={handleExport}
-              title="Export PNG"
+              title={t.freeform_export}
             >
               <ExportIcon width="16" height="16" />
             </button>
             <button
               className="freeform-action-btn"
               onClick={handleClearAll}
-              title="Clear All"
+              title={t.freeform_clear_all}
             >
               <ClearAllIcon width="16" height="16" />
             </button>
@@ -1431,38 +1509,46 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               onPointerDown={(e) => e.stopPropagation()}
               onClick={(e) => e.stopPropagation()}
               onKeyDown={(e) => e.stopPropagation()}
-              placeholder="Type here..."
+              placeholder={t.freeform_placeholder}
             />
           )}
         </div>
 
         {/* Floating Toolbar */}
         <div className="freeform-toolbar">
-          {toolList.map((t) => (
-            <button
-              key={t.id}
-              className={`freeform-tool-btn${tool === t.id ? " active" : ""}`}
-              onClick={() => {
-                if (t.id === "image") {
-                  handleImageUpload();
-                  return;
-                }
-                const isSameTool = tool === t.id;
-                setTool(t.id);
-                setShowColorPicker(false);
-                setShowShapePicker(false);
-                setShowEraserPicker(false);
-                if (t.id === "shape") {
-                  setShowShapePicker(!isSameTool || !showShapePicker);
-                } else if (t.id === "eraser") {
-                  setShowEraserPicker(!isSameTool || !showEraserPicker);
-                }
-              }}
-              title={t.label}
-            >
-              {t.icon}
-            </button>
-          ))}
+          {toolList.map((toolItem) => {
+            const isDisabled = plan === "basic" && isProTool(toolItem.id);
+            return (
+              <button
+                key={toolItem.id}
+                className={`freeform-tool-btn${tool === toolItem.id ? " active" : ""}`}
+                style={{
+                  opacity: isDisabled ? 0.3 : 1,
+                  cursor: isDisabled ? "not-allowed" : "pointer",
+                }}
+                disabled={isDisabled}
+                onClick={() => {
+                  if (toolItem.id === "image") {
+                    handleImageUpload();
+                    return;
+                  }
+                  const isSameTool = tool === toolItem.id;
+                  setTool(toolItem.id);
+                  setShowColorPicker(false);
+                  setShowShapePicker(false);
+                  setShowEraserPicker(false);
+                  if (toolItem.id === "shape") {
+                    setShowShapePicker(!isSameTool || !showShapePicker);
+                  } else if (toolItem.id === "eraser") {
+                    setShowEraserPicker(!isSameTool || !showEraserPicker);
+                  }
+                }}
+                title={toolItem.label + (isDisabled ? ` (${t.freeform_pro_only})` : "")}
+              >
+                {toolItem.icon}
+              </button>
+            );
+          })}
 
           <div className="freeform-toolbar-divider" />
 
@@ -1475,7 +1561,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               setShowShapePicker(false);
               setShowEraserPicker(false);
             }}
-            title="Color"
+            title={t.freeform_color}
           />
 
           {/* Color picker popup */}
@@ -1486,22 +1572,31 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               onClick={(e) => e.stopPropagation()}
             >
               <div className="freeform-color-grid">
-                {COLORS.map((c) => (
-                  <button
-                    key={c}
-                    className={`freeform-color-swatch${color === c ? " active" : ""}`}
-                    style={{ background: c }}
-                    onClick={() => {
-                      setColor(c);
-                      setShowColorPicker(false);
-                    }}
-                  />
-                ))}
+                {COLORS.map((c) => {
+                  const isColorDisabled = plan === "basic" && !isBasicColor(c);
+                  return (
+                    <button
+                      key={c}
+                      className={`freeform-color-swatch${color === c ? " active" : ""}`}
+                      style={{
+                        background: c,
+                        opacity: isColorDisabled ? 0.3 : 1,
+                        cursor: isColorDisabled ? "not-allowed" : "pointer",
+                      }}
+                      disabled={isColorDisabled}
+                      title={isColorDisabled ? t.freeform_pro_only : undefined}
+                      onClick={() => {
+                        setColor(c);
+                        setShowColorPicker(false);
+                      }}
+                    />
+                  );
+                })}
               </div>
               {tool === "pen" && (
                 <>
                   <div className="freeform-width-label">
-                    Stroke Width: {strokeWidth}px
+                    {t.freeform_stroke_width}: {strokeWidth}px
                   </div>
                   <input
                     type="range"
@@ -1523,7 +1618,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               style={{ right: 40 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="freeform-shapes-title">Shapes</div>
+              <div className="freeform-shapes-title">{t.freeform_shapes_title}</div>
               <div className="freeform-shapes-grid">
                 {SHAPE_LIST.map((s) => (
                   <button
@@ -1533,7 +1628,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
                       setSelectedShape(s.type);
                       setShowShapePicker(false);
                     }}
-                    title={s.label}
+                    title={t[s.labelKey as keyof typeof t] as string}
                   >
                     <ShapeIcon type={s.type} />
                   </button>
@@ -1549,7 +1644,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               style={{ right: 80 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="freeform-shapes-title">Eraser Size</div>
+              <div className="freeform-shapes-title">{t.freeform_eraser_size}</div>
               <div style={{ padding: "0 8px 8px" }}>
                 <input
                   type="range"
@@ -1565,11 +1660,18 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
         </div>
 
         {/* Zoom controls */}
-        <div className="freeform-zoom-controls">
+        <div
+          className="freeform-zoom-controls"
+          style={{
+            opacity: plan === "basic" ? 0.3 : 1,
+            pointerEvents: plan === "basic" ? "none" : "auto",
+          }}
+          title={plan === "basic" ? t.freeform_zoom_locked : ""}
+        >
           <button
             className="freeform-zoom-btn"
             onClick={handleZoomIn}
-            title="Zoom In"
+            title={t.freeform_zoom_in}
           >
             +
           </button>
@@ -1579,14 +1681,14 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
           <button
             className="freeform-zoom-btn"
             onClick={handleZoomOut}
-            title="Zoom Out"
+            title={t.freeform_zoom_out}
           >
             −
           </button>
           <button
             className="freeform-zoom-btn"
             onClick={handleZoomReset}
-            title="Reset"
+            title={t.freeform_zoom_reset}
             style={{ fontSize: 18 }}
           >
             ⟲

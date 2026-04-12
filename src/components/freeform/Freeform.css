@@ -425,3 +425,58 @@
   padding: 2px 4px;
   min-width: 32px;
 }
+
+/* Pricing notice banner */
+.freeform-pricing-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: linear-gradient(90deg, rgba(255,180,0,0.15), rgba(255,140,0,0.12));
+  border-bottom: 1px solid rgba(255,165,0,0.25);
+  font-size: 12px;
+  font-weight: 500;
+  color: #a06000;
+  position: relative;
+  z-index: 11;
+}
+
+.App.theme-dark .freeform-pricing-banner {
+  background: linear-gradient(90deg, rgba(255,180,0,0.1), rgba(255,140,0,0.07));
+  border-bottom-color: rgba(255,180,0,0.2);
+  color: #ffc043;
+}
+
+.freeform-pricing-banner-dismiss {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: inherit;
+  opacity: 0.6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  margin-left: auto;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+
+.freeform-pricing-banner-dismiss:hover {
+  opacity: 1;
+}
+
+.freeform-bmc-btn {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0.92;
+  transition: opacity 0.15s;
+}
+
+.freeform-bmc-btn:hover {
+  opacity: 1;
+}
