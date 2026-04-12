@@ -11,8 +11,10 @@ const SnowTheme: React.FC = () => {
 
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
+    let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
-    const snowflakes: any[] = [];
+    const snowflakes: Snowflake[] = [];
     const maxFlakes = 200;
 
     class Snowflake {
@@ -64,13 +66,16 @@ const SnowTheme: React.FC = () => {
       if (!ctx) return;
       ctx.clearRect(0, 0, w, h);
       snowflakes.forEach((flake) => flake.update());
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     const handleResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-      init();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        init();
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
@@ -79,6 +84,8 @@ const SnowTheme: React.FC = () => {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

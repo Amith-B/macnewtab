@@ -138,6 +138,7 @@ const ParticlesInteractiveTheme: React.FC = () => {
     };
 
     let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const animate = () => {
       if (!ctx) return;
@@ -153,10 +154,13 @@ const ParticlesInteractiveTheme: React.FC = () => {
     animate();
 
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      mouse.radius = (canvas.height / 80) * (canvas.width / 80);
-      init();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        mouse.radius = (canvas.height / 80) * (canvas.width / 80);
+        init();
+      }, 200);
     };
 
     const handleMouseMove = (event: MouseEvent) => {
@@ -178,6 +182,7 @@ const ParticlesInteractiveTheme: React.FC = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseout", handleMouseLeave);
       cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

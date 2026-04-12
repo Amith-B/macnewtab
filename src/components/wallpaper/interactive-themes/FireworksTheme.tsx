@@ -68,6 +68,7 @@ const FireworksTheme: React.FC = () => {
     let frame = 0;
 
     let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const animate = () => {
       if (!ctx) return;
@@ -92,8 +93,11 @@ const FireworksTheme: React.FC = () => {
     };
 
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }, 200);
     };
 
     const handleClick = (e: MouseEvent) => {
@@ -108,6 +112,7 @@ const FireworksTheme: React.FC = () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousedown", handleClick);
       cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

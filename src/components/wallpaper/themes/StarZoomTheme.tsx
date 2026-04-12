@@ -11,8 +11,10 @@ const StarZoomTheme: React.FC = () => {
 
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
+    let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
-    const stars: any[] = [];
+    const stars: Star[] = [];
     const maxStars = 800;
 
     class Star {
@@ -67,13 +69,16 @@ const StarZoomTheme: React.FC = () => {
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, w, h);
       stars.forEach((star) => star.update(speed));
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     const handleResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-      init();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        init();
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
@@ -82,6 +87,8 @@ const StarZoomTheme: React.FC = () => {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

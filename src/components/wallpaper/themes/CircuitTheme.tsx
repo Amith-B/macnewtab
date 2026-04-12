@@ -58,6 +58,7 @@ const CircuitTheme: React.FC = () => {
     };
 
     let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const animate = () => {
       if (!ctx) return;
@@ -106,8 +107,11 @@ const CircuitTheme: React.FC = () => {
     };
 
     const handleResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
@@ -116,6 +120,7 @@ const CircuitTheme: React.FC = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

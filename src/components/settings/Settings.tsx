@@ -83,6 +83,43 @@ const ACCOUNT_MENU = {
   content: GoogleAccount,
 };
 
+const DARK_DYNAMIC_THEMES = new Set([
+  "hyper",
+  "grid",
+  "matrix",
+  "particles",
+  "waves",
+  "fireflies",
+  "star-zoom",
+  "circuit",
+  "circuit-2",
+  "dna",
+  "wormhole",
+  "plasma",
+  "lava",
+  "fog",
+  "hexagons",
+  "cubes",
+  "tunnel",
+  "net",
+  "globe",
+]);
+
+const DARK_INTERACTIVE_THEMES = new Set([
+  "particles",
+  "hexagon",
+  "waves",
+  "fluid",
+  "constellation",
+  "globe",
+  "net",
+  "fireworks",
+  "ripples",
+  "tunnel",
+  "space-globes",
+  "breakout",
+]);
+
 export default function Settings({
   open,
   onClose,
@@ -92,7 +129,8 @@ export default function Settings({
 }) {
   const [selectedMenu, setSelectedMenu] = useState(SETTINGS_MENU[0]);
   const [modalAccessible, setModalAccessible] = useState(false);
-  const { dockPosition, googleUser } = useContext(AppContext);
+  const { dockPosition, googleUser, wallpaperType, dynamicWallpaperTheme, interactiveWallpaperTheme } =
+    useContext(AppContext);
 
   const [position, setPosition] = useState({ x: "unset", y: "unset" });
   const modalRef = useRef<HTMLDivElement>(null);
@@ -139,6 +177,18 @@ export default function Settings({
     return selectedMenu.content;
   }, [selectedMenu]);
 
+  const useHighContrastSidebar = useMemo(() => {
+    if (wallpaperType === "dynamic") {
+      return DARK_DYNAMIC_THEMES.has(dynamicWallpaperTheme);
+    }
+
+    if (wallpaperType === "interactive") {
+      return DARK_INTERACTIVE_THEMES.has(interactiveWallpaperTheme);
+    }
+
+    return false;
+  }, [wallpaperType, dynamicWallpaperTheme, interactiveWallpaperTheme]);
+
   // this is to prevent keyboard accessibility when modal is closed
   useEffect(() => {
     if (open) {
@@ -175,7 +225,10 @@ export default function Settings({
         }}
       >
         <div
-          className="settings__side-panel draggable"
+          className={
+            "settings__side-panel draggable" +
+            (useHighContrastSidebar ? " high-contrast" : "")
+          }
           onMouseDown={handleMouseDown}
         >
           <div className="settings__window-manager">

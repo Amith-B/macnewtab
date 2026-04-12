@@ -2,6 +2,7 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useMemo,
   ReactNode,
   createContext,
 } from "react";
@@ -51,10 +52,7 @@ import {
   SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
   ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY,
 } from "../static/stickyNotes";
-import {
-  getLocalstorageDataWithPromise,
-  useLocalStorage,
-} from "../utils/localStorage";
+import { useLocalStorage } from "../utils/localStorage";
 import {
   GOOGLE_CALENDAR_EVENTS_LOCAL_STORAGE_KEY,
   GOOGLE_USER_LOCAL_STORAGE_KEY,
@@ -487,30 +485,25 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const getList = () => {
-      const request = getLocalstorageDataWithPromise(
-        TODO_LIST_LOCAL_STORAGE_KEY,
-      );
+      const todoList = localStorage.getItem(TODO_LIST_LOCAL_STORAGE_KEY);
+      try {
+        if (todoList) {
+          let parsedList = JSON.parse(todoList) as TodoList;
 
-      request.then((todoList: string | null) => {
-        try {
-          if (todoList) {
-            let parsedList = JSON.parse(todoList) as TodoList;
+          parsedList = parsedList.map((item) => ({
+            ...item,
+            id: item.id || generateRandomId(),
+          }));
 
-            parsedList = parsedList.map((item) => ({
-              ...item,
-              id: item.id || generateRandomId(),
-            }));
-
-            if (Array.isArray(parsedList)) {
-              setTodoList(parsedList);
-            }
-          } else {
-            setTodoList([]);
+          if (Array.isArray(parsedList)) {
+            setTodoList(parsedList);
           }
-        } catch (_) {
+        } else {
           setTodoList([]);
         }
-      });
+      } catch (_) {
+        setTodoList([]);
+      }
     };
 
     getList();
@@ -535,6 +528,34 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
     loadGoogleUser();
   }, []);
+
+  const handleSaveWallpaper = useCallback(async (base64Image: string) => {
+    const blobURL = await saveImageToIndexedDB(base64Image);
+    setBackgroundImage(blobURL);
+  }, []);
+
+  const handleLoadWallpaper = useCallback(async () => {
+    const blobURL = await fetchImageFromIndexedDB();
+    if (blobURL) {
+      setBackgroundImage(blobURL);
+    }
+  }, []);
+
+  const handleDeleteWallpaper = useCallback(async () => {
+    await deleteImageFromIndexedDB();
+    setBackgroundImage("");
+  }, []);
+
+  const handleWallpaperChange = useCallback(
+    (val: string) => {
+      if (val) {
+        handleSaveWallpaper(val);
+      } else {
+        handleDeleteWallpaper();
+      }
+    },
+    [handleSaveWallpaper, handleDeleteWallpaper],
+  );
 
   useEffect(() => {
     handleLoadWallpaper();
@@ -610,7 +631,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, []);
+  }, [handleLoadWallpaper]);
 
   useEffect(() => {
     if (!showGoogleCalendar || !googleAuthToken) {
@@ -623,7 +644,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line
   }, [showGoogleCalendar, googleAuthToken]);
 
-  const handleClearCompletedTodoList = () => {
+  const handleClearCompletedTodoList = useCallback(() => {
     const todoSavedDate = localStorage.getItem(
       TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
     );
@@ -644,120 +665,107 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
       formatedCurrentDate,
     );
-  };
+  }, [todoList]);
 
-  const handleWallpaperChange = (val: string) => {
-    if (val) {
-      handleSaveWallpaper(val);
-    } else {
-      handleDeleteWallpaper();
-    }
-  };
+  const handleTodoListUpdate = useCallback((list: TodoList) => {
+    setTodoList(list);
+    localStorage.setItem(TODO_LIST_LOCAL_STORAGE_KEY, JSON.stringify(list));
+  }, []);
 
-  const handleSaveWallpaper = async (base64Image: string) => {
-    const blobURL = await saveImageToIndexedDB(base64Image);
-    setBackgroundImage(blobURL);
-  };
+  const handleAddTodoList = useCallback(
+    (content: string) => {
+      const updatedTodoList = [
+        {
+          checked: false,
+          id: generateRandomId(),
+          content,
+        },
+        ...todoList,
+      ] as TodoList;
 
-  const handleLoadWallpaper = async () => {
-    const blobURL = await fetchImageFromIndexedDB();
-    if (blobURL) {
-      setBackgroundImage(blobURL);
-    }
-  };
+      handleTodoListUpdate(updatedTodoList);
+      handleClearCompletedTodoList();
+    },
+    [todoList, handleTodoListUpdate, handleClearCompletedTodoList],
+  );
 
-  const handleDeleteWallpaper = async () => {
-    await deleteImageFromIndexedDB();
-    setBackgroundImage("");
-  };
+  const handleTodoItemChecked = useCallback(
+    (id: string, checked: boolean) => {
+      const updatedTodoList = todoList.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            checked,
+          };
+        }
 
-  const handleAddTodoList = (content: string) => {
-    const updatedTodoList = [
-      {
-        checked: false,
-        id: generateRandomId(),
-        content,
-      },
-      ...todoList,
-    ] as TodoList;
+        return item;
+      });
 
-    handleTodoListUpdate(updatedTodoList);
-    handleClearCompletedTodoList();
-  };
+      handleTodoListUpdate(updatedTodoList);
+      handleClearCompletedTodoList();
+    },
+    [todoList, handleTodoListUpdate, handleClearCompletedTodoList],
+  );
 
-  const handleTodoItemChecked = (id: string, checked: boolean) => {
-    const updatedTodoList = todoList.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          checked,
-        };
-      }
+  const handleTodoItemDelete = useCallback(
+    (id: string) => {
+      const updatedTodoList = todoList.filter((item) => {
+        return item.id !== id;
+      });
+      handleTodoListUpdate(updatedTodoList);
+      handleClearCompletedTodoList();
+    },
+    [todoList, handleTodoListUpdate, handleClearCompletedTodoList],
+  );
 
-      return item;
-    });
-
-    handleTodoListUpdate(updatedTodoList);
-    handleClearCompletedTodoList();
-  };
-
-  const handleTodoItemDelete = (id: string) => {
-    const updatedTodoList = todoList.filter((item) => {
-      return item.id !== id;
-    });
-    handleTodoListUpdate(updatedTodoList);
-    handleClearCompletedTodoList();
-  };
-
-  const groupTodosByCheckedStatus = () => {
+  const groupTodosByCheckedStatus = useCallback(() => {
     const uncheckedItems = todoList.filter((todo) => !todo.checked);
     const checkedItems = todoList.filter((todo) => todo.checked);
 
     handleTodoListUpdate([...uncheckedItems, ...checkedItems]);
-  };
+  }, [todoList, handleTodoListUpdate]);
 
-  const handleWallpaperBlur = (val: number) => {
+  const handleWallpaperBlur = useCallback((val: number) => {
     localStorage.setItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY, String(val));
     setWallpaperBlur(val);
-  };
+  }, []);
 
-  const handleTodoListUpdate = (list: TodoList) => {
-    setTodoList(list);
-    localStorage.setItem(TODO_LIST_LOCAL_STORAGE_KEY, JSON.stringify(list));
-  };
-
-  const handleDockSitesChange = (val: DockBarSites) => {
+  const handleDockSitesChange = useCallback((val: DockBarSites) => {
     localStorage.setItem(DOCK_SITES_LOCAL_STORAGE_KEY, JSON.stringify(val));
     setDockBarSites(val);
-  };
+  }, []);
 
-  const handleQuickLinksChange = (val: QuickLinksSites) => {
+  const handleQuickLinksChange = useCallback((val: QuickLinksSites) => {
     localStorage.setItem(QUICK_LINKS_LOCAL_STORAGE_KEY, JSON.stringify(val));
     setQuickLinks(val);
-  };
+  }, []);
 
-  const handleBookmarkVisbility = async (val: boolean) => {
-    if (val) {
-      const hasBookmarkPermission = await new Promise((resolve) =>
-        chrome.permissions.contains({ permissions: ["bookmarks"] }, resolve),
-      );
-
-      if (!hasBookmarkPermission) {
-        const permissionGranted = await new Promise((resolve) =>
-          chrome.permissions.request({ permissions: ["bookmarks"] }, resolve),
+  const handleBookmarkVisbility = useCallback(
+    async (val: boolean) => {
+      if (val) {
+        const hasBookmarkPermission = await new Promise((resolve) =>
+          chrome.permissions.contains({ permissions: ["bookmarks"] }, resolve),
         );
 
-        if (!permissionGranted) {
-          return;
+        if (!hasBookmarkPermission) {
+          const permissionGranted = await new Promise((resolve) =>
+            chrome.permissions.request({ permissions: ["bookmarks"] }, resolve),
+          );
+
+          if (!permissionGranted) {
+            return;
+          }
         }
       }
-    }
 
-    localStorage.setItem(BOOKMARK_TOGGLE_STORAGE_KEY, String(val));
-    setBookmarksVisible(val);
-  };
+      localStorage.setItem(BOOKMARK_TOGGLE_STORAGE_KEY, String(val));
+      setBookmarksVisible(val);
+    },
+    [setBookmarksVisible],
+  );
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = useCallback(async () => {
     try {
       try {
         await chrome.identity.clearAllCachedAuthTokens();
@@ -776,9 +784,9 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       console.error("Google sign in failed:", error);
       throw error;
     }
-  };
+  }, []);
 
-  const handleGoogleSignOut = async () => {
+  const handleGoogleSignOut = useCallback(async () => {
     try {
       if (googleAuthToken) {
         await removeGoogleAuthToken(googleAuthToken);
@@ -793,97 +801,182 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       console.error("Google sign out failed:", error);
       throw error;
     }
-  };
+  }, [googleAuthToken, setShowGoogleCalendar]);
+
+  const contextValue = useMemo(
+    () => ({
+      theme,
+      setTheme,
+      themeColor,
+      setThemeColor,
+      backgroundImage,
+      handleWallpaperChange,
+      wallpaperBlur,
+      handleWallpaperBlur,
+      showGreeting,
+      setShowGreeeting,
+      showVisitedSites,
+      setShowVisitedSites,
+      separatePageSite,
+      setSeparatePageSite,
+      showSearchEngines,
+      setShowSearchEngines,
+      showMonthView,
+      setShowMonthView,
+      showClockAndCalendar,
+      setShowClockAndCalendar,
+      showTabManager,
+      setShowTabManager,
+      locale,
+      setLocale,
+      dockBarSites,
+      handleDockSitesChange,
+      dockPosition,
+      setDockPosition,
+      todoList,
+      handleAddTodoList,
+      handleTodoItemChecked,
+      todoListVisbility,
+      setTodoListVisbility,
+      handleTodoListUpdate,
+      handleTodoItemDelete,
+      handleClearCompletedTodoList,
+      setTodoList,
+      groupTodosByCheckedStatus,
+      bookmarksVisible,
+      handleBookmarkVisbility,
+      showStickyNotes,
+      setShowStickyNotes,
+      enableStickyNotesSync,
+      setEnableStickyNotesSync,
+      showFocusMode,
+      setShowFocusMode,
+      isWidgetsAwayFromDock,
+      setIsWidgetsAwayFromDock,
+      googleUser,
+      googleAuthToken,
+      handleGoogleSignIn,
+      handleGoogleSignOut,
+      showGoogleCalendar,
+      setShowGoogleCalendar,
+      calendarEvents,
+      setCalendarEvents,
+      useAnalogClock2,
+      setUseAnalogClock2,
+      wallpaperType,
+      setWallpaperType,
+      dynamicWallpaperTheme,
+      setDynamicWallpaperTheme,
+      interactiveWallpaperTheme,
+      setInteractiveWallpaperTheme,
+      quickLinksMode,
+      setQuickLinksMode,
+      quickLinks,
+      handleQuickLinksChange,
+      showBattery,
+      setShowBattery,
+      showWeather,
+      setShowWeather,
+      weatherTempUnit,
+      setWeatherTempUnit,
+      weatherLocationMode,
+      setWeatherLocationMode,
+      weatherManualLocation,
+      setWeatherManualLocation,
+      weatherData,
+      weatherLoading,
+      weatherError,
+      showFreeform,
+      setShowFreeform,
+    }),
+    [
+      theme,
+      setTheme,
+      themeColor,
+      setThemeColor,
+      backgroundImage,
+      handleWallpaperChange,
+      wallpaperBlur,
+      handleWallpaperBlur,
+      showGreeting,
+      setShowGreeeting,
+      showVisitedSites,
+      setShowVisitedSites,
+      separatePageSite,
+      setSeparatePageSite,
+      showSearchEngines,
+      setShowSearchEngines,
+      showMonthView,
+      setShowMonthView,
+      showClockAndCalendar,
+      setShowClockAndCalendar,
+      showTabManager,
+      setShowTabManager,
+      locale,
+      setLocale,
+      dockBarSites,
+      handleDockSitesChange,
+      dockPosition,
+      setDockPosition,
+      todoList,
+      handleAddTodoList,
+      handleTodoItemChecked,
+      todoListVisbility,
+      setTodoListVisbility,
+      handleTodoListUpdate,
+      handleTodoItemDelete,
+      handleClearCompletedTodoList,
+      setTodoList,
+      groupTodosByCheckedStatus,
+      bookmarksVisible,
+      handleBookmarkVisbility,
+      showStickyNotes,
+      setShowStickyNotes,
+      enableStickyNotesSync,
+      setEnableStickyNotesSync,
+      showFocusMode,
+      setShowFocusMode,
+      isWidgetsAwayFromDock,
+      setIsWidgetsAwayFromDock,
+      googleUser,
+      googleAuthToken,
+      handleGoogleSignIn,
+      handleGoogleSignOut,
+      showGoogleCalendar,
+      setShowGoogleCalendar,
+      calendarEvents,
+      setCalendarEvents,
+      useAnalogClock2,
+      setUseAnalogClock2,
+      wallpaperType,
+      setWallpaperType,
+      dynamicWallpaperTheme,
+      setDynamicWallpaperTheme,
+      interactiveWallpaperTheme,
+      setInteractiveWallpaperTheme,
+      quickLinksMode,
+      setQuickLinksMode,
+      quickLinks,
+      handleQuickLinksChange,
+      showBattery,
+      setShowBattery,
+      showWeather,
+      setShowWeather,
+      weatherTempUnit,
+      setWeatherTempUnit,
+      weatherLocationMode,
+      setWeatherLocationMode,
+      weatherManualLocation,
+      setWeatherManualLocation,
+      weatherData,
+      weatherLoading,
+      weatherError,
+      showFreeform,
+      setShowFreeform,
+    ],
+  );
 
   return (
-    <AppContext.Provider
-      value={{
-        theme,
-        setTheme,
-        themeColor,
-        setThemeColor,
-        backgroundImage,
-        handleWallpaperChange,
-        wallpaperBlur,
-        handleWallpaperBlur,
-        showGreeting,
-        setShowGreeeting,
-        showVisitedSites,
-        setShowVisitedSites,
-        separatePageSite,
-        setSeparatePageSite,
-        showSearchEngines,
-        setShowSearchEngines,
-        showMonthView,
-        setShowMonthView,
-        showClockAndCalendar,
-        setShowClockAndCalendar,
-        showTabManager,
-        setShowTabManager,
-        locale,
-        setLocale,
-        dockBarSites,
-        handleDockSitesChange,
-        dockPosition,
-        setDockPosition,
-        todoList,
-        handleAddTodoList,
-        handleTodoItemChecked,
-        todoListVisbility,
-        setTodoListVisbility,
-        handleTodoListUpdate,
-        handleTodoItemDelete,
-        handleClearCompletedTodoList,
-        setTodoList,
-        groupTodosByCheckedStatus,
-        bookmarksVisible,
-        handleBookmarkVisbility,
-        showStickyNotes,
-        setShowStickyNotes,
-        enableStickyNotesSync,
-        setEnableStickyNotesSync,
-        showFocusMode,
-        setShowFocusMode,
-        isWidgetsAwayFromDock,
-        setIsWidgetsAwayFromDock,
-        googleUser,
-        googleAuthToken,
-        handleGoogleSignIn,
-        handleGoogleSignOut,
-        showGoogleCalendar,
-        setShowGoogleCalendar,
-        calendarEvents,
-        setCalendarEvents,
-        useAnalogClock2,
-        setUseAnalogClock2,
-        wallpaperType,
-        setWallpaperType,
-        dynamicWallpaperTheme,
-        setDynamicWallpaperTheme,
-        interactiveWallpaperTheme,
-        setInteractiveWallpaperTheme,
-        quickLinksMode,
-        setQuickLinksMode,
-        quickLinks,
-        handleQuickLinksChange,
-        showBattery,
-        setShowBattery,
-        showFreeform,
-        setShowFreeform,
-        showWeather,
-        setShowWeather,
-        weatherTempUnit,
-        setWeatherTempUnit,
-        weatherLocationMode,
-        setWeatherLocationMode,
-        weatherManualLocation,
-        setWeatherManualLocation,
-        weatherData,
-        weatherLoading,
-        weatherError,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
 }

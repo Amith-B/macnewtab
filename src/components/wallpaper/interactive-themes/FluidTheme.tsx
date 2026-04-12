@@ -92,6 +92,7 @@ const FluidTheme: React.FC = () => {
     }
 
     let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const animate = () => {
       if (!ctx) return;
@@ -110,8 +111,11 @@ const FluidTheme: React.FC = () => {
     };
 
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }, 200);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -127,6 +131,7 @@ const FluidTheme: React.FC = () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

@@ -11,10 +11,21 @@ const SnowfallTheme: React.FC = () => {
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const particles: Particle[] = [];
     const maxParticles = 300;
     let mouse = { x: -1000, y: -1000 };
+
+    // Cache the background gradient — recreate only on resize
+    let bgGradient = createBgGradient();
+
+    function createBgGradient() {
+      const grd = ctx!.createLinearGradient(0, 0, 0, height);
+      grd.addColorStop(0, "#1b2735");
+      grd.addColorStop(1, "#090a0f");
+      return grd;
+    }
 
     class Particle {
       x: number;
@@ -79,11 +90,8 @@ const SnowfallTheme: React.FC = () => {
 
     const animate = () => {
       if (!ctx) return;
-      // Background with slight gradient
-      const grd = ctx.createLinearGradient(0, 0, 0, height);
-      grd.addColorStop(0, "#1b2735");
-      grd.addColorStop(1, "#090a0f");
-      ctx.fillStyle = grd;
+      // Use cached gradient
+      ctx.fillStyle = bgGradient;
       ctx.fillRect(0, 0, width, height);
 
       particles.forEach((p) => {
@@ -95,8 +103,12 @@ const SnowfallTheme: React.FC = () => {
     };
 
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        bgGradient = createBgGradient();
+      }, 200);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -112,6 +124,7 @@ const SnowfallTheme: React.FC = () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

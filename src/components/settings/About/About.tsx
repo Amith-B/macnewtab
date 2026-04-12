@@ -39,12 +39,26 @@ export default function About() {
           </div>
           <div className="about__row-item">
             <Translation value="developer_info" />
-            <div>
-              Amith B(
-              <a rel="noreferrer" href="mailto:amithbr6@gmail.com">
-                amithbr6@gmail.com
-              </a>
-              )
+            <div className="about__developer-info">
+              <div className="about__developer-name">Built by Amith</div>
+              <div className="about__developer-meta">
+                <a
+                  className="about__developer-link"
+                  rel="noreferrer"
+                  href="https://instagram.com/capture.loom"
+                  target="_blank"
+                >
+                  @capture.loom
+                </a>
+                <span className="about__developer-separator">·</span>
+                <a
+                  className="about__developer-link"
+                  rel="noreferrer"
+                  href="mailto:amithbr6@gmail.com"
+                >
+                  amithbr6@gmail.com
+                </a>
+              </div>
             </div>
           </div>
           <div className="about__row-item">

@@ -40,10 +40,14 @@ const MatrixTheme: React.FC = () => {
     };
 
     const interval = setInterval(draw, 33);
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
@@ -51,6 +55,7 @@ const MatrixTheme: React.FC = () => {
     return () => {
       clearInterval(interval);
       window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

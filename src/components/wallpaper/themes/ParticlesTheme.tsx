@@ -12,8 +12,9 @@ const ParticlesTheme: React.FC = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const particlesArray: any[] = [];
+    const particlesArray: Particle[] = [];
     const numberOfParticles = 100;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     class Particle {
       x: number;
@@ -99,15 +100,19 @@ const ParticlesTheme: React.FC = () => {
     animate();
 
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

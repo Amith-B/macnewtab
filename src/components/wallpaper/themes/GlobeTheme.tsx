@@ -12,6 +12,8 @@ const GlobeTheme: React.FC = () => {
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
     let rotation = 0;
+    let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const animate = () => {
       if (!ctx) return;
@@ -48,25 +50,22 @@ const GlobeTheme: React.FC = () => {
         const y = cy + (i / 9 - 0.5) * 2 * R;
         const rAtY = Math.sqrt(R * R - (y - cy) * (y - cy));
         ctx.beginPath();
-        // pseudo-3d effect, just draw horizontal for now (quick globe)
-        // Proper: draw line
         ctx.ellipse(cx, y, rAtY, 10, 0, 0, Math.PI * 2);
-        // Wait that draws discs. Just simple lines.
-        // ctx.moveTo(cx - rAtY, y);
-        // ctx.lineTo(cx + rAtY, y);
-        // Let's use ellipses but compressed
         ctx.ellipse(cx, y, rAtY, rAtY * 0.1, 0, 0, Math.PI * 2);
 
         ctx.stroke();
       }
 
       rotation += 0.005;
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     const handleResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
@@ -74,6 +73,8 @@ const GlobeTheme: React.FC = () => {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 

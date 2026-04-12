@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import ParticlesInteractiveTheme from "./interactive-themes/ParticlesInteractiveTheme";
 import HexagonGridTheme from "./interactive-themes/HexagonGridTheme";
 import WavesInteractiveTheme from "./interactive-themes/WavesInteractiveTheme";
@@ -9,9 +9,28 @@ import NetTheme from "./interactive-themes/NetTheme";
 import SnowfallTheme from "./interactive-themes/SnowfallTheme";
 import FireworksTheme from "./interactive-themes/FireworksTheme";
 import RipplesTheme from "./interactive-themes/RipplesTheme";
-import SpaceGlobesTheme from "./interactive-themes/SpaceGlobesTheme";
 import TunnelTheme from "./interactive-themes/TunnelTheme";
+import SpaceGlobesTheme from "./interactive-themes/SpaceGlobesTheme";
 import BreakoutTheme from "./interactive-themes/BreakoutTheme";
+
+const themeComponents: Record<string, React.FC> = {
+  particles: ParticlesInteractiveTheme,
+  hexagon: HexagonGridTheme,
+  waves: WavesInteractiveTheme,
+  fluid: FluidTheme,
+  constellation: ConstellationTheme,
+  globe: GlobeTheme,
+  net: NetTheme,
+  snowfall: SnowfallTheme,
+  fireworks: FireworksTheme,
+  ripples: RipplesTheme,
+  tunnel: TunnelTheme,
+  "space-globes": SpaceGlobesTheme,
+  breakout: BreakoutTheme,
+};
+
+// Default fallback theme key
+const DEFAULT_THEME = "particles";
 
 interface InteractiveWallpaperProps {
   theme: string;
@@ -19,38 +38,10 @@ interface InteractiveWallpaperProps {
 
 const InteractiveWallpaper: React.FC<InteractiveWallpaperProps> = memo(
   ({ theme }) => {
-    const renderThemeContent = () => {
-      switch (theme) {
-        case "particles":
-          return <ParticlesInteractiveTheme />;
-        case "hexagon":
-          return <HexagonGridTheme />;
-        case "waves":
-          return <WavesInteractiveTheme />;
-        case "fluid":
-          return <FluidTheme />;
-        case "constellation":
-          return <ConstellationTheme />;
-        case "globe":
-          return <GlobeTheme />;
-        case "net":
-          return <NetTheme />;
-        case "snowfall":
-          return <SnowfallTheme />;
-        case "fireworks":
-          return <FireworksTheme />;
-        case "ripples":
-          return <RipplesTheme />;
-        case "tunnel":
-          return <TunnelTheme />;
-        case "space-globes":
-          return <SpaceGlobesTheme />;
-        case "breakout":
-          return <BreakoutTheme />;
-        default:
-          return <ParticlesInteractiveTheme />;
-      }
-    };
+    const ThemeComponent = useMemo(
+      () => themeComponents[theme] || themeComponents[DEFAULT_THEME],
+      [theme],
+    );
 
     return (
       <div
@@ -64,7 +55,7 @@ const InteractiveWallpaper: React.FC<InteractiveWallpaperProps> = memo(
           overflow: "hidden",
         }}
       >
-        {renderThemeContent()}
+        <ThemeComponent />
       </div>
     );
   },

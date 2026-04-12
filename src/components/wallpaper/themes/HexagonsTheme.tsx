@@ -11,6 +11,8 @@ const HexagonsTheme: React.FC = () => {
 
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
+    let animationId: number;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
     const a = (2 * Math.PI) / 6;
     const r = 30;
@@ -26,17 +28,21 @@ const HexagonsTheme: React.FC = () => {
       ctx.stroke();
     };
 
-    const hexes: any[] = [];
-    const rows = Math.ceil(h / (r * 1.5)) + 1;
-    const cols = Math.ceil(w / (r * Math.sqrt(3))) + 1;
+    let hexes: { x: number; y: number; pulse: number }[] = [];
 
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const x = col * r * Math.sqrt(3) + ((row % 2) * r * Math.sqrt(3)) / 2;
-        const y = row * r * 1.5;
-        hexes.push({ x, y, pulse: Math.random() * Math.PI });
+    const initHexes = () => {
+      hexes = [];
+      const rows = Math.ceil(h / (r * 1.5)) + 1;
+      const cols = Math.ceil(w / (r * Math.sqrt(3))) + 1;
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const x = col * r * Math.sqrt(3) + ((row % 2) * r * Math.sqrt(3)) / 2;
+          const y = row * r * 1.5;
+          hexes.push({ x, y, pulse: Math.random() * Math.PI });
+        }
       }
-    }
+    };
 
     const animate = () => {
       if (!ctx) return;
@@ -50,19 +56,26 @@ const HexagonsTheme: React.FC = () => {
         drawHexagon(hex.x, hex.y, r, color);
       });
 
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     };
 
     const handleResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        initHexes();
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize);
+    initHexes();
     animate();
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationId);
+      clearTimeout(resizeTimer);
     };
   }, []);
 
