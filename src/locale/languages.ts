@@ -249,6 +249,7 @@ export const translation = {
     freeform_shape_star: "Star",
     freeform_shape_pentagon: "Pentagon",
     freeform_shape_speech: "Speech",
+    animated_wallpaper_warning: "Animated wallpapers may use slightly more battery if the device is running on battery.",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -500,6 +501,7 @@ export const translation = {
     freeform_shape_star: "ನಕ್ಷತ್ರ",
     freeform_shape_pentagon: "ಪಂಚಭುಜ",
     freeform_shape_speech: "ಮಾತಿನ ಗುಳ್ಳೆ",
+    animated_wallpaper_warning: "ಸಾಧನವು ಬ್ಯಾಟರಿಯಲ್ಲಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿದ್ದರೆ ಅನಿಮೇಟೆಡ್ ವಾಲ್‌ಪೇಪರ್‌ಗಳು ಸ್ವಲ್ಪ ಹೆಚ್ಚು ಬ್ಯಾಟರಿಯನ್ನು ಬಳಸಬಹುದು.",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -750,6 +752,7 @@ export const translation = {
     freeform_shape_star: "Hvězda",
     freeform_shape_pentagon: "Pětihran",
     freeform_shape_speech: "Bublina",
+    animated_wallpaper_warning: "Animované tapety mohou spotřebovat o něco více baterie, pokud zařízení běží na baterii.",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -1002,6 +1005,7 @@ export const translation = {
     freeform_shape_star: "Yıldız",
     freeform_shape_pentagon: "Beşgen",
     freeform_shape_speech: "Konuşma Balonu",
+    animated_wallpaper_warning: "Cihaz pille çalışıyorsa hareketli duvar kağıtları biraz daha fazla pil tüketebilir.",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -1254,6 +1258,7 @@ export const translation = {
     freeform_shape_star: "Ngôi sao",
     freeform_shape_pentagon: "Ngũ giác",
     freeform_shape_speech: "ಮಾತಿನ ಗುಳ್ಳೆ",
+    animated_wallpaper_warning: "Hình nền động có thể sử dụng nhiều pin hơn một chút nếu thiết bị đang chạy bằng pin.",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -1505,6 +1510,7 @@ export const translation = {
     freeform_shape_star: "Yulduz",
     freeform_shape_pentagon: "五边形",
     freeform_shape_speech: "对话气泡",
+    animated_wallpaper_warning: "Agar qurilma batareyada ishlayotgan bo'lsa, jonlantirilgan fon rasmlari bir oz ko'proq batareya sarflashi mumkin.",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -1751,6 +1757,7 @@ export const translation = {
     freeform_shape_star: "ನಕ್ಷತ್ರ",
     freeform_shape_pentagon: "ಪಂಚಭುಜ",
     freeform_shape_speech: "ಮಾತಿನ ಗುಳ್ಳೆ",
+    animated_wallpaper_warning: "如果设备使用电池供电，动态壁纸可能会稍微增加电池消耗。",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -2002,6 +2009,7 @@ export const translation = {
     freeform_shape_star: "तारा",
     freeform_shape_pentagon: "पंचभुज",
     freeform_shape_speech: "वाक् बुलबुला",
+    animated_wallpaper_warning: "यदि डिवाइस बैटरी पर चल रहा है तो एनिमेटेड वॉलपेपर थोड़ी अधिक बैटरी का उपयोग कर सकते हैं।",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -2255,6 +2263,7 @@ export const translation = {
     freeform_shape_star: "Stella",
     freeform_shape_pentagon: "Pentagono",
     freeform_shape_speech: "Nuvoletta",
+    animated_wallpaper_warning: "Gli sfondi animati potrebbero utilizzare un po' più di batteria se il dispositivo funziona a batteria.",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -2506,6 +2515,7 @@ export const translation = {
     freeform_shape_star: "তারা",
     freeform_shape_pentagon: "পঞ্চভুজ",
     freeform_shape_speech: "কথা বলার বুদবুদ",
+    animated_wallpaper_warning: "ডিভাইসটি ব্যাটারিতে চললে অ্যানিমেটেড ওয়ালপেপারগুলি কিছুটা বেশি ব্যাটারি ব্যবহার করতে পারে।",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -2759,6 +2769,7 @@ export const translation = {
     freeform_shape_star: "Estrela",
     freeform_shape_pentagon: "Pentágono",
     freeform_shape_speech: "Balão de fala",
+    animated_wallpaper_warning: "Papéis de parede animados podem usar um pouco mais de bateria se o dispositivo estiver funcionando com bateria.",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -3011,6 +3022,7 @@ export const translation = {
     freeform_shape_star: "Étoile",
     freeform_shape_pentagon: "Pentagone",
     freeform_shape_speech: "Bulle de dialogue",
+    animated_wallpaper_warning: "Les fonds d'écran animés peuvent consommer un peu plus de batterie si l'appareil fonctionne sur batterie.",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -3262,6 +3274,7 @@ export const translation = {
     freeform_shape_star: "Звезда",
     freeform_shape_pentagon: "Пятиугольник",
     freeform_shape_speech: "Речевой пузырь",
+    animated_wallpaper_warning: "Анимированные обои могут потреблять немного больше батареи, если устройство работает от батареи.",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -3514,6 +3527,7 @@ export const translation = {
     freeform_shape_star: "Estrella",
     freeform_shape_pentagon: "Pentágono",
     freeform_shape_speech: "吹き出し",
+    animated_wallpaper_warning: "Los fondos de pantalla animados pueden consumir un poco más de batería si el dispositivo funciona con batería.",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -3763,6 +3777,7 @@ export const translation = {
     freeform_shape_star: "星",
     freeform_shape_pentagon: "ಪಂಚಭುಜ",
     freeform_shape_speech: "ಮಾತಿನ ಗುಳ್ಳೆ",
+    animated_wallpaper_warning: "デバイスがバッテリーで動作している場合、アニメーションの壁紙は少し多くのバッテリーを消費する可能性があります。",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -4011,6 +4026,7 @@ export const translation = {
     freeform_shape_star: "별",
     freeform_shape_pentagon: "오각형",
     freeform_shape_speech: "말풍선",
+    animated_wallpaper_warning: "기기가 배터리로 실행 중인 경우 애니메이션 배경화면이 배터리를 약간 더 소모할 수 있습니다.",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -4261,6 +4277,7 @@ export const translation = {
     freeform_shape_star: "Bintang",
     freeform_shape_pentagon: "Segi lima",
     freeform_shape_speech: "Gelembung bicara",
+    animated_wallpaper_warning: "Gambar latar animasi mungkin menggunakan sedikit lebih banyak baterai jika perangkat berjalan menggunakan baterai.",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -4511,6 +4528,7 @@ export const translation = {
     freeform_shape_star: "तारा",
     freeform_shape_pentagon: "पंचकोन",
     freeform_shape_speech: "बोलण्याचा फुगा",
+    animated_wallpaper_warning: "डिव्हाइस बॅटरीवर चालत असल्यास ॲनिमेटेड वॉलपेपर थोडी जास्त बॅटरी वापरू शकतात.",
   },
   pl: {
     show_greetings: "Pokaż pozdrowienia",
@@ -4762,6 +4780,7 @@ export const translation = {
     freeform_shape_star: "Gwiazda",
     freeform_shape_pentagon: "Pięciokąt",
     freeform_shape_speech: "Dymek",
+    animated_wallpaper_warning: "Animowane tapety mogą zużywać nieco więcej baterii, jeśli urządzenie działa na baterii.",
   },
   de: {
     show_greetings: "Grüße anzeigen",
@@ -5012,6 +5031,7 @@ export const translation = {
     freeform_shape_star: "Stern",
     freeform_shape_pentagon: "Fünfeck",
     freeform_shape_speech: "Sprechblase",
+    animated_wallpaper_warning: "Animierte Hintergrundbilder können etwas mehr Akku verbrauchen, wenn das Gerät im Akkubetrieb läuft.",
   },
 };
 export const languages = Object.keys(
