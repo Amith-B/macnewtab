@@ -9,17 +9,22 @@ const MatrixTheme: React.FC = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const letters = "0123456789ABCDEF";
     const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops: number[] = [];
+    const letters = "0123456789ABCDEF";
 
-    for (let i = 0; i < columns; i++) {
-      drops[i] = 1;
-    }
+    // Mutable state shared between draw() and handleResize()
+    let drops: number[] = [];
+
+    const initCanvas = () => {
+      const parent = canvas.parentElement;
+      canvas.width = parent ? parent.offsetWidth : window.innerWidth;
+      canvas.height = parent ? parent.offsetHeight : window.innerHeight;
+
+      const columns = Math.floor(canvas.width / fontSize);
+      drops = Array.from({ length: columns }, () =>
+        Math.floor(Math.random() * (canvas.height / fontSize)),
+      );
+    };
 
     const draw = () => {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
@@ -39,15 +44,16 @@ const MatrixTheme: React.FC = () => {
       }
     };
 
+    initCanvas();
     const interval = setInterval(draw, 33);
+
     let resizeTimer: ReturnType<typeof setTimeout>;
 
     const handleResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }, 200);
+        initCanvas();
+      }, 150);
     };
 
     window.addEventListener("resize", handleResize);
