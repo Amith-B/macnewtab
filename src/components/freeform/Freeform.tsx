@@ -648,6 +648,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     const mousePosRef = useRef<{ x: number; y: number } | null>(null);
     const isDrawingRef = useRef(false);
     const isPanningRef = useRef(false);
+    const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const activeEraserRef = useRef<Record<string, Point[]>>({});
     const panStartRef = useRef<Point>({ x: 0, y: 0 });
     const camStartRef = useRef<Camera>({ x: 0, y: 0, zoom: 1 });
@@ -983,6 +984,17 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
           } else {
             setSelectedId(null);
             setEditingTextId(null);
+            if (plan !== "basic") {
+              // Long-press on empty space starts panning after 300ms
+              longPressTimerRef.current = setTimeout(() => {
+                isPanningRef.current = true;
+                panStartRef.current = { x: e.clientX, y: e.clientY };
+                camStartRef.current = { ...camera };
+                if (containerRef.current) {
+                  containerRef.current.style.cursor = "grabbing";
+                }
+              }, 300);
+            }
           }
           return;
         }
@@ -1161,8 +1173,14 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
 
     const handleMouseUp = useCallback(() => {
       activeEraserRef.current = {};
+      // Cancel any pending long-press pan timer
+      if (longPressTimerRef.current) {
+        clearTimeout(longPressTimerRef.current);
+        longPressTimerRef.current = null;
+      }
       if (isPanningRef.current) {
         isPanningRef.current = false;
+        if (containerRef.current) containerRef.current.style.cursor = "";
         return;
       }
       if (isDraggingObjRef.current) {
