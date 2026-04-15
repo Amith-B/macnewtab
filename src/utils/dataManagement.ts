@@ -13,6 +13,7 @@ import {
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
   USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
   SHOW_BATTERY_LOCAL_STORAGE_KEY,
+  SHOW_FREEFORM_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
 import {
@@ -50,6 +51,7 @@ import {
   QUICK_LINKS_LOCAL_STORAGE_KEY,
 } from "../static/quickLinksSettings";
 import { syncNotesToChrome, Note } from "./stickyNotesSync";
+import { FREEFORM_DATA_LOCAL_STORAGE_KEY } from "../static/freeformSettings";
 
 const STICKY_NOTES_KEY = "macnewtab_sticky_notes";
 
@@ -86,6 +88,8 @@ const KEYS_TO_EXPORT = [
   QUICK_LINKS_LOCAL_STORAGE_KEY,
   ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY,
   SHOW_BATTERY_LOCAL_STORAGE_KEY,
+  SHOW_FREEFORM_LOCAL_STORAGE_KEY,
+  FREEFORM_DATA_LOCAL_STORAGE_KEY,
 ];
 
 // Helper to convert Blob URL to Base64

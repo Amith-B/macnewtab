@@ -23,6 +23,7 @@ import {
   USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
   SHOW_BATTERY_LOCAL_STORAGE_KEY,
+  SHOW_FREEFORM_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
 import {
   SHOW_WEATHER_LOCAL_STORAGE_KEY,
@@ -168,6 +169,8 @@ export const AppContext = createContext({
   handleQuickLinksChange: (_: QuickLinksSites) => {},
   showBattery: true,
   setShowBattery: (_: boolean) => {},
+  showFreeform: true,
+  setShowFreeform: (_: boolean) => {},
   showWeather: true,
   setShowWeather: (_: boolean) => {},
   weatherTempUnit: "celsius",
@@ -327,6 +330,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
   const [showBattery, setShowBattery] = useLocalStorage(
     SHOW_BATTERY_LOCAL_STORAGE_KEY,
+    true,
+  );
+
+  const [showFreeform, setShowFreeform] = useLocalStorage(
+    SHOW_FREEFORM_LOCAL_STORAGE_KEY,
     true,
   );
 
@@ -878,6 +886,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       weatherData,
       weatherLoading,
       weatherError,
+      showFreeform,
+      setShowFreeform,
     }),
     [
       theme,
@@ -961,6 +971,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       weatherData,
       weatherLoading,
       weatherError,
+      showFreeform,
+      setShowFreeform,
     ],
   );
 

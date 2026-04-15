@@ -118,6 +118,22 @@ Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and
 - **Visual & Audio Alerts**: Get notified with a gentle chime and notification when your session is complete.
 - Customize your focus duration to match your workflow.
 
+### 🖌️ Freeform Canvas (New!)
+
+An **infinite whiteboard** built right into your new tab — sketch ideas, build mind-maps, and annotate screenshots without ever leaving your browser.
+
+- **Drawing Tools**: Pen, Fine Pen, Highlighter, and Eraser with adjustable sizes.
+- **Shapes**: Draw Lines, Arrows, Rectangles, Circles, Triangles, Stars, and more.
+- **Sticky Notes**: Add colorful sticky notes anywhere on the canvas.
+- **Text & Images**: Place resizable text blocks and images freely on the canvas.
+- **Pan & Zoom**: Explore an infinite workspace at any zoom level.
+- **Smart Eraser**: Cleanly erase any part of your drawing without affecting the rest.
+- **Colors & Styles**: Choose from a full color palette with per-stroke customization.
+- **Undo / Redo**: Easily undo any mistake with a full history stack.
+- **Export**: Save your canvas as a PNG image with one click.
+- **Auto-Save**: Your canvas is saved automatically and restored the next time you open it.
+- Toggle Freeform on or off from **Settings → Dock**.
+
 ### 💾 Backup & Restore
 
 - Never lose your setup! Easily **export** your settings, to-do lists, sticky notes, and custom wallpapers to a JSON file.
@@ -125,7 +141,7 @@ Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and
 
 ### 🌍 Multi-Language Support
 
-- Supports **15+ languages**, including English, Kannada, Hindi, Spanish, French, Chinese, Japanese, Korean, and more.
+- Supports **20 languages**, including English, Kannada, Hindi, German, Spanish, French, Chinese, Japanese, Korean, and more.
 
 ## 🛠 Installation & Running Locally
 

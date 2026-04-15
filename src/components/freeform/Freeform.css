@@ -1,0 +1,482 @@
+.freeform-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgba(240, 240, 240, 1);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.freeform-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Dark mode */
+:root[data-theme="dark"] .freeform-overlay,
+.App.theme-dark .freeform-overlay {
+  background: rgba(30, 30, 30, 1);
+}
+
+/* Top bar */
+.freeform-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  height: 44px;
+  min-height: 44px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  z-index: 10;
+  user-select: none;
+}
+.App.theme-dark .freeform-topbar {
+  background: rgba(40,40,40,0.8);
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+
+.freeform-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.freeform-close-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.06);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: background 0.15s;
+  padding: 0;
+}
+.freeform-close-btn:hover {
+  background: rgba(0,0,0,0.12);
+  color: #333;
+}
+.App.theme-dark .freeform-close-btn {
+  background: rgba(255,255,255,0.1);
+  color: #aaa;
+}
+.App.theme-dark .freeform-close-btn:hover {
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+}
+
+.freeform-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 0.2px;
+}
+.App.theme-dark .freeform-title {
+  color: #ddd;
+}
+
+.freeform-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.freeform-action-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+}
+.freeform-action-btn:hover:not(:disabled) {
+  background: rgba(0,0,0,0.08);
+  color: #111;
+}
+.freeform-action-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.App.theme-dark .freeform-action-btn {
+  color: #aaa;
+}
+.App.theme-dark .freeform-action-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+/* Canvas area */
+.freeform-canvas-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: crosshair;
+  /* dot grid background */
+  background-image: radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.App.theme-dark .freeform-canvas-area {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+}
+.freeform-canvas-area.tool-select { cursor: default; }
+.freeform-canvas-area.tool-pen,
+.freeform-canvas-area.tool-finePen,
+.freeform-canvas-area.tool-highlighter { cursor: crosshair; }
+.freeform-canvas-area.tool-eraser { cursor: cell; }
+.freeform-canvas-area.tool-text { cursor: text; }
+.freeform-canvas-area.tool-shape { cursor: crosshair; }
+.freeform-canvas-area.panning { cursor: grab; }
+.freeform-canvas-area.panning:active { cursor: grabbing; }
+
+.freeform-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Text & sticky overlays on canvas */
+.freeform-text-overlay {
+  position: absolute;
+  background: transparent;
+  border: 2px solid #007AFF;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 16px;
+  outline: none;
+  resize: none;
+  min-width: 60px;
+  min-height: 28px;
+  color: #222;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  z-index: 5;
+}
+.App.theme-dark .freeform-text-overlay {
+  color: #eee;
+}
+
+.freeform-sticky-overlay {
+  position: absolute;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 14px;
+  min-width: 120px;
+  min-height: 100px;
+  outline: none;
+  resize: both;
+  overflow: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  z-index: 5;
+  border: none;
+  color: #222;
+}
+
+/* Text input for new text */
+.freeform-new-text-input {
+  position: absolute;
+  background: transparent;
+  border: 2px dashed #007AFF;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 16px;
+  outline: none;
+  min-width: 100px;
+  color: #222;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  z-index: 6;
+}
+.App.theme-dark .freeform-new-text-input {
+  color: #eee;
+}
+
+/* Floating toolbar */
+.freeform-toolbar {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 10px;
+  background: rgba(80, 80, 80, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  z-index: 20;
+  user-select: none;
+}
+
+.freeform-toolbar-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255,255,255,0.15);
+  margin: 0 4px;
+}
+
+.freeform-tool-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.75);
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+  padding: 0;
+  position: relative;
+}
+.freeform-tool-btn:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+.freeform-tool-btn.active {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+/* Color picker button */
+.freeform-color-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+  padding: 0;
+  margin-left: 4px;
+}
+.freeform-color-btn:hover {
+  transform: scale(1.1);
+  border-color: rgba(255,255,255,0.7);
+}
+
+/* Color / width picker popup */
+.freeform-picker-popup {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  background: rgba(60, 60, 60, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  z-index: 30;
+  min-width: 200px;
+}
+
+.freeform-color-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.freeform-color-swatch {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s, border-color 0.12s;
+  padding: 0;
+}
+.freeform-color-swatch:hover {
+  transform: scale(1.15);
+}
+.freeform-color-swatch.active {
+  border-color: #fff;
+  transform: scale(1.15);
+}
+
+.freeform-width-slider {
+  width: 100%;
+  accent-color: #007AFF;
+}
+
+.freeform-width-label {
+  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+/* Shapes picker popup */
+.freeform-shapes-popup {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  background: rgba(60, 60, 60, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  z-index: 30;
+}
+
+.freeform-shapes-title {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.freeform-shapes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.freeform-shape-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.08);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4CD6F8;
+  transition: background 0.15s;
+  padding: 0;
+}
+.freeform-shape-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+.freeform-shape-btn.active {
+  background: rgba(255,255,255,0.2);
+  outline: 2px solid #4CD6F8;
+}
+
+/* Selection box */
+.freeform-selection-box {
+  position: absolute;
+  border: 2px solid #007AFF;
+  background: rgba(0, 122, 255, 0.05);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.freeform-selection-handles {
+  position: absolute;
+  border: 1.5px solid #007AFF;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Zoom controls */
+.freeform-zoom-controls {
+  position: absolute;
+  bottom: 80px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(80, 80, 80, 0.7);
+  backdrop-filter: blur(12px);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.freeform-zoom-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(255,255,255,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: background 0.12s;
+  padding: 0;
+}
+.freeform-zoom-btn:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+.freeform-zoom-label {
+  color: rgba(255,255,255,0.6);
+  font-size: 10px;
+  text-align: center;
+  padding: 2px 4px;
+  min-width: 32px;
+}
+
+/* Pricing notice banner */
+.freeform-pricing-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: linear-gradient(90deg, rgba(255,180,0,0.15), rgba(255,140,0,0.12));
+  border-bottom: 1px solid rgba(255,165,0,0.25);
+  font-size: 12px;
+  font-weight: 500;
+  color: #a06000;
+  position: relative;
+  z-index: 11;
+}
+
+.App.theme-dark .freeform-pricing-banner {
+  background: linear-gradient(90deg, rgba(255,180,0,0.1), rgba(255,140,0,0.07));
+  border-bottom-color: rgba(255,180,0,0.2);
+  color: #ffc043;
+}
+
+.freeform-pricing-banner-dismiss {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: inherit;
+  opacity: 0.6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  margin-left: auto;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+
+.freeform-pricing-banner-dismiss:hover {
+  opacity: 1;
+}
+
+.freeform-bmc-btn {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0.92;
+  transition: opacity 0.15s;
+}
+
+.freeform-bmc-btn:hover {
+  opacity: 1;
+}
