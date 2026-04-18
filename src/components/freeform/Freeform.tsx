@@ -658,6 +658,8 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     const dragObjStartRef = useRef<Point>({ x: 0, y: 0 });
     const isDraggingObjRef = useRef(false);
     const tempShapeRef = useRef<ShapeObject | null>(null);
+    const pinchDistRef = useRef<number | null>(null);
+    const pinchZoomStartRef = useRef(1);
 
     const { objects, pushState, replaceState, undo, redo, canUndo, canRedo } =
       useHistory(loadData());
@@ -1220,6 +1222,109 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
       }
     }, [tool, color, strokeWidth, objects, pushState]);
 
+    // ─── Touch handlers ──────────────────────────────────────
+    const handleTouchStart = useCallback(
+      (e: React.TouchEvent) => {
+        // Two-finger: pinch-to-zoom
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          if (plan === "basic") return;
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          pinchDistRef.current = Math.hypot(dx, dy);
+          pinchZoomStartRef.current = camera.zoom;
+          // Also start a two-finger pan
+          const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+          const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+          isPanningRef.current = true;
+          panStartRef.current = { x: mx, y: my };
+          camStartRef.current = { ...camera };
+          return;
+        }
+
+        const touch = e.touches[0];
+        // Synthesize a fake mouse event with clientX/clientY + button=0
+        const syntheticEvent = {
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+          button: 0,
+          preventDefault: () => e.preventDefault(),
+          stopPropagation: () => e.stopPropagation(),
+        } as unknown as React.MouseEvent;
+        handleMouseDown(syntheticEvent);
+      },
+      [handleMouseDown, camera, plan],
+    );
+
+    const handleTouchMove = useCallback(
+      (e: React.TouchEvent) => {
+        // Two-finger: pinch-to-zoom + pan
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          if (plan === "basic") return;
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          const dist = Math.hypot(dx, dy);
+          if (pinchDistRef.current !== null) {
+            const scale = dist / pinchDistRef.current;
+            setCamera((c) => ({
+              ...c,
+              zoom: Math.max(0.1, Math.min(5, pinchZoomStartRef.current * scale)),
+            }));
+          }
+          // Two-finger pan
+          const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+          const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+          if (isPanningRef.current) {
+            const panDx = (mx - panStartRef.current.x) / camera.zoom;
+            const panDy = (my - panStartRef.current.y) / camera.zoom;
+            setCamera((prev) => ({
+              ...prev,
+              x: camStartRef.current.x + panDx,
+              y: camStartRef.current.y + panDy,
+            }));
+          }
+          return;
+        }
+
+        const touch = e.touches[0];
+        const syntheticEvent = {
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+          preventDefault: () => e.preventDefault(),
+          stopPropagation: () => e.stopPropagation(),
+        } as unknown as React.MouseEvent;
+        handleMouseMove(syntheticEvent);
+      },
+      [handleMouseMove, camera, plan],
+    );
+
+    const handleTouchEnd = useCallback(
+      (e: React.TouchEvent) => {
+        // If a pinch was active and all fingers lifted, end pinch
+        if (pinchDistRef.current !== null) {
+          pinchDistRef.current = null;
+          if (e.touches.length === 0) {
+            isPanningRef.current = false;
+          }
+          return;
+        }
+        handleMouseUp();
+      },
+      [handleMouseUp],
+    );
+
+    // Prevent default touch actions (scroll/zoom) on the canvas
+    useEffect(() => {
+      const el = containerRef.current;
+      if (!el) return;
+      const prevent = (e: TouchEvent) => {
+        if (e.touches.length >= 1) e.preventDefault();
+      };
+      el.addEventListener("touchmove", prevent, { passive: false });
+      return () => el.removeEventListener("touchmove", prevent);
+    }, []);
+
     // Wheel for zoom
     const handleWheel = useCallback(
       (e: React.WheelEvent) => {
@@ -1466,6 +1571,10 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
             activeEraserRef.current = {};
             handleMouseUp();
           }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
           onWheel={handleWheel}
           onDoubleClick={(e) => {
             if (tool === "select" && selectedId) {
