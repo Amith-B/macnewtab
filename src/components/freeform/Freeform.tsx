@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback, memo, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  memo,
+  useContext,
+} from "react";
 import "./Freeform.css";
 import {
   CanvasObject,
@@ -623,7 +630,8 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     const isBasicColor = (c: string) => c === "#000000" || c === "#FFFFFF";
 
     const [showPricingBanner, setShowPricingBanner] = useState(
-      () => localStorage.getItem("freeform_pricing_banner_dismissed") !== "true",
+      () =>
+        localStorage.getItem("freeform_pricing_banner_dismissed") !== "true",
     );
 
     const dismissPricingBanner = () => {
@@ -638,6 +646,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     const [showColorPicker, setShowColorPicker] = useState(false);
     const [showShapePicker, setShowShapePicker] = useState(false);
     const [showEraserPicker, setShowEraserPicker] = useState(false);
+    const [showPenPicker, setShowPenPicker] = useState(false);
     const [eraserWidth, setEraserWidth] = useState(18);
     const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
 
@@ -648,7 +657,9 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     const mousePosRef = useRef<{ x: number; y: number } | null>(null);
     const isDrawingRef = useRef(false);
     const isPanningRef = useRef(false);
-    const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+      null,
+    );
     const activeEraserRef = useRef<Record<string, Point[]>>({});
     const panStartRef = useRef<Point>({ x: 0, y: 0 });
     const camStartRef = useRef<Camera>({ x: 0, y: 0, zoom: 1 });
@@ -967,6 +978,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
         setShowColorPicker(false);
         setShowShapePicker(false);
         setShowEraserPicker(false);
+        setShowPenPicker(false);
 
         if (tool === "select") {
           // Try to select an object
@@ -1269,7 +1281,10 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
             const scale = dist / pinchDistRef.current;
             setCamera((c) => ({
               ...c,
-              zoom: Math.max(0.1, Math.min(5, pinchZoomStartRef.current * scale)),
+              zoom: Math.max(
+                0.1,
+                Math.min(5, pinchZoomStartRef.current * scale),
+              ),
             }));
           }
           // Two-finger pan
@@ -1467,7 +1482,11 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
         label: t.freeform_tool_eraser,
         icon: <EraserIcon width="18" height="18" />,
       },
-      { id: "text", label: t.freeform_tool_text, icon: <TextIcon width="18" height="18" /> },
+      {
+        id: "text",
+        label: t.freeform_tool_text,
+        icon: <TextIcon width="18" height="18" />,
+      },
       {
         id: "shape",
         label: t.freeform_tool_shape,
@@ -1664,13 +1683,19 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
                   setShowColorPicker(false);
                   setShowShapePicker(false);
                   setShowEraserPicker(false);
+                  setShowPenPicker(false);
                   if (toolItem.id === "shape") {
                     setShowShapePicker(!isSameTool || !showShapePicker);
                   } else if (toolItem.id === "eraser") {
                     setShowEraserPicker(!isSameTool || !showEraserPicker);
+                  } else if (toolItem.id === "pen") {
+                    setShowPenPicker(!isSameTool || !showPenPicker);
                   }
                 }}
-                title={toolItem.label + (isDisabled ? ` (${t.freeform_pro_only})` : "")}
+                title={
+                  toolItem.label +
+                  (isDisabled ? ` (${t.freeform_pro_only})` : "")
+                }
               >
                 {toolItem.icon}
               </button>
@@ -1687,6 +1712,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               setShowColorPicker(!showColorPicker);
               setShowShapePicker(false);
               setShowEraserPicker(false);
+              setShowPenPicker(false);
             }}
             title={t.freeform_color}
           />
@@ -1720,21 +1746,6 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
                   );
                 })}
               </div>
-              {tool === "pen" && (
-                <>
-                  <div className="freeform-width-label">
-                    {t.freeform_stroke_width}: {strokeWidth}px
-                  </div>
-                  <input
-                    type="range"
-                    min="1"
-                    max="20"
-                    value={strokeWidth}
-                    className="freeform-width-slider"
-                    onChange={(e) => setStrokeWidth(Number(e.target.value))}
-                  />
-                </>
-              )}
             </div>
           )}
 
@@ -1745,7 +1756,9 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               style={{ right: 40 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="freeform-shapes-title">{t.freeform_shapes_title}</div>
+              <div className="freeform-shapes-title">
+                {t.freeform_shapes_title}
+              </div>
               <div className="freeform-shapes-grid">
                 {SHAPE_LIST.map((s) => (
                   <button
@@ -1771,7 +1784,9 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               style={{ right: 80 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="freeform-shapes-title">{t.freeform_eraser_size}</div>
+              <div className="freeform-shapes-title">
+                {t.freeform_eraser_size}
+              </div>
               <div style={{ padding: "0 8px 8px" }}>
                 <input
                   type="range"
@@ -1780,6 +1795,29 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
                   value={eraserWidth}
                   className="freeform-width-slider"
                   onChange={(e) => setEraserWidth(Number(e.target.value))}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Pen picker */}
+          {showPenPicker && tool === "pen" && (
+            <div
+              className="freeform-shapes-popup"
+              style={{ right: 120 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="freeform-shapes-title">
+                {t.freeform_stroke_width}: {strokeWidth}px
+              </div>
+              <div style={{ padding: "0 8px 8px" }}>
+                <input
+                  type="range"
+                  min="1"
+                  max="20"
+                  value={strokeWidth}
+                  className="freeform-width-slider"
+                  onChange={(e) => setStrokeWidth(Number(e.target.value))}
                 />
               </div>
             </div>
