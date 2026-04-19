@@ -629,13 +629,29 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
       ["finePen", "highlighter", "shape", "sticky", "image"].includes(id);
     const isBasicColor = (c: string) => c === "#000000" || c === "#FFFFFF";
 
-    const [showPricingBanner, setShowPricingBanner] = useState(
-      () =>
-        localStorage.getItem("freeform_pricing_banner_dismissed") !== "true",
-    );
+    const [showPricingBanner, setShowPricingBanner] = useState(() => {
+      const dismissedAt = localStorage.getItem(
+        "freeform_pricing_banner_dismissed_at",
+      );
+      
+      if (!dismissedAt) {
+        // Migrate old boolean format if the user already clicked dismiss before this update
+        if (localStorage.getItem("freeform_pricing_banner_dismissed") === "true") {
+          localStorage.removeItem("freeform_pricing_banner_dismissed");
+          localStorage.setItem("freeform_pricing_banner_dismissed_at", Date.now().toString());
+          return false;
+        }
+        return true;
+      }
+
+      const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+      const timeSinceDismissed = Date.now() - parseInt(dismissedAt, 10);
+      
+      return timeSinceDismissed > ONE_WEEK_MS;
+    });
 
     const dismissPricingBanner = () => {
-      localStorage.setItem("freeform_pricing_banner_dismissed", "true");
+      localStorage.setItem("freeform_pricing_banner_dismissed_at", Date.now().toString());
       setShowPricingBanner(false);
     };
 
@@ -647,7 +663,9 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     const [showShapePicker, setShowShapePicker] = useState(false);
     const [showEraserPicker, setShowEraserPicker] = useState(false);
     const [showPenPicker, setShowPenPicker] = useState(false);
+    const [showHighlighterPicker, setShowHighlighterPicker] = useState(false);
     const [eraserWidth, setEraserWidth] = useState(18);
+    const [highlighterWidth, setHighlighterWidth] = useState(20);
     const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
 
     const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -827,7 +845,11 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
           points: currentStrokeRef.current,
           color,
           width:
-            tool === "finePen" ? 1 : tool === "highlighter" ? 20 : strokeWidth,
+            tool === "finePen"
+              ? 1
+              : tool === "highlighter"
+                ? highlighterWidth
+                : strokeWidth,
           opacity: tool === "highlighter" ? 0.8 : 1,
         };
         drawStroke(ctx, tempStroke, camera);
@@ -881,6 +903,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
       selectedId,
       editingTextId,
       eraserWidth,
+      highlighterWidth,
     ]);
 
     useEffect(() => {
@@ -979,6 +1002,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
         setShowShapePicker(false);
         setShowEraserPicker(false);
         setShowPenPicker(false);
+        setShowHighlighterPicker(false);
 
         if (tool === "select") {
           // Try to select an object
@@ -1215,7 +1239,11 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
           points: [...currentStrokeRef.current],
           color,
           width:
-            tool === "finePen" ? 1 : tool === "highlighter" ? 20 : strokeWidth,
+            tool === "finePen"
+              ? 1
+              : tool === "highlighter"
+                ? highlighterWidth
+                : strokeWidth,
           opacity: tool === "highlighter" ? 0.8 : 1,
         };
         pushState([...objects, stroke]);
@@ -1232,7 +1260,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
           pushState([...objects, shape]);
         }
       }
-    }, [tool, color, strokeWidth, objects, pushState]);
+    }, [tool, color, strokeWidth, highlighterWidth, objects, pushState]);
 
     // ─── Touch handlers ──────────────────────────────────────
     const handleTouchStart = useCallback(
@@ -1684,12 +1712,17 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
                   setShowShapePicker(false);
                   setShowEraserPicker(false);
                   setShowPenPicker(false);
+                  setShowHighlighterPicker(false);
                   if (toolItem.id === "shape") {
                     setShowShapePicker(!isSameTool || !showShapePicker);
                   } else if (toolItem.id === "eraser") {
                     setShowEraserPicker(!isSameTool || !showEraserPicker);
                   } else if (toolItem.id === "pen") {
                     setShowPenPicker(!isSameTool || !showPenPicker);
+                  } else if (toolItem.id === "highlighter") {
+                    setShowHighlighterPicker(
+                      !isSameTool || !showHighlighterPicker,
+                    );
                   }
                 }}
                 title={
@@ -1713,6 +1746,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               setShowShapePicker(false);
               setShowEraserPicker(false);
               setShowPenPicker(false);
+              setShowHighlighterPicker(false);
             }}
             title={t.freeform_color}
           />
@@ -1818,6 +1852,29 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
                   value={strokeWidth}
                   className="freeform-width-slider"
                   onChange={(e) => setStrokeWidth(Number(e.target.value))}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Highlighter picker */}
+          {showHighlighterPicker && tool === "highlighter" && (
+            <div
+              className="freeform-shapes-popup"
+              style={{ right: 120 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="freeform-shapes-title">
+                {t.freeform_stroke_width}: {highlighterWidth}px
+              </div>
+              <div style={{ padding: "0 8px 8px" }}>
+                <input
+                  type="range"
+                  min="5"
+                  max="60"
+                  value={highlighterWidth}
+                  className="freeform-width-slider"
+                  onChange={(e) => setHighlighterWidth(Number(e.target.value))}
                 />
               </div>
             </div>
