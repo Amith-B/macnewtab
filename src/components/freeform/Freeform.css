@@ -18,8 +18,7 @@
 }
 
 /* Dark mode */
-:root[data-theme="dark"] .freeform-overlay,
-.App.theme-dark .freeform-overlay {
+.freeform-overlay[data-theme="dark"] {
   background: rgba(30, 30, 30, 1);
 }
 
@@ -38,7 +37,7 @@
   z-index: 10;
   user-select: none;
 }
-.App.theme-dark .freeform-topbar {
+.freeform-overlay[data-theme="dark"] .freeform-topbar {
   background: rgba(40, 40, 40, 0.8);
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
@@ -67,11 +66,11 @@
   background: rgba(0, 0, 0, 0.12);
   color: #333;
 }
-.App.theme-dark .freeform-close-btn {
+.freeform-overlay[data-theme="dark"] .freeform-close-btn {
   background: rgba(255, 255, 255, 0.1);
   color: #aaa;
 }
-.App.theme-dark .freeform-close-btn:hover {
+.freeform-overlay[data-theme="dark"] .freeform-close-btn:hover {
   background: rgba(255, 255, 255, 0.18);
   color: #fff;
 }
@@ -82,7 +81,7 @@
   color: #333;
   letter-spacing: 0.2px;
 }
-.App.theme-dark .freeform-title {
+.freeform-overlay[data-theme="dark"] .freeform-title {
   color: #ddd;
 }
 
@@ -116,10 +115,10 @@
   opacity: 0.3;
   cursor: default;
 }
-.App.theme-dark .freeform-action-btn {
+.freeform-overlay[data-theme="dark"] .freeform-action-btn {
   color: #aaa;
 }
-.App.theme-dark .freeform-action-btn:hover:not(:disabled) {
+.freeform-overlay[data-theme="dark"] .freeform-action-btn:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
 }
@@ -139,7 +138,7 @@
   );
   background-size: 24px 24px;
 }
-.App.theme-dark .freeform-canvas-area {
+.freeform-overlay[data-theme="dark"] .freeform-canvas-area {
   background-image: radial-gradient(
     circle,
     rgba(255, 255, 255, 0.1) 1px,
@@ -192,7 +191,7 @@
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   z-index: 5;
 }
-.App.theme-dark .freeform-text-overlay {
+.freeform-overlay[data-theme="dark"] .freeform-text-overlay {
   color: #eee;
 }
 
@@ -227,7 +226,7 @@
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   z-index: 6;
 }
-.App.theme-dark .freeform-new-text-input {
+.freeform-overlay[data-theme="dark"] .freeform-new-text-input {
   color: #eee;
 }
 
@@ -478,7 +477,7 @@
   z-index: 11;
 }
 
-.App.theme-dark .freeform-pricing-banner {
+.freeform-overlay[data-theme="dark"] .freeform-pricing-banner {
   background: linear-gradient(
     90deg,
     rgba(255, 180, 0, 0.1),
@@ -519,55 +518,4 @@
 
 .freeform-bmc-btn:hover {
   opacity: 1;
-}
-
-/* System Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .App.theme-system .freeform-overlay {
-    background: rgba(30, 30, 30, 1);
-  }
-  .App.theme-system .freeform-topbar {
-    background: rgba(40, 40, 40, 0.8);
-    border-bottom-color: rgba(255, 255, 255, 0.08);
-  }
-  .App.theme-system .freeform-close-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: #aaa;
-  }
-  .App.theme-system .freeform-close-btn:hover {
-    background: rgba(255, 255, 255, 0.18);
-    color: #fff;
-  }
-  .App.theme-system .freeform-title {
-    color: #ddd;
-  }
-  .App.theme-system .freeform-action-btn {
-    color: #aaa;
-  }
-  .App.theme-system .freeform-action-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-  }
-  .App.theme-system .freeform-canvas-area {
-    background-image: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.1) 1px,
-      transparent 1px
-    );
-  }
-  .App.theme-system .freeform-text-overlay {
-    color: #eee;
-  }
-  .App.theme-system .freeform-new-text-input {
-    color: #eee;
-  }
-  .App.theme-system .freeform-pricing-banner {
-    background: linear-gradient(
-      90deg,
-      rgba(255, 180, 0, 0.1),
-      rgba(255, 140, 0, 0.07)
-    );
-    border-bottom-color: rgba(255, 180, 0, 0.2);
-    color: #ffc043;
-  }
 }

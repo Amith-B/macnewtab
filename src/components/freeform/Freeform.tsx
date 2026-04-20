@@ -24,6 +24,7 @@ import { useHistory } from "./useHistory";
 import { FREEFORM_DATA_LOCAL_STORAGE_KEY } from "../../static/freeformSettings";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
+import { useLocalStorage } from "../../utils/localStorage";
 
 import { ReactComponent as UndoIcon } from "./icons/undo.svg";
 import { ReactComponent as RedoIcon } from "./icons/redo.svg";
@@ -695,6 +696,19 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
 
     const { locale } = useContext(AppContext);
     const t = translation[locale];
+
+    const [freeformTheme, setFreeformTheme] = useLocalStorage<"light" | "dark">(
+      "freeform_theme_override",
+      "light",
+    );
+
+    const isDarkTheme = freeformTheme === "dark";
+      
+    const activeThemeClass = isDarkTheme ? "dark" : "light";
+
+    const toggleTheme = () => {
+      setFreeformTheme(isDarkTheme ? "light" : "dark");
+    };
 
     // Screen → world coords
     const screenToWorld = useCallback(
@@ -1533,7 +1547,10 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     ];
 
     return (
-      <div className={`freeform-overlay${visible ? " visible" : ""}`}>
+      <div
+        className={`freeform-overlay${visible ? " visible" : ""} freeform-container`}
+        data-theme={activeThemeClass}
+      >
         {/* Pricing notice banner */}
         {showPricingBanner && (
           <div className="freeform-pricing-banner">
@@ -1573,6 +1590,22 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
             <span className="freeform-title">{t.freeform}</span>
           </div>
           <div className="freeform-topbar-right">
+            <button
+              className="freeform-action-btn"
+              onClick={toggleTheme}
+              title={t.theme || "Toggle Theme"}
+            >
+              {isDarkTheme ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="4"/>
+                  <path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                </svg>
+              )}
+            </button>
             <button
               className="freeform-action-btn"
               onClick={undo}
