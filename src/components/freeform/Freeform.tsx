@@ -1319,27 +1319,39 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
           const dx = e.touches[0].clientX - e.touches[1].clientX;
           const dy = e.touches[0].clientY - e.touches[1].clientY;
           const dist = Math.hypot(dx, dy);
-          if (pinchDistRef.current !== null) {
-            const scale = dist / pinchDistRef.current;
-            setCamera((c) => ({
-              ...c,
-              zoom: Math.max(
-                0.1,
-                Math.min(5, pinchZoomStartRef.current * scale),
-              ),
-            }));
-          }
-          // Two-finger pan
+          
           const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
           const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-          if (isPanningRef.current) {
-            const panDx = (mx - panStartRef.current.x) / camera.zoom;
-            const panDy = (my - panStartRef.current.y) / camera.zoom;
-            setCamera((prev) => ({
-              ...prev,
-              x: camStartRef.current.x + panDx,
-              y: camStartRef.current.y + panDy,
-            }));
+
+          if (pinchDistRef.current !== null && isPanningRef.current) {
+            const rect = containerRef.current!.getBoundingClientRect();
+            const vpScale = getBodyZoomScale();
+            // Current screen center of pinch
+            const sx = (mx - rect.left) / vpScale;
+            const sy = (my - rect.top) / vpScale;
+            
+            // Start screen center of pinch
+            const startSx = (panStartRef.current.x - rect.left) / vpScale;
+            const startSy = (panStartRef.current.y - rect.top) / vpScale;
+            
+            const startCamX = camStartRef.current.x;
+            const startCamY = camStartRef.current.y;
+            const startZoom = pinchZoomStartRef.current;
+            
+            const scale = dist / pinchDistRef.current;
+            const newZoom = Math.max(0.1, Math.min(5, startZoom * scale));
+            
+            const worldX = startSx / startZoom - startCamX;
+            const worldY = startSy / startZoom - startCamY;
+            
+            const newCamX = sx / newZoom - worldX;
+            const newCamY = sy / newZoom - worldY;
+            
+            setCamera({
+              x: newCamX,
+              y: newCamY,
+              zoom: newZoom
+            });
           }
           return;
         }
@@ -1353,7 +1365,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
         } as unknown as React.MouseEvent;
         handleMouseMove(syntheticEvent);
       },
-      [handleMouseMove, camera, plan],
+      [handleMouseMove, plan],
     );
 
     const handleTouchEnd = useCallback(
@@ -1375,23 +1387,61 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     useEffect(() => {
       const el = containerRef.current;
       if (!el) return;
-      const prevent = (e: TouchEvent) => {
+
+      const preventTouch = (e: TouchEvent) => {
         if (e.touches.length >= 1) e.preventDefault();
       };
-      el.addEventListener("touchmove", prevent, { passive: false });
-      return () => el.removeEventListener("touchmove", prevent);
+      const preventWheel = (e: WheelEvent) => {
+        if (e.ctrlKey) {
+          e.preventDefault();
+        }
+      };
+
+      el.addEventListener("touchmove", preventTouch, { passive: false });
+      el.addEventListener("wheel", preventWheel, { passive: false });
+
+      return () => {
+        el.removeEventListener("touchmove", preventTouch);
+        el.removeEventListener("wheel", preventWheel);
+      };
     }, []);
 
     // Wheel for zoom
     const handleWheel = useCallback(
       (e: React.WheelEvent) => {
-        e.preventDefault();
+        if (!e.ctrlKey) {
+          e.preventDefault();
+        }
         if (plan === "basic") return;
-        const delta = e.deltaY > 0 ? 0.9 : 1.1;
-        setCamera((c) => ({
-          ...c,
-          zoom: Math.max(0.1, Math.min(5, c.zoom * delta)),
-        }));
+
+        const rect = containerRef.current?.getBoundingClientRect();
+        if (!rect) return;
+        
+        const scale = getBodyZoomScale();
+        const sx = (e.clientX - rect.left) / scale;
+        const sy = (e.clientY - rect.top) / scale;
+
+        setCamera((c) => {
+          let newZoom = c.zoom;
+          if (e.ctrlKey) {
+            newZoom -= e.deltaY * 0.01;
+          } else {
+            const delta = e.deltaY > 0 ? 0.9 : 1.1;
+            newZoom = c.zoom * delta;
+          }
+          
+          const clampedZoom = Math.max(0.1, Math.min(5, newZoom));
+          if (clampedZoom === c.zoom) return c;
+
+          const worldX = sx / c.zoom - c.x;
+          const worldY = sy / c.zoom - c.y;
+
+          return {
+            x: sx / clampedZoom - worldX,
+            y: sy / clampedZoom - worldY,
+            zoom: clampedZoom,
+          };
+        });
       },
       [plan],
     );
@@ -1448,10 +1498,32 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
       setEditingTextId(null);
     }, [pushState]);
 
-    const handleZoomIn = () =>
-      setCamera((c) => ({ ...c, zoom: Math.min(5, c.zoom * 1.2) }));
-    const handleZoomOut = () =>
-      setCamera((c) => ({ ...c, zoom: Math.max(0.1, c.zoom / 1.2) }));
+    const handleZoomIn = () => {
+      setCamera((c) => {
+        const newZoom = Math.min(5, c.zoom * 1.2);
+        if (newZoom === c.zoom) return c;
+        const rect = containerRef.current?.getBoundingClientRect();
+        const sc = getBodyZoomScale();
+        const sx = rect ? (rect.width / 2) / sc : window.innerWidth / 2;
+        const sy = rect ? (rect.height / 2) / sc : window.innerHeight / 2;
+        const worldX = sx / c.zoom - c.x;
+        const worldY = sy / c.zoom - c.y;
+        return { x: sx / newZoom - worldX, y: sy / newZoom - worldY, zoom: newZoom };
+      });
+    };
+    const handleZoomOut = () => {
+      setCamera((c) => {
+        const newZoom = Math.max(0.1, c.zoom / 1.2);
+        if (newZoom === c.zoom) return c;
+        const rect = containerRef.current?.getBoundingClientRect();
+        const sc = getBodyZoomScale();
+        const sx = rect ? (rect.width / 2) / sc : window.innerWidth / 2;
+        const sy = rect ? (rect.height / 2) / sc : window.innerHeight / 2;
+        const worldX = sx / c.zoom - c.x;
+        const worldY = sy / c.zoom - c.y;
+        return { x: sx / newZoom - worldX, y: sy / newZoom - worldY, zoom: newZoom };
+      });
+    };
     const handleZoomReset = () => setCamera({ x: 0, y: 0, zoom: 1 });
 
     // ─── Inline text editing overlay ─────────────────────────
