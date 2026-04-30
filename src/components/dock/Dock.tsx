@@ -51,6 +51,7 @@ const Dock = memo(() => {
     showStickyNotes,
     showFocusMode,
     showFreeform,
+    separatePageSite,
   } = useContext(AppContext);
 
   const handleLaunchpadClose = useCallback(
@@ -243,7 +244,7 @@ const Dock = memo(() => {
                 new URL(item.url);
                 anchorProps = {
                   href: item.url,
-                  target: "_self",
+                  target: separatePageSite ? "_blank" : "_self",
                 };
               } catch (error) {
                 if (!/^https?:\/\//i.test(item.url)) {

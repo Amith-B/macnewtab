@@ -29,6 +29,8 @@ const General = memo(function General() {
     setUseAnalogClock2,
     showBattery,
     setShowBattery,
+    separatePageSite,
+    setSeparatePageSite,
   } = useContext(AppContext);
 
   const selectedLanguageDetails = useMemo(() => {
@@ -116,6 +118,16 @@ const General = memo(function General() {
           name="Battery widget toggle"
           isChecked={showBattery}
           handleToggleChange={() => setShowBattery(!showBattery)}
+        />
+      </div>
+
+      <div className="general__row-item">
+        <Translation value="open_links_on_separate_page" />
+        <Toggle
+          id={"separate-page-toggle"}
+          name="Separate page on link click toggle"
+          isChecked={separatePageSite}
+          handleToggleChange={() => setSeparatePageSite(!separatePageSite)}
         />
       </div>
 

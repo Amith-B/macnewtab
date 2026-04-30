@@ -13,8 +13,6 @@ export default memo(function QuickLinks() {
     handleQuickLinksChange,
     showVisitedSites,
     setShowVisitedSites,
-    separatePageSite,
-    setSeparatePageSite,
   } = useContext(AppContext);
 
   const isCustomMode = quickLinksMode === "custom";
@@ -30,19 +28,7 @@ export default memo(function QuickLinks() {
           handleToggleChange={() => setShowVisitedSites(!showVisitedSites)}
         />
       </div>
-      <div
-        className={
-          "quick-links__toggle-row" + (!showVisitedSites ? " disabled" : "")
-        }
-      >
-        <Translation value="open_visited_sites_on_separate_page" />
-        <Toggle
-          id={"separate-page-toggle"}
-          name="Separate page on link click toggle"
-          isChecked={separatePageSite}
-          handleToggleChange={() => setSeparatePageSite(!separatePageSite)}
-        />
-      </div>
+
       <div
         className={
           "quick-links__toggle-row" + (!showVisitedSites ? " disabled" : "")

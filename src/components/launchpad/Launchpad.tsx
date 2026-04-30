@@ -58,7 +58,7 @@ export default function Launchpad({
   const [selectedTab, setSelectedTab] = useState<"google_apps" | "bookmarks">(
     "google_apps"
   );
-  const { bookmarksVisible, locale } = useContext(AppContext);
+  const { bookmarksVisible, locale, separatePageSite } = useContext(AppContext);
   const [bookmarksTree, setBookmarksTree] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
@@ -217,6 +217,8 @@ export default function Launchpad({
           {filteredLaunchpadList.map((item, idx) => (
             <a
               href={item.href}
+              rel="noreferrer"
+              target={separatePageSite ? "_blank" : "_self"}
               className="launchpad-item"
               key={idx}
               title={item.label}
@@ -235,6 +237,7 @@ export default function Launchpad({
               <BookmarkGroup
                 data={item}
                 onBookmarkRemove={handleBookmarkRemove}
+                separatePageSite={separatePageSite}
               />
             ))}
           </div>
@@ -256,16 +259,18 @@ export default function Launchpad({
 function BookmarkGroup({
   data,
   onBookmarkRemove,
+  separatePageSite,
 }: {
   data: chrome.bookmarks.BookmarkTreeNode;
   onBookmarkRemove: (id: string) => void;
+  separatePageSite?: boolean;
 }) {
   if (data?.children?.length) {
     return (
       <fieldset className="bookmark-group">
         <legend className="bookmark-group-title">{data.title}</legend>
         {data.children.map((item) => (
-          <BookmarkGroup data={item} onBookmarkRemove={onBookmarkRemove} />
+          <BookmarkGroup data={item} onBookmarkRemove={onBookmarkRemove} separatePageSite={separatePageSite} />
         ))}
       </fieldset>
     );
@@ -287,6 +292,8 @@ function BookmarkGroup({
   return (
     <a
       href={data.url}
+      rel="noreferrer"
+      target={separatePageSite ? "_blank" : "_self"}
       className="bookmark-item"
       key={data.id}
       title={data.title}

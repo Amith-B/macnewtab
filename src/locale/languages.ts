@@ -2,7 +2,7 @@ export const translation = {
   en: {
     show_greetings: "Show Greetings",
     show_top_visited_sites: "Show Top Visited Sites",
-    open_visited_sites_on_separate_page: "Open Visited Sites On Separate Page",
+    open_links_on_separate_page: "Open Links On Separate Page",
     show_search_engines: "Show Search Engines",
     show_clock_and_calendar: "Show Clock And Calendar Widgets",
     switch_calendar_to_month_view: "Switch Calendar to Month View",
@@ -254,8 +254,7 @@ export const translation = {
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
     show_top_visited_sites: "ಟಾಪ್ ಭೇಟಿ ನೀಡಿದ ಸೈಟ್‌ಗಳನ್ನು ತೋರಿಸಿ",
-    open_visited_sites_on_separate_page:
-      "ಭೇಟಿ ನೀಡಿದ ಸೈಟ್‌ಗಳನ್ನು ಪ್ರತ್ಯೇಕ ಪುಟದಲ್ಲಿ ತೆರೆಯಿರಿ",
+    open_links_on_separate_page: "ಲಿಂಕ್‌ಗಳನ್ನು ಪ್ರತ್ಯೇಕ ಪುಟದಲ್ಲಿ ತೆರೆಯಿರಿ",
     show_search_engines: "ಹುಡುಕಾಟ ಇಂಜಿನ್ಗಳನ್ನು ತೋರಿಸಿ",
     show_clock_and_calendar: "ಗಡಿಯಾರ ಮತ್ತು ಕ್ಯಾಲೆಂಡರ್ ವಿಜೆಟ್‌ಗಳನ್ನು ತೋರಿಸಿ",
     switch_calendar_to_month_view: "ಕ್ಯಾಲೆಂಡರ್ ಅನ್ನು ತಿಂಗಳ ವೀಕ್ಷಣೆಗೆ ಬದಲಾಯಿಸಿ",
@@ -506,8 +505,7 @@ export const translation = {
   cs: {
     show_greetings: "Zobrazit pozdravy",
     show_top_visited_sites: "Zobrazit nejnavštěvovanější stránky",
-    open_visited_sites_on_separate_page:
-      "Otevřete navštívené stránky na samostatné stránce",
+    open_links_on_separate_page: "Otevřít odkazy na samostatné stránce",
     show_search_engines: "Zobrazit vyhledávače",
     show_clock_and_calendar: "Zobrazit widgety hodin a kalendáře",
     switch_calendar_to_month_view: "Přepněte kalendář do zobrazení měsíce",
@@ -757,8 +755,7 @@ export const translation = {
   tr: {
     show_greetings: "Selamlamayı Göster",
     show_top_visited_sites: "En Çok Ziyaret Edilen Siteleri Göster",
-    open_visited_sites_on_separate_page:
-      "Ziyaret Edilen Siteleri Ayrı Sayfada Açma",
+    open_links_on_separate_page: "Bağlantıları Ayrı Sayfada Aç",
     show_search_engines: "Arama Motorlarını Göster",
     show_clock_and_calendar: "Saat ve takvim widget'larını göster",
     switch_calendar_to_month_view: "Takvimi Ay Görünümüne Geç",
@@ -1010,8 +1007,7 @@ export const translation = {
   vi: {
     show_greetings: "Hiển thị lời chào",
     show_top_visited_sites: "Hiển thị các trang web được truy cập hàng đầu",
-    open_visited_sites_on_separate_page:
-      "Mở các trang đã truy cập trên trang riêng",
+    open_links_on_separate_page: "Mở liên kết trên trang riêng biệt",
     show_search_engines: "Hiển thị công cụ tìm kiếm",
     show_clock_and_calendar: "Hiển thị các tiện ích đồng hồ và lịch",
     switch_calendar_to_month_view: "Chuyển Lịch sang Chế độ xem theo tháng",
@@ -1263,8 +1259,7 @@ export const translation = {
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
     show_top_visited_sites: "Eng ko'p tashrif buyurilgan saytlarni ko'rsatish",
-    open_visited_sites_on_separate_page:
-      "Alohida sahifada tashrif buyurilgan saytlarni oching",
+    open_links_on_separate_page: "Havolalarni alohida sahifada ochish",
     show_search_engines: "Qidiruv mexanizmlarini ko'rsatish",
     show_clock_and_calendar: "Soat va taqvim vidjetlarini namoyish eting",
     switch_calendar_to_month_view: "Taqvimni Oy ko‘rinishiga o‘tkazing",
@@ -1515,7 +1510,7 @@ export const translation = {
   zh: {
     show_greetings: "显示问候语",
     show_top_visited_sites: "显示最常访问的网站",
-    open_visited_sites_on_separate_page: "在单独的页面上打开访问过的网站",
+    open_links_on_separate_page: "在新页面中打开链接",
     show_search_engines: "显示搜索引擎",
     show_clock_and_calendar: "显示时钟和日历小部件",
     switch_calendar_to_month_view: "将日历切换到月视图",
@@ -1762,8 +1757,7 @@ export const translation = {
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
     show_top_visited_sites: "शीर्ष देखी गई साइटें दिखाएँ",
-    open_visited_sites_on_separate_page:
-      "विज़िट की गई साइटें अलग पृष्ठ पर खोलें",
+    open_links_on_separate_page: "लिंक को अलग पेज पर खोलें",
     show_search_engines: "खोज इंजन दिखाएँ",
     show_clock_and_calendar: "घड़ी और कैलेंडर विजेट दिखाएं",
     switch_calendar_to_month_view: "कैलेंडर को माह दृश्य में बदलें",
@@ -2014,8 +2008,7 @@ export const translation = {
   it: {
     show_greetings: "Mostra saluti",
     show_top_visited_sites: "Mostra i siti più visitati",
-    open_visited_sites_on_separate_page:
-      "Apri i siti visitati in una pagina separata",
+    open_links_on_separate_page: "Apri i link in una pagina separata",
     show_search_engines: "Mostra motori di ricerca",
     show_clock_and_calendar: "Mostra i widget dell'orologio e del calendario",
     switch_calendar_to_month_view:
@@ -2268,8 +2261,7 @@ export const translation = {
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
     show_top_visited_sites: "শীর্ষ পরিদর্শন সাইট দেখান",
-    open_visited_sites_on_separate_page:
-      "পৃথক পৃষ্ঠায় পরিদর্শন করা সাইটগুলি খুলুন",
+    open_links_on_separate_page: "লিঙ্কগুলি আলাদা পৃষ্ঠায় খুলুন",
     show_search_engines: "সার্চ ইঞ্জিন দেখান",
     show_clock_and_calendar: "ঘড়ি এবং ক্যালেন্ডার উইজেটগুলি দেখান",
     switch_calendar_to_month_view: "ক্যালেন্ডারকে মাস ভিউতে পরিবর্তন করুন",
@@ -2520,8 +2512,7 @@ export const translation = {
   pt: {
     show_greetings: "Mostrar saudações",
     show_top_visited_sites: "Mostrar os sites mais visitados",
-    open_visited_sites_on_separate_page:
-      "Abra os sites visitados em uma página separada",
+    open_links_on_separate_page: "Abrir links em uma página separada",
     show_search_engines: "Mostrar motores de busca",
     show_clock_and_calendar: "Mostrar relógio e widgets de calendário",
     switch_calendar_to_month_view: "Mudar calendário para visualização mensal",
@@ -2774,8 +2765,7 @@ export const translation = {
   fr: {
     show_greetings: "Afficher les salutations",
     show_top_visited_sites: "Afficher les sites les plus visités",
-    open_visited_sites_on_separate_page:
-      "Ouvrir les sites visités sur une page séparée",
+    open_links_on_separate_page: "Ouvrir les liens sur une page séparée",
     show_search_engines: "Afficher les moteurs de recherche",
     show_clock_and_calendar: "Montrer des widgets d'horloge et de calendrier",
     switch_calendar_to_month_view:
@@ -3027,8 +3017,7 @@ export const translation = {
   ru: {
     show_greetings: "Показать приветствия",
     show_top_visited_sites: "Показать самые посещаемые сайты",
-    open_visited_sites_on_separate_page:
-      "Открыть посещенные сайты на отдельной странице",
+    open_links_on_separate_page: "Открывать ссылки на отдельной странице",
     show_search_engines: "Показать поисковые системы",
     show_clock_and_calendar: "Показать часы и виджеты календаря",
     switch_calendar_to_month_view: "Переключить календарь на просмотр месяца",
@@ -3279,8 +3268,7 @@ export const translation = {
   es: {
     show_greetings: "Mostrar saludos",
     show_top_visited_sites: "Mostrar los sitios más visitados",
-    open_visited_sites_on_separate_page:
-      "Abrir sitios visitados en una página separada",
+    open_links_on_separate_page: "Abrir enlaces en una página separada",
     show_search_engines: "Mostrar motores de búsqueda",
     show_clock_and_calendar: "Mostrar reloj y widgets de calendario",
     switch_calendar_to_month_view: "Cambiar calendario a vista mensual",
@@ -3531,7 +3519,7 @@ export const translation = {
   ja: {
     show_greetings: "挨拶を表示",
     show_top_visited_sites: "よくアクセスしたサイトを表示",
-    open_visited_sites_on_separate_page: "訪問したサイトを別のページで開く",
+    open_links_on_separate_page: "リンクを別のページで開く",
     show_search_engines: "検索エンジンを表示",
     show_clock_and_calendar: "時計とカレンダーのウィジェットを表示します",
     switch_calendar_to_month_view: "カレンダーを月表示に切り替える",
@@ -3781,7 +3769,7 @@ export const translation = {
   ko: {
     show_greetings: "인사말 표시",
     show_top_visited_sites: "가장 많이 방문한 사이트 표시",
-    open_visited_sites_on_separate_page: "별도의 페이지에서 방문한 사이트 열기",
+    open_links_on_separate_page: "별도의 페이지에서 링크 열기",
     show_search_engines: "검색 엔진 표시",
     show_clock_and_calendar: "시계와 캘린더 위젯을 표시하십시오",
     switch_calendar_to_month_view: "달력을 월별 보기로 전환",
@@ -4030,8 +4018,7 @@ export const translation = {
   id: {
     show_greetings: "Tampilkan Salam",
     show_top_visited_sites: "Tampilkan Situs yang Paling Banyak Dikunjungi",
-    open_visited_sites_on_separate_page:
-      "Buka Situs yang Dikunjungi Di Halaman Terpisah",
+    open_links_on_separate_page: "Buka Tautan di Halaman Terpisah",
     show_search_engines: "Tampilkan Mesin Pencari",
     show_clock_and_calendar: "Tampilkan Widget Jam dan Kalender",
     switch_calendar_to_month_view: "Alihkan Kalender ke Tampilan Bulan",
@@ -4281,8 +4268,7 @@ export const translation = {
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
     show_top_visited_sites: "शीर्ष भेट दिलेल्या साइट दर्शवा",
-    open_visited_sites_on_separate_page:
-      "स्वतंत्र पृष्ठावर भेट दिलेल्या साइट उघडा",
+    open_links_on_separate_page: "लिंक वेगळ्या पृष्ठावर उघडा",
     show_search_engines: "शोध इंजिन दाखवा",
     show_clock_and_calendar: "घड्याळ आणि कॅलेंडर विजेट दर्शवा",
     switch_calendar_to_month_view: "कॅलेंडर महिना दृश्यावर स्विच करा",
@@ -4532,7 +4518,7 @@ export const translation = {
   pl: {
     show_greetings: "Pokaż pozdrowienia",
     show_top_visited_sites: "Pokaż najczęściej odwiedzane strony",
-    open_visited_sites_on_separate_page: "Otwórz odwiedzone strony na osobnej karcie",
+    open_links_on_separate_page: "Otwórz linki na osobnej stronie",
     show_search_engines: "Pokaż wyszukiwarki",
     show_clock_and_calendar: "Pokaż widżety zegara i kalendarza",
     switch_calendar_to_month_view: "Przełącz kalendarz na widok miesiąca",
@@ -4784,7 +4770,7 @@ export const translation = {
   de: {
     show_greetings: "Grüße anzeigen",
     show_top_visited_sites: "Meistbesuchte Seiten anzeigen",
-    open_visited_sites_on_separate_page: "Besuchte Seiten auf separater Seite öffnen",
+    open_links_on_separate_page: "Links auf einer separaten Seite öffnen",
     show_search_engines: "Suchmaschinen anzeigen",
     show_clock_and_calendar: "Uhr- und Kalender-Widgets anzeigen",
     switch_calendar_to_month_view: "Kalender zur Monatsansicht wechseln",
