@@ -129,6 +129,16 @@ export default function Settings({
 }) {
   const [selectedMenu, setSelectedMenu] = useState(SETTINGS_MENU[0]);
   const [modalAccessible, setModalAccessible] = useState(false);
+  const [renderOpen, setRenderOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      const timer = setTimeout(() => setRenderOpen(true), 10);
+      return () => clearTimeout(timer);
+    } else {
+      setRenderOpen(false);
+    }
+  }, [open]);
   const { dockPosition, googleUser, wallpaperType, dynamicWallpaperTheme, interactiveWallpaperTheme } =
     useContext(AppContext);
 
@@ -207,7 +217,7 @@ export default function Settings({
     <div
       className={
         "settings__overlay" +
-        (open ? " visible" : "") +
+        (renderOpen ? " visible" : "") +
         (modalAccessible ? " modal-accessible" : " modal-inaccessible")
       }
       onClick={() => {

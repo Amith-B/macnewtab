@@ -16,7 +16,6 @@ import { ReactComponent as TodoIcon } from "../../assets/todo.svg";
 import { ReactComponent as StickyNotesIcon } from "../../assets/sticky-notes.svg";
 import { ReactComponent as FreeformIcon } from "../../assets/freeform.svg";
 import { ReactComponent as FocusIcon } from "../../assets/focus.svg";
-import Settings from "../settings/Settings";
 import Launchpad from "../launchpad/Launchpad";
 import TodoDialog from "../todo/Todo";
 import FocusMode from "../focus/FocusMode";
@@ -24,6 +23,7 @@ import "./Dock.css";
 import { AppContext } from "../../context/provider";
 import { DockIcon } from "./DockIcon";
 
+const SettingsLazy = lazy(() => import("../settings/Settings"));
 const FreeformLazy = lazy(() => import("../freeform/Freeform"));
 
 const TooltipPosition: Record<string, string> = {
@@ -35,6 +35,7 @@ const TooltipPosition: Record<string, string> = {
 
 const Dock = memo(() => {
   const [settingsVisible, setSettingsVisible] = useState(false);
+  const [hasOpenedSettings, setHasOpenedSettings] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
   const [todoDialogOpen, setTodoDialogOpen] = useState(false);
   const [focusModeVisible, setFocusModeVisible] = useState(false);
@@ -214,6 +215,7 @@ const Dock = memo(() => {
           }`}
           data-label="Settings"
           onClick={() => {
+            setHasOpenedSettings(true);
             setSettingsVisible(true);
             setLaunchpadVisible(false);
           }}
@@ -296,10 +298,14 @@ const Dock = memo(() => {
           </button>
         )}
       </div>
-      <Settings
-        open={settingsVisible}
-        onClose={() => setSettingsVisible(false)}
-      />
+      {hasOpenedSettings && (
+        <Suspense fallback={null}>
+          <SettingsLazy
+            open={settingsVisible}
+            onClose={() => setSettingsVisible(false)}
+          />
+        </Suspense>
+      )}
       <Launchpad visible={launchpadVisible} onClose={handleLaunchpadClose} />
       <TodoDialog open={todoDialogOpen} onClose={handleTodoClose} />
       <FocusMode
