@@ -38,7 +38,6 @@
 .search-engine-switcher__tile-group-wrapper {
   position: relative;
   display: flex;
-  max-width: calc(100vw - 200px); /* adjust width dynamically */
   overflow: hidden;
   border-radius: 12px;
 }
