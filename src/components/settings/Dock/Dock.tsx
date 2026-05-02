@@ -67,8 +67,7 @@ export default memo(function Dock() {
       </div>
       <div
         className={
-          "dock-app__toggle sub-toggle" +
-          (!showStickyNotes ? " disabled" : "")
+          "dock-app__toggle sub-toggle" + (!showStickyNotes ? " disabled" : "")
         }
       >
         <div className="dock-app__toggle-info">
@@ -118,11 +117,7 @@ export default memo(function Dock() {
           handleToggleChange={() => setShowFreeform(!showFreeform)}
         />
       </div>
-      <div
-        className={
-          "dock-links__position" + (!dockBarSites.length ? " disabled" : "")
-        }
-      >
+      <div className={"dock-links__position"}>
         <Translation value="position_on_screen" />
         <Select
           id="dock-position-menu"
@@ -143,4 +138,3 @@ export default memo(function Dock() {
     </div>
   );
 });
-

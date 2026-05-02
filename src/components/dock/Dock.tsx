@@ -142,87 +142,7 @@ const Dock = memo(() => {
 
   return (
     <>
-      <div className={`dock-container ${dockPosition} center`}>
-        <button
-          className={`launchpad-icon accessible tooltip tooltip-${
-            TooltipPosition[dockPosition] || "top"
-          }`}
-          data-label="Launchpad"
-          onClick={() => {
-            setLaunchpadVisible(!launchpadVisible);
-            setSettingsVisible(false);
-          }}
-        >
-          <LaunchpadIcon />
-        </button>
-        {todoListVisbility && (
-          <button
-            className={`todo-button accessible tooltip tooltip-${
-              TooltipPosition[dockPosition] || "top"
-            }`}
-            data-label="Todo List"
-            onClick={() => {
-              groupTodosByCheckedStatus();
-              setTodoDialogOpen(true);
-            }}
-          >
-            <TodoIcon />
-          </button>
-        )}
-        {showStickyNotes && (
-          <button
-            className={`sticky-notes-button accessible tooltip tooltip-${
-              TooltipPosition[dockPosition] || "top"
-            }`}
-            data-label="Add Sticky Note"
-            onClick={() => {
-              window.dispatchEvent(new CustomEvent("createStickyNote"));
-            }}
-          >
-            <StickyNotesIcon />
-          </button>
-        )}
-        {showFocusMode && (
-          <button
-            className={`focus-button accessible tooltip tooltip-${
-              TooltipPosition[dockPosition] || "top"
-            }`}
-            data-label="Focus Studio"
-            onClick={() => {
-              setFocusModeVisible(!focusModeVisible);
-            }}
-          >
-            <FocusIcon />
-          </button>
-        )}
-        {showFreeform && (
-          <button
-            className={`freeform-button accessible tooltip tooltip-${
-              TooltipPosition[dockPosition] || "top"
-            }`}
-            data-label="Freeform"
-            onClick={() => {
-              setHasOpenedFreeform(true);
-              setFreeformVisible(!freeformVisible);
-            }}
-          >
-            <FreeformIcon />
-          </button>
-        )}
-        <button
-          className={`settings-icon accessible tooltip tooltip-${
-            TooltipPosition[dockPosition] || "top"
-          }`}
-          data-label="Settings"
-          onClick={() => {
-            setHasOpenedSettings(true);
-            setSettingsVisible(true);
-            setLaunchpadVisible(false);
-          }}
-        >
-          <SettingsIcon />
-        </button>
-        {hasLinks && <div className="dock-divider"></div>}
+      <div className={`dock-scroll-container ${dockPosition}`}>
         {isOverflowButtonVisible && (
           <button
             className={
@@ -233,60 +153,148 @@ const Dock = memo(() => {
             <LeftArrow />
           </button>
         )}
-        {hasLinks && (
-          <div
-            className="dock-links-container"
-            ref={containerRef}
-            onScroll={checkOverflow}
+        <div
+          className={`dock-container ${dockPosition}`}
+          ref={containerRef}
+          onScroll={checkOverflow}
+        >
+          <button
+            className={`launchpad-icon accessible tooltip tooltip-${
+              TooltipPosition[dockPosition] || "top"
+            }`}
+            data-label="Launchpad"
+            title="Launchpad"
+            onClick={() => {
+              setLaunchpadVisible(!launchpadVisible);
+              setSettingsVisible(false);
+            }}
           >
-            {dockBarSites.map((item) => {
-              let anchorProps = {};
+            <LaunchpadIcon />
+          </button>
+          {todoListVisbility && (
+            <button
+              className={`todo-button accessible tooltip tooltip-${
+                TooltipPosition[dockPosition] || "top"
+              }`}
+              data-label="Todo List"
+              title="Todo List"
+              onClick={() => {
+                groupTodosByCheckedStatus();
+                setTodoDialogOpen(true);
+              }}
+            >
+              <TodoIcon />
+            </button>
+          )}
+          {showStickyNotes && (
+            <button
+              className={`sticky-notes-button accessible tooltip tooltip-${
+                TooltipPosition[dockPosition] || "top"
+              }`}
+              data-label="Add Sticky Note"
+              title="Add Sticky Note"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent("createStickyNote"));
+              }}
+            >
+              <StickyNotesIcon />
+            </button>
+          )}
+          {showFocusMode && (
+            <button
+              className={`focus-button accessible tooltip tooltip-${
+                TooltipPosition[dockPosition] || "top"
+              }`}
+              data-label="Focus Studio"
+              title="Focus Studio"
+              onClick={() => {
+                setFocusModeVisible(!focusModeVisible);
+              }}
+            >
+              <FocusIcon />
+            </button>
+          )}
+          {showFreeform && (
+            <button
+              className={`freeform-button accessible tooltip tooltip-${
+                TooltipPosition[dockPosition] || "top"
+              }`}
+              data-label="Freeform"
+              title="Freeform"
+              onClick={() => {
+                setHasOpenedFreeform(true);
+                setFreeformVisible(!freeformVisible);
+              }}
+            >
+              <FreeformIcon />
+            </button>
+          )}
+          <button
+            className={`settings-icon accessible tooltip tooltip-${
+              TooltipPosition[dockPosition] || "top"
+            }`}
+            data-label="Settings"
+            title="Settings"
+            onClick={() => {
+              setHasOpenedSettings(true);
+              setSettingsVisible(true);
+              setLaunchpadVisible(false);
+            }}
+          >
+            <SettingsIcon />
+          </button>
+          {hasLinks && <div className="dock-divider"></div>}
+          {hasLinks && (
+            <>
+              {dockBarSites.map((item) => {
+                let anchorProps = {};
 
-              try {
-                new URL(item.url);
-                anchorProps = {
-                  href: item.url,
-                  target: separatePageSite ? "_blank" : "_self",
-                };
-              } catch (error) {
-                if (!/^https?:\/\//i.test(item.url)) {
-                  try {
-                    new URL("https://" + item.url);
-                  } catch (_) {}
+                try {
+                  new URL(item.url);
+                  anchorProps = {
+                    href: item.url,
+                    target: separatePageSite ? "_blank" : "_self",
+                  };
+                } catch (error) {
+                  if (!/^https?:\/\//i.test(item.url)) {
+                    try {
+                      new URL("https://" + item.url);
+                    } catch (_) {}
+                  }
+
+                  anchorProps = {
+                    onClick: () => {
+                      if (!chrome?.search?.query) {
+                        return;
+                      }
+                      chrome.search.query({
+                        text: item.url,
+                      });
+                    },
+                  };
                 }
 
-                anchorProps = {
-                  onClick: () => {
-                    if (!chrome?.search?.query) {
-                      return;
-                    }
-                    chrome.search.query({
-                      text: item.url,
-                    });
-                  },
-                };
-              }
-
-              return (
-                <a
-                  rel="noreferrer"
-                  className="dock-site__item with-link"
-                  data-label={item.title}
-                  title={item.title}
-                  key={item.id}
-                  {...anchorProps}
-                >
-                  <DockIcon
-                    id={item.id}
-                    hasCustomIcon={item.hasCustomIcon}
-                    url={item.url}
+                return (
+                  <a
+                    rel="noreferrer"
+                    className="dock-site__item with-link"
+                    data-label={item.title}
                     title={item.title}
-                  />
-                </a>
-              );
-            })}
-          </div>
-        )}
+                    key={item.id}
+                    {...anchorProps}
+                  >
+                    <DockIcon
+                      id={item.id}
+                      hasCustomIcon={item.hasCustomIcon}
+                      url={item.url}
+                      title={item.title}
+                    />
+                  </a>
+                );
+              })}
+            </>
+          )}
+        </div>
         {isOverflowButtonVisible && (
           <button
             className={
