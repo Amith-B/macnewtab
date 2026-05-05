@@ -43,7 +43,6 @@ const App = function App() {
     showStickyNotes,
     dockPosition,
     isWidgetsAwayFromDock,
-    dockBarSites,
     useAnalogClock2,
     wallpaperType,
     dynamicWallpaperTheme,
@@ -143,7 +142,7 @@ const App = function App() {
           "main-content" +
           (showClockAndCalendar ? " has-clock-calendar" : "") +
           (isWidgetsAwayFromDock ? " widgets-away-from-dock" : "") +
-          (!!dockBarSites.length ? ` dock-${dockPosition}` : "")
+          ` dock-${dockPosition}`
         }
       >
         {showClockAndCalendar && (

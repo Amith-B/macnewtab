@@ -24,7 +24,6 @@ const General = memo(function General() {
     handleBookmarkVisbility,
     isWidgetsAwayFromDock,
     setIsWidgetsAwayFromDock,
-    dockBarSites,
     useAnalogClock2,
     setUseAnalogClock2,
     showBattery,
@@ -170,11 +169,7 @@ const General = memo(function General() {
         </div>
       </div>
 
-      <div
-        className={
-          "general__row-item" + (!dockBarSites.length ? " disabled" : "")
-        }
-      >
+      <div className="general__row-item">
         <Translation value="center_widgets_away_from_dock" />
         <Toggle
           id={"center-widgets-away-from-dock"}
