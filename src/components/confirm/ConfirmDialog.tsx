@@ -10,6 +10,7 @@ interface ConfirmDialogProps {
   cancelText?: string | ReactNode;
   onConfirm?: () => void;
   onCancel?: () => void;
+  children?: ReactNode;
 }
 
 const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
@@ -20,6 +21,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   cancelText = "Cancel",
   onConfirm = () => {},
   onCancel = () => {},
+  children,
 }) => {
   if (!open) return null;
 
@@ -43,6 +45,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
                 {description}
               </div>
             )}
+            {children}
           </div>
         </div>
 

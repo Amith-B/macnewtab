@@ -58,6 +58,29 @@
   flex: 1;
 }
 
+.cd-input__container {
+  height: 32px;
+  width: 100%;
+  padding: 4px 10px;
+  background: var(--theme-bg-secondary);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--theme-border);
+  box-sizing: border-box;
+}
+
+.cd-input__container input {
+  height: 100%;
+  border: none;
+  background: transparent;
+  width: 100%;
+  outline: none;
+  font-size: 0.875rem;
+  color: var(--theme-clr);
+  caret-color: var(--input-caret-color);
+}
+
 .cd-actions {
   display: flex;
   justify-content: flex-end;

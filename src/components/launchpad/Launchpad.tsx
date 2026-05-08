@@ -63,6 +63,10 @@ export default function Launchpad({
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
   const [bookmarkIdToBeDeleted, setBookmarkIdToBeDeleted] = useState("");
+  const [bookmarkToBeEdited, setBookmarkToBeEdited] = useState<chrome.bookmarks.BookmarkTreeNode | null>(null);
+  const [editName, setEditName] = useState("");
+  const [editUrl, setEditUrl] = useState("");
+  const [editError, setEditError] = useState("");
 
   useEffect(() => {
     if (bookmarksVisible && visible) {
@@ -171,6 +175,27 @@ export default function Launchpad({
     }
   };
 
+  const handleBookmarkEdit = (bookmark: chrome.bookmarks.BookmarkTreeNode) => {
+    setBookmarkToBeEdited(bookmark);
+    setEditName(bookmark.title || "");
+    setEditUrl(bookmark.url || "");
+    setEditError("");
+  };
+
+  const handleConfirmEdit = () => {
+    setEditError("");
+    if (chrome?.bookmarks?.update && bookmarkToBeEdited) {
+      chrome.bookmarks.update(bookmarkToBeEdited.id, { title: editName, url: editUrl })
+        .then(() => {
+          refreshBookmark();
+          setBookmarkToBeEdited(null);
+        })
+        .catch((error) => {
+          setEditError(error?.message || "Failed to update bookmark.");
+        });
+    }
+  };
+
   return (
     <div
       className={
@@ -237,6 +262,7 @@ export default function Launchpad({
               <BookmarkGroup
                 data={item}
                 onBookmarkRemove={handleBookmarkRemove}
+                onBookmarkEdit={handleBookmarkEdit}
                 separatePageSite={separatePageSite}
               />
             ))}
@@ -250,6 +276,44 @@ export default function Launchpad({
             onConfirm={handleConfirmDelete}
             onCancel={() => setBookmarkIdToBeDeleted("")}
           />
+          <ConfirmDialog
+            open={!!bookmarkToBeEdited}
+            title="Edit Bookmark"
+            confirmText="Save"
+            cancelText="Cancel"
+            onConfirm={handleConfirmEdit}
+            onCancel={() => setBookmarkToBeEdited(null)}
+          >
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "10px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <label htmlFor="edit-name" style={{ fontSize: "12px", fontWeight: 600 }}>Name</label>
+                <div className="cd-input__container">
+                  <input
+                    id="edit-name"
+                    value={editName}
+                    onChange={(e) => setEditName(e.target.value)}
+                    autoComplete="off"
+                  />
+                </div>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <label htmlFor="edit-url" style={{ fontSize: "12px", fontWeight: 600 }}>URL</label>
+                <div className="cd-input__container">
+                  <input
+                    id="edit-url"
+                    value={editUrl}
+                    onChange={(e) => setEditUrl(e.target.value)}
+                    autoComplete="off"
+                  />
+                </div>
+              </div>
+              {editError && (
+                <div style={{ color: "#ff4d4d", fontSize: "12px", marginTop: "4px" }}>
+                  {editError}
+                </div>
+              )}
+            </div>
+          </ConfirmDialog>
         </>
       )}
     </div>
@@ -259,10 +323,12 @@ export default function Launchpad({
 function BookmarkGroup({
   data,
   onBookmarkRemove,
+  onBookmarkEdit,
   separatePageSite,
 }: {
   data: chrome.bookmarks.BookmarkTreeNode;
   onBookmarkRemove: (id: string) => void;
+  onBookmarkEdit: (bookmark: chrome.bookmarks.BookmarkTreeNode) => void;
   separatePageSite?: boolean;
 }) {
   if (data?.children?.length) {
@@ -270,7 +336,7 @@ function BookmarkGroup({
       <fieldset className="bookmark-group">
         <legend className="bookmark-group-title">{data.title}</legend>
         {data.children.map((item) => (
-          <BookmarkGroup data={item} onBookmarkRemove={onBookmarkRemove} separatePageSite={separatePageSite} />
+          <BookmarkGroup data={item} onBookmarkRemove={onBookmarkRemove} onBookmarkEdit={onBookmarkEdit} separatePageSite={separatePageSite} />
         ))}
       </fieldset>
     );
@@ -289,6 +355,14 @@ function BookmarkGroup({
     onBookmarkRemove(bookmarkId);
   };
 
+  const handleContextMenu = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    onBookmarkEdit(data);
+  };
+
   return (
     <a
       href={data.url}
@@ -297,6 +371,7 @@ function BookmarkGroup({
       className="bookmark-item"
       key={data.id}
       title={data.title}
+      onContextMenu={handleContextMenu}
     >
       <button
         className="bookmark-item__delete button-icon"

@@ -20,6 +20,7 @@ import DynamicWallpaper from "./components/wallpaper/DynamicWallpaper";
 import InteractiveWallpaper from "./components/wallpaper/InteractiveWallpaper";
 import Weather from "./widgets/weather/Weather";
 import Battery from "./widgets/battery/Battery";
+import FooterNotice from "./components/footer-notice/FooterNotice";
 
 const App = function App() {
   const [searchEngine, setSearchEngine] = useState("");
@@ -190,6 +191,11 @@ const App = function App() {
       <Dock />
       {showTabManager && <TabManager />}
       {showStickyNotes && <StickyNotes />}
+      <FooterNotice 
+        storageKey="hide_footer_notice"
+        title={<Translation value="hide_footer_notice_title" />}
+        description={<Translation value="hide_footer_notice_desc" />}
+      />
     </div>
   );
 };
