@@ -252,6 +252,9 @@ export const translation = {
     animated_wallpaper_warning: "Animated wallpapers may use slightly more battery if the device is running on battery.",
     hide_footer_notice_title: "Notice a bar at the bottom of the page?",
     hide_footer_notice_desc: "You can remove it by right-clicking on the bar and choosing 'Hide Footer on New Tab Page'.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
@@ -505,6 +508,9 @@ export const translation = {
     animated_wallpaper_warning: "ಸಾಧನವು ಬ್ಯಾಟರಿಯಲ್ಲಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿದ್ದರೆ ಅನಿಮೇಟೆಡ್ ವಾಲ್‌ಪೇಪರ್‌ಗಳು ಸ್ವಲ್ಪ ಹೆಚ್ಚು ಬ್ಯಾಟರಿಯನ್ನು ಬಳಸಬಹುದು.",
     hide_footer_notice_title: "ಪುಟದ ಕೆಳಭಾಗದಲ್ಲಿ ಒಂದು ಬಾರ್ ಕಾಣಿಸುತ್ತಿದೆಯೇ?",
     hide_footer_notice_desc: "ಅದನ್ನು ತೆಗೆದುಹಾಕಲು, ಬಾರ್ ಮೇಲೆ ಬಲ ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು 'Hide Footer on New Tab Page' ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -757,6 +763,9 @@ export const translation = {
     animated_wallpaper_warning: "Animované tapety mohou spotřebovat o něco více baterie, pokud zařízení běží na baterii.",
     hide_footer_notice_title: "Všimli jste si lišty ve spodní části stránky?",
     hide_footer_notice_desc: "Můžete ji odstranit kliknutím pravým tlačítkem na lištu a výběrem 'Hide Footer on New Tab Page'.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -1011,6 +1020,9 @@ export const translation = {
     animated_wallpaper_warning: "Cihaz pille çalışıyorsa hareketli duvar kağıtları biraz daha fazla pil tüketebilir.",
     hide_footer_notice_title: "Sayfanın altında bir çubuk mu görüyorsunuz?",
     hide_footer_notice_desc: "Çubuğa sağ tıklayıp 'Hide Footer on New Tab Page' seçeneğini seçerek kaldırabilirsiniz.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -1265,6 +1277,9 @@ export const translation = {
     animated_wallpaper_warning: "Hình nền động có thể sử dụng nhiều pin hơn một chút nếu thiết bị đang chạy bằng pin.",
     hide_footer_notice_title: "Bạn có thấy thanh ở cuối trang không?",
     hide_footer_notice_desc: "Bạn có thể xóa nó bằng cách nhấp chuột phải vào thanh đó và chọn 'Hide Footer on New Tab Page'.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -1518,6 +1533,9 @@ export const translation = {
     animated_wallpaper_warning: "Agar qurilma batareyada ishlayotgan bo'lsa, jonlantirilgan fon rasmlari bir oz ko'proq batareya sarflashi mumkin.",
     hide_footer_notice_title: "Sahifaning pastki qismida chiziq ko'ryapsizmi?",
     hide_footer_notice_desc: "Uni olib tashlash uchun chiziqni o'ng tugma bilan bosing va 'Hide Footer on New Tab Page' ni tanlang.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -1767,6 +1785,9 @@ export const translation = {
     animated_wallpaper_warning: "如果设备使用电池供电，动态壁纸可能会稍微增加电池消耗。",
     hide_footer_notice_title: "注意到页面底部的横条了吗？",
     hide_footer_notice_desc: "右键点击该横条并选择 'Hide Footer on New Tab Page' 即可将其移除。",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -2020,6 +2041,9 @@ export const translation = {
     animated_wallpaper_warning: "यदि डिवाइस बैटरी पर चल रहा है तो एनिमेटेड वॉलपेपर थोड़ी अधिक बैटरी का उपयोग कर सकते हैं।",
     hide_footer_notice_title: "पेज के नीचे एक बार दिखाई दे रहा है?",
     hide_footer_notice_desc: "उस बार पर राइट-क्लिक करके 'Hide Footer on New Tab Page' चुनें, इससे वह हट जाएगा।",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -2275,6 +2299,9 @@ export const translation = {
     animated_wallpaper_warning: "Gli sfondi animati potrebbero utilizzare un po' più di batteria se il dispositivo funziona a batteria.",
     hide_footer_notice_title: "Noti una barra in fondo alla pagina?",
     hide_footer_notice_desc: "Puoi rimuoverla facendo clic destro sulla barra e selezionando 'Hide Footer on New Tab Page'.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -2528,6 +2555,9 @@ export const translation = {
     animated_wallpaper_warning: "ডিভাইসটি ব্যাটারিতে চললে অ্যানিমেটেড ওয়ালপেপারগুলি কিছুটা বেশি ব্যাটারি ব্যবহার করতে পারে।",
     hide_footer_notice_title: "পৃষ্ঠার নীচে একটি বার দেখতে পাচ্ছেন?",
     hide_footer_notice_desc: "বারটিতে ডান-ক্লিক করে 'Hide Footer on New Tab Page' নির্বাচন করলে এটি সরিয়ে ফেলা যাবে।",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -2783,6 +2813,9 @@ export const translation = {
     animated_wallpaper_warning: "Papéis de parede animados podem usar um pouco mais de bateria se o dispositivo estiver funcionando com bateria.",
     hide_footer_notice_title: "Notou uma barra na parte inferior da página?",
     hide_footer_notice_desc: "Pode removê-la clicando com o botão direito na barra e selecionando 'Hide Footer on New Tab Page'.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -3037,6 +3070,9 @@ export const translation = {
     animated_wallpaper_warning: "Les fonds d'écran animés peuvent consommer un peu plus de batterie si l'appareil fonctionne sur batterie.",
     hide_footer_notice_title: "Vous remarquez une barre en bas de la page ?",
     hide_footer_notice_desc: "Vous pouvez la supprimer en faisant un clic droit sur la barre et en choisissant 'Hide Footer on New Tab Page'.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -3290,6 +3326,9 @@ export const translation = {
     animated_wallpaper_warning: "Анимированные обои могут потреблять немного больше батареи, если устройство работает от батареи.",
     hide_footer_notice_title: "Заметили полосу внизу страницы?",
     hide_footer_notice_desc: "Её можно убрать, щёлкнув правой кнопкой мыши по полосе и выбрав 'Hide Footer on New Tab Page'.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -3543,6 +3582,9 @@ export const translation = {
     animated_wallpaper_warning: "Los fondos de pantalla animados pueden consumir ligeramente más batería si el dispositivo funciona con batería.",
     hide_footer_notice_title: "¿Notas una barra en la parte inferior de la página?",
     hide_footer_notice_desc: "Puedes quitarla haciendo clic derecho en la barra y eligiendo 'Hide Footer on New Tab Page'.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -3795,6 +3837,9 @@ export const translation = {
     animated_wallpaper_warning: "デバイスがバッテリーで動作している場合、アニメーションの壁紙は少し多くのバッテリーを消費する可能性があります。",
     hide_footer_notice_title: "ページ下部にバーが表示されていませんか？",
     hide_footer_notice_desc: "バーを右クリックして 'Hide Footer on New Tab Page' を選択すると消すことができます。",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -4046,6 +4091,9 @@ export const translation = {
     animated_wallpaper_warning: "기기가 배터리로 실행 중인 경우 애니메이션 배경화면이 배터리를 약간 더 소모할 수 있습니다.",
     hide_footer_notice_title: "페이지 하단에 막대가 보이시나요?",
     hide_footer_notice_desc: "해당 막대를 마우스 오른쪽 버튼으로 클릭하고 'Hide Footer on New Tab Page'를 선택하면 제거할 수 있습니다.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -4298,6 +4346,9 @@ export const translation = {
     animated_wallpaper_warning: "Gambar latar animasi mungkin menggunakan sedikit lebih banyak baterai jika perangkat berjalan menggunakan baterai.",
     hide_footer_notice_title: "Melihat bilah di bagian bawah halaman?",
     hide_footer_notice_desc: "Anda dapat menghapusnya dengan mengklik kanan bilah tersebut dan memilih 'Hide Footer on New Tab Page'.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -4550,6 +4601,9 @@ export const translation = {
     animated_wallpaper_warning: "डिव्हाइस बॅटरीवर चालत असल्यास ॲनिमेटेड वॉलपेपर थोडी जास्त बॅटरी वापरू शकतात.",
     hide_footer_notice_title: "पृष्ठाच्या तळाशी एक बार दिसत आहे का?",
     hide_footer_notice_desc: "त्या बारवर उजवे-क्लिक करा आणि 'Hide Footer on New Tab Page' निवडल्यास ते काढता येईल.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   pl: {
     show_greetings: "Pokaż pozdrowienia",
@@ -4804,6 +4858,9 @@ export const translation = {
     animated_wallpaper_warning: "Animowane tapety mogą zużywać nieco więcej baterii, jeśli urządzenie działa na baterii.",
     hide_footer_notice_title: "Widzisz pasek na dole strony?",
     hide_footer_notice_desc: "Możesz go usunąć, klikając pasek prawym przyciskiem myszy i wybierając 'Hide Footer on New Tab Page'.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
   de: {
     show_greetings: "Grüße anzeigen",
@@ -5057,6 +5114,9 @@ export const translation = {
     animated_wallpaper_warning: "Animierte Hintergrundbilder können etwas mehr Akku verbrauchen, wenn das Gerät im Akkubetrieb läuft.",
     hide_footer_notice_title: "Fällt Ihnen eine Leiste am unteren Seitenrand auf?",
     hide_footer_notice_desc: "Sie können sie entfernen, indem Sie mit der rechten Maustaste auf die Leiste klicken und 'Hide Footer on New Tab Page' auswählen.",
+    advanced: "Advanced",
+    enable_load_animation: "Enable Load Animation",
+    animation_type: "Animation Type",
   },
 };
 export const languages = Object.keys(

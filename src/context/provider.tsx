@@ -24,6 +24,8 @@ import {
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
   SHOW_BATTERY_LOCAL_STORAGE_KEY,
   SHOW_FREEFORM_LOCAL_STORAGE_KEY,
+  ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
+  LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
 import {
   SHOW_WEATHER_LOCAL_STORAGE_KEY,
@@ -171,6 +173,10 @@ export const AppContext = createContext({
   setShowBattery: (_: boolean) => {},
   showFreeform: true,
   setShowFreeform: (_: boolean) => {},
+  enableLoadAnimation: false,
+  setEnableLoadAnimation: (_: boolean) => {},
+  loadAnimationType: "crt-wake-up",
+  setLoadAnimationType: (_: string) => {},
   showWeather: true,
   setShowWeather: (_: boolean) => {},
   weatherTempUnit: "celsius",
@@ -336,6 +342,28 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [showFreeform, setShowFreeform] = useLocalStorage(
     SHOW_FREEFORM_LOCAL_STORAGE_KEY,
     true,
+  );
+
+  const [enableLoadAnimation, setEnableLoadAnimation] = useLocalStorage(
+    ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
+    false,
+  );
+
+  const [loadAnimationType, setLoadAnimationType] = useLocalStorage(
+    LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
+    "crt-wake-up",
+    (val) =>
+      typeof val === "string" &&
+      [
+        "crt-wake-up",
+        "fade-in",
+        "scale-up",
+        "chromatic-shift",
+        "iris-reveal",
+        "camera-focus",
+        "tv-static-burst",
+        "float-in"
+      ].includes(val),
   );
 
   const [showWeather, setShowWeather] = useLocalStorage(
@@ -888,6 +916,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       weatherError,
       showFreeform,
       setShowFreeform,
+      enableLoadAnimation,
+      setEnableLoadAnimation,
+      loadAnimationType,
+      setLoadAnimationType,
     }),
     [
       theme,
@@ -973,6 +1005,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       weatherError,
       showFreeform,
       setShowFreeform,
+      enableLoadAnimation,
+      setEnableLoadAnimation,
+      loadAnimationType,
+      setLoadAnimationType,
     ],
   );
 
