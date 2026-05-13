@@ -83,6 +83,23 @@
   letter-spacing: 2px;
   z-index: 2;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-edit-icon {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+  transition: transform 0.2s ease;
+  color: white;
+}
+
+.timer-text:hover .timer-edit-icon {
+  transform: translateX(-50%) scale(1.1);
 }
 
 .timer-input {
@@ -159,6 +176,8 @@
 
 .sound-select-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .sound-select {
@@ -169,8 +188,15 @@
   font-weight: 500;
   cursor: pointer;
   outline: none;
-  padding-right: 15px;
+  padding-right: 20px;
   appearance: none;
+}
+
+.select-icon {
+  position: absolute;
+  right: 0;
+  pointer-events: none;
+  opacity: 0.6;
 }
 
 .sound-toggle {
