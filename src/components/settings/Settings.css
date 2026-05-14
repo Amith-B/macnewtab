@@ -60,6 +60,8 @@
 .settings__side-panel {
   width: 224px;
   max-width: 224px;
+  min-width: 224px;
+  flex-shrink: 0;
   height: 100%;
   backdrop-filter: var(--settings-side-panel-blur);
   -webkit-backdrop-filter: var(--settings-side-panel-blur);
@@ -178,6 +180,67 @@
 .buy-me-coffee {
   padding: 0px 30px;
   width: 100%;
+  transition: opacity 0.3s ease 0.05s, transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+.buy-me-coffee.slide-to-content {
+  opacity: 0;
+  transform: translate(20px, -30px) scale(0.7);
+  pointer-events: none;
+}
+
+/* Advanced Support Row */
+.advanced-support-row {
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px;
+  padding: 16px 0 !important;
+}
+
+.advanced-support-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.advanced-support-emoji {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.advanced-support-link {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  animation: bmc-diagonal-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.advanced-support-link img {
+  height: 36px;
+  width: auto;
+  border-radius: 8px;
+}
+
+.advanced-support-link:hover {
+  transform: scale(1.05);
+}
+
+@keyframes bmc-diagonal-in {
+  0% {
+    opacity: 0;
+    transform: translate(-200px, 260px) scale(0.7);
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
 }
 
 .settings_menu-item.account {

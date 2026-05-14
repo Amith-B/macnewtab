@@ -319,7 +319,10 @@ export default function Settings({
           </div>
 
           <a
-            className="buy-me-coffee"
+            className={
+              "buy-me-coffee" +
+              (selectedMenu.key === "advanced" ? " slide-to-content" : "")
+            }
             href="https://www.buymeacoffee.com/amithb"
             target="_blank"
             rel="noreferrer"
