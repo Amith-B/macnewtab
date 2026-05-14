@@ -11,7 +11,9 @@ import { ReactComponent as LoggedOutIcon } from "./logged-out.svg";
 import { ReactComponent as DataIcon } from "./data.svg";
 import { ReactComponent as WeatherIcon } from "./weather.svg";
 import { ReactComponent as QuickLinksIcon } from "./quick-links.svg";
+import { ReactComponent as AdvancedIcon } from "./advanced.svg";
 import Appearance from "./Appearance/Appearance";
+import Advanced from "./Advanced/Advanced";
 import About from "./About/About";
 import General from "./general/General";
 import GoogleAccount from "./Account/GoogleAccount";
@@ -54,6 +56,12 @@ export const SETTINGS_MENU = [
     title: <Translation value="quick_links" />,
     icon: QuickLinksIcon,
     content: QuickLinks,
+  },
+  {
+    key: "advanced",
+    title: <Translation value="advanced" />,
+    icon: AdvancedIcon,
+    content: Advanced,
   },
   {
     key: "about",
@@ -311,7 +319,10 @@ export default function Settings({
           </div>
 
           <a
-            className="buy-me-coffee"
+            className={
+              "buy-me-coffee" +
+              (selectedMenu.key === "advanced" ? " slide-to-content" : "")
+            }
             href="https://www.buymeacoffee.com/amithb"
             target="_blank"
             rel="noreferrer"

@@ -867,3 +867,106 @@ to be revisited in future */
     min-width: 520px !important;
   }
 }
+
+/* CRT Wake-up Animation */
+@keyframes crt-wake-up {
+  0% {
+    transform: scale(1, 0.002);
+    opacity: 0;
+    filter: blur(10px) drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+  }
+  30% {
+    transform: scale(1, 0.002);
+    opacity: 1;
+    filter: blur(5px) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+  }
+  60% {
+    transform: scale(1, 1.1);
+    opacity: 1;
+    filter: blur(1px) drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+    filter: none;
+  }
+}
+
+.load-animation-crt-wake-up {
+  animation: crt-wake-up 0.45s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  transform-origin: center center;
+}
+
+/* Fade In Animation */
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.load-animation-fade-in {
+  animation: fade-in 0.6s ease forwards;
+}
+
+
+/* Scale Up Animation */
+@keyframes scale-up {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.load-animation-scale-up {
+  animation: scale-up 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Chromatic Shift Animation */
+.load-animation-chromatic-shift {
+  filter: url(#chromatic-shift-filter);
+}
+
+
+/* Iris Reveal Animation */
+.load-animation-iris-reveal {
+  animation: iris-reveal-anim 0.6s ease-out forwards;
+}
+@keyframes iris-reveal-anim {
+  0% { clip-path: circle(0% at 50% 50%); }
+  100% { clip-path: circle(150% at 50% 50%); }
+}
+
+/* Camera Focus Animation */
+.load-animation-camera-focus {
+  animation: camera-focus-anim 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes camera-focus-anim {
+  0% { filter: blur(15px) brightness(1.5); transform: scale(1.05); }
+  100% { filter: blur(0px) brightness(1); transform: scale(1); }
+}
+
+/* Float In Animation */
+.load-animation-float-in {
+  animation: float-in-anim 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+@keyframes float-in-anim {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* TV Static Burst Animation */
+.tv-static-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: difference;
+  animation: static-fade-and-flicker 0.6s steps(10) forwards;
+}
+
+@keyframes static-fade-and-flicker {
+  0% { opacity: 0.85; background-position: 0 0; }
+  20% { opacity: 0.7; background-position: -50px 50px; }
+  40% { opacity: 0.55; background-position: 100px -50px; }
+  60% { opacity: 0.3; background-position: -100px 100px; }
+  80% { opacity: 0.15; background-position: 50px -100px; }
+  100% { opacity: 0; background-position: 0 0; }
+}
