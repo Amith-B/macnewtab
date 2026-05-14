@@ -17,6 +17,7 @@ export default function TodoDialog({
   onClose: () => void;
 }) {
   const [modalAccessible, setModalAccessible] = useState(false);
+  const [renderOpen, setRenderOpen] = useState(false);
   const [todoInput, setTodoInput] = useState("");
   const {
     locale,
@@ -37,6 +38,7 @@ export default function TodoDialog({
 
   useEffect(() => {
     if (open) {
+      const timer = setTimeout(() => setRenderOpen(true), 10);
       handleClearCompletedTodoList();
       setModalAccessible(true);
       const timerRef = setTimeout(() => {
@@ -52,10 +54,12 @@ export default function TodoDialog({
       };
       document.addEventListener("keydown", handleEsc);
       return () => {
+        clearTimeout(timer);
         clearTimeout(timerRef);
         document.removeEventListener("keydown", handleEsc);
       };
     } else {
+      setRenderOpen(false);
       const timerRef = setTimeout(() => {
         setModalAccessible(false);
         setPosition({ x: "unset", y: "unset" });
@@ -118,7 +122,7 @@ export default function TodoDialog({
     <div
       className={
         "todo-dialog__overlay" +
-        (open ? " visible" : "") +
+        (renderOpen ? " visible" : "") +
         (modalAccessible ? " modal-accessible" : " modal-inaccessible")
       }
       onClick={onClose}

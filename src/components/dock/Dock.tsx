@@ -17,14 +17,15 @@ import { ReactComponent as StickyNotesIcon } from "../../assets/sticky-notes.svg
 import { ReactComponent as FreeformIcon } from "../../assets/freeform.svg";
 import { ReactComponent as FocusIcon } from "../../assets/focus.svg";
 import Launchpad from "../launchpad/Launchpad";
-import TodoDialog from "../todo/Todo";
-import FocusMode from "../focus/FocusMode";
+
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
 import { DockIcon } from "./DockIcon";
 
 const SettingsLazy = lazy(() => import("../settings/Settings"));
 const FreeformLazy = lazy(() => import("../freeform/Freeform"));
+const TodoLazy = lazy(() => import("../todo/Todo"));
+const FocusModeLazy = lazy(() => import("../focus/FocusMode"));
 
 const TooltipPosition: Record<string, string> = {
   left: "right",
@@ -38,7 +39,9 @@ const Dock = memo(() => {
   const [hasOpenedSettings, setHasOpenedSettings] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
   const [todoDialogOpen, setTodoDialogOpen] = useState(false);
+  const [hasOpenedTodo, setHasOpenedTodo] = useState(false);
   const [focusModeVisible, setFocusModeVisible] = useState(false);
+  const [hasOpenedFocusMode, setHasOpenedFocusMode] = useState(false);
   const [freeformVisible, setFreeformVisible] = useState(false);
   const [hasOpenedFreeform, setHasOpenedFreeform] = useState(false);
   const [isOverflowLeft, setIsOverflowLeft] = useState(false);
@@ -180,6 +183,7 @@ const Dock = memo(() => {
               title="Todo List"
               onClick={() => {
                 groupTodosByCheckedStatus();
+                setHasOpenedTodo(true);
                 setTodoDialogOpen(true);
               }}
             >
@@ -208,6 +212,7 @@ const Dock = memo(() => {
               data-label="Focus Studio"
               title="Focus Studio"
               onClick={() => {
+                setHasOpenedFocusMode(true);
                 setFocusModeVisible(!focusModeVisible);
               }}
             >
@@ -315,14 +320,23 @@ const Dock = memo(() => {
         </Suspense>
       )}
       <Launchpad visible={launchpadVisible} onClose={handleLaunchpadClose} />
-      <TodoDialog open={todoDialogOpen} onClose={handleTodoClose} />
-      <FocusMode
-        visible={focusModeVisible}
-        onClose={() => setFocusModeVisible(false)}
-        onOpenTodo={() => {
-          setTodoDialogOpen(true);
-        }}
-      />
+      {hasOpenedTodo && (
+        <Suspense fallback={null}>
+          <TodoLazy open={todoDialogOpen} onClose={handleTodoClose} />
+        </Suspense>
+      )}
+      {hasOpenedFocusMode && (
+        <Suspense fallback={null}>
+          <FocusModeLazy
+            visible={focusModeVisible}
+            onClose={() => setFocusModeVisible(false)}
+            onOpenTodo={() => {
+              setHasOpenedTodo(true);
+              setTodoDialogOpen(true);
+            }}
+          />
+        </Suspense>
+      )}
       {hasOpenedFreeform && (
         <Suspense fallback={null}>
           <FreeformLazy
