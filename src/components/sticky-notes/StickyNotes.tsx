@@ -40,6 +40,7 @@ const StickyNotes: React.FC = memo(() => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [draggedNote, setDraggedNote] = useState<string | null>(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const newNoteIdRef = useRef<string | null>(null);
   const dragScale = useRef(1);
   const containerRef = useRef<HTMLDivElement>(null);
   const { locale, enableStickyNotesSync } = useContext(AppContext);
@@ -154,6 +155,7 @@ const StickyNotes: React.FC = memo(() => {
     };
 
     const updatedNotes = [...existingNotes, newNote];
+    newNoteIdRef.current = newNote.id;
     saveNotes(updatedNotes);
   };
 
@@ -266,6 +268,17 @@ const StickyNotes: React.FC = memo(() => {
       };
     }
   });
+
+  // Auto-focus the textarea of a newly created note
+  useEffect(() => {
+    if (newNoteIdRef.current) {
+      const textarea = document.getElementById(newNoteIdRef.current) as HTMLTextAreaElement | null;
+      if (textarea) {
+        textarea.focus();
+        newNoteIdRef.current = null;
+      }
+    }
+  }, [notes]);
 
   return (
     <div className="sticky-notes-container" ref={containerRef}>
