@@ -691,8 +691,19 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     const pinchDistRef = useRef<number | null>(null);
     const pinchZoomStartRef = useRef(1);
 
-    const { objects, pushState, replaceState, undo, redo, canUndo, canRedo } =
+    const { objects, pushState, replaceState, undo, redo, canUndo, canRedo, resetHistory } =
       useHistory(loadData());
+
+    // Reload freeform data when the active space changes (no page reload)
+    useEffect(() => {
+      const handleSpaceChanged = () => {
+        resetHistory(loadData());
+      };
+      window.addEventListener("spaceChanged", handleSpaceChanged);
+      return () => {
+        window.removeEventListener("spaceChanged", handleSpaceChanged);
+      };
+    }, [resetHistory]);
 
     const { locale } = useContext(AppContext);
     const t = translation[locale];

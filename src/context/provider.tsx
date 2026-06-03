@@ -3,9 +3,24 @@ import React, {
   useEffect,
   useCallback,
   useMemo,
+  useRef,
   ReactNode,
   createContext,
 } from "react";
+import {
+  SpacesConfig,
+  Space,
+} from "../static/spacesSettings";
+import {
+  loadSpacesConfig,
+  saveSpacesConfig,
+  enableSpaces,
+  createNewSpace,
+  deleteSpace,
+  switchToSpace,
+  initializeSpaceForCurrentTime,
+  completeIndexedDBSwap,
+} from "../utils/spacesStorage";
 import {
   THEME_KEYS,
   THEME_LOCAL_STORAGE_KEY,
@@ -200,13 +215,96 @@ export const AppContext = createContext({
   } | null,
   weatherLoading: true,
   weatherError: null as string | null,
+  // Spaces
+  spacesConfig: null as SpacesConfig | null,
+  activeSpace: null as Space | null,
+  handleEnableSpaces: () => {},
+  handleSwitchSpace: async (_: string) => {},
+  handleCreateSpace: (_name: string, _color: string) => {},
+  handleDeleteSpace: async (_: string) => {},
+  handleUpdateSpace: (_: Space) => {},
+  handleUpdateSpacesConfig: (_: SpacesConfig) => {},
 });
 
 export default function AppProvider({ children }: { children: ReactNode }) {
+  // ─── Spaces State ───
+  // initializeSpaceForCurrentTime() checks if a time-sensitive switch is needed
+  // and performs the localStorage swap SYNCHRONOUSLY during state init.
+  // This ensures all flat keys have the correct space's data before children mount.
+  // IndexedDB (wallpaper/icons) is handled async in a useEffect below.
+  const spaceInitResult = useRef(initializeSpaceForCurrentTime());
+
+  const [spacesConfig, setSpacesConfigState] = useState<SpacesConfig | null>(
+    () => spaceInitResult.current.config
+  );
+
+  const activeSpace = useMemo(() => {
+    if (!spacesConfig) return null;
+    return (
+      spacesConfig.spaces.find(
+        (s) => s.id === spacesConfig.activeSpaceId
+      ) || null
+    );
+  }, [spacesConfig]);
+
+  const handleEnableSpaces = useCallback(() => {
+    const config = enableSpaces("Default");
+    setSpacesConfigState(config);
+  }, []);
+
+  const handleCreateSpace = useCallback(
+    (name: string, color: string) => {
+      if (!spacesConfig) return;
+      const space = createNewSpace(name, color);
+      const updatedConfig: SpacesConfig = {
+        ...spacesConfig,
+        spaces: [...spacesConfig.spaces, space],
+      };
+      saveSpacesConfig(updatedConfig);
+      setSpacesConfigState(updatedConfig);
+    },
+    [spacesConfig]
+  );
+
+  const handleDeleteSpace = useCallback(
+    async (spaceId: string) => {
+      if (!spacesConfig) return;
+      if (spaceId === spacesConfig.activeSpaceId) return;
+      if (spacesConfig.spaces.length <= 1) return;
+      const updatedConfig = await deleteSpace(spaceId, spacesConfig);
+      setSpacesConfigState(updatedConfig);
+    },
+    [spacesConfig]
+  );
+
+  const handleUpdateSpace = useCallback(
+    (updatedSpace: Space) => {
+      if (!spacesConfig) return;
+      const updatedSpaces = spacesConfig.spaces.map((s) =>
+        s.id === updatedSpace.id ? updatedSpace : s
+      );
+      const updatedConfig: SpacesConfig = {
+        ...spacesConfig,
+        spaces: updatedSpaces,
+      };
+      saveSpacesConfig(updatedConfig);
+      setSpacesConfigState(updatedConfig);
+    },
+    [spacesConfig]
+  );
+
+  const handleUpdateSpacesConfig = useCallback(
+    (config: SpacesConfig) => {
+      saveSpacesConfig(config);
+      setSpacesConfigState(config);
+    },
+    []
+  );
+
   const [backgroundImage, setBackgroundImage] = useState("");
   const [wallpaperBlur, setWallpaperBlur] = useState(0);
 
-  const [locale, setLocale] = useLocalStorage<typeof languages>(
+  const [locale, setLocale, reloadLocale] = useLocalStorage<typeof languages>(
     SELECTED_LOCALE_LOCAL_STORAGE_KEY,
     "en",
     (val) => {
@@ -214,48 +312,48 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     },
   );
 
-  const [theme, setTheme] = useLocalStorage(
+  const [theme, setTheme, reloadTheme] = useLocalStorage(
     THEME_LOCAL_STORAGE_KEY,
     "system",
     (val) => {
       return THEME_KEYS.includes(val);
     },
   );
-  const [themeColor, setThemeColor] = useLocalStorage(
+  const [themeColor, setThemeColor, reloadThemeColor] = useLocalStorage(
     THEME_COLOR_LOCAL_STORAGE_KEY,
     "",
   );
-  const [showGreeting, setShowGreeeting] = useLocalStorage(
+  const [showGreeting, setShowGreeeting, reloadShowGreeting] = useLocalStorage(
     SHOW_GREETING_LOCAL_STORAGE_KEY,
     true,
   );
-  const [showClockAndCalendar, setShowClockAndCalendar] = useLocalStorage(
+  const [showClockAndCalendar, setShowClockAndCalendar, reloadShowClockAndCalendar] = useLocalStorage(
     SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY,
     true,
   );
-  const [showTabManager, setShowTabManager] = useLocalStorage(
+  const [showTabManager, setShowTabManager, reloadShowTabManager] = useLocalStorage(
     SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY,
     true,
   );
-  const [showVisitedSites, setShowVisitedSites] = useLocalStorage(
+  const [showVisitedSites, setShowVisitedSites, reloadShowVisitedSites] = useLocalStorage(
     SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
     true,
   );
-  const [separatePageSite, setSeparatePageSite] = useLocalStorage(
+  const [separatePageSite, setSeparatePageSite, reloadSeparatePageSite] = useLocalStorage(
     SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY,
     false,
   );
-  const [showSearchEngines, setShowSearchEngines] = useLocalStorage(
+  const [showSearchEngines, setShowSearchEngines, reloadShowSearchEngines] = useLocalStorage(
     SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY,
     true,
   );
-  const [showMonthView, setShowMonthView] = useLocalStorage(
+  const [showMonthView, setShowMonthView, reloadShowMonthView] = useLocalStorage(
     SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY,
     false,
   );
   const [dockBarSites, setDockBarSites] = useState<DockBarSites>([]);
 
-  const [dockPosition, setDockPosition] = useLocalStorage<DockPosition>(
+  const [dockPosition, setDockPosition, reloadDockPosition] = useLocalStorage<DockPosition>(
     DOCK_POSITION_LOCAL_STORAGE_KEY,
     "bottom",
     (val) => {
@@ -264,52 +362,52 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   );
   const [todoList, setTodoList] = useState<TodoList>([]);
 
-  const [todoListVisbility, setTodoListVisbility] = useLocalStorage(
+  const [todoListVisbility, setTodoListVisbility, reloadTodoListVisibility] = useLocalStorage(
     TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY,
     true,
   );
-  const [bookmarksVisible, setBookmarksVisible] = useLocalStorage(
+  const [bookmarksVisible, setBookmarksVisible, reloadBookmarksVisible] = useLocalStorage(
     BOOKMARK_TOGGLE_STORAGE_KEY,
     false,
   );
-  const [showStickyNotes, setShowStickyNotes] = useLocalStorage(
+  const [showStickyNotes, setShowStickyNotes, reloadShowStickyNotes] = useLocalStorage(
     SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
     true,
   );
 
-  const [enableStickyNotesSync, setEnableStickyNotesSync] = useLocalStorage(
+  const [enableStickyNotesSync, setEnableStickyNotesSync, reloadEnableStickyNotesSync] = useLocalStorage(
     ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY,
     false,
   );
 
-  const [showFocusMode, setShowFocusMode] = useLocalStorage(
+  const [showFocusMode, setShowFocusMode, reloadShowFocusMode] = useLocalStorage(
     SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
     true,
   );
 
-  const [isWidgetsAwayFromDock, setIsWidgetsAwayFromDock] = useLocalStorage(
+  const [isWidgetsAwayFromDock, setIsWidgetsAwayFromDock, reloadIsWidgetsAwayFromDock] = useLocalStorage(
     CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY,
     false,
   );
 
   const [googleUser, setGoogleUser] = useState<GoogleUser | null>(null);
   const [googleAuthToken, setGoogleAuthToken] = useState("");
-  const [showGoogleCalendar, setShowGoogleCalendar] = useLocalStorage(
+  const [showGoogleCalendar, setShowGoogleCalendar, reloadShowGoogleCalendar] = useLocalStorage(
     SHOW_GOOGLE_CALENDAR_LOCAL_STORAGE_KEY,
     true,
   );
 
-  const [useAnalogClock2, setUseAnalogClock2] = useLocalStorage(
+  const [useAnalogClock2, setUseAnalogClock2, reloadUseAnalogClock2] = useLocalStorage(
     USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
     false,
   );
 
-  const [wallpaperType, setWallpaperType] = useLocalStorage(
+  const [wallpaperType, setWallpaperType, reloadWallpaperType] = useLocalStorage(
     WALLPAPER_TYPE_LOCAL_STORAGE_KEY,
     "image",
   );
 
-  const [dynamicWallpaperTheme, setDynamicWallpaperTheme] = useLocalStorage(
+  const [dynamicWallpaperTheme, setDynamicWallpaperTheme, reloadDynamicWallpaperTheme] = useLocalStorage(
     DYNAMIC_WALLPAPER_THEME_LOCAL_STORAGE_KEY,
     "sunset",
     (val) => {
@@ -317,7 +415,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     },
   );
 
-  const [quickLinksMode, setQuickLinksMode] = useLocalStorage<QuickLinksMode>(
+  const [quickLinksMode, setQuickLinksMode, reloadQuickLinksMode] = useLocalStorage<QuickLinksMode>(
     QUICK_LINKS_MODE_LOCAL_STORAGE_KEY,
     "default",
     (val) => val === "default" || val === "custom",
@@ -325,7 +423,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
   const [quickLinks, setQuickLinks] = useState<QuickLinksSites>([]);
 
-  const [interactiveWallpaperTheme, setInteractiveWallpaperTheme] =
+  const [interactiveWallpaperTheme, setInteractiveWallpaperTheme, reloadInteractiveWallpaperTheme] =
     useLocalStorage(
       INTERACTIVE_WALLPAPER_THEME_LOCAL_STORAGE_KEY,
       "particles",
@@ -334,22 +432,22 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       },
     );
 
-  const [showBattery, setShowBattery] = useLocalStorage(
+  const [showBattery, setShowBattery, reloadShowBattery] = useLocalStorage(
     SHOW_BATTERY_LOCAL_STORAGE_KEY,
     true,
   );
 
-  const [showFreeform, setShowFreeform] = useLocalStorage(
+  const [showFreeform, setShowFreeform, reloadShowFreeform] = useLocalStorage(
     SHOW_FREEFORM_LOCAL_STORAGE_KEY,
     true,
   );
 
-  const [enableLoadAnimation, setEnableLoadAnimation] = useLocalStorage(
+  const [enableLoadAnimation, setEnableLoadAnimation, reloadEnableLoadAnimation] = useLocalStorage(
     ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
     false,
   );
 
-  const [loadAnimationType, setLoadAnimationType] = useLocalStorage(
+  const [loadAnimationType, setLoadAnimationType, reloadLoadAnimationType] = useLocalStorage(
     LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
     "crt-wake-up",
     (val) =>
@@ -366,24 +464,24 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       ].includes(val),
   );
 
-  const [showWeather, setShowWeather] = useLocalStorage(
+  const [showWeather, setShowWeather, reloadShowWeather] = useLocalStorage(
     SHOW_WEATHER_LOCAL_STORAGE_KEY,
     false,
   );
 
-  const [weatherTempUnit, setWeatherTempUnit] = useLocalStorage(
+  const [weatherTempUnit, setWeatherTempUnit, reloadWeatherTempUnit] = useLocalStorage(
     WEATHER_TEMP_UNIT_LOCAL_STORAGE_KEY,
     "celsius",
     (val) => val === "celsius" || val === "fahrenheit",
   );
 
-  const [weatherLocationMode, setWeatherLocationMode] = useLocalStorage(
+  const [weatherLocationMode, setWeatherLocationMode, reloadWeatherLocationMode] = useLocalStorage(
     WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
     "auto",
     (val) => val === "auto" || val === "manual",
   );
 
-  const [weatherManualLocation, setWeatherManualLocation] = useLocalStorage<{
+  const [weatherManualLocation, setWeatherManualLocation, reloadWeatherManualLocation] = useLocalStorage<{
     latitude: number;
     longitude: number;
     name: string;
@@ -505,10 +603,177 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [weatherTempUnit]);
 
-  const [calendarEvents, setCalendarEvents] = useLocalStorage(
+  const [calendarEvents, setCalendarEvents, reloadCalendarEvents] = useLocalStorage(
     GOOGLE_CALENDAR_EVENTS_LOCAL_STORAGE_KEY,
     [] as GoogleCalendarEvent[],
     (val) => Array.isArray(val),
+  );
+
+  // ─── Rehydrate all state from localStorage/IndexedDB after space switch ───
+  const rehydrateAllState = useCallback(async () => {
+    // 1. Reload all useLocalStorage-backed state
+    reloadLocale();
+    reloadTheme();
+    reloadThemeColor();
+    reloadShowGreeting();
+    reloadShowClockAndCalendar();
+    reloadShowTabManager();
+    reloadShowVisitedSites();
+    reloadSeparatePageSite();
+    reloadShowSearchEngines();
+    reloadShowMonthView();
+    reloadDockPosition();
+    reloadTodoListVisibility();
+    reloadBookmarksVisible();
+    reloadShowStickyNotes();
+    reloadEnableStickyNotesSync();
+    reloadShowFocusMode();
+    reloadIsWidgetsAwayFromDock();
+    reloadShowGoogleCalendar();
+    reloadUseAnalogClock2();
+    reloadWallpaperType();
+    reloadDynamicWallpaperTheme();
+    reloadInteractiveWallpaperTheme();
+    reloadQuickLinksMode();
+    reloadShowBattery();
+    reloadShowFreeform();
+    reloadEnableLoadAnimation();
+    reloadLoadAnimationType();
+    reloadShowWeather();
+    reloadWeatherTempUnit();
+    reloadWeatherLocationMode();
+    reloadWeatherManualLocation();
+    reloadCalendarEvents();
+
+    // 2. Reload useState-backed state that reads from localStorage on mount
+    // Wallpaper blur
+    const wallpaperBlurValue = parseInt(
+      localStorage.getItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY) || "0",
+    );
+    setWallpaperBlur(
+      !isNaN(wallpaperBlurValue) &&
+        wallpaperBlurValue <= 50 &&
+        wallpaperBlurValue >= 0
+        ? wallpaperBlurValue
+        : 0,
+    );
+
+    // Dock bar sites
+    try {
+      const storedDockSites = localStorage.getItem(DOCK_SITES_LOCAL_STORAGE_KEY);
+      if (storedDockSites) {
+        let parsedList = JSON.parse(storedDockSites) as DockBarSites;
+        parsedList = parsedList.map((item) => ({
+          ...item,
+          id: item.id || generateRandomId(),
+        }));
+        if (Array.isArray(parsedList)) {
+          setDockBarSites(parsedList);
+        }
+      } else {
+        setDockBarSites(dockBarDefaultSites);
+      }
+    } catch (_) {
+      setDockBarSites(dockBarDefaultSites);
+    }
+
+    // Todo list
+    try {
+      const storedTodoList = localStorage.getItem(TODO_LIST_LOCAL_STORAGE_KEY);
+      if (storedTodoList) {
+        let parsedList = JSON.parse(storedTodoList) as TodoList;
+        parsedList = parsedList.map((item) => ({
+          ...item,
+          id: item.id || generateRandomId(),
+        }));
+        if (Array.isArray(parsedList)) {
+          setTodoList(parsedList);
+        }
+      } else {
+        setTodoList([]);
+      }
+    } catch (_) {
+      setTodoList([]);
+    }
+
+    // Quick links
+    try {
+      const storedQuickLinks = localStorage.getItem(QUICK_LINKS_LOCAL_STORAGE_KEY);
+      if (storedQuickLinks) {
+        let parsedQuickLinks = JSON.parse(storedQuickLinks) as QuickLinksSites;
+        parsedQuickLinks = parsedQuickLinks.map((item) => ({
+          ...item,
+          id: item.id || generateRandomId(),
+        }));
+        if (Array.isArray(parsedQuickLinks)) {
+          setQuickLinks(parsedQuickLinks);
+        }
+      } else {
+        setQuickLinks([]);
+      }
+    } catch (_) {
+      setQuickLinks([]);
+    }
+
+    // 3. Reload wallpaper from IndexedDB
+    const blobURL = await fetchImageFromIndexedDB();
+    if (blobURL) {
+      setBackgroundImage(blobURL);
+    } else {
+      setBackgroundImage("");
+    }
+
+    // 4. Reload spaces config
+    const freshConfig = loadSpacesConfig();
+    if (freshConfig) {
+      setSpacesConfigState(freshConfig);
+    }
+
+    // 5. Notify self-managed components (StickyNotes, Freeform, etc.)
+    window.dispatchEvent(new Event("spaceChanged"));
+  }, [
+    reloadLocale, reloadTheme, reloadThemeColor, reloadShowGreeting,
+    reloadShowClockAndCalendar, reloadShowTabManager, reloadShowVisitedSites,
+    reloadSeparatePageSite, reloadShowSearchEngines, reloadShowMonthView,
+    reloadDockPosition, reloadTodoListVisibility, reloadBookmarksVisible,
+    reloadShowStickyNotes, reloadEnableStickyNotesSync, reloadShowFocusMode,
+    reloadIsWidgetsAwayFromDock, reloadShowGoogleCalendar, reloadUseAnalogClock2,
+    reloadWallpaperType, reloadDynamicWallpaperTheme, reloadInteractiveWallpaperTheme,
+    reloadQuickLinksMode, reloadShowBattery, reloadShowFreeform,
+    reloadEnableLoadAnimation, reloadLoadAnimationType, reloadShowWeather,
+    reloadWeatherTempUnit, reloadWeatherLocationMode, reloadWeatherManualLocation,
+    reloadCalendarEvents,
+  ]);
+
+  // The time-sensitive localStorage swap already happened synchronously in
+  // initializeSpaceForCurrentTime() above (during state init). But IndexedDB
+  // (wallpaper, custom icons) requires async operations. This effect completes
+  // the IndexedDB swap and reloads the wallpaper.
+  useEffect(() => {
+    const { swappedFromSpaceId, swappedToSpaceId } = spaceInitResult.current;
+    if (swappedFromSpaceId && swappedToSpaceId) {
+      completeIndexedDBSwap(swappedFromSpaceId, swappedToSpaceId).then(
+        async () => {
+          // Reload wallpaper from the now-correct IndexedDB entry
+          const blobURL = await fetchImageFromIndexedDB();
+          if (blobURL) {
+            setBackgroundImage(blobURL);
+          } else {
+            setBackgroundImage("");
+          }
+        }
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSwitchSpace = useCallback(
+    async (spaceId: string) => {
+      if (!spacesConfig || spaceId === spacesConfig.activeSpaceId) return;
+      await switchToSpace(spaceId, spacesConfig);
+      await rehydrateAllState();
+    },
+    [spacesConfig, rehydrateAllState]
   );
 
   useEffect(() => {
@@ -920,6 +1185,15 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setEnableLoadAnimation,
       loadAnimationType,
       setLoadAnimationType,
+      // Spaces
+      spacesConfig,
+      activeSpace,
+      handleEnableSpaces,
+      handleSwitchSpace,
+      handleCreateSpace,
+      handleDeleteSpace,
+      handleUpdateSpace,
+      handleUpdateSpacesConfig,
     }),
     [
       theme,
@@ -1009,6 +1283,15 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setEnableLoadAnimation,
       loadAnimationType,
       setLoadAnimationType,
+      // Spaces
+      spacesConfig,
+      activeSpace,
+      handleEnableSpaces,
+      handleSwitchSpace,
+      handleCreateSpace,
+      handleDeleteSpace,
+      handleUpdateSpace,
+      handleUpdateSpacesConfig,
     ],
   );
 

@@ -1,18 +1,21 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 
 export function useLocalStorage<T>(
   key: string,
   defaultValue: T,
   validate?: (val: any) => boolean,
 ) {
-  const [state, setState] = useState<T>(() => {
+  // Keep validate in a ref so reloadFromStorage always uses the latest
+  const validateRef = useRef(validate);
+  validateRef.current = validate;
+
+  const readFromStorage = useCallback((): T => {
     try {
       const stored = localStorage.getItem(key);
       if (typeof defaultValue === "string") {
-        if (!validate || validate(stored)) {
+        if (!validateRef.current || validateRef.current(stored)) {
           return stored as T;
         }
-
         return defaultValue;
       }
 
@@ -21,14 +24,17 @@ export function useLocalStorage<T>(
         if (parsed === "") {
           return defaultValue;
         }
-
-        if (!validate || validate(parsed)) {
+        if (!validateRef.current || validateRef.current(parsed)) {
           return parsed as T;
         }
       }
     } catch {}
     return defaultValue;
-  });
+    // defaultValue is only used as a fallback and should not change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
+
+  const [state, setState] = useState<T>(readFromStorage);
 
   const updateState = useCallback(
     (val: T) => {
@@ -42,5 +48,10 @@ export function useLocalStorage<T>(
     [key],
   );
 
-  return [state, updateState] as const;
+  /** Re-read the current value from localStorage into React state. */
+  const reloadFromStorage = useCallback(() => {
+    setState(readFromStorage());
+  }, [readFromStorage]);
+
+  return [state, updateState, reloadFromStorage] as const;
 }

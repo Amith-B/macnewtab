@@ -54,6 +54,7 @@ import {
 } from "../static/quickLinksSettings";
 import { syncNotesToChrome, Note } from "./stickyNotesSync";
 import { FREEFORM_DATA_LOCAL_STORAGE_KEY } from "../static/freeformSettings";
+import { SPACES_CONFIG_KEY } from "../static/spacesSettings";
 
 const STICKY_NOTES_KEY = "macnewtab_sticky_notes";
 
@@ -185,10 +186,63 @@ export const exportData = async () => {
     console.error("Failed to export data:", error);
   }
 
-  const blob = new Blob([JSON.stringify(data, null, 2)], {
+
+  // Include spaces config if Spaces is enabled
+  const spacesConfigRaw = localStorage.getItem(SPACES_CONFIG_KEY);
+  if (spacesConfigRaw) {
+    try {
+      data[SPACES_CONFIG_KEY] = JSON.parse(spacesConfigRaw);
+    } catch {
+      // ignore parse error
+    }
+
+    // Export all space-prefixed keys
+    const spacePrefixedData: Record<string, any> = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith("space_")) {
+        const value = localStorage.getItem(key);
+        if (value !== null) {
+          try {
+            spacePrefixedData[key] = JSON.parse(value);
+          } catch {
+            spacePrefixedData[key] = value;
+          }
+        }
+      }
+    }
+    if (Object.keys(spacePrefixedData).length > 0) {
+      data["spaces_data"] = spacePrefixedData;
+    }
+
+    // Export space-prefixed IndexedDB images
+    const spacesIndexedDBData: Record<string, string> = {};
+    try {
+      const spacesConfig = JSON.parse(spacesConfigRaw);
+      if (spacesConfig?.spaces && Array.isArray(spacesConfig.spaces)) {
+        for (const space of spacesConfig.spaces) {
+          // Space wallpapers
+          const wallpaperId = `space_${space.id}__customWallpaper`;
+          const wallpaperData = await fetchImageFromIndexedDB(wallpaperId);
+          if (wallpaperData) {
+            spacesIndexedDBData[wallpaperId] = wallpaperData.startsWith("blob:")
+              ? await convertBlobUrlToBase64(wallpaperData)
+              : wallpaperData;
+          }
+        }
+      }
+    } catch {
+      // ignore
+    }
+    if (Object.keys(spacesIndexedDBData).length > 0) {
+      data["spaces_indexeddb"] = spacesIndexedDBData;
+    }
+  }
+
+  const finalBlob = new Blob([JSON.stringify(data, null, 2)], {
     type: "application/json",
   });
-  const url = URL.createObjectURL(blob);
+  const url = URL.createObjectURL(finalBlob);
   const a = document.createElement("a");
   a.href = url;
   a.download = "macnewtab-backup.json";
@@ -268,6 +322,44 @@ export const importData = (file: File): Promise<void> => {
         }
 
         resolve();
+
+        // Import Spaces data if present
+        if (data[SPACES_CONFIG_KEY]) {
+          try {
+            localStorage.setItem(
+              SPACES_CONFIG_KEY,
+              JSON.stringify(data[SPACES_CONFIG_KEY])
+            );
+          } catch (error) {
+            console.error("Failed to import spaces config:", error);
+          }
+        }
+
+        // Import space-prefixed localStorage keys
+        if (data["spaces_data"] && typeof data["spaces_data"] === "object") {
+          try {
+            for (const [key, value] of Object.entries(data["spaces_data"])) {
+              if (typeof value === "object") {
+                localStorage.setItem(key, JSON.stringify(value));
+              } else {
+                localStorage.setItem(key, String(value));
+              }
+            }
+          } catch (error) {
+            console.error("Failed to import spaces data:", error);
+          }
+        }
+
+        // Import space-prefixed IndexedDB images
+        if (data["spaces_indexeddb"] && typeof data["spaces_indexeddb"] === "object") {
+          try {
+            for (const [id, base64] of Object.entries(data["spaces_indexeddb"])) {
+              await saveImageToIndexedDB(base64 as string, id);
+            }
+          } catch (error) {
+            console.error("Failed to import spaces IndexedDB data:", error);
+          }
+        }
       } catch (error) {
         reject(error);
       }

@@ -12,6 +12,7 @@ import { ReactComponent as DataIcon } from "./data.svg";
 import { ReactComponent as WeatherIcon } from "./weather.svg";
 import { ReactComponent as QuickLinksIcon } from "./quick-links.svg";
 import { ReactComponent as AdvancedIcon } from "./advanced.svg";
+import { ReactComponent as SpacesIcon } from "./spaces.svg";
 import Appearance from "./Appearance/Appearance";
 import Advanced from "./Advanced/Advanced";
 import About from "./About/About";
@@ -23,6 +24,7 @@ import QuickLinks from "./QuickLinks/QuickLinks";
 import Changelog from "./Changelog/Changelog";
 import Data from "./Data/Data";
 import WeatherSettings from "./Weather/WeatherSettings";
+import Spaces from "./Spaces/Spaces";
 import { AppContext } from "../../context/provider";
 import { getBodyZoomScale } from "../../utils/zoom";
 
@@ -56,6 +58,12 @@ export const SETTINGS_MENU = [
     title: <Translation value="quick_links" />,
     icon: QuickLinksIcon,
     content: QuickLinks,
+  },
+  {
+    key: "spaces",
+    title: <Translation value="spaces" />,
+    icon: SpacesIcon,
+    content: Spaces,
   },
   {
     key: "advanced",

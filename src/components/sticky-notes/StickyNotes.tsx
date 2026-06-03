@@ -47,9 +47,24 @@ const StickyNotes: React.FC = memo(() => {
   // Track whether initial sync load is complete to avoid overwriting sync data
   const initialLoadDone = useRef(false);
 
+  // Track whether a space switch just happened — when true, skip the
+  // chrome.storage.sync merge in initNotes so shared sync data doesn't
+  // overwrite the per-space local notes that were just swapped in.
+  const justSwitchedSpace = useRef(false);
+
   useEffect(() => {
     const initNotes = async () => {
       const localNotes = loadLocalNotes();
+
+      // After a space switch we must NOT merge with chrome.storage.sync
+      // because sync is shared across all spaces and would pull in the
+      // previous space's notes, overwriting the correctly-swapped local data.
+      if (justSwitchedSpace.current) {
+        justSwitchedSpace.current = false;
+        setNotes(localNotes);
+        initialLoadDone.current = true;
+        return;
+      }
 
       if (enableStickyNotesSync) {
         const syncNotes = await loadNotesFromSync();
@@ -95,6 +110,15 @@ const StickyNotes: React.FC = memo(() => {
 
     window.addEventListener("storage", handleStorageChange);
 
+    // Reload notes when the active space changes (no page reload)
+    const handleSpaceChanged = () => {
+      // Mark that a space switch just happened so the next initNotes
+      // run (triggered by enableStickyNotesSync dep change) skips sync merge.
+      justSwitchedSpace.current = true;
+      setNotes(loadLocalNotes());
+    };
+    window.addEventListener("spaceChanged", handleSpaceChanged);
+
     // Listen for chrome.storage.sync changes from other devices
     let unsubscribeSync = () => {};
     if (enableStickyNotesSync) {
@@ -112,6 +136,7 @@ const StickyNotes: React.FC = memo(() => {
 
     return () => {
       window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("spaceChanged", handleSpaceChanged);
       unsubscribeSync();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
