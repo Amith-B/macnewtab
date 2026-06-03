@@ -12,6 +12,7 @@ import { ReactComponent as DataIcon } from "./data.svg";
 import { ReactComponent as WeatherIcon } from "./weather.svg";
 import { ReactComponent as QuickLinksIcon } from "./quick-links.svg";
 import { ReactComponent as AdvancedIcon } from "./advanced.svg";
+import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
 import Appearance from "./Appearance/Appearance";
 import Advanced from "./Advanced/Advanced";
 import About from "./About/About";
@@ -19,6 +20,7 @@ import General from "./general/General";
 import GoogleAccount from "./Account/GoogleAccount";
 import Translation from "../../locale/Translation";
 import Dock from "./Dock/Dock";
+import LaunchpadSettings from "./Launchpad/LaunchpadSettings";
 import QuickLinks from "./QuickLinks/QuickLinks";
 import Changelog from "./Changelog/Changelog";
 import Data from "./Data/Data";
@@ -50,6 +52,12 @@ export const SETTINGS_MENU = [
     title: <Translation value="dock" />,
     icon: DockIcon,
     content: Dock,
+  },
+  {
+    key: "launchpad",
+    title: <Translation value="launchpad" />,
+    icon: LaunchpadIcon,
+    content: LaunchpadSettings,
   },
   {
     key: "quick_links",

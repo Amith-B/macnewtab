@@ -8,6 +8,8 @@ import { FAVICON_URL, faviconURL } from "../../utils/favicon";
 import EmptySiteImage from "../../assets/empty-site-image.png";
 import { ReactComponent as DeleteIcon } from "../../assets/delete-icon.svg";
 import ConfirmDialog from "../confirm/ConfirmDialog";
+import { DockIcon } from "../dock/DockIcon";
+import { useLocalStorage } from "../../utils/localStorage";
 
 const FALLBACK_SITE_IMAGE = EmptySiteImage;
 
@@ -55,10 +57,10 @@ export default function Launchpad({
   const [modalAccessible, setModalAccessible] = useState(false);
   const [search, setSearch] = useState("");
   const [searchDebouncedValue, setSearchDebouncedValue] = useState("");
-  const [selectedTab, setSelectedTab] = useState<"google_apps" | "bookmarks">(
-    "google_apps"
-  );
-  const { bookmarksVisible, locale, separatePageSite } = useContext(AppContext);
+  const [selectedTab, setSelectedTab] = useLocalStorage<
+    "google_apps" | "bookmarks" | "my_apps"
+  >("launchpad_selected_tab", "google_apps");
+  const { bookmarksVisible, locale, separatePageSite, customLaunchpadLinks } = useContext(AppContext);
   const [bookmarksTree, setBookmarksTree] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
@@ -74,7 +76,6 @@ export default function Launchpad({
     } else {
       const timeoutRef = setTimeout(() => {
         setBookmarksTree([]);
-        setSelectedTab("google_apps");
       }, 500);
 
       return () => clearTimeout(timeoutRef);
@@ -111,6 +112,16 @@ export default function Launchpad({
     return filterBookmarksTree(bookmarksTree, searchStr);
   }, [bookmarksTree, searchDebouncedValue]);
 
+  const filteredCustomLinks = useMemo(() => {
+    const searchStr = searchDebouncedValue.trim().toLowerCase();
+    if (searchStr === "") return customLaunchpadLinks;
+    return (customLaunchpadLinks || []).filter(
+      (item: any) =>
+        item.title.toLowerCase().includes(searchStr) ||
+        item.url.toLowerCase().includes(searchStr)
+    );
+  }, [searchDebouncedValue, customLaunchpadLinks]);
+
   // this is to prevent keyboard accessibility when modal is closed
   useEffect(() => {
     if (visible) {
@@ -140,7 +151,7 @@ export default function Launchpad({
   }, [visible, onClose]);
 
   const handleTabSelect =
-    (tabId: "google_apps" | "bookmarks") =>
+    (tabId: "google_apps" | "bookmarks" | "my_apps") =>
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.stopPropagation();
       setSelectedTab(tabId);
@@ -160,7 +171,6 @@ export default function Launchpad({
         const rootTree = tree[0].children || [];
         if (rootTree.length) {
           setBookmarksTree(rootTree);
-          setSelectedTab("bookmarks");
         }
       });
     }
@@ -196,6 +206,15 @@ export default function Launchpad({
     }
   };
 
+  const activeTab = useMemo(() => {
+    const hasBookmarks = !!bookmarksTree.length;
+    const hasCustomLinks = !!customLaunchpadLinks?.length;
+    if (selectedTab === "bookmarks" && !hasBookmarks) return "google_apps";
+    if (selectedTab === "my_apps" && !hasCustomLinks) return "google_apps";
+    if (selectedTab !== "google_apps" && selectedTab !== "bookmarks" && selectedTab !== "my_apps") return "google_apps";
+    return selectedTab;
+  }, [selectedTab, bookmarksTree.length, customLaunchpadLinks?.length]);
+
   return (
     <div
       className={
@@ -205,26 +224,39 @@ export default function Launchpad({
       }
       onClick={onClose}
     >
-      {!!bookmarksTree.length && (
+      {(!!bookmarksTree.length || !!customLaunchpadLinks?.length) && (
         <div className="launchpad__tab">
           <button
             className={
               "launchpad__tab__button" +
-              (selectedTab === "google_apps" ? " selected" : "")
+              (activeTab === "google_apps" ? " selected" : "")
             }
             onClick={handleTabSelect("google_apps")}
           >
             <Translation value="google_apps" />
           </button>
-          <button
-            className={
-              "launchpad__tab__button" +
-              (selectedTab === "bookmarks" ? " selected" : "")
-            }
-            onClick={handleTabSelect("bookmarks")}
-          >
-            <Translation value="bookmarks" />
-          </button>
+          {!!customLaunchpadLinks?.length && (
+            <button
+              className={
+                "launchpad__tab__button" +
+                (activeTab === "my_apps" ? " selected" : "")
+              }
+              onClick={handleTabSelect("my_apps")}
+            >
+              <Translation value="my_apps" />
+            </button>
+          )}
+          {!!bookmarksTree.length && (
+            <button
+              className={
+                "launchpad__tab__button" +
+                (activeTab === "bookmarks" ? " selected" : "")
+              }
+              onClick={handleTabSelect("bookmarks")}
+            >
+              <Translation value="bookmarks" />
+            </button>
+          )}
         </div>
       )}
       <div className="launchpad__search-container">
@@ -237,7 +269,7 @@ export default function Launchpad({
           onClick={(evt) => evt.stopPropagation()}
         />
       </div>
-      {selectedTab === "google_apps" && (
+      {activeTab === "google_apps" && (
         <div className="launchpad__container">
           {filteredLaunchpadList.map((item, idx) => (
             <a
@@ -255,7 +287,49 @@ export default function Launchpad({
         </div>
       )}
 
-      {selectedTab === "bookmarks" && (
+      {activeTab === "my_apps" && (
+        <div className="launchpad__container">
+          {filteredCustomLinks?.map((item: any, idx: number) => (
+            <a
+              href={item.url}
+              rel="noreferrer"
+              target={separatePageSite ? "_blank" : "_self"}
+              className="launchpad-item"
+              key={item.id || idx}
+              title={item.title}
+            >
+              <div className="launchpad-item__logo">
+                {item.hasCustomIcon ? (
+                  <DockIcon
+                    id={item.id}
+                    hasCustomIcon={true}
+                    url={item.url}
+                    title={item.title}
+                    iconDbPrefix="launchpad_custom_icon"
+                  />
+                ) : (
+                  <img
+                    className="launchpad-item__icon"
+                    src={faviconURL(item.url)}
+                    onError={({ currentTarget }) => {
+                      currentTarget.src = FAVICON_URL + item.url;
+                      currentTarget.onerror = () => {
+                        currentTarget.src = FALLBACK_SITE_IMAGE;
+                        currentTarget.onerror = null;
+                      };
+                    }}
+                    alt={item.title}
+                    style={{ width: "48px", height: "48px", borderRadius: "12px", objectFit: "cover" }}
+                  />
+                )}
+              </div>
+              <span className="launchpad-item__label">{item.title}</span>
+            </a>
+          ))}
+        </div>
+      )}
+
+      {activeTab === "bookmarks" && (
         <>
           <div className="launchpad__bookmarks__container">
             {filteredBookmarksTree.map((item) => (

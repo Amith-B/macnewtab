@@ -1,0 +1,37 @@
+.launchpad-settings__container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  padding: 12px;
+  background-color: var(--theme-bg-with-opacity);
+  width: 100%;
+  height: calc(100% - 60px);
+  overflow: auto;
+}
+
+.launchpad-settings__description {
+  font-size: 0.875rem;
+  color: var(--theme-description-clr, #888);
+  padding: 0 4px;
+}
+
+.launchpad-settings__row-item {
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.bookmark-toggle-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.bookmark-toggle-description {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: grey;
+}

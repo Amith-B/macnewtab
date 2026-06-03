@@ -8,6 +8,10 @@ export function useLocalStorage<T>(
   const [state, setState] = useState<T>(() => {
     try {
       const stored = localStorage.getItem(key);
+      if (stored === null) {
+        return defaultValue;
+      }
+
       if (typeof defaultValue === "string") {
         if (!validate || validate(stored)) {
           return stored as T;

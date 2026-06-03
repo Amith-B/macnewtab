@@ -6,12 +6,20 @@ import Translation from "../../../locale/Translation";
 import { Select } from "../../select/Select";
 import { languageOptions, languages } from "../../../locale/languages";
 
+const clockStyleOptions = [
+  { label: <Translation value="analog_clock_1" />, value: "analog-1" },
+  { label: <Translation value="analog_clock_2" />, value: "analog-2" },
+  { label: <Translation value="digital_clock" />, value: "digital" },
+];
+
 const General = memo(function General() {
   const {
     showGreeting,
     setShowGreeeting,
     showSearchEngines,
     setShowSearchEngines,
+    useSearchDropdown,
+    setUseSearchDropdown,
     showMonthView,
     setShowMonthView,
     showClockAndCalendar,
@@ -20,12 +28,10 @@ const General = memo(function General() {
     setShowTabManager,
     locale,
     setLocale,
-    bookmarksVisible,
-    handleBookmarkVisbility,
     isWidgetsAwayFromDock,
     setIsWidgetsAwayFromDock,
-    useAnalogClock2,
-    setUseAnalogClock2,
+    clockStyle,
+    setClockStyle,
     showBattery,
     setShowBattery,
     separatePageSite,
@@ -36,9 +42,6 @@ const General = memo(function General() {
     return languageOptions.find((item) => item.value === locale);
   }, [locale]);
 
-  const isMac = useMemo(() => {
-    return navigator.userAgent.toLowerCase().includes("mac");
-  }, []);
 
   return (
     <div className="general__container">
@@ -58,6 +61,19 @@ const General = memo(function General() {
           name="Search engine options toggle"
           isChecked={showSearchEngines}
           handleToggleChange={() => setShowSearchEngines(!showSearchEngines)}
+        />
+      </div>
+      <div
+        className={
+          "general__row-item" + (!showSearchEngines ? " disabled" : "")
+        }
+      >
+        <Translation value="use_search_dropdown" />
+        <Toggle
+          id={"search-dropdown-toggle"}
+          name="Search dropdown toggle"
+          isChecked={useSearchDropdown}
+          handleToggleChange={() => setUseSearchDropdown(!useSearchDropdown)}
         />
       </div>
       <div
@@ -91,12 +107,13 @@ const General = memo(function General() {
           "general__row-item" + (!showClockAndCalendar ? " disabled" : "")
         }
       >
-        <Translation value="use_analog_clock_2" />
-        <Toggle
-          id={"use-analog-clock-2-toggle"}
-          name="Analog clock 2 toggle"
-          isChecked={useAnalogClock2}
-          handleToggleChange={() => setUseAnalogClock2(!useAnalogClock2)}
+        <Translation value="clock_style" />
+        <Select
+          id="clock-style-menu"
+          name="Clock style menu"
+          options={clockStyleOptions}
+          value={clockStyle}
+          onChange={(event) => setClockStyle(event.target.value)}
         />
       </div>
 
@@ -149,24 +166,6 @@ const General = memo(function General() {
             <Translation value="voice_search_warning" />
           </div>
         )}
-      </div>
-
-      <div className="general__row-item with-description">
-        <div className="bookmark-toggle-row">
-          <Translation value="bookmark_toggle" />
-          <Toggle
-            id={"bookmark-toggle"}
-            name="Bookmark toggle"
-            isChecked={bookmarksVisible}
-            handleToggleChange={() =>
-              handleBookmarkVisbility(!bookmarksVisible)
-            }
-          />
-        </div>
-        <div className="bookmark-toggle-description">
-          <Translation value="bookmark_toggle_description" />{" "}
-          <code>{isMac ? "Cmd + Shift + B" : "Ctrl + Shift + B"}</code>
-        </div>
       </div>
 
       <div className="general__row-item">

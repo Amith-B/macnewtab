@@ -26,7 +26,10 @@ import {
   SHOW_FREEFORM_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
+  CLOCK_STYLE_LOCAL_STORAGE_KEY,
+  USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
+import { CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY } from "../static/launchpadSettings";
 import {
   SHOW_WEATHER_LOCAL_STORAGE_KEY,
   WEATHER_TEMP_UNIT_LOCAL_STORAGE_KEY,
@@ -157,8 +160,12 @@ export const AppContext = createContext({
   setShowGoogleCalendar: (_: boolean) => {},
   calendarEvents: [] as GoogleCalendarEvent[],
   setCalendarEvents: (_: GoogleCalendarEvent[]) => {},
+  clockStyle: "analog-1",
+  setClockStyle: (_: string) => {},
   useAnalogClock2: false,
   setUseAnalogClock2: (_: boolean) => {},
+  customLaunchpadLinks: [] as any[],
+  handleCustomLaunchpadLinksChange: (_: any[]) => {},
   wallpaperType: "image",
   setWallpaperType: (_: string) => {},
   dynamicWallpaperTheme: "aurora",
@@ -173,6 +180,8 @@ export const AppContext = createContext({
   setShowBattery: (_: boolean) => {},
   showFreeform: true,
   setShowFreeform: (_: boolean) => {},
+  useSearchDropdown: false,
+  setUseSearchDropdown: (_: boolean) => {},
   enableLoadAnimation: false,
   setEnableLoadAnimation: (_: boolean) => {},
   loadAnimationType: "crt-wake-up",
@@ -304,6 +313,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     false,
   );
 
+  const [clockStyle, setClockStyle] = useLocalStorage(
+    CLOCK_STYLE_LOCAL_STORAGE_KEY,
+    "analog-1",
+  );
+
+  const [customLaunchpadLinks, setCustomLaunchpadLinks] = useState<any[]>([]);
+
   const [wallpaperType, setWallpaperType] = useLocalStorage(
     WALLPAPER_TYPE_LOCAL_STORAGE_KEY,
     "image",
@@ -342,6 +358,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [showFreeform, setShowFreeform] = useLocalStorage(
     SHOW_FREEFORM_LOCAL_STORAGE_KEY,
     true,
+  );
+
+  const [useSearchDropdown, setUseSearchDropdown] = useLocalStorage(
+    USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
+    false,
   );
 
   const [enableLoadAnimation, setEnableLoadAnimation] = useLocalStorage(
@@ -644,6 +665,27 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setDockBarSites(dockBarDefaultSites);
     }
 
+    try {
+      const storedLaunchpadLinks = localStorage.getItem(
+        CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY,
+      );
+
+      if (storedLaunchpadLinks) {
+        let parsedLaunchpadLinks = JSON.parse(storedLaunchpadLinks);
+
+        parsedLaunchpadLinks = parsedLaunchpadLinks.map((item: any) => ({
+          ...item,
+          id: item.id || generateRandomId(),
+        }));
+
+        if (Array.isArray(parsedLaunchpadLinks)) {
+          setCustomLaunchpadLinks(parsedLaunchpadLinks);
+        }
+      }
+    } catch (_) {
+      setCustomLaunchpadLinks([]);
+    }
+
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === TODO_LIST_LOCAL_STORAGE_KEY && e.newValue) {
         try {
@@ -769,6 +811,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setQuickLinks(val);
   }, []);
 
+  const handleCustomLaunchpadLinksChange = useCallback((val: any[]) => {
+    localStorage.setItem(CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY, JSON.stringify(val));
+    setCustomLaunchpadLinks(val);
+  }, []);
+
   const handleBookmarkVisbility = useCallback(
     async (val: boolean) => {
       if (val) {
@@ -889,8 +936,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setShowGoogleCalendar,
       calendarEvents,
       setCalendarEvents,
+      clockStyle,
+      setClockStyle,
       useAnalogClock2,
       setUseAnalogClock2,
+      customLaunchpadLinks,
+      handleCustomLaunchpadLinksChange,
       wallpaperType,
       setWallpaperType,
       dynamicWallpaperTheme,
@@ -916,6 +967,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       weatherError,
       showFreeform,
       setShowFreeform,
+      useSearchDropdown,
+      setUseSearchDropdown,
       enableLoadAnimation,
       setEnableLoadAnimation,
       loadAnimationType,
@@ -978,8 +1031,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setShowGoogleCalendar,
       calendarEvents,
       setCalendarEvents,
+      clockStyle,
+      setClockStyle,
       useAnalogClock2,
       setUseAnalogClock2,
+      customLaunchpadLinks,
+      handleCustomLaunchpadLinksChange,
       wallpaperType,
       setWallpaperType,
       dynamicWallpaperTheme,
@@ -1005,6 +1062,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       weatherError,
       showFreeform,
       setShowFreeform,
+      useSearchDropdown,
+      setUseSearchDropdown,
       enableLoadAnimation,
       setEnableLoadAnimation,
       loadAnimationType,

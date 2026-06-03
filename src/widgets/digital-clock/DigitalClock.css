@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800&display=swap');
+
+.digital-clock__container {
+  background-color: var(--digital-clock-bg, var(--theme-bg-with-opacity));
+  box-shadow: 0px 0px 4px var(--theme-shadow);
+  width: 12.5rem;
+  height: 12.5rem;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  user-select: none;
+  position: relative;
+}
+
+.digital-clock__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.digital-clock__time {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  transform: scale(0.75, 1.35);
+}
+
+.digital-clock__hours,
+.digital-clock__minutes {
+  font-family: 'Inter', ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  font-size: 4.8rem;
+  font-weight: 800;
+  color: var(--theme-clr);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -2px;
+}
+
+.digital-clock__colon {
+  font-family: 'Inter', ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: var(--theme-clr);
+  opacity: 0.8;
+  margin: 0;
+  display: inline-block;
+  transform: translateY(-4px);
+}
+

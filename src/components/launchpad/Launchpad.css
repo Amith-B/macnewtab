@@ -93,6 +93,9 @@
   background-color: #fcfcfc;
   border-radius: 12px;
   padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .launchpad-item__logo svg {
   width: 100%;
