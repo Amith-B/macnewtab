@@ -8,6 +8,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 import { ReactComponent as SearchIcon } from "./search-icon.svg";
 import "./Search.css";
 import { searchEngineList } from "../../static/searchEngine";
@@ -56,6 +57,7 @@ const Search = memo(
     const hiddenButtonRef = useRef<HTMLButtonElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
+    const panelRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
       if (listening && listenerRef.current !== "listening") {
@@ -73,7 +75,9 @@ const Search = memo(
       const handleClickOutside = (event: MouseEvent) => {
         if (
           dropdownRef.current &&
-          !dropdownRef.current.contains(event.target as Node)
+          !dropdownRef.current.contains(event.target as Node) &&
+          panelRef.current &&
+          !panelRef.current.contains(event.target as Node)
         ) {
           setDropdownOpen(false);
         }
@@ -92,13 +96,17 @@ const Search = memo(
 
         if (spaceBelow > spaceAbove) {
           setDropdownStyle({
-            top: "calc(100% + 8px)",
+            position: "fixed",
+            top: `${triggerRect.bottom + 8}px`,
+            left: `${triggerRect.left}px`,
             bottom: "auto",
             maxHeight: `${Math.max(spaceBelow - margin, 100)}px`,
           });
         } else {
           setDropdownStyle({
-            bottom: "calc(100% + 8px)",
+            position: "fixed",
+            bottom: `${window.innerHeight - triggerRect.top + 8}px`,
+            left: `${triggerRect.left}px`,
             top: "auto",
             maxHeight: `${Math.max(spaceAbove - margin, 100)}px`,
           });
@@ -191,8 +199,8 @@ const Search = memo(
                 />
               </svg>
             </button>
-            {dropdownOpen && (
-              <div className="search-engine-dropdown__panel" style={dropdownStyle}>
+            {dropdownOpen && createPortal(
+              <div className="search-engine-dropdown__panel" style={dropdownStyle} ref={panelRef}>
                 {searchEngineList.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -219,7 +227,8 @@ const Search = memo(
                     </button>
                   );
                 })}
-              </div>
+              </div>,
+              document.body
             )}
             <div className="search-engine-dropdown__divider" />
           </div>
