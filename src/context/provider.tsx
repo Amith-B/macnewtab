@@ -526,6 +526,14 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [weatherTempUnit]);
 
+  // Migrate legacy useAnalogClock2 to clockStyle
+  useEffect(() => {
+    if (useAnalogClock2) {
+      setClockStyle("analog-2");
+      setUseAnalogClock2(false);
+    }
+  }, [useAnalogClock2, setClockStyle, setUseAnalogClock2]);
+
   const [calendarEvents, setCalendarEvents] = useLocalStorage(
     GOOGLE_CALENDAR_EVENTS_LOCAL_STORAGE_KEY,
     [] as GoogleCalendarEvent[],

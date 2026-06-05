@@ -51,7 +51,6 @@ const App = function App() {
     showStickyNotes,
     dockPosition,
     isWidgetsAwayFromDock,
-    useAnalogClock2,
     clockStyle,
     wallpaperType,
     dynamicWallpaperTheme,
@@ -226,7 +225,7 @@ const App = function App() {
           <div className="section-1">
             {clockStyle === "digital" ? (
               <DigitalClock date={time} />
-            ) : clockStyle === "analog-2" || useAnalogClock2 ? (
+            ) : clockStyle === "analog-2" ? (
               <Clock2 date={time} />
             ) : (
               <Clock1 date={time} />
