@@ -12,6 +12,10 @@ export function useLocalStorage<T>(
   const readFromStorage = useCallback((): T => {
     try {
       const stored = localStorage.getItem(key);
+      if (stored === null) {
+        return defaultValue;
+      }
+
       if (typeof defaultValue === "string") {
         if (!validateRef.current || validateRef.current(stored)) {
           return stored as T;

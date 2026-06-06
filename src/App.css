@@ -48,6 +48,7 @@ body:has(.App.theme-light) {
   --calendar-sunday-text-color: #a1a1a1;
 
   --widget-background: #ffffff;
+  --digital-clock-bg: #ffffff;
 
   --window-expand-bg: #959595;
   --active-window-indicator: #2c2c2c;
@@ -98,6 +99,7 @@ body:has(.App.theme-dark) {
   --calendar-sunday-text-color: #a1a1a1;
 
   --widget-background: #2e2e2e;
+  --digital-clock-bg: #000000;
 
   --window-expand-bg: #878787;
   --active-window-indicator: #c4c5c5;
@@ -155,6 +157,7 @@ body:has(.App.theme-dark) {
     --calendar-sunday-text-color: #a1a1a1;
 
     --widget-background: #2e2e2e;
+    --digital-clock-bg: #000000;
 
     --window-expand-bg: #878787;
     --active-window-indicator: #c4c5c5;
@@ -210,6 +213,7 @@ body:has(.App.theme-blue) {
   --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #7c7c7c;
   --widget-background: #accfff;
+  --digital-clock-bg: #ffffff;
   --window-expand-bg: #528cd9;
   --active-window-indicator: #528cd9;
   --calendar-date-text-color: #272727;
@@ -251,6 +255,7 @@ body:has(.App.theme-red) {
   --calendaevents-dateth-text-color: black;
   --calendar-sunday-text-color: #666666;
   --widget-background: #ffc8c8;
+  --digital-clock-bg: #ffffff;
   --window-expand-bg: #ffb9b9;
   --active-window-indicator: #dd4646;
   --calendar-date-text-color: #272727;
@@ -292,6 +297,7 @@ body:has(.App.theme-orange) {
   --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #737373;
   --widget-background: #ffc8ac;
+  --digital-clock-bg: #ffffff;
   --window-expand-bg: #dc8154;
   --active-window-indicator: #d87e51;
   --calendar-date-text-color: #272727;
@@ -333,6 +339,7 @@ body:has(.App.theme-purple) {
   --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #7c7c7c;
   --widget-background: #d5ceff;
+  --digital-clock-bg: #ffffff;
   --window-expand-bg: #bfc0ff;
   --active-window-indicator: #cecbff;
   --calendar-date-text-color: #272727;
@@ -374,6 +381,7 @@ body:has(.App.theme-pink) {
   --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #6a6a6a;
   --widget-background: #ffcedd;
+  --digital-clock-bg: #ffffff;
   --window-expand-bg: #ffbfdd;
   --active-window-indicator: #ffcbdd;
   --calendar-date-text-color: #272727;
@@ -415,6 +423,7 @@ body:has(.App.theme-brown) {
   --calendar-events-current-date-text-color: #ff3b31;
   --calendar-sunday-text-color: #7c7c7c;
   --widget-background: #ffdfce;
+  --digital-clock-bg: #ffffff;
   --window-expand-bg: #ffd9bf;
   --active-window-indicator: #ffe2cb;
   --calendar-date-text-color: #272727;
@@ -456,6 +465,7 @@ body:has(.App.theme-teal) {
   --calendar-events-current-date-text-color: #0f8f88;
   --calendar-sunday-text-color: #63706f;
   --widget-background: #c7ece8;
+  --digital-clock-bg: #ffffff;
   --window-expand-bg: #8fd6cf;
   --active-window-indicator: #79c6be;
   --calendar-date-text-color: #272727;
@@ -497,6 +507,7 @@ body:has(.App.theme-mint) {
   --calendar-events-current-date-text-color: #4e9a2d;
   --calendar-sunday-text-color: #687163;
   --widget-background: #d9f2c1;
+  --digital-clock-bg: #ffffff;
   --window-expand-bg: #b7e38c;
   --active-window-indicator: #a8d775;
   --calendar-date-text-color: #272727;
@@ -538,6 +549,7 @@ body:has(.App.theme-gold) {
   --calendar-events-current-date-text-color: #b77900;
   --calendar-sunday-text-color: #766a4f;
   --widget-background: #ffe7a8;
+  --digital-clock-bg: #ffffff;
   --window-expand-bg: #ffc85b;
   --active-window-indicator: #f0ba50;
   --calendar-date-text-color: #272727;
@@ -579,6 +591,7 @@ body:has(.App.theme-rose) {
   --calendar-events-current-date-text-color: #d15d43;
   --calendar-sunday-text-color: #7d675f;
   --widget-background: #ffd8ca;
+  --digital-clock-bg: #ffffff;
   --window-expand-bg: #ffb299;
   --active-window-indicator: #f4a88f;
   --calendar-date-text-color: #272727;
@@ -899,19 +912,28 @@ to be revisited in future */
 
 /* Fade In Animation */
 @keyframes fade-in {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .load-animation-fade-in {
   animation: fade-in 0.6s ease forwards;
 }
 
-
 /* Scale Up Animation */
 @keyframes scale-up {
-  0% { transform: scale(0.95); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .load-animation-scale-up {
@@ -923,14 +945,17 @@ to be revisited in future */
   filter: url(#chromatic-shift-filter);
 }
 
-
 /* Iris Reveal Animation */
 .load-animation-iris-reveal {
   animation: iris-reveal-anim 0.6s ease-out forwards;
 }
 @keyframes iris-reveal-anim {
-  0% { clip-path: circle(0% at 50% 50%); }
-  100% { clip-path: circle(150% at 50% 50%); }
+  0% {
+    clip-path: circle(0% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(150% at 50% 50%);
+  }
 }
 
 /* Camera Focus Animation */
@@ -938,8 +963,14 @@ to be revisited in future */
   animation: camera-focus-anim 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 @keyframes camera-focus-anim {
-  0% { filter: blur(15px) brightness(1.5); transform: scale(1.05); }
-  100% { filter: blur(0px) brightness(1); transform: scale(1); }
+  0% {
+    filter: blur(15px) brightness(1.5);
+    transform: scale(1.05);
+  }
+  100% {
+    filter: blur(0px) brightness(1);
+    transform: scale(1);
+  }
 }
 
 /* Float In Animation */
@@ -947,14 +978,23 @@ to be revisited in future */
   animation: float-in-anim 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 @keyframes float-in-anim {
-  0% { transform: translateY(30px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* TV Static Burst Animation */
 .tv-static-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 9999;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -963,10 +1003,28 @@ to be revisited in future */
 }
 
 @keyframes static-fade-and-flicker {
-  0% { opacity: 0.85; background-position: 0 0; }
-  20% { opacity: 0.7; background-position: -50px 50px; }
-  40% { opacity: 0.55; background-position: 100px -50px; }
-  60% { opacity: 0.3; background-position: -100px 100px; }
-  80% { opacity: 0.15; background-position: 50px -100px; }
-  100% { opacity: 0; background-position: 0 0; }
+  0% {
+    opacity: 0.85;
+    background-position: 0 0;
+  }
+  20% {
+    opacity: 0.7;
+    background-position: -50px 50px;
+  }
+  40% {
+    opacity: 0.55;
+    background-position: 100px -50px;
+  }
+  60% {
+    opacity: 0.3;
+    background-position: -100px 100px;
+  }
+  80% {
+    opacity: 0.15;
+    background-position: 50px -100px;
+  }
+  100% {
+    opacity: 0;
+    background-position: 0 0;
+  }
 }

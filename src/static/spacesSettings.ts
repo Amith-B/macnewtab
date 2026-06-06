@@ -11,6 +11,8 @@ import {
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
   SHOW_BATTERY_LOCAL_STORAGE_KEY,
   SHOW_FREEFORM_LOCAL_STORAGE_KEY,
+  CLOCK_STYLE_LOCAL_STORAGE_KEY,
+  USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
 } from "./generalSettings";
 import {
   THEME_LOCAL_STORAGE_KEY,
@@ -26,6 +28,7 @@ import {
   DOCK_SITES_LOCAL_STORAGE_KEY,
   DOCK_POSITION_LOCAL_STORAGE_KEY,
 } from "./dockSites";
+import { CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY } from "./launchpadSettings";
 import {
   TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY,
   TODO_LIST_LOCAL_STORAGE_KEY,
@@ -121,10 +124,15 @@ export const PER_SPACE_KEYS: string[] = [
   SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY, // "show_tab_manager"
   CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY, // "center_widgets_away_from_dock"
   USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY, // "use_analog_clock_2"
+  CLOCK_STYLE_LOCAL_STORAGE_KEY, // "clock_style"
+  USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY, // "use_search_dropdown"
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY, // "show_focus_mode"
   SHOW_BATTERY_LOCAL_STORAGE_KEY, // "show_battery"
   SHOW_FREEFORM_LOCAL_STORAGE_KEY, // "show_freeform" (from generalSettings)
   FREEFORM_SHOW_KEY, // "macnewtab_show_freeform" (from freeformSettings)
+
+  // Launchpad
+  CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY, // "custom_launchpad_links"
 
   // Dock
   DOCK_SITES_LOCAL_STORAGE_KEY, // "dock_sites"

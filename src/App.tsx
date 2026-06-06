@@ -11,6 +11,7 @@ import Clock1 from "./widgets/clock-1/Clock1";
 import Clock2 from "./widgets/clock-2/Clock2";
 import Calendar1 from "./widgets/day-calendar/Calendar1";
 import Calendar from "./widgets/calendar/Calendar";
+import DigitalClock from "./widgets/digital-clock/DigitalClock";
 import Search from "./components/search/Search";
 import SearchEngineSwitcher from "./components/search-engine-switcher/SearchEngineSwitcher";
 import {
@@ -42,6 +43,7 @@ const App = function App() {
     showGreeting,
     showVisitedSites,
     showSearchEngines,
+    useSearchDropdown,
     showMonthView,
     locale,
     showClockAndCalendar,
@@ -49,7 +51,7 @@ const App = function App() {
     showStickyNotes,
     dockPosition,
     isWidgetsAwayFromDock,
-    useAnalogClock2,
+    clockStyle,
     wallpaperType,
     dynamicWallpaperTheme,
     interactiveWallpaperTheme,
@@ -221,7 +223,13 @@ const App = function App() {
       >
         {showClockAndCalendar && (
           <div className="section-1">
-            {useAnalogClock2 ? <Clock2 date={time} /> : <Clock1 date={time} />}
+            {clockStyle === "digital" ? (
+              <DigitalClock date={time} />
+            ) : clockStyle === "analog-2" ? (
+              <Clock2 date={time} />
+            ) : (
+              <Clock1 date={time} />
+            )}
             {showMonthView ? (
               <Calendar date={date} />
             ) : (
@@ -252,8 +260,13 @@ const App = function App() {
             </h1>
           )}
           {showVisitedSites && <TopSites />}
-          <Search selectedSearchEngine={searchEngine} />
-          {showSearchEngines && (
+          <Search
+            selectedSearchEngine={searchEngine}
+            onSelectedEngineChange={handleSearchEngineChange}
+            showSearchEngines={showSearchEngines}
+            useSearchDropdown={useSearchDropdown}
+          />
+          {showSearchEngines && !useSearchDropdown && (
             <SearchEngineSwitcher
               selectedSearchEngine={searchEngine}
               onSelectedEngineChange={handleSearchEngineChange}

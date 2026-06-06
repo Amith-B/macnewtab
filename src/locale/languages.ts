@@ -1,5 +1,4 @@
-export const translation = {
-  en: {
+const enTranslation = {
     show_greetings: "Show Greetings",
     show_top_visited_sites: "Show Top Visited Sites",
     open_links_on_separate_page: "Open Links On Separate Page",
@@ -185,6 +184,14 @@ export const translation = {
     blue_noise: "Blue Noise",
     close_reset: "Close (Reset)",
     minimize: "Minimize",
+    my_apps: "My Apps",
+    my_apps_description: "Add your favorite applications to the Launchpad",
+    add_launchpad_links: "No custom links added. Add some below.",
+    launchpad: "Launchpad",
+    clock_style: "Clock Style",
+    analog_clock_1: "Analog Clock 1",
+    analog_clock_2: "Analog Clock 2",
+    digital_clock: "Digital Clock",
     show_weather: "Show Weather Widget",
     weather_temperature_unit: "Temperature Unit",
     celsius: "Celsius",
@@ -272,7 +279,13 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
-  },
+
+    use_search_dropdown: "Show search with dropdown in search bar",
+};
+
+export const translation: Record<string, Record<string, string>> & { en: typeof enTranslation } = {
+  en: enTranslation,
+
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
     show_top_visited_sites: "ಟಾಪ್ ಭೇಟಿ ನೀಡಿದ ಸೈಟ್‌ಗಳನ್ನು ತೋರಿಸಿ",
@@ -545,6 +558,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "ನನ್ನ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು",
+    my_apps_description: "ನಿಮ್ಮ ನೆಚ್ಚಿನ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು Launchpad ಗೆ ಸೇರಿಸಿ",
+    add_launchpad_links: "ಯಾವುದೇ ಕಸ್ಟಮ್ ಲಿಂಕ್‌ಗಳನ್ನು ಸೇರಿಸಲಾಗಿಲ್ಲ. ಕೆಳಗೆ ಕೆಲವು ಸೇರಿಸಿ.",
+    launchpad: "Launchpad",
+    clock_style: "ಗಡಿಯಾರದ ಶೈಲಿ",
+    analog_clock_1: "ಅನಲಾಗ್ ಗಡಿಯಾರ 1",
+    analog_clock_2: "ಅನಲಾಗ್ ಗಡಿಯಾರ 2",
+    digital_clock: "ಡಿಜಿಟಲ್ ಗಡಿಯಾರ",
+
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -817,6 +839,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Moje aplikace",
+    my_apps_description: "Přidejte své oblíbené aplikace do Launchpad",
+    add_launchpad_links: "Nebyly přidány žádné vlastní odkazy. Přidejte nějaké níže.",
+    launchpad: "Launchpad",
+    clock_style: "Styl hodin",
+    analog_clock_1: "Analogové hodiny 1",
+    analog_clock_2: "Analogové hodiny 2",
+    digital_clock: "Digitální hodiny",
+
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -1091,6 +1122,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Uygulamalarım",
+    my_apps_description: "Favori uygulamalarınızı Launchpad'e ekleyin",
+    add_launchpad_links: "Özel bağlantı eklenmedi. Aşağıdan bazılarını ekleyin.",
+    launchpad: "Launchpad",
+    clock_style: "Saat Stili",
+    analog_clock_1: "Analog Saat 1",
+    analog_clock_2: "Analog Saat 2",
+    digital_clock: "Dijital Saat",
+
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -1365,6 +1405,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Ứng dụng của tôi",
+    my_apps_description: "Thêm các ứng dụng yêu thích của bạn vào Launchpad",
+    add_launchpad_links: "Chưa có liên kết tùy chỉnh nào được thêm. Hãy thêm một số liên kết bên dưới.",
+    launchpad: "Launchpad",
+    clock_style: "Kiểu đồng hồ",
+    analog_clock_1: "Đồng hồ kim 1",
+    analog_clock_2: "Đồng hồ kim 2",
+    digital_clock: "Đồng hồ kỹ thuật số",
+
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -1638,6 +1687,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Mening ilovalarim",
+    my_apps_description: "Sevimli ilovalaringizni Launchpad-ga qo'shing",
+    add_launchpad_links: "Maxsus havolalar qo'shilmagan. Quyida ba'zilarini qo'shing.",
+    launchpad: "Launchpad",
+    clock_style: "Soat uslubi",
+    analog_clock_1: "Analog soat 1",
+    analog_clock_2: "Analog soat 2",
+    digital_clock: "Raqamli soat",
+
   },
   zh: {
     show_greetings: "显示问候语",
@@ -1907,6 +1965,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "我的应用",
+    my_apps_description: "将您喜欢的应用添加到 Launchpad",
+    add_launchpad_links: "未添加任何自定义链接。在下面添加一些。",
+    launchpad: "Launchpad",
+    clock_style: "时钟样式",
+    analog_clock_1: "模拟时钟 1",
+    analog_clock_2: "模拟时钟 2",
+    digital_clock: "数字时钟",
+
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -2180,6 +2247,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "मेरे ऐप्स",
+    my_apps_description: "अपने पसंदीदा एप्लिकेशन को Launchpad में जोड़ें",
+    add_launchpad_links: "कोई कस्टम लिंक नहीं जोड़ा गया। नीचे कुछ जोड़ें।",
+    launchpad: "Launchpad",
+    clock_style: "घड़ी की शैली",
+    analog_clock_1: "एनालॉग घड़ी 1",
+    analog_clock_2: "एनालॉग घड़ी 2",
+    digital_clock: "डिजिटल घड़ी",
+
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -2455,6 +2531,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Le mie app",
+    my_apps_description: "Aggiungi le tue applicazioni preferite al Launchpad",
+    add_launchpad_links: "Nessun link personalizzato aggiunto. Aggiungine alcuni di seguito.",
+    launchpad: "Launchpad",
+    clock_style: "Stile dell'orologio",
+    analog_clock_1: "Orologio analogico 1",
+    analog_clock_2: "Orologio analogico 2",
+    digital_clock: "Orologio digitale",
+
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -2728,6 +2813,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "আমার অ্যাপস",
+    my_apps_description: "আপনার প্রিয় অ্যাপ্লিকেশনগুলি Launchpad এ যোগ করুন",
+    add_launchpad_links: "কোনো কাস্টম লিঙ্ক যোগ করা হয়নি। নিচে কিছু যোগ করুন।",
+    launchpad: "Launchpad",
+    clock_style: "ঘড়ির ধরন",
+    analog_clock_1: "অ্যানালগ ঘড়ি 1",
+    analog_clock_2: "অ্যানালগ ঘড়ি 2",
+    digital_clock: "ডিজিটাল ঘড়ি",
+
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -3003,6 +3097,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Meus Apps",
+    my_apps_description: "Adicione seus aplicativos favoritos ao Launchpad",
+    add_launchpad_links: "Nenhum link personalizado adicionado. Adicione alguns abaixo.",
+    launchpad: "Launchpad",
+    clock_style: "Estilo do Relógio",
+    analog_clock_1: "Relógio Analógico 1",
+    analog_clock_2: "Relógio Analógico 2",
+    digital_clock: "Relógio Digital",
+
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -3277,6 +3380,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Mes applications",
+    my_apps_description: "Ajoutez vos applications préférées au Launchpad",
+    add_launchpad_links: "Aucun lien personnalisé ajouté. Ajoutez-en ci-dessous.",
+    launchpad: "Launchpad",
+    clock_style: "Style d'horloge",
+    analog_clock_1: "Horloge analogique 1",
+    analog_clock_2: "Horloge analogique 2",
+    digital_clock: "Horloge numérique",
+
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -3550,6 +3662,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Мои приложения",
+    my_apps_description: "Добавьте свои любимые приложения в Launchpad",
+    add_launchpad_links: "Пользовательские ссылки не добавлены. Добавьте их ниже.",
+    launchpad: "Launchpad",
+    clock_style: "Стиль часов",
+    analog_clock_1: "Аналоговые часы 1",
+    analog_clock_2: "Аналоговые часы 2",
+    digital_clock: "Цифровые часы",
+
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -3823,6 +3944,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Mis aplicaciones",
+    my_apps_description: "Agrega tus aplicaciones favoritas al Launchpad",
+    add_launchpad_links: "No se agregaron enlaces personalizados. Agrega algunos a continuación.",
+    launchpad: "Launchpad",
+    clock_style: "Estilo de reloj",
+    analog_clock_1: "Reloj analógico 1",
+    analog_clock_2: "Reloj analógico 2",
+    digital_clock: "Reloj digital",
+
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -4095,6 +4225,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "マイアプリ",
+    my_apps_description: "お気に入りのアプリケーションを Launchpad に追加します",
+    add_launchpad_links: "カスタムリンクは追加されていません。以下から追加してください。",
+    launchpad: "Launchpad",
+    clock_style: "時計のスタイル",
+    analog_clock_1: "アナログ時計 1",
+    analog_clock_2: "アナログ時計 2",
+    digital_clock: "デジタル時計",
+
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -4366,6 +4505,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "내 앱",
+    my_apps_description: "즐겨찾는 애플리케이션을 Launchpad에 추가하세요",
+    add_launchpad_links: "추가된 사용자 지정 링크가 없습니다. 아래에 추가하세요.",
+    launchpad: "Launchpad",
+    clock_style: "시계 스타일",
+    analog_clock_1: "아날로그 시계 1",
+    analog_clock_2: "아날로그 시계 2",
+    digital_clock: "디지털 시계",
+
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -4638,6 +4786,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Aplikasi Saya",
+    my_apps_description: "Tambahkan aplikasi favorit Anda ke Launchpad",
+    add_launchpad_links: "Belum ada tautan khusus yang ditambahkan. Tambahkan beberapa di bawah.",
+    launchpad: "Launchpad",
+    clock_style: "Gaya Jam",
+    analog_clock_1: "Jam Analog 1",
+    analog_clock_2: "Jam Analog 2",
+    digital_clock: "Jam Digital",
+
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -4910,6 +5067,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "माझे ॲप्स",
+    my_apps_description: "तुमचे आवडते ॲप्लिकेशन्स Launchpad मध्ये जोडा",
+    add_launchpad_links: "कोणत्याही कस्टम लिंक जोडल्या नाहीत. खाली काही जोडा.",
+    launchpad: "Launchpad",
+    clock_style: "घड्याळाची शैली",
+    analog_clock_1: "ॲनालॉग घड्याळ 1",
+    analog_clock_2: "ॲनालॉग घड्याळ 2",
+    digital_clock: "डिजिटल घड्याळ",
+
   },
   pl: {
     show_greetings: "Pokaż pozdrowienia",
@@ -5184,6 +5350,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Moje aplikacje",
+    my_apps_description: "Dodaj swoje ulubione aplikacje do Launchpad",
+    add_launchpad_links: "Nie dodano żadnych niestandardowych linków. Dodaj jakieś poniżej.",
+    launchpad: "Launchpad",
+    clock_style: "Styl zegara",
+    analog_clock_1: "Zegar analogowy 1",
+    analog_clock_2: "Zegar analogowy 2",
+    digital_clock: "Zegar cyfrowy",
+
   },
   de: {
     show_greetings: "Grüße anzeigen",
@@ -5457,6 +5632,15 @@ export const translation = {
     spaces_active: "Active",
     spaces_rename: "Rename",
     spaces_switching: "Switching space...",
+    my_apps: "Meine Apps",
+    my_apps_description: "Fügen Sie Ihre Lieblingsanwendungen zum Launchpad hinzu",
+    add_launchpad_links: "Keine benutzerdefinierten Links hinzugefügt. Fügen Sie unten einige hinzu.",
+    launchpad: "Launchpad",
+    clock_style: "Uhrenstil",
+    analog_clock_1: "Analoge Uhr 1",
+    analog_clock_2: "Analoge Uhr 2",
+    digital_clock: "Digitaluhr",
+
   },
 };
 export const languages = Object.keys(
