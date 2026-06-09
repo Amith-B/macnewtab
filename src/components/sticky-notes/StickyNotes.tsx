@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useRef, useContext, memo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  memo,
+  useCallback,
+} from "react";
 import "./StickyNotes.css";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
@@ -10,6 +17,7 @@ import {
   listenForSyncChanges,
 } from "../../utils/stickyNotesSync";
 import { getBodyZoomScale } from "../../utils/zoom";
+import { getResolvedKey } from "../../utils/spacesStorage";
 
 const STICKY_NOTES_KEY = "macnewtab_sticky_notes";
 
@@ -43,62 +51,54 @@ const StickyNotes: React.FC = memo(() => {
   const newNoteIdRef = useRef<string | null>(null);
   const dragScale = useRef(1);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { locale, enableStickyNotesSync } = useContext(AppContext);
+  const { locale, enableStickyNotesSync, activeSpace } = useContext(AppContext);
+  const activeSpaceId = activeSpace?.id;
+  const actualKey = getResolvedKey(STICKY_NOTES_KEY, activeSpaceId);
 
   // Track whether initial sync load is complete to avoid overwriting sync data
   const initialLoadDone = useRef(false);
 
-  // Track whether a space switch just happened — when true, skip the
-  // chrome.storage.sync merge in initNotes so shared sync data doesn't
-  // overwrite the per-space local notes that were just swapped in.
-  const justSwitchedSpace = useRef(false);
+  const loadLocalNotes = useCallback((): Note[] => {
+    const savedNotes = localStorage.getItem(actualKey);
+    if (savedNotes) {
+      try {
+        return JSON.parse(savedNotes);
+      } catch {
+        return [];
+      }
+    }
+    return [];
+  }, [actualKey]);
 
   useEffect(() => {
     const initNotes = async () => {
       const localNotes = loadLocalNotes();
 
-      // After a space switch we must NOT merge with chrome.storage.sync
-      // because sync is shared across all spaces and would pull in the
-      // previous space's notes, overwriting the correctly-swapped local data.
-      if (justSwitchedSpace.current) {
-        justSwitchedSpace.current = false;
-        setNotes(localNotes);
-        initialLoadDone.current = true;
-        return;
-      }
-
       if (enableStickyNotesSync) {
-        const syncNotes = await loadNotesFromSync();
-
-        // Merge local and sync: latest timestamp wins
+        const syncNotes = await loadNotesFromSync(activeSpaceId);
         const merged = mergeNotes(localNotes, syncNotes);
 
-        // Save merged result locally
-        localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(merged));
+        localStorage.setItem(actualKey, JSON.stringify(merged));
         setNotes(merged);
 
-        // Push merged result back to sync (handles migration from localStorage-only)
         if (merged.length > 0) {
-          syncNotesToChrome(merged);
+          syncNotesToChrome(merged, activeSpaceId);
         }
       } else {
         setNotes(localNotes);
       }
-
       initialLoadDone.current = true;
     };
 
     initNotes();
 
-    // Listen for localStorage changes from other tabs (same device)
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === STICKY_NOTES_KEY && e.newValue) {
+      if (e.key === actualKey && e.newValue) {
         try {
           const updatedNotes = JSON.parse(e.newValue);
           setNotes(updatedNotes);
-          // Also sync to Chrome for cross-device sync
           if (enableStickyNotesSync) {
-            syncNotesToChrome(updatedNotes);
+            syncNotesToChrome(updatedNotes, activeSpaceId);
           }
         } catch (error) {
           console.error(
@@ -111,58 +111,28 @@ const StickyNotes: React.FC = memo(() => {
 
     window.addEventListener("storage", handleStorageChange);
 
-    // Reload notes when the active space changes (no page reload)
-    const handleSpaceChanged = () => {
-      // Mark that a space switch just happened so the next initNotes
-      // run (triggered by enableStickyNotesSync dep change) skips sync merge.
-      justSwitchedSpace.current = true;
-      setNotes(loadLocalNotes());
-    };
-    window.addEventListener("spaceChanged", handleSpaceChanged);
-
-    // Listen for chrome.storage.sync changes from other devices
     let unsubscribeSync = () => {};
     if (enableStickyNotesSync) {
       unsubscribeSync = listenForSyncChanges((remoteNotes) => {
         if (!initialLoadDone.current) return;
-
-        // Merge remote changes with current local state
         const currentLocal = loadLocalNotes();
         const merged = mergeNotes(currentLocal, remoteNotes);
-
-        localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(merged));
+        localStorage.setItem(actualKey, JSON.stringify(merged));
         setNotes(merged);
-      });
+      }, activeSpaceId);
     }
 
     return () => {
       window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("spaceChanged", handleSpaceChanged);
       unsubscribeSync();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enableStickyNotesSync]);
-
-  /**
-   * Helper to read notes from localStorage.
-   */
-  const loadLocalNotes = (): Note[] => {
-    const savedNotes = localStorage.getItem(STICKY_NOTES_KEY);
-    if (savedNotes) {
-      try {
-        return JSON.parse(savedNotes);
-      } catch {
-        return [];
-      }
-    }
-    return [];
-  };
+  }, [enableStickyNotesSync, actualKey, activeSpaceId, loadLocalNotes]);
 
   const saveNotes = (updatedNotes: Note[]) => {
-    localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(updatedNotes));
+    localStorage.setItem(actualKey, JSON.stringify(updatedNotes));
     setNotes(updatedNotes);
     if (enableStickyNotesSync) {
-      syncNotesToChrome(updatedNotes);
+      syncNotesToChrome(updatedNotes, activeSpaceId);
     }
   };
 
@@ -268,7 +238,7 @@ const StickyNotes: React.FC = memo(() => {
               }
             : note,
         );
-        localStorage.setItem(STICKY_NOTES_KEY, JSON.stringify(updatedNotes));
+        localStorage.setItem(actualKey, JSON.stringify(updatedNotes));
         if (enableStickyNotesSync) {
           syncNotesToChrome(updatedNotes);
         }
@@ -297,7 +267,9 @@ const StickyNotes: React.FC = memo(() => {
   // Auto-focus the textarea of a newly created note
   useEffect(() => {
     if (newNoteIdRef.current) {
-      const textarea = document.getElementById(newNoteIdRef.current) as HTMLTextAreaElement | null;
+      const textarea = document.getElementById(
+        newNoteIdRef.current,
+      ) as HTMLTextAreaElement | null;
       if (textarea) {
         textarea.focus();
         newNoteIdRef.current = null;

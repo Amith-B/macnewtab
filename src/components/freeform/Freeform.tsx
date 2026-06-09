@@ -23,6 +23,7 @@ import { getBodyZoomScale } from "../../utils/zoom";
 import { useHistory } from "./useHistory";
 import { FREEFORM_DATA_LOCAL_STORAGE_KEY } from "../../static/freeformSettings";
 import { AppContext } from "../../context/provider";
+import { getResolvedKey } from "../../utils/spacesStorage";
 import { translation } from "../../locale/languages";
 import { useLocalStorage } from "../../utils/localStorage";
 
@@ -90,9 +91,9 @@ function generateId() {
 }
 
 // ─── Load / Save ───────────────────────────────────────────
-function loadData(): CanvasObject[] {
+function loadData(actualKey: string): CanvasObject[] {
   try {
-    const raw = localStorage.getItem(FREEFORM_DATA_LOCAL_STORAGE_KEY);
+    const raw = localStorage.getItem(actualKey);
     if (raw) {
       const d = JSON.parse(raw);
       if (Array.isArray(d)) return d;
@@ -101,11 +102,8 @@ function loadData(): CanvasObject[] {
   return [];
 }
 
-function saveData(objects: CanvasObject[]) {
-  localStorage.setItem(
-    FREEFORM_DATA_LOCAL_STORAGE_KEY,
-    JSON.stringify(objects),
-  );
+function saveData(objects: CanvasObject[], actualKey: string) {
+  localStorage.setItem(actualKey, JSON.stringify(objects));
 }
 
 // ─── Drawing helpers ───────────────────────────────────────
@@ -619,6 +617,13 @@ type Plan = "basic" | "pro";
 // ─── Main Component ────────────────────────────────────────
 const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
   ({ visible, onClose }) => {
+    const { activeSpace } = useContext(AppContext);
+    const activeSpaceId = activeSpace?.id;
+    const actualKey = getResolvedKey(
+      FREEFORM_DATA_LOCAL_STORAGE_KEY,
+      activeSpaceId,
+    );
+
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const tempCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -634,12 +639,17 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
       const dismissedAt = localStorage.getItem(
         "freeform_pricing_banner_dismissed_at",
       );
-      
+
       if (!dismissedAt) {
         // Migrate old boolean format if the user already clicked dismiss before this update
-        if (localStorage.getItem("freeform_pricing_banner_dismissed") === "true") {
+        if (
+          localStorage.getItem("freeform_pricing_banner_dismissed") === "true"
+        ) {
           localStorage.removeItem("freeform_pricing_banner_dismissed");
-          localStorage.setItem("freeform_pricing_banner_dismissed_at", Date.now().toString());
+          localStorage.setItem(
+            "freeform_pricing_banner_dismissed_at",
+            Date.now().toString(),
+          );
           return false;
         }
         return true;
@@ -647,12 +657,15 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
 
       const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
       const timeSinceDismissed = Date.now() - parseInt(dismissedAt, 10);
-      
+
       return timeSinceDismissed > ONE_WEEK_MS;
     });
 
     const dismissPricingBanner = () => {
-      localStorage.setItem("freeform_pricing_banner_dismissed_at", Date.now().toString());
+      localStorage.setItem(
+        "freeform_pricing_banner_dismissed_at",
+        Date.now().toString(),
+      );
       setShowPricingBanner(false);
     };
 
@@ -691,19 +704,27 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     const pinchDistRef = useRef<number | null>(null);
     const pinchZoomStartRef = useRef(1);
 
-    const { objects, pushState, replaceState, undo, redo, canUndo, canRedo, resetHistory } =
-      useHistory(loadData());
+    const {
+      objects,
+      pushState,
+      replaceState,
+      undo,
+      redo,
+      canUndo,
+      canRedo,
+      resetHistory,
+    } = useHistory(loadData(actualKey));
 
     // Reload freeform data when the active space changes (no page reload)
     useEffect(() => {
       const handleSpaceChanged = () => {
-        resetHistory(loadData());
+        resetHistory(loadData(actualKey));
       };
       window.addEventListener("spaceChanged", handleSpaceChanged);
       return () => {
         window.removeEventListener("spaceChanged", handleSpaceChanged);
       };
-    }, [resetHistory]);
+    }, [resetHistory, actualKey]);
 
     const { locale } = useContext(AppContext);
     const t = translation[locale];
@@ -714,7 +735,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
     );
 
     const isDarkTheme = freeformTheme === "dark";
-      
+
     const activeThemeClass = isDarkTheme ? "dark" : "light";
 
     const toggleTheme = () => {
@@ -944,8 +965,8 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
 
     // Save on changes
     useEffect(() => {
-      saveData(objects);
-    }, [objects]);
+      saveData(objects, actualKey);
+    }, [objects, actualKey]);
 
     // Load images into cache and prune removed images
     useEffect(() => {
@@ -1330,7 +1351,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
           const dx = e.touches[0].clientX - e.touches[1].clientX;
           const dy = e.touches[0].clientY - e.touches[1].clientY;
           const dist = Math.hypot(dx, dy);
-          
+
           const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
           const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
 
@@ -1340,28 +1361,28 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
             // Current screen center of pinch
             const sx = (mx - rect.left) / vpScale;
             const sy = (my - rect.top) / vpScale;
-            
+
             // Start screen center of pinch
             const startSx = (panStartRef.current.x - rect.left) / vpScale;
             const startSy = (panStartRef.current.y - rect.top) / vpScale;
-            
+
             const startCamX = camStartRef.current.x;
             const startCamY = camStartRef.current.y;
             const startZoom = pinchZoomStartRef.current;
-            
+
             const scale = dist / pinchDistRef.current;
             const newZoom = Math.max(0.1, Math.min(5, startZoom * scale));
-            
+
             const worldX = startSx / startZoom - startCamX;
             const worldY = startSy / startZoom - startCamY;
-            
+
             const newCamX = sx / newZoom - worldX;
             const newCamY = sy / newZoom - worldY;
-            
+
             setCamera({
               x: newCamX,
               y: newCamY,
-              zoom: newZoom
+              zoom: newZoom,
             });
           }
           return;
@@ -1427,7 +1448,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
 
         const rect = containerRef.current?.getBoundingClientRect();
         if (!rect) return;
-        
+
         const scale = getBodyZoomScale();
         const sx = (e.clientX - rect.left) / scale;
         const sy = (e.clientY - rect.top) / scale;
@@ -1440,7 +1461,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
             const delta = e.deltaY > 0 ? 0.9 : 1.1;
             newZoom = c.zoom * delta;
           }
-          
+
           const clampedZoom = Math.max(0.1, Math.min(5, newZoom));
           if (clampedZoom === c.zoom) return c;
 
@@ -1515,11 +1536,15 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
         if (newZoom === c.zoom) return c;
         const rect = containerRef.current?.getBoundingClientRect();
         const sc = getBodyZoomScale();
-        const sx = rect ? (rect.width / 2) / sc : window.innerWidth / 2;
-        const sy = rect ? (rect.height / 2) / sc : window.innerHeight / 2;
+        const sx = rect ? rect.width / 2 / sc : window.innerWidth / 2;
+        const sy = rect ? rect.height / 2 / sc : window.innerHeight / 2;
         const worldX = sx / c.zoom - c.x;
         const worldY = sy / c.zoom - c.y;
-        return { x: sx / newZoom - worldX, y: sy / newZoom - worldY, zoom: newZoom };
+        return {
+          x: sx / newZoom - worldX,
+          y: sy / newZoom - worldY,
+          zoom: newZoom,
+        };
       });
     };
     const handleZoomOut = () => {
@@ -1528,11 +1553,15 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
         if (newZoom === c.zoom) return c;
         const rect = containerRef.current?.getBoundingClientRect();
         const sc = getBodyZoomScale();
-        const sx = rect ? (rect.width / 2) / sc : window.innerWidth / 2;
-        const sy = rect ? (rect.height / 2) / sc : window.innerHeight / 2;
+        const sx = rect ? rect.width / 2 / sc : window.innerWidth / 2;
+        const sy = rect ? rect.height / 2 / sc : window.innerHeight / 2;
         const worldX = sx / c.zoom - c.x;
         const worldY = sy / c.zoom - c.y;
-        return { x: sx / newZoom - worldX, y: sy / newZoom - worldY, zoom: newZoom };
+        return {
+          x: sx / newZoom - worldX,
+          y: sy / newZoom - worldY,
+          zoom: newZoom,
+        };
       });
     };
     const handleZoomReset = () => setCamera({ x: 0, y: 0, zoom: 1 });
@@ -1679,13 +1708,40 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
               title={t.theme || "Toggle Theme"}
             >
               {isDarkTheme ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="4"/>
-                  <path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2" />
+                  <path d="M12 20v2" />
+                  <path d="m4.93 4.93 1.41 1.41" />
+                  <path d="m17.66 17.66 1.41 1.41" />
+                  <path d="M2 12h2" />
+                  <path d="M20 12h2" />
+                  <path d="m6.34 17.66-1.41 1.41" />
+                  <path d="m19.07 4.93-1.41 1.41" />
                 </svg>
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
                 </svg>
               )}
             </button>
