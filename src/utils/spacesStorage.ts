@@ -234,7 +234,7 @@ export function formatTime(hour: number, minute: number): string {
 
 /** Format a time value (hour, minute) to 12-hour AM/PM display string */
 export function formatTimeDisplay(hour: number, minute: number): string {
-  const period = hour >= 12 ? "PM" : "AM";
+  const period = hour >= 12 && hour < 24 ? "PM" : "AM";
   const displayHour = hour % 12 || 12;
   return `${displayHour}:${String(minute).padStart(2, "0")} ${period}`;
 }

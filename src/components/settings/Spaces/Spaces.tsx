@@ -1,4 +1,11 @@
-import { memo, useCallback, useContext, useMemo, useRef, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import "./Spaces.css";
 import { AppContext } from "../../../context/provider";
 import Translation from "../../../locale/Translation";
@@ -6,15 +13,10 @@ import Toggle from "../../toggle/Toggle";
 import {
   Space,
   SpacesConfig,
-  SpaceTimeRange,
   DEFAULT_SPACE_COLORS,
 } from "../../../static/spacesSettings";
-import {
-  validateTimeRanges,
-  formatTime,
-  formatTimeDisplay,
-  parseTime,
-} from "../../../utils/spacesStorage";
+import { validateTimeRanges } from "../../../utils/spacesStorage";
+import { TimeRangeSlider } from "./TimeRangeSlider";
 
 const Spaces = memo(function Spaces() {
   const {
@@ -34,7 +36,7 @@ const Spaces = memo(function Spaces() {
   const [editingSpaceId, setEditingSpaceId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState("");
   const [colorPickerSpaceId, setColorPickerSpaceId] = useState<string | null>(
-    null
+    null,
   );
   const [deleteConfirmSpaceId, setDeleteConfirmSpaceId] = useState<
     string | null
@@ -57,7 +59,7 @@ const Spaces = memo(function Spaces() {
     setNewSpaceColor(
       DEFAULT_SPACE_COLORS[
         (spacesConfig?.spaces.length || 0) % DEFAULT_SPACE_COLORS.length
-      ]
+      ],
     );
     setShowAddForm(false);
   }, [newSpaceName, newSpaceColor, handleCreateSpace, spacesConfig]);
@@ -76,7 +78,7 @@ const Spaces = memo(function Spaces() {
       setEditingSpaceId(null);
       setEditingName("");
     },
-    [editingName, handleUpdateSpace]
+    [editingName, handleUpdateSpace],
   );
 
   const handleColorChange = useCallback(
@@ -84,7 +86,7 @@ const Spaces = memo(function Spaces() {
       handleUpdateSpace({ ...space, color });
       setColorPickerSpaceId(null);
     },
-    [handleUpdateSpace]
+    [handleUpdateSpace],
   );
 
   // Derive whether any space has time-sensitive enabled (for UI display)
@@ -105,7 +107,7 @@ const Spaces = memo(function Spaces() {
           : undefined,
       };
       const updatedSpaces = spacesConfig.spaces.map((s) =>
-        s.id === updatedSpace.id ? updatedSpace : s
+        s.id === updatedSpace.id ? updatedSpace : s,
       );
       const anyEnabled = updatedSpaces.some((s) => s.isTimeSensitive);
       const updatedConfig: SpacesConfig = {
@@ -115,28 +117,7 @@ const Spaces = memo(function Spaces() {
       };
       handleUpdateSpacesConfig(updatedConfig);
     },
-    [spacesConfig, handleUpdateSpacesConfig]
-  );
-
-  const handleTimeChange = useCallback(
-    (
-      space: Space,
-      field: "start" | "end",
-      timeStr: string
-    ) => {
-      const parsed = parseTime(timeStr);
-      if (!parsed || !space.timeRange) return;
-
-      const updatedRange: SpaceTimeRange = {
-        ...space.timeRange,
-        ...(field === "start"
-          ? { startHour: parsed.hour, startMinute: parsed.minute }
-          : { endHour: parsed.hour, endMinute: parsed.minute }),
-      };
-
-      handleUpdateSpace({ ...space, timeRange: updatedRange });
-    },
-    [handleUpdateSpace]
+    [spacesConfig, handleUpdateSpacesConfig],
   );
 
   const confirmDelete = useCallback(() => {
@@ -158,10 +139,7 @@ const Spaces = memo(function Spaces() {
           <p className="spaces__empty-description">
             <Translation value="spaces_description" />
           </p>
-          <button
-            className="spaces__enable-btn"
-            onClick={handleEnableSpaces}
-          >
+          <button className="spaces__enable-btn" onClick={handleEnableSpaces}>
             <Translation value="spaces_enable" />
           </button>
         </div>
@@ -194,7 +172,15 @@ const Spaces = memo(function Spaces() {
             const showMultipleSpaces = spacesConfig.spaces.length > 1;
 
             return (
-              <li key={space.id} className="spaces__item">
+              <li
+                key={space.id}
+                className="spaces__item"
+                onClick={() => {
+                  if (!isActive && !isEditing) {
+                    handleSwitchSpace(space.id);
+                  }
+                }}
+              >
                 <div className="spaces__item-main">
                   {/* Color Dot */}
                   <div style={{ position: "relative" }}>
@@ -204,7 +190,7 @@ const Spaces = memo(function Spaces() {
                       onClick={(e) => {
                         e.stopPropagation();
                         setColorPickerSpaceId(
-                          showColorPicker ? null : space.id
+                          showColorPicker ? null : space.id,
                         );
                       }}
                       title="Change color"
@@ -230,14 +216,7 @@ const Spaces = memo(function Spaces() {
                   </div>
 
                   {/* Name */}
-                  <div
-                    className="spaces__name"
-                    onClick={() => {
-                      if (!isActive && !isEditing) {
-                        handleSwitchSpace(space.id);
-                      }
-                    }}
-                  >
+                  <div className="spaces__name">
                     {isEditing ? (
                       <input
                         ref={editInputRef}
@@ -290,7 +269,10 @@ const Spaces = memo(function Spaces() {
 
                   {/* Per-space time-sensitive toggle (only shown when multiple spaces) */}
                   {showMultipleSpaces && (
-                    <div className="spaces__space-time-toggle">
+                    <div
+                      className="spaces__space-time-toggle"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <Toggle
                         id={`space-time-toggle-${space.id}`}
                         name={`Time toggle for ${space.name}`}
@@ -304,51 +286,37 @@ const Spaces = memo(function Spaces() {
                 </div>
 
                 {/* Time range inputs (shown when time-sensitive is enabled for this space) */}
-                {space.isTimeSensitive && space.timeRange && (
-                  <div className="spaces__time-range-inline">
-                    <div className="spaces__time-range-inputs">
-                      <div className="spaces__time-input-group">
-                        <input
-                          type="time"
-                          className="spaces__time-input"
-                          value={formatTime(
-                            space.timeRange.startHour,
-                            space.timeRange.startMinute
-                          )}
-                          onChange={(e) =>
-                            handleTimeChange(space, "start", e.target.value)
+                {space.isTimeSensitive &&
+                  space.timeRange &&
+                  (() => {
+                    const unavailableRanges = spacesConfig.spaces
+                      .filter(
+                        (s) =>
+                          s.id !== space.id && s.isTimeSensitive && s.timeRange,
+                      )
+                      .map((s) => s.timeRange!);
+
+                    const isValid = !timeValidation.conflicts.some((c) =>
+                      c.includes(space.id),
+                    );
+
+                    return (
+                      <div
+                        className="spaces__time-range-container"
+                        style={{ marginTop: "10px", padding: "0 10px" }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <TimeRangeSlider
+                          value={space.timeRange}
+                          onChange={(newRange) =>
+                            handleUpdateSpace({ ...space, timeRange: newRange })
                           }
+                          unavailableRanges={unavailableRanges}
+                          isValid={isValid}
                         />
-                        <span className="spaces__time-display">
-                          {formatTimeDisplay(
-                            space.timeRange.startHour,
-                            space.timeRange.startMinute
-                          )}
-                        </span>
                       </div>
-                      <span className="spaces__time-separator">→</span>
-                      <div className="spaces__time-input-group">
-                        <input
-                          type="time"
-                          className="spaces__time-input"
-                          value={formatTime(
-                            space.timeRange.endHour,
-                            space.timeRange.endMinute
-                          )}
-                          onChange={(e) =>
-                            handleTimeChange(space, "end", e.target.value)
-                          }
-                        />
-                        <span className="spaces__time-display">
-                          {formatTimeDisplay(
-                            space.timeRange.endHour,
-                            space.timeRange.endMinute
-                          )}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                    );
+                  })()}
               </li>
             );
           })}
@@ -417,7 +385,7 @@ const Spaces = memo(function Spaces() {
                 setNewSpaceColor(
                   DEFAULT_SPACE_COLORS[
                     spacesConfig.spaces.length % DEFAULT_SPACE_COLORS.length
-                  ]
+                  ],
                 );
                 setShowAddForm(true);
               }}

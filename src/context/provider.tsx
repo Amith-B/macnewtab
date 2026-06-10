@@ -6,7 +6,11 @@ import React, {
   ReactNode,
   createContext,
 } from "react";
-import { SpacesConfig, Space } from "../static/spacesSettings";
+import {
+  SpacesConfig,
+  Space,
+  SPACES_CONFIG_KEY,
+} from "../static/spacesSettings";
 import {
   saveSpacesConfig,
   enableSpaces,
@@ -14,6 +18,8 @@ import {
   deleteSpace,
   switchToSpace,
   initializeSpaceForCurrentTime,
+  loadSpacesConfig,
+  getResolvedKey,
 } from "../utils/spacesStorage";
 import {
   THEME_KEYS,
@@ -234,6 +240,17 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [spacesConfig, setSpacesConfigState] = useState<SpacesConfig | null>(
     () => initializeSpaceForCurrentTime(),
   );
+
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === SPACES_CONFIG_KEY || !e.key) {
+        const config = loadSpacesConfig();
+        setSpacesConfigState(config);
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   const activeSpaceId = spacesConfig?.activeSpaceId || "Default";
 
@@ -697,8 +714,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
+    const resolvedTodoKey = getResolvedKey(
+      TODO_LIST_LOCAL_STORAGE_KEY,
+      activeSpaceId,
+    );
+
     const getList = () => {
-      const todoList = localStorage.getItem(TODO_LIST_LOCAL_STORAGE_KEY);
+      const todoList = localStorage.getItem(resolvedTodoKey);
       try {
         if (todoList) {
           let parsedList = JSON.parse(todoList) as TodoList;
@@ -720,7 +742,20 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     };
 
     getList();
-  }, [todoListVisbility]);
+
+    // Listen for storage events specific to this space's todo list
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === resolvedTodoKey && e.newValue) {
+        try {
+          setTodoList(JSON.parse(e.newValue));
+        } catch (error) {
+          console.error("Failed to parse todo list from storage event", error);
+        }
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [todoListVisbility, activeSpaceId]);
 
   useEffect(() => {
     const loadGoogleUser = async () => {
@@ -804,7 +839,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
     try {
       const storedQuickLinks = localStorage.getItem(
-        QUICK_LINKS_LOCAL_STORAGE_KEY,
+        getResolvedKey(QUICK_LINKS_LOCAL_STORAGE_KEY, activeSpaceId),
       );
 
       if (storedQuickLinks) {
@@ -818,6 +853,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         if (Array.isArray(parsedQuickLinks)) {
           setQuickLinks(parsedQuickLinks);
         }
+      } else {
+        setQuickLinks([]);
       }
     } catch (_) {
       setQuickLinks([]);
@@ -825,7 +862,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
     try {
       const storedDockSites = localStorage.getItem(
-        DOCK_SITES_LOCAL_STORAGE_KEY,
+        getResolvedKey(DOCK_SITES_LOCAL_STORAGE_KEY, activeSpaceId),
       );
 
       if (storedDockSites) {
@@ -848,7 +885,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
     try {
       const storedLaunchpadLinks = localStorage.getItem(
-        CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY,
+        getResolvedKey(CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY, activeSpaceId),
       );
 
       if (storedLaunchpadLinks) {
@@ -862,27 +899,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         if (Array.isArray(parsedLaunchpadLinks)) {
           setCustomLaunchpadLinks(parsedLaunchpadLinks);
         }
+      } else {
+        setCustomLaunchpadLinks([]);
       }
     } catch (_) {
       setCustomLaunchpadLinks([]);
     }
-
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === TODO_LIST_LOCAL_STORAGE_KEY && e.newValue) {
-        try {
-          setTodoList(JSON.parse(e.newValue));
-        } catch (error) {
-          console.error("Failed to parse todo list from storage event", error);
-        }
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [handleLoadWallpaper]);
+  }, [handleLoadWallpaper, activeSpaceId]);
 
   useEffect(() => {
     if (!showGoogleCalendar || !googleAuthToken) {
@@ -896,9 +919,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   }, [showGoogleCalendar, googleAuthToken]);
 
   const handleClearCompletedTodoList = useCallback(() => {
-    const todoSavedDate = localStorage.getItem(
+    const resolvedDateKey = getResolvedKey(
       TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
+      activeSpaceId,
     );
+    const todoSavedDate = localStorage.getItem(resolvedDateKey);
 
     const currentDate = new Date();
     const formatedCurrentDate = `${currentDate.getDate()}_${currentDate.getMonth()}_${currentDate.getFullYear()}`;
@@ -912,16 +937,19 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setTodoList(updatedTodoList);
     }
 
-    localStorage.setItem(
-      TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
-      formatedCurrentDate,
-    );
-  }, [todoList]);
+    localStorage.setItem(resolvedDateKey, formatedCurrentDate);
+  }, [todoList, activeSpaceId]);
 
-  const handleTodoListUpdate = useCallback((list: TodoList) => {
-    setTodoList(list);
-    localStorage.setItem(TODO_LIST_LOCAL_STORAGE_KEY, JSON.stringify(list));
-  }, []);
+  const handleTodoListUpdate = useCallback(
+    (list: TodoList) => {
+      setTodoList(list);
+      localStorage.setItem(
+        getResolvedKey(TODO_LIST_LOCAL_STORAGE_KEY, activeSpaceId),
+        JSON.stringify(list),
+      );
+    },
+    [activeSpaceId],
+  );
 
   const handleAddTodoList = useCallback(
     (content: string) => {
@@ -982,23 +1010,38 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     setWallpaperBlur(val);
   }, []);
 
-  const handleDockSitesChange = useCallback((val: DockBarSites) => {
-    localStorage.setItem(DOCK_SITES_LOCAL_STORAGE_KEY, JSON.stringify(val));
-    setDockBarSites(val);
-  }, []);
+  const handleDockSitesChange = useCallback(
+    (val: DockBarSites) => {
+      localStorage.setItem(
+        getResolvedKey(DOCK_SITES_LOCAL_STORAGE_KEY, activeSpaceId),
+        JSON.stringify(val),
+      );
+      setDockBarSites(val);
+    },
+    [activeSpaceId],
+  );
 
-  const handleQuickLinksChange = useCallback((val: QuickLinksSites) => {
-    localStorage.setItem(QUICK_LINKS_LOCAL_STORAGE_KEY, JSON.stringify(val));
-    setQuickLinks(val);
-  }, []);
+  const handleQuickLinksChange = useCallback(
+    (val: QuickLinksSites) => {
+      localStorage.setItem(
+        getResolvedKey(QUICK_LINKS_LOCAL_STORAGE_KEY, activeSpaceId),
+        JSON.stringify(val),
+      );
+      setQuickLinks(val);
+    },
+    [activeSpaceId],
+  );
 
-  const handleCustomLaunchpadLinksChange = useCallback((val: any[]) => {
-    localStorage.setItem(
-      CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY,
-      JSON.stringify(val),
-    );
-    setCustomLaunchpadLinks(val);
-  }, []);
+  const handleCustomLaunchpadLinksChange = useCallback(
+    (val: any[]) => {
+      localStorage.setItem(
+        getResolvedKey(CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY, activeSpaceId),
+        JSON.stringify(val),
+      );
+      setCustomLaunchpadLinks(val);
+    },
+    [activeSpaceId],
+  );
 
   const handleBookmarkVisbility = useCallback(
     async (val: boolean) => {
