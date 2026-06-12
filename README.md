@@ -134,6 +134,15 @@ An **infinite whiteboard** built right into your new tab — sketch ideas, build
 - **Auto-Save**: Your canvas is saved automatically and restored the next time you open it.
 - Toggle Freeform on or off from **Settings → Dock**.
 
+### 🪟 Spaces (New!)
+
+Create entirely separate, customizable workspaces within your dashboard to keep your contexts organized.
+
+- **Independent Customization**: Assign a unique wallpaper, theme, and custom launchpad icons to each Space.
+- **Isolated Workflows**: To-dos, Sticky Notes, and Freeform Canvas drawings are saved independently per Space.
+- **Time-Sensitive Automation**: Configure time ranges for your Spaces, allowing your dashboard to automatically transition between different layouts and aesthetics based on the time of day.
+- Switch between Spaces seamlessly to stay organized, whether it's for work, personal use, or varying times of the day.
+
 ### 💾 Backup & Restore
 
 - Never lose your setup! Easily **export** your settings, to-do lists, sticky notes, and custom wallpapers to a JSON file.
