@@ -715,6 +715,11 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
       resetHistory,
     } = useHistory(loadData(actualKey));
 
+    const actualKeyRef = useRef(actualKey);
+    useEffect(() => {
+      actualKeyRef.current = actualKey;
+    }, [actualKey]);
+
     // Reload freeform data when the active space changes
     useEffect(() => {
       resetHistory(loadData(actualKey));
@@ -959,8 +964,8 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
 
     // Save on changes
     useEffect(() => {
-      saveData(objects, actualKey);
-    }, [objects, actualKey]);
+      saveData(objects, actualKeyRef.current);
+    }, [objects]);
 
     // Load images into cache and prune removed images
     useEffect(() => {
