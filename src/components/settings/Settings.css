@@ -93,6 +93,22 @@
   z-index: 1;
 }
 
+.settings__close-btn:active {
+  background: var(--theme-active);
+}
+
+.beta-capsule {
+  background-color: var(--theme-active);
+  color: var(--theme-text);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid var(--theme-border);
+}
+
 .settings__menu-content-title {
   color: var(--theme-clr);
   font-weight: bold;
@@ -180,7 +196,9 @@
 .buy-me-coffee {
   padding: 0px 30px;
   width: 100%;
-  transition: opacity 0.3s ease 0.05s, transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 0.3s ease 0.05s,
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 1;
   transform: translate(0, 0) scale(1);
 }
@@ -215,7 +233,9 @@
 }
 
 .advanced-support-link {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
   animation: bmc-diagonal-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 

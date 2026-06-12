@@ -69,7 +69,12 @@ export const SETTINGS_MENU = [
   },
   {
     key: "spaces",
-    title: <Translation value="spaces" />,
+    title: (
+      <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <Translation value="spaces" />
+        <span className="beta-capsule">Beta</span>
+      </span>
+    ),
     icon: SpacesIcon,
     content: Spaces,
   },
@@ -163,8 +168,13 @@ export default function Settings({
       setRenderOpen(false);
     }
   }, [open]);
-  const { dockPosition, googleUser, wallpaperType, dynamicWallpaperTheme, interactiveWallpaperTheme } =
-    useContext(AppContext);
+  const {
+    dockPosition,
+    googleUser,
+    wallpaperType,
+    dynamicWallpaperTheme,
+    interactiveWallpaperTheme,
+  } = useContext(AppContext);
 
   const [position, setPosition] = useState({ x: "unset", y: "unset" });
   const modalRef = useRef<HTMLDivElement>(null);

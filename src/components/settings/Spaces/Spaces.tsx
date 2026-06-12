@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import "./Spaces.css";
+import { ReactComponent as SpacesIcon } from "../spaces.svg";
 import { AppContext } from "../../../context/provider";
 import Translation from "../../../locale/Translation";
 import Toggle from "../../toggle/Toggle";
@@ -132,9 +133,21 @@ const Spaces = memo(function Spaces() {
     return (
       <div className="spaces__container">
         <div className="spaces__empty-state">
-          <div className="spaces__empty-icon">🪟</div>
+          <div className="spaces__empty-icon">
+            <SpacesIcon />
+          </div>
           <h3 className="spaces__empty-title">
-            <Translation value="spaces" />
+            <span
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                justifyContent: "center",
+              }}
+            >
+              <Translation value="spaces" />
+              <span className="beta-capsule">Beta</span>
+            </span>
           </h3>
           <p className="spaces__empty-description">
             <Translation value="spaces_description" />
@@ -154,8 +167,12 @@ const Spaces = memo(function Spaces() {
         {/* Header Row */}
         {spacesConfig.spaces.length > 1 && (
           <div className="spaces__header">
-            <span className="spaces__header-label">
+            <span
+              className="spaces__header-label"
+              style={{ display: "flex", alignItems: "center", gap: "8px" }}
+            >
               <Translation value="spaces" />
+              <span className="beta-capsule">Beta</span>
             </span>
             <span className="spaces__header-label spaces__header-schedule">
               <Translation value="spaces_time_sensitive" />
