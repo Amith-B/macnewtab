@@ -111,6 +111,13 @@ export async function deleteSpace(
 
   keysToRemove.forEach((k) => localStorage.removeItem(k));
 
+  // Clean up any associated images/wallpapers in IndexedDB
+  try {
+    const { deleteSpaceImagesFromIndexedDB } = await import("./db");
+    await deleteSpaceImagesFromIndexedDB(spaceId);
+  } catch (error) {
+    console.error("Failed to delete space images from IndexedDB", error);
+  }
   const updatedConfig: SpacesConfig = {
     ...config,
     spaces: config.spaces.filter((s) => s.id !== spaceId),

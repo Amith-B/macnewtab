@@ -88,3 +88,30 @@ export const deleteImageFromIndexedDB = async (
     request.onerror = () => reject(transaction.error);
   });
 };
+
+export const deleteSpaceImagesFromIndexedDB = async (
+  spaceId: string,
+): Promise<void> => {
+  const db = await openDatabase();
+  const prefix = `space_${spaceId}__`;
+
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("wallpapers", "readwrite");
+    const store = transaction.objectStore("wallpapers");
+    const request = store.openCursor();
+
+    request.onsuccess = (event) => {
+      const cursor = (event.target as IDBRequest)
+        .result as IDBCursorWithValue | null;
+      if (cursor) {
+        if (typeof cursor.key === "string" && cursor.key.startsWith(prefix)) {
+          cursor.delete();
+        }
+        cursor.continue();
+      }
+    };
+
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () => reject(transaction.error);
+  });
+};
