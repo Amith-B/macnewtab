@@ -35,7 +35,7 @@ const TopSites = memo(function TopSites() {
 
   const [isOverflowLeft, setIsOverflowLeft] = useState(false);
   const [isOverflowRight, setIsOverflowRight] = useState(true);
-  const { separatePageSite, quickLinksMode, quickLinks } =
+  const { separatePageSite, quickLinksMode, quickLinks, activeSpaceId } =
     useContext(AppContext);
 
   const isCustomMode = quickLinksMode === "custom";
@@ -114,6 +114,7 @@ const TopSites = memo(function TopSites() {
                   url={item.url}
                   title={item.title}
                   iconDbPrefix="quick_link_icon"
+                  activeSpaceId={activeSpaceId}
                 />
               ) : (
                 <img

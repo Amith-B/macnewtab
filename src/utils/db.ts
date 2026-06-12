@@ -1,3 +1,5 @@
+import { getResolvedDbKey } from "./spacesStorage";
+
 export const openDatabase = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open("WallpaperDB", 1);
@@ -21,15 +23,17 @@ export const openDatabase = (): Promise<IDBDatabase> => {
 
 export const saveImageToIndexedDB = async (
   base64Image: string,
-  id: string = "customWallpaper"
+  id: string = "customWallpaper",
+  activeSpaceId?: string,
 ): Promise<string> => {
   const db = await openDatabase();
   const blob = await fetch(base64Image).then((res) => res.blob());
+  const actualId = getResolvedDbKey(id, activeSpaceId);
 
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("wallpapers", "readwrite");
     const store = transaction.objectStore("wallpapers");
-    store.put({ id, imageBlob: blob });
+    store.put({ id: actualId, imageBlob: blob });
 
     transaction.oncomplete = () => {
       const url = URL.createObjectURL(blob);
@@ -40,13 +44,16 @@ export const saveImageToIndexedDB = async (
 };
 
 export const fetchImageFromIndexedDB = async (
-  id: string = "customWallpaper"
+  id: string = "customWallpaper",
+  activeSpaceId?: string,
 ): Promise<string | null> => {
   const db = await openDatabase();
+  const actualId = getResolvedDbKey(id, activeSpaceId);
+
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("wallpapers", "readonly");
     const store = transaction.objectStore("wallpapers");
-    const request = store.get(id);
+    const request = store.get(actualId);
 
     request.onsuccess = () => {
       const result = request.result as
@@ -61,20 +68,23 @@ export const fetchImageFromIndexedDB = async (
       }
     };
 
-    request.onerror = () => reject(request.error);
+    request.onerror = () => reject(transaction.error);
   });
 };
 
 export const deleteImageFromIndexedDB = async (
-  id: string = "customWallpaper"
+  id: string = "customWallpaper",
+  activeSpaceId?: string,
 ): Promise<void> => {
   const db = await openDatabase();
+  const actualId = getResolvedDbKey(id, activeSpaceId);
+
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("wallpapers", "readwrite");
     const store = transaction.objectStore("wallpapers");
-    store.delete(id);
+    const request = store.delete(actualId);
 
-    transaction.oncomplete = () => resolve();
-    transaction.onerror = () => reject(transaction.error);
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(transaction.error);
   });
 };

@@ -9,6 +9,7 @@ interface DockIconProps {
   url: string;
   title: string;
   iconDbPrefix?: string;
+  activeSpaceId?: string;
 }
 
 export const DockIcon = memo(
@@ -18,6 +19,7 @@ export const DockIcon = memo(
     url,
     title,
     iconDbPrefix = "dock_icon",
+    activeSpaceId,
   }: DockIconProps) => {
     const [iconSrc, setIconSrc] = useState<string>("");
 
@@ -31,6 +33,7 @@ export const DockIcon = memo(
           try {
             const blobUrl = await fetchImageFromIndexedDB(
               `${iconDbPrefix}_${id}`,
+              activeSpaceId
             );
             if (blobUrl) {
               src = blobUrl;
@@ -68,7 +71,7 @@ export const DockIcon = memo(
       return () => {
         isMounted = false;
       };
-    }, [id, hasCustomIcon, url, iconDbPrefix]);
+    }, [id, hasCustomIcon, url, iconDbPrefix, activeSpaceId]);
 
     // Fallback if no src found yet, or valid
     // We can render a placeholder or just empty

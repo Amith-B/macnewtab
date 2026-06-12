@@ -26,6 +26,7 @@ interface LinkListEditorProps {
   onSave: (links: LinkItem[]) => void;
   emptyMessage: TranslationKey;
   iconDbPrefix: string;
+  activeSpaceId?: string;
 }
 
 export default function LinkListEditor({
@@ -33,6 +34,7 @@ export default function LinkListEditor({
   onSave,
   emptyMessage,
   iconDbPrefix,
+  activeSpaceId,
 }: LinkListEditorProps) {
   const [changesActive, setChangesActive] = useState(false);
   const [currentLinks, setCurrentLinks] = useState(links);
@@ -55,7 +57,7 @@ export default function LinkListEditor({
     // Find items that were removed completely
     for (const originalSite of links) {
       if (!currentIds.has(originalSite.id) && originalSite.hasCustomIcon) {
-        await deleteImageFromIndexedDB(`${iconDbPrefix}_${originalSite.id}`);
+        await deleteImageFromIndexedDB(`${iconDbPrefix}_${originalSite.id}`, activeSpaceId);
       }
     }
 
@@ -67,7 +69,7 @@ export default function LinkListEditor({
         originalSite.hasCustomIcon &&
         !currentSite.hasCustomIcon
       ) {
-        await deleteImageFromIndexedDB(`${iconDbPrefix}_${originalSite.id}`);
+        await deleteImageFromIndexedDB(`${iconDbPrefix}_${originalSite.id}`, activeSpaceId);
       }
     }
 
@@ -102,6 +104,7 @@ export default function LinkListEditor({
         await saveImageToIndexedDB(
           reader.result as string,
           `${iconDbPrefix}_${item.id}`,
+          activeSpaceId
         );
 
         const updatedLinks = [...currentLinks];
@@ -200,6 +203,7 @@ export default function LinkListEditor({
                       url={value.url}
                       title={value.title}
                       iconDbPrefix={iconDbPrefix}
+                      activeSpaceId={activeSpaceId}
                     />
                   </div>
                   <div className="input__container link-title">

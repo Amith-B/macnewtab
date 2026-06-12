@@ -1,0 +1,505 @@
+.spaces__container {
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  padding: 0 12px;
+  background-color: var(--theme-bg-with-opacity);
+  width: 100%;
+  max-height: calc(100% - 60px);
+  overflow: auto;
+}
+
+/* ─── Empty State ─── */
+
+.spaces__empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  gap: 16px;
+}
+
+.spaces__empty-icon {
+  font-size: 2.5rem;
+  opacity: 0.6;
+}
+
+.spaces__empty-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-clr);
+  margin: 0;
+}
+
+.spaces__empty-description {
+  font-size: 0.813rem;
+  font-weight: 500;
+  color: var(--theme-clr);
+  opacity: 0.6;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+.spaces__enable-btn {
+  background-color: var(--theme-selection-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 0.813rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.spaces__enable-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.spaces__enable-btn:active {
+  transform: scale(0.98);
+}
+
+/* ─── Header Row ─── */
+
+.spaces__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 0;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.spaces__header-label {
+  font-size: 0.688rem;
+  font-weight: 600;
+  color: var(--theme-clr);
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-bottom: 6px;
+}
+
+.spaces__header-schedule {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ─── Space List ─── */
+
+.spaces__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.spaces__item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--theme-border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.spaces__item:last-child {
+  border-bottom: none;
+}
+
+.spaces__item:hover .spaces__delete-btn {
+  opacity: 1;
+}
+
+.spaces__item-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ─── Color Dot ─── */
+
+.spaces__color-dot {
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  padding: 0;
+}
+
+.spaces__color-dot:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 2px var(--theme-bg), 0 0 0 4px var(--theme-border);
+}
+
+/* ─── Color Picker Popover ─── */
+
+.spaces__color-picker {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 5;
+  background-color: var(--theme-bg);
+  border: 1px solid var(--theme-border);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 140px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: spaces-fade-in 0.15s ease;
+}
+
+.spaces__color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.1s ease, border-color 0.1s ease;
+  padding: 0;
+}
+
+.spaces__color-swatch:hover {
+  transform: scale(1.15);
+}
+
+.spaces__color-swatch.selected {
+  border-color: var(--theme-clr);
+}
+
+/* ─── Space Name ─── */
+
+.spaces__name {
+  flex-grow: 1;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-clr);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.spaces__name-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spaces__name-input {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-clr);
+  background: transparent;
+  border: 1px solid var(--theme-selection-color);
+  border-radius: 4px;
+  padding: 2px 6px;
+  outline: none;
+  width: 100%;
+  max-width: 160px;
+}
+
+/* ─── Active Badge ─── */
+
+.spaces__active-badge {
+  font-size: 0.688rem;
+  font-weight: 600;
+  color: var(--theme-selection-color);
+  background-color: color-mix(in srgb, var(--theme-selection-color) 12%, transparent);
+  border-radius: 4px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ─── Delete Button ─── */
+
+.spaces__delete-btn {
+  background: none;
+  border: none;
+  color: #ff3b30;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  font-size: 1rem;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.spaces__delete-btn:hover {
+  transform: scale(1.1);
+}
+
+.spaces__delete-btn.visible {
+  opacity: 1;
+}
+
+/* ─── Add Space Section ─── */
+
+.spaces__add-section {
+  padding: 10px 0;
+}
+
+.spaces__add-btn {
+  background: none;
+  border: 1px dashed var(--theme-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 100%;
+  color: var(--theme-clr);
+  opacity: 0.7;
+  font-size: 0.813rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.spaces__add-btn:hover {
+  opacity: 1;
+  border-color: var(--theme-selection-color);
+}
+
+/* ─── Add Space Form ─── */
+
+.spaces__add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 0;
+  animation: spaces-fade-in 0.2s ease;
+}
+
+.spaces__add-form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.spaces__add-input {
+  flex-grow: 1;
+  font-size: 0.813rem;
+  font-weight: 500;
+  color: var(--theme-clr);
+  background-color: var(--theme-bg);
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  padding: 7px 10px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.spaces__add-input:focus {
+  border-color: var(--theme-selection-color);
+}
+
+.spaces__add-colors {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.spaces__add-form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.spaces__form-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.spaces__form-btn:hover {
+  opacity: 0.85;
+}
+
+.spaces__form-btn.primary {
+  background-color: var(--theme-selection-color);
+  color: white;
+}
+
+.spaces__form-btn.secondary {
+  background-color: var(--theme-button-bg);
+  color: var(--theme-clr);
+}
+
+.spaces__form-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─── Time-Sensitive Section ─── */
+
+.spaces__time-error {
+  color: #ff3b30;
+  font-size: 0.688rem;
+  font-weight: 600;
+  padding: 6px 0;
+  border-top: 1px solid var(--theme-border);
+  animation: spaces-fade-in 0.15s ease;
+}
+
+/* ─── Inline Time Range ─── */
+
+.spaces__time-range-inline {
+  padding: 4px 0 2px 22px;
+  animation: spaces-fade-in 0.2s ease;
+}
+
+.spaces__time-range-inline .spaces__time-range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.spaces__time-input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.spaces__time-display {
+  font-size: 0.688rem;
+  font-weight: 600;
+  color: var(--theme-clr);
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+.spaces__time-input {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--theme-clr);
+  background-color: var(--theme-bg);
+  border: 1px solid var(--theme-border);
+  border-radius: 4px;
+  padding: 4px 6px;
+  outline: none;
+  width: 80px;
+  transition: border-color 0.15s ease;
+}
+
+.spaces__time-input:focus {
+  border-color: var(--theme-selection-color);
+}
+
+.spaces__time-separator {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+/* ─── Confirm Dialog ─── */
+
+.spaces__confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spaces-fade-in 0.15s ease;
+}
+
+.spaces__confirm-dialog {
+  background-color: var(--theme-bg);
+  border: 1px solid var(--theme-border);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.spaces__confirm-text {
+  font-size: 0.813rem;
+  font-weight: 500;
+  color: var(--theme-clr);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.spaces__confirm-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.spaces__confirm-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 7px 18px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.spaces__confirm-btn:hover {
+  opacity: 0.85;
+}
+
+.spaces__confirm-btn.danger {
+  background-color: #ff3b30;
+  color: white;
+}
+
+.spaces__confirm-btn.cancel {
+  background-color: var(--theme-button-bg);
+  color: var(--theme-clr);
+}
+
+/* ─── Space time toggle ─── */
+
+.spaces__space-time-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ─── Animation ─── */
+
+@keyframes spaces-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Disabled state ─── */
+
+.spaces__disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

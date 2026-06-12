@@ -13,6 +13,7 @@ export default memo(function QuickLinks() {
     handleQuickLinksChange,
     showVisitedSites,
     setShowVisitedSites,
+    activeSpaceId,
   } = useContext(AppContext);
 
   const isCustomMode = quickLinksMode === "custom";
@@ -59,6 +60,7 @@ export default memo(function QuickLinks() {
           onSave={handleQuickLinksChange}
           emptyMessage="add_quick_links"
           iconDbPrefix="quick_link_icon"
+          activeSpaceId={activeSpaceId}
         />
       )}
     </div>

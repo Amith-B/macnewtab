@@ -12,6 +12,7 @@ import { ReactComponent as DataIcon } from "./data.svg";
 import { ReactComponent as WeatherIcon } from "./weather.svg";
 import { ReactComponent as QuickLinksIcon } from "./quick-links.svg";
 import { ReactComponent as AdvancedIcon } from "./advanced.svg";
+import { ReactComponent as SpacesIcon } from "./spaces.svg";
 import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
 import Appearance from "./Appearance/Appearance";
 import Advanced from "./Advanced/Advanced";
@@ -25,6 +26,7 @@ import QuickLinks from "./QuickLinks/QuickLinks";
 import Changelog from "./Changelog/Changelog";
 import Data from "./Data/Data";
 import WeatherSettings from "./Weather/WeatherSettings";
+import Spaces from "./Spaces/Spaces";
 import { AppContext } from "../../context/provider";
 import { getBodyZoomScale } from "../../utils/zoom";
 
@@ -64,6 +66,17 @@ export const SETTINGS_MENU = [
     title: <Translation value="quick_links" />,
     icon: QuickLinksIcon,
     content: QuickLinks,
+  },
+  {
+    key: "spaces",
+    title: (
+      <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <Translation value="spaces" />
+        <span className="beta-capsule">Beta</span>
+      </span>
+    ),
+    icon: SpacesIcon,
+    content: Spaces,
   },
   {
     key: "advanced",
@@ -155,8 +168,13 @@ export default function Settings({
       setRenderOpen(false);
     }
   }, [open]);
-  const { dockPosition, googleUser, wallpaperType, dynamicWallpaperTheme, interactiveWallpaperTheme } =
-    useContext(AppContext);
+  const {
+    dockPosition,
+    googleUser,
+    wallpaperType,
+    dynamicWallpaperTheme,
+    interactiveWallpaperTheme,
+  } = useContext(AppContext);
 
   const [position, setPosition] = useState({ x: "unset", y: "unset" });
   const modalRef = useRef<HTMLDivElement>(null);

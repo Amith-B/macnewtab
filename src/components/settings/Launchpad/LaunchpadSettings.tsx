@@ -6,7 +6,7 @@ import LinkListEditor from "../shared/LinkListEditor";
 import Toggle from "../../toggle/Toggle";
 
 export default memo(function LaunchpadSettings() {
-  const { customLaunchpadLinks, handleCustomLaunchpadLinksChange, bookmarksVisible, handleBookmarkVisbility } =
+  const { customLaunchpadLinks, handleCustomLaunchpadLinksChange, bookmarksVisible, handleBookmarkVisbility, activeSpaceId } =
     useContext(AppContext);
 
   const isMac = useMemo(() => {
@@ -41,6 +41,7 @@ export default memo(function LaunchpadSettings() {
         onSave={handleCustomLaunchpadLinksChange}
         emptyMessage="add_launchpad_links"
         iconDbPrefix="launchpad_custom_icon"
+        activeSpaceId={activeSpaceId}
       />
     </div>
   );
