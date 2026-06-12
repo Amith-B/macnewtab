@@ -715,16 +715,10 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
       resetHistory,
     } = useHistory(loadData(actualKey));
 
-    // Reload freeform data when the active space changes (no page reload)
+    // Reload freeform data when the active space changes
     useEffect(() => {
-      const handleSpaceChanged = () => {
-        resetHistory(loadData(actualKey));
-      };
-      window.addEventListener("spaceChanged", handleSpaceChanged);
-      return () => {
-        window.removeEventListener("spaceChanged", handleSpaceChanged);
-      };
-    }, [resetHistory, actualKey]);
+      resetHistory(loadData(actualKey));
+    }, [actualKey, resetHistory]);
 
     const { locale } = useContext(AppContext);
     const t = translation[locale];
