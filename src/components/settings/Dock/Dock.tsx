@@ -27,6 +27,7 @@ export default memo(function Dock() {
     setShowFocusMode,
     showFreeform,
     setShowFreeform,
+    activeSpaceId,
   } = useContext(AppContext);
 
   return (
@@ -134,6 +135,7 @@ export default memo(function Dock() {
         onSave={handleDockSitesChange}
         emptyMessage="add_dock_links"
         iconDbPrefix="dock_icon"
+        activeSpaceId={activeSpaceId}
       />
     </div>
   );

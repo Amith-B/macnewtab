@@ -224,8 +224,8 @@ export const AppContext = createContext({
   } | null,
   weatherLoading: true,
   weatherError: null as string | null,
-  // Spaces
   spacesConfig: null as SpacesConfig | null,
+  activeSpaceId: "Default" as string,
   activeSpace: null as Space | null,
   handleEnableSpaces: () => {},
   handleSwitchSpace: async (_: string) => {},
@@ -1202,6 +1202,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setLoadAnimationType,
       // Spaces
       spacesConfig,
+      activeSpaceId,
       activeSpace,
       handleEnableSpaces,
       handleSwitchSpace,
@@ -1306,6 +1307,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setLoadAnimationType,
       // Spaces
       spacesConfig,
+      activeSpaceId,
       activeSpace,
       handleEnableSpaces,
       handleSwitchSpace,

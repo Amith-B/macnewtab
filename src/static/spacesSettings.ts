@@ -13,6 +13,8 @@ import {
   SHOW_FREEFORM_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
   USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
+  ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
+  LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
 } from "./generalSettings";
 import {
   THEME_LOCAL_STORAGE_KEY,
@@ -28,7 +30,10 @@ import {
   DOCK_SITES_LOCAL_STORAGE_KEY,
   DOCK_POSITION_LOCAL_STORAGE_KEY,
 } from "./dockSites";
-import { CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY } from "./launchpadSettings";
+import {
+  CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY,
+  LAUNCHPAD_SELECTED_TAB_LOCAL_STORAGE_KEY,
+} from "./launchpadSettings";
 import {
   TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY,
   TODO_LIST_LOCAL_STORAGE_KEY,
@@ -53,6 +58,7 @@ import {
   FREEFORM_DATA_LOCAL_STORAGE_KEY,
   SHOW_FREEFORM_LOCAL_STORAGE_KEY as FREEFORM_SHOW_KEY,
 } from "./freeformSettings";
+import { SEARCH_ENGINE_LOCAL_STORAGE_KEY } from "./searchEngine";
 
 // ─── LocalStorage key for Spaces configuration ───
 export const SPACES_CONFIG_KEY = "macnewtab_spaces_config";
@@ -130,9 +136,13 @@ export const PER_SPACE_KEYS: string[] = [
   SHOW_BATTERY_LOCAL_STORAGE_KEY, // "show_battery"
   SHOW_FREEFORM_LOCAL_STORAGE_KEY, // "show_freeform" (from generalSettings)
   FREEFORM_SHOW_KEY, // "macnewtab_show_freeform" (from freeformSettings)
+  SEARCH_ENGINE_LOCAL_STORAGE_KEY, // "default_search_engine"
+  ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY, // "enable_load_animation"
+  LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY, // "load_animation_type"
 
   // Launchpad
   CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY, // "custom_launchpad_links"
+  LAUNCHPAD_SELECTED_TAB_LOCAL_STORAGE_KEY, // "launchpad_selected_tab"
 
   // Dock
   DOCK_SITES_LOCAL_STORAGE_KEY, // "dock_sites"

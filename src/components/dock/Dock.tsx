@@ -56,6 +56,7 @@ const Dock = memo(() => {
     showFocusMode,
     showFreeform,
     separatePageSite,
+    activeSpaceId,
   } = useContext(AppContext);
 
   const handleLaunchpadClose = useCallback(
@@ -293,6 +294,7 @@ const Dock = memo(() => {
                       hasCustomIcon={item.hasCustomIcon}
                       url={item.url}
                       title={item.title}
+                      activeSpaceId={activeSpaceId}
                     />
                   </a>
                 );

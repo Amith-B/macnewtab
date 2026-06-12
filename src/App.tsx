@@ -18,6 +18,7 @@ import {
   SEARCH_ENGINE_LOCAL_STORAGE_KEY,
   searchEngineKeys,
 } from "./static/searchEngine";
+import { getResolvedKey } from "./utils/spacesStorage";
 import { AppContext } from "./context/provider";
 import TopSites from "./components/topsites/TopSites";
 import Translation from "./locale/Translation";
@@ -59,6 +60,7 @@ const App = function App() {
     showBattery,
     enableLoadAnimation,
     loadAnimationType,
+    activeSpaceId,
   } = useContext(AppContext);
 
   const [isWakingUp, setIsWakingUp] = useState(enableLoadAnimation);
@@ -116,21 +118,21 @@ const App = function App() {
   }, [showClockAndCalendar]);
 
   useEffect(() => {
-    const defaultSearchEngine = localStorage.getItem(
-      SEARCH_ENGINE_LOCAL_STORAGE_KEY,
-    );
+    const resolvedSearchKey = getResolvedKey(SEARCH_ENGINE_LOCAL_STORAGE_KEY, activeSpaceId);
+    const defaultSearchEngine = localStorage.getItem(resolvedSearchKey);
 
     if (defaultSearchEngine && searchEngineKeys.includes(defaultSearchEngine)) {
       setSearchEngine(defaultSearchEngine);
     } else {
       setSearchEngine(searchEngineKeys[0]);
     }
-  }, []);
+  }, [activeSpaceId]);
 
   const handleSearchEngineChange = useCallback((val: string) => {
-    localStorage.setItem(SEARCH_ENGINE_LOCAL_STORAGE_KEY, val);
+    const resolvedSearchKey = getResolvedKey(SEARCH_ENGINE_LOCAL_STORAGE_KEY, activeSpaceId);
+    localStorage.setItem(resolvedSearchKey, val);
     setSearchEngine(val);
-  }, []);
+  }, [activeSpaceId]);
 
   const bgStyle: CSSProperties & Record<string, string> = useMemo(
     () => ({

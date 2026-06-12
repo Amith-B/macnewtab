@@ -16,12 +16,20 @@ import {
   SHOW_FREEFORM_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
+  SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
+  CLOCK_STYLE_LOCAL_STORAGE_KEY,
+  USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
+import { SEARCH_ENGINE_LOCAL_STORAGE_KEY } from "../static/searchEngine";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
 import {
   DOCK_POSITION_LOCAL_STORAGE_KEY,
   DOCK_SITES_LOCAL_STORAGE_KEY,
 } from "../static/dockSites";
+import {
+  CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY,
+  LAUNCHPAD_SELECTED_TAB_LOCAL_STORAGE_KEY,
+} from "../static/launchpadSettings";
 import {
   TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY,
   TODO_LIST_LOCAL_STORAGE_KEY,
@@ -95,6 +103,12 @@ const KEYS_TO_EXPORT = [
   FREEFORM_DATA_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
+  SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
+  CLOCK_STYLE_LOCAL_STORAGE_KEY,
+  USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
+  SEARCH_ENGINE_LOCAL_STORAGE_KEY,
+  CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY,
+  LAUNCHPAD_SELECTED_TAB_LOCAL_STORAGE_KEY,
 ];
 
 // Helper to convert Blob URL to Base64
@@ -182,6 +196,31 @@ export const exportData = async () => {
         data["quick_link_icons"] = quickLinkIcons;
       }
     }
+
+    // Export Custom Launchpad Icons
+    const launchpadLinksString = localStorage.getItem(CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY);
+    if (launchpadLinksString) {
+      const launchpadLinksList = JSON.parse(launchpadLinksString);
+      const launchpadIcons: Record<string, string> = {};
+
+      for (const link of launchpadLinksList) {
+        if (link.hasCustomIcon) {
+          const iconId = `launchpad_custom_icon_${link.id}`;
+          const iconData = await fetchImageFromIndexedDB(iconId);
+          if (iconData) {
+            if (iconData.startsWith("blob:")) {
+              launchpadIcons[iconId] = await convertBlobUrlToBase64(iconData);
+            } else {
+              launchpadIcons[iconId] = iconData;
+            }
+          }
+        }
+      }
+
+      if (Object.keys(launchpadIcons).length > 0) {
+        data["launchpad_icons"] = launchpadIcons;
+      }
+    }
   } catch (error) {
     console.error("Failed to export data:", error);
   }
@@ -228,6 +267,69 @@ export const exportData = async () => {
             spacesIndexedDBData[wallpaperId] = wallpaperData.startsWith("blob:")
               ? await convertBlobUrlToBase64(wallpaperData)
               : wallpaperData;
+          }
+
+          // Space dock icons
+          const spaceDockSitesRaw = localStorage.getItem(`space_${space.id}__${DOCK_SITES_LOCAL_STORAGE_KEY}`);
+          if (spaceDockSitesRaw) {
+            try {
+              const spaceDockSites = JSON.parse(spaceDockSitesRaw);
+              for (const site of spaceDockSites) {
+                if (site.hasCustomIcon) {
+                  const iconId = `space_${space.id}__dock_icon_${site.id}`;
+                  const iconData = await fetchImageFromIndexedDB(iconId);
+                  if (iconData) {
+                    spacesIndexedDBData[iconId] = iconData.startsWith("blob:")
+                      ? await convertBlobUrlToBase64(iconData)
+                      : iconData;
+                  }
+                }
+              }
+            } catch {
+              // ignore parse errors
+            }
+          }
+
+          // Space quick link icons
+          const spaceQuickLinksRaw = localStorage.getItem(`space_${space.id}__${QUICK_LINKS_LOCAL_STORAGE_KEY}`);
+          if (spaceQuickLinksRaw) {
+            try {
+              const spaceQuickLinks = JSON.parse(spaceQuickLinksRaw);
+              for (const link of spaceQuickLinks) {
+                if (link.hasCustomIcon) {
+                  const iconId = `space_${space.id}__quick_link_icon_${link.id}`;
+                  const iconData = await fetchImageFromIndexedDB(iconId);
+                  if (iconData) {
+                    spacesIndexedDBData[iconId] = iconData.startsWith("blob:")
+                      ? await convertBlobUrlToBase64(iconData)
+                      : iconData;
+                  }
+                }
+              }
+            } catch {
+              // ignore parse errors
+            }
+          }
+
+          // Space launchpad icons
+          const spaceLaunchpadLinksRaw = localStorage.getItem(`space_${space.id}__${CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY}`);
+          if (spaceLaunchpadLinksRaw) {
+            try {
+              const spaceLaunchpadLinks = JSON.parse(spaceLaunchpadLinksRaw);
+              for (const link of spaceLaunchpadLinks) {
+                if (link.hasCustomIcon) {
+                  const iconId = `space_${space.id}__launchpad_custom_icon_${link.id}`;
+                  const iconData = await fetchImageFromIndexedDB(iconId);
+                  if (iconData) {
+                    spacesIndexedDBData[iconId] = iconData.startsWith("blob:")
+                      ? await convertBlobUrlToBase64(iconData)
+                      : iconData;
+                  }
+                }
+              }
+            } catch {
+              // ignore parse errors
+            }
           }
         }
       }
@@ -308,6 +410,18 @@ export const importData = (file: File): Promise<void> => {
           }
         }
 
+        // Import Custom Launchpad Icons
+        if (data["launchpad_icons"]) {
+          try {
+            const launchpadIcons = data["launchpad_icons"] as Record<string, string>;
+            for (const [id, base64] of Object.entries(launchpadIcons)) {
+              await saveImageToIndexedDB(base64, id);
+            }
+          } catch (error) {
+            console.error("Failed to import launchpad icons:", error);
+          }
+        }
+
         // Sync imported sticky notes to chrome.storage.sync (only if sync is enabled)
         const isSyncEnabled = localStorage.getItem(ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY) === "true";
         if (data[STICKY_NOTES_KEY] && isSyncEnabled) {
@@ -320,8 +434,6 @@ export const importData = (file: File): Promise<void> => {
             console.error("Failed to sync imported sticky notes:", error);
           }
         }
-
-        resolve();
 
         // Import Spaces data if present
         if (data[SPACES_CONFIG_KEY]) {
@@ -360,6 +472,8 @@ export const importData = (file: File): Promise<void> => {
             console.error("Failed to import spaces IndexedDB data:", error);
           }
         }
+
+        resolve();
       } catch (error) {
         reject(error);
       }

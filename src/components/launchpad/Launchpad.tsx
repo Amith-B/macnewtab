@@ -10,6 +10,7 @@ import { ReactComponent as DeleteIcon } from "../../assets/delete-icon.svg";
 import ConfirmDialog from "../confirm/ConfirmDialog";
 import { DockIcon } from "../dock/DockIcon";
 import { useLocalStorage } from "../../utils/localStorage";
+import { LAUNCHPAD_SELECTED_TAB_LOCAL_STORAGE_KEY } from "../../static/launchpadSettings";
 
 const FALLBACK_SITE_IMAGE = EmptySiteImage;
 
@@ -57,10 +58,10 @@ export default function Launchpad({
   const [modalAccessible, setModalAccessible] = useState(false);
   const [search, setSearch] = useState("");
   const [searchDebouncedValue, setSearchDebouncedValue] = useState("");
+  const { bookmarksVisible, locale, separatePageSite, customLaunchpadLinks, activeSpaceId } = useContext(AppContext);
   const [selectedTab, setSelectedTab] = useLocalStorage<
     "google_apps" | "bookmarks" | "my_apps"
-  >("launchpad_selected_tab", "google_apps");
-  const { bookmarksVisible, locale, separatePageSite, customLaunchpadLinks } = useContext(AppContext);
+  >(LAUNCHPAD_SELECTED_TAB_LOCAL_STORAGE_KEY, "google_apps", undefined, activeSpaceId);
   const [bookmarksTree, setBookmarksTree] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
@@ -306,6 +307,7 @@ export default function Launchpad({
                     url={item.url}
                     title={item.title}
                     iconDbPrefix="launchpad_custom_icon"
+                    activeSpaceId={activeSpaceId}
                   />
                 ) : (
                   <img
