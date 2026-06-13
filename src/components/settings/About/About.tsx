@@ -45,10 +45,10 @@ export default function About() {
                 <a
                   className="about__developer-link"
                   rel="noreferrer"
-                  href="https://instagram.com/capture.loom"
+                  href="https://www.linkedin.com/in/amith-b-sagar"
                   target="_blank"
                 >
-                  @capture.loom
+                  LinkedIn
                 </a>
                 <span className="about__developer-separator">·</span>
                 <a
@@ -57,6 +57,15 @@ export default function About() {
                   href="mailto:amithbr6@gmail.com"
                 >
                   amithbr6@gmail.com
+                </a>
+                <span className="about__developer-separator">·</span>
+                <a
+                  className="about__developer-link"
+                  rel="noreferrer"
+                  href="https://instagram.com/capture.loom"
+                  target="_blank"
+                >
+                  @capture.loom
                 </a>
               </div>
             </div>
