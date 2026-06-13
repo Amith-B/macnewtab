@@ -155,10 +155,10 @@ export function initializeSpaceForCurrentTime(): SpacesConfig | null {
     const startMins = s.timeRange.startHour * 60 + s.timeRange.startMinute;
     const endMins = s.timeRange.endHour * 60 + s.timeRange.endMinute;
 
-    if (startMins <= endMins) {
-      return currentTotalMinutes >= startMins && currentTotalMinutes <= endMins;
+    if (startMins < endMins) {
+      return currentTotalMinutes >= startMins && currentTotalMinutes < endMins;
     } else {
-      return currentTotalMinutes >= startMins || currentTotalMinutes <= endMins;
+      return currentTotalMinutes >= startMins || currentTotalMinutes < endMins;
     }
   });
 
