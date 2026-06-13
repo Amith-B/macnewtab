@@ -61,6 +61,8 @@ const App = function App() {
     enableLoadAnimation,
     loadAnimationType,
     activeSpaceId,
+    activeSpace,
+    spacesConfig,
   } = useContext(AppContext);
 
   const [isWakingUp, setIsWakingUp] = useState(enableLoadAnimation);
@@ -215,6 +217,15 @@ const App = function App() {
             style={{ backdropFilter: `blur(${wallpaperBlur}px)` }}
           ></div>
         )}
+      {spacesConfig && activeSpace && (
+        <div className="active-space-capsule">
+          <span
+            className="space-color-dot"
+            style={{ backgroundColor: activeSpace.color || "#0883fd" }}
+          ></span>
+          <span className="space-name">{activeSpace.name}</span>
+        </div>
+      )}
       <div
         className={
           "main-content" +
