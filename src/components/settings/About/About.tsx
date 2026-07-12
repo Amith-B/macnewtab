@@ -114,7 +114,7 @@ export default function About() {
           </div>
         </div>
       </div>
-      &copy; 2025 - 2026 {<Translation value="copyright" />}
+      &copy; 2024 - 2026 {<Translation value="copyright" />}
     </div>
   );
 }
