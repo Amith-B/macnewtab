@@ -20,6 +20,7 @@ import Launchpad from "../launchpad/Launchpad";
 
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
+import { translation } from "../../locale/languages";
 import { DockIcon } from "./DockIcon";
 
 const SettingsLazy = lazy(() => import("../settings/Settings"));
@@ -57,7 +58,10 @@ const Dock = memo(() => {
     showFreeform,
     separatePageSite,
     activeSpaceId,
+    locale,
   } = useContext(AppContext);
+
+  const t = translation[locale] || translation.en;
 
   const handleLaunchpadClose = useCallback(
     () => setLaunchpadVisible(false),
@@ -166,8 +170,8 @@ const Dock = memo(() => {
             className={`launchpad-icon accessible tooltip tooltip-${
               TooltipPosition[dockPosition] || "top"
             }`}
-            data-label="Launchpad"
-            title="Launchpad"
+            data-label={t.launchpad || "Launchpad"}
+            title={t.launchpad || "Launchpad"}
             onClick={() => {
               setLaunchpadVisible(!launchpadVisible);
               setSettingsVisible(false);
@@ -180,8 +184,8 @@ const Dock = memo(() => {
               className={`todo-button accessible tooltip tooltip-${
                 TooltipPosition[dockPosition] || "top"
               }`}
-              data-label="Todo List"
-              title="Todo List"
+              data-label={t.todo || "Todo List"}
+              title={t.todo || "Todo List"}
               onClick={() => {
                 groupTodosByCheckedStatus();
                 setHasOpenedTodo(true);
@@ -196,8 +200,8 @@ const Dock = memo(() => {
               className={`sticky-notes-button accessible tooltip tooltip-${
                 TooltipPosition[dockPosition] || "top"
               }`}
-              data-label="Add Sticky Note"
-              title="Add Sticky Note"
+              data-label={t.show_sticky_notes || "Add Sticky Note"}
+              title={t.show_sticky_notes || "Add Sticky Note"}
               onClick={() => {
                 window.dispatchEvent(new CustomEvent("createStickyNote"));
               }}
@@ -210,8 +214,8 @@ const Dock = memo(() => {
               className={`focus-button accessible tooltip tooltip-${
                 TooltipPosition[dockPosition] || "top"
               }`}
-              data-label="Focus Studio"
-              title="Focus Studio"
+              data-label={t.focus_studio || "Focus Studio"}
+              title={t.focus_studio || "Focus Studio"}
               onClick={() => {
                 setHasOpenedFocusMode(true);
                 setFocusModeVisible(!focusModeVisible);
@@ -225,8 +229,8 @@ const Dock = memo(() => {
               className={`freeform-button accessible tooltip tooltip-${
                 TooltipPosition[dockPosition] || "top"
               }`}
-              data-label="Freeform"
-              title="Freeform"
+              data-label={t.freeform || "Freeform"}
+              title={t.freeform || "Freeform"}
               onClick={() => {
                 setHasOpenedFreeform(true);
                 setFreeformVisible(!freeformVisible);
@@ -239,8 +243,8 @@ const Dock = memo(() => {
             className={`settings-icon accessible tooltip tooltip-${
               TooltipPosition[dockPosition] || "top"
             }`}
-            data-label="Settings"
-            title="Settings"
+            data-label={t.appearance || "Settings"}
+            title={t.appearance || "Settings"}
             onClick={() => {
               setHasOpenedSettings(true);
               setSettingsVisible(true);
