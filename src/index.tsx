@@ -5,14 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AppProvider from "./context/provider";
 
+import ErrorBoundary from "./ErrorBoundary";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <AppProvider>
-      <App />
-    </AppProvider>
+    <ErrorBoundary>
+      <AppProvider>
+        <App />
+      </AppProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 
