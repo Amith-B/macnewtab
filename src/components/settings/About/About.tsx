@@ -72,7 +72,7 @@ export default function About() {
           </div>
           <div className="about__row-item">
             <Translation value="supported_browsers" />
-            <div>Chrome</div>
+            <div>Chrome, Microsoft Edge</div>
           </div>
           <div className="about__row-item">
             <Translation value="permissions_needed" />
