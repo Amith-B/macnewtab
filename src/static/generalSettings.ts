@@ -6,11 +6,13 @@ export const SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY = "show_month_view";
 export const SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY =
   "show_clock_and_calendar";
 export const SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY = "show_tab_manager";
-export const CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY = "center_widgets_away_from_dock";
+export const CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY =
+  "center_widgets_away_from_dock";
 export const USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY = "use_analog_clock_2";
 export const SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY = "show_focus_mode";
 export const SHOW_BATTERY_LOCAL_STORAGE_KEY = "show_battery";
 export const SHOW_FREEFORM_LOCAL_STORAGE_KEY = "show_freeform";
+export const SHOW_SCREEN_RECORDER_LOCAL_STORAGE_KEY = "show_screen_recorder";
 export const ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY = "enable_load_animation";
 export const LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY = "load_animation_type";
 export const CLOCK_STYLE_LOCAL_STORAGE_KEY = "clock_style";
@@ -18,4 +20,4 @@ export const USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY = "use_search_dropdown";
 export const CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY = "center_widgets_layout";
 
 export const centerWidgetsLayoutsList = ["default", "reversed"] as const;
-export type CenterWidgetsLayout = typeof centerWidgetsLayoutsList[number];
+export type CenterWidgetsLayout = (typeof centerWidgetsLayoutsList)[number];

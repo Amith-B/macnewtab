@@ -1,0 +1,13 @@
+<svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="100" height="100" rx="22" fill="url(#paint0_linear_recorder)"/>
+<path d="M72.9 33.5H27.1C24.3 33.5 22 35.8 22 38.6V66.4C22 69.2 24.3 71.5 27.1 71.5H72.9C75.7 71.5 78 69.2 78 66.4V38.6C78 35.8 75.7 33.5 72.9 33.5Z" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="50" cy="52.5" r="10" fill="#FF3B30" stroke="white" stroke-width="3"/>
+<path d="M50 25.5V29.5" stroke="white" stroke-width="4" stroke-linecap="round"/>
+<path d="M40 25.5H60" stroke="white" stroke-width="4" stroke-linecap="round"/>
+<defs>
+<linearGradient id="paint0_linear_recorder" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4c4c4c"/>
+<stop offset="1" stop-color="#2c2c2c"/>
+</linearGradient>
+</defs>
+</svg>

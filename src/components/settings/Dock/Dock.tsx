@@ -10,6 +10,7 @@ import { ReactComponent as TodoIcon } from "../../../assets/todo.svg";
 import { ReactComponent as StickyNotesIcon } from "../../../assets/sticky-notes.svg";
 import { ReactComponent as FocusIcon } from "../../../assets/focus.svg";
 import { ReactComponent as FreeformIcon } from "../../../assets/freeform.svg";
+import { ReactComponent as ScreenRecorderIcon } from "../../../assets/screen-recorder.svg";
 
 export default memo(function Dock() {
   const {
@@ -27,6 +28,8 @@ export default memo(function Dock() {
     setShowFocusMode,
     showFreeform,
     setShowFreeform,
+    showScreenRecorder,
+    setShowScreenRecorder,
     activeSpaceId,
   } = useContext(AppContext);
 
@@ -116,6 +119,20 @@ export default memo(function Dock() {
           name="Freeform toggle"
           isChecked={showFreeform}
           handleToggleChange={() => setShowFreeform(!showFreeform)}
+        />
+      </div>
+      <div className="dock-app__toggle">
+        <div className="dock-app__toggle-info">
+          <div className="dock-app__icon">
+            <ScreenRecorderIcon />
+          </div>
+          <Translation value="show_screen_recorder" />
+        </div>
+        <Toggle
+          id={"screen-recorder-toggle"}
+          name="Screen Recorder toggle"
+          isChecked={showScreenRecorder}
+          handleToggleChange={() => setShowScreenRecorder(!showScreenRecorder)}
         />
       </div>
       <div className={"dock-links__position"}>

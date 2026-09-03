@@ -16,6 +16,7 @@ import { ReactComponent as TodoIcon } from "../../assets/todo.svg";
 import { ReactComponent as StickyNotesIcon } from "../../assets/sticky-notes.svg";
 import { ReactComponent as FreeformIcon } from "../../assets/freeform.svg";
 import { ReactComponent as FocusIcon } from "../../assets/focus.svg";
+import { ReactComponent as ScreenRecorderIcon } from "../../assets/screen-recorder.svg";
 import Launchpad from "../launchpad/Launchpad";
 
 import "./Dock.css";
@@ -26,6 +27,7 @@ const SettingsLazy = lazy(() => import("../settings/Settings"));
 const FreeformLazy = lazy(() => import("../freeform/Freeform"));
 const TodoLazy = lazy(() => import("../todo/Todo"));
 const FocusModeLazy = lazy(() => import("../focus/FocusMode"));
+const ScreenRecorderLazy = lazy(() => import("../screen-recorder/ScreenRecorder"));
 
 const TooltipPosition: Record<string, string> = {
   left: "right",
@@ -44,6 +46,8 @@ const Dock = memo(() => {
   const [hasOpenedFocusMode, setHasOpenedFocusMode] = useState(false);
   const [freeformVisible, setFreeformVisible] = useState(false);
   const [hasOpenedFreeform, setHasOpenedFreeform] = useState(false);
+  const [screenRecorderVisible, setScreenRecorderVisible] = useState(false);
+  const [hasOpenedScreenRecorder, setHasOpenedScreenRecorder] = useState(false);
   const [isOverflowLeft, setIsOverflowLeft] = useState(false);
   const [isOverflowRight, setIsOverflowRight] = useState(false);
   const [isOverflowButtonVisible, setIsOverflowButtonVisible] = useState(false);
@@ -55,6 +59,7 @@ const Dock = memo(() => {
     showStickyNotes,
     showFocusMode,
     showFreeform,
+    showScreenRecorder,
     separatePageSite,
     activeSpaceId,
   } = useContext(AppContext);
@@ -235,6 +240,21 @@ const Dock = memo(() => {
               <FreeformIcon />
             </button>
           )}
+          {showScreenRecorder && (
+            <button
+              className={`screen-recorder-button accessible tooltip tooltip-${
+                TooltipPosition[dockPosition] || "top"
+              }`}
+              data-label="Capture"
+              title="Capture"
+              onClick={() => {
+                setHasOpenedScreenRecorder(true);
+                setScreenRecorderVisible(!screenRecorderVisible);
+              }}
+            >
+              <ScreenRecorderIcon />
+            </button>
+          )}
           <button
             className={`settings-icon accessible tooltip tooltip-${
               TooltipPosition[dockPosition] || "top"
@@ -344,6 +364,14 @@ const Dock = memo(() => {
           <FreeformLazy
             visible={freeformVisible}
             onClose={() => setFreeformVisible(false)}
+          />
+        </Suspense>
+      )}
+      {hasOpenedScreenRecorder && (
+        <Suspense fallback={null}>
+          <ScreenRecorderLazy
+            open={screenRecorderVisible}
+            onClose={() => setScreenRecorderVisible(false)}
           />
         </Suspense>
       )}

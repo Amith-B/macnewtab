@@ -1,0 +1,210 @@
+.screen-recorder-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  will-change: transform;
+}
+
+.screen-recorder-container {
+  width: 320px;
+  background: var(--theme-bg-with-opacity);
+  backdrop-filter: var(--theme-bg-blur);
+  -webkit-backdrop-filter: var(--theme-bg-blur);
+  border-radius: 18px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px var(--theme-border, rgba(255, 255, 255, 0.1));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: var(--theme-clr);
+}
+
+.screen-recorder-header {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: grab;
+  position: relative;
+}
+
+.screen-recorder-header:active {
+  cursor: grabbing;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.window-control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.window-control.close {
+  background-color: #ff5f56;
+}
+.window-control.minimize {
+  background-color: #ffbd2e;
+}
+.window-control.maximize {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: default;
+}
+
+.screen-recorder-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--theme-clr);
+  pointer-events: none;
+}
+
+.screen-recorder-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.recorder-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.audio-toggle {
+  font-size: 13px;
+  color: var(--theme-clr);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  width: 100%;
+  padding: 0 4px;
+}
+
+.recorder-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-clr);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.recorder-btn.start {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: background 0.2s;
+}
+
+.recorder-btn.start:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.record-circle {
+  width: 16px;
+  height: 16px;
+  background-color: #ff3b30;
+  border-radius: 50%;
+  border: 2px solid var(--text-clr);
+}
+
+.recording-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+  font-family: monospace;
+  font-weight: 300;
+  color: var(--text-clr);
+}
+
+.recording-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #ff3b30;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 59, 48, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
+  }
+}
+
+.recorder-btn.stop {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.stop-square {
+  width: 16px;
+  height: 16px;
+  background-color: #ff3b30;
+  border-radius: 4px;
+}
+
+.recorder-result {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.recorder-preview {
+  width: 100%;
+  border-radius: 8px;
+  background: #000;
+  max-height: 160px;
+}
+
+.recorder-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.recorder-hint {
+  font-size: 11px;
+  color: var(--theme-clr-secondary, rgba(128, 128, 128, 0.8));
+  text-align: center;
+  margin-top: -5px;
+  margin-bottom: 0;
+}

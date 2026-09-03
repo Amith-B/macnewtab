@@ -39,6 +39,7 @@ import {
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
   SHOW_BATTERY_LOCAL_STORAGE_KEY,
   SHOW_FREEFORM_LOCAL_STORAGE_KEY,
+  SHOW_SCREEN_RECORDER_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
@@ -199,6 +200,8 @@ export const AppContext = createContext({
   setShowBattery: (_: boolean) => {},
   showFreeform: true,
   setShowFreeform: (_: boolean) => {},
+  showScreenRecorder: true,
+  setShowScreenRecorder: (_: boolean) => {},
   useSearchDropdown: false,
   setUseSearchDropdown: (_: boolean) => {},
   enableLoadAnimation: false,
@@ -513,6 +516,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     activeSpaceId,
   );
 
+  const [showScreenRecorder, setShowScreenRecorder] = useLocalStorage(
+    SHOW_SCREEN_RECORDER_LOCAL_STORAGE_KEY,
+    true,
+    undefined,
+    activeSpaceId,
+  );
+
   const [useSearchDropdown, setUseSearchDropdown] = useLocalStorage(
     USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
     false,
@@ -527,12 +537,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     activeSpaceId,
   );
 
-  const [centerWidgetsLayout, setCenterWidgetsLayout] = useLocalStorage<CenterWidgetsLayout>(
-    CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY,
-    "default",
-    (val) => centerWidgetsLayoutsList.includes(val as any),
-    activeSpaceId,
-  );
+  const [centerWidgetsLayout, setCenterWidgetsLayout] =
+    useLocalStorage<CenterWidgetsLayout>(
+      CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY,
+      "default",
+      (val) => centerWidgetsLayoutsList.includes(val as any),
+      activeSpaceId,
+    );
 
   const [loadAnimationType, setLoadAnimationType] = useLocalStorage(
     LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
@@ -1225,6 +1236,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       weatherError,
       showFreeform,
       setShowFreeform,
+      showScreenRecorder,
+      setShowScreenRecorder,
       useSearchDropdown,
       setUseSearchDropdown,
       enableLoadAnimation,
@@ -1333,6 +1346,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       weatherError,
       showFreeform,
       setShowFreeform,
+      showScreenRecorder,
+      setShowScreenRecorder,
       useSearchDropdown,
       setUseSearchDropdown,
       enableLoadAnimation,
