@@ -146,7 +146,6 @@ const Spaces = memo(function Spaces() {
               }}
             >
               <Translation value="spaces" />
-              <span className="beta-capsule">Beta</span>
             </span>
           </h3>
           <p className="spaces__empty-description">
@@ -172,7 +171,6 @@ const Spaces = memo(function Spaces() {
               style={{ display: "flex", alignItems: "center", gap: "8px" }}
             >
               <Translation value="spaces" />
-              <span className="beta-capsule">Beta</span>
             </span>
             <span className="spaces__header-label spaces__header-schedule">
               <Translation value="spaces_time_sensitive" />

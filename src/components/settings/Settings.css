@@ -97,18 +97,6 @@
   background: var(--theme-active);
 }
 
-.beta-capsule {
-  background-color: var(--theme-active);
-  color: var(--theme-text);
-  font-size: 10px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border: 1px solid var(--theme-border);
-}
-
 .settings__menu-content-title {
   color: var(--theme-clr);
   font-weight: bold;

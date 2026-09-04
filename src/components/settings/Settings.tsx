@@ -69,12 +69,7 @@ export const SETTINGS_MENU = [
   },
   {
     key: "spaces",
-    title: (
-      <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        <Translation value="spaces" />
-        <span className="beta-capsule">Beta</span>
-      </span>
-    ),
+    title: <Translation value="spaces" />,
     icon: SpacesIcon,
     content: Spaces,
   },
