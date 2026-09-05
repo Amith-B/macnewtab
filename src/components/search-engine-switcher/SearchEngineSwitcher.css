@@ -26,6 +26,8 @@
   font-size: 1rem;
   font-weight: bold;
   align-self: center;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .search-engine-switcher__divider-vertical {
   height: 50px;
