@@ -1,0 +1,59 @@
+# AI Development Guidelines for MacNewTab
+
+You are an AI assistant working on the `macnewtab` Chrome Extension project. This file contains the architectural patterns and rules for adding new features without needing to scan the entire repository.
+
+## 🏗 Architecture Overview
+- **Type**: Chrome Extension (Manifest V3) overriding the New Tab page.
+- **Framework**: React, TypeScript, CSS (no preprocessors, custom CSS variables for theming).
+- **Aesthetic**: macOS-inspired design (frosted glass, standard window controls, specific dock behaviors).
+
+## 🚀 How to Add a New Feature (Step-by-Step Flow)
+
+If adding a new widget or dock feature (like the Screen Recorder, Focus Mode, etc.), follow this exact flow:
+
+### 1. Global State (Context)
+State is managed globally via `AppContext` and persisted in LocalStorage.
+1. **Define Key**: Add your feature's local storage key in `src/static/generalSettings.ts` (e.g., `export const SHOW_NEW_FEATURE_LOCAL_STORAGE_KEY = "show_new_feature";`).
+2. **Space Isolation (Crucial)**: If the setting should be customizable per "Space" (workspace), import the key into `src/static/spacesSettings.ts` and add it to the `PER_SPACE_KEYS` array.
+3. **Wire Context**: In `src/context/provider.tsx`:
+   - Add the state to the `AppContext` type definition.
+   - Use the custom `useLocalStorage` hook to initialize the state.
+   - Add the state and setter to **both** `useMemo` dependency arrays and return objects (around lines ~1230 and ~1345).
+
+### 2. UI Component
+Create your feature in `src/components/<feature-name>/<Feature>.tsx`.
+- **macOS Window Pattern**: Reference `FocusMode.tsx` for standard draggable window headers, close/minimize dots, and frosted glass containers.
+- **Shared Components**: Reuse existing components like `<Toggle>` (`src/components/toggle/Toggle.tsx`) instead of building custom switches.
+- **Buttons**: Use global classes `.button` and `.button-primary` (from `App.css`) for consistent button styling.
+
+### 3. Styling & Theming (CSS)
+Do NOT hardcode colors. The extension has dynamic theming (Light/Dark/Custom). Always use these CSS variables:
+- **Backgrounds**: `var(--theme-bg-with-opacity)` combined with `backdrop-filter: var(--theme-bg-blur)`
+- **Text**: `var(--theme-clr)` for primary text, `var(--theme-clr-secondary)` for hints.
+- **Borders**: `var(--theme-border)`
+- **Active states**: `var(--theme-selection-color)`
+
+### 4. Localization (Strict Rule)
+**DO NOT use hardcoded English strings in JSX.**
+1. Open `src/locale/languages.ts`.
+2. Add your translation keys to the `enTranslation` object at the top.
+3. You **MUST** add the exact same keys translated into all 20 supported languages below it (kn, cs, tr, vi, uz, zh, hi, it, bn, pt, fr, ru, es, ja, ko, id, mr, pl, de). Ensure the order and structure match exactly.
+4. Usage in components: `const { translation } = useContext(AppContext); const t = translation[locale];` -> `t.your_new_key`.
+
+### 5. Dock Integration
+If your feature lives in the Dock:
+1. Place the SVG icon in `src/assets/`.
+2. Open `src/components/dock/Dock.tsx`.
+3. **Lazy Load**: Import the component lazily (`const FeatureLazy = lazy(() => import(...));`).
+4. **Mount Guard**: Create a `hasOpenedFeature` state to prevent rendering the DOM until the user clicks the dock icon for the first time. Wrap it in `<Suspense fallback={null}>`.
+5. **Dock CSS**: In `src/components/dock/Dock.css`, add your new button's class (e.g., `.new-feature-button`) to the massive grouped selector that enforces `width: 44px; height: 44px;`. If you skip this, the dock layout will break.
+
+### 6. Settings Panel
+Allow users to toggle the visibility of the new feature:
+- Add a toggle in the appropriate settings component (e.g., `src/components/settings/Dock/Dock.tsx` or `General/General.tsx`).
+- Use the shared `<Toggle>` component and wire it to the Context state created in Step 1.
+
+## 🛑 Important "Gotchas"
+- **Sandbox Environment**: If running build commands (`yarn build`), git commands (`git checkout`), or any file-system heavy script, you may need to bypass the sandbox or request explicit permissions.
+- **Build Verification**: Always run `yarn build` before finalizing a feature.
+- **CSS Chunking**: Since the app uses standard React Scripts, avoid unused CSS to keep chunk sizes minimal.
