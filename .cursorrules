@@ -38,7 +38,9 @@ Do NOT hardcode colors. The extension has dynamic theming (Light/Dark/Custom). A
 1. Open `src/locale/languages.ts`.
 2. Add your translation keys to the `enTranslation` object at the top.
 3. You **MUST** add the exact same keys translated into all 20 supported languages below it (kn, cs, tr, vi, uz, zh, hi, it, bn, pt, fr, ru, es, ja, ko, id, mr, pl, de). Ensure the order and structure match exactly.
-4. Usage in components: `const { translation } = useContext(AppContext); const t = translation[locale];` -> `t.your_new_key`.
+4. Usage in components: 
+   - **For JSX Elements**: Always use the `<Translation>` component. Example: `<Translation value="your_new_key" />`
+   - **For String Values** (e.g., placeholders, aria-labels, titles): Access the translation object from Context. Example: `const { translation, locale } = useContext(AppContext); const t = translation[locale];` -> `t.your_new_key`.
 
 ### 5. Dock Integration
 If your feature lives in the Dock:
