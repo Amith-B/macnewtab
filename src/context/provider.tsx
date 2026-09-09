@@ -32,6 +32,7 @@ import {
   SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY,
   SHOW_GREETING_LOCAL_STORAGE_KEY,
   SHOW_MONTH_VIEW_LOCAL_STORAGE_KEY,
+  SHOW_SEARCH_BAR_LOCAL_STORAGE_KEY,
   SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY,
   SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY,
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
@@ -145,6 +146,8 @@ export const AppContext = createContext({
   setShowVisitedSites: (_: boolean) => {},
   separatePageSite: false,
   setSeparatePageSite: (_: boolean) => {},
+  showSearchBar: true,
+  setShowSearchBar: (_: boolean) => {},
   showSearchEngines: true,
   setShowSearchEngines: (_: boolean) => {},
   showMonthView: false,
@@ -331,8 +334,18 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const [backgroundImage, setBackgroundImage] = useState("");
-  const [wallpaperBlur, setWallpaperBlur] = useState(0);
-  const [wallpaperFit, setWallpaperFit] = useState("cover");
+  const [wallpaperBlur, handleWallpaperBlur] = useLocalStorage(
+    WALLPAPER_BLUR_LOCAL_STORAGE_KEY,
+    0,
+    (val) => !isNaN(val) && val >= 0 && val <= 50,
+    activeSpaceId,
+  );
+  const [wallpaperFit, handleWallpaperFitChange] = useLocalStorage(
+    WALLPAPER_FIT_LOCAL_STORAGE_KEY,
+    "cover",
+    undefined,
+    activeSpaceId,
+  );
 
   const [locale, setLocale] = useLocalStorage<typeof languages>(
     SELECTED_LOCALE_LOCAL_STORAGE_KEY,
@@ -390,6 +403,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [separatePageSite, setSeparatePageSite] = useLocalStorage(
     SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY,
     false,
+    undefined,
+    activeSpaceId,
+  );
+  const [showSearchBar, setShowSearchBar] = useLocalStorage(
+    SHOW_SEARCH_BAR_LOCAL_STORAGE_KEY,
+    true,
     undefined,
     activeSpaceId,
   );
@@ -864,23 +883,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     handleLoadWallpaper();
 
-    const wallpaperBlurValue = parseInt(
-      localStorage.getItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY) || "0",
-    );
-
-    setWallpaperBlur(
-      !isNaN(wallpaperBlurValue) &&
-        wallpaperBlurValue <= 50 &&
-        wallpaperBlurValue >= 0
-        ? wallpaperBlurValue
-        : 0,
-    );
-    const wallpaperFitValue =
-      localStorage.getItem(
-        getResolvedKey(WALLPAPER_FIT_LOCAL_STORAGE_KEY, activeSpaceId),
-      ) || "cover";
-    setWallpaperFit(wallpaperFitValue);
-
     try {
       const storedQuickLinks = localStorage.getItem(
         getResolvedKey(QUICK_LINKS_LOCAL_STORAGE_KEY, activeSpaceId),
@@ -1066,22 +1068,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     handleTodoListUpdate([...uncheckedItems, ...checkedItems]);
   }, [todoList, handleTodoListUpdate]);
 
-  const handleWallpaperFitChange = useCallback(
-    (val: string) => {
-      localStorage.setItem(
-        getResolvedKey(WALLPAPER_FIT_LOCAL_STORAGE_KEY, activeSpaceId),
-        val,
-      );
-      setWallpaperFit(val);
-    },
-    [activeSpaceId],
-  );
-
-  const handleWallpaperBlur = useCallback((val: number) => {
-    localStorage.setItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY, String(val));
-    setWallpaperBlur(val);
-  }, []);
-
   const handleDockSitesChange = useCallback(
     (val: DockBarSites) => {
       localStorage.setItem(
@@ -1195,6 +1181,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setShowVisitedSites,
       separatePageSite,
       setSeparatePageSite,
+      showSearchBar,
+      setShowSearchBar,
       showSearchEngines,
       setShowSearchEngines,
       showMonthView,
@@ -1309,6 +1297,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setShowVisitedSites,
       separatePageSite,
       setSeparatePageSite,
+      showSearchBar,
+      setShowSearchBar,
       showSearchEngines,
       setShowSearchEngines,
       showMonthView,

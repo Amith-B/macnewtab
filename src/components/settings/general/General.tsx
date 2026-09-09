@@ -16,6 +16,8 @@ const General = memo(function General() {
   const {
     showGreeting,
     setShowGreeeting,
+    showSearchBar,
+    setShowSearchBar,
     showSearchEngines,
     setShowSearchEngines,
     useSearchDropdown,
@@ -55,6 +57,19 @@ const General = memo(function General() {
         />
       </div>
       <div className="general__row-item">
+        <Translation value="show_search_bar" />
+        <Toggle
+          id={"show-search-bar-toggle"}
+          name="Show search bar toggle"
+          isChecked={showSearchBar}
+          handleToggleChange={() => setShowSearchBar(!showSearchBar)}
+        />
+      </div>
+      <div
+        className={
+          "general__row-item" + (!showSearchBar ? " disabled" : "")
+        }
+      >
         <Translation value="show_search_engines" />
         <Toggle
           id={"search-engine-toggle"}

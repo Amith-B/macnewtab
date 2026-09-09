@@ -44,6 +44,7 @@ const App = function App() {
     wallpaperFit,
     showGreeting,
     showVisitedSites,
+    showSearchBar,
     showSearchEngines,
     useSearchDropdown,
     showMonthView,
@@ -332,17 +333,21 @@ const App = function App() {
             </h1>
           )}
           {showVisitedSites && <TopSites />}
-          <Search
-            selectedSearchEngine={searchEngine}
-            onSelectedEngineChange={handleSearchEngineChange}
-            showSearchEngines={showSearchEngines}
-            useSearchDropdown={useSearchDropdown}
-          />
-          {showSearchEngines && !useSearchDropdown && (
-            <SearchEngineSwitcher
-              selectedSearchEngine={searchEngine}
-              onSelectedEngineChange={handleSearchEngineChange}
-            />
+          {showSearchBar && (
+            <>
+              <Search
+                selectedSearchEngine={searchEngine}
+                onSelectedEngineChange={handleSearchEngineChange}
+                showSearchEngines={showSearchEngines}
+                useSearchDropdown={useSearchDropdown}
+              />
+              {showSearchEngines && !useSearchDropdown && (
+                <SearchEngineSwitcher
+                  selectedSearchEngine={searchEngine}
+                  onSelectedEngineChange={handleSearchEngineChange}
+                />
+              )}
+            </>
           )}
         </div>
       </div>
