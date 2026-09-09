@@ -63,6 +63,7 @@
   min-width: 224px;
   flex-shrink: 0;
   height: 100%;
+  background-color: var(--settings-side-panel-bg, rgba(255, 255, 255, 0.45));
   backdrop-filter: var(--settings-side-panel-blur);
   -webkit-backdrop-filter: var(--settings-side-panel-blur);
   padding: 18px 10px;
@@ -77,6 +78,7 @@
 
 .settings__side-panel.high-contrast {
   --settings-side-panel-text-color: #f3f3f3;
+  background-color: rgba(0, 0, 0, 0.25);
   --theme-bg: rgba(20, 20, 20, 0.88);
   --theme-border: rgba(255, 255, 255, 0.12);
   --window-expand-bg: #33c35b;

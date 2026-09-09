@@ -67,6 +67,7 @@ body:has(.App.theme-light) {
 
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: #3d3d3d;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #bcbcbc;
 
@@ -118,6 +119,7 @@ body:has(.App.theme-dark) {
 
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.7);
   --settings-side-panel-text-color: white;
+  --settings-side-panel-bg: rgba(0, 0, 0, 0.25);
 
   --launchpad-tab-selected-bg: #ffffff5c;
 
@@ -176,6 +178,7 @@ body:has(.App.theme-dark) {
 
     --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.7);
     --settings-side-panel-text-color: white;
+  --settings-side-panel-bg: rgba(0, 0, 0, 0.25);
 
     --launchpad-tab-selected-bg: #ffffff5c;
 
@@ -225,6 +228,7 @@ body:has(.App.theme-blue) {
   --search-engine-tile-icon-clr: #3a5e8f;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: #3d3d3d;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #81b7ff;
   --calendar-has-event-bg-color: #19354a;
@@ -267,6 +271,7 @@ body:has(.App.theme-red) {
   --search-engine-tile-icon-clr: #8f3a3a;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #ffa8a8;
   --calendar-has-event-bg-color: #19354a;
@@ -309,6 +314,7 @@ body:has(.App.theme-orange) {
   --search-engine-tile-icon-clr: #865841;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #ff9f6f;
   --calendar-has-event-bg-color: #19354a;
@@ -351,6 +357,7 @@ body:has(.App.theme-purple) {
   --search-engine-tile-icon-clr: #655da3;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #a7a7ff;
   --calendar-has-event-bg-color: #19354a;
@@ -393,6 +400,7 @@ body:has(.App.theme-pink) {
   --search-engine-tile-icon-clr: #a35d7f;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #ffabd1;
   --calendar-has-event-bg-color: #19354a;
@@ -435,6 +443,7 @@ body:has(.App.theme-brown) {
   --search-engine-tile-icon-clr: #a3765d;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #ffc69b;
   --calendar-has-event-bg-color: #19354a;
@@ -477,6 +486,7 @@ body:has(.App.theme-teal) {
   --search-engine-tile-icon-clr: #2f7b76;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #92dbd4;
   --calendar-has-event-bg-color: #11484b;
@@ -519,6 +529,7 @@ body:has(.App.theme-mint) {
   --search-engine-tile-icon-clr: #62844f;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #b5eb8c;
   --calendar-has-event-bg-color: #214125;
@@ -561,6 +572,7 @@ body:has(.App.theme-gold) {
   --search-engine-tile-icon-clr: #977139;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #ffd06e;
   --calendar-has-event-bg-color: #4d3b17;
@@ -603,6 +615,7 @@ body:has(.App.theme-rose) {
   --search-engine-tile-icon-clr: #a06556;
   --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.98);
   --settings-side-panel-text-color: black;
+  --settings-side-panel-bg: rgba(255, 255, 255, 0.45);
 
   --launchpad-tab-selected-bg: #ffb79f;
   --calendar-has-event-bg-color: #5c2f21;
