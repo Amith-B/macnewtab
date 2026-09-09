@@ -40,6 +40,7 @@ import {
   SHOW_BATTERY_LOCAL_STORAGE_KEY,
   SHOW_FREEFORM_LOCAL_STORAGE_KEY,
   SHOW_SCREEN_RECORDER_LOCAL_STORAGE_KEY,
+  SHOW_LAUNCHPAD_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
@@ -71,7 +72,10 @@ import {
   TODO_LIST_LOCAL_STORAGE_KEY,
   TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
 } from "../static/todo";
-import { WALLPAPER_BLUR_LOCAL_STORAGE_KEY } from "../static/wallpapers";
+import {
+  WALLPAPER_BLUR_LOCAL_STORAGE_KEY,
+  WALLPAPER_FIT_LOCAL_STORAGE_KEY,
+} from "../static/wallpapers";
 import {
   SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
   ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY,
@@ -149,6 +153,8 @@ export const AppContext = createContext({
   setShowClockAndCalendar: (_: boolean) => {},
   showTabManager: true,
   setShowTabManager: (_: boolean) => {},
+  showLaunchpad: true,
+  setShowLaunchpad: (_: boolean) => {},
   todoList: [] as TodoList,
   handleTodoListUpdate: (_: TodoList) => {},
   handleAddTodoList: (_: string) => {},
@@ -161,6 +167,8 @@ export const AppContext = createContext({
   handleClearCompletedTodoList: () => {},
   groupTodosByCheckedStatus: () => {},
   wallpaperBlur: 0,
+  wallpaperFit: "cover",
+  handleWallpaperFitChange: (_: string) => {},
   handleWallpaperBlur: (_: number) => {},
   bookmarksVisible: false,
   handleBookmarkVisbility: (_: boolean) => {},
@@ -324,6 +332,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
   const [backgroundImage, setBackgroundImage] = useState("");
   const [wallpaperBlur, setWallpaperBlur] = useState(0);
+  const [wallpaperFit, setWallpaperFit] = useState("cover");
 
   const [locale, setLocale] = useLocalStorage<typeof languages>(
     SELECTED_LOCALE_LOCAL_STORAGE_KEY,
@@ -356,6 +365,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   );
   const [showClockAndCalendar, setShowClockAndCalendar] = useLocalStorage(
     SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY,
+    true,
+    undefined,
+    activeSpaceId,
+  );
+  const [showLaunchpad, setShowLaunchpad] = useLocalStorage(
+    SHOW_LAUNCHPAD_LOCAL_STORAGE_KEY,
     true,
     undefined,
     activeSpaceId,
@@ -860,6 +875,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         ? wallpaperBlurValue
         : 0,
     );
+    const wallpaperFitValue =
+      localStorage.getItem(
+        getResolvedKey(WALLPAPER_FIT_LOCAL_STORAGE_KEY, activeSpaceId),
+      ) || "cover";
+    setWallpaperFit(wallpaperFitValue);
 
     try {
       const storedQuickLinks = localStorage.getItem(
@@ -1046,6 +1066,17 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     handleTodoListUpdate([...uncheckedItems, ...checkedItems]);
   }, [todoList, handleTodoListUpdate]);
 
+  const handleWallpaperFitChange = useCallback(
+    (val: string) => {
+      localStorage.setItem(
+        getResolvedKey(WALLPAPER_FIT_LOCAL_STORAGE_KEY, activeSpaceId),
+        val,
+      );
+      setWallpaperFit(val);
+    },
+    [activeSpaceId],
+  );
+
   const handleWallpaperBlur = useCallback((val: number) => {
     localStorage.setItem(WALLPAPER_BLUR_LOCAL_STORAGE_KEY, String(val));
     setWallpaperBlur(val);
@@ -1155,7 +1186,9 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       backgroundImage,
       handleWallpaperChange,
       wallpaperBlur,
+      wallpaperFit,
       handleWallpaperBlur,
+      handleWallpaperFitChange,
       showGreeting,
       setShowGreeeting,
       showVisitedSites,
@@ -1169,7 +1202,9 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       showClockAndCalendar,
       setShowClockAndCalendar,
       showTabManager,
+      showLaunchpad,
       setShowTabManager,
+      setShowLaunchpad,
       locale,
       setLocale,
       dockBarSites,
@@ -1266,6 +1301,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       handleWallpaperChange,
       wallpaperBlur,
       handleWallpaperBlur,
+      wallpaperFit,
+      handleWallpaperFitChange,
       showGreeting,
       setShowGreeeting,
       showVisitedSites,
@@ -1280,6 +1317,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setShowClockAndCalendar,
       showTabManager,
       setShowTabManager,
+      showLaunchpad,
+      setShowLaunchpad,
       locale,
       setLocale,
       dockBarSites,

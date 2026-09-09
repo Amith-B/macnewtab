@@ -21,3 +21,4 @@ export const CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY = "center_widgets_layout";
 
 export const centerWidgetsLayoutsList = ["default", "reversed"] as const;
 export type CenterWidgetsLayout = (typeof centerWidgetsLayoutsList)[number];
+export const SHOW_LAUNCHPAD_LOCAL_STORAGE_KEY = "show_launchpad";

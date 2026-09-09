@@ -41,6 +41,7 @@ const App = function App() {
     themeColor,
     backgroundImage,
     wallpaperBlur,
+    wallpaperFit,
     showGreeting,
     showVisitedSites,
     showSearchEngines,
@@ -121,7 +122,10 @@ const App = function App() {
   }, [showClockAndCalendar]);
 
   useEffect(() => {
-    const resolvedSearchKey = getResolvedKey(SEARCH_ENGINE_LOCAL_STORAGE_KEY, activeSpaceId);
+    const resolvedSearchKey = getResolvedKey(
+      SEARCH_ENGINE_LOCAL_STORAGE_KEY,
+      activeSpaceId,
+    );
     const defaultSearchEngine = localStorage.getItem(resolvedSearchKey);
 
     if (defaultSearchEngine && searchEngineKeys.includes(defaultSearchEngine)) {
@@ -131,21 +135,38 @@ const App = function App() {
     }
   }, [activeSpaceId]);
 
-  const handleSearchEngineChange = useCallback((val: string) => {
-    const resolvedSearchKey = getResolvedKey(SEARCH_ENGINE_LOCAL_STORAGE_KEY, activeSpaceId);
-    localStorage.setItem(resolvedSearchKey, val);
-    setSearchEngine(val);
-  }, [activeSpaceId]);
+  const handleSearchEngineChange = useCallback(
+    (val: string) => {
+      const resolvedSearchKey = getResolvedKey(
+        SEARCH_ENGINE_LOCAL_STORAGE_KEY,
+        activeSpaceId,
+      );
+      localStorage.setItem(resolvedSearchKey, val);
+      setSearchEngine(val);
+    },
+    [activeSpaceId],
+  );
 
   const bgStyle: CSSProperties & Record<string, string> = useMemo(
     () => ({
       ...(backgroundImage && (wallpaperType === "image" || !wallpaperType)
         ? {
             "--bg-image": `url(${backgroundImage})`,
+            backgroundSize:
+              wallpaperFit === "fit"
+                ? "contain"
+                : wallpaperFit === "fill"
+                  ? "100% 100%"
+                  : wallpaperFit === "tile"
+                    ? "auto"
+                    : "cover",
+            backgroundRepeat: wallpaperFit === "tile" ? "repeat" : "no-repeat",
+            backgroundPosition:
+              wallpaperFit === "tile" ? "top left" : "center center",
           }
         : {}),
     }),
-    [backgroundImage, wallpaperType],
+    [backgroundImage, wallpaperType, wallpaperFit],
   );
 
   const greeting = useMemo(() => {
@@ -177,9 +198,23 @@ const App = function App() {
       lang={locale}
     >
       {isWakingUp && loadAnimationType === "chromatic-shift" && (
-        <svg style={{ position: "absolute", width: 0, height: 0 }} aria-hidden="true">
-          <filter id="chromatic-shift-filter" x="-5%" y="0%" width="110%" height="100%">
-            <feOffset in="SourceGraphic" dx="8" result="shifted-right" id="chromatic-dx-right" />
+        <svg
+          style={{ position: "absolute", width: 0, height: 0 }}
+          aria-hidden="true"
+        >
+          <filter
+            id="chromatic-shift-filter"
+            x="-5%"
+            y="0%"
+            width="110%"
+            height="100%"
+          >
+            <feOffset
+              in="SourceGraphic"
+              dx="8"
+              result="shifted-right"
+              id="chromatic-dx-right"
+            />
             <feComponentTransfer in="shifted-right" result="red-only">
               <feFuncR type="identity" />
               <feFuncG type="discrete" tableValues="0" />
@@ -190,14 +225,36 @@ const App = function App() {
               <feFuncG type="identity" />
               <feFuncB type="discrete" tableValues="0" />
             </feComponentTransfer>
-            <feOffset in="SourceGraphic" dx="-8" result="shifted-left" id="chromatic-dx-left" />
+            <feOffset
+              in="SourceGraphic"
+              dx="-8"
+              result="shifted-left"
+              id="chromatic-dx-left"
+            />
             <feComponentTransfer in="shifted-left" result="blue-only">
               <feFuncR type="discrete" tableValues="0" />
               <feFuncG type="discrete" tableValues="0" />
               <feFuncB type="identity" />
             </feComponentTransfer>
-            <feComposite in="red-only" in2="green-only" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="rg" />
-            <feComposite in="rg" in2="blue-only" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+            <feComposite
+              in="red-only"
+              in2="green-only"
+              operator="arithmetic"
+              k1="0"
+              k2="1"
+              k3="1"
+              k4="0"
+              result="rg"
+            />
+            <feComposite
+              in="rg"
+              in2="blue-only"
+              operator="arithmetic"
+              k1="0"
+              k2="1"
+              k3="1"
+              k4="0"
+            />
           </filter>
         </svg>
       )}
@@ -292,7 +349,7 @@ const App = function App() {
       <Dock />
       {showTabManager && <TabManager />}
       {showStickyNotes && <StickyNotes />}
-      <FooterNotice 
+      <FooterNotice
         storageKey="hide_footer_notice"
         title={<Translation value="hide_footer_notice_title" />}
         description={<Translation value="hide_footer_notice_desc" />}

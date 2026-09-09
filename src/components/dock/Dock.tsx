@@ -27,7 +27,9 @@ const SettingsLazy = lazy(() => import("../settings/Settings"));
 const FreeformLazy = lazy(() => import("../freeform/Freeform"));
 const TodoLazy = lazy(() => import("../todo/Todo"));
 const FocusModeLazy = lazy(() => import("../focus/FocusMode"));
-const ScreenRecorderLazy = lazy(() => import("../screen-recorder/ScreenRecorder"));
+const ScreenRecorderLazy = lazy(
+  () => import("../screen-recorder/ScreenRecorder"),
+);
 
 const TooltipPosition: Record<string, string> = {
   left: "right",
@@ -62,6 +64,7 @@ const Dock = memo(() => {
     showScreenRecorder,
     separatePageSite,
     activeSpaceId,
+    showLaunchpad,
   } = useContext(AppContext);
 
   const handleLaunchpadClose = useCallback(
@@ -167,19 +170,22 @@ const Dock = memo(() => {
           ref={containerRef}
           onScroll={checkOverflow}
         >
-          <button
-            className={`launchpad-icon accessible tooltip tooltip-${
-              TooltipPosition[dockPosition] || "top"
-            }`}
-            data-label="Launchpad"
-            title="Launchpad"
-            onClick={() => {
-              setLaunchpadVisible(!launchpadVisible);
-              setSettingsVisible(false);
-            }}
-          >
-            <LaunchpadIcon />
-          </button>
+          {showLaunchpad && (
+            <button
+              className={`launchpad-icon accessible tooltip tooltip-${
+                TooltipPosition[dockPosition] || "top"
+              }`}
+              data-label="Launchpad"
+              title="Launchpad"
+              onClick={() => {
+                setLaunchpadVisible(!launchpadVisible);
+                setSettingsVisible(false);
+              }}
+            >
+              <LaunchpadIcon />
+            </button>
+          )}
+
           {todoListVisbility && (
             <button
               className={`todo-button accessible tooltip tooltip-${

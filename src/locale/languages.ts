@@ -25,7 +25,6 @@ const enTranslation = {
   third_party_libraries: "Third-Party Libraries Used",
   copyright: "Amith B. All Rights Reserved.",
   language: "Language",
-
   january: "January",
   february: "February",
   march: "March",
@@ -49,7 +48,6 @@ const enTranslation = {
   oct: "Oct",
   nov: "Nov",
   dec: "Dec",
-
   sunday: "Sunday",
   monday: "Monday",
   tuesday: "Tuesday",
@@ -64,63 +62,45 @@ const enTranslation = {
   thu: "Thu",
   fri: "Fri",
   sat: "Sat",
-
   dark: "Dark",
   light: "Light",
   system: "System",
-
   search: "Search",
-
   browser_search_engine: "Browser Default Search Engine",
-
   choose_wallpaper: "Choose Wallpaper",
-
   voice_search_warning:
     "Voice search is not supported for this language. It will default to English for this language.",
-
   dock: "Dock",
-
   add: "Add",
   done: "Done",
   add_dock_links: "Add Links to Dock",
   upload_icon: "Upload Icon",
   change_icon: "Change Icon",
-
   position_on_screen: "Position On Screen",
   left: "Left",
   bottom: "Bottom",
   right: "Right",
-
   theme: "Theme",
-
   toggle_bookmark: "Toggle Bookmark",
-
   write_review: "Write a Review",
   home_page: "Home Page",
   privacy_policy: "Privacy Policy",
-
   todo: "Todo List",
   todo_toggle_title: "Show Todo List",
   todo_toggle_description:
     "Checked todo items are automatically deleted next day",
   add_to_list: "Add to list",
-
   wallpaper_blur: "Blur Wallpaper",
-
   changelog: "Changelog",
-
   tab_manager: "Tab Manager",
   window: "Window",
   tabs: "Tabs",
   search_tabs: "Search Tabs",
-
   show_tab_manager: "Show Tab Manager",
   show_sticky_notes: "Show Sticky Notes",
   sticky_note_placeholder: "Type your note here...",
-
   close_all: "Close All",
   close_filtered: "Close Filtered",
-
   mute_all: "Mute All",
   unmute_all: "Unmute All",
   merge_all: "Merge All",
@@ -128,15 +108,12 @@ const enTranslation = {
   bookmark_toggle_description: "You can toggle browser default bookmark with:",
   google_apps: "Google Apps",
   bookmarks: "Bookmarks",
-
   delete_bookmark: "Delete bookmark",
   delete_bookmark_confirm:
     "Are you sure you want to delete this bookmark? This action cannot be undone.",
   delete: "Delete",
   keep: "Keep",
-
   center_widgets_away_from_dock: "Shift center widgets away from dock",
-
   sign_in: "Sign In",
   signing_in: "Signing In",
   sign_out: "Sign Out",
@@ -166,6 +143,9 @@ const enTranslation = {
   import_failed: "Failed to import data. Please check the file format.",
   use_analog_clock_2: "Use Analog Clock 2",
   wallpaper_type: "Wallpaper Type",
+  wallpaper_fit: "Wallpaper Fit",
+  repeat_warning:
+    "This option only takes effect if the image is smaller than your screen.",
   dynamic_theme: "Dynamic Theme",
   interactive_theme: "Interactive Theme",
   show_focus_mode: "Show Focus Mode",
@@ -190,6 +170,7 @@ const enTranslation = {
   my_apps_description: "Add your favorite applications to the Launchpad",
   add_launchpad_links: "No custom links added. Add some below.",
   launchpad: "Launchpad",
+  show_launchpad_in_dock: "Show Launchpad in Dock",
   clock_style: "Clock Style",
   analog_clock_1: "Analog Clock 1",
   analog_clock_2: "Analog Clock 2",
@@ -301,12 +282,10 @@ const enTranslation = {
   layout_default: "Default",
   layout_reversed: "Reversed",
 };
-
 export const translation: Record<string, Record<string, string>> & {
   en: typeof enTranslation;
 } = {
   en: enTranslation,
-
   kn: {
     show_greetings: "ಶುಭಾಶಯಗಳನ್ನು ತೋರಿಸಿ",
     show_top_visited_sites: "ಟಾಪ್ ಭೇಟಿ ನೀಡಿದ ಸೈಟ್‌ಗಳನ್ನು ತೋರಿಸಿ",
@@ -371,81 +350,58 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "ಗುರು",
     fri: "ಶುಕ್ರ",
     sat: "ಶನಿ",
-
     dark: "ಕತ್ತಲು",
     light: "ಬೆಳಕು",
     system: "ವ್ಯವಸ್ಥೆ",
-
     search: "ಹುಡುಕು",
-
     browser_search_engine: "ಬ್ರೌಸರ್ ಡೀಫಾಲ್ಟ್ ಸರ್ಚ್ ಇಂಜಿನ್",
-
     choose_wallpaper: "ವಾಲ್‌ಪೇಪರ್ ಆಯ್ಕೆಮಾಡಿ",
-
     voice_search_warning: "ಈ ಭಾಷೆಗೆ ಧ್ವನಿ ಹುಡುಕಾಟವು ಬೆಂಬಲಿತವಾಗಿಲ್ಲ.",
-
     dock: "ಡಾಕ್",
-
     add: "ಸೇರಿಸಿ",
     done: "ಮುಗಿದಿದೆ",
     add_dock_links: "ಡಾಕ್‌ಗೆ ಲಿಂಕ್‌ಗಳನ್ನು ಸೇರಿಸಿ",
     upload_icon: "ಐಕಾನ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
     change_icon: "ಐಕಾನ್ ಬದಲಾಯಿಸಿ",
-
     position_on_screen: "ಪರದೆಯ ಮೇಲೆ ಸ್ಥಾನ",
     left: "ಎಡಕ್ಕೆ",
     bottom: "ಕೆಳಗೆ",
     right: "ಬಲ",
-
     theme: "ಬಣ್ಣ",
-
     toggle_bookmark: "ಬುಕ್ಮಾರ್ಕ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಿ",
-
     write_review: "ವಿಮರ್ಶೆಯನ್ನು ಬರೆಯಿರಿ",
     home_page: "ಮುಖಪುಟ",
     privacy_policy: "ಗೌಪ್ಯತಾ ನೀತಿ",
-
     todo: "TODO ಪಟ್ಟಿ",
     todo_toggle_title: "ಟೊಡೊ ಪಟ್ಟಿಯನ್ನು ತೋರಿಸಿ",
     todo_toggle_description:
       "ಪರಿಶೀಲಿಸಿದ ಟೊಡೊ ವಸ್ತುಗಳನ್ನು ಮರುದಿನ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ",
     add_to_list: "ಪಟ್ಟಿಗೆ ಸೇರಿಸಿ",
-
     wallpaper_blur: "ವಾಲ್‌ಪೇಪರ್ ಅನ್ನು ಮಸುಕುಗೊಳಿಸಿ",
-
     changelog: "ಬದಲಾವಣೆ ಪಟ್ಟಿ",
-
     tab_manager: "ಟ್ಯಾಬ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
     window: "ಕಿಟಕಿ",
     tabs: "ಬ್ರೌಸರ್ ಟ್ಯಾಬ್‌ಗಳು",
     search_tabs: "ಟ್ಯಾಬ್ ಹುಡುಕಾಟ",
-
     show_tab_manager: "TAB ವ್ಯವಸ್ಥಾಪಕವನ್ನು ತೋರಿಸಿ",
     show_sticky_notes: "ಸ್ಟಿಕಿ ನೋಟ್‌ಗಳನ್ನು ತೋರಿಸಿ",
     sticky_note_placeholder: "ನಿಮ್ಮ ಟಿಪ್ಪಣಿಯನ್ನು ಇಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ...",
-
     close_all: "ಎಲ್ಲವನ್ನು ಮುಚ್ಚಿ",
     close_filtered: "ಕ್ಲೋಸ್ ಫಿಲ್ಟರ್",
-
     mute_all: "ಎಲ್ಲವನ್ನೂ ಮ್ಯೂಟ್ ಮಾಡಿ",
     unmute_all: "ಎಲ್ಲಾ ಅನ್ಮುಟ್",
-
     merge_all: "ಎಲ್ಲವನ್ನು ವಿಲೀನಗೊಳಿಸಿ",
-
     bookmark_toggle: "ಲಾಂಚ್‌ಪ್ಯಾಡ್‌ನಲ್ಲಿ ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳನ್ನು ತೋರಿಸಿ",
     bookmark_toggle_description:
       "ನೀವು ಬ್ರೌಸರ್ ಡೀಫಾಲ್ಟ್ ಬುಕ್‌ಮಾರ್ಕ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಬಹುದು:",
     google_apps: "ಗೂಗಲ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು",
     bookmarks: "ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳು",
-
     delete_bookmark: "ಬುಕ್ಮಾರ್ಕ್ ಅಳಿಸಿ",
     delete_bookmark_confirm:
       "ಈ ಬುಕ್‌ಮಾರ್ಕ್ ಅನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ? ",
     delete: "ಅಳಿಸು",
     keep: "ಇರಿಸು",
-
     center_widgets_away_from_dock: "ಡಾಕ್‌ನಿಂದ ಸೆಂಟರ್ ವಿಜೆಟ್‌ಗಳನ್ನು ಶಿಫ್ಟ್ ಮಾಡಿ",
-
     sign_in: "ಸೈನ್ ಇನ್ ಮಾಡಿ",
     signing_in: "ಸೈನ್ ಇನ್ ಆಗುತ್ತಿದೆ",
     sign_out: "ಸೈನ್ ಔಟ್ ಮಾಡಿ",
@@ -476,6 +432,9 @@ export const translation: Record<string, Record<string, string>> & {
       "ಡೇಟಾವನ್ನು ಆಮದು ಮಾಡಲು ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಫೈಲ್ ಫಾರ್ಮ್ಯಾಟ್ ಪರಿಶೀಲಿಸಿ.",
     use_analog_clock_2: "ಅನಲಾಗ್ ಗಡಿಯಾರ 2 ಬಳಸಿ",
     wallpaper_type: "ವಾಲ್ಪೇಪರ್ ಪ್ರಕಾರ",
+    wallpaper_fit: "ವಾಲ್‌ಪೇಪರ್ ಹೊಂದಿಕೊಳ್ಳುವಿಕೆ",
+    repeat_warning:
+      "ಈ ಆಯ್ಕೆಯು ಚಿತ್ರವು ನಿಮ್ಮ ಪರದೆಗಿಂತ ಚಿಕ್ಕದಾಗಿದ್ದರೆ ಮಾತ್ರ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ.",
     dynamic_theme: "ಡೈನಾಮಿಕ್ ಥೀಮ್",
     interactive_theme: "ಸಂವಾದಾತ್ಮಕ ಥೀಮ್",
     show_focus_mode: "ಫೋಕಸ್ ಮೋಡ್ ತೋರಿಸಿ",
@@ -601,6 +560,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "ಯಾವುದೇ ಕಸ್ಟಮ್ ಲಿಂಕ್‌ಗಳನ್ನು ಸೇರಿಸಲಾಗಿಲ್ಲ. ಕೆಳಗೆ ಕೆಲವು ಸೇರಿಸಿ.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "ಡಾಕ್‌ನಲ್ಲಿ ಲಾಂಚ್‌ಪ್ಯಾಡ್ ತೋರಿಸಿ",
     clock_style: "ಗಡಿಯಾರದ ಶೈಲಿ",
     analog_clock_1: "ಅನಲಾಗ್ ಗಡಿಯಾರ 1",
     analog_clock_2: "ಅನಲಾಗ್ ಗಡಿಯಾರ 2",
@@ -677,80 +637,57 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Čt",
     fri: "pá",
     sat: "sobota",
-
     dark: "Tmavý",
     light: "Světlo",
     system: "Systém",
-
     search: "Vyhledávání",
-
     browser_search_engine: "Výchozí vyhledávač prohlížeče",
-
     choose_wallpaper: "Vyberte Tapeta",
-
     voice_search_warning:
       "Hlasové vyhledávání není pro tento jazyk podporováno.",
-
     dock: "Dok",
-
     add: "Přidat",
     done: "Hotovo",
     add_dock_links: "Přidat odkazy do Docku",
     upload_icon: "Nahrát ikonu",
     change_icon: "Změnit ikonu",
-
     position_on_screen: "Pozice Na Obrazovce",
     left: "Vlevo",
     bottom: "Dno",
     right: "Pravá strana",
-
     theme: "Barva",
-
     toggle_bookmark: "Přepněte záložku",
-
     write_review: "Napište recenzi",
     home_page: "Domovská stránka",
     privacy_policy: "Zásady ochrany osobních údajů",
-
     todo: "Seznam Todo",
     todo_toggle_title: "Zobrazit seznam Todo",
     todo_toggle_description:
       "Zkontrolované položky Todo jsou příští den automaticky smazány",
     add_to_list: "Přidat do seznamu",
-
     wallpaper_blur: "Tapeta rozmazání",
-
     changelog: "Seznam ChangeLog",
-
     tab_manager: "Správa karet",
     window: "Okno",
     tabs: "Karty prohlížeče",
     search_tabs: "Vyhledávání na kartě",
-
     show_tab_manager: "Zobrazit správce Tab",
     show_sticky_notes: "Zobrazit lepící poznámky",
     sticky_note_placeholder: "Zde napište svou poznámku...",
-
     close_all: "Zavřete všechny",
     close_filtered: "Zavřete filtrovány",
-
     mute_all: "Ztlumit vše",
     unmute_all: "Zobrazení všeho",
-
     merge_all: "Sloučit všechny",
-
     bookmark_toggle: "Zobrazit záložky v Launchpad",
     bookmark_toggle_description: "Výchozí záložka prohlížeče můžete přepínat:",
     google_apps: "Google Apps",
     bookmarks: "Záložky",
-
     delete_bookmark: "Odstranit záložku",
     delete_bookmark_confirm: "Jste si jisti, že chcete tuto záložku smazat? ",
     delete: "Vymazat",
     keep: "Udržet",
-
     center_widgets_away_from_dock: "Přesuňte středové widgety z doku",
-
     sign_in: "Přihlaste se",
     signing_in: "Přihlašování",
     sign_out: "Odhlásit se",
@@ -780,6 +717,9 @@ export const translation: Record<string, Record<string, string>> & {
       "Import dat se nezdařil. Zkontrolujte prosím formát souboru.",
     use_analog_clock_2: "Použít analogové hodiny 2",
     wallpaper_type: "Typ tapety",
+    wallpaper_fit: "Přizpůsobení tapety",
+    repeat_warning:
+      "Tato možnost se projeví pouze v případě, že je obrázek menší než vaše obrazovka.",
     dynamic_theme: "Dynamické téma",
     interactive_theme: "Interaktivní téma",
     show_focus_mode: "Zobrazit režim soustředění",
@@ -912,6 +852,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Nebyly přidány žádné vlastní odkazy. Přidejte nějaké níže.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Zobrazit Launchpad v Docku",
     clock_style: "Styl hodin",
     analog_clock_1: "Analogové hodiny 1",
     analog_clock_2: "Analogové hodiny 2",
@@ -981,82 +922,59 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Per",
     fri: "Cuma",
     sat: "Cmt",
-
     dark: "Karanlık",
     light: "Işık",
     system: "Sistem",
-
     search: "Aramak",
-
     browser_search_engine: "Tarayıcı Varsayılan Arama Motoru",
-
     choose_wallpaper: "Duvar Kağıdını Seçin",
-
     voice_search_warning: "Bu dil için sesli arama desteklenmiyor.",
-
     dock: "Rıhtım",
-
     add: "Eklemek",
     done: "Tamamlamak",
     add_dock_links: "Dock'a Bağlantı Ekle",
     upload_icon: "Simge Yükle",
     change_icon: "Simgeyi Değiştir",
-
     position_on_screen: "Ekrandaki Konum",
     left: "Sol",
     bottom: "Alt",
     right: "Sağ Taraf",
-
     theme: "Renk",
-
     toggle_bookmark: "Bookmark'ı değiştirin",
-
     write_review: "Bir İnceleme Yazın",
     home_page: "Ana Sayfa",
     privacy_policy: "Gizlilik Politikası",
-
     todo: "Todo Listesi",
     todo_toggle_title: "Todo listesini göster",
     todo_toggle_description:
       "Kontrol edilen Todo öğeleri ertesi gün otomatik olarak silinir",
     add_to_list: "Listeye Ekle",
-
     wallpaper_blur: "Bulanık duvar kağıdı",
-
     changelog: "Changelog Listesi",
-
     tab_manager: "Sekmeleri Yönetin",
     window: "Pencere",
     tabs: "Tarayıcı sekmeleri",
     search_tabs: "Sekme arama",
-
     show_tab_manager: "Sekme Yöneticisini Göster",
     show_sticky_notes: "Yapışkan Notları Göster",
     sticky_note_placeholder: "Notunuzu buraya yazın...",
-
     close_all: "Hepsini kapat",
     close_filtered: "Yakın filtrelenmiş",
-
     mute_all: "Sesle Sesle",
     unmute_all: "Hepsini çıkar",
-
     merge_all: "Hepsini birleştirmek",
-
     bookmark_toggle: "Launchpad'de yer işaretlerini göster",
     bookmark_toggle_description:
       "Tarayıcı varsayılan yer işaretini şu şekilde değiştirebilirsiniz:",
     google_apps: "Google Apps",
     bookmarks: "Yer imleri",
-
     delete_bookmark: "Yer imi Sil",
     delete_bookmark_confirm:
       "Bu yer işaretini silmek istediğinizden emin misiniz? ",
     delete: "Silmek",
     keep: "Kale",
-
     center_widgets_away_from_dock:
       "Ortadaki widget'ları dock'tan uzağa taşıyın",
-
     sign_in: "Oturum aç",
     signing_in: "Oturum Açma",
     sign_out: "Oturumu Kapat",
@@ -1087,6 +1005,9 @@ export const translation: Record<string, Record<string, string>> & {
       "Veriler içe aktarılamadı. Lütfen dosya formatını kontrol edin.",
     use_analog_clock_2: "Analog Saat 2'yi Kullan",
     wallpaper_type: "Duvar Kağıdı Türü",
+    wallpaper_fit: "Duvar Kağıdı Sığdırma",
+    repeat_warning:
+      "Bu seçenek yalnızca resim ekranınızdan küçükse etkili olur.",
     dynamic_theme: "Dinamik Tema",
     interactive_theme: "Etkileşimli Tema",
     show_focus_mode: "Odak Modunu Göster",
@@ -1218,6 +1139,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Özel bağlantı eklenmedi. Aşağıdan bazılarını ekleyin.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Launchpad'i Dock'ta Göster",
     clock_style: "Saat Stili",
     analog_clock_1: "Analog Saat 1",
     analog_clock_2: "Analog Saat 2",
@@ -1287,86 +1209,66 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Thứ năm",
     fri: "Thứ sáu",
     sat: "Thứ bảy",
-
     dark: "Tối tăm",
     light: "Ánh sáng",
     system: "Hệ thống",
-
     search: "Tìm kiếm",
-
     browser_search_engine: "Công cụ tìm kiếm mặc định của trình duyệt",
-
     choose_wallpaper: "Chọn hình nền",
-
     voice_search_warning:
       "Tìm kiếm bằng giọng nói không được hỗ trợ cho ngôn ngữ này.",
-
     dock: "bến tàu",
-
     add: "Thêm vào",
     done: "Xong",
     add_dock_links: "Thêm liên kết vào Dock",
     upload_icon: "Tải lên biểu tượng",
     change_icon: "Thay đổi biểu tượng",
-
     position_on_screen: "Vị trí trên màn hình",
     left: "Bên trái",
     bottom: "Đáy",
     right: "Bên phải",
-
     theme: "Màu sắc",
-
     toggle_bookmark: "Chuyển đổi dấu trang",
-
     write_review: "Viết một đánh giá",
     home_page: "Trang chủ",
     privacy_policy: "Chính sách bảo mật",
-
     todo: "Danh sách việc cần làm",
     todo_toggle_title: "Hiển thị danh sách TODO",
     todo_toggle_description:
       "Các mặt hàng đã kiểm tra sẽ tự động bị xóa vào ngày hôm sau",
     add_to_list: "Thêm vào danh sách",
-
     wallpaper_blur: "Hình nền mờ",
-
     changelog: "Danh sách thay đổi",
-
     tab_manager: "Quản lý tab",
     window: "Cửa sổ",
     tabs: "Tab trình duyệt",
     search_tabs: "Tìm kiếm tab",
-
     show_tab_manager: "Hiển thị trình quản lý tab",
     show_sticky_notes: "Hiển thị ghi chú dính",
     sticky_note_placeholder: "Nhập ghi chú của bạn ở đây...",
-
     close_all: "Đóng tất cả",
     close_filtered: "Đóng được lọc",
-
     mute_all: "Tắt tiếng tất cả",
     unmute_all: "Không xoay được tất cả",
-
     merge_all: "Hợp nhất tất cả",
-
     bookmark_toggle: "Hiển thị dấu trang trong Launchpad",
     bookmark_toggle_description:
       "Bạn có thể chuyển đổi dấu trang mặc định của trình duyệt với:",
     google_apps: "Ứng dụng Google",
     bookmarks: "Dấu trang",
-
     delete_bookmark: "Xóa dấu trang",
     delete_bookmark_confirm: "Bạn có chắc là bạn muốn xóa dấu trang này? ",
     wallpaper_type: "Loại hình nền",
+    wallpaper_fit: "Vừa vặn hình nền",
+    repeat_warning:
+      "Tùy chọn này chỉ có tác dụng nếu hình ảnh nhỏ hơn màn hình của bạn.",
     dynamic_theme: "Chủ đề động",
     interactive_theme: "Chủ đề tương tác",
     delete: "Xóa bỏ",
     keep: "Giữ",
     use_analog_clock_2: "Sử dụng Đồng hồ Analog 2",
-
     center_widgets_away_from_dock:
       "Di chuyển các widget trung tâm ra khỏi dock",
-
     sign_in: "Đăng nhập",
     signing_in: "Đăng nhập",
     sign_out: "Đăng xuất",
@@ -1524,6 +1426,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Chưa có liên kết tùy chỉnh nào được thêm. Hãy thêm một số liên kết bên dưới.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Hiển thị Launchpad trong Dock",
     clock_style: "Kiểu đồng hồ",
     analog_clock_1: "Đồng hồ kim 1",
     analog_clock_2: "Đồng hồ kim 2",
@@ -1593,81 +1496,58 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Pays",
     fri: "Juma",
     sat: "Shanba",
-
     dark: "Qorong'i",
     light: "Nur",
     system: "Tizim",
-
     search: "Qidiruv",
-
     browser_search_engine: "Brauzerning standart qidiruvi",
-
     choose_wallpaper: "Fon rasmi tanlang",
-
     voice_search_warning: "Bu tilda ovozli qidiruv ishlamaydi.",
-
     dock: "Dok",
-
     add: "Qo'shish",
     done: "Bajarildi",
     add_dock_links: "Dock-ga havolalar qo'shing",
     upload_icon: "Belgini yuklash",
     change_icon: "Belgini o'zgartirish",
-
     position_on_screen: "Ekrandagi joylashuv",
     left: "Chapga",
     bottom: "Pastki",
     right: "O'ng tomon",
-
     theme: "Rang",
-
     toggle_bookmark: "Xatcho'pni almashtiring",
-
     write_review: "Sharh yozing",
     home_page: "Bosh sahifa",
     privacy_policy: "Maxfiylik siyosati",
-
     todo: "Todo ro'yxati",
     todo_toggle_title: "Todo ro'yxatini ko'rsatish",
     todo_toggle_description:
       "Tekshirilgan todo elementlari keyingi kun avtomatik ravishda o'chiriladi",
     add_to_list: "Ro'yxatga qo'shing",
-
     wallpaper_blur: "Blur fon rasmi",
-
     changelog: "Changelog ro'yxati",
-
     tab_manager: "Yorliqlarni boshqarish",
     window: "Deraza",
     tabs: "Brauzer yorliqlari",
     search_tabs: "Yorliqni qidirish",
-
     show_tab_manager: "Tab menejerini ko'rsatish",
     show_sticky_notes: "Yopishqoq eslatmalarni ko'rsatish",
     sticky_note_placeholder: "Eslatmangizni shu yerga yozing...",
-
     close_all: "Hammasini yaqin",
     close_filtered: "Filtrni yoping",
-
     mute_all: "Ovoz berish",
     unmute_all: "Barchasini yoqimsiz",
-
     merge_all: "Barchasini birlashtirish",
-
     bookmark_toggle: "OnePadda xatcho'plarni ko'rsatish",
     bookmark_toggle_description:
       "Siz brauzerning standart bazasini almashtirishingiz mumkin:",
     google_apps: "Google Apps",
     bookmarks: "Xatcho'plar",
-
     delete_bookmark: "Bookmarkni o'chirish",
     delete_bookmark_confirm:
       "Haqiqatan ham ushbu xatcho'pni yo'q qilmoqchimisiz? ",
     delete: "O'chirmoq",
     keep: "Saqlamoq",
-
     center_widgets_away_from_dock: "Shift markazi vidjetlar dokdan uzoqda",
-
     sign_in: "Tizimga kirish",
     signing_in: "Imzo",
     sign_out: "Tizimdan chiqish",
@@ -1698,6 +1578,9 @@ export const translation: Record<string, Record<string, string>> & {
       "Ma'lumotlarni import qilib bo'lmadi. Iltimos, fayl formatini tekshiring.",
     use_analog_clock_2: "Analog soat 2 dan foydalaning",
     wallpaper_type: "Fon turi",
+    wallpaper_fit: "Fonni moslashtirish",
+    repeat_warning:
+      "Bu parametr faqat rasm ekraningizdan kichikroq bo'lsa kuchga kiradi.",
     dynamic_theme: "Dinamik mavzu",
     interactive_theme: "Interaktiv mavzu",
     show_focus_mode: "Fokus rejimini ko'rsatish",
@@ -1831,6 +1714,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Maxsus havolalar qo'shilmagan. Quyida ba'zilarini qo'shing.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Launchpad-ni Dock-da ko'rsatish",
     clock_style: "Soat uslubi",
     analog_clock_1: "Analog soat 1",
     analog_clock_2: "Analog soat 2",
@@ -1900,78 +1784,55 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "星期四",
     fri: "周五",
     sat: "星期六",
-
     dark: "黑暗的",
     light: "光",
     system: "系统",
-
     search: "搜索",
-
     browser_search_engine: "浏览器默认搜索引擎",
-
     choose_wallpaper: "选择壁纸",
-
     voice_search_warning: "该语言不支持语音搜索",
-
     dock: "码头",
-
     add: "添加",
     done: "完毕",
     add_dock_links: "添加链接到 Dock",
     upload_icon: "上传图标",
     change_icon: "更换图标",
-
     position_on_screen: "屏幕上的位置",
     left: "左边",
     bottom: "底部",
     right: "右侧",
-
     theme: "颜色",
-
     toggle_bookmark: "切换书签",
-
     write_review: "写评论",
     home_page: "主页",
     privacy_policy: "隐私政策",
-
     todo: "待办事项清单",
     todo_toggle_title: "展示托多列表",
     todo_toggle_description: "检查的托多商品第二天将自动删除",
     add_to_list: "添加到列表",
-
     wallpaper_blur: "模糊的壁纸",
-
     changelog: "ChangElog列表",
-
     tab_manager: "管理选项卡",
     window: "窗户",
     tabs: "浏览器选项卡",
     search_tabs: "选项卡搜索",
-
     show_tab_manager: "显示选项卡管理器",
     show_sticky_notes: "显示便签",
     sticky_note_placeholder: "在此输入您的笔记...",
-
     close_all: "关闭全部",
     close_filtered: "关闭过滤",
-
     mute_all: "静音",
     unmute_all: "取消静音",
-
     merge_all: "合并全部",
-
     bookmark_toggle: "在Launchpad中显示书签",
     bookmark_toggle_description: "您可以使用以下方式切换浏览器默认书签：",
     google_apps: "Google应用程序",
     bookmarks: "书签",
-
     delete_bookmark: "删除书签",
     delete_bookmark_confirm: "您确定要删除此书签吗？",
     delete: "删除",
     keep: "保持",
-
     center_widgets_away_from_dock: "将中心小部件移离底座",
-
     sign_in: "登入",
     signing_in: "登录",
     sign_out: "登出",
@@ -1998,6 +1859,8 @@ export const translation: Record<string, Record<string, string>> & {
     import_failed: "导入数据失败。请检查文件格式。",
     use_analog_clock_2: "使用模拟时钟 2",
     wallpaper_type: "壁纸类型",
+    wallpaper_fit: "壁纸适应",
+    repeat_warning: "仅当图像小于您的屏幕时，此选项才会生效。",
     dynamic_theme: "动态主题",
     interactive_theme: "互动主题",
     show_focus_mode: "显示专注模式",
@@ -2125,6 +1988,7 @@ export const translation: Record<string, Record<string, string>> & {
     my_apps_description: "将您喜欢的应用添加到 Launchpad",
     add_launchpad_links: "未添加任何自定义链接。在下面添加一些。",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "在程序坞中显示 Launchpad",
     clock_style: "时钟样式",
     analog_clock_1: "模拟时钟 1",
     analog_clock_2: "模拟时钟 2",
@@ -2194,81 +2058,58 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "गुरु",
     fri: "शुक्र",
     sat: "शनि",
-
     dark: "अँधेरा",
     light: "रोशनी",
     system: "प्रणाली",
-
     search: "खोज",
-
     browser_search_engine: "ब्राउज़र डिफ़ॉल्ट खोज इंजन",
-
     choose_wallpaper: "वॉलपेपर चुनें",
-
     voice_search_warning: "इस भाषा के लिए ध्वनि खोज समर्थित नहीं है.",
-
     dock: "गोदी",
-
     add: "जोड़ना",
     done: "हो गया",
     add_dock_links: "डॉक में लिंक जोड़ें",
     upload_icon: "आइकन अपलोड करें",
     change_icon: "आइकन बदलें",
-
     position_on_screen: "स्क्रीन पर स्थिति",
     left: "बाएं",
     bottom: "तल",
     right: "दाहिनी ओर",
-
     theme: "रंग",
-
     toggle_bookmark: "टॉगल बुकमार्क",
-
     write_review: "एक समीक्षा लिखे",
     home_page: "मुख पृष्ठ",
     privacy_policy: "गोपनीयता नीति",
-
     todo: "करने के लिए सूची",
     todo_toggle_title: "टोडो सूची दिखाएं",
     todo_toggle_description:
       "चेक किए गए टोडो आइटम स्वचालित रूप से अगले दिन हटा दिए जाते हैं",
     add_to_list: "सूची में शामिल",
-
     wallpaper_blur: "धब्बा वॉलपेपर",
-
     changelog: "चेंलोग सूची",
-
     tab_manager: "टैब प्रबंधित करें",
     window: "खिड़की",
     tabs: "ब्राउज़र टैब",
     search_tabs: "टैब खोज",
-
     show_tab_manager: "शो टैब मैनेजर",
     show_sticky_notes: "स्टिकी नोट्स दिखाएं",
     sticky_note_placeholder: "अपना नोट यहाँ टाइप करें...",
-
     close_all: "सभी को बंद कर देना",
     close_filtered: "बंद फ़िल्टर किया हुआ",
-
     mute_all: "मूक सभी",
     unmute_all: "सभी को कम करें",
-
     merge_all: "सभी को मर्ज करें",
-
     bookmark_toggle: "लॉन्चपैड में बुकमार्क दिखाएं",
     bookmark_toggle_description:
       "आप ब्राउज़र डिफ़ॉल्ट बुकमार्क के साथ टॉगल कर सकते हैं:",
     google_apps: "Google Apps",
     bookmarks: "बुकमार्क",
-
     delete_bookmark: "बुकमार्क हटाएं",
     delete_bookmark_confirm:
       "क्या आप सुनिश्चित हैं कि आप इस बुकमार्क को हटाना चाहते हैं? ",
     delete: "मिटाना",
     keep: "रखना",
-
     center_widgets_away_from_dock: "केंद्र विजेट्स को डॉक से दूर शिफ्ट करें",
-
     sign_in: "दाखिल करना",
     signing_in: "इन कर रहे हैं",
     sign_out: "साइन आउट",
@@ -2298,6 +2139,9 @@ export const translation: Record<string, Record<string, string>> & {
     import_failed: "डेटा आयात करने में विफल। कृपया फ़ाइल प्रारूप की जाँच करें।",
     use_analog_clock_2: "एनालॉग क्लॉक 2 का उपयोग करें",
     wallpaper_type: "वॉलपेपर प्रकार",
+    wallpaper_fit: "वॉलपेपर फिट",
+    repeat_warning:
+      "यह विकल्प केवल तभी प्रभावी होता है जब छवि आपकी स्क्रीन से छोटी हो।",
     dynamic_theme: "गतिशील थीम",
     interactive_theme: "इंटरएक्टिव थीम",
     show_focus_mode: "फोकस मोड दिखाएँ",
@@ -2428,6 +2272,7 @@ export const translation: Record<string, Record<string, string>> & {
     my_apps_description: "अपने पसंदीदा एप्लिकेशन को Launchpad में जोड़ें",
     add_launchpad_links: "कोई कस्टम लिंक नहीं जोड़ा गया। नीचे कुछ जोड़ें।",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "डॉक में लॉन्चपैड दिखाएं",
     clock_style: "घड़ी की शैली",
     analog_clock_1: "एनालॉग घड़ी 1",
     analog_clock_2: "एनालॉग घड़ी 2",
@@ -2498,82 +2343,59 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Gio",
     fri: "Ven",
     sat: "Sab",
-
     dark: "Buio",
     light: "Leggero",
     system: "Sistema",
-
     search: "Ricerca",
-
     browser_search_engine: "Motore di ricerca predefinito del browser",
-
     choose_wallpaper: "Scegli Sfondo",
-
     voice_search_warning:
       "La ricerca vocale non è supportata per questa lingua.",
-
     dock: "Dock",
-
     add: "Aggiungere",
     done: "Fatto",
     add_dock_links: "Aggiungi collegamenti al Dock",
     upload_icon: "Carica icona",
     change_icon: "Cambia icona",
-
     position_on_screen: "Posizione sullo schermo",
     left: "Sinistra",
     bottom: "Metter il fondo a",
     right: "Lato destro",
-
     theme: "Colore",
-
     toggle_bookmark: "Attiva segnalibro",
-
     write_review: "Scrivi una recensione",
     home_page: "Pagina iniziale",
     privacy_policy: "Informativa sulla privacy",
-
     todo: "Elenco Todo",
     todo_toggle_title: "Mostra elenco TODO",
     todo_toggle_description:
       "Gli articoli controllati vengono eliminati automaticamente il giorno successivo",
     add_to_list: "Aggiungi all'elenco",
-
     wallpaper_blur: "Sfondo sfocato",
-
     changelog: "Elenco Changelog",
-
     tab_manager: "Gestisci le schede",
     window: "Finestra",
     tabs: "Schede browser",
     search_tabs: "Scheda Cerca",
-
     show_tab_manager: "Show Scheda Manager",
     show_sticky_notes: "Mostra note adesive",
     sticky_note_placeholder: "Digita la tua nota qui...",
-
     close_all: "Chiudi tutto",
     close_filtered: "Chiuso filtrato",
-
     mute_all: "Mute tutto",
     unmute_all: "Sgraturare tutto",
-
     merge_all: "Unire tutto",
-
     bookmark_toggle: "Mostra segnalibri in Launchpad",
     bookmark_toggle_description:
       "È possibile attivare segnalibri predefiniti del browser con:",
     google_apps: "App Google",
     bookmarks: "Segnalibri",
-
     delete_bookmark: "Elimina il segnalibro",
     delete_bookmark_confirm:
       "Sei sicuro di voler eliminare questo segnalibro? ",
     delete: "Eliminare",
     keep: "Mantenere",
-
     center_widgets_away_from_dock: "Sposta i widget centrali lontano dal dock",
-
     sign_in: "Registrazione",
     signing_in: "Accesso",
     sign_out: "Disconnessione",
@@ -2604,6 +2426,9 @@ export const translation: Record<string, Record<string, string>> & {
       "Impossibile importare i dati. Controlla il formato del file.",
     use_analog_clock_2: "Usa l'orologio analogico 2",
     wallpaper_type: "Tipo di sfondo",
+    wallpaper_fit: "Adatta sfondo",
+    repeat_warning:
+      "Questa opzione ha effetto solo se l'immagine è più piccola dello schermo.",
     dynamic_theme: "Tema dinamico",
     interactive_theme: "Tema interattivo",
     show_focus_mode: "Mostra modalità Focus",
@@ -2736,6 +2561,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Nessun link personalizzato aggiunto. Aggiungine alcuni di seguito.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Mostra Launchpad nel Dock",
     clock_style: "Stile dell'orologio",
     analog_clock_1: "Orologio analogico 1",
     analog_clock_2: "Orologio analogico 2",
@@ -2805,81 +2631,58 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "বৃহ",
     fri: "শুক্র",
     sat: "শনি",
-
     dark: "অন্ধকার",
     light: "আলো",
     system: "সিস্টেম",
-
     search: "অনুসন্ধান করুন",
-
     browser_search_engine: "ব্রাউজার ডিফল্ট সার্চ ইঞ্জিন",
-
     choose_wallpaper: "ওয়ালপেপার চয়ন করুন",
-
     voice_search_warning: "এই ভাষার জন্য ভয়েস অনুসন্ধান সমর্থিত নয়।",
-
     dock: "ডক",
-
     add: "যোগ করুন",
     done: "সম্পন্ন",
     add_dock_links: "ডক লিঙ্ক যোগ করুন",
     upload_icon: "আইকন আপলোড করুন",
     change_icon: "আইকন পরিবর্তন করুন",
-
     position_on_screen: "স্ক্রিনে অবস্থান",
     left: "বাম",
     bottom: "নীচে",
     right: "ডান দিক",
-
     theme: "রঙ",
-
     toggle_bookmark: "টগল বুকমার্ক",
-
     write_review: "একটি পর্যালোচনা লিখুন",
     home_page: "হোম পেজ",
     privacy_policy: "গোপনীয়তা নীতি",
-
     todo: "টোডো তালিকা",
     todo_toggle_title: "টোডো তালিকা দেখান",
     todo_toggle_description:
       "চেক করা টোডো আইটেমগুলি পরের দিন স্বয়ংক্রিয়ভাবে মুছে ফেলা হয়",
     add_to_list: "তালিকায় যুক্ত করুন",
-
     wallpaper_blur: "ঝাপসা ওয়ালপেপার",
-
     changelog: "চেঞ্জলগ তালিকা",
-
     tab_manager: "ট্যাব পরিচালনা করুন",
     window: "উইন্ডো",
     tabs: "ব্রাউজার ট্যাব",
     search_tabs: "ট্যাব অনুসন্ধান",
-
     show_tab_manager: "ট্যাব ম্যানেজার দেখান",
     show_sticky_notes: "স্টিকি নোট দেখান",
     sticky_note_placeholder: "এখানে আপনার নোট টাইপ করুন...",
-
     close_all: "সব বন্ধ",
     close_filtered: "ফিল্টার বন্ধ",
-
     mute_all: "সমস্ত নিঃশব্দ",
     unmute_all: "আনমুট সব",
-
     merge_all: "সমস্ত মার্জ",
-
     bookmark_toggle: "লঞ্চপ্যাডে বুকমার্কগুলি দেখান",
     bookmark_toggle_description:
       "আপনি ব্রাউজার ডিফল্ট বুকমার্ক টগল করতে পারেন:",
     google_apps: "গুগল অ্যাপস",
     bookmarks: "বুকমার্কস",
-
     delete_bookmark: "বুকমার্ক মুছুন",
     delete_bookmark_confirm:
       "আপনি কি নিশ্চিত যে আপনি এই বুকমার্কটি মুছতে চান? ",
     delete: "মুছুন",
     keep: "রাখুন",
-
     center_widgets_away_from_dock: "কেন্দ্রের উইজেটগুলি ডক থেকে দূরে সরান৷",
-
     sign_in: "সাইন ইন করুন",
     signing_in: "সাইন ইন করা হচ্ছে",
     sign_out: "সাইন আউট",
@@ -2910,6 +2713,9 @@ export const translation: Record<string, Record<string, string>> & {
       "ডেটা আমদানি করতে ব্যর্থ হয়েছে। অনুগ্রহ করে ফাইল বিন্যাস পরীক্ষা করুন।",
     use_analog_clock_2: "অ্যানালগ ঘড়ি 2 ব্যবহার করুন",
     wallpaper_type: "ওয়ালপেপার প্রকার",
+    wallpaper_fit: "ওয়ালপেপার ফিট",
+    repeat_warning:
+      "এই বিকল্পটি কেবল তখনই কার্যকর হয় যদি ছবিটি আপনার স্ক্রিনের চেয়ে ছোট হয়।",
     dynamic_theme: "ডায়নামিক থিম",
     interactive_theme: "ইন্টারেক্টিভ থিম",
     show_focus_mode: "ফোকাস মোড দেখান",
@@ -3041,6 +2847,7 @@ export const translation: Record<string, Record<string, string>> & {
     my_apps_description: "আপনার প্রিয় অ্যাপ্লিকেশনগুলি Launchpad এ যোগ করুন",
     add_launchpad_links: "কোনো কাস্টম লিঙ্ক যোগ করা হয়নি। নিচে কিছু যোগ করুন।",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "ডক এ লঞ্চপ্যাড দেখান",
     clock_style: "ঘড়ির ধরন",
     analog_clock_1: "অ্যানালগ ঘড়ি 1",
     analog_clock_2: "অ্যানালগ ঘড়ি 2",
@@ -3110,83 +2917,60 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "qui",
     fri: "sex",
     sat: "Sáb",
-
     dark: "Escuro",
     light: "Luz",
     system: "Sistema",
-
     search: "Procurar",
-
     browser_search_engine: "Mecanismo de pesquisa padrão do navegador",
-
     choose_wallpaper: "Escolha o papel de parede",
-
     voice_search_warning:
       "A pesquisa por voz não é compatível com este idioma.",
-
     dock: "Doca",
-
     add: "Adicionar",
     done: "Feito",
     add_dock_links: "Adicionar links ao Dock",
     upload_icon: "Carregar ícone",
     change_icon: "Alterar ícone",
-
     position_on_screen: "Posição na tela",
     left: "Esquerda",
     bottom: "Fundo",
     right: "Lado direito",
-
     theme: "Cor",
-
     toggle_bookmark: "Alterar marcador",
-
     write_review: "Escreva uma resenha",
     home_page: "Página inicial",
     privacy_policy: "Política de Privacidade",
-
     todo: "Lista de tarefas",
     todo_toggle_title: "Mostre a lista de tarefas",
     todo_toggle_description:
       "Os itens verificados para TODO são excluídos automaticamente no dia seguinte",
     add_to_list: "Adicione à lista",
-
     wallpaper_blur: "Papel de parede borrado",
-
     changelog: "Lista de Changelog",
-
     tab_manager: "Gerenciar guias",
     window: "Janela",
     tabs: "Guias do navegador",
     search_tabs: "Pesquisa de guia",
-
     show_tab_manager: "Mostrar gerente de guia",
     show_sticky_notes: "Mostrar notas adesivas",
     sticky_note_placeholder: "Digite sua nota aqui...",
-
     close_all: "Feche tudo",
     close_filtered: "Filtrado próximo",
-
     mute_all: "Mudo tudo",
     unmute_all: "Lear tudo",
-
     merge_all: "Mesclar tudo",
-
     bookmark_toggle: "Mostrar marcadores no Launchpad",
     bookmark_toggle_description:
       "Você pode alternar o marcador padrão do navegador com:",
     google_apps: "Google Apps",
     bookmarks: "Marcadores",
-
     delete_bookmark: "Exclua marcador",
     delete_bookmark_confirm:
       "Tem certeza de que deseja excluir este marcador? ",
     delete: "Excluir",
     keep: "Manter",
-
     center_widgets_away_from_dock:
       "Desloque os widgets centrais para fora do dock",
-
     sign_in: "Entrar",
     signing_in: "Fazendo login",
     sign_out: "Sair",
@@ -3216,6 +3000,9 @@ export const translation: Record<string, Record<string, string>> & {
     import_failed: "Falha ao importar dados. Verifique o formato do arquivo.",
     use_analog_clock_2: "Use Relógio Analógico 2",
     wallpaper_type: "Tipo de papel de parede",
+    wallpaper_fit: "Ajuste do papel de parede",
+    repeat_warning:
+      "Esta opção só tem efeito se a imagem for menor que a sua tela.",
     dynamic_theme: "Tema Dinâmico",
     interactive_theme: "Tema Interativo",
     show_focus_mode: "Mostrar modo de foco",
@@ -3348,6 +3135,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Nenhum link personalizado adicionado. Adicione alguns abaixo.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Mostrar Launchpad no Dock",
     clock_style: "Estilo do Relógio",
     analog_clock_1: "Relógio Analógico 1",
     analog_clock_2: "Relógio Analógico 2",
@@ -3418,81 +3206,58 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Jeu",
     fri: "Ven",
     sat: "Sam",
-
     dark: "Sombre",
     light: "Lumière",
     system: "Système",
-
     search: "Recherche",
-
     browser_search_engine: "Moteur de recherche par défaut du navigateur",
-
     choose_wallpaper: "Choisissez le papier peint",
-
     voice_search_warning:
       "La recherche vocale n'est pas prise en charge pour cette langue.",
-
     dock: "Quai",
-
     add: "Ajouter",
     done: "Fait",
     add_dock_links: "Ajouter des liens au Dock",
     upload_icon: "Télécharger l'icône",
     change_icon: "Changer d'icône",
-
     position_on_screen: "Position à l'écran",
     left: "Gauche",
     bottom: "Bas",
     right: "Côté droit",
-
     theme: "Couleur",
-
     toggle_bookmark: "Mettre en signet à basculer",
-
     write_review: "Rédiger une critique",
     home_page: "Page d'accueil",
     privacy_policy: "Politique de confidentialité",
-
     todo: "Liste de TOD",
     todo_toggle_title: "Afficher la liste des TODO",
     todo_toggle_description:
       "Les éléments TODO cochés sont automatiquement supprimés le lendemain",
     add_to_list: "Ajouter à la liste",
-
     wallpaper_blur: "Fond d'écran flou",
-
     changelog: "Liste des modifications",
-
     tab_manager: "Gérer les onglets",
     window: "Fenêtre",
     tabs: "Onglets de navigateur",
     search_tabs: "Recherche d'onglet",
-
     show_tab_manager: "Afficher le gestionnaire d'onglet",
     show_sticky_notes: "Afficher les notes autocollantes",
     sticky_note_placeholder: "Tapez votre note ici...",
-
     close_all: "Fermer tous",
     close_filtered: "Fermer filtré",
-
     mute_all: "Muet tout",
     unmute_all: "Réactivation à tous",
-
     merge_all: "Fusionner tout",
-
     bookmark_toggle: "Afficher les signets dans Launchpad",
     bookmark_toggle_description:
       "Vous pouvez basculer le bibliothèque par défaut du navigateur avec:",
     google_apps: "Google Apps",
     bookmarks: "Signets",
-
     delete_bookmark: "Supprimer le signet",
     delete_bookmark_confirm: "Êtes-vous sûr de vouloir supprimer ce signet? ",
     delete: "Supprimer",
     keep: "Garder",
-
     center_widgets_away_from_dock: "Déplacer les widgets centraux du dock",
-
     sign_in: "Se connecter",
     signing_in: "Connexion",
     sign_out: "Se déconnecter",
@@ -3523,6 +3288,9 @@ export const translation: Record<string, Record<string, string>> & {
       "Échec de l'importation des données. Veuillez vérifier le format du fichier.",
     use_analog_clock_2: "Utiliser l'horloge analogique 2",
     wallpaper_type: "Type de papier peint",
+    wallpaper_fit: "Ajustement du fond d'écran",
+    repeat_warning:
+      "Cette option ne prend effet que si l'image est plus petite que votre écran.",
     dynamic_theme: "Thème dynamique",
     interactive_theme: "Thème interactif",
     show_focus_mode: "Afficher le mode Focus",
@@ -3655,6 +3423,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Aucun lien personnalisé ajouté. Ajoutez-en ci-dessous.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Afficher Launchpad dans le Dock",
     clock_style: "Style d'horloge",
     analog_clock_1: "Horloge analogique 1",
     analog_clock_2: "Horloge analogique 2",
@@ -3724,81 +3493,58 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Чт",
     fri: "Пт",
     sat: "Суббота",
-
     dark: "Темный",
     light: "Свет",
     system: "Система",
-
     search: "Поиск",
-
     browser_search_engine: "Поисковая система браузера по умолчанию",
-
     choose_wallpaper: "Выбрать обои",
-
     voice_search_warning: "Голосовой поиск не поддерживается для этого языка.",
-
     dock: "Док",
-
     add: "Добавлять",
     done: "Сделанный",
     add_dock_links: "Добавить ссылки в док",
     upload_icon: "Загрузить значок",
     change_icon: "Изменить значок",
-
     position_on_screen: "Положение на экране",
     left: "Левый",
     bottom: "Нижний",
     right: "Правая сторона",
-
     theme: "Цвет",
-
     toggle_bookmark: "Переверните закладку",
-
     write_review: "Напишите обзор",
     home_page: "Домашняя страница",
     privacy_policy: "Политика конфиденциальности",
-
     todo: "Список Тодо",
     todo_toggle_title: "Показать список Тодо",
     todo_toggle_description:
       "Проверенные элементы TODO автоматически удалены на следующий день",
     add_to_list: "Добавить в список",
-
     wallpaper_blur: "Размытые обои",
-
     changelog: "Список изменений",
-
     tab_manager: "Управление вкладками",
     window: "Окно",
     tabs: "Вкладки браузера",
     search_tabs: "Поиск вкладок",
-
     show_tab_manager: "Показать менеджер вкладок",
     show_sticky_notes: "Показать стикеры",
     sticky_note_placeholder: "Введите вашу заметку здесь...",
-
     close_all: "Закрыть все",
     close_filtered: "Близко отфильтрован",
-
     mute_all: "Морет все",
     unmute_all: "Включил все",
-
     merge_all: "Объединить все",
-
     bookmark_toggle: "Показать закладки в Launchpad",
     bookmark_toggle_description:
       "Вы можете переключить браузер по умолчанию закладки с:",
     google_apps: "Google Apps",
     bookmarks: "Закладки",
-
     delete_bookmark: "Удалить закладку",
     delete_bookmark_confirm: "Вы уверены, что хотите удалить эту закладку? ",
     delete: "Удалить",
     keep: "Держать",
-
     center_widgets_away_from_dock:
       "Сместить центральные виджеты подальше от дока",
-
     sign_in: "Войти",
     signing_in: "Вход в систему",
     sign_out: "Выход",
@@ -3829,6 +3575,9 @@ export const translation: Record<string, Record<string, string>> & {
       "Не удалось импортировать данные. Пожалуйста, проверьте формат файла.",
     use_analog_clock_2: "Использовать аналоговые часы 2",
     wallpaper_type: "Тип обоев",
+    wallpaper_fit: "Подгонка обоев",
+    repeat_warning:
+      "Этот параметр вступает в силу только в том случае, если изображение меньше вашего экрана.",
     dynamic_theme: "Динамичная тема",
     interactive_theme: "Интерактивная тема",
     show_focus_mode: "Показать режим фокусировки",
@@ -3961,6 +3710,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Пользовательские ссылки не добавлены. Добавьте их ниже.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Показывать Launchpad в Dock",
     clock_style: "Стиль часов",
     analog_clock_1: "Аналоговые часы 1",
     analog_clock_2: "Аналоговые часы 2",
@@ -4016,7 +3766,6 @@ export const translation: Record<string, Record<string, string>> & {
     oct: "Oct",
     nov: "Nov",
     dec: "Dic",
-
     sunday: "Domingo",
     monday: "Lunes",
     tuesday: "Martes",
@@ -4031,63 +3780,45 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Jue",
     fri: "Vie",
     sat: "Sáb",
-
     dark: "Oscuro",
     light: "Luz",
     system: "Sistema",
-
     search: "Buscar",
-
     browser_search_engine: "Motor de búsqueda predeterminado del navegador",
-
     choose_wallpaper: "Elegir fondo de pantalla",
-
     voice_search_warning:
       "La búsqueda por voz no es compatible con este idioma.",
-
     dock: "Dock",
-
     add: "Añadir",
     done: "Listo",
     add_dock_links: "Añadir enlaces al Dock",
     upload_icon: "Subir icono",
     change_icon: "Cambiar icono",
-
     position_on_screen: "Posición en pantalla",
     left: "Izquierda",
     bottom: "Abajo",
     right: "Derecha",
-
     theme: "Tema",
-
     toggle_bookmark: "Activar/desactivar marcador",
-
     write_review: "Escribe una reseña",
     home_page: "Página de inicio",
     privacy_policy: "Política de privacidad",
-
     todo: "Lista de tareas",
     todo_toggle_title: "Mostrar lista de tareas",
     todo_toggle_description:
       "Los elementos marcados se eliminan automáticamente al día siguiente",
     add_to_list: "Añadir a la lista",
-
     wallpaper_blur: "Desenfocar fondo de pantalla",
-
     changelog: "Registro de cambios",
-
     tab_manager: "Administrador de pestañas",
     window: "Ventana",
     tabs: "Pestañas",
     search_tabs: "Buscar pestañas",
-
     show_tab_manager: "Mostrar administrador de pestañas",
     show_sticky_notes: "Mostrar notas adhesivas",
     sticky_note_placeholder: "Escribe tu nota aquí...",
-
     close_all: "Cerrar todo",
     close_filtered: "Cerrar filtradas",
-
     mute_all: "Silenciar todo",
     unmute_all: "Reactivar sonido",
     merge_all: "Unificar todo",
@@ -4096,16 +3827,13 @@ export const translation: Record<string, Record<string, string>> & {
       "Puedes activar/desactivar el marcador predeterminado del navegador con:",
     google_apps: "Aplicaciones de Google",
     bookmarks: "Marcadores",
-
     delete_bookmark: "Eliminar marcador",
     delete_bookmark_confirm:
       "¿Seguro que quieres eliminar este marcador? Esta acción no se puede deshacer.",
     delete: "Eliminar",
     keep: "Conservar",
-
     center_widgets_away_from_dock:
       "Desplazar los widgets centrales lejos del Dock",
-
     sign_in: "Iniciar sesión",
     signing_in: "Iniciando sesión",
     sign_out: "Cerrar sesión",
@@ -4136,6 +3864,9 @@ export const translation: Record<string, Record<string, string>> & {
       "Error al importar los datos. Comprueba el formato del archivo.",
     use_analog_clock_2: "Usar reloj analógico 2",
     wallpaper_type: "Tipo de fondo de pantalla",
+    wallpaper_fit: "Ajuste del fondo de pantalla",
+    repeat_warning:
+      "Esta opción solo tiene efecto si la imagen es más pequeña que su pantalla.",
     dynamic_theme: "Tema dinámico",
     interactive_theme: "Tema interactivo",
     show_focus_mode: "Mostrar modo de enfoque",
@@ -4262,6 +3993,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "No se agregaron enlaces personalizados. Agrega algunos a continuación.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Mostrar Launchpad en el Dock",
     clock_style: "Estilo de reloj",
     analog_clock_1: "Reloj analógico 1",
     analog_clock_2: "Reloj analógico 2",
@@ -4338,80 +4070,57 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "木",
     fri: "金",
     sat: "土",
-
     dark: "暗い",
     light: "ライト",
     system: "システム",
-
     search: "検索",
-
     browser_search_engine: "ブラウザのデフォルトの検索エンジン",
-
     choose_wallpaper: "壁紙を選択してください",
-
     voice_search_warning: "この言語では音声検索がサポートされていません",
-
     dock: "ドック",
-
     add: "追加",
     done: "終わり",
     add_dock_links: "リンクをドックに追加",
     upload_icon: "アイコンをアップロード",
     change_icon: "アイコンを変更",
-
     position_on_screen: "画面上の位置",
     left: "左",
     bottom: "底",
     right: "右側",
-
     theme: "色",
-
     toggle_bookmark: "トグルブックマーク",
-
     write_review: "レビューを書いてください",
     home_page: "ホームページ",
     privacy_policy: "プライバシーポリシー",
-
     todo: "TODOリスト",
     todo_toggle_title: "TODOリストを表示します",
     todo_toggle_description:
       "チェックされたTODOアイテムは、翌日自動的に削除されます",
     add_to_list: "リストに追加します",
-
     wallpaper_blur: "ぼんやりした壁紙",
-
     changelog: "Changelogリスト",
-
     tab_manager: "タブを管理します",
     window: "ウィンドウ",
     tabs: "ブラウザタブ",
     search_tabs: "タブ検索",
-
     show_tab_manager: "タブマネージャーを表示します",
     show_sticky_notes: "付箋を表示",
     sticky_note_placeholder: "ここにメモを入力してください...",
-
     close_all: "すべてを閉じます",
     close_filtered: "フィルタリングを閉じます",
-
     mute_all: "すべてをミュートします",
     unmute_all: "すべてのミュートを解除します",
-
     merge_all: "すべてをマージします",
-
     bookmark_toggle: "LaunchPadでブックマークを表示します",
     bookmark_toggle_description:
       "ブラウザのデフォルトのブックマークを次のように切り替えることができます。",
     google_apps: "Googleアプリ",
     bookmarks: "ブックマーク",
-
     delete_bookmark: "ブックマークを削除します",
     delete_bookmark_confirm: "このブックマークを削除したいですか？",
     delete: "消去",
     keep: "保つ",
-
     center_widgets_away_from_dock: "中央のウィジェットをドックから遠ざける",
-
     sign_in: "サインイン",
     signing_in: "サインイン",
     sign_out: "サインアウト",
@@ -4442,6 +4151,9 @@ export const translation: Record<string, Record<string, string>> & {
       "データのインポートに失敗しました。ファイル形式を確認してください。",
     use_analog_clock_2: "アナログ時計2を使用する",
     wallpaper_type: "壁紙タイプ",
+    wallpaper_fit: "壁紙のフィット",
+    repeat_warning:
+      "このオプションは、画像が画面より小さい場合にのみ有効になります。",
     dynamic_theme: "ダイナミックなテーマ",
     interactive_theme: "インタラクティブテーマ",
     show_focus_mode: "フォーカスモードを表示",
@@ -4575,6 +4287,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "カスタムリンクは追加されていません。以下から追加してください。",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Dock に Launchpad を表示",
     clock_style: "時計のスタイル",
     analog_clock_1: "アナログ時計 1",
     analog_clock_2: "アナログ時計 2",
@@ -4644,79 +4357,56 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "목",
     fri: "금",
     sat: "토",
-
     dark: "어두운",
     light: "빛",
     system: "체계",
-
     search: "찾다",
-
     browser_search_engine: "브라우저 기본 검색 엔진",
-
     choose_wallpaper: "배경화면 선택",
-
     voice_search_warning: "이 언어에서는 음성 검색이 지원되지 않습니다.",
-
     dock: "독",
-
     add: "추가하다",
     done: "완료",
     add_dock_links: "Dock에 링크 추가",
     upload_icon: "아이콘 업로드",
     change_icon: "아이콘 변경",
-
     position_on_screen: "화면상의 위치",
     left: "왼쪽",
     bottom: "맨 아래",
     right: "오른쪽",
-
     theme: "색상",
-
     toggle_bookmark: "토글 북마크",
-
     write_review: "리뷰를 작성하십시오",
     home_page: "홈페이지",
     privacy_policy: "개인 정보 정책",
-
     todo: "TODO 목록",
     todo_toggle_title: "TODO 목록을 표시하십시오",
     todo_toggle_description: "확인 된 할 일 품목은 다음날 자동으로 삭제됩니다",
     add_to_list: "목록에 추가하십시오",
-
     wallpaper_blur: "블러 벽지",
-
     changelog: "ChangeLog 목록",
-
     tab_manager: "탭을 관리합니다",
     window: "창문",
     tabs: "브라우저 탭",
     search_tabs: "탭 검색",
-
     show_tab_manager: "탭 관리자 표시",
     show_sticky_notes: "스티키 노트 표시",
     sticky_note_placeholder: "여기에 메모를 입력하세요...",
-
     close_all: "모두 닫으십시오",
     close_filtered: "필터링 된 닫기",
-
     mute_all: "모두 음소거",
     unmute_all: "모든 것을 해제하십시오",
-
     merge_all: "모두 합병하십시오",
-
     bookmark_toggle: "LaunchPad에서 북마크를 표시하십시오",
     bookmark_toggle_description:
       "브라우저 기본 북마크를 다음과 같이 토글 할 수 있습니다.",
     google_apps: "Google Apps",
     bookmarks: "북마크",
-
     delete_bookmark: "북마크를 삭제하십시오",
     delete_bookmark_confirm: "이 북마크를 삭제 하시겠습니까? ",
     delete: "삭제",
     keep: "유지하다",
-
     center_widgets_away_from_dock: "중앙 위젯을 도크에서 멀리 이동",
-
     sign_in: "로그인",
     signing_in: "로그인",
     sign_out: "로그아웃",
@@ -4746,6 +4436,8 @@ export const translation: Record<string, Record<string, string>> & {
     import_failed: "데이터를 가져오지 못했습니다. 파일 형식을 확인하십시오.",
     use_analog_clock_2: "아날로그 시계 2 사용",
     wallpaper_type: "배경 화면 유형",
+    wallpaper_fit: "배경화면 맞춤",
+    repeat_warning: "이 옵션은 이미지가 화면보다 작은 경우에만 적용됩니다.",
     dynamic_theme: "동적 테마",
     interactive_theme: "대화형 테마",
     show_focus_mode: "포커스 모드 표시",
@@ -4877,6 +4569,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "추가된 사용자 지정 링크가 없습니다. 아래에 추가하세요.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Dock에 Launchpad 표시",
     clock_style: "시계 스타일",
     analog_clock_1: "아날로그 시계 1",
     analog_clock_2: "아날로그 시계 2",
@@ -4946,80 +4639,57 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Kam",
     fri: "Jumat",
     sat: "Sab",
-
     dark: "Gelap",
     light: "Lampu",
     system: "Sistem",
-
     search: "Mencari",
-
     browser_search_engine: "Mesin Pencari Default Peramban",
-
     choose_wallpaper: "Pilih Wallpaper",
-
     voice_search_warning: "Penelusuran suara tidak didukung untuk bahasa ini.",
-
     dock: "Dermaga",
-
     add: "Menambahkan",
     done: "Selesai",
     add_dock_links: "Tambahkan Tautan ke Dock",
     upload_icon: "Unggah Ikon",
     change_icon: "Ubah Ikon",
-
     position_on_screen: "Posisi Di Layar",
     left: "Kiri",
     bottom: "Dasar",
     right: "Sisi Kanan",
-
     theme: "Warna",
-
     toggle_bookmark: "Toggle Bookmark",
-
     write_review: "Tulis ulasan",
     home_page: "Beranda",
     privacy_policy: "Kebijakan Privasi",
-
     todo: "Daftar TODO",
     todo_toggle_title: "Tampilkan daftar todo",
     todo_toggle_description:
       "Item todo yang diperiksa secara otomatis dihapus hari berikutnya",
     add_to_list: "Tambahkan ke daftar",
-
     wallpaper_blur: "Wallpaper kabur",
-
     changelog: "Daftar Changelog",
-
     tab_manager: "Kelola tab",
     window: "Jendela",
     tabs: "Tab Browser",
     search_tabs: "Pencarian tab",
-
     show_tab_manager: "Tampilkan Tab Manager",
     show_sticky_notes: "Tampilkan Catatan Tempel",
     sticky_note_placeholder: "Ketik catatan Anda di sini...",
-
     close_all: "Tutup semua",
     close_filtered: "Tutup difilter",
-
     mute_all: "Bisu semua",
     unmute_all: "Buka semua",
-
     merge_all: "Gabungkan semuanya",
-
     bookmark_toggle: "Tampilkan Bookmark di Launchpad",
     bookmark_toggle_description:
       "Anda dapat beralih bookmark default browser dengan:",
     google_apps: "Aplikasi Google",
     bookmarks: "Bookmark",
-
     delete_bookmark: "Hapus Bookmark",
     delete_bookmark_confirm: "Anda yakin ingin menghapus bookmark ini? ",
     delete: "Menghapus",
     keep: "Menyimpan",
-
     center_widgets_away_from_dock: "Geser widget tengah menjauh dari dok",
-
     sign_in: "Masuk",
     signing_in: "Masuk",
     sign_out: "Keluar",
@@ -5049,6 +4719,9 @@ export const translation: Record<string, Record<string, string>> & {
     import_failed: "Gagal mengimpor data. Silakan periksa format file.",
     use_analog_clock_2: "Gunakan Jam Analog 2",
     wallpaper_type: "Jenis wallpaper",
+    wallpaper_fit: "Kesesuaian wallpaper",
+    repeat_warning:
+      "Opsi ini hanya berlaku jika gambar lebih kecil dari layar Anda.",
     dynamic_theme: "Tema dinamis",
     interactive_theme: "Tema Interaktif",
     show_focus_mode: "Tampilkan Mode Fokus",
@@ -5181,6 +4854,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Belum ada tautan khusus yang ditambahkan. Tambahkan beberapa di bawah.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Tampilkan Launchpad di Dock",
     clock_style: "Gaya Jam",
     analog_clock_1: "Jam Analog 1",
     analog_clock_2: "Jam Analog 2",
@@ -5250,80 +4924,57 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "गुरु",
     fri: "शुक्र",
     sat: "शनि",
-
     dark: "गडद",
     light: "प्रकाश",
     system: "प्रणाली",
-
     search: "शोधा",
-
     browser_search_engine: "ब्राउझर डीफॉल्ट शोध इंजिन",
-
     choose_wallpaper: "वॉलपेपर निवडा",
-
     voice_search_warning: "या भाषेसाठी व्हॉइस शोध समर्थित नाही.",
-
     dock: "डॉक",
-
     add: "ॲड",
     done: "झाले",
     add_dock_links: "डॉकमध्ये लिंक्स जोडा",
     upload_icon: "आयकॉन अपलोड करा",
     change_icon: "आयकॉन बदला",
-
     position_on_screen: "स्क्रीनवर स्थान",
     left: "बाकी",
     bottom: "तळ",
     right: "उजवी बाजू",
-
     theme: "रंग",
-
     toggle_bookmark: "टॉगल बुकमार्क",
-
     write_review: "एक पुनरावलोकन लिहा",
     home_page: "मुख्यपृष्ठ",
     privacy_policy: "गोपनीयता धोरण",
-
     todo: "टोडो यादी",
     todo_toggle_title: "टोडो यादी दर्शवा",
     todo_toggle_description:
       "चेक केलेल्या टोडो आयटम दुसर्‍या दिवशी स्वयंचलितपणे हटविले जातात",
     add_to_list: "यादीमध्ये जोडा",
-
     wallpaper_blur: "ब्लर वॉलपेपर",
-
     changelog: "चेंजलॉग यादी",
-
     tab_manager: "टॅब व्यवस्थापित करा",
     window: "विंडो",
     tabs: "ब्राउझर टॅब",
     search_tabs: "टॅब शोध",
-
     show_tab_manager: "टॅब व्यवस्थापक दर्शवा",
     show_sticky_notes: "स्टिकी नोट्स दाखवा",
     sticky_note_placeholder: "तुमची नोंद इथे टाइप करा...",
-
     close_all: "सर्व बंद करा",
     close_filtered: "बंद फिल्टर",
-
     mute_all: "सर्व नि: शब्द",
     unmute_all: "सर्व सशब्द",
-
     merge_all: "सर्व विलीनीकरण",
-
     bookmark_toggle: "लॉन्चपॅड मध्ये बुकमार्क दर्शवा",
     bookmark_toggle_description: "आपण ब्राउझर डीफॉल्ट बुकमार्क टॉगल करू शकता:",
     google_apps: "Google अॅप्स",
     bookmarks: "बुकमार्क",
-
     delete_bookmark: "बुकमार्क हटवा",
     delete_bookmark_confirm:
       "आपणास खात्री आहे की आपण हा बुकमार्क हटवू इच्छिता? ",
     delete: "हटवा",
     keep: "ठेवा",
-
     center_widgets_away_from_dock: "केंद्र विजेट डॉकपासून दूर हलवा",
-
     sign_in: "साइन इन करा",
     signing_in: "साइन इन करत आहे",
     sign_out: "साइन आउट करा",
@@ -5353,6 +5004,9 @@ export const translation: Record<string, Record<string, string>> & {
     import_failed: "डेटा आयात करण्यात अयशस्वी. कृपया फाइल फॉरमॅट तपासा.",
     use_analog_clock_2: "अॅनालॉग घड्याळ 2 वापरा",
     wallpaper_type: "वॉलपेपर प्रकार",
+    wallpaper_fit: "वॉलपेपर फिट",
+    repeat_warning:
+      "हा पर्याय तेव्हाच लागू होतो जर प्रतिमा तुमच्या स्क्रीनपेक्षा लहान असेल.",
     dynamic_theme: "डायनॅमिक थीम",
     interactive_theme: "परस्पर थीम",
     show_focus_mode: "फोकस मोड दाखवा",
@@ -5483,6 +5137,7 @@ export const translation: Record<string, Record<string, string>> & {
     my_apps_description: "तुमचे आवडते ॲप्लिकेशन्स Launchpad मध्ये जोडा",
     add_launchpad_links: "कोणत्याही कस्टम लिंक जोडल्या नाहीत. खाली काही जोडा.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "डॉकमध्ये लॉन्चपॅड दाखवा",
     clock_style: "घड्याळाची शैली",
     analog_clock_1: "ॲनालॉग घड्याळ 1",
     analog_clock_2: "ॲनालॉग घड्याळ 2",
@@ -5515,7 +5170,6 @@ export const translation: Record<string, Record<string, string>> & {
     third_party_libraries: "Użyte biblioteki stron trzecich",
     copyright: "Amith B. Wszelkie prawa zastrzeżone.",
     language: "Język",
-
     january: "Styczeń",
     february: "Luty",
     march: "Marzec",
@@ -5539,7 +5193,6 @@ export const translation: Record<string, Record<string, string>> & {
     oct: "Paź",
     nov: "Lis",
     dec: "Gru",
-
     sunday: "Niedziela",
     monday: "Poniedziałek",
     tuesday: "Wtorek",
@@ -5554,63 +5207,45 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Czw",
     fri: "Pią",
     sat: "Sob",
-
     dark: "Ciemny",
     light: "Jasny",
     system: "System",
-
     search: "Szukaj",
-
     browser_search_engine: "Domyślna wyszukiwarka przeglądarki",
-
     choose_wallpaper: "Wybierz tapetę",
-
     voice_search_warning:
       "Wyszukiwanie głosowe nie jest obsługiwane w tym języku.",
-
     dock: "Dok",
-
     add: "Dodaj",
     done: "Gotowe",
     add_dock_links: "Dodaj linki do doku",
     upload_icon: "Prześlij ikonę",
     change_icon: "Zmień ikonę",
-
     position_on_screen: "Pozycja na ekranie",
     left: "Lewo",
     bottom: "Dół",
     right: "Prawo",
-
     theme: "Motyw",
-
     toggle_bookmark: "Przełącz zakładkę",
-
     write_review: "Napisz recenzję",
     home_page: "Strona główna",
     privacy_policy: "Polityka prywatności",
-
     todo: "Lista zadań",
     todo_toggle_title: "Pokaż listę zadań",
     todo_toggle_description:
       "Zaznaczone zadania są automatycznie usuwane następnego dnia",
     add_to_list: "Dodaj do listy",
-
     wallpaper_blur: "Rozmycie tapety",
-
     changelog: "Dziennik zmian",
-
     tab_manager: "Menedżer kart",
     window: "Okno",
     tabs: "Karty",
     search_tabs: "Szukaj kart",
-
     show_tab_manager: "Pokaż Menedżera Kart",
     show_sticky_notes: "Pokaż Notatki",
     sticky_note_placeholder: "Wpisz swoją notatkę tutaj...",
-
     close_all: "Zamknij wszystkie",
     close_filtered: "Zamknij przefiltrowane",
-
     mute_all: "Wycisz wszystkie",
     unmute_all: "Wyłącz wyciszenie wszystkich",
     merge_all: "Połącz wszystkie",
@@ -5619,15 +5254,12 @@ export const translation: Record<string, Record<string, string>> & {
       "Możesz przełączyć domyślną zakładkę przeglądarki za pomocą:",
     google_apps: "Aplikacje Google",
     bookmarks: "Zakładki",
-
     delete_bookmark: "Usuń zakładkę",
     delete_bookmark_confirm:
       "Czy na pewno chcesz usunąć tę zakładkę? Tej czynności nie można cofnąć.",
     delete: "Usuń",
     keep: "Zatrzymaj",
-
     center_widgets_away_from_dock: "Odsuń środkowe widżety od doku",
-
     sign_in: "Zaloguj się",
     signing_in: "Logowanie",
     sign_out: "Wyloguj się",
@@ -5657,6 +5289,9 @@ export const translation: Record<string, Record<string, string>> & {
     import_failed: "Nie udało się zaimportować danych. Sprawdź format pliku.",
     use_analog_clock_2: "Użyj zegara analogowego 2",
     wallpaper_type: "Rodzaj tapety",
+    wallpaper_fit: "Dopasowanie tapety",
+    repeat_warning:
+      "Ta opcja ma zastosowanie tylko wtedy, gdy obraz jest mniejszy niż ekran.",
     dynamic_theme: "Motyw dynamiczny",
     interactive_theme: "Motyw interaktywny",
     show_focus_mode: "Pokaż Tryb Skupienia",
@@ -5789,6 +5424,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Nie dodano żadnych niestandardowych linków. Dodaj jakieś poniżej.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Pokaż Launchpad w Docku",
     clock_style: "Styl zegara",
     analog_clock_1: "Zegar analogowy 1",
     analog_clock_2: "Zegar analogowy 2",
@@ -5821,7 +5457,6 @@ export const translation: Record<string, Record<string, string>> & {
     third_party_libraries: "Verwendete Drittanbieter-Bibliotheken",
     copyright: "Amith B. Alle Rechte vorbehalten.",
     language: "Sprache",
-
     january: "Januar",
     february: "Februar",
     march: "März",
@@ -5845,7 +5480,6 @@ export const translation: Record<string, Record<string, string>> & {
     oct: "Okt",
     nov: "Nov",
     dec: "Dez",
-
     sunday: "Sonntag",
     monday: "Montag",
     tuesday: "Dienstag",
@@ -5860,63 +5494,45 @@ export const translation: Record<string, Record<string, string>> & {
     thu: "Do",
     fri: "Fr",
     sat: "Sa",
-
     dark: "Dunkel",
     light: "Hell",
     system: "System",
-
     search: "Suchen",
-
     browser_search_engine: "Standard-Suchmaschine des Browsers",
-
     choose_wallpaper: "Hintergrundbild auswählen",
-
     voice_search_warning:
       "Die Sprachsuche wird für diese Sprache nicht unterstützt.",
-
     dock: "Dock",
-
     add: "Hinzufügen",
     done: "Fertig",
     add_dock_links: "Links zum Dock hinzufügen",
     upload_icon: "Symbol hochladen",
     change_icon: "Symbol ändern",
-
     position_on_screen: "Position auf dem Bildschirm",
     left: "Links",
     bottom: "Unten",
     right: "Rechts",
-
     theme: "Thema",
-
     toggle_bookmark: "Lesezeichen umschalten",
-
     write_review: "Eine Bewertung schreiben",
     home_page: "Startseite",
     privacy_policy: "Datenschutzrichtlinie",
-
     todo: "Todo-Liste",
     todo_toggle_title: "Todo-Liste anzeigen",
     todo_toggle_description:
       "Aktivierte Todo-Elemente werden am nächsten Tag automatisch gelöscht",
     add_to_list: "Zur Liste hinzufügen",
-
     wallpaper_blur: "Hintergrundbild weichzeichnen",
-
     changelog: "Änderungsprotokoll",
-
     tab_manager: "Tab-Manager",
     window: "Fenster",
     tabs: "Tabs",
     search_tabs: "Tabs suchen",
-
     show_tab_manager: "Tab-Manager anzeigen",
     show_sticky_notes: "Haftnotizen anzeigen",
     sticky_note_placeholder: "Geben Sie hier Ihre Notiz ein...",
-
     close_all: "Alle schließen",
     close_filtered: "Gefilterte schließen",
-
     mute_all: "Alle stummschalten",
     unmute_all: "Stummschaltung für alle aufheben",
     merge_all: "Alle zusammenführen",
@@ -5925,15 +5541,12 @@ export const translation: Record<string, Record<string, string>> & {
       "Sie können das Standard-Lesezeichen des Browsers umschalten mit:",
     google_apps: "Google Apps",
     bookmarks: "Lesezeichen",
-
     delete_bookmark: "Lesezeichen löschen",
     delete_bookmark_confirm:
       "Möchten Sie dieses Lesezeichen wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
     delete: "Löschen",
     keep: "Behalten",
-
     center_widgets_away_from_dock: "Mittlere Widgets vom Dock wegschieben",
-
     sign_in: "Anmelden",
     signing_in: "Wird angemeldet...",
     sign_out: "Abmelden",
@@ -5964,6 +5577,9 @@ export const translation: Record<string, Record<string, string>> & {
       "Fehler beim Importieren der Daten. Bitte prüfen Sie das Dateiformat.",
     use_analog_clock_2: "Analoge Uhr 2 verwenden",
     wallpaper_type: "Hintergrundbildtyp",
+    wallpaper_fit: "Hintergrundbild-Anpassung",
+    repeat_warning:
+      "Diese Option wird nur wirksam, wenn das Bild kleiner als Ihr Bildschirm ist.",
     dynamic_theme: "Dynamisches Design",
     interactive_theme: "Interaktives Design",
     show_focus_mode: "Fokusmodus anzeigen",
@@ -6098,6 +5714,7 @@ export const translation: Record<string, Record<string, string>> & {
     add_launchpad_links:
       "Keine benutzerdefinierten Links hinzugefügt. Fügen Sie unten einige hinzu.",
     launchpad: "Launchpad",
+    show_launchpad_in_dock: "Launchpad im Dock anzeigen",
     clock_style: "Uhrenstil",
     analog_clock_1: "Analoge Uhr 1",
     analog_clock_2: "Analoge Uhr 2",
@@ -6107,7 +5724,6 @@ export const translation: Record<string, Record<string, string>> & {
 export const languages = Object.keys(
   translation,
 ) as unknown as keyof typeof translation;
-
 export const languageOptions = [
   { label: "English", value: "en", voiceSearchLanguage: "en-US" },
   { label: "Kannada", value: "kn", voiceSearchLanguage: "" },
@@ -6130,7 +5746,6 @@ export const languageOptions = [
   { label: "Polish", value: "pl", voiceSearchLanguage: "pl" },
   { label: "German", value: "de", voiceSearchLanguage: "de-DE" },
 ];
-
 export const languageLocaleMap: Record<keyof typeof translation, string> = {
   en: "en-US", // English
   kn: "kn-IN", // Kannada

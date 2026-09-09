@@ -103,3 +103,5 @@ export const WALLPAPER_LIST = [
 ];
 
 export const WALLPAPER_BLUR_LOCAL_STORAGE_KEY = "wallpaper_blur";
+
+export const WALLPAPER_FIT_LOCAL_STORAGE_KEY = "wallpaper_fit";

@@ -6,8 +6,15 @@ import LinkListEditor from "../shared/LinkListEditor";
 import Toggle from "../../toggle/Toggle";
 
 export default memo(function LaunchpadSettings() {
-  const { customLaunchpadLinks, handleCustomLaunchpadLinksChange, bookmarksVisible, handleBookmarkVisbility, activeSpaceId } =
-    useContext(AppContext);
+  const {
+    customLaunchpadLinks,
+    handleCustomLaunchpadLinksChange,
+    bookmarksVisible,
+    handleBookmarkVisbility,
+    activeSpaceId,
+    showLaunchpad,
+    setShowLaunchpad,
+  } = useContext(AppContext);
 
   const isMac = useMemo(() => {
     return navigator.userAgent.toLowerCase().includes("mac");
@@ -16,6 +23,26 @@ export default memo(function LaunchpadSettings() {
   return (
     <div className="launchpad-settings__container">
       <div className="launchpad-settings__row-item with-description">
+        <div className="bookmark-toggle-row">
+          <Translation value="launchpad" />
+          <Toggle
+            id={"launchpad-toggle"}
+            name="Launchpad toggle"
+            isChecked={showLaunchpad}
+            handleToggleChange={() => setShowLaunchpad(!showLaunchpad)}
+          />
+        </div>
+        <div className="bookmark-toggle-description">
+          <Translation value="show_launchpad_in_dock" />
+        </div>
+      </div>
+
+      <div
+        className={
+          "launchpad-settings__row-item with-description" +
+          (!showLaunchpad ? " disabled" : "")
+        }
+      >
         <div className="bookmark-toggle-row">
           <Translation value="bookmark_toggle" />
           <Toggle
