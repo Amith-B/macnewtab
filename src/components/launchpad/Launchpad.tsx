@@ -58,7 +58,7 @@ export default function Launchpad({
   const [modalAccessible, setModalAccessible] = useState(false);
   const [search, setSearch] = useState("");
   const [searchDebouncedValue, setSearchDebouncedValue] = useState("");
-  const { bookmarksVisible, locale, separatePageSite, customLaunchpadLinks, activeSpaceId } = useContext(AppContext);
+  const { bookmarksVisible, locale, separatePageSite, customLaunchpadLinks, activeSpaceId, showGoogleApps } = useContext(AppContext);
   const [selectedTab, setSelectedTab] = useLocalStorage<
     "google_apps" | "bookmarks" | "my_apps"
   >(LAUNCHPAD_SELECTED_TAB_LOCAL_STORAGE_KEY, "google_apps", undefined, activeSpaceId);
@@ -210,11 +210,18 @@ export default function Launchpad({
   const activeTab = useMemo(() => {
     const hasBookmarks = !!bookmarksTree.length;
     const hasCustomLinks = !!customLaunchpadLinks?.length;
-    if (selectedTab === "bookmarks" && !hasBookmarks) return "google_apps";
-    if (selectedTab === "my_apps" && !hasCustomLinks) return "google_apps";
-    if (selectedTab !== "google_apps" && selectedTab !== "bookmarks" && selectedTab !== "my_apps") return "google_apps";
-    return selectedTab;
-  }, [selectedTab, bookmarksTree.length, customLaunchpadLinks?.length]);
+    
+    const visibleTabs: string[] = [];
+    if (showGoogleApps) visibleTabs.push("google_apps");
+    if (hasCustomLinks) visibleTabs.push("my_apps");
+    if (hasBookmarks) visibleTabs.push("bookmarks");
+    
+    if (visibleTabs.includes(selectedTab)) {
+      return selectedTab;
+    }
+    
+    return visibleTabs.length > 0 ? visibleTabs[0] : "google_apps";
+  }, [selectedTab, bookmarksTree.length, customLaunchpadLinks?.length, showGoogleApps]);
 
   return (
     <div
@@ -225,17 +232,19 @@ export default function Launchpad({
       }
       onClick={onClose}
     >
-      {(!!bookmarksTree.length || !!customLaunchpadLinks?.length) && (
+      {((showGoogleApps ? 1 : 0) + (bookmarksTree.length ? 1 : 0) + (customLaunchpadLinks?.length ? 1 : 0)) > 1 && (
         <div className="launchpad__tab">
-          <button
-            className={
-              "launchpad__tab__button" +
-              (activeTab === "google_apps" ? " selected" : "")
-            }
-            onClick={handleTabSelect("google_apps")}
-          >
-            <Translation value="google_apps" />
-          </button>
+          {showGoogleApps && (
+            <button
+              className={
+                "launchpad__tab__button" +
+                (activeTab === "google_apps" ? " selected" : "")
+              }
+              onClick={handleTabSelect("google_apps")}
+            >
+              <Translation value="google_apps" />
+            </button>
+          )}
           {!!customLaunchpadLinks?.length && (
             <button
               className={
@@ -270,7 +279,7 @@ export default function Launchpad({
           onClick={(evt) => evt.stopPropagation()}
         />
       </div>
-      {activeTab === "google_apps" && (
+      {showGoogleApps && activeTab === "google_apps" && (
         <div className="launchpad__container">
           {filteredLaunchpadList.map((item, idx) => (
             <a

@@ -65,6 +65,9 @@ const Dock = memo(() => {
     separatePageSite,
     activeSpaceId,
     showLaunchpad,
+    bookmarksVisible,
+    showGoogleApps,
+    customLaunchpadLinks,
   } = useContext(AppContext);
 
   const handleLaunchpadClose = useCallback(
@@ -152,6 +155,9 @@ const Dock = memo(() => {
 
   const hasLinks = !!dockBarSites.length;
 
+  const hasLaunchpadContent = bookmarksVisible || showGoogleApps || !!customLaunchpadLinks?.length;
+  const shouldShowLaunchpad = showLaunchpad && hasLaunchpadContent;
+
   return (
     <>
       <div className={`dock-scroll-container ${dockPosition}`}>
@@ -170,7 +176,7 @@ const Dock = memo(() => {
           ref={containerRef}
           onScroll={checkOverflow}
         >
-          {showLaunchpad && (
+          {shouldShowLaunchpad && (
             <button
               className={`launchpad-icon accessible tooltip tooltip-${
                 TooltipPosition[dockPosition] || "top"

@@ -19,6 +19,7 @@ import {
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
   CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY,
   SHOW_LAUNCHPAD_LOCAL_STORAGE_KEY,
+  SHOW_GOOGLE_APPS_LOCAL_STORAGE_KEY,
 } from "./generalSettings";
 import {
   THEME_LOCAL_STORAGE_KEY,
@@ -135,6 +136,7 @@ export const PER_SPACE_KEYS: string[] = [
   SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY, // "show_clock_and_calendar"
   SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY, // "show_tab_manager"
   SHOW_LAUNCHPAD_LOCAL_STORAGE_KEY, // "show_launchpad"
+  SHOW_GOOGLE_APPS_LOCAL_STORAGE_KEY, // "show_google_apps"
   CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY, // "center_widgets_away_from_dock"
   USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY, // "use_analog_clock_2"
   CLOCK_STYLE_LOCAL_STORAGE_KEY, // "clock_style"

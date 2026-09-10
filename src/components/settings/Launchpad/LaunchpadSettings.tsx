@@ -14,15 +14,19 @@ export default memo(function LaunchpadSettings() {
     activeSpaceId,
     showLaunchpad,
     setShowLaunchpad,
+    showGoogleApps,
+    setShowGoogleApps,
   } = useContext(AppContext);
 
   const isMac = useMemo(() => {
     return navigator.userAgent.toLowerCase().includes("mac");
   }, []);
 
+  const hasLaunchpadContent = bookmarksVisible || showGoogleApps || !!customLaunchpadLinks?.length;
+
   return (
     <div className="launchpad-settings__container">
-      <div className="launchpad-settings__row-item with-description">
+      <div className={`launchpad-settings__row-item with-description ${!hasLaunchpadContent ? "disabled" : ""}`}>
         <div className="bookmark-toggle-row">
           <Translation value="launchpad" />
           <Toggle
@@ -34,6 +38,23 @@ export default memo(function LaunchpadSettings() {
         </div>
         <div className="bookmark-toggle-description">
           <Translation value="show_launchpad_in_dock" />
+        </div>
+      </div>
+
+      <div
+        className={
+          "launchpad-settings__row-item" +
+          (!showLaunchpad ? " disabled" : "")
+        }
+      >
+        <div className="bookmark-toggle-row">
+          <Translation value="show_google_apps_toggle" />
+          <Toggle
+            id={"google-apps-toggle"}
+            name="Google Apps toggle"
+            isChecked={showGoogleApps}
+            handleToggleChange={() => setShowGoogleApps(!showGoogleApps)}
+          />
         </div>
       </div>
 

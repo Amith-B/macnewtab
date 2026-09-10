@@ -283,6 +283,7 @@ const enTranslation = {
   layout_default: "Default",
   layout_reversed: "Reversed",
   drag_and_drop_to_reorder_links: "Drag and drop to reorder links",
+  show_google_apps_toggle: "Show Google Apps",
 };
 export const translation: Record<string, Record<string, string>> & {
   en: typeof enTranslation;
@@ -559,6 +560,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "ಡೀಫಾಲ್ಟ್",
     layout_reversed: "ವಿಲೋಮ",
     drag_and_drop_to_reorder_links: "ಲಿಂಕ್‌ಗಳನ್ನು ಮರುಕ್ರಮಗೊಳಿಸಲು ಎಳೆಯಿರಿ ಮತ್ತು ಬಿಡಿ",
+    show_google_apps_toggle: "ಗೂಗಲ್ ಆ್ಯಪ್‌ಗಳನ್ನು ತೋರಿಸಿ",
     my_apps: "ನನ್ನ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು",
     my_apps_description: "ನಿಮ್ಮ ನೆಚ್ಚಿನ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು Launchpad ಗೆ ಸೇರಿಸಿ",
     add_launchpad_links:
@@ -853,6 +855,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Výchozí",
     layout_reversed: "Obráceně",
     drag_and_drop_to_reorder_links: "Přetažením uspořádáte odkazy",
+    show_google_apps_toggle: "Zobrazit Google aplikace",
     my_apps: "Moje aplikace",
     my_apps_description: "Přidejte své oblíbené aplikace do Launchpad",
     add_launchpad_links:
@@ -1142,6 +1145,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Varsayılan",
     layout_reversed: "Ters",
     drag_and_drop_to_reorder_links: "Bağlantıları yeniden sıralamak için sürükleyip bırakın",
+    show_google_apps_toggle: "Google Uygulamalarını Göster",
     my_apps: "Uygulamalarım",
     my_apps_description: "Favori uygulamalarınızı Launchpad'e ekleyin",
     add_launchpad_links:
@@ -1431,6 +1435,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Mặc định",
     layout_reversed: "Đảo ngược",
     drag_and_drop_to_reorder_links: "Kéo và thả để sắp xếp lại các liên kết",
+    show_google_apps_toggle: "Hiển thị Ứng dụng Google",
     my_apps: "Ứng dụng của tôi",
     my_apps_description: "Thêm các ứng dụng yêu thích của bạn vào Launchpad",
     add_launchpad_links:
@@ -1721,6 +1726,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Standart",
     layout_reversed: "Teskari",
     drag_and_drop_to_reorder_links: "Havolalarni qayta tartiblash uchun sudrab tashlang",
+    show_google_apps_toggle: "Google ilovalarini ko'rsatish",
     my_apps: "Mening ilovalarim",
     my_apps_description: "Sevimli ilovalaringizni Launchpad-ga qo'shing",
     add_launchpad_links:
@@ -1998,6 +2004,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "默认",
     layout_reversed: "反转",
     drag_and_drop_to_reorder_links: "拖放以重新排序链接",
+    show_google_apps_toggle: "显示 Google 应用程序",
     my_apps: "我的应用",
     my_apps_description: "将您喜欢的应用添加到 Launchpad",
     add_launchpad_links: "未添加任何自定义链接。在下面添加一些。",
@@ -2284,6 +2291,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "डिफ़ॉल्ट",
     layout_reversed: "उलट",
     drag_and_drop_to_reorder_links: "लिंक को पुनर्व्यवस्थित करने के लिए खींचें और छोड़ें",
+    show_google_apps_toggle: "Google ऐप्स दिखाएं",
     my_apps: "मेरे ऐप्स",
     my_apps_description: "अपने पसंदीदा एप्लिकेशन को Launchpad में जोड़ें",
     add_launchpad_links: "कोई कस्टम लिंक नहीं जोड़ा गया। नीचे कुछ जोड़ें।",
@@ -2574,6 +2582,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Predefinito",
     layout_reversed: "Invertito",
     drag_and_drop_to_reorder_links: "Trascina e rilascia per riordinare i link",
+    show_google_apps_toggle: "Mostra App Google",
     my_apps: "Le mie app",
     my_apps_description: "Aggiungi le tue applicazioni preferite al Launchpad",
     add_launchpad_links:
@@ -2863,6 +2872,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "ডিফল্ট",
     layout_reversed: "উল্টানো",
     drag_and_drop_to_reorder_links: "লিঙ্কগুলি পুনরায় সাজাতে টেনে আনুন এবং ছেড়ে দিন",
+    show_google_apps_toggle: "গুগল অ্যাপস দেখান",
     my_apps: "আমার অ্যাপস",
     my_apps_description: "আপনার প্রিয় অ্যাপ্লিকেশনগুলি Launchpad এ যোগ করুন",
     add_launchpad_links: "কোনো কাস্টম লিঙ্ক যোগ করা হয়নি। নিচে কিছু যোগ করুন।",
@@ -3152,6 +3162,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Padrão",
     layout_reversed: "Invertido",
     drag_and_drop_to_reorder_links: "Arraste e solte para reordenar os links",
+    show_google_apps_toggle: "Mostrar Google Apps",
     my_apps: "Meus Apps",
     my_apps_description: "Adicione seus aplicativos favoritos ao Launchpad",
     add_launchpad_links:
@@ -3442,6 +3453,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Par défaut",
     layout_reversed: "Inversé",
     drag_and_drop_to_reorder_links: "Faites glisser et déposez pour réorganiser les liens",
+    show_google_apps_toggle: "Afficher les applications Google",
     my_apps: "Mes applications",
     my_apps_description: "Ajoutez vos applications préférées au Launchpad",
     add_launchpad_links:
@@ -3731,6 +3743,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "По умолчанию",
     layout_reversed: "В обратном порядке",
     drag_and_drop_to_reorder_links: "Перетащите, чтобы изменить порядок ссылок",
+    show_google_apps_toggle: "Показать Google Приложения",
     my_apps: "Мои приложения",
     my_apps_description: "Добавьте свои любимые приложения в Launchpad",
     add_launchpad_links:
@@ -4016,6 +4029,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Predeterminado",
     layout_reversed: "Invertido",
     drag_and_drop_to_reorder_links: "Arrastra y suelta para reordenar los enlaces",
+    show_google_apps_toggle: "Mostrar aplicaciones de Google",
     my_apps: "Mis aplicaciones",
     my_apps_description: "Agrega tus aplicaciones favoritas al Launchpad",
     add_launchpad_links:
@@ -4311,6 +4325,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "デフォルト",
     layout_reversed: "反転",
     drag_and_drop_to_reorder_links: "ドラッグ＆ドロップでリンクを並べ替え",
+    show_google_apps_toggle: "Googleアプリを表示",
     my_apps: "マイアプリ",
     my_apps_description:
       "お気に入りのアプリケーションを Launchpad に追加します",
@@ -4596,6 +4611,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "기본값",
     layout_reversed: "반전",
     drag_and_drop_to_reorder_links: "링크를 드래그 앤 드롭하여 순서 변경",
+    show_google_apps_toggle: "Google 앱 표시",
     my_apps: "내 앱",
     my_apps_description: "즐겨찾는 애플리케이션을 Launchpad에 추가하세요",
     add_launchpad_links:
@@ -4883,6 +4899,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Bawaan",
     layout_reversed: "Dibalik",
     drag_and_drop_to_reorder_links: "Seret dan lepas untuk mengatur ulang tautan",
+    show_google_apps_toggle: "Tampilkan Google Apps",
     my_apps: "Aplikasi Saya",
     my_apps_description: "Tambahkan aplikasi favorit Anda ke Launchpad",
     add_launchpad_links:
@@ -5169,6 +5186,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "डीफॉल्ट",
     layout_reversed: "उलट",
     drag_and_drop_to_reorder_links: "लिंक्सची क्रमवारी बदलण्यासाठी ड्रॅग आणि ड्रॉप करा",
+    show_google_apps_toggle: "Google अ‍ॅप्स दाखवा",
     my_apps: "माझे ॲप्स",
     my_apps_description: "तुमचे आवडते ॲप्लिकेशन्स Launchpad मध्ये जोडा",
     add_launchpad_links: "कोणत्याही कस्टम लिंक जोडल्या नाहीत. खाली काही जोडा.",
@@ -5457,6 +5475,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Domyślny",
     layout_reversed: "Odwrócony",
     drag_and_drop_to_reorder_links: "Przeciągnij i upuść, aby zmienić kolejność linków",
+    show_google_apps_toggle: "Pokaż aplikacje Google",
     my_apps: "Moje aplikacje",
     my_apps_description: "Dodaj swoje ulubione aplikacje do Launchpad",
     add_launchpad_links:
@@ -5748,6 +5767,7 @@ export const translation: Record<string, Record<string, string>> & {
     layout_default: "Standard",
     layout_reversed: "Umgekehrt",
     drag_and_drop_to_reorder_links: "Ziehen und ablegen, um Links neu anzuordnen",
+    show_google_apps_toggle: "Google Apps anzeigen",
     my_apps: "Meine Apps",
     my_apps_description:
       "Fügen Sie Ihre Lieblingsanwendungen zum Launchpad hinzu",
