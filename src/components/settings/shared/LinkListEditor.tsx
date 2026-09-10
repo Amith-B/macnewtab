@@ -153,14 +153,21 @@ export default function LinkListEditor({
 
   return (
     <>
-      <div>
-        <button className="link-editor__add button" onClick={handleAdd}>
-          <Translation value="add" />
-        </button>
-        {changesActive && (
-          <button className="link-editor__done button" onClick={handleDone}>
-            <Translation value="done" />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+        <div>
+          <button className="link-editor__add button" onClick={handleAdd}>
+            <Translation value="add" />
           </button>
+          {changesActive && (
+            <button className="link-editor__done button" onClick={handleDone}>
+              <Translation value="done" />
+            </button>
+          )}
+        </div>
+        {currentLinks.length > 1 && (
+          <span style={{ fontSize: "12px", color: "var(--theme-clr-secondary)", marginLeft: "10px", textAlign: "right" }}>
+            <Translation value="drag_and_drop_to_reorder_links" />
+          </span>
         )}
       </div>
       <div
