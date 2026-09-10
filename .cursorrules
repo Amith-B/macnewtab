@@ -11,11 +11,12 @@ You are an AI assistant working on the `macnewtab` Chrome Extension project. Thi
 
 If adding a new widget or dock feature (like the Screen Recorder, Focus Mode, etc.), follow this exact flow:
 
-### 1. Global State (Context)
+### 1. Global State & Data Management
 State is managed globally via `AppContext` and persisted in LocalStorage.
 1. **Define Key**: Add your feature's local storage key in `src/static/generalSettings.ts` (e.g., `export const SHOW_NEW_FEATURE_LOCAL_STORAGE_KEY = "show_new_feature";`).
-2. **Space Isolation (Crucial)**: If the setting should be customizable per "Space" (workspace), import the key into `src/static/spacesSettings.ts` and add it to the `PER_SPACE_KEYS` array.
-3. **Wire Context**: In `src/context/provider.tsx`:
+2. **Space Isolation (CRITICAL)**: If the setting should be customizable per "Space" (workspace), you **MUST** import the key into `src/static/spacesSettings.ts` and add it to the `PER_SPACE_KEYS` array. AI models frequently forget this—do not skip this step!
+3. **Data Backup (CRITICAL)**: You **MUST** import the new key into `src/utils/dataManagement.ts` and add it to the `KEYS_TO_EXPORT` array so users don't lose their settings when exporting/importing data. AI models frequently forget this too!
+4. **Wire Context**: In `src/context/provider.tsx`:
    - Add the state to the `AppContext` type definition.
    - Use the custom `useLocalStorage` hook to initialize the state.
    - Add the state and setter to **both** `useMemo` dependency arrays and return objects (around lines ~1230 and ~1345).
