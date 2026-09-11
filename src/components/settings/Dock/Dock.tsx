@@ -153,6 +153,7 @@ export default memo(function Dock() {
         emptyMessage="add_dock_links"
         iconDbPrefix="dock_icon"
         activeSpaceId={activeSpaceId}
+        allowFolder={true}
       />
     </div>
   );

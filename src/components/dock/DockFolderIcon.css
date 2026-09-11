@@ -4,13 +4,15 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: 10px;
+  border-radius: 12px;
   background-color: var(--theme-bg-with-opacity);
-  backdrop-filter: blur(var(--theme-bg-blur));
-  border: 1px solid var(--theme-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid #9696967a;
   cursor: pointer;
-  padding: 4px;
+  padding: 6px;
   box-sizing: border-box;
+  box-shadow: 0 2px 6px var(--theme-shadow);
 }
 
 .folder-icon-grid {
@@ -20,8 +22,6 @@
   gap: 2px;
   width: 100%;
   height: 100%;
-  border-radius: 6px;
-  overflow: hidden;
 }
 
 .folder-icon-minified {
@@ -32,21 +32,12 @@
   height: 100%;
 }
 
-.folder-icon-minified .dock-app__icon-container {
-  width: 100%;
-  height: 100%;
+.folder-icon-minified .dock-site__icon {
+  width: 100% !important;
+  height: 100% !important;
   min-width: unset;
   min-height: unset;
-  border-radius: 2px;
-}
-
-.folder-icon-minified .dock-app__icon-container img {
-  width: 100%;
-  height: 100%;
+  border-radius: 3px !important;
   object-fit: cover;
-  border-radius: 2px;
-}
-
-.folder-icon-minified .dock-app__icon-container .dock-app__icon-letter {
-  font-size: 6px;
+  box-shadow: none !important;
 }

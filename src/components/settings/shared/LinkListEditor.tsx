@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  useRef,
+  useState,
+  useEffect,
+  useContext,
+} from "react";
 import { List, arrayMove } from "react-movable";
 import { ReactComponent as DeleteIcon } from "../../../assets/delete-icon.svg";
 import { ReactComponent as DraggableIcon } from "../Dock/draggable.svg";
@@ -10,6 +16,7 @@ import {
   deleteImageFromIndexedDB,
 } from "../../../utils/db";
 import { translation } from "../../../locale/languages";
+import { AppContext } from "../../../context/provider";
 import "./LinkListEditor.css";
 
 export type LinkItem = {
@@ -29,6 +36,7 @@ interface LinkListEditorProps {
   emptyMessage: TranslationKey;
   iconDbPrefix: string;
   activeSpaceId?: string;
+  allowFolder?: boolean;
 }
 
 export default function LinkListEditor({
@@ -37,10 +45,51 @@ export default function LinkListEditor({
   emptyMessage,
   iconDbPrefix,
   activeSpaceId,
+  allowFolder,
 }: LinkListEditorProps) {
+  const { locale } = useContext(AppContext);
   const [changesActive, setChangesActive] = useState(false);
   const [currentLinks, setCurrentLinks] = useState(links);
   const prevLinksRef = useRef(links);
+  const lastMousePos = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handlePointerMove = (e: PointerEvent) => {
+      lastMousePos.current = { x: e.clientX, y: e.clientY };
+
+      const isDragging = !!document.querySelector(".is-being-dragged");
+      const folderElements = document.querySelectorAll(
+        ".link-editor-folder-container",
+      );
+
+      folderElements.forEach((el) => {
+        if (!isDragging) {
+          el.classList.remove("folder-drag-hover");
+          return;
+        }
+
+        const rect = el.getBoundingClientRect();
+        if (
+          e.clientX >= rect.left + 10 &&
+          e.clientX <= rect.right - 10 &&
+          e.clientY >= rect.top + 10 &&
+          e.clientY <= rect.bottom - 10
+        ) {
+          el.classList.add("folder-drag-hover");
+        } else {
+          el.classList.remove("folder-drag-hover");
+        }
+      });
+    };
+    window.addEventListener("pointermove", handlePointerMove);
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      // Clean up any stray classes on unmount
+      document
+        .querySelectorAll(".link-editor-folder-container")
+        .forEach((el) => el.classList.remove("folder-drag-hover"));
+    };
+  }, []);
 
   // Only sync when the parent genuinely passes new links (e.g., after save)
   if (prevLinksRef.current !== links) {
@@ -129,6 +178,7 @@ export default function LinkListEditor({
       id: generateRandomId(),
       links: [],
     });
+
     setCurrentLinks(updatedLinks);
   };
 
@@ -307,17 +357,21 @@ export default function LinkListEditor({
       >
         <div>
           <button className="link-editor__add button" onClick={handleAdd}>
-            <Translation value="add" />
+            <Translation value="add_link" />
           </button>
-          <button
-            className="link-editor__add button"
-            onClick={handleAddFolder}
-            style={{ marginLeft: "8px" }}
-          >
-            <Translation value="add_folder" />
-          </button>
+          {allowFolder && (
+            <button
+              className="link-editor__add button"
+              onClick={handleAddFolder}
+            >
+              <Translation value="add_folder" />
+            </button>
+          )}
           {changesActive && (
-            <button className="link-editor__done button" onClick={handleDone}>
+            <button
+              className="link-editor__done button button-primary"
+              onClick={handleDone}
+            >
               <Translation value="done" />
             </button>
           )}
@@ -326,7 +380,8 @@ export default function LinkListEditor({
           <span
             style={{
               fontSize: "12px",
-              color: "var(--theme-border)",
+              color: "var(--theme-clr)",
+              opacity: 0.6,
               marginLeft: "10px",
               textAlign: "right",
             }}
@@ -335,100 +390,124 @@ export default function LinkListEditor({
           </span>
         )}
       </div>
-      <div
-        className={
-          "link-editor__list-container" +
-          (!currentLinks.length ? " center" : "")
-        }
-      >
-        {currentLinks.length ? (
-          <List
-            lockVertically
-            values={currentLinks}
-            onChange={({ oldIndex, newIndex }) => {
-              const draggedItem = currentLinks[oldIndex];
-              const targetItem = currentLinks[newIndex];
-              // If dropping a non-folder link onto a folder, move it into the folder
+      {currentLinks.length ? (
+        <List
+          lockVertically
+          values={currentLinks}
+          onChange={({ oldIndex, newIndex }) => {
+            const { x, y } = lastMousePos.current;
+
+            // Find if mouse is over any folder
+            const folderElements = document.querySelectorAll(
+              ".link-editor-folder-container",
+            );
+            let droppedOnFolderIndex = -1;
+
+            folderElements.forEach((el) => {
+              const rect = el.getBoundingClientRect();
+              // Add a small threshold (e.g. 10px) to make sure they are well inside the folder to avoid accidental drops
               if (
-                targetItem &&
-                targetItem.type === "folder" &&
-                draggedItem.type !== "folder" &&
-                oldIndex !== newIndex
+                x >= rect.left + 10 &&
+                x <= rect.right - 10 &&
+                y >= rect.top + 10 &&
+                y <= rect.bottom - 10
               ) {
-                handleMoveToFolder(oldIndex, newIndex);
-              } else {
-                setCurrentLinks(arrayMove(currentLinks, oldIndex, newIndex));
-                setChangesActive(true);
+                const idx = parseInt(
+                  el.getAttribute("data-folder-index") || "-1",
+                  10,
+                );
+                if (idx !== -1 && idx !== oldIndex) {
+                  droppedOnFolderIndex = idx;
+                }
               }
-            }}
-            renderList={({ children, props }) => (
-              <div className="link-editor__draggable-container" {...props}>
-                {children}
-              </div>
-            )}
-            renderItem={({ value, props, index }) => {
-              if (value.type === "folder") {
-                return (
-                  <fieldset
-                    className="link-editor-folder-container"
-                    {...props}
-                    key={value.id}
+            });
+            if (
+              droppedOnFolderIndex !== -1 &&
+              currentLinks[oldIndex]?.type !== "folder"
+            ) {
+              handleMoveToFolder(oldIndex, droppedOnFolderIndex);
+            } else {
+              setCurrentLinks(arrayMove(currentLinks, oldIndex, newIndex));
+              setChangesActive(true);
+            }
+          }}
+          renderList={({ children, props }) => (
+            <div className="link-editor__list-container" {...props}>
+              {children}
+            </div>
+          )}
+          renderItem={({ value, props, index, isDragged }) => {
+            if (value.type === "folder") {
+              return (
+                <fieldset
+                  className="link-editor-folder-container draggable"
+                  data-folder-index={index}
+                  {...props}
+                  key={value.id}
+                  style={{
+                    ...(props.style || {}),
+                    pointerEvents: isDragged ? "none" : "auto",
+                  }}
+                >
+                  <legend
                     style={{
-                      ...(props.style || {}),
+                      padding: "0 5px",
+                      fontSize: "12px",
+                      color: "var(--theme-clr)",
+                      fontWeight: 600,
+                      opacity: 0.6,
                     }}
                   >
-                    <legend
+                    <Translation value="folder" />
+                  </legend>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      alignItems: "center",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <DraggableIcon
+                      className="draggable-indicator"
                       style={{
-                        padding: "0 5px",
-                        fontSize: "12px",
-                        color: "var(--theme-border)",
+                        height: "16px",
+                        width: "fit-content",
                       }}
-                    >
-                      Folder
-                    </legend>
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: "10px",
-                        alignItems: "center",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      <DraggableIcon
-                        className="draggable-indicator"
-                        style={{ height: "16px", width: "fit-content" }}
+                    />
+                    <div className="input__container link-title">
+                      <input
+                        id="folder-title"
+                        name={
+                          translation[locale]?.folder_name_placeholder ||
+                          "Folder title"
+                        }
+                        value={value.title}
+                        placeholder={
+                          translation[locale]?.folder_name_placeholder ||
+                          "Folder Name"
+                        }
+                        onChange={(event) =>
+                          handleInput(event, "title", index!)
+                        }
                       />
-                      <div
-                        className="input__container link-title"
-                        style={{ flexGrow: 1 }}
-                      >
-                        <input
-                          value={value.title}
-                          placeholder="Folder Name"
-                          onChange={(e) => handleInput(e, "title", index)}
-                        />
-                      </div>
-                      <button
-                        className="link-editor__delete"
-                        onClick={handleDelete(index!)}
-                      >
-                        <DeleteIcon />
-                      </button>
                     </div>
+                    <button
+                      className="link-editor__delete"
+                      onClick={handleDelete(index!)}
+                    >
+                      <DeleteIcon />
+                    </button>
+                  </div>
 
-                    {/* Render inner links */}
-                    {value.links &&
-                      value.links.map((link, nestedIdx) => (
-                        <div
-                          key={link.id}
-                          style={{
-                            display: "flex",
-                            gap: "8px",
-                            alignItems: "center",
-                            marginLeft: "10px",
-                            marginBottom: "5px",
-                          }}
-                        >
+                  {value.links &&
+                    value.links.map((link, nestedIdx) => (
+                      <div
+                        className="link-editor-input__container"
+                        key={link.id}
+                        style={{ padding: "8px 12px", marginBottom: "8px" }}
+                      >
+                        <div className="link-editor-input-group">
                           <div
                             style={{
                               display: "flex",
@@ -446,7 +525,9 @@ export default function LinkListEditor({
                                     nestedIdx - 1,
                                   )
                                 }
-                                title="Move up"
+                                title={
+                                  translation[locale]?.move_up || "Move up"
+                                }
                                 style={{
                                   display: "flex",
                                   alignItems: "center",
@@ -462,8 +543,8 @@ export default function LinkListEditor({
                                 }}
                               >
                                 <svg
-                                  width="10"
-                                  height="10"
+                                  width="16"
+                                  height="16"
                                   viewBox="0 0 24 24"
                                   fill="currentColor"
                                 >
@@ -480,7 +561,9 @@ export default function LinkListEditor({
                                     nestedIdx + 1,
                                   )
                                 }
-                                title="Move down"
+                                title={
+                                  translation[locale]?.move_down || "Move down"
+                                }
                                 style={{
                                   display: "flex",
                                   alignItems: "center",
@@ -496,8 +579,8 @@ export default function LinkListEditor({
                                 }}
                               >
                                 <svg
-                                  width="10"
-                                  height="10"
+                                  width="16"
+                                  height="16"
                                   viewBox="0 0 24 24"
                                   fill="currentColor"
                                 >
@@ -506,11 +589,15 @@ export default function LinkListEditor({
                               </button>
                             )}
                           </div>
+
                           <button
                             onClick={() =>
                               handleEjectFromFolder(index!, nestedIdx)
                             }
-                            title="Move out of folder"
+                            title={
+                              translation[locale]?.move_out_of_folder ||
+                              "Move out of folder"
+                            }
                             style={{
                               display: "flex",
                               alignItems: "center",
@@ -527,8 +614,8 @@ export default function LinkListEditor({
                             }}
                           >
                             <svg
-                              width="14"
-                              height="14"
+                              width="16"
+                              height="16"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -549,10 +636,7 @@ export default function LinkListEditor({
                               />
                             </svg>
                           </button>
-                          <div
-                            className="link-editor-preview-wrapper"
-                            style={{ flexShrink: 0 }}
-                          >
+                          <div className="link-editor-preview-wrapper">
                             <DockIcon
                               id={link.id}
                               hasCustomIcon={link.hasCustomIcon}
@@ -564,35 +648,38 @@ export default function LinkListEditor({
                           </div>
                           <div
                             className="input__container link-title"
-                            style={{ flexGrow: 1 }}
+                            style={{ width: "80px" }}
                           >
                             <input
+                              id="link-title"
+                              name="Link title"
                               value={link.title}
                               placeholder="Example"
-                              onChange={(e) =>
-                                handleInput(e, "title", index, nestedIdx)
+                              onChange={(event) =>
+                                handleInput(event, "title", index!, nestedIdx)
                               }
                             />
                           </div>
                           <div
                             className="input__container"
-                            style={{ flexGrow: 1 }}
+                            style={{ width: "140px" }}
                           >
                             <input
+                              id="link-url"
+                              name="Link URL"
                               value={link.url}
                               placeholder="https://example.com"
-                              onChange={(e) =>
-                                handleInput(e, "url", index, nestedIdx)
+                              onChange={(event) =>
+                                handleInput(event, "url", index!, nestedIdx)
                               }
                             />
                           </div>
-                          <div
-                            className="link-editor-upload-wrapper"
-                            style={{ flexShrink: 0 }}
-                          >
+                          <div className="link-editor-upload-wrapper">
                             <label
                               htmlFor={`file-upload-${iconDbPrefix}-${index}-${nestedIdx}`}
-                              className={`link-editor-upload-label button ${link.hasCustomIcon ? "has-remove" : ""}`}
+                              className={`link-editor-upload-label button ${
+                                link.hasCustomIcon ? "has-remove" : ""
+                              }`}
                             >
                               {link.hasCustomIcon ? (
                                 <Translation value="change_icon" />
@@ -628,110 +715,118 @@ export default function LinkListEditor({
                             <DeleteIcon />
                           </button>
                         </div>
-                      ))}
-                    <div
-                      style={{
-                        marginLeft: "10px",
-                        marginTop: "10px",
-                        color: "var(--theme-border)",
-                        fontSize: "11px",
-                        padding: "6px",
-                        textAlign: "center",
-                      }}
-                    >
-                      Drag links onto this folder to add them
-                    </div>
-                  </fieldset>
-                );
-              }
-
-              return (
-                <div
-                  className="link-editor-input__container draggable"
-                  {...props}
-                  key={value.id}
-                >
-                  <div className="link-editor-input-group">
-                    <DraggableIcon
-                      className="draggable-indicator"
-                      style={{
-                        height: "16px",
-                        width: "fit-content",
-                      }}
-                    />
-                    <div className="link-editor-preview-wrapper">
-                      <DockIcon
-                        id={value.id}
-                        hasCustomIcon={value.hasCustomIcon}
-                        url={value.url}
-                        title={value.title}
-                        iconDbPrefix={iconDbPrefix}
-                        activeSpaceId={activeSpaceId}
-                      />
-                    </div>
-                    <div className="input__container link-title">
-                      <input
-                        id="link-title"
-                        name="Link title"
-                        value={value.title}
-                        placeholder="Example"
-                        onChange={(event) => handleInput(event, "title", index)}
-                      />
-                    </div>
-                    <div className="input__container">
-                      <input
-                        id="link-url"
-                        name="Link URL"
-                        value={value.url}
-                        placeholder="https://example.com"
-                        onChange={(event) => handleInput(event, "url", index)}
-                      />
-                    </div>
-                    <div className="link-editor-upload-wrapper">
-                      <label
-                        htmlFor={`file-upload-${iconDbPrefix}-${index}`}
-                        className={`link-editor-upload-label button ${
-                          value.hasCustomIcon ? "has-remove" : ""
-                        }`}
-                      >
-                        {value.hasCustomIcon ? (
-                          <Translation value="change_icon" />
-                        ) : (
-                          <Translation value="upload_icon" />
-                        )}
-                      </label>
-                      <input
-                        id={`file-upload-${iconDbPrefix}-${index}`}
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => handleFileUpload(e, index!)}
-                        style={{ display: "none" }}
-                      />
-                      {value.hasCustomIcon && (
-                        <button
-                          className="link-editor-remove-icon button"
-                          onClick={() => handleRemoveCustomIcon(index!)}
-                          title="Remove custom icon"
-                        >
-                          ✕
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <button
-                    className="link-editor__delete"
-                    onClick={handleDelete(index!)}
+                      </div>
+                    ))}
+                  <div
+                    style={{
+                      marginLeft: "10px",
+                      marginTop: "10px",
+                      color: "var(--theme-clr)",
+                      opacity: 0.6,
+                      fontSize: "11px",
+                      padding: "6px",
+                      textAlign: "center",
+                      fontWeight: 600,
+                    }}
                   >
-                    <DeleteIcon />
-                  </button>
-                </div>
+                    <Translation value="drag_links_to_folder" />
+                  </div>
+                </fieldset>
               );
-            }}
-          />
-        ) : (
+            }
+
+            return (
+              <div
+                className={`link-editor-input__container draggable ${isDragged ? "is-being-dragged" : ""}`}
+                {...props}
+                key={value.id}
+                style={{
+                  ...(props.style || {}),
+                  pointerEvents: isDragged ? "none" : "auto",
+                }}
+              >
+                <div className="link-editor-input-group">
+                  <DraggableIcon
+                    className="draggable-indicator"
+                    style={{
+                      height: "16px",
+                      width: "fit-content",
+                    }}
+                  />
+                  <div className="link-editor-preview-wrapper">
+                    <DockIcon
+                      id={value.id}
+                      hasCustomIcon={value.hasCustomIcon}
+                      url={value.url}
+                      title={value.title}
+                      iconDbPrefix={iconDbPrefix}
+                      activeSpaceId={activeSpaceId}
+                    />
+                  </div>
+                  <div className="input__container link-title">
+                    <input
+                      id="link-title"
+                      name="Link title"
+                      value={value.title}
+                      placeholder="Example"
+                      onChange={(event) => handleInput(event, "title", index!)}
+                    />
+                  </div>
+                  <div className="input__container">
+                    <input
+                      id="link-url"
+                      name="Link URL"
+                      value={value.url}
+                      placeholder="https://example.com"
+                      onChange={(event) => handleInput(event, "url", index!)}
+                    />
+                  </div>
+                  <div className="link-editor-upload-wrapper">
+                    <label
+                      htmlFor={`file-upload-${iconDbPrefix}-${index}`}
+                      className={`link-editor-upload-label button ${
+                        value.hasCustomIcon ? "has-remove" : ""
+                      }`}
+                    >
+                      {value.hasCustomIcon ? (
+                        <Translation value="change_icon" />
+                      ) : (
+                        <Translation value="upload_icon" />
+                      )}
+                    </label>
+                    <input
+                      id={`file-upload-${iconDbPrefix}-${index}`}
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, index!)}
+                      style={{ display: "none" }}
+                    />
+                    {value.hasCustomIcon && (
+                      <button
+                        className="link-editor-remove-icon button"
+                        onClick={() => handleRemoveCustomIcon(index!)}
+                        title="Remove custom icon"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <button
+                  className="link-editor__delete"
+                  onClick={handleDelete(index!)}
+                >
+                  <DeleteIcon />
+                </button>
+              </div>
+            );
+          }}
+        />
+      ) : (
+        <div className="link-editor__list-container center">
           <Translation value={emptyMessage} />
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 }

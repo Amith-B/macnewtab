@@ -757,7 +757,6 @@ to be revisited in future */
 }
 
 .draggable {
-  cursor: move;
   cursor: grab;
 }
 

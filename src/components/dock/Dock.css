@@ -155,6 +155,10 @@
   justify-content: center;
 }
 
+.dock-site__item.folder-icon-container {
+  background-color: transparent;
+}
+
 .dock-site__item.with-link {
   cursor: pointer;
 }
