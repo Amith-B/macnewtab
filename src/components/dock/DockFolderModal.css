@@ -1,0 +1,90 @@
+.dock-folder-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+.dock-folder-modal {
+  width: 320px;
+  max-width: 90vw;
+  max-height: 80vh;
+  background-color: var(--theme-bg-with-opacity);
+  backdrop-filter: blur(var(--theme-bg-blur));
+  border: 1px solid var(--theme-border);
+  border-radius: 24px;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: scale-up 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.dock-folder-modal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dock-folder-modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--theme-clr);
+}
+
+.dock-folder-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
+
+.dock-folder-modal-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.dock-folder-modal-item .dock-site__item {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  transform: none;
+}
+
+.dock-folder-modal-item .dock-app__icon-container {
+  width: 60px;
+  height: 60px;
+}
+
+.dock-folder-modal-item-title {
+  font-size: 12px;
+  color: var(--theme-clr);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}

@@ -16,6 +16,15 @@
   justify-content: center;
 }
 
+.link-editor-folder-container {
+  z-index: 10;
+  border: 1px solid var(--theme-border);
+  padding: 10px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  background-color: var(--theme-bg);
+}
+
 .link-editor-input__container {
   position: relative;
   z-index: 10;

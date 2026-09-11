@@ -73,6 +73,7 @@ const enTranslation = {
     "Voice search is not supported for this language. It will default to English for this language.",
   dock: "Dock",
   add: "Add",
+  add_folder: "Add Folder",
   done: "Done",
   add_dock_links: "Add Links to Dock",
   upload_icon: "Upload Icon",

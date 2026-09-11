@@ -11,6 +11,9 @@ import {
 import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
 import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
 import { ReactComponent as LeftArrow } from "../../assets/left-arrow.svg";
+import { DockIcon } from "./DockIcon";
+import { DockFolderIcon } from "./DockFolderIcon";
+import { DockFolderModal } from "./DockFolderModal";
 import { ReactComponent as RightArrow } from "../../assets/right-arrow.svg";
 import { ReactComponent as TodoIcon } from "../../assets/todo.svg";
 import { ReactComponent as StickyNotesIcon } from "../../assets/sticky-notes.svg";
@@ -21,7 +24,7 @@ import Launchpad from "../launchpad/Launchpad";
 
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
-import { DockIcon } from "./DockIcon";
+import { LinkItem } from "../settings/shared/LinkListEditor";
 
 const SettingsLazy = lazy(() => import("../settings/Settings"));
 const FreeformLazy = lazy(() => import("../freeform/Freeform"));
@@ -53,6 +56,7 @@ const Dock = memo(() => {
   const [isOverflowLeft, setIsOverflowLeft] = useState(false);
   const [isOverflowRight, setIsOverflowRight] = useState(false);
   const [isOverflowButtonVisible, setIsOverflowButtonVisible] = useState(false);
+  const [openedFolder, setOpenedFolder] = useState<LinkItem | null>(null);
   const {
     dockBarSites,
     dockPosition,
@@ -285,6 +289,19 @@ const Dock = memo(() => {
           {hasLinks && (
             <>
               {dockBarSites.map((item) => {
+                if (item.type === "folder") {
+                  return (
+                    <DockFolderIcon
+                      key={item.id}
+                      id={item.id}
+                      title={item.title}
+                      links={item.links}
+                      activeSpaceId={activeSpaceId}
+                      onClick={() => setOpenedFolder(item)}
+                    />
+                  );
+                }
+
                 let anchorProps = {};
 
                 try {
@@ -386,6 +403,15 @@ const Dock = memo(() => {
             onClose={() => setScreenRecorderVisible(false)}
           />
         </Suspense>
+      )}
+      {openedFolder && (
+        <DockFolderModal
+          title={openedFolder.title}
+          links={openedFolder.links}
+          activeSpaceId={activeSpaceId}
+          onClose={() => setOpenedFolder(null)}
+          separatePageSite={separatePageSite}
+        />
       )}
     </>
   );
