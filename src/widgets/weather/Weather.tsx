@@ -3,39 +3,86 @@ import "./Weather.css";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
 
-// WMO Weather interpretation codes
-// https://open-meteo.com/en/docs
-const getWeatherInfo = (
-  code: number,
-  isDay: boolean,
-): { icon: string; label: string } => {
-  if (code === 0) return { icon: isDay ? "☀️" : "🌙", label: "Clear sky" };
-  if (code === 1) return { icon: isDay ? "🌤️" : "🌙", label: "Mainly clear" };
-  if (code === 2) return { icon: "⛅", label: "Partly cloudy" };
-  if (code === 3) return { icon: "☁️", label: "Overcast" };
-  if (code === 45 || code === 48) return { icon: "🌫️", label: "Fog" };
-  if (code === 51 || code === 53 || code === 55)
-    return { icon: "🌦️", label: "Drizzle" };
-  if (code === 56 || code === 57)
-    return { icon: "🌧️", label: "Freezing drizzle" };
-  if (code === 61 || code === 63 || code === 65)
-    return { icon: "🌧️", label: "Rain" };
-  if (code === 66 || code === 67) return { icon: "🌧️", label: "Freezing rain" };
-  if (code === 71 || code === 73 || code === 75)
-    return { icon: "❄️", label: "Snow" };
-  if (code === 77) return { icon: "🌨️", label: "Snow grains" };
-  if (code === 80 || code === 81 || code === 82)
-    return { icon: "🌧️", label: "Rain showers" };
-  if (code === 85 || code === 86) return { icon: "🌨️", label: "Snow showers" };
-  if (code === 95) return { icon: "⛈️", label: "Thunderstorm" };
-  if (code === 96 || code === 99)
-    return { icon: "⛈️", label: "Thunderstorm with hail" };
-  return { icon: "🌡️", label: "Unknown" };
+// WeatherAPI.com condition code → emoji mapping
+// https://www.weatherapi.com/docs/#weather-icons
+const getWeatherEmoji = (code: number, isDay: boolean): string => {
+  // Sunny / Clear
+  if (code === 1000) return isDay ? "☀️" : "🌙";
+  // Partly cloudy
+  if (code === 1003) return isDay ? "🌤️" : "🌙";
+  // Cloudy
+  if (code === 1006) return "⛅";
+  // Overcast
+  if (code === 1009) return "☁️";
+  // Mist, Fog, Freezing fog
+  if (code === 1030 || code === 1135 || code === 1147) return "🌫️";
+  // Drizzle variants
+  if (
+    code === 1150 ||
+    code === 1153 ||
+    code === 1168 ||
+    code === 1171
+  )
+    return "🌦️";
+  // Rain variants
+  if (
+    code === 1063 ||
+    code === 1180 ||
+    code === 1183 ||
+    code === 1186 ||
+    code === 1189 ||
+    code === 1192 ||
+    code === 1195 ||
+    code === 1240 ||
+    code === 1243 ||
+    code === 1246
+  )
+    return "🌧️";
+  // Freezing rain / sleet
+  if (
+    code === 1069 ||
+    code === 1072 ||
+    code === 1198 ||
+    code === 1201 ||
+    code === 1204 ||
+    code === 1207 ||
+    code === 1237 ||
+    code === 1249 ||
+    code === 1252
+  )
+    return "🌧️";
+  // Snow variants
+  if (
+    code === 1066 ||
+    code === 1114 ||
+    code === 1117 ||
+    code === 1210 ||
+    code === 1213 ||
+    code === 1216 ||
+    code === 1219 ||
+    code === 1222 ||
+    code === 1225 ||
+    code === 1255 ||
+    code === 1258 ||
+    code === 1261 ||
+    code === 1264
+  )
+    return "❄️";
+  // Thunderstorm variants
+  if (code === 1087 || code === 1273 || code === 1276 || code === 1279 || code === 1282)
+    return "⛈️";
+  return "🌡️";
 };
 
 const Weather = memo(function Weather() {
-  const { locale, weatherTempUnit, weatherData, weatherLoading, weatherError } =
-    useContext(AppContext);
+  const {
+    locale,
+    weatherTempUnit,
+    weatherData,
+    weatherLoading,
+    weatherError,
+    setOpenSettingsToWeather,
+  } = useContext(AppContext);
 
   const tempSymbol = weatherTempUnit === "fahrenheit" ? "°F" : "°C";
 
@@ -45,6 +92,23 @@ const Weather = memo(function Weather() {
         <span className="weather-icon">🌡️</span>
         <span className="weather-text">
           {translation[locale]?.weather_loading || "Loading weather..."}
+        </span>
+      </div>
+    );
+  }
+
+  if (weatherError === "weather_api_key_needed") {
+    return (
+      <div
+        className="weather-widget weather-api-key-needed"
+        onClick={() => setOpenSettingsToWeather(true)}
+        title={
+          translation[locale]?.weather_api_key_needed || "API key needed"
+        }
+      >
+        <span className="weather-icon">🔑</span>
+        <span className="weather-text">
+          {translation[locale]?.weather_api_key_needed || "API key needed"}
         </span>
       </div>
     );
@@ -65,10 +129,7 @@ const Weather = memo(function Weather() {
 
   if (!weatherData) return null;
 
-  const { icon, label } = getWeatherInfo(
-    weatherData.weatherCode,
-    weatherData.isDay,
-  );
+  const icon = getWeatherEmoji(weatherData.conditionCode, weatherData.isDay);
 
   return (
     <div className="weather-widget">
@@ -82,7 +143,7 @@ const Weather = memo(function Weather() {
         </span>
         <span className="weather-icon">{icon}</span>
       </div>
-      <span className="weather-label">{label}</span>
+      <span className="weather-label">{weatherData.conditionText}</span>
     </div>
   );
 });
