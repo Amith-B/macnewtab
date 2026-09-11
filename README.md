@@ -30,7 +30,7 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 - View current temperature and conditions directly on your new tab.
 - **Auto Location**: Uses geolocation to automatically fetch weather for your area.
 - **Manual Location**: Pin a specific city to always show its weather without sharing your location.
-- **Customizable**: Toggle between Celsius and Fahrenheit. Privacy-first with no API keys required.
+- **Customizable**: Toggle between Celsius and Fahrenheit.
 
 ### 🔋 Battery Widget
 
