@@ -72,6 +72,8 @@ const Dock = memo(() => {
     bookmarksVisible,
     showGoogleApps,
     customLaunchpadLinks,
+    openSettingsToWeather,
+    setOpenSettingsToWeather,
   } = useContext(AppContext);
 
   const handleLaunchpadClose = useCallback(
@@ -80,6 +82,28 @@ const Dock = memo(() => {
   );
 
   const handleTodoClose = useCallback(() => setTodoDialogOpen(false), []);
+
+  const [settingsInitialTab, setSettingsInitialTab] = useState<
+    string | undefined
+  >(undefined);
+
+  // When weather widget requests opening settings to weather tab
+  useEffect(() => {
+    if (openSettingsToWeather) {
+      setHasOpenedSettings(true);
+      setSettingsInitialTab("weather");
+      setSettingsVisible(true);
+      setLaunchpadVisible(false);
+      setOpenSettingsToWeather(false);
+    }
+  }, [openSettingsToWeather, setOpenSettingsToWeather]);
+
+  // Reset initialTab when settings is closed
+  useEffect(() => {
+    if (!settingsVisible) {
+      setSettingsInitialTab(undefined);
+    }
+  }, [settingsVisible]);
 
   const containerRef = useRef(null);
 
@@ -159,7 +183,8 @@ const Dock = memo(() => {
 
   const hasLinks = !!dockBarSites.length;
 
-  const hasLaunchpadContent = bookmarksVisible || showGoogleApps || !!customLaunchpadLinks?.length;
+  const hasLaunchpadContent =
+    bookmarksVisible || showGoogleApps || !!customLaunchpadLinks?.length;
   const shouldShowLaunchpad = showLaunchpad && hasLaunchpadContent;
 
   return (
@@ -367,6 +392,7 @@ const Dock = memo(() => {
           <SettingsLazy
             open={settingsVisible}
             onClose={() => setSettingsVisible(false)}
+            initialTab={settingsInitialTab}
           />
         </Suspense>
       )}

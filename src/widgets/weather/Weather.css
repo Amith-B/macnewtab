@@ -73,3 +73,13 @@
 .weather-error {
   opacity: 0.7;
 }
+
+.weather-api-key-needed {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.weather-api-key-needed:hover {
+  opacity: 1;
+}

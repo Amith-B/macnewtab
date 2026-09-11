@@ -57,6 +57,7 @@ import {
   WEATHER_TEMP_UNIT_LOCAL_STORAGE_KEY,
   WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
   WEATHER_MANUAL_LOCATION_LOCAL_STORAGE_KEY,
+  WEATHER_API_KEY_LOCAL_STORAGE_KEY,
 } from "../static/weatherSettings";
 import { BOOKMARK_TOGGLE_STORAGE_KEY } from "../static/bookmarks";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
@@ -233,15 +234,20 @@ export const AppContext = createContext({
   setWeatherManualLocation: (
     _: { latitude: number; longitude: number; name: string } | null,
   ) => {},
+  weatherApiKey: "",
+  setWeatherApiKey: (_: string) => {},
   weatherData: null as {
     temperature: number;
-    weatherCode: number;
+    conditionCode: number;
+    conditionText: string;
     isDay: boolean;
     windSpeed: number;
     cityName: string;
   } | null,
   weatherLoading: true,
   weatherError: null as string | null,
+  openSettingsToWeather: false,
+  setOpenSettingsToWeather: (_: boolean) => {},
   spacesConfig: null as SpacesConfig | null,
   activeSpaceId: "Default" as string,
   activeSpace: null as Space | null,
@@ -635,9 +641,19 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     activeSpaceId,
   );
 
+  const [weatherApiKey, setWeatherApiKey] = useLocalStorage(
+    WEATHER_API_KEY_LOCAL_STORAGE_KEY,
+    "",
+    undefined,
+    undefined,
+  );
+
+  const [openSettingsToWeather, setOpenSettingsToWeather] = useState(false);
+
   const [weatherData, setWeatherData] = useState<{
     temperature: number;
-    weatherCode: number;
+    conditionCode: number;
+    conditionText: string;
     isDay: boolean;
     windSpeed: number;
     cityName: string;
@@ -650,35 +666,44 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
   const fetchWeatherData = useCallback(
     async (lat: number, lon: number) => {
+      if (!weatherApiKey) {
+        setWeatherError("weather_api_key_needed");
+        setWeatherLoading(false);
+        return;
+      }
+
       try {
-        const tempUnit =
-          weatherTempUnit === "fahrenheit" ? "fahrenheit" : "celsius";
         const response = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=${tempUnit}&timezone=auto`,
+          `https://api.weatherapi.com/v1/current.json?key=${encodeURIComponent(weatherApiKey)}&q=${lat},${lon}&aqi=no`,
         );
         const data = await response.json();
 
-        if (!data.current_weather) {
+        if (data.error) {
+          if (data.error.code === 2006 || data.error.code === 2008) {
+            setWeatherError("weather_invalid_api_key");
+          } else {
+            setWeatherError("weather_unavailable");
+          }
+          setWeatherLoading(false);
+          return;
+        }
+
+        if (!data.current) {
           throw new Error("No weather data");
         }
 
-        let cityName = "";
-        try {
-          const geoRes = await fetch(
-            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`,
-          );
-          const geoData = await geoRes.json();
-          cityName = geoData.city || geoData.locality || "";
-        } catch {
-          // Ignore geocoding errors
-        }
+        const temp =
+          weatherTempUnit === "fahrenheit"
+            ? data.current.temp_f
+            : data.current.temp_c;
 
         const weather = {
-          temperature: Math.round(data.current_weather.temperature),
-          weatherCode: data.current_weather.weathercode,
-          isDay: data.current_weather.is_day === 1,
-          windSpeed: data.current_weather.windspeed,
-          cityName,
+          temperature: Math.round(temp),
+          conditionCode: data.current.condition.code,
+          conditionText: data.current.condition.text,
+          isDay: data.current.is_day === 1,
+          windSpeed: data.current.wind_kph,
+          cityName: data.location?.name || "",
           timestamp: Date.now(),
           latitude: lat,
           longitude: lon,
@@ -693,11 +718,17 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         setWeatherLoading(false);
       }
     },
-    [weatherTempUnit],
+    [weatherTempUnit, weatherApiKey],
   );
 
   useEffect(() => {
     if (!showWeather) {
+      setWeatherLoading(false);
+      return;
+    }
+
+    if (!weatherApiKey) {
+      setWeatherError("weather_api_key_needed");
       setWeatherLoading(false);
       return;
     }
@@ -740,7 +771,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setWeatherLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showWeather, weatherLocationMode, weatherManualLocation]);
+  }, [showWeather, weatherLocationMode, weatherManualLocation, weatherApiKey]);
 
   // Re-fetch when temperature unit changes
   useEffect(() => {
@@ -1262,9 +1293,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setWeatherLocationMode,
       weatherManualLocation,
       setWeatherManualLocation,
+      weatherApiKey,
+      setWeatherApiKey,
       weatherData,
       weatherLoading,
       weatherError,
+      openSettingsToWeather,
+      setOpenSettingsToWeather,
       showFreeform,
       setShowFreeform,
       showScreenRecorder,
@@ -1380,9 +1415,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setWeatherLocationMode,
       weatherManualLocation,
       setWeatherManualLocation,
+      weatherApiKey,
+      setWeatherApiKey,
       weatherData,
       weatherLoading,
       weatherError,
+      openSettingsToWeather,
+      setOpenSettingsToWeather,
       showFreeform,
       setShowFreeform,
       showScreenRecorder,

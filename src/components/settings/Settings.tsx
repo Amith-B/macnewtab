@@ -147,13 +147,28 @@ const DARK_INTERACTIVE_THEMES = new Set([
 export default function Settings({
   open,
   onClose,
+  initialTab,
 }: {
   open: boolean;
   onClose: () => void;
+  initialTab?: string;
 }) {
-  const [selectedMenu, setSelectedMenu] = useState(SETTINGS_MENU[0]);
+  const [selectedMenu, setSelectedMenu] = useState(() => {
+    if (initialTab) {
+      const found = SETTINGS_MENU.find((item) => item.key === initialTab);
+      if (found) return found;
+    }
+    return SETTINGS_MENU[0];
+  });
   const [modalAccessible, setModalAccessible] = useState(false);
   const [renderOpen, setRenderOpen] = useState(false);
+
+  useEffect(() => {
+    if (initialTab) {
+      const found = SETTINGS_MENU.find((item) => item.key === initialTab);
+      if (found) setSelectedMenu(found);
+    }
+  }, [initialTab]);
 
   useEffect(() => {
     if (open) {
