@@ -55,9 +55,16 @@ export const DockFolderModal: React.FC<DockFolderModalProps> = ({
                 } catch (_) {}
               }
               anchorProps = {
+                tabIndex: 0,
                 onClick: () => {
                   if (!chrome?.search?.query) return;
                   chrome.search.query({ text: item.url });
+                },
+                onKeyDown: (e: React.KeyboardEvent) => {
+                  if (e.key === "Enter") {
+                    if (!chrome?.search?.query) return;
+                    chrome.search.query({ text: item.url });
+                  }
                 },
               };
             }

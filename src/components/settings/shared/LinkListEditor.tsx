@@ -52,13 +52,15 @@ export default function LinkListEditor({
   const [currentLinks, setCurrentLinks] = useState(links);
   const prevLinksRef = useRef(links);
   const lastMousePos = useRef({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handlePointerMove = (e: PointerEvent) => {
       lastMousePos.current = { x: e.clientX, y: e.clientY };
+      if (!containerRef.current) return;
 
-      const isDragging = !!document.querySelector(".is-being-dragged");
-      const folderElements = document.querySelectorAll(
+      const isDragging = !!containerRef.current.querySelector(".is-being-dragged");
+      const folderElements = containerRef.current.querySelectorAll(
         ".link-editor-folder-container",
       );
 
@@ -85,9 +87,11 @@ export default function LinkListEditor({
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
       // Clean up any stray classes on unmount
-      document
-        .querySelectorAll(".link-editor-folder-container")
-        .forEach((el) => el.classList.remove("folder-drag-hover"));
+      if (containerRef.current) {
+        containerRef.current
+          .querySelectorAll(".link-editor-folder-container")
+          .forEach((el) => el.classList.remove("folder-drag-hover"));
+      }
     };
   }, []);
 
@@ -189,9 +193,11 @@ export default function LinkListEditor({
       updatedLinks[idx].type === "folder" &&
       updatedLinks[idx].links
     ) {
-      updatedLinks[idx].links = updatedLinks[idx].links!.filter(
+      const newFolder = { ...updatedLinks[idx] };
+      newFolder.links = newFolder.links!.filter(
         (_, index) => index !== nestedIdx,
       );
+      updatedLinks[idx] = newFolder;
     } else {
       updatedLinks = updatedLinks.filter((_, index) => index !== idx);
     }
@@ -227,10 +233,11 @@ export default function LinkListEditor({
           updatedLinks[idx].type === "folder" &&
           updatedLinks[idx].links
         ) {
-          updatedLinks[idx].links![nestedIdx] = {
-            ...item,
-            hasCustomIcon: true,
-          };
+          const newFolder = { ...updatedLinks[idx] };
+          const newLinks = [...newFolder.links!];
+          newLinks[nestedIdx] = { ...item, hasCustomIcon: true };
+          newFolder.links = newLinks;
+          updatedLinks[idx] = newFolder;
         } else {
           updatedLinks[idx] = { ...item, hasCustomIcon: true };
         }
@@ -257,7 +264,11 @@ export default function LinkListEditor({
       updatedLinks[idx].type === "folder" &&
       updatedLinks[idx].links
     ) {
-      updatedLinks[idx].links![nestedIdx] = { ...item, hasCustomIcon: false };
+      const newFolder = { ...updatedLinks[idx] };
+      const newLinks = [...newFolder.links!];
+      newLinks[nestedIdx] = { ...item, hasCustomIcon: false };
+      newFolder.links = newLinks;
+      updatedLinks[idx] = newFolder;
     } else {
       updatedLinks[idx] = { ...item, hasCustomIcon: false };
     }
@@ -281,10 +292,11 @@ export default function LinkListEditor({
       updatedLinks[idx].type === "folder" &&
       updatedLinks[idx].links
     ) {
-      updatedLinks[idx].links![nestedIdx] = {
-        ...updatedLinks[idx].links![nestedIdx],
-        [key]: e.target.value,
-      };
+      const newFolder = { ...updatedLinks[idx] };
+      const newLinks = [...newFolder.links!];
+      newLinks[nestedIdx] = { ...newLinks[nestedIdx], [key]: e.target.value };
+      newFolder.links = newLinks;
+      updatedLinks[idx] = newFolder;
     } else {
       updatedLinks[idx] = {
         ...updatedLinks[idx],
@@ -305,9 +317,10 @@ export default function LinkListEditor({
     // Remove link from root
     updatedLinks.splice(linkIndex, 1);
 
-    // Add to folder
-    if (!folder.links) folder.links = [];
-    folder.links.push(link);
+    const newFolderIdx = linkIndex < folderIndex ? folderIndex - 1 : folderIndex;
+    const newFolder = { ...updatedLinks[newFolderIdx] };
+    newFolder.links = [...(newFolder.links || []), link];
+    updatedLinks[newFolderIdx] = newFolder;
 
     setCurrentLinks(updatedLinks);
     setChangesActive(true);
@@ -318,7 +331,10 @@ export default function LinkListEditor({
     const folder = updatedLinks[folderIndex];
     if (!folder || folder.type !== "folder" || !folder.links) return;
 
-    const [ejected] = folder.links.splice(nestedIdx, 1);
+    const newFolder = { ...folder };
+    newFolder.links = [...folder.links];
+    const [ejected] = newFolder.links.splice(nestedIdx, 1);
+    updatedLinks[folderIndex] = newFolder;
     // Insert right after the folder
     updatedLinks.splice(folderIndex + 1, 0, ejected);
 
@@ -346,7 +362,7 @@ export default function LinkListEditor({
   };
 
   return (
-    <>
+    <div ref={containerRef} style={{ display: "contents" }}>
       <div
         style={{
           display: "flex",
@@ -398,9 +414,9 @@ export default function LinkListEditor({
             const { x, y } = lastMousePos.current;
 
             // Find if mouse is over any folder
-            const folderElements = document.querySelectorAll(
-              ".link-editor-folder-container",
-            );
+            const folderElements = containerRef.current
+              ? containerRef.current.querySelectorAll(".link-editor-folder-container")
+              : [];
             let droppedOnFolderIndex = -1;
 
             folderElements.forEach((el) => {
@@ -827,6 +843,6 @@ export default function LinkListEditor({
           <Translation value={emptyMessage} />
         </div>
       )}
-    </>
+    </div>
   );
 }
