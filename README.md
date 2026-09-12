@@ -81,6 +81,11 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 ### 📱 Launchpad & Dock
 
 - Access favorite links quickly with a customizable **dock bar** and **Launchpad overlay**.
+- **Dock Folders (New!)**: Group multiple links together in the dock to save space.
+  - Drag and drop links into folders to organize them.
+  - Click a folder to open a clean, animated modal overlay containing your nested links.
+  - The folder icon displays a beautiful miniature grid preview of its contents.
+  - Fully supports custom icons and optional titles for both folders and nested links.
 
 ### 📝 Daily To-Do List
 
