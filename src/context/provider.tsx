@@ -117,16 +117,13 @@ import {
   deleteImageFromIndexedDB,
 } from "../utils/db";
 
+import { LinkItem } from "../components/settings/shared/LinkListEditor";
+
 const WEATHER_CACHE_KEY = "macnewtab_weather_cache";
 const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
 
-type DockBarSites = Array<{
-  title: string;
-  url: string;
-  id: string;
-  hasCustomIcon?: boolean;
-}>;
-type QuickLinksSites = DockBarSites;
+type DockBarSites = Array<LinkItem>;
+type QuickLinksSites = Array<LinkItem>; 
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
 
 export const AppContext = createContext({
