@@ -200,7 +200,13 @@ export default function LinkListEditor({
       );
       updatedLinks[idx] = newFolder;
     } else {
-      updatedLinks = updatedLinks.filter((_, index) => index !== idx);
+      const item = updatedLinks[idx];
+      if (item.type === "folder" && item.links && item.links.length > 0) {
+        // Eject child links into root at the folder's position
+        updatedLinks.splice(idx, 1, ...item.links);
+      } else {
+        updatedLinks = updatedLinks.filter((_, index) => index !== idx);
+      }
     }
     setCurrentLinks(updatedLinks);
     setChangesActive(true);
