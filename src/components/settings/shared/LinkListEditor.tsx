@@ -84,11 +84,12 @@ export default function LinkListEditor({
       });
     };
     window.addEventListener("pointermove", handlePointerMove);
+    const container = containerRef.current;
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
       // Clean up any stray classes on unmount
-      if (containerRef.current) {
-        containerRef.current
+      if (container) {
+        container
           .querySelectorAll(".link-editor-folder-container")
           .forEach((el) => el.classList.remove("folder-drag-hover"));
       }
