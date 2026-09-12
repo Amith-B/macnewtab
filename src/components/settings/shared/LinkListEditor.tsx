@@ -53,6 +53,7 @@ export default function LinkListEditor({
   const prevLinksRef = useRef(links);
   const lastMousePos = useRef({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const unsavedIconKeys = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     const handlePointerMove = (e: PointerEvent) => {
@@ -94,6 +95,17 @@ export default function LinkListEditor({
           .forEach((el) => el.classList.remove("folder-drag-hover"));
       }
     };
+  }, []);
+
+  // Clean up unsaved icon uploads on unmount
+  useEffect(() => {
+    const iconKeys = unsavedIconKeys.current;
+    return () => {
+      iconKeys.forEach((key) => {
+        deleteImageFromIndexedDB(key, activeSpaceId);
+      });
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Only sync when the parent genuinely passes new links (e.g., after save)
@@ -163,6 +175,7 @@ export default function LinkListEditor({
     }
 
     setChangesActive(false);
+    unsavedIconKeys.current.clear();
     onSave(linksToSave);
   };
 
@@ -228,11 +241,16 @@ export default function LinkListEditor({
             ? currentLinks[idx].links![nestedIdx]
             : currentLinks[idx];
 
+        const iconKey = `${iconDbPrefix}_${item.id}`;
         await saveImageToIndexedDB(
           reader.result as string,
-          `${iconDbPrefix}_${item.id}`,
+          iconKey,
           activeSpaceId,
         );
+        // Track this upload so we can clean it up if the user doesn't save
+        if (!item.hasCustomIcon) {
+          unsavedIconKeys.current.add(iconKey);
+        }
 
         const updatedLinks = [...currentLinks];
         if (
