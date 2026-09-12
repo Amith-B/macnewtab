@@ -110,14 +110,14 @@ export default function LinkListEditor({
           return {
             ...item,
             links: (item.links || []).filter(
-              ({ title, url }) => !!url.trim() && !!title.trim(),
+              ({ url }) => !!url.trim(),
             ),
           };
         }
         return item;
       })
-      .filter(({ type, title, url }) =>
-        type === "folder" ? !!title.trim() : !!url.trim() && !!title.trim(),
+      .filter(({ type, url }) =>
+        type === "folder" ? true : !!url.trim(),
       );
 
     const currentIds = new Set<string>();
