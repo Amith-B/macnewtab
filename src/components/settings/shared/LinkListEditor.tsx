@@ -59,7 +59,7 @@ export default function LinkListEditor({
       lastMousePos.current = { x: e.clientX, y: e.clientY };
       if (!containerRef.current) return;
 
-      const isDragging = !!containerRef.current.querySelector(".is-being-dragged");
+      const isDragging = !!document.querySelector(".is-being-dragged");
       const folderElements = containerRef.current.querySelectorAll(
         ".link-editor-folder-container",
       );
