@@ -70,7 +70,7 @@ export default memo(function Calendar({ date }: { date: Date }) {
   }, [year, month]);
 
   const monthKey = getMonthName(
-    date
+    date,
   ).toLowerCase() as keyof (typeof translation)["en"];
 
   return (
@@ -99,8 +99,8 @@ export default memo(function Calendar({ date }: { date: Date }) {
               const hasEvent = item
                 ? eventGroupDateSet.has(
                     `${year}-${String(month + 1).padStart(2, "0")}-${String(
-                      item
-                    ).padStart(2, "0")}`
+                      item,
+                    ).padStart(2, "0")}`,
                   )
                 : false;
 

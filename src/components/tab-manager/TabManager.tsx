@@ -69,7 +69,7 @@ const TabManager = memo(() => {
       const handleTabUpdate = (
         _tabId: number,
         _tabChange: chrome.tabs.TabChangeInfo,
-        tab: chrome.tabs.Tab
+        tab: chrome.tabs.Tab,
       ) => {
         if (tab.status === "complete") {
           handleUpdateTabList();
@@ -115,7 +115,7 @@ const TabManager = memo(() => {
 
   const handleRemoveTab = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    id?: number
+    id?: number,
   ) => {
     event.stopPropagation();
     if (!id) {
@@ -151,7 +151,7 @@ const TabManager = memo(() => {
 
   const handleToggleMute = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    tab: chrome.tabs.Tab
+    tab: chrome.tabs.Tab,
   ) => {
     event.stopPropagation();
 
@@ -176,7 +176,7 @@ const TabManager = memo(() => {
 
   const handleKeyDown = (
     event: React.KeyboardEvent<HTMLDivElement>,
-    tab: chrome.tabs.Tab
+    tab: chrome.tabs.Tab,
   ) => {
     if (event.key === "Enter") {
       handleFocusTab(tab);
@@ -373,7 +373,7 @@ const TabManager = memo(() => {
                   ))}
                 </div>
               );
-            }
+            },
           )}
         </div>
       </section>

@@ -27,7 +27,8 @@ const SearchEngineSwitcher = memo(
         setIsOverflowLeft(container.scrollLeft > 0);
         setIsOverflowRight(
           // Allow 1px tolerance for rounding issues
-          container.scrollLeft < container.scrollWidth - container.clientWidth - 1
+          container.scrollLeft <
+            container.scrollWidth - container.clientWidth - 1,
         );
       }, 0);
     };
@@ -45,7 +46,7 @@ const SearchEngineSwitcher = memo(
       if (!container) return;
 
       const selectedButton = container.querySelector(
-        '[data-id="' + selectedSearchEngine + '"]'
+        '[data-id="' + selectedSearchEngine + '"]',
       ) as HTMLButtonElement | null;
 
       if (selectedButton) {
@@ -59,7 +60,7 @@ const SearchEngineSwitcher = memo(
           left: scrollPosition,
           behavior: "smooth",
         });
-        
+
         // Timeout necessary to check overflow AFTER the smooth scroll finishes
         setTimeout(checkOverflow, 350);
       }
@@ -126,7 +127,7 @@ const SearchEngineSwitcher = memo(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default SearchEngineSwitcher;

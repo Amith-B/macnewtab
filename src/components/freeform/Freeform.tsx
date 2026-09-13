@@ -905,10 +905,7 @@ const Freeform: React.FC<{ visible: boolean; onClose: () => void }> = memo(
         const sel = objects.find((o) => o.id === selectedId);
         if (sel && sel.type !== "stroke") {
           const o = sel as
-            | ShapeObject
-            | TextObject
-            | StickyObject
-            | ImageObject;
+            ShapeObject | TextObject | StickyObject | ImageObject;
           const sx = (o.x + camera.x) * camera.zoom;
           const sy = (o.y + camera.y) * camera.zoom;
           const sw = o.width * camera.zoom;

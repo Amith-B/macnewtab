@@ -149,6 +149,7 @@ Create entirely separate, customizable workspaces within your dashboard to keep 
 - Switch between Spaces seamlessly to stay organized, whether it's for work, personal use, or varying times of the day.
 
 ### 🎥 Screen Recorder (New!)
+
 Capture your screen without ever leaving your new tab — no third-party software needed.
 
 - **Flexible Capture**: Choose to record your entire screen, a specific app window, or just a browser tab using Chrome's native screen picker.

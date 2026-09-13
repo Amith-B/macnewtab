@@ -22,7 +22,10 @@ export const DockFolderModal: React.FC<DockFolderModalProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
         onClose();
       }
     };
@@ -86,7 +89,9 @@ export const DockFolderModal: React.FC<DockFolderModalProps> = ({
                     activeSpaceId={activeSpaceId}
                   />
                 </a>
-                <span className="dock-folder-modal-item-title">{item.title}</span>
+                <span className="dock-folder-modal-item-title">
+                  {item.title}
+                </span>
               </div>
             );
           })}

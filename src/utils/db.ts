@@ -57,8 +57,7 @@ export const fetchImageFromIndexedDB = async (
 
     request.onsuccess = () => {
       const result = request.result as
-        | { id: string; base64?: string; imageBlob?: Blob }
-        | undefined;
+        { id: string; base64?: string; imageBlob?: Blob } | undefined;
 
       if (result?.imageBlob) {
         const url = URL.createObjectURL(result.imageBlob);

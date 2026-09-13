@@ -20,6 +20,7 @@
     "build": "node ./scripts/updateVersion.js;yarn generate-changelog;react-scripts build",
     "generate-changelog": "node ./scripts/generateChangeLog.js",
     "test": "react-scripts test",
+    "format": "prettier --write .",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,7 +43,8 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.287",
-    "@types/react-speech-recognition": "^3.9.5"
+    "@types/react-speech-recognition": "^3.9.5",
+    "prettier": "^3.9.6"
   },
   "resolutions": {
     "@tootallnate/once": "^3.0.1",

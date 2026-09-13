@@ -105,7 +105,7 @@ export default function LinkListEditor({
         deleteImageFromIndexedDB(key, activeSpaceId);
       });
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Only sync when the parent genuinely passes new links (e.g., after save)
@@ -121,16 +121,12 @@ export default function LinkListEditor({
         if (item.type === "folder") {
           return {
             ...item,
-            links: (item.links || []).filter(
-              ({ url }) => !!url.trim(),
-            ),
+            links: (item.links || []).filter(({ url }) => !!url.trim()),
           };
         }
         return item;
       })
-      .filter(({ type, url }) =>
-        type === "folder" ? true : !!url.trim(),
-      );
+      .filter(({ type, url }) => (type === "folder" ? true : !!url.trim()));
 
     const currentIds = new Set<string>();
     currentLinks.forEach((site) => {
@@ -342,7 +338,8 @@ export default function LinkListEditor({
     // Remove link from root
     updatedLinks.splice(linkIndex, 1);
 
-    const newFolderIdx = linkIndex < folderIndex ? folderIndex - 1 : folderIndex;
+    const newFolderIdx =
+      linkIndex < folderIndex ? folderIndex - 1 : folderIndex;
     const newFolder = { ...updatedLinks[newFolderIdx] };
     newFolder.links = [...(newFolder.links || []), link];
     updatedLinks[newFolderIdx] = newFolder;
@@ -440,7 +437,9 @@ export default function LinkListEditor({
 
             // Find if mouse is over any folder
             const folderElements = containerRef.current
-              ? containerRef.current.querySelectorAll(".link-editor-folder-container")
+              ? containerRef.current.querySelectorAll(
+                  ".link-editor-folder-container",
+                )
               : [];
             let droppedOnFolderIndex = -1;
 

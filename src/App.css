@@ -178,7 +178,7 @@ body:has(.App.theme-dark) {
 
     --settings-side-panel-blur: blur(60px) saturate(150%) brightness(0.7);
     --settings-side-panel-text-color: white;
-  --settings-side-panel-bg: rgba(0, 0, 0, 0.25);
+    --settings-side-panel-bg: rgba(0, 0, 0, 0.25);
 
     --launchpad-tab-selected-bg: #ffffff5c;
 
@@ -674,7 +674,6 @@ body:has(.App.theme-rose) {
 .main-content.layout-reversed .section-2 {
   order: 1;
 }
-
 
 .accessible:focus-visible,
 .accessible:has(input:focus-visible),

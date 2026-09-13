@@ -123,7 +123,7 @@ const WEATHER_CACHE_KEY = "macnewtab_weather_cache";
 const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
 
 type DockBarSites = Array<LinkItem>;
-type QuickLinksSites = Array<LinkItem>; 
+type QuickLinksSites = Array<LinkItem>;
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
 
 export const AppContext = createContext({

@@ -17,12 +17,7 @@ const getWeatherEmoji = (code: number, isDay: boolean): string => {
   // Mist, Fog, Freezing fog
   if (code === 1030 || code === 1135 || code === 1147) return "🌫️";
   // Drizzle variants
-  if (
-    code === 1150 ||
-    code === 1153 ||
-    code === 1168 ||
-    code === 1171
-  )
+  if (code === 1150 || code === 1153 || code === 1168 || code === 1171)
     return "🌦️";
   // Rain variants
   if (
@@ -69,7 +64,13 @@ const getWeatherEmoji = (code: number, isDay: boolean): string => {
   )
     return "❄️";
   // Thunderstorm variants
-  if (code === 1087 || code === 1273 || code === 1276 || code === 1279 || code === 1282)
+  if (
+    code === 1087 ||
+    code === 1273 ||
+    code === 1276 ||
+    code === 1279 ||
+    code === 1282
+  )
     return "⛈️";
   return "🌡️";
 };
@@ -102,9 +103,7 @@ const Weather = memo(function Weather() {
       <div
         className="weather-widget weather-api-key-needed"
         onClick={() => setOpenSettingsToWeather(true)}
-        title={
-          translation[locale]?.weather_api_key_needed || "API key needed"
-        }
+        title={translation[locale]?.weather_api_key_needed || "API key needed"}
       >
         <span className="weather-icon">🔑</span>
         <span className="weather-text">

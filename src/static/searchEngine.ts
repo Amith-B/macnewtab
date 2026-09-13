@@ -32,7 +32,7 @@ export const searchEngineList = [
     icon: GoogleIcon,
     searchFunction: (text: string) => {
       window.location.href = `https://www.google.com/search?q=${encodeURIComponent(
-        text
+        text,
       )}`;
     },
   },
@@ -42,7 +42,7 @@ export const searchEngineList = [
     icon: WikipediaIcon,
     searchFunction: (text: string) => {
       window.location.href = `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(
-        text
+        text,
       )}`;
     },
   },
@@ -52,7 +52,7 @@ export const searchEngineList = [
     icon: YoutubeIcon,
     searchFunction: (text: string) => {
       window.location.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(
-        text
+        text,
       )}`;
     },
   },
@@ -62,7 +62,7 @@ export const searchEngineList = [
     icon: ChaptGPTIcon,
     searchFunction: (text: string) => {
       window.location.href = `https://chatgpt.com/?q=${encodeURIComponent(
-        text
+        text,
       )}`;
     },
   },
@@ -72,7 +72,7 @@ export const searchEngineList = [
     icon: SpotifyIcon,
     searchFunction: (text: string) => {
       window.location.href = `https://open.spotify.com/search/${encodeURIComponent(
-        text
+        text,
       )}`;
     },
   },

@@ -22,7 +22,7 @@ import Translation from "../../locale/Translation";
 
 const triggerSearch = (searchString: string, selectedSearchEngine: string) => {
   const searchSelection = searchEngineList.find(
-    (item) => item.key === selectedSearchEngine
+    (item) => item.key === selectedSearchEngine,
   );
 
   if (searchString.trim() !== "") {
@@ -122,9 +122,7 @@ const Search = memo(
     }, [locale]);
 
     const selectedEngine = useMemo(() => {
-      return searchEngineList.find(
-        (item) => item.key === selectedSearchEngine
-      );
+      return searchEngineList.find((item) => item.key === selectedSearchEngine);
     }, [selectedSearchEngine]);
 
     const handleKeyDown = (evt: React.KeyboardEvent) => {
@@ -158,7 +156,7 @@ const Search = memo(
         onSelectedEngineChange(key);
         setDropdownOpen(false);
       },
-      [onSelectedEngineChange]
+      [onSelectedEngineChange],
     );
 
     return (
@@ -199,37 +197,42 @@ const Search = memo(
                 />
               </svg>
             </button>
-            {dropdownOpen && createPortal(
-              <div className="search-engine-dropdown__panel" style={dropdownStyle} ref={panelRef}>
-                {searchEngineList.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <button
-                      key={item.key}
-                      className={
-                        "search-engine-dropdown__item" +
-                        (selectedSearchEngine === item.key ? " selected" : "")
-                      }
-                      onClick={() => handleEngineSelect(item.key)}
-                    >
-                      <div className="search-engine-dropdown__item-icon">
-                        <Icon />
-                      </div>
-                      <span>
-                        {item.title || (
-                          <Translation
-                            value={
-                              item.key as keyof (typeof translation)["en"]
-                            }
-                          />
-                        )}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>,
-              document.body
-            )}
+            {dropdownOpen &&
+              createPortal(
+                <div
+                  className="search-engine-dropdown__panel"
+                  style={dropdownStyle}
+                  ref={panelRef}
+                >
+                  {searchEngineList.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <button
+                        key={item.key}
+                        className={
+                          "search-engine-dropdown__item" +
+                          (selectedSearchEngine === item.key ? " selected" : "")
+                        }
+                        onClick={() => handleEngineSelect(item.key)}
+                      >
+                        <div className="search-engine-dropdown__item-icon">
+                          <Icon />
+                        </div>
+                        <span>
+                          {item.title || (
+                            <Translation
+                              value={
+                                item.key as keyof (typeof translation)["en"]
+                              }
+                            />
+                          )}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>,
+                document.body,
+              )}
             <div className="search-engine-dropdown__divider" />
           </div>
         ) : (
@@ -240,7 +243,10 @@ const Search = memo(
           name="Search web"
           value={transcript || searchString}
           onChange={handleInput}
-          placeholder={translation[locale as keyof typeof translation]?.["search"] || "Search"}
+          placeholder={
+            translation[locale as keyof typeof translation]?.["search"] ||
+            "Search"
+          }
           onKeyDown={handleKeyDown}
         />
         {browserSupportsSpeechRecognition && (
@@ -257,7 +263,7 @@ const Search = memo(
         )}
       </div>
     );
-  }
+  },
 );
 
 export default Search;

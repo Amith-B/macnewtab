@@ -44,7 +44,6 @@ const General = memo(function General() {
     return languageOptions.find((item) => item.value === locale);
   }, [locale]);
 
-
   return (
     <div className="general__container">
       <div className="general__row-item">
@@ -66,9 +65,7 @@ const General = memo(function General() {
         />
       </div>
       <div
-        className={
-          "general__row-item" + (!showSearchBar ? " disabled" : "")
-        }
+        className={"general__row-item" + (!showSearchBar ? " disabled" : "")}
       >
         <Translation value="show_search_engines" />
         <Toggle

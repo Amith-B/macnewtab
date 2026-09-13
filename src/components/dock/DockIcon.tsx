@@ -33,7 +33,7 @@ export const DockIcon = memo(
           try {
             const blobUrl = await fetchImageFromIndexedDB(
               `${iconDbPrefix}_${id}`,
-              activeSpaceId
+              activeSpaceId,
             );
             if (blobUrl) {
               src = blobUrl;

@@ -16,12 +16,12 @@ const FALLBACK_SITE_IMAGE = EmptySiteImage;
 
 function filterBookmarksTree(
   nodes: chrome.bookmarks.BookmarkTreeNode[],
-  searchTerm: string
+  searchTerm: string,
 ): chrome.bookmarks.BookmarkTreeNode[] {
   const lowerSearch = searchTerm.toLowerCase();
 
   function filterNode(
-    node: chrome.bookmarks.BookmarkTreeNode
+    node: chrome.bookmarks.BookmarkTreeNode,
   ): chrome.bookmarks.BookmarkTreeNode | null {
     const matches =
       (node.title && node.title.toLowerCase().includes(lowerSearch)) ||
@@ -32,7 +32,7 @@ function filterBookmarksTree(
       filteredChildren = node.children
         .map(filterNode)
         .filter(
-          (child): child is chrome.bookmarks.BookmarkTreeNode => child !== null
+          (child): child is chrome.bookmarks.BookmarkTreeNode => child !== null,
         );
     }
 
@@ -58,15 +58,28 @@ export default function Launchpad({
   const [modalAccessible, setModalAccessible] = useState(false);
   const [search, setSearch] = useState("");
   const [searchDebouncedValue, setSearchDebouncedValue] = useState("");
-  const { bookmarksVisible, locale, separatePageSite, customLaunchpadLinks, activeSpaceId, showGoogleApps } = useContext(AppContext);
+  const {
+    bookmarksVisible,
+    locale,
+    separatePageSite,
+    customLaunchpadLinks,
+    activeSpaceId,
+    showGoogleApps,
+  } = useContext(AppContext);
   const [selectedTab, setSelectedTab] = useLocalStorage<
     "google_apps" | "bookmarks" | "my_apps"
-  >(LAUNCHPAD_SELECTED_TAB_LOCAL_STORAGE_KEY, "google_apps", undefined, activeSpaceId);
+  >(
+    LAUNCHPAD_SELECTED_TAB_LOCAL_STORAGE_KEY,
+    "google_apps",
+    undefined,
+    activeSpaceId,
+  );
   const [bookmarksTree, setBookmarksTree] = useState<
     chrome.bookmarks.BookmarkTreeNode[]
   >([]);
   const [bookmarkIdToBeDeleted, setBookmarkIdToBeDeleted] = useState("");
-  const [bookmarkToBeEdited, setBookmarkToBeEdited] = useState<chrome.bookmarks.BookmarkTreeNode | null>(null);
+  const [bookmarkToBeEdited, setBookmarkToBeEdited] =
+    useState<chrome.bookmarks.BookmarkTreeNode | null>(null);
   const [editName, setEditName] = useState("");
   const [editUrl, setEditUrl] = useState("");
   const [editError, setEditError] = useState("");
@@ -100,7 +113,7 @@ export default function Launchpad({
     return launchpadList.filter(
       (item) =>
         item.label.toLowerCase().includes(searchStr) ||
-        item.href.toLowerCase().includes(searchStr)
+        item.href.toLowerCase().includes(searchStr),
     );
   }, [searchDebouncedValue]);
 
@@ -119,7 +132,7 @@ export default function Launchpad({
     return (customLaunchpadLinks || []).filter(
       (item: any) =>
         item.title.toLowerCase().includes(searchStr) ||
-        item.url.toLowerCase().includes(searchStr)
+        item.url.toLowerCase().includes(searchStr),
     );
   }, [searchDebouncedValue, customLaunchpadLinks]);
 
@@ -196,7 +209,8 @@ export default function Launchpad({
   const handleConfirmEdit = () => {
     setEditError("");
     if (chrome?.bookmarks?.update && bookmarkToBeEdited) {
-      chrome.bookmarks.update(bookmarkToBeEdited.id, { title: editName, url: editUrl })
+      chrome.bookmarks
+        .update(bookmarkToBeEdited.id, { title: editName, url: editUrl })
         .then(() => {
           refreshBookmark();
           setBookmarkToBeEdited(null);
@@ -210,18 +224,23 @@ export default function Launchpad({
   const activeTab = useMemo(() => {
     const hasBookmarks = !!bookmarksTree.length;
     const hasCustomLinks = !!customLaunchpadLinks?.length;
-    
+
     const visibleTabs: string[] = [];
     if (showGoogleApps) visibleTabs.push("google_apps");
     if (hasCustomLinks) visibleTabs.push("my_apps");
     if (hasBookmarks) visibleTabs.push("bookmarks");
-    
+
     if (visibleTabs.includes(selectedTab)) {
       return selectedTab;
     }
-    
+
     return visibleTabs.length > 0 ? visibleTabs[0] : "google_apps";
-  }, [selectedTab, bookmarksTree.length, customLaunchpadLinks?.length, showGoogleApps]);
+  }, [
+    selectedTab,
+    bookmarksTree.length,
+    customLaunchpadLinks?.length,
+    showGoogleApps,
+  ]);
 
   return (
     <div
@@ -232,7 +251,10 @@ export default function Launchpad({
       }
       onClick={onClose}
     >
-      {((showGoogleApps ? 1 : 0) + (bookmarksTree.length ? 1 : 0) + (customLaunchpadLinks?.length ? 1 : 0)) > 1 && (
+      {(showGoogleApps ? 1 : 0) +
+        (bookmarksTree.length ? 1 : 0) +
+        (customLaunchpadLinks?.length ? 1 : 0) >
+        1 && (
         <div className="launchpad__tab">
           {showGoogleApps && (
             <button
@@ -330,7 +352,12 @@ export default function Launchpad({
                       };
                     }}
                     alt={item.title}
-                    style={{ width: "48px", height: "48px", borderRadius: "12px", objectFit: "cover" }}
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      borderRadius: "12px",
+                      objectFit: "cover",
+                    }}
                   />
                 )}
               </div>
@@ -369,9 +396,23 @@ export default function Launchpad({
             onConfirm={handleConfirmEdit}
             onCancel={() => setBookmarkToBeEdited(null)}
           >
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "10px" }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                <label htmlFor="edit-name" style={{ fontSize: "12px", fontWeight: 600 }}>Name</label>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                marginTop: "10px",
+              }}
+            >
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+              >
+                <label
+                  htmlFor="edit-name"
+                  style={{ fontSize: "12px", fontWeight: 600 }}
+                >
+                  Name
+                </label>
                 <div className="cd-input__container">
                   <input
                     id="edit-name"
@@ -381,8 +422,15 @@ export default function Launchpad({
                   />
                 </div>
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                <label htmlFor="edit-url" style={{ fontSize: "12px", fontWeight: 600 }}>URL</label>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "4px" }}
+              >
+                <label
+                  htmlFor="edit-url"
+                  style={{ fontSize: "12px", fontWeight: 600 }}
+                >
+                  URL
+                </label>
                 <div className="cd-input__container">
                   <input
                     id="edit-url"
@@ -393,7 +441,13 @@ export default function Launchpad({
                 </div>
               </div>
               {editError && (
-                <div style={{ color: "#ff4d4d", fontSize: "12px", marginTop: "4px" }}>
+                <div
+                  style={{
+                    color: "#ff4d4d",
+                    fontSize: "12px",
+                    marginTop: "4px",
+                  }}
+                >
                   {editError}
                 </div>
               )}
@@ -421,7 +475,12 @@ function BookmarkGroup({
       <fieldset className="bookmark-group">
         <legend className="bookmark-group-title">{data.title}</legend>
         {data.children.map((item) => (
-          <BookmarkGroup data={item} onBookmarkRemove={onBookmarkRemove} onBookmarkEdit={onBookmarkEdit} separatePageSite={separatePageSite} />
+          <BookmarkGroup
+            data={item}
+            onBookmarkRemove={onBookmarkRemove}
+            onBookmarkEdit={onBookmarkEdit}
+            separatePageSite={separatePageSite}
+          />
         ))}
       </fieldset>
     );
@@ -433,7 +492,7 @@ function BookmarkGroup({
 
   const handleBookmarkDelete = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    bookmarkId: string
+    bookmarkId: string,
   ) => {
     event.stopPropagation();
     event.preventDefault();
@@ -441,7 +500,7 @@ function BookmarkGroup({
   };
 
   const handleContextMenu = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
     event.preventDefault();
     event.stopPropagation();

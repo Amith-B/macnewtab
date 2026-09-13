@@ -21,8 +21,8 @@ export const DockFolderIcon: React.FC<DockFolderIconProps> = ({
   const previewLinks = links.slice(0, 9);
 
   return (
-    <button 
-      className="dock-site__item folder-icon-container" 
+    <button
+      className="dock-site__item folder-icon-container"
       onClick={onClick}
       data-label={title}
       title={title}

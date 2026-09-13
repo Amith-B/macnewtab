@@ -200,7 +200,10 @@ export default function TodoDialog({
                     onMouseDown={(e) => e.stopPropagation()}
                     onTouchStart={(e) => e.stopPropagation()}
                     onBlur={() => {
-                      if (editingContent.trim() && editingContent !== item.content) {
+                      if (
+                        editingContent.trim() &&
+                        editingContent !== item.content
+                      ) {
                         handleTodoItemUpdate(item.id, editingContent);
                       }
                       setEditingId(null);
@@ -208,7 +211,10 @@ export default function TodoDialog({
                     onKeyDown={(e) => {
                       e.stopPropagation();
                       if (e.key === "Enter") {
-                        if (editingContent.trim() && editingContent !== item.content) {
+                        if (
+                          editingContent.trim() &&
+                          editingContent !== item.content
+                        ) {
                           handleTodoItemUpdate(item.id, editingContent);
                         }
                         setEditingId(null);

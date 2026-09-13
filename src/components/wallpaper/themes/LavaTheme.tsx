@@ -14,7 +14,13 @@ const LavaTheme: React.FC = () => {
     let animationId: number;
     let resizeTimer: ReturnType<typeof setTimeout>;
 
-    const balls: { x: number; y: number; vx: number; vy: number; radius: number }[] = [];
+    const balls: {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+    }[] = [];
     const numBalls = 15;
 
     for (let i = 0; i < numBalls; i++) {
@@ -49,7 +55,7 @@ const LavaTheme: React.FC = () => {
           0,
           ball.x,
           ball.y,
-          ball.radius
+          ball.radius,
         );
         gradient.addColorStop(0, "rgba(255, 100, 0, 0.8)");
         gradient.addColorStop(0.5, "rgba(255, 0, 0, 0.4)");

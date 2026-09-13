@@ -22,11 +22,14 @@ export default memo(function LaunchpadSettings() {
     return navigator.userAgent.toLowerCase().includes("mac");
   }, []);
 
-  const hasLaunchpadContent = bookmarksVisible || showGoogleApps || !!customLaunchpadLinks?.length;
+  const hasLaunchpadContent =
+    bookmarksVisible || showGoogleApps || !!customLaunchpadLinks?.length;
 
   return (
     <div className="launchpad-settings__container">
-      <div className={`launchpad-settings__row-item with-description ${!hasLaunchpadContent ? "disabled" : ""}`}>
+      <div
+        className={`launchpad-settings__row-item with-description ${!hasLaunchpadContent ? "disabled" : ""}`}
+      >
         <div className="bookmark-toggle-row">
           <Translation value="launchpad" />
           <Toggle
@@ -43,8 +46,7 @@ export default memo(function LaunchpadSettings() {
 
       <div
         className={
-          "launchpad-settings__row-item" +
-          (!showLaunchpad ? " disabled" : "")
+          "launchpad-settings__row-item" + (!showLaunchpad ? " disabled" : "")
         }
       >
         <div className="bookmark-toggle-row">

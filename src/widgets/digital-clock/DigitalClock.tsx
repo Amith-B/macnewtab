@@ -28,7 +28,6 @@ export default function DigitalClock({ date }: { date: Date }) {
     <div className="digital-clock__container">
       <div className="digital-clock__background">
         <DigitalTicks currentSecond={sec} />
-
       </div>
       <div className="digital-clock__time">
         <span className="digital-clock__hours">{formattedHour}</span>

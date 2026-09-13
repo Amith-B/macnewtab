@@ -57,8 +57,8 @@ const CubesTheme: React.FC = () => {
           this.project(
             this.x + v[0] * this.size,
             this.y + v[1] * this.size,
-            this.z + v[2] * this.size
-          )
+            this.z + v[2] * this.size,
+          ),
         );
 
         ctx.strokeStyle = `rgba(0, 255, 128, ${0.5 * points[0].scale})`;
