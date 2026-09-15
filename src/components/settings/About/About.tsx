@@ -62,10 +62,10 @@ export default function About() {
                 <a
                   className="about__developer-link"
                   rel="noreferrer"
-                  href="https://instagram.com/capture.loom"
+                  href="https://www.instagram.com/macnewtab.extension"
                   target="_blank"
                 >
-                  @capture.loom
+                  @macnewtab.extension
                 </a>
               </div>
             </div>
