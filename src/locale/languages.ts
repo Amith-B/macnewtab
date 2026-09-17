@@ -184,6 +184,17 @@ const enTranslation = {
   analog_clock_1: "Analog Clock 1",
   analog_clock_2: "Analog Clock 2",
   digital_clock: "Digital Clock",
+  fullscreen_clock: "Fullscreen Clock",
+  stay_awake: "Stay Awake",
+  exit: "Exit",
+  on: "ON",
+  off: "OFF",
+  toggle_12_24_hour: "Toggle 12h / 24h mode",
+  wake_lock_on_title: "Screen wake lock is ON (screen will not lock or sleep)",
+  wake_lock_off_title:
+    "Screen wake lock is OFF (screen will sleep/lock normally)",
+  exit_fullscreen_esc: "Exit full screen (Esc)",
+  click_background_to_exit: "Click background or press Esc to exit",
   show_weather: "Show Weather Widget",
   weather_temperature_unit: "Temperature Unit",
   celsius: "Celsius",
@@ -600,6 +611,19 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "ಅನಲಾಗ್ ಗಡಿಯಾರ 1",
     analog_clock_2: "ಅನಲಾಗ್ ಗಡಿಯಾರ 2",
     digital_clock: "ಡಿಜಿಟಲ್ ಗಡಿಯಾರ",
+    fullscreen_clock: "ಪೂರ್ಣ ಪರದೆಯ ಗಡಿಯಾರ",
+    stay_awake: "ಎಚ್ಚರವಾಗಿರಿ",
+    exit: "ನಿರ್ಗಮಿಸಿ",
+    on: "ಆನ್",
+    off: "ಆಫ್",
+    toggle_12_24_hour: "12 ಗಂಟೆ / 24 ಗಂಟೆ ಮೋಡ್ ಬದಲಾಯಿಸಿ",
+    wake_lock_on_title:
+      "ಸ್ಕ್ರೀನ್ ವೇಕ್ ಲಾಕ್ ಆನ್ ಆಗಿದೆ (ಪರದೆ ಲಾಕ್ ಆಗುವುದಿಲ್ಲ ಅಥವಾ ನಿದ್ರಿಸುವುದಿಲ್ಲ)",
+    wake_lock_off_title:
+      "ಸ್ಕ್ರೀನ್ ವೇಕ್ ಲಾಕ್ ಆಫ್ ಆಗಿದೆ (ಪರದೆ ಸಾಮಾನ್ಯವಾಗಿ ನಿದ್ರಿಸುತ್ತದೆ/ಲಾಕ್ ಆಗುತ್ತದೆ)",
+    exit_fullscreen_esc: "ಪೂರ್ಣ ಪರದೆಯಿಂದ ನಿರ್ಗಮಿಸಿ (Esc)",
+    click_background_to_exit:
+      "ಹಿನ್ನೆಲೆಯನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಅಥವಾ ನಿರ್ಗಮಿಸಲು Esc ಒತ್ತಿರಿ",
     show_screen_recorder: "ಸ್ಕ್ರೀನ್ ರೆಕಾರ್ಡರ್ ತೋರಿಸಿ",
     capture_title: "ಕ್ಯಾಪ್ಚರ್",
     include_mic_audio: "ಮೈಕ್ರೊಫೋನ್ ಆಡಿಯೊ ಸೇರಿಸಿ",
@@ -909,6 +933,19 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Analogové hodiny 1",
     analog_clock_2: "Analogové hodiny 2",
     digital_clock: "Digitální hodiny",
+    fullscreen_clock: "Hodiny na celou obrazovku",
+    stay_awake: "Zůstat vzhůru",
+    exit: "Ukončit",
+    on: "ZAP",
+    off: "VYP",
+    toggle_12_24_hour: "Přepnout 12h / 24h režim",
+    wake_lock_on_title:
+      "Zámek probuzení obrazovky je ZAPNUTÝ (obrazovka se nezamkne ani neuspí)",
+    wake_lock_off_title:
+      "Zámek probuzení obrazovky je VYPNUTÝ (obrazovka se běžně uspí/zamkne)",
+    exit_fullscreen_esc: "Ukončit celou obrazovku (Esc)",
+    click_background_to_exit:
+      "Klikněte na pozadí nebo stiskněte Esc pro ukončení",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -1214,6 +1251,19 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Analog Saat 1",
     analog_clock_2: "Analog Saat 2",
     digital_clock: "Dijital Saat",
+    fullscreen_clock: "Tam Ekran Saat",
+    stay_awake: "Uyanık Kal",
+    exit: "Çıkış",
+    on: "AÇIK",
+    off: "KAPALI",
+    toggle_12_24_hour: "12s / 24s moduna geç",
+    wake_lock_on_title:
+      "Ekran uyandırma kilidi AÇIK (ekran kilitlenmez veya uyumaz)",
+    wake_lock_off_title:
+      "Ekran uyandırma kilidi KAPALI (ekran normal şekilde uyur/kilitlenir)",
+    exit_fullscreen_esc: "Tam ekrandan çık (Esc)",
+    click_background_to_exit:
+      "Çıkmak için arka plana tıklayın veya Esc tuşuna basın",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -1518,6 +1568,18 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Đồng hồ kim 1",
     analog_clock_2: "Đồng hồ kim 2",
     digital_clock: "Đồng hồ kỹ thuật số",
+    fullscreen_clock: "Đồng hồ toàn màn hình",
+    stay_awake: "Giữ màn hình bật",
+    exit: "Thoát",
+    on: "BẬT",
+    off: "TẮT",
+    toggle_12_24_hour: "Chuyển chế độ 12h / 24h",
+    wake_lock_on_title:
+      "Khóa màn hình bật ĐANG BẬT (màn hình sẽ không khóa hoặc ngủ)",
+    wake_lock_off_title:
+      "Khóa màn hình bật ĐÃ TẮT (màn hình sẽ ngủ/khóa bình thường)",
+    exit_fullscreen_esc: "Thoát toàn màn hình (Esc)",
+    click_background_to_exit: "Nhấp vào nền hoặc nhấn Esc để thoát",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -1825,6 +1887,19 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Analog soat 1",
     analog_clock_2: "Analog soat 2",
     digital_clock: "Raqamli soat",
+    fullscreen_clock: "To'liq ekran soati",
+    stay_awake: "Uyg'oq qolish",
+    exit: "Chiqish",
+    on: "YONIQ",
+    off: "O'CHIQ",
+    toggle_12_24_hour: "12 soat / 24 soat rejimini almashtirish",
+    wake_lock_on_title:
+      "Ekran uyg'oq qulflangan (ekran qulflanmaydi yoki uyquga ketmaydi)",
+    wake_lock_off_title:
+      "Ekran uyg'oq qulflash O'CHIQ (ekran odatdagidek uyquga ketadi/qulflanadi)",
+    exit_fullscreen_esc: "To'liq ekrandan chiqish (Esc)",
+    click_background_to_exit:
+      "Chiqish uchun fonga bosing yoki Esc tugmasini bosing",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -2116,6 +2191,16 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "模拟时钟 1",
     analog_clock_2: "模拟时钟 2",
     digital_clock: "数字时钟",
+    fullscreen_clock: "全屏时钟",
+    stay_awake: "保持常亮",
+    exit: "退出",
+    on: "开启",
+    off: "关闭",
+    toggle_12_24_hour: "切换 12小时 / 24小时 模式",
+    wake_lock_on_title: "屏幕保持常亮开启（屏幕不会锁屏或休眠）",
+    wake_lock_off_title: "屏幕保持常亮关闭（屏幕将正常休眠/锁屏）",
+    exit_fullscreen_esc: "退出全屏 (Esc)",
+    click_background_to_exit: "点击背景或按 Esc 键退出",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -2418,6 +2503,19 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "एनालॉग घड़ी 1",
     analog_clock_2: "एनालॉग घड़ी 2",
     digital_clock: "डिजिटल घड़ी",
+    fullscreen_clock: "फुलस्क्रीन घड़ी",
+    stay_awake: "स्क्रीन चालू रखें",
+    exit: "बाहर निकलें",
+    on: "चालू",
+    off: "बंद",
+    toggle_12_24_hour: "12 घंटे / 24 घंटे मोड बदलें",
+    wake_lock_on_title:
+      "स्क्रीन वेक लॉक चालू है (स्क्रीन लॉक या स्लीप नहीं होगी)",
+    wake_lock_off_title:
+      "स्क्रीन वेक लॉक बंद है (स्क्रीन सामान्य रूप से स्लीप/लॉक होगी)",
+    exit_fullscreen_esc: "फुलस्क्रीन से बाहर निकलें (Esc)",
+    click_background_to_exit:
+      "बाहर निकलने के लिए पृष्ठभूमि पर क्लिक करें या Esc दबाएं",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -2725,6 +2823,18 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Orologio analogico 1",
     analog_clock_2: "Orologio analogico 2",
     digital_clock: "Orologio digitale",
+    fullscreen_clock: "Orologio a schermo intero",
+    stay_awake: "Rimani sveglio",
+    exit: "Esci",
+    on: "ON",
+    off: "OFF",
+    toggle_12_24_hour: "Passa alla modalità 12h / 24h",
+    wake_lock_on_title:
+      "Il blocco riattivazione schermo è ATTIVO (lo schermo non si blocca né va in sospensione)",
+    wake_lock_off_title:
+      "Il blocco riattivazione schermo è DISATTIVATO (lo schermo si bloccherà normalmente)",
+    exit_fullscreen_esc: "Esci da schermo intero (Esc)",
+    click_background_to_exit: "Fai clic sullo sfondo o premi Esc per uscire",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -3029,6 +3139,19 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "অ্যানালগ ঘড়ি 1",
     analog_clock_2: "অ্যানালগ ঘড়ি 2",
     digital_clock: "ডিজিটাল ঘড়ি",
+    fullscreen_clock: "ফুলস্ক্রিন ঘড়ি",
+    stay_awake: "স্ক্রিন চালু রাখুন",
+    exit: "প্রস্থান",
+    on: "চালু",
+    off: "বন্ধ",
+    toggle_12_24_hour: "১২ ঘণ্টা / ২৪ ঘণ্টা মোড পরিবর্তন করুন",
+    wake_lock_on_title:
+      "স্ক্রিন ওয়েক লক চালু আছে (স্ক্রিন লক বা স্লিপ হবে না)",
+    wake_lock_off_title:
+      "স্ক্রিন ওয়েক লক বন্ধ আছে (স্ক্রিন স্বাভাবিকভাবে স্লিপ/লক হবে)",
+    exit_fullscreen_esc: "ফুলস্ক্রিন থেকে প্রস্থান (Esc)",
+    click_background_to_exit:
+      "প্রস্থান করতে ব্যাকগ্রাউন্ডে ক্লিক করুন বা Esc টিপুন",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -3334,6 +3457,18 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Relógio Analógico 1",
     analog_clock_2: "Relógio Analógico 2",
     digital_clock: "Relógio Digital",
+    fullscreen_clock: "Relógio em tela cheia",
+    stay_awake: "Manter acordado",
+    exit: "Sair",
+    on: "LIGADO",
+    off: "DESLIGADO",
+    toggle_12_24_hour: "Alternar modo 12h / 24h",
+    wake_lock_on_title:
+      "O bloqueio de tela acordada está LIGADO (a tela não será bloqueada nem suspensa)",
+    wake_lock_off_title:
+      "O bloqueio de tela acordada está DESLIGADO (a tela será bloqueada normalmente)",
+    exit_fullscreen_esc: "Sair da tela cheia (Esc)",
+    click_background_to_exit: "Clique no fundo ou pressione Esc para sair",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -3641,6 +3776,19 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Horloge analogique 1",
     analog_clock_2: "Horloge analogique 2",
     digital_clock: "Horloge numérique",
+    fullscreen_clock: "Horloge plein écran",
+    stay_awake: "Garder allumé",
+    exit: "Quitter",
+    on: "ACTIVÉ",
+    off: "DÉSACTIVÉ",
+    toggle_12_24_hour: "Basculer entre le mode 12h / 24h",
+    wake_lock_on_title:
+      "Le maintien de l'écran allumé est ACTIVÉ (l'écran ne se verrouillera pas et ne se mettra pas en veille)",
+    wake_lock_off_title:
+      "Le maintien de l'écran allumé est DÉSACTIVÉ (l'écran se mettra en veille normalement)",
+    exit_fullscreen_esc: "Quitter le plein écran (Esc)",
+    click_background_to_exit:
+      "Cliquez sur l'arrière-plan ou appuyez sur Échap pour quitter",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -3945,6 +4093,18 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Аналоговые часы 1",
     analog_clock_2: "Аналоговые часы 2",
     digital_clock: "Цифровые часы",
+    fullscreen_clock: "Полноэкранные часы",
+    stay_awake: "Не выключать экран",
+    exit: "Выход",
+    on: "ВКЛ",
+    off: "ВЫКЛ",
+    toggle_12_24_hour: "Переключить режим 12ч / 24ч",
+    wake_lock_on_title:
+      "Блокировка сна экрана ВКЛ (экран не заблокируется и не уснет)",
+    wake_lock_off_title:
+      "Блокировка сна экрана ВЫКЛ (экран будет засыпать/блокироваться в обычном режиме)",
+    exit_fullscreen_esc: "Выйти из полноэкранного режима (Esc)",
+    click_background_to_exit: "Нажмите на фон или клавишу Esc для выхода",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -4246,6 +4406,18 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Reloj analógico 1",
     analog_clock_2: "Reloj analógico 2",
     digital_clock: "Reloj digital",
+    fullscreen_clock: "Reloj a pantalla completa",
+    stay_awake: "Mantener despierto",
+    exit: "Salir",
+    on: "ACTIVADO",
+    off: "DESACTIVADO",
+    toggle_12_24_hour: "Cambiar modo 12h / 24h",
+    wake_lock_on_title:
+      "Bloqueo de activación de pantalla ACTIVADO (la pantalla no se bloqueará ni se suspenderá)",
+    wake_lock_off_title:
+      "Bloqueo de activación de pantalla DESACTIVADO (la pantalla se suspenderá normalmente)",
+    exit_fullscreen_esc: "Salir de pantalla completa (Esc)",
+    click_background_to_exit: "Haz clic en el fondo o presiona Esc para salir",
     show_screen_recorder: "Mostrar Grabador de Pantalla",
     capture_title: "Captura",
     include_mic_audio: "Incluir audio del micrófono",
@@ -4557,6 +4729,18 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "アナログ時計 1",
     analog_clock_2: "アナログ時計 2",
     digital_clock: "デジタル時計",
+    fullscreen_clock: "全画面時計",
+    stay_awake: "画面維持",
+    exit: "終了",
+    on: "オン",
+    off: "オフ",
+    toggle_12_24_hour: "12時間/24時間モードの切り替え",
+    wake_lock_on_title:
+      "画面のスリープ防止がオンです（画面がロックまたはスリープしません）",
+    wake_lock_off_title:
+      "画面のスリープ防止がオフです（通常通り画面がスリープ/ロックします）",
+    exit_fullscreen_esc: "全画面表示を終了 (Esc)",
+    click_background_to_exit: "背景をクリックするかEscキーを押して終了",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -4856,6 +5040,18 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "아날로그 시계 1",
     analog_clock_2: "아날로그 시계 2",
     digital_clock: "디지털 시계",
+    fullscreen_clock: "전체 화면 시계",
+    stay_awake: "화면 켜짐 유지",
+    exit: "종료",
+    on: "켜짐",
+    off: "꺼짐",
+    toggle_12_24_hour: "12시간 / 24시간 모드 전환",
+    wake_lock_on_title:
+      "화면 켜짐 유지가 켜져 있습니다 (화면이 잠기거나 꺼지지 않음)",
+    wake_lock_off_title:
+      "화면 켜짐 유지가 꺼져 있습니다 (화면이 정상적으로 잠김/꺼짐)",
+    exit_fullscreen_esc: "전체 화면 종료 (Esc)",
+    click_background_to_exit: "배경을 클릭하거나 Esc 키를 눌러 종료",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -5159,6 +5355,18 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Jam Analog 1",
     analog_clock_2: "Jam Analog 2",
     digital_clock: "Jam Digital",
+    fullscreen_clock: "Jam Layar Penuh",
+    stay_awake: "Tetap Aktif",
+    exit: "Keluar",
+    on: "ON",
+    off: "OFF",
+    toggle_12_24_hour: "Beralih mode 12 jam / 24 jam",
+    wake_lock_on_title:
+      "Kunci layar aktif AKTIF (layar tidak akan terkunci atau tidur)",
+    wake_lock_off_title:
+      "Kunci layar aktif NONAKTIF (layar akan tidur/terkunci normal)",
+    exit_fullscreen_esc: "Keluar dari layar penuh (Esc)",
+    click_background_to_exit: "Klik latar belakang atau tekan Esc untuk keluar",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -5460,6 +5668,19 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "ॲनालॉग घड्याळ 1",
     analog_clock_2: "ॲनालॉग घड्याळ 2",
     digital_clock: "डिजिटल घड्याळ",
+    fullscreen_clock: "फुलस्क्रीन घड्याळ",
+    stay_awake: "स्क्रीन चालू ठेवा",
+    exit: "बाहेर पडा",
+    on: "चालू",
+    off: "बंद",
+    toggle_12_24_hour: "१२ तास / २४ तास मोड बदला",
+    wake_lock_on_title:
+      "स्क्रीन वेक लॉक चालू आहे (स्क्रीन लॉक किंवा स्लीप होणार नाही)",
+    wake_lock_off_title:
+      "स्क्रीन वेक लॉक बंद आहे (स्क्रीन सामान्यपणे स्लीप/लॉक होईल)",
+    exit_fullscreen_esc: "फुलस्क्रीनमधून बाहेर पडा (Esc)",
+    click_background_to_exit:
+      "बाहेर पडण्यासाठी पार्श्वभूमीवर क्लिक करा किंवा Esc दाबा",
   },
   pl: {
     show_greetings: "Pokaż pozdrowienia",
@@ -5765,6 +5986,18 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Zegar analogowy 1",
     analog_clock_2: "Zegar analogowy 2",
     digital_clock: "Zegar cyfrowy",
+    fullscreen_clock: "Zegar pełnoekranowy",
+    stay_awake: "Nie usypiaj",
+    exit: "Wyjście",
+    on: "WŁ",
+    off: "WYŁ",
+    toggle_12_24_hour: "Przełącz tryb 12h / 24h",
+    wake_lock_on_title:
+      "Blokada wygaszania ekranu jest WŁĄCZONA (ekran nie zablokuje się ani nie uśnie)",
+    wake_lock_off_title:
+      "Blokada wygaszania ekranu jest WYŁĄCZONA (ekran będzie normalnie usypiany)",
+    exit_fullscreen_esc: "Opuść tryb pełnoekranowy (Esc)",
+    click_background_to_exit: "Kliknij tło lub naciśnij Esc, aby wyjść",
   },
   de: {
     show_greetings: "Grüße anzeigen",
@@ -6074,6 +6307,19 @@ export const translation: Record<string, Record<string, string>> & {
     analog_clock_1: "Analoge Uhr 1",
     analog_clock_2: "Analoge Uhr 2",
     digital_clock: "Digitaluhr",
+    fullscreen_clock: "Vollbild-Uhr",
+    stay_awake: "Wach bleiben",
+    exit: "Beenden",
+    on: "AN",
+    off: "AUS",
+    toggle_12_24_hour: "12-Std.- / 24-Std.-Modus umschalten",
+    wake_lock_on_title:
+      "Bildschirmsperre-Verhinderung ist AN (Bildschirm wird nicht gesperrt)",
+    wake_lock_off_title:
+      "Bildschirmsperre-Verhinderung ist AUS (Bildschirm wird normal gesperrt)",
+    exit_fullscreen_esc: "Vollbild beenden (Esc)",
+    click_background_to_exit:
+      "Klicken Sie auf den Hintergrund oder drücken Sie Esc zum Beenden",
   },
 };
 export const languages = Object.keys(

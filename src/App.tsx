@@ -12,6 +12,7 @@ import Clock2 from "./widgets/clock-2/Clock2";
 import Calendar1 from "./widgets/day-calendar/Calendar1";
 import Calendar from "./widgets/calendar/Calendar";
 import DigitalClock from "./widgets/digital-clock/DigitalClock";
+import FullScreenClock from "./components/fullscreen-clock/FullScreenClock";
 import Search from "./components/search/Search";
 import SearchEngineSwitcher from "./components/search-engine-switcher/SearchEngineSwitcher";
 import {
@@ -22,6 +23,7 @@ import { getResolvedKey } from "./utils/spacesStorage";
 import { AppContext } from "./context/provider";
 import TopSites from "./components/topsites/TopSites";
 import Translation from "./locale/Translation";
+import { translation } from "./locale/languages";
 import Dock from "./components/dock/Dock";
 import TabManager from "./components/tab-manager/TabManager";
 import StickyNotes from "./components/sticky-notes/StickyNotes";
@@ -35,6 +37,7 @@ const App = function App() {
   const [searchEngine, setSearchEngine] = useState("");
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
+  const [showFullscreenClock, setShowFullscreenClock] = useState(false);
 
   const {
     theme,
@@ -106,7 +109,7 @@ const App = function App() {
   }, [isWakingUp, loadAnimationType]);
 
   useEffect(() => {
-    if (showClockAndCalendar) {
+    if (showClockAndCalendar || showFullscreenClock) {
       const interval = setInterval(() => {
         const now = new Date();
         setTime(now);
@@ -120,7 +123,7 @@ const App = function App() {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [showClockAndCalendar]);
+  }, [showClockAndCalendar, showFullscreenClock]);
 
   useEffect(() => {
     const resolvedSearchKey = getResolvedKey(
@@ -147,6 +150,19 @@ const App = function App() {
     },
     [activeSpaceId],
   );
+
+  const handleOpenFullscreenClock = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowFullscreenClock(true);
+    if (
+      !document.fullscreenElement &&
+      document.documentElement.requestFullscreen
+    ) {
+      document.documentElement.requestFullscreen().catch(() => {
+        // Fallback: in-tab fixed overlay still provides fullscreen view
+      });
+    }
+  }, []);
 
   const bgStyle: CSSProperties & Record<string, string> = useMemo(
     () => ({
@@ -296,13 +312,40 @@ const App = function App() {
       >
         {showClockAndCalendar && (
           <div className="section-1">
-            {clockStyle === "digital" ? (
-              <DigitalClock date={time} />
-            ) : clockStyle === "analog-2" ? (
-              <Clock2 date={time} />
-            ) : (
-              <Clock1 date={time} />
-            )}
+            <div className="clock-widget-container">
+              {clockStyle === "digital" ? (
+                <DigitalClock date={time} />
+              ) : clockStyle === "analog-2" ? (
+                <Clock2 date={time} />
+              ) : (
+                <Clock1 date={time} />
+              )}
+              <button
+                className="clock-widget-fullscreen-btn"
+                onClick={handleOpenFullscreenClock}
+                title={
+                  translation[locale]?.fullscreen_clock || "Fullscreen Clock"
+                }
+                aria-label={
+                  translation[locale]?.fullscreen_clock || "Fullscreen Clock"
+                }
+                type="button"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="15 3 21 3 21 9" />
+                  <polyline points="9 21 3 21 3 15" />
+                  <line x1="21" y1="3" x2="14" y2="10" />
+                  <line x1="3" y1="21" x2="10" y2="14" />
+                </svg>
+              </button>
+            </div>
             {showMonthView ? (
               <Calendar date={date} />
             ) : (
@@ -354,6 +397,12 @@ const App = function App() {
       <Dock />
       {showTabManager && <TabManager />}
       {showStickyNotes && <StickyNotes />}
+      {showFullscreenClock && (
+        <FullScreenClock
+          date={time}
+          onClose={() => setShowFullscreenClock(false)}
+        />
+      )}
       <FooterNotice
         storageKey="hide_footer_notice"
         title={<Translation value="hide_footer_notice_title" />}
