@@ -153,6 +153,7 @@ const App = function App() {
 
   const handleOpenFullscreenClock = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
+    setTime(new Date());
     setShowFullscreenClock(true);
     if (
       !document.fullscreenElement &&

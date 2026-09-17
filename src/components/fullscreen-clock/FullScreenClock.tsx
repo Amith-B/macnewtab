@@ -88,15 +88,28 @@ export const FullScreenClock: React.FC<FullScreenClockProps> = ({
     }, 3000);
   }, []);
 
+  // Prevent background scrolling while fullscreen overlay is active
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
   useEffect(() => {
     resetIdleTimer();
-    const handleMouseMove = () => resetIdleTimer();
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("keydown", handleMouseMove);
+    const handleActivity = () => resetIdleTimer();
+    window.addEventListener("mousemove", handleActivity);
+    window.addEventListener("keydown", handleActivity);
+    window.addEventListener("pointerdown", handleActivity);
+    window.addEventListener("touchstart", handleActivity, { passive: true });
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("keydown", handleMouseMove);
+      window.removeEventListener("mousemove", handleActivity);
+      window.removeEventListener("keydown", handleActivity);
+      window.removeEventListener("pointerdown", handleActivity);
+      window.removeEventListener("touchstart", handleActivity);
       if (idleTimeoutRef.current) {
         clearTimeout(idleTimeoutRef.current);
       }
