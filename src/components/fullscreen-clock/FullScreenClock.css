@@ -1,0 +1,335 @@
+.fullscreen-clock-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  overflow: hidden;
+  cursor: default;
+  transition: opacity 0.3s ease;
+}
+
+.fullscreen-clock-overlay.controls-hidden {
+  cursor: none;
+}
+
+/* Controls Bar */
+.fullscreen-clock-controls {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  opacity: 1;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.fullscreen-clock-overlay.controls-hidden .fullscreen-clock-controls {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+}
+
+.fullscreen-clock-btn {
+  background: rgba(45, 45, 48, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e0e0e0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    border-color 0.2s ease;
+}
+
+.fullscreen-clock-btn:hover {
+  background: rgba(70, 70, 75, 0.85);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.04);
+}
+
+.fullscreen-clock-btn:active {
+  transform: scale(0.96);
+}
+
+.fullscreen-clock-btn.active {
+  background: rgba(30, 110, 230, 0.45);
+  border-color: rgba(90, 160, 255, 0.5);
+  color: #ffffff;
+}
+
+.fullscreen-clock-btn.active:hover {
+  background: rgba(30, 110, 230, 0.65);
+  border-color: rgba(120, 180, 255, 0.7);
+}
+
+.fullscreen-clock-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.fullscreen-clock-key-hint {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #c0c0c0;
+  margin-left: 2px;
+}
+
+/* Main Clock Display */
+.fullscreen-clock-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.8vw, 24px);
+  padding: 20px;
+  max-width: 95vw;
+}
+
+.flip-card-group {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 1.2vw, 16px);
+}
+
+/* Individual Flip Card Unit */
+.flip-card-unit {
+  position: relative;
+  width: clamp(55px, 10.5vw, 150px);
+  height: clamp(85px, 16.5vw, 230px);
+  background-color: #333333;
+  border-radius: clamp(10px, 1.8vw, 22px);
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.8),
+    0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Card Halves */
+.flip-card-half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  overflow: hidden;
+  background-color: #333333;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-upper {
+  top: 0;
+  border-radius: clamp(10px, 1.8vw, 22px) clamp(10px, 1.8vw, 22px) 0 0;
+  z-index: 1;
+}
+
+.flip-card-lower {
+  top: 50%;
+  border-radius: 0 0 clamp(10px, 1.8vw, 22px) clamp(10px, 1.8vw, 22px);
+  z-index: 1;
+}
+
+/* Flipping Leaves */
+.flip-card-leaf-top {
+  top: 0;
+  border-radius: clamp(10px, 1.8vw, 22px) clamp(10px, 1.8vw, 22px) 0 0;
+  transform-origin: bottom center;
+  animation: flipFoldTop 0.26s ease-in forwards;
+  z-index: 3;
+}
+
+.flip-card-leaf-bottom {
+  top: 50%;
+  border-radius: 0 0 clamp(10px, 1.8vw, 22px) clamp(10px, 1.8vw, 22px);
+  transform-origin: top center;
+  transform: rotateX(90deg);
+  animation: flipFoldBottom 0.26s cubic-bezier(0.15, 0.45, 0.25, 1) 0.24s
+    forwards;
+  z-index: 4;
+}
+
+/* Card Content / Digits */
+.flip-card-content {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "SF Pro Display",
+    "Inter", "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(55px, 12vw, 168px);
+  font-weight: 800;
+  color: #cfcfcf;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.flip-card-upper .flip-card-content,
+.flip-card-leaf-top .flip-card-content {
+  top: 0;
+}
+
+.flip-card-lower .flip-card-content,
+.flip-card-leaf-bottom .flip-card-content {
+  top: -100%;
+}
+
+/* Subtle Card Gradients for Realism */
+.flip-card-gradient-top {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+.flip-card-gradient-bottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  pointer-events: none;
+}
+
+.flip-card-leaf-shadow-top {
+  position: absolute;
+  inset: 0;
+  background: #000000;
+  opacity: 0;
+  animation: shadowFadeIn 0.26s ease-in forwards;
+  pointer-events: none;
+}
+
+.flip-card-leaf-shadow-bottom {
+  position: absolute;
+  inset: 0;
+  background: #000000;
+  opacity: 0.5;
+  animation: shadowFadeOut 0.26s cubic-bezier(0.15, 0.45, 0.25, 1) 0.24s
+    forwards;
+  pointer-events: none;
+}
+
+/* Middle Seam Groove */
+.flip-card-seam {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform: translateY(-50%);
+  background-color: #121212;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Side notches at fold seam */
+.flip-card-unit::before,
+.flip-card-unit::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: clamp(2px, 0.4vw, 5px);
+  height: clamp(5px, 0.9vw, 10px);
+  background-color: #000000;
+  transform: translateY(-50%);
+  z-index: 6;
+  border-radius: 2px;
+}
+
+.flip-card-unit::before {
+  left: 0;
+  border-radius: 0 2px 2px 0;
+}
+
+.flip-card-unit::after {
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+
+/* Colons */
+.flip-clock-colon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4.5vw, 60px);
+  width: clamp(16px, 3vw, 42px);
+  height: clamp(85px, 16.5vw, 230px);
+}
+
+.flip-clock-colon-dot {
+  width: clamp(10px, 1.8vw, 24px);
+  height: clamp(10px, 1.8vw, 24px);
+  border-radius: 50%;
+  background-color: #4a4a4c;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Keyframes */
+@keyframes flipFoldTop {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(-90deg);
+  }
+}
+
+@keyframes flipFoldBottom {
+  0% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes shadowFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes shadowFadeOut {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -649,6 +649,66 @@ body:has(.App.theme-rose) {
   gap: 24px;
 }
 
+.clock-widget-container {
+  position: relative;
+  width: 12.5rem;
+  height: 12.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clock-widget-fullscreen-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.85);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  padding: 0;
+}
+
+.clock-widget-container:hover .clock-widget-fullscreen-btn,
+.clock-widget-fullscreen-btn:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.clock-widget-fullscreen-btn:hover {
+  background: rgba(0, 0, 0, 0.72);
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.clock-widget-fullscreen-btn:active {
+  transform: scale(0.95);
+}
+
+.clock-widget-fullscreen-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
 .weather-in-widgets {
   display: none;
 }
