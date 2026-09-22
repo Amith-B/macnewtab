@@ -3,7 +3,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  background-color: #000000;
+  background-color: var(--fullscreen-clock-bg, #000000);
   z-index: 99999;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,9 @@
   user-select: none;
   overflow: hidden;
   cursor: default;
-  transition: opacity 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .fullscreen-clock-overlay.controls-hidden {
@@ -262,10 +264,11 @@
   top: 50%;
   width: clamp(2px, 0.4vw, 5px);
   height: clamp(5px, 0.9vw, 10px);
-  background-color: #000000;
+  background-color: var(--fullscreen-clock-bg, #000000);
   transform: translateY(-50%);
   z-index: 6;
   border-radius: 2px;
+  transition: background-color 0.3s ease;
 }
 
 .flip-card-unit::before {
@@ -331,5 +334,191 @@
   }
   100% {
     opacity: 0;
+  }
+}
+
+/* Color Palette Controls & Popover */
+.fullscreen-clock-btn-swatch-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.fullscreen-clock-palette-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.fullscreen-clock-palette-popover {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 230px;
+  background: rgba(28, 28, 30, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  padding: 14px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  animation: paletteFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fullscreen-clock-palette-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a0a0a5;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.fullscreen-clock-palette-presets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 10px;
+}
+
+.fullscreen-clock-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0 auto;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.fullscreen-clock-swatch:hover {
+  transform: scale(1.12);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.fullscreen-clock-swatch.light-swatch {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.fullscreen-clock-swatch.light-swatch:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.fullscreen-clock-swatch.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  transform: scale(1.08);
+}
+
+.fullscreen-clock-swatch.light-swatch.selected {
+  border-color: #3b82f6;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.12),
+    0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.fullscreen-clock-swatch-check {
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
+}
+
+.fullscreen-clock-swatch-check.dark-check {
+  color: #111827;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.5));
+}
+
+.fullscreen-clock-palette-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.fullscreen-clock-custom-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: #e0e0e0;
+  user-select: none;
+}
+
+.fullscreen-clock-color-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+  overflow: hidden;
+}
+
+.fullscreen-clock-color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.fullscreen-clock-color-input::-webkit-color-swatch {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+}
+
+.fullscreen-clock-color-input::-moz-color-swatch {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+}
+
+.fullscreen-clock-reset-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #c0c0c5;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.fullscreen-clock-reset-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+@keyframes paletteFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }

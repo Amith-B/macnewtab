@@ -195,6 +195,10 @@ const enTranslation = {
     "Screen wake lock is OFF (screen will sleep/lock normally)",
   exit_fullscreen_esc: "Exit full screen (Esc)",
   click_background_to_exit: "Click background or press Esc to exit",
+  color_palette: "Color Palette",
+  choose_bg_color: "Choose Background Color",
+  custom_color: "Custom Color",
+  reset_color: "Reset",
   show_weather: "Show Weather Widget",
   weather_temperature_unit: "Temperature Unit",
   celsius: "Celsius",
@@ -624,6 +628,10 @@ export const translation: Record<string, Record<string, string>> & {
     exit_fullscreen_esc: "ಪೂರ್ಣ ಪರದೆಯಿಂದ ನಿರ್ಗಮಿಸಿ (Esc)",
     click_background_to_exit:
       "ಹಿನ್ನೆಲೆಯನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಅಥವಾ ನಿರ್ಗಮಿಸಲು Esc ಒತ್ತಿರಿ",
+    color_palette: "ಬಣ್ಣದ ಪ್ಯಾಲೆಟ್",
+    choose_bg_color: "ಹಿನ್ನೆಲೆ ಬಣ್ಣವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    custom_color: "ಕಸ್ಟಮ್ ಬಣ್ಣ",
+    reset_color: "ಮರುಹೊಂದಿಸಿ",
     show_screen_recorder: "ಸ್ಕ್ರೀನ್ ರೆಕಾರ್ಡರ್ ತೋರಿಸಿ",
     capture_title: "ಕ್ಯಾಪ್ಚರ್",
     include_mic_audio: "ಮೈಕ್ರೊಫೋನ್ ಆಡಿಯೊ ಸೇರಿಸಿ",
@@ -946,6 +954,10 @@ export const translation: Record<string, Record<string, string>> & {
     exit_fullscreen_esc: "Ukončit celou obrazovku (Esc)",
     click_background_to_exit:
       "Klikněte na pozadí nebo stiskněte Esc pro ukončení",
+    color_palette: "Barevná paleta",
+    choose_bg_color: "Vyberte barvu pozadí",
+    custom_color: "Vlastní barva",
+    reset_color: "Resetovat",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -1264,6 +1276,10 @@ export const translation: Record<string, Record<string, string>> & {
     exit_fullscreen_esc: "Tam ekrandan çık (Esc)",
     click_background_to_exit:
       "Çıkmak için arka plana tıklayın veya Esc tuşuna basın",
+    color_palette: "Renk Paleti",
+    choose_bg_color: "Arka Plan Rengini Seç",
+    custom_color: "Özel Renk",
+    reset_color: "Sıfırla",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -1580,6 +1596,10 @@ export const translation: Record<string, Record<string, string>> & {
       "Khóa màn hình bật ĐÃ TẮT (màn hình sẽ ngủ/khóa bình thường)",
     exit_fullscreen_esc: "Thoát toàn màn hình (Esc)",
     click_background_to_exit: "Nhấp vào nền hoặc nhấn Esc để thoát",
+    color_palette: "Bảng màu",
+    choose_bg_color: "Chọn màu nền",
+    custom_color: "Màu tùy chỉnh",
+    reset_color: "Đặt lại",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -1900,6 +1920,10 @@ export const translation: Record<string, Record<string, string>> & {
     exit_fullscreen_esc: "To'liq ekrandan chiqish (Esc)",
     click_background_to_exit:
       "Chiqish uchun fonga bosing yoki Esc tugmasini bosing",
+    color_palette: "Ranglar palitrasi",
+    choose_bg_color: "Fon rangini tanlang",
+    custom_color: "Maxsus rang",
+    reset_color: "Qayta o'rnatish",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -2201,6 +2225,10 @@ export const translation: Record<string, Record<string, string>> & {
     wake_lock_off_title: "屏幕保持常亮关闭（屏幕将正常休眠/锁屏）",
     exit_fullscreen_esc: "退出全屏 (Esc)",
     click_background_to_exit: "点击背景或按 Esc 键退出",
+    color_palette: "调色板",
+    choose_bg_color: "选择背景颜色",
+    custom_color: "自定义颜色",
+    reset_color: "重置",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -2516,6 +2544,10 @@ export const translation: Record<string, Record<string, string>> & {
     exit_fullscreen_esc: "फुलस्क्रीन से बाहर निकलें (Esc)",
     click_background_to_exit:
       "बाहर निकलने के लिए पृष्ठभूमि पर क्लिक करें या Esc दबाएं",
+    color_palette: "रंग पट्टिका",
+    choose_bg_color: "पृष्ठभूमि का रंग चुनें",
+    custom_color: "कस्टम रंग",
+    reset_color: "रीसेट",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -2835,6 +2867,10 @@ export const translation: Record<string, Record<string, string>> & {
       "Il blocco riattivazione schermo è DISATTIVATO (lo schermo si bloccherà normalmente)",
     exit_fullscreen_esc: "Esci da schermo intero (Esc)",
     click_background_to_exit: "Fai clic sullo sfondo o premi Esc per uscire",
+    color_palette: "Tavolozza dei colori",
+    choose_bg_color: "Scegli il colore di sfondo",
+    custom_color: "Colore personalizzato",
+    reset_color: "Reimposta",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -3152,6 +3188,10 @@ export const translation: Record<string, Record<string, string>> & {
     exit_fullscreen_esc: "ফুলস্ক্রিন থেকে প্রস্থান (Esc)",
     click_background_to_exit:
       "প্রস্থান করতে ব্যাকগ্রাউন্ডে ক্লিক করুন বা Esc টিপুন",
+    color_palette: "রঙের প্যালেট",
+    choose_bg_color: "পটভূমির রঙ চয়ন করুন",
+    custom_color: "কাস্টম রঙ",
+    reset_color: "রিসেট",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -3469,6 +3509,10 @@ export const translation: Record<string, Record<string, string>> & {
       "O bloqueio de tela acordada está DESLIGADO (a tela será bloqueada normalmente)",
     exit_fullscreen_esc: "Sair da tela cheia (Esc)",
     click_background_to_exit: "Clique no fundo ou pressione Esc para sair",
+    color_palette: "Paleta de Cores",
+    choose_bg_color: "Escolher cor de fundo",
+    custom_color: "Cor personalizada",
+    reset_color: "Redefinir",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -3789,6 +3833,10 @@ export const translation: Record<string, Record<string, string>> & {
     exit_fullscreen_esc: "Quitter le plein écran (Esc)",
     click_background_to_exit:
       "Cliquez sur l'arrière-plan ou appuyez sur Échap pour quitter",
+    color_palette: "Palette de couleurs",
+    choose_bg_color: "Choisir la couleur d'arrière-plan",
+    custom_color: "Couleur personnalisée",
+    reset_color: "Réinitialiser",
   },
   ru: {
     show_greetings: "Показать приветствия",
@@ -4105,6 +4153,10 @@ export const translation: Record<string, Record<string, string>> & {
       "Блокировка сна экрана ВЫКЛ (экран будет засыпать/блокироваться в обычном режиме)",
     exit_fullscreen_esc: "Выйти из полноэкранного режима (Esc)",
     click_background_to_exit: "Нажмите на фон или клавишу Esc для выхода",
+    color_palette: "Палитра цветов",
+    choose_bg_color: "Выбрать цвет фона",
+    custom_color: "Свой цвет",
+    reset_color: "Сброс",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -4418,6 +4470,10 @@ export const translation: Record<string, Record<string, string>> & {
       "Bloqueo de activación de pantalla DESACTIVADO (la pantalla se suspenderá normalmente)",
     exit_fullscreen_esc: "Salir de pantalla completa (Esc)",
     click_background_to_exit: "Haz clic en el fondo o presiona Esc para salir",
+    color_palette: "Paleta de colores",
+    choose_bg_color: "Elegir color de fondo",
+    custom_color: "Color personalizado",
+    reset_color: "Restablecer",
     show_screen_recorder: "Mostrar Grabador de Pantalla",
     capture_title: "Captura",
     include_mic_audio: "Incluir audio del micrófono",
@@ -4741,6 +4797,10 @@ export const translation: Record<string, Record<string, string>> & {
       "画面のスリープ防止がオフです（通常通り画面がスリープ/ロックします）",
     exit_fullscreen_esc: "全画面表示を終了 (Esc)",
     click_background_to_exit: "背景をクリックするかEscキーを押して終了",
+    color_palette: "カラーパレット",
+    choose_bg_color: "背景色を選択",
+    custom_color: "カスタム色",
+    reset_color: "リセット",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -5052,6 +5112,10 @@ export const translation: Record<string, Record<string, string>> & {
       "화면 켜짐 유지가 꺼져 있습니다 (화면이 정상적으로 잠김/꺼짐)",
     exit_fullscreen_esc: "전체 화면 종료 (Esc)",
     click_background_to_exit: "배경을 클릭하거나 Esc 키를 눌러 종료",
+    color_palette: "색상 팔레트",
+    choose_bg_color: "배경색 선택",
+    custom_color: "사용자 지정 색상",
+    reset_color: "초기화",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -5367,6 +5431,10 @@ export const translation: Record<string, Record<string, string>> & {
       "Kunci layar aktif NONAKTIF (layar akan tidur/terkunci normal)",
     exit_fullscreen_esc: "Keluar dari layar penuh (Esc)",
     click_background_to_exit: "Klik latar belakang atau tekan Esc untuk keluar",
+    color_palette: "Palet Warna",
+    choose_bg_color: "Pilih Warna Latar Belakang",
+    custom_color: "Warna Kustom",
+    reset_color: "Atur Ulang",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -5681,6 +5749,10 @@ export const translation: Record<string, Record<string, string>> & {
     exit_fullscreen_esc: "फुलस्क्रीनमधून बाहेर पडा (Esc)",
     click_background_to_exit:
       "बाहेर पडण्यासाठी पार्श्वभूमीवर क्लिक करा किंवा Esc दाबा",
+    color_palette: "रंग पॅलेट",
+    choose_bg_color: "पार्श्वभूमी रंग निवडा",
+    custom_color: "सानुकूल रंग",
+    reset_color: "रीसेट करा",
   },
   pl: {
     show_greetings: "Pokaż pozdrowienia",
@@ -5998,6 +6070,10 @@ export const translation: Record<string, Record<string, string>> & {
       "Blokada wygaszania ekranu jest WYŁĄCZONA (ekran będzie normalnie usypiany)",
     exit_fullscreen_esc: "Opuść tryb pełnoekranowy (Esc)",
     click_background_to_exit: "Kliknij tło lub naciśnij Esc, aby wyjść",
+    color_palette: "Paleta kolorów",
+    choose_bg_color: "Wybierz kolor tła",
+    custom_color: "Własny kolor",
+    reset_color: "Resetuj",
   },
   de: {
     show_greetings: "Grüße anzeigen",
@@ -6320,6 +6396,10 @@ export const translation: Record<string, Record<string, string>> & {
     exit_fullscreen_esc: "Vollbild beenden (Esc)",
     click_background_to_exit:
       "Klicken Sie auf den Hintergrund oder drücken Sie Esc zum Beenden",
+    color_palette: "Farbpalette",
+    choose_bg_color: "Hintergrundfarbe wählen",
+    custom_color: "Benutzerdefinierte Farbe",
+    reset_color: "Zurücksetzen",
   },
 };
 export const languages = Object.keys(

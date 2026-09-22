@@ -16,6 +16,20 @@ interface FullScreenClockProps {
   onClose: () => void;
 }
 
+const BG_COLOR_PRESETS = [
+  // First row: 4 Dark colors
+  { name: "Pure Black", value: "#000000", isLight: false },
+  { name: "Deep Navy", value: "#1e3a8a", isLight: false },
+  { name: "Forest Green", value: "#065f46", isLight: false },
+  { name: "Deep Wine", value: "#4a044e", isLight: false },
+
+  // Second row: 4 Light colors (distinct contrasting hues)
+  { name: "Pure White", value: "#ffffff", isLight: true },
+  { name: "Warm Peach", value: "#fed7aa", isLight: true },
+  { name: "Mint Sage", value: "#d1fae5", isLight: true },
+  { name: "Sky Blue", value: "#bae6fd", isLight: true },
+];
+
 export const FullScreenClock: React.FC<FullScreenClockProps> = ({
   date,
   onClose,
@@ -26,6 +40,14 @@ export const FullScreenClock: React.FC<FullScreenClockProps> = ({
   const [keepAwake, setKeepAwake] = useState(() => {
     return localStorage.getItem("fullscreen_clock_keep_awake") !== "false";
   });
+  const [bgColor, setBgColor] = useState(() => {
+    return localStorage.getItem("fullscreen_clock_bg_color") || "#000000";
+  });
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const paletteRef = useRef<HTMLDivElement | null>(null);
+  const paletteOpenRef = useRef(paletteOpen);
+  paletteOpenRef.current = paletteOpen;
+
   const [controlsVisible, setControlsVisible] = useState(true);
   const idleTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const wakeLockSentinelRef = useRef<any>(null);
@@ -77,16 +99,28 @@ export const FullScreenClock: React.FC<FullScreenClockProps> = ({
     };
   }, [keepAwake, requestWakeLock, releaseWakeLock]);
 
-  // Idle timer to hide controls after 3s of inactivity
+  // Idle timer to hide controls after 3s of inactivity (paused when palette is open)
   const resetIdleTimer = useCallback(() => {
     setControlsVisible(true);
     if (idleTimeoutRef.current) {
       clearTimeout(idleTimeoutRef.current);
     }
-    idleTimeoutRef.current = setTimeout(() => {
-      setControlsVisible(false);
-    }, 3000);
-  }, []);
+    if (!paletteOpen) {
+      idleTimeoutRef.current = setTimeout(() => {
+        setControlsVisible(false);
+      }, 3000);
+    }
+  }, [paletteOpen]);
+
+  // Keep controls visible while palette popover is open
+  useEffect(() => {
+    if (paletteOpen) {
+      setControlsVisible(true);
+      if (idleTimeoutRef.current) {
+        clearTimeout(idleTimeoutRef.current);
+      }
+    }
+  }, [paletteOpen]);
 
   // Prevent background scrolling while fullscreen overlay is active
   useEffect(() => {
@@ -116,6 +150,27 @@ export const FullScreenClock: React.FC<FullScreenClockProps> = ({
     };
   }, [resetIdleTimer]);
 
+  // Click-outside listener to close palette popover
+  useEffect(() => {
+    if (!paletteOpen) return;
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (
+        paletteRef.current &&
+        !paletteRef.current.contains(e.target as Node)
+      ) {
+        setPaletteOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [paletteOpen]);
+
   const mountTimeRef = useRef(Date.now());
   const enteredNativeFullscreen = useRef(Boolean(document.fullscreenElement));
 
@@ -126,10 +181,16 @@ export const FullScreenClock: React.FC<FullScreenClockProps> = ({
     onClose();
   }, [onClose]);
 
-  // Handle native Fullscreen exit & Escape key
+  // Handle native Fullscreen exit & Escape key (close palette first if open)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        if (paletteOpenRef.current) {
+          e.preventDefault();
+          e.stopPropagation();
+          setPaletteOpen(false);
+          return;
+        }
         handleClose();
       }
     };
@@ -170,6 +231,11 @@ export const FullScreenClock: React.FC<FullScreenClockProps> = ({
     });
   };
 
+  const handleBgColorChange = (newColor: string) => {
+    setBgColor(newColor);
+    localStorage.setItem("fullscreen_clock_bg_color", newColor);
+  };
+
   const handleOverlayClick = (e: React.MouseEvent) => {
     // Close if clicking directly on overlay background after a short delay from mount
     if (
@@ -194,16 +260,55 @@ export const FullScreenClock: React.FC<FullScreenClockProps> = ({
   const { locale } = useContext(AppContext);
   const t = translation[locale] || translation.en;
 
+  const renderSwatch = (preset: {
+    name: string;
+    value: string;
+    isLight: boolean;
+  }) => {
+    const isSelected = bgColor.toLowerCase() === preset.value.toLowerCase();
+    return (
+      <button
+        key={preset.value}
+        type="button"
+        className={`fullscreen-clock-swatch ${preset.isLight ? "light-swatch" : ""} ${
+          isSelected ? "selected" : ""
+        }`}
+        style={{ backgroundColor: preset.value }}
+        onClick={() => handleBgColorChange(preset.value)}
+        title={preset.name}
+      >
+        {isSelected && (
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={`fullscreen-clock-swatch-check ${
+              preset.isLight ? "dark-check" : ""
+            }`}
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        )}
+      </button>
+    );
+  };
+
   return (
     <div
       className={`fullscreen-clock-overlay ${controlsVisible ? "" : "controls-hidden"}`}
-      onClick={handleOverlayClick}
-      title={
-        t.click_background_to_exit || "Click background or press Esc to exit"
+      style={
+        {
+          backgroundColor: bgColor,
+          "--fullscreen-clock-bg": bgColor,
+        } as React.CSSProperties
       }
+      onClick={handleOverlayClick}
     >
       {/* Top Floating Controls */}
-      <div className="fullscreen-clock-controls">
+      <div className="fullscreen-clock-controls" title="">
         <button
           className={`fullscreen-clock-btn ${keepAwake ? "active" : ""}`}
           onClick={toggleKeepAwake}
@@ -241,6 +346,80 @@ export const FullScreenClock: React.FC<FullScreenClockProps> = ({
             <Translation value={keepAwake ? "on" : "off"} />
           </span>
         </button>
+
+        {/* Color Palette Button & Popover */}
+        <div className="fullscreen-clock-palette-container" ref={paletteRef}>
+          <button
+            className={`fullscreen-clock-btn ${paletteOpen ? "active" : ""}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setPaletteOpen((prev) => !prev);
+            }}
+            type="button"
+            title={t.color_palette || "Color Palette"}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+              <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+              <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+              <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
+            </svg>
+            <span
+              className="fullscreen-clock-btn-swatch-dot"
+              style={{ backgroundColor: bgColor }}
+            />
+            <span>
+              <Translation value="color_palette" />
+            </span>
+          </button>
+
+          {paletteOpen && (
+            <div
+              className="fullscreen-clock-palette-popover"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="fullscreen-clock-palette-title">
+                <Translation value="choose_bg_color" />
+              </div>
+
+              {/* 4 Dark presets in first row, 4 Light presets in second row */}
+              <div className="fullscreen-clock-palette-presets">
+                {BG_COLOR_PRESETS.map((preset) => renderSwatch(preset))}
+              </div>
+
+              <div className="fullscreen-clock-palette-custom">
+                <label className="fullscreen-clock-custom-label">
+                  <input
+                    type="color"
+                    value={bgColor}
+                    onChange={(e) => handleBgColorChange(e.target.value)}
+                    className="fullscreen-clock-color-input"
+                  />
+                  <span>
+                    <Translation value="custom_color" />
+                  </span>
+                </label>
+                {bgColor.toLowerCase() !== "#000000" && (
+                  <button
+                    type="button"
+                    className="fullscreen-clock-reset-btn"
+                    onClick={() => handleBgColorChange("#000000")}
+                  >
+                    <Translation value="reset_color" />
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
 
         <button
           className="fullscreen-clock-btn"
