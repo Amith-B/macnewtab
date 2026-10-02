@@ -58,12 +58,14 @@
 
 @keyframes sunset-sun-glow {
   0% {
-    box-shadow: 0 0 60px rgba(255, 100, 0, 0.5),
+    box-shadow:
+      0 0 60px rgba(255, 100, 0, 0.5),
       0 0 100px rgba(255, 100, 0, 0.2);
     transform: translateX(-50%) scale(1);
   }
   100% {
-    box-shadow: 0 0 80px rgba(255, 140, 0, 0.8),
+    box-shadow:
+      0 0 80px rgba(255, 140, 0, 0.8),
       0 0 140px rgba(255, 140, 0, 0.4);
     transform: translateX(-50%) scale(1.05);
   }
@@ -118,7 +120,8 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background-image: linear-gradient(rgba(255, 0, 221, 0.4) 1px, transparent 1px),
+  background-image:
+    linear-gradient(rgba(255, 0, 221, 0.4) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 0, 221, 0.4) 1px, transparent 1px);
   background-size: 40px 40px;
   transform: rotateX(60deg);

@@ -11,22 +11,29 @@ import {
 import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
 import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
 import { ReactComponent as LeftArrow } from "../../assets/left-arrow.svg";
+import { DockIcon } from "./DockIcon";
+import { DockFolderIcon } from "./DockFolderIcon";
+import { DockFolderModal } from "./DockFolderModal";
 import { ReactComponent as RightArrow } from "../../assets/right-arrow.svg";
 import { ReactComponent as TodoIcon } from "../../assets/todo.svg";
 import { ReactComponent as StickyNotesIcon } from "../../assets/sticky-notes.svg";
 import { ReactComponent as FreeformIcon } from "../../assets/freeform.svg";
 import { ReactComponent as FocusIcon } from "../../assets/focus.svg";
+import { ReactComponent as ScreenRecorderIcon } from "../../assets/screen-recorder.svg";
 import Launchpad from "../launchpad/Launchpad";
 
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
-import { DockIcon } from "./DockIcon";
+import { LinkItem } from "../settings/shared/LinkListEditor";
 
 const SettingsLazy = lazy(() => import("../settings/Settings"));
 const FreeformLazy = lazy(() => import("../freeform/Freeform"));
 const TodoLazy = lazy(() => import("../todo/Todo"));
 const FocusModeLazy = lazy(() => import("../focus/FocusMode"));
+const ScreenRecorderLazy = lazy(
+  () => import("../screen-recorder/ScreenRecorder"),
+);
 
 const TooltipPosition: Record<string, string> = {
   left: "right",
@@ -45,9 +52,12 @@ const Dock = memo(() => {
   const [hasOpenedFocusMode, setHasOpenedFocusMode] = useState(false);
   const [freeformVisible, setFreeformVisible] = useState(false);
   const [hasOpenedFreeform, setHasOpenedFreeform] = useState(false);
+  const [screenRecorderVisible, setScreenRecorderVisible] = useState(false);
+  const [hasOpenedScreenRecorder, setHasOpenedScreenRecorder] = useState(false);
   const [isOverflowLeft, setIsOverflowLeft] = useState(false);
   const [isOverflowRight, setIsOverflowRight] = useState(false);
   const [isOverflowButtonVisible, setIsOverflowButtonVisible] = useState(false);
+  const [openedFolder, setOpenedFolder] = useState<LinkItem | null>(null);
   const {
     dockBarSites,
     dockPosition,
@@ -56,9 +66,16 @@ const Dock = memo(() => {
     showStickyNotes,
     showFocusMode,
     showFreeform,
+    showScreenRecorder,
     separatePageSite,
     activeSpaceId,
     locale,
+    showLaunchpad,
+    bookmarksVisible,
+    showGoogleApps,
+    customLaunchpadLinks,
+    openSettingsToWeather,
+    setOpenSettingsToWeather,
   } = useContext(AppContext);
 
   const t = translation[locale] || translation.en;
@@ -69,6 +86,28 @@ const Dock = memo(() => {
   );
 
   const handleTodoClose = useCallback(() => setTodoDialogOpen(false), []);
+
+  const [settingsInitialTab, setSettingsInitialTab] = useState<
+    string | undefined
+  >(undefined);
+
+  // When weather widget requests opening settings to weather tab
+  useEffect(() => {
+    if (openSettingsToWeather) {
+      setHasOpenedSettings(true);
+      setSettingsInitialTab("weather");
+      setSettingsVisible(true);
+      setLaunchpadVisible(false);
+      setOpenSettingsToWeather(false);
+    }
+  }, [openSettingsToWeather, setOpenSettingsToWeather]);
+
+  // Reset initialTab when settings is closed
+  useEffect(() => {
+    if (!settingsVisible) {
+      setSettingsInitialTab(undefined);
+    }
+  }, [settingsVisible]);
 
   const containerRef = useRef(null);
 
@@ -148,6 +187,10 @@ const Dock = memo(() => {
 
   const hasLinks = !!dockBarSites.length;
 
+  const hasLaunchpadContent =
+    bookmarksVisible || showGoogleApps || !!customLaunchpadLinks?.length;
+  const shouldShowLaunchpad = showLaunchpad && hasLaunchpadContent;
+
   return (
     <>
       <div className={`dock-scroll-container ${dockPosition}`}>
@@ -166,19 +209,21 @@ const Dock = memo(() => {
           ref={containerRef}
           onScroll={checkOverflow}
         >
-          <button
-            className={`launchpad-icon accessible tooltip tooltip-${
-              TooltipPosition[dockPosition] || "top"
-            }`}
-            data-label={t.launchpad || "Launchpad"}
-            title={t.launchpad || "Launchpad"}
-            onClick={() => {
-              setLaunchpadVisible(!launchpadVisible);
-              setSettingsVisible(false);
-            }}
-          >
-            <LaunchpadIcon />
-          </button>
+          {shouldShowLaunchpad && (
+            <button
+              className={`launchpad-icon accessible tooltip tooltip-${
+                TooltipPosition[dockPosition] || "top"
+              }`}
+              data-label={t.launchpad || "Launchpad"}
+              title={t.launchpad || "Launchpad"}
+              onClick={() => {
+                setLaunchpadVisible(!launchpadVisible);
+                setSettingsVisible(false);
+              }}
+            >
+              <LaunchpadIcon />
+            </button>
+          )}
           {todoListVisbility && (
             <button
               className={`todo-button accessible tooltip tooltip-${
@@ -239,6 +284,21 @@ const Dock = memo(() => {
               <FreeformIcon />
             </button>
           )}
+          {showScreenRecorder && (
+            <button
+              className={`screen-recorder-button accessible tooltip tooltip-${
+                TooltipPosition[dockPosition] || "top"
+              }`}
+              data-label={t.capture_title || "Capture"}
+              title={t.capture_title || "Capture"}
+              onClick={() => {
+                setHasOpenedScreenRecorder(true);
+                setScreenRecorderVisible(!screenRecorderVisible);
+              }}
+            >
+              <ScreenRecorderIcon />
+            </button>
+          )}
           <button
             className={`settings-icon accessible tooltip tooltip-${
               TooltipPosition[dockPosition] || "top"
@@ -257,6 +317,19 @@ const Dock = memo(() => {
           {hasLinks && (
             <>
               {dockBarSites.map((item) => {
+                if (item.type === "folder") {
+                  return (
+                    <DockFolderIcon
+                      key={item.id}
+                      id={item.id}
+                      title={item.title}
+                      links={item.links}
+                      activeSpaceId={activeSpaceId}
+                      onClick={() => setOpenedFolder(item)}
+                    />
+                  );
+                }
+
                 let anchorProps = {};
 
                 try {
@@ -322,6 +395,7 @@ const Dock = memo(() => {
           <SettingsLazy
             open={settingsVisible}
             onClose={() => setSettingsVisible(false)}
+            initialTab={settingsInitialTab}
           />
         </Suspense>
       )}
@@ -350,6 +424,23 @@ const Dock = memo(() => {
             onClose={() => setFreeformVisible(false)}
           />
         </Suspense>
+      )}
+      {hasOpenedScreenRecorder && (
+        <Suspense fallback={null}>
+          <ScreenRecorderLazy
+            open={screenRecorderVisible}
+            onClose={() => setScreenRecorderVisible(false)}
+          />
+        </Suspense>
+      )}
+      {openedFolder && (
+        <DockFolderModal
+          title={openedFolder.title}
+          links={openedFolder.links}
+          activeSpaceId={activeSpaceId}
+          onClose={() => setOpenedFolder(null)}
+          separatePageSite={separatePageSite}
+        />
       )}
     </>
   );

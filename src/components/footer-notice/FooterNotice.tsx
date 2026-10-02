@@ -8,7 +8,12 @@ interface FooterNoticeProps {
   children?: React.ReactNode;
 }
 
-export default function FooterNotice({ storageKey, title, description, children }: FooterNoticeProps) {
+export default function FooterNotice({
+  storageKey,
+  title,
+  description,
+  children,
+}: FooterNoticeProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -28,11 +33,19 @@ export default function FooterNotice({ storageKey, title, description, children 
   return (
     <div className="footer-notice">
       <div className="footer-notice-content">
-        {title && <p><strong>{title}</strong></p>}
+        {title && (
+          <p>
+            <strong>{title}</strong>
+          </p>
+        )}
         {description && <p>{description}</p>}
         {children}
       </div>
-      <button className="footer-notice-close" onClick={handleClose} title="Dismiss">
+      <button
+        className="footer-notice-close"
+        onClick={handleClose}
+        title="Dismiss"
+      >
         ✕
       </button>
     </div>

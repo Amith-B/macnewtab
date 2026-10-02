@@ -1,16 +1,25 @@
-export type ToolType = 'select' | 'pen' | 'finePen' | 'highlighter' | 'eraser' | 'text' | 'shape' | 'sticky' | 'image';
+export type ToolType =
+  | "select"
+  | "pen"
+  | "finePen"
+  | "highlighter"
+  | "eraser"
+  | "text"
+  | "shape"
+  | "sticky"
+  | "image";
 
 export type ShapeType =
-  | 'line'
-  | 'arrow'
-  | 'rectangle'
-  | 'roundedRectangle'
-  | 'circle'
-  | 'triangle'
-  | 'diamond'
-  | 'star'
-  | 'pentagon'
-  | 'speechBubble';
+  | "line"
+  | "arrow"
+  | "rectangle"
+  | "roundedRectangle"
+  | "circle"
+  | "triangle"
+  | "diamond"
+  | "star"
+  | "pentagon"
+  | "speechBubble";
 
 export interface Point {
   x: number;
@@ -24,8 +33,8 @@ export interface ErasedStroke {
 
 export interface StrokeObject {
   id: string;
-  type: 'stroke';
-  tool: 'pen' | 'finePen' | 'highlighter';
+  type: "stroke";
+  tool: "pen" | "finePen" | "highlighter";
   points: Point[];
   color: string;
   width: number;
@@ -35,7 +44,7 @@ export interface StrokeObject {
 
 export interface ShapeObject {
   id: string;
-  type: 'shape';
+  type: "shape";
   shapeType: ShapeType;
   x: number;
   y: number;
@@ -50,7 +59,7 @@ export interface ShapeObject {
 
 export interface TextObject {
   id: string;
-  type: 'text';
+  type: "text";
   x: number;
   y: number;
   width: number;
@@ -66,7 +75,7 @@ export interface TextObject {
 
 export interface StickyObject {
   id: string;
-  type: 'sticky';
+  type: "sticky";
   x: number;
   y: number;
   width: number;
@@ -78,7 +87,7 @@ export interface StickyObject {
 
 export interface ImageObject {
   id: string;
-  type: 'image';
+  type: "image";
   x: number;
   y: number;
   width: number;
@@ -87,7 +96,8 @@ export interface ImageObject {
   erasedStrokes?: ErasedStroke[];
 }
 
-export type CanvasObject = StrokeObject | ShapeObject | TextObject | StickyObject | ImageObject;
+export type CanvasObject =
+  StrokeObject | ShapeObject | TextObject | StickyObject | ImageObject;
 
 export interface Camera {
   x: number;

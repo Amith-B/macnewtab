@@ -16,6 +16,8 @@ const General = memo(function General() {
   const {
     showGreeting,
     setShowGreeeting,
+    showSearchBar,
+    setShowSearchBar,
     showSearchEngines,
     setShowSearchEngines,
     useSearchDropdown,
@@ -36,12 +38,13 @@ const General = memo(function General() {
     setShowBattery,
     separatePageSite,
     setSeparatePageSite,
+    resetLeftWidgetsOrder,
+    resetRightWidgetsOrder,
   } = useContext(AppContext);
 
   const selectedLanguageDetails = useMemo(() => {
     return languageOptions.find((item) => item.value === locale);
   }, [locale]);
-
 
   return (
     <div className="general__container">
@@ -55,6 +58,17 @@ const General = memo(function General() {
         />
       </div>
       <div className="general__row-item">
+        <Translation value="show_search_bar" />
+        <Toggle
+          id={"show-search-bar-toggle"}
+          name="Show search bar toggle"
+          isChecked={showSearchBar}
+          handleToggleChange={() => setShowSearchBar(!showSearchBar)}
+        />
+      </div>
+      <div
+        className={"general__row-item" + (!showSearchBar ? " disabled" : "")}
+      >
         <Translation value="show_search_engines" />
         <Toggle
           id={"search-engine-toggle"}
@@ -115,6 +129,33 @@ const General = memo(function General() {
           value={clockStyle}
           onChange={(event) => setClockStyle(event.target.value)}
         />
+      </div>
+
+      <div
+        className={
+          "general__row-item" + (!showClockAndCalendar ? " disabled" : "")
+        }
+      >
+        <Translation value="reset_calendar_clock_widgets" />
+        <button
+          className="button accessible"
+          type="button"
+          disabled={!showClockAndCalendar}
+          onClick={resetLeftWidgetsOrder}
+        >
+          <Translation value="reset" />
+        </button>
+      </div>
+
+      <div className="general__row-item">
+        <Translation value="reset_search_home_widgets" />
+        <button
+          className="button accessible"
+          type="button"
+          onClick={resetRightWidgetsOrder}
+        >
+          <Translation value="reset" />
+        </button>
       </div>
 
       <div className="general__row-item">

@@ -62,17 +62,17 @@ export default function About() {
                 <a
                   className="about__developer-link"
                   rel="noreferrer"
-                  href="https://instagram.com/capture.loom"
+                  href="https://www.instagram.com/macnewtab.extension"
                   target="_blank"
                 >
-                  @capture.loom
+                  @macnewtab.extension
                 </a>
               </div>
             </div>
           </div>
           <div className="about__row-item">
             <Translation value="supported_browsers" />
-            <div>Chrome</div>
+            <div>Chrome, Microsoft Edge</div>
           </div>
           <div className="about__row-item">
             <Translation value="permissions_needed" />

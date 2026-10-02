@@ -41,7 +41,7 @@ const GlobeTheme: React.FC = () => {
           R,
           0,
           0,
-          Math.PI * 2
+          Math.PI * 2,
         );
         ctx.stroke();
       }

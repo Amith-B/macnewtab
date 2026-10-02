@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@700;800&display=swap");
 
 .digital-clock__container {
   background-color: var(--digital-clock-bg, var(--theme-bg-with-opacity));
@@ -36,7 +36,7 @@
 
 .digital-clock__hours,
 .digital-clock__minutes {
-  font-family: 'Inter', ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  font-family: "Inter", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
   font-size: 4.8rem;
   font-weight: 800;
   color: var(--theme-clr);
@@ -45,7 +45,7 @@
 }
 
 .digital-clock__colon {
-  font-family: 'Inter', ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  font-family: "Inter", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
   font-size: 4.5rem;
   font-weight: 700;
   color: var(--theme-clr);
@@ -54,4 +54,3 @@
   display: inline-block;
   transform: translateY(-4px);
 }
-

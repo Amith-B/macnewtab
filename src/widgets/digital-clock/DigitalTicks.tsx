@@ -61,15 +61,26 @@ const TICKS = [
   { id: 59, x1: 89.91, y1: 4, x2: 90.6417, y2: 10.9617 },
 ];
 
-export default function DigitalTicks({ currentSecond }: { currentSecond: number }) {
+export default function DigitalTicks({
+  currentSecond,
+}: {
+  currentSecond: number;
+}) {
   return (
-    <svg style={{ width: "100%", height: "100%" }} width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      style={{ width: "100%", height: "100%" }}
+      width="200"
+      height="200"
+      viewBox="0 0 200 200"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       {TICKS.map((tick, index) => {
         let diff = currentSecond - index;
         if (diff < 0) {
           diff += 60;
         }
-        
+
         let opacity = 0.2; // default dim
         if (diff === 0) {
           opacity = 1.0;
@@ -77,7 +88,7 @@ export default function DigitalTicks({ currentSecond }: { currentSecond: number 
           // fade from 0.8 to 0.2 over 30 seconds
           opacity = 0.8 - (diff / 30) * 0.6;
         }
-        
+
         return (
           <line
             key={tick.id}

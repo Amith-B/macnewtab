@@ -56,7 +56,10 @@ function getCommitsBetween(fromCommit, toCommit) {
 
     return filtered.map((msg) => `- ${msg}`).join("\n");
   } catch (err) {
-    console.error(`Error getting commits between ${fromCommit} and ${toCommit}:`, err.message);
+    console.error(
+      `Error getting commits between ${fromCommit} and ${toCommit}:`,
+      err.message,
+    );
     return "";
   }
 }
@@ -99,7 +102,9 @@ function generateChangelog() {
   if (versionCommits.length === 0) {
     try {
       const currentVersion = require("./package.json").version;
-      const currentCommit = execSync("git rev-parse HEAD", { encoding: "utf8" }).trim();
+      const currentCommit = execSync("git rev-parse HEAD", {
+        encoding: "utf8",
+      }).trim();
       versionCommits.push({ version: currentVersion, commit: currentCommit });
     } catch (err) {
       console.error("Couldn't determine current version:", err.message);
@@ -133,13 +138,13 @@ function generateChangelog() {
   }
 
   // Limit history and write to file
-  const finalContent = changelogEntries
-    .reverse()
-    .slice(0, MAX_COMMIT_HISTORY)
-    .join("\n\n") + "\n";
+  const finalContent =
+    changelogEntries.reverse().slice(0, MAX_COMMIT_HISTORY).join("\n\n") + "\n";
 
   fs.writeFileSync("public/CHANGELOG.md", finalContent);
-  console.log(`✅ CHANGELOG.md generated for last ${MAX_COMMIT_HISTORY} versions`);
+  console.log(
+    `✅ CHANGELOG.md generated for last ${MAX_COMMIT_HISTORY} versions`,
+  );
 }
 
 generateChangelog();

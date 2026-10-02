@@ -35,7 +35,7 @@ export default function Events({
           <div className="events__date-label current-date">
             {getFormattedDateStringForEventsGroup(
               new Date().toISOString(),
-              locale
+              locale,
             )}
           </div>
           <h2 className="event__item-no-event">

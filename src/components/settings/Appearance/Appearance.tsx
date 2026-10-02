@@ -19,6 +19,8 @@ export default function Appearance() {
     backgroundImage,
     wallpaperBlur,
     handleWallpaperBlur,
+    wallpaperFit,
+    handleWallpaperFitChange,
     setTheme,
     setThemeColor,
     handleWallpaperChange,
@@ -206,6 +208,36 @@ export default function Appearance() {
         </div>
       ) : (
         <>
+          <div
+            className={
+              "appearance__wallpaper-type-container with-description" +
+              (!backgroundImage ? " disabled" : "")
+            }
+          >
+            <div className="appearance__wallpaper-type-row">
+              <Translation value="wallpaper_fit" />
+              <Select
+                id="wallpaper-fit-select"
+                name="Wallpaper fit select"
+                options={[
+                  { value: "cover", label: "Cover" },
+                  { value: "fit", label: "Fit" },
+                  { value: "fill", label: "Fill / Stretch" },
+                  { value: "tile", label: "Repeat" },
+                ]}
+                value={wallpaperFit}
+                onChange={(event) =>
+                  handleWallpaperFitChange(event.target.value)
+                }
+                disabled={!backgroundImage}
+              />
+            </div>
+            {wallpaperFit === "tile" && (
+              <div className="appearance__wallpaper-fit-warning">
+                <Translation value="repeat_warning" />
+              </div>
+            )}
+          </div>
           <div className="appearance__wallpaper-blur-container">
             <Translation value="wallpaper_blur" />
             <div

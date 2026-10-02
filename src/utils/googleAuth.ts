@@ -1,6 +1,5 @@
 // Google OAuth configuration
-export const GOOGLE_CLIENT_ID_FOR_EDGE =
-  process.env.REACT_APP_EDGE_CLIENT_ID;
+export const GOOGLE_CLIENT_ID_FOR_EDGE = process.env.REACT_APP_EDGE_CLIENT_ID;
 export const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/userinfo.profile",
   "https://www.googleapis.com/auth/userinfo.email",
@@ -35,7 +34,7 @@ export interface GoogleCalendarEvent {
 
 // Get OAuth token using Chrome Identity API or Web Auth Flow
 export const getGoogleAuthToken = (
-  interactive: boolean = true
+  interactive: boolean = true,
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
     // Try the standard Chrome Identity API first
@@ -44,7 +43,7 @@ export const getGoogleAuthToken = (
         // If that fails (e.g. on Edge or dev env with ID mismatch), try Web Auth Flow
         const redirectUrl = chrome.identity.getRedirectURL();
         const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${GOOGLE_CLIENT_ID_FOR_EDGE}&response_type=token&redirect_uri=${encodeURIComponent(
-          redirectUrl
+          redirectUrl,
         )}&scope=${encodeURIComponent(GOOGLE_SCOPES)}`;
 
         chrome.identity.launchWebAuthFlow(
@@ -67,11 +66,10 @@ export const getGoogleAuthToken = (
                   reject(new Error("No access token found"));
                 }
               }
+            } catch (error) {
+              reject(error);
             }
-            catch (error) {
-              reject(error)
-            }
-          }
+          },
         );
       } else {
         resolve(token);
@@ -90,7 +88,7 @@ export const removeGoogleAuthToken = (token: string): Promise<void> => {
       if (chrome.runtime.lastError) {
         console.warn(
           "Failed to remove cached token (expected on Edge):",
-          chrome.runtime.lastError
+          chrome.runtime.lastError,
         );
       }
       resolve();
@@ -100,7 +98,7 @@ export const removeGoogleAuthToken = (token: string): Promise<void> => {
 
 // Fetch user profile from Google
 export const fetchGoogleUserProfile = async (
-  token: string
+  token: string,
 ): Promise<GoogleUser> => {
   const response = await fetch(
     "https://www.googleapis.com/oauth2/v2/userinfo",
@@ -108,7 +106,7 @@ export const fetchGoogleUserProfile = async (
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
 
   if (!response.ok) {
@@ -121,16 +119,16 @@ export const fetchGoogleUserProfile = async (
 // Fetch calendar events from Google Calendar API
 export const fetchGoogleCalendarEvents = async (
   token: string,
-  maxResults: number = 100
+  maxResults: number = 100,
 ): Promise<GoogleCalendarEvent[]> => {
   const now = new Date();
   const timeMin = now.toISOString();
   const timeMax = new Date(
-    now.getTime() + 30 * 24 * 60 * 60 * 1000
+    now.getTime() + 30 * 24 * 60 * 60 * 1000,
   ).toISOString(); // 30 days ahead
 
   const url = new URL(
-    "https://www.googleapis.com/calendar/v3/calendars/primary/events"
+    "https://www.googleapis.com/calendar/v3/calendars/primary/events",
   );
   url.searchParams.append("timeMin", timeMin);
   url.searchParams.append("timeMax", timeMax);
@@ -154,12 +152,12 @@ export const fetchGoogleCalendarEvents = async (
 
 export const getIdentityPermissionAccess = async () => {
   const hasIdentityPermission = await new Promise((resolve) =>
-    chrome.permissions.contains({ permissions: ["identity"] }, resolve)
+    chrome.permissions.contains({ permissions: ["identity"] }, resolve),
   );
 
   if (!hasIdentityPermission) {
     const permissionGranted = await new Promise((resolve) =>
-      chrome.permissions.request({ permissions: ["identity"] }, resolve)
+      chrome.permissions.request({ permissions: ["identity"] }, resolve),
     );
 
     if (!permissionGranted) {

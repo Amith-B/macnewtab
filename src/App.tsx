@@ -7,57 +7,44 @@ import {
   useState,
 } from "react";
 import "./App.css";
-import Clock1 from "./widgets/clock-1/Clock1";
-import Clock2 from "./widgets/clock-2/Clock2";
-import Calendar1 from "./widgets/day-calendar/Calendar1";
-import Calendar from "./widgets/calendar/Calendar";
-import DigitalClock from "./widgets/digital-clock/DigitalClock";
-import Search from "./components/search/Search";
-import SearchEngineSwitcher from "./components/search-engine-switcher/SearchEngineSwitcher";
+import WidgetsContainer from "./components/widgets-container/WidgetsContainer";
+import RightWidgetsContainer from "./components/right-widgets/RightWidgetsContainer";
+import FullScreenClock from "./components/fullscreen-clock/FullScreenClock";
 import {
   SEARCH_ENGINE_LOCAL_STORAGE_KEY,
   searchEngineKeys,
 } from "./static/searchEngine";
 import { getResolvedKey } from "./utils/spacesStorage";
 import { AppContext } from "./context/provider";
-import TopSites from "./components/topsites/TopSites";
 import Translation from "./locale/Translation";
 import Dock from "./components/dock/Dock";
 import TabManager from "./components/tab-manager/TabManager";
 import StickyNotes from "./components/sticky-notes/StickyNotes";
 import DynamicWallpaper from "./components/wallpaper/DynamicWallpaper";
 import InteractiveWallpaper from "./components/wallpaper/InteractiveWallpaper";
-import Weather from "./widgets/weather/Weather";
-import Battery from "./widgets/battery/Battery";
 import FooterNotice from "./components/footer-notice/FooterNotice";
 
 const App = function App() {
   const [searchEngine, setSearchEngine] = useState("");
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
+  const [showFullscreenClock, setShowFullscreenClock] = useState(false);
 
   const {
     theme,
     themeColor,
     backgroundImage,
     wallpaperBlur,
-    showGreeting,
-    showVisitedSites,
-    showSearchEngines,
-    useSearchDropdown,
-    showMonthView,
+    wallpaperFit,
     locale,
     showClockAndCalendar,
     showTabManager,
     showStickyNotes,
     dockPosition,
     isWidgetsAwayFromDock,
-    clockStyle,
     wallpaperType,
     dynamicWallpaperTheme,
     interactiveWallpaperTheme,
-    showWeather,
-    showBattery,
     enableLoadAnimation,
     loadAnimationType,
     activeSpaceId,
@@ -104,7 +91,7 @@ const App = function App() {
   }, [isWakingUp, loadAnimationType]);
 
   useEffect(() => {
-    if (showClockAndCalendar) {
+    if (showClockAndCalendar || showFullscreenClock) {
       const interval = setInterval(() => {
         const now = new Date();
         setTime(now);
@@ -118,10 +105,13 @@ const App = function App() {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [showClockAndCalendar]);
+  }, [showClockAndCalendar, showFullscreenClock]);
 
   useEffect(() => {
-    const resolvedSearchKey = getResolvedKey(SEARCH_ENGINE_LOCAL_STORAGE_KEY, activeSpaceId);
+    const resolvedSearchKey = getResolvedKey(
+      SEARCH_ENGINE_LOCAL_STORAGE_KEY,
+      activeSpaceId,
+    );
     const defaultSearchEngine = localStorage.getItem(resolvedSearchKey);
 
     if (defaultSearchEngine && searchEngineKeys.includes(defaultSearchEngine)) {
@@ -131,21 +121,52 @@ const App = function App() {
     }
   }, [activeSpaceId]);
 
-  const handleSearchEngineChange = useCallback((val: string) => {
-    const resolvedSearchKey = getResolvedKey(SEARCH_ENGINE_LOCAL_STORAGE_KEY, activeSpaceId);
-    localStorage.setItem(resolvedSearchKey, val);
-    setSearchEngine(val);
-  }, [activeSpaceId]);
+  const handleSearchEngineChange = useCallback(
+    (val: string) => {
+      const resolvedSearchKey = getResolvedKey(
+        SEARCH_ENGINE_LOCAL_STORAGE_KEY,
+        activeSpaceId,
+      );
+      localStorage.setItem(resolvedSearchKey, val);
+      setSearchEngine(val);
+    },
+    [activeSpaceId],
+  );
+
+  const handleOpenFullscreenClock = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setTime(new Date());
+    setShowFullscreenClock(true);
+    if (
+      !document.fullscreenElement &&
+      document.documentElement.requestFullscreen
+    ) {
+      document.documentElement.requestFullscreen().catch(() => {
+        // Fallback: in-tab fixed overlay still provides fullscreen view
+      });
+    }
+  }, []);
 
   const bgStyle: CSSProperties & Record<string, string> = useMemo(
     () => ({
       ...(backgroundImage && (wallpaperType === "image" || !wallpaperType)
         ? {
             "--bg-image": `url(${backgroundImage})`,
+            backgroundSize:
+              wallpaperFit === "fit"
+                ? "contain"
+                : wallpaperFit === "fill"
+                  ? "100% 100%"
+                  : wallpaperFit === "tile"
+                    ? "auto"
+                    : "cover",
+            backgroundRepeat: wallpaperFit === "tile" ? "repeat" : "no-repeat",
+            backgroundPosition:
+              wallpaperFit === "tile" ? "top left" : "center center",
           }
         : {}),
     }),
-    [backgroundImage, wallpaperType],
+    [backgroundImage, wallpaperType, wallpaperFit],
   );
 
   const greeting = useMemo(() => {
@@ -177,9 +198,23 @@ const App = function App() {
       lang={locale}
     >
       {isWakingUp && loadAnimationType === "chromatic-shift" && (
-        <svg style={{ position: "absolute", width: 0, height: 0 }} aria-hidden="true">
-          <filter id="chromatic-shift-filter" x="-5%" y="0%" width="110%" height="100%">
-            <feOffset in="SourceGraphic" dx="8" result="shifted-right" id="chromatic-dx-right" />
+        <svg
+          style={{ position: "absolute", width: 0, height: 0 }}
+          aria-hidden="true"
+        >
+          <filter
+            id="chromatic-shift-filter"
+            x="-5%"
+            y="0%"
+            width="110%"
+            height="100%"
+          >
+            <feOffset
+              in="SourceGraphic"
+              dx="8"
+              result="shifted-right"
+              id="chromatic-dx-right"
+            />
             <feComponentTransfer in="shifted-right" result="red-only">
               <feFuncR type="identity" />
               <feFuncG type="discrete" tableValues="0" />
@@ -190,14 +225,36 @@ const App = function App() {
               <feFuncG type="identity" />
               <feFuncB type="discrete" tableValues="0" />
             </feComponentTransfer>
-            <feOffset in="SourceGraphic" dx="-8" result="shifted-left" id="chromatic-dx-left" />
+            <feOffset
+              in="SourceGraphic"
+              dx="-8"
+              result="shifted-left"
+              id="chromatic-dx-left"
+            />
             <feComponentTransfer in="shifted-left" result="blue-only">
               <feFuncR type="discrete" tableValues="0" />
               <feFuncG type="discrete" tableValues="0" />
               <feFuncB type="identity" />
             </feComponentTransfer>
-            <feComposite in="red-only" in2="green-only" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="rg" />
-            <feComposite in="rg" in2="blue-only" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+            <feComposite
+              in="red-only"
+              in2="green-only"
+              operator="arithmetic"
+              k1="0"
+              k2="1"
+              k3="1"
+              k4="0"
+              result="rg"
+            />
+            <feComposite
+              in="rg"
+              in2="blue-only"
+              operator="arithmetic"
+              k1="0"
+              k2="1"
+              k3="1"
+              k4="0"
+            />
           </filter>
         </svg>
       )}
@@ -238,61 +295,31 @@ const App = function App() {
       >
         {showClockAndCalendar && (
           <div className="section-1">
-            {clockStyle === "digital" ? (
-              <DigitalClock date={time} />
-            ) : clockStyle === "analog-2" ? (
-              <Clock2 date={time} />
-            ) : (
-              <Clock1 date={time} />
-            )}
-            {showMonthView ? (
-              <Calendar date={date} />
-            ) : (
-              <Calendar1 date={date} />
-            )}
-            {(showWeather || showBattery) && (
-              <div className="weather-in-widgets">
-                <div className="weather-battery-row">
-                  {showWeather && <Weather />}
-                  {showBattery && <Battery />}
-                </div>
-              </div>
-            )}
+            <WidgetsContainer
+              date={date}
+              time={time}
+              handleOpenFullscreenClock={handleOpenFullscreenClock}
+            />
           </div>
         )}
         <div className="section-2">
-          {(showWeather || showBattery) && (
-            <div className={showClockAndCalendar ? "weather-in-greeting" : ""}>
-              <div className="weather-battery-row">
-                {showWeather && <Weather />}
-                {showBattery && <Battery />}
-              </div>
-            </div>
-          )}
-          {showGreeting && (
-            <h1 className="greeting">
-              <Translation value={greeting} />!
-            </h1>
-          )}
-          {showVisitedSites && <TopSites />}
-          <Search
-            selectedSearchEngine={searchEngine}
-            onSelectedEngineChange={handleSearchEngineChange}
-            showSearchEngines={showSearchEngines}
-            useSearchDropdown={useSearchDropdown}
+          <RightWidgetsContainer
+            searchEngine={searchEngine}
+            handleSearchEngineChange={handleSearchEngineChange}
+            greeting={greeting}
           />
-          {showSearchEngines && !useSearchDropdown && (
-            <SearchEngineSwitcher
-              selectedSearchEngine={searchEngine}
-              onSelectedEngineChange={handleSearchEngineChange}
-            />
-          )}
         </div>
       </div>
       <Dock />
       {showTabManager && <TabManager />}
       {showStickyNotes && <StickyNotes />}
-      <FooterNotice 
+      {showFullscreenClock && (
+        <FullScreenClock
+          date={time}
+          onClose={() => setShowFullscreenClock(false)}
+        />
+      )}
+      <FooterNotice
         storageKey="hide_footer_notice"
         title={<Translation value="hide_footer_notice_title" />}
         description={<Translation value="hide_footer_notice_desc" />}

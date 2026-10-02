@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import { CanvasObject } from './freeformTypes';
+import { useState, useCallback } from "react";
+import { CanvasObject } from "./freeformTypes";
 
 const MAX_HISTORY = 50;
 
@@ -9,33 +9,39 @@ export function useHistory(initialState: CanvasObject[]) {
 
   const current = history[historyIndex] || [];
 
-  const pushState = useCallback((objects: CanvasObject[]) => {
-    setHistory(prev => {
-      const newHistory = prev.slice(0, historyIndex + 1);
-      newHistory.push(objects);
-      if (newHistory.length > MAX_HISTORY) {
-        newHistory.shift();
+  const pushState = useCallback(
+    (objects: CanvasObject[]) => {
+      setHistory((prev) => {
+        const newHistory = prev.slice(0, historyIndex + 1);
+        newHistory.push(objects);
+        if (newHistory.length > MAX_HISTORY) {
+          newHistory.shift();
+          return newHistory;
+        }
         return newHistory;
-      }
-      return newHistory;
-    });
-    setHistoryIndex(prev => Math.min(prev + 1, MAX_HISTORY - 1));
-  }, [historyIndex]);
+      });
+      setHistoryIndex((prev) => Math.min(prev + 1, MAX_HISTORY - 1));
+    },
+    [historyIndex],
+  );
 
-  const replaceState = useCallback((objects: CanvasObject[]) => {
-    setHistory(prev => {
-      const newHistory = [...prev];
-      newHistory[historyIndex] = objects;
-      return newHistory;
-    });
-  }, [historyIndex]);
+  const replaceState = useCallback(
+    (objects: CanvasObject[]) => {
+      setHistory((prev) => {
+        const newHistory = [...prev];
+        newHistory[historyIndex] = objects;
+        return newHistory;
+      });
+    },
+    [historyIndex],
+  );
 
   const undo = useCallback(() => {
-    setHistoryIndex(prev => Math.max(0, prev - 1));
+    setHistoryIndex((prev) => Math.max(0, prev - 1));
   }, []);
 
   const redo = useCallback(() => {
-    setHistoryIndex(prev => Math.min(history.length - 1, prev + 1));
+    setHistoryIndex((prev) => Math.min(history.length - 1, prev + 1));
   }, [history.length]);
 
   const canUndo = historyIndex > 0;

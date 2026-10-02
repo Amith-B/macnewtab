@@ -7,7 +7,9 @@ export const Select = ({
   onChange,
   id,
   name,
+  disabled,
 }: {
+  disabled?: boolean;
   options: Array<{ value: string; label: string | ReactElement }>;
   value: string;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
@@ -23,6 +25,7 @@ export const Select = ({
           value={value}
           onChange={onChange}
           className="select-input"
+          disabled={disabled}
         >
           {options.map((option) => (
             <option key={option.value} value={option.value}>

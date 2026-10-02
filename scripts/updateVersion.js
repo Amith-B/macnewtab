@@ -13,7 +13,7 @@ manifestJson.version = packageJson.version;
 fs.writeFileSync(
   manifestJsonPath,
   JSON.stringify(manifestJson, null, 2),
-  "utf8"
+  "utf8",
 );
 
 console.log(`Updated manifest.json version to ${packageJson.version}`);

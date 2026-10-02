@@ -30,7 +30,7 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 - View current temperature and conditions directly on your new tab.
 - **Auto Location**: Uses geolocation to automatically fetch weather for your area.
 - **Manual Location**: Pin a specific city to always show its weather without sharing your location.
-- **Customizable**: Toggle between Celsius and Fahrenheit. Privacy-first with no API keys required.
+- **Customizable**: Toggle between Celsius and Fahrenheit.
 
 ### 🔋 Battery Widget
 
@@ -57,7 +57,7 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 - **Custom Icons**: Automatically fetches the site's high-quality favicon, or upload your own custom icon.
 - Customize whether links open in the same tab or a new one.
 
-### 📚 Bookmark Manager (New!)
+### 📚 Bookmark Manager
 
 - Browse and search through all your saved bookmarks in a clean, macOS-inspired interface.
 - Quickly open any bookmark with a single click.
@@ -81,6 +81,11 @@ This is a simple new tab (browser's home page) inspired by macOS design, created
 ### 📱 Launchpad & Dock
 
 - Access favorite links quickly with a customizable **dock bar** and **Launchpad overlay**.
+- **Dock Folders (New!)**: Group multiple links together in the dock to save space.
+  - Drag and drop links into folders to organize them.
+  - Click a folder to open a clean, animated modal overlay containing your nested links.
+  - The folder icon displays a beautiful miniature grid preview of its contents.
+  - Fully supports custom icons and optional titles for both folders and nested links.
 
 ### 📝 Daily To-Do List
 
@@ -110,7 +115,7 @@ Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and
 - All authentication and data access happen securely through Google APIs — no user data is stored or shared externally.
 - Optionally toggle this widget on or off from the settings panel for a clutter-free experience.
 
-### 🍅 Focus Studio (New!)
+### 🍅 Focus Studio
 
 - Stay productive with a built-in **Pomodoro-style timer**.
 - **Ambient Sounds**: Mask distractions with Brown, Pink, White, Violet, and Blue noise generators.
@@ -118,7 +123,7 @@ Stay on top of your tasks with a simple, built-in **to-do list**. Easily add and
 - **Visual & Audio Alerts**: Get notified with a gentle chime and notification when your session is complete.
 - Customize your focus duration to match your workflow.
 
-### 🖌️ Freeform Canvas (New!)
+### 🖌️ Freeform Canvas
 
 An **infinite whiteboard** built right into your new tab — sketch ideas, build mind-maps, and annotate screenshots without ever leaving your browser.
 
@@ -142,6 +147,17 @@ Create entirely separate, customizable workspaces within your dashboard to keep 
 - **Isolated Workflows**: To-dos, Sticky Notes, and Freeform Canvas drawings are saved independently per Space.
 - **Time-Sensitive Automation**: Configure time ranges for your Spaces, allowing your dashboard to automatically transition between different layouts and aesthetics based on the time of day.
 - Switch between Spaces seamlessly to stay organized, whether it's for work, personal use, or varying times of the day.
+
+### 🎥 Screen Recorder (New!)
+
+Capture your screen without ever leaving your new tab — no third-party software needed.
+
+- **Flexible Capture**: Choose to record your entire screen, a specific app window, or just a browser tab using Chrome's native screen picker.
+- **Microphone Audio**: Optionally include your microphone audio mixed together with system/tab audio for narrations or commentary.
+- **Live Timer**: A pulsing recording indicator and live elapsed timer keep you informed while recording.
+- **Instant Playback & Save**: Preview your recording right inside the modal before saving it to your Downloads folder as a .webm file.
+- **Tab Protection**: If you try to navigate away or close the tab while recording, a native browser warning prevents you from accidentally losing your recording.
+- **Minimizable**: Minimize the Capture window during recording — it keeps running silently in the background. Reopen it from the dock anytime to stop and retrieve your recording.
 
 ### 💾 Backup & Restore
 
@@ -185,4 +201,4 @@ Enjoy the elegance of macOS design right in your browser! ✨
 ---
 
 **[Privacy Policy](https://amith-b.github.io/macnewtab/privacy.html)**  
-© 2025 macnewtab
+© 2024 - 2026 macnewtab

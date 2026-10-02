@@ -50,7 +50,9 @@
   font-size: 0.813rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.15s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease;
 }
 
 .spaces__enable-btn:hover {
@@ -130,13 +132,17 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
   padding: 0;
 }
 
 .spaces__color-dot:hover {
   transform: scale(1.2);
-  box-shadow: 0 0 0 2px var(--theme-bg), 0 0 0 4px var(--theme-border);
+  box-shadow:
+    0 0 0 2px var(--theme-bg),
+    0 0 0 4px var(--theme-border);
 }
 
 /* ─── Color Picker Popover ─── */
@@ -164,7 +170,9 @@
   border-radius: 50%;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: transform 0.1s ease, border-color 0.1s ease;
+  transition:
+    transform 0.1s ease,
+    border-color 0.1s ease;
   padding: 0;
 }
 
@@ -214,7 +222,11 @@
   font-size: 0.688rem;
   font-weight: 600;
   color: var(--theme-selection-color);
-  background-color: color-mix(in srgb, var(--theme-selection-color) 12%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--theme-selection-color) 12%,
+    transparent
+  );
   border-radius: 4px;
   padding: 2px 8px;
   white-space: nowrap;
@@ -229,7 +241,9 @@
   color: #ff3b30;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.2s ease, transform 0.1s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease;
   font-size: 1rem;
   padding: 4px;
   display: flex;
@@ -262,7 +276,9 @@
   font-size: 0.813rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.15s ease, border-color 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    border-color 0.15s ease;
   display: flex;
   align-items: center;
   justify-content: center;

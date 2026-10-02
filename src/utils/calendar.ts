@@ -12,7 +12,7 @@ export type CalendarEvents = Array<{
   location?: string;
 }>;
 export function convertCalendarEvents(
-  events: GoogleCalendarEvent[]
+  events: GoogleCalendarEvent[],
 ): CalendarEvents {
   const eventList: any[] = [];
 
@@ -64,10 +64,10 @@ export function convertCalendarEvents(
             .toISOString()
             .split("T")[0]
         : `${startDateTime.getFullYear()}-${String(
-            startDateTime.getMonth() + 1
+            startDateTime.getMonth() + 1,
           ).padStart(2, "0")}-${String(startDateTime.getDate()).padStart(
             2,
-            "0"
+            "0",
           )}`;
 
       const endDay = timeZone
@@ -75,10 +75,10 @@ export function convertCalendarEvents(
             .toISOString()
             .split("T")[0]
         : `${endDateTime.getFullYear()}-${String(
-            endDateTime.getMonth() + 1
+            endDateTime.getMonth() + 1,
           ).padStart(2, "0")}-${String(endDateTime.getDate()).padStart(
             2,
-            "0"
+            "0",
           )}`;
 
       if (startDay === endDay) {
@@ -104,7 +104,7 @@ export function convertCalendarEvents(
           d.setDate(d.getDate() + 1)
         ) {
           const currentDay = `${d.getFullYear()}-${String(
-            d.getMonth() + 1
+            d.getMonth() + 1,
           ).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
           if (currentDay === startDay) {
@@ -156,7 +156,7 @@ export function groupEventsByDate(events: CalendarEvents): Array<{
     // Convert to local date in YYYY-MM-DD format
     const eventDate = new Date(e.date);
     const localDate = `${eventDate.getFullYear()}-${String(
-      eventDate.getMonth() + 1
+      eventDate.getMonth() + 1,
     ).padStart(2, "0")}-${String(eventDate.getDate()).padStart(2, "0")}`;
 
     if (!groups[localDate]) groups[localDate] = [];
@@ -171,19 +171,19 @@ export function groupEventsByDate(events: CalendarEvents): Array<{
 
 export function getFormattedDateStringForEventsGroup(
   dateString: string,
-  language: keyof typeof translation = "en"
+  language: keyof typeof translation = "en",
 ) {
   const locale = languageLocaleMap[language] || "en-US";
   const date = new Date(
-    dateString.includes("T") ? dateString : `${dateString}T00:00:00`
+    dateString.includes("T") ? dateString : `${dateString}T00:00:00`,
   );
 
   const weekday = new Intl.DateTimeFormat(locale, { weekday: "long" }).format(
-    date
+    date,
   );
   const day = new Intl.DateTimeFormat(locale, { day: "2-digit" }).format(date);
   const month = new Intl.DateTimeFormat(locale, { month: "short" }).format(
-    date
+    date,
   );
 
   return `${weekday}, ${day} ${month}`;
@@ -191,7 +191,7 @@ export function getFormattedDateStringForEventsGroup(
 
 export function getFormattedTimeString(
   dateString: Date,
-  langCode: keyof typeof translation = "en"
+  langCode: keyof typeof translation = "en",
 ) {
   const locale = languageLocaleMap[langCode] || "en-US";
   const date = new Date(dateString);

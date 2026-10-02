@@ -11,14 +11,16 @@ import { Select } from "../../select/Select";
 import { AppContext } from "../../../context/provider";
 import Translation from "../../../locale/Translation";
 import { translation } from "../../../locale/languages";
+import { ReactComponent as ShowIcon } from "./show.svg";
+import { ReactComponent as HideIcon } from "./hide.svg";
 import "./WeatherSettings.css";
 
-interface GeoResult {
+interface SearchResult {
   name: string;
+  region: string;
   country: string;
-  admin1?: string;
-  latitude: number;
-  longitude: number;
+  lat: number;
+  lon: number;
 }
 
 const temperatureUnitOptions = [
@@ -36,59 +38,65 @@ const WeatherSettings = memo(function WeatherSettings() {
     setWeatherLocationMode,
     weatherManualLocation,
     setWeatherManualLocation,
+    weatherApiKey,
+    setWeatherApiKey,
     locale,
   } = useContext(AppContext);
 
-  const [autoCity, setAutoCity] = useState<string>("");
+  const [apiKeyInput, setApiKeyInput] = useState(weatherApiKey || "");
+  const [showApiKey, setShowApiKey] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<GeoResult[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searching, setSearching] = useState(false);
   const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Detect auto city only when weather is enabled
+  // Sync input when weatherApiKey changes externally
   useEffect(() => {
-    if (!showWeather) return;
+    setApiKeyInput(weatherApiKey || "");
+  }, [weatherApiKey]);
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          try {
-            const res = await fetch(
-              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`,
-            );
-            const data = await res.json();
-            setAutoCity(data.city || data.locality || "");
-          } catch {
-            setAutoCity("");
-          }
-        },
-        () => {
-          setAutoCity("");
-        },
-        { timeout: 10000 },
-      );
-    }
-  }, [showWeather]);
+  const handleApiKeySave = useCallback(() => {
+    const trimmed = apiKeyInput.trim();
+    setWeatherApiKey(trimmed);
+    // Clear weather cache so it re-fetches with new key
+    localStorage.removeItem("macnewtab_weather_cache");
+  }, [apiKeyInput, setWeatherApiKey]);
 
-  const searchCity = useCallback(async (query: string) => {
-    if (query.length < 2) {
-      setSearchResults([]);
-      return;
-    }
+  const handleApiKeyInputKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        handleApiKeySave();
+      }
+    },
+    [handleApiKeySave],
+  );
 
-    setSearching(true);
-    try {
-      const response = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en`,
-      );
-      const data = await response.json();
-      setSearchResults(data.results || []);
-    } catch {
-      setSearchResults([]);
-    } finally {
-      setSearching(false);
-    }
-  }, []);
+  const searchCity = useCallback(
+    async (query: string) => {
+      if (query.length < 2 || !weatherApiKey) {
+        setSearchResults([]);
+        return;
+      }
+
+      setSearching(true);
+      try {
+        const response = await fetch(
+          `https://api.weatherapi.com/v1/search.json?key=${encodeURIComponent(weatherApiKey)}&q=${encodeURIComponent(query)}`,
+        );
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setSearchResults(data);
+        } else {
+          setSearchResults([]);
+        }
+      } catch {
+        setSearchResults([]);
+      } finally {
+        setSearching(false);
+      }
+    },
+    [weatherApiKey],
+  );
 
   const handleSearchInput = useCallback(
     (value: string) => {
@@ -104,10 +112,10 @@ const WeatherSettings = memo(function WeatherSettings() {
   );
 
   const handleCitySelect = useCallback(
-    (result: GeoResult) => {
+    (result: SearchResult) => {
       setWeatherManualLocation({
-        latitude: result.latitude,
-        longitude: result.longitude,
+        latitude: result.lat,
+        longitude: result.lon,
         name: result.name,
       });
       setSearchQuery("");
@@ -136,6 +144,49 @@ const WeatherSettings = memo(function WeatherSettings() {
           handleToggleChange={() => setShowWeather(!showWeather)}
         />
       </div>
+
+      {showWeather && (
+        <div className="weather-settings__api-key-section">
+          <div className="weather-settings__city-label">
+            <Translation value="weather_api_key" />
+          </div>
+          <div className="weather-settings__api-key-row">
+            <div className="weather-settings__api-key-input-wrapper">
+              <input
+                className="weather-settings__search-input"
+                type={showApiKey ? "text" : "password"}
+                placeholder={
+                  translation[locale]?.weather_api_key_placeholder ||
+                  "Enter your WeatherAPI.com key"
+                }
+                value={apiKeyInput}
+                onChange={(e) => setApiKeyInput(e.target.value)}
+                onBlur={handleApiKeySave}
+                onKeyDown={handleApiKeyInputKeyDown}
+              />
+              <button
+                className="weather-settings__api-key-toggle"
+                onClick={() => setShowApiKey(!showApiKey)}
+                title={showApiKey ? "Hide API key" : "Show API key"}
+              >
+                {showApiKey ? <HideIcon /> : <ShowIcon />}
+              </button>
+            </div>
+          </div>
+          <div className="weather-settings__api-key-links">
+            <a
+              href="https://www.weatherapi.com/signup.aspx"
+              target="_blank"
+              rel="noreferrer"
+              className="weather-settings__get-key-link"
+            >
+              {translation[locale]?.weather_get_api_key ||
+                "Get your free API key"}{" "}
+              ↗
+            </a>
+          </div>
+        </div>
+      )}
 
       <div
         className={
@@ -166,15 +217,6 @@ const WeatherSettings = memo(function WeatherSettings() {
         />
       </div>
 
-      {showWeather && weatherLocationMode === "auto" && autoCity && (
-        <div className="weather-settings__city-search">
-          <div className="weather-settings__city-label">
-            <Translation value="weather_current_city" />
-          </div>
-          <div className="weather-settings__current-city">{autoCity}</div>
-        </div>
-      )}
-
       {showWeather && weatherLocationMode === "manual" && (
         <div className="weather-settings__city-search">
           <div className="weather-settings__city-label">
@@ -199,6 +241,7 @@ const WeatherSettings = memo(function WeatherSettings() {
               }
               value={searchQuery}
               onChange={(e) => handleSearchInput(e.target.value)}
+              disabled={!weatherApiKey}
             />
             {searching && (
               <div className="weather-settings__searching">...</div>
@@ -215,7 +258,7 @@ const WeatherSettings = memo(function WeatherSettings() {
                       {result.name}
                     </span>
                     <span className="weather-settings__result-detail">
-                      {[result.admin1, result.country]
+                      {[result.region, result.country]
                         .filter(Boolean)
                         .join(", ")}
                     </span>
@@ -224,6 +267,19 @@ const WeatherSettings = memo(function WeatherSettings() {
               </ul>
             )}
           </div>
+        </div>
+      )}
+
+      {showWeather && (
+        <div className="weather-settings__powered-by">
+          <a
+            href="https://www.weatherapi.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {translation[locale]?.weather_powered_by ||
+              "Powered by WeatherAPI.com"}
+          </a>
         </div>
       )}
     </div>

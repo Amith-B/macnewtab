@@ -19,6 +19,13 @@ import {
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
   USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
+  SHOW_SCREEN_RECORDER_LOCAL_STORAGE_KEY,
+  SHOW_LAUNCHPAD_LOCAL_STORAGE_KEY,
+  SHOW_SEARCH_BAR_LOCAL_STORAGE_KEY,
+  SHOW_GOOGLE_APPS_LOCAL_STORAGE_KEY,
+  CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY,
+  LEFT_WIDGETS_ORDER_LOCAL_STORAGE_KEY,
+  RIGHT_WIDGETS_ORDER_LOCAL_STORAGE_KEY,
 } from "../static/generalSettings";
 import { SEARCH_ENGINE_LOCAL_STORAGE_KEY } from "../static/searchEngine";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
@@ -35,15 +42,15 @@ import {
   TODO_LIST_LOCAL_STORAGE_KEY,
   TODO_LIST_UPDATED_DATE_LOCAL_STORAGE_KEY,
 } from "../static/todo";
-import { WALLPAPER_BLUR_LOCAL_STORAGE_KEY } from "../static/wallpapers";
+import {
+  WALLPAPER_BLUR_LOCAL_STORAGE_KEY,
+  WALLPAPER_FIT_LOCAL_STORAGE_KEY,
+} from "../static/wallpapers";
 import {
   SHOW_STICKY_NOTES_LOCAL_STORAGE_KEY,
   ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY,
 } from "../static/stickyNotes";
-import {
-  fetchImageFromIndexedDB,
-  saveImageToIndexedDB,
-} from "../utils/db";
+import { fetchImageFromIndexedDB, saveImageToIndexedDB } from "../utils/db";
 import {
   WALLPAPER_TYPE_LOCAL_STORAGE_KEY,
   DYNAMIC_WALLPAPER_THEME_LOCAL_STORAGE_KEY,
@@ -55,6 +62,7 @@ import {
   WEATHER_LOCATION_LOCAL_STORAGE_KEY,
   WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
   WEATHER_MANUAL_LOCATION_LOCAL_STORAGE_KEY,
+  WEATHER_API_KEY_LOCAL_STORAGE_KEY,
 } from "../static/weatherSettings";
 import {
   QUICK_LINKS_MODE_LOCAL_STORAGE_KEY,
@@ -95,6 +103,7 @@ const KEYS_TO_EXPORT = [
   WEATHER_LOCATION_LOCAL_STORAGE_KEY,
   WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
   WEATHER_MANUAL_LOCATION_LOCAL_STORAGE_KEY,
+  WEATHER_API_KEY_LOCAL_STORAGE_KEY,
   QUICK_LINKS_MODE_LOCAL_STORAGE_KEY,
   QUICK_LINKS_LOCAL_STORAGE_KEY,
   ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY,
@@ -109,6 +118,14 @@ const KEYS_TO_EXPORT = [
   SEARCH_ENGINE_LOCAL_STORAGE_KEY,
   CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY,
   LAUNCHPAD_SELECTED_TAB_LOCAL_STORAGE_KEY,
+  SHOW_SCREEN_RECORDER_LOCAL_STORAGE_KEY,
+  SHOW_LAUNCHPAD_LOCAL_STORAGE_KEY,
+  WALLPAPER_FIT_LOCAL_STORAGE_KEY,
+  SHOW_SEARCH_BAR_LOCAL_STORAGE_KEY,
+  SHOW_GOOGLE_APPS_LOCAL_STORAGE_KEY,
+  CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY,
+  LEFT_WIDGETS_ORDER_LOCAL_STORAGE_KEY,
+  RIGHT_WIDGETS_ORDER_LOCAL_STORAGE_KEY,
 ];
 
 // Helper to convert Blob URL to Base64
@@ -173,7 +190,9 @@ export const exportData = async () => {
     }
 
     // Export Custom Quick Link Icons
-    const quickLinksString = localStorage.getItem(QUICK_LINKS_LOCAL_STORAGE_KEY);
+    const quickLinksString = localStorage.getItem(
+      QUICK_LINKS_LOCAL_STORAGE_KEY,
+    );
     if (quickLinksString) {
       const quickLinksList = JSON.parse(quickLinksString);
       const quickLinkIcons: Record<string, string> = {};
@@ -198,7 +217,9 @@ export const exportData = async () => {
     }
 
     // Export Custom Launchpad Icons
-    const launchpadLinksString = localStorage.getItem(CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY);
+    const launchpadLinksString = localStorage.getItem(
+      CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY,
+    );
     if (launchpadLinksString) {
       const launchpadLinksList = JSON.parse(launchpadLinksString);
       const launchpadIcons: Record<string, string> = {};
@@ -224,7 +245,6 @@ export const exportData = async () => {
   } catch (error) {
     console.error("Failed to export data:", error);
   }
-
 
   // Include spaces config if Spaces is enabled
   const spacesConfigRaw = localStorage.getItem(SPACES_CONFIG_KEY);
@@ -270,7 +290,9 @@ export const exportData = async () => {
           }
 
           // Space dock icons
-          const spaceDockSitesRaw = localStorage.getItem(`space_${space.id}__${DOCK_SITES_LOCAL_STORAGE_KEY}`);
+          const spaceDockSitesRaw = localStorage.getItem(
+            `space_${space.id}__${DOCK_SITES_LOCAL_STORAGE_KEY}`,
+          );
           if (spaceDockSitesRaw) {
             try {
               const spaceDockSites = JSON.parse(spaceDockSitesRaw);
@@ -291,7 +313,9 @@ export const exportData = async () => {
           }
 
           // Space quick link icons
-          const spaceQuickLinksRaw = localStorage.getItem(`space_${space.id}__${QUICK_LINKS_LOCAL_STORAGE_KEY}`);
+          const spaceQuickLinksRaw = localStorage.getItem(
+            `space_${space.id}__${QUICK_LINKS_LOCAL_STORAGE_KEY}`,
+          );
           if (spaceQuickLinksRaw) {
             try {
               const spaceQuickLinks = JSON.parse(spaceQuickLinksRaw);
@@ -312,7 +336,9 @@ export const exportData = async () => {
           }
 
           // Space launchpad icons
-          const spaceLaunchpadLinksRaw = localStorage.getItem(`space_${space.id}__${CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY}`);
+          const spaceLaunchpadLinksRaw = localStorage.getItem(
+            `space_${space.id}__${CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY}`,
+          );
           if (spaceLaunchpadLinksRaw) {
             try {
               const spaceLaunchpadLinks = JSON.parse(spaceLaunchpadLinksRaw);
@@ -401,7 +427,10 @@ export const importData = (file: File): Promise<void> => {
         // Import Custom Quick Link Icons
         if (data["quick_link_icons"]) {
           try {
-            const quickLinkIcons = data["quick_link_icons"] as Record<string, string>;
+            const quickLinkIcons = data["quick_link_icons"] as Record<
+              string,
+              string
+            >;
             for (const [id, base64] of Object.entries(quickLinkIcons)) {
               await saveImageToIndexedDB(base64, id);
             }
@@ -413,7 +442,10 @@ export const importData = (file: File): Promise<void> => {
         // Import Custom Launchpad Icons
         if (data["launchpad_icons"]) {
           try {
-            const launchpadIcons = data["launchpad_icons"] as Record<string, string>;
+            const launchpadIcons = data["launchpad_icons"] as Record<
+              string,
+              string
+            >;
             for (const [id, base64] of Object.entries(launchpadIcons)) {
               await saveImageToIndexedDB(base64, id);
             }
@@ -423,7 +455,9 @@ export const importData = (file: File): Promise<void> => {
         }
 
         // Sync imported sticky notes to chrome.storage.sync (only if sync is enabled)
-        const isSyncEnabled = localStorage.getItem(ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY) === "true";
+        const isSyncEnabled =
+          localStorage.getItem(ENABLE_STICKY_NOTES_SYNC_LOCAL_STORAGE_KEY) ===
+          "true";
         if (data[STICKY_NOTES_KEY] && isSyncEnabled) {
           try {
             const importedNotes: Note[] = Array.isArray(data[STICKY_NOTES_KEY])
@@ -440,7 +474,7 @@ export const importData = (file: File): Promise<void> => {
           try {
             localStorage.setItem(
               SPACES_CONFIG_KEY,
-              JSON.stringify(data[SPACES_CONFIG_KEY])
+              JSON.stringify(data[SPACES_CONFIG_KEY]),
             );
           } catch (error) {
             console.error("Failed to import spaces config:", error);
@@ -463,9 +497,14 @@ export const importData = (file: File): Promise<void> => {
         }
 
         // Import space-prefixed IndexedDB images
-        if (data["spaces_indexeddb"] && typeof data["spaces_indexeddb"] === "object") {
+        if (
+          data["spaces_indexeddb"] &&
+          typeof data["spaces_indexeddb"] === "object"
+        ) {
           try {
-            for (const [id, base64] of Object.entries(data["spaces_indexeddb"])) {
+            for (const [id, base64] of Object.entries(
+              data["spaces_indexeddb"],
+            )) {
               await saveImageToIndexedDB(base64 as string, id);
             }
           } catch (error) {
