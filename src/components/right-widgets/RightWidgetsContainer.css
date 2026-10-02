@@ -1,0 +1,134 @@
+.right-widgets-container {
+  max-width: 640px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-self: center;
+  position: relative;
+  z-index: 2;
+}
+
+.right-widgets-container__slot {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-widgets-container__item {
+  position: relative;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  width: 100%;
+  transition:
+    transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-widgets-container__item:hover {
+  transform: translateY(-2px);
+}
+
+.right-widgets-container__item:active {
+  cursor: grabbing;
+}
+
+/* Allow text input and clicks inside interactive child elements */
+.right-widgets-container__item input,
+.right-widgets-container__item button,
+.right-widgets-container__item a {
+  cursor: auto;
+}
+
+.right-widgets-container__item input {
+  user-select: text;
+}
+
+.right-widgets-container__item button {
+  cursor: pointer;
+}
+
+/* Dragging active state */
+.right-widgets-container__item.is-being-dragged {
+  cursor: grabbing;
+  z-index: 10000 !important;
+  opacity: 0.95;
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+  transform: scale(1.02) !important;
+  pointer-events: none !important;
+  transition: none !important;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.right-widgets-container__item.is-being-dragged:not(:has(.search__container)) {
+  background: var(--theme-bg-with-opacity);
+  padding: 8px 12px;
+}
+
+/* Subtle drag indicator on hover */
+.right-widget-drag-indicator {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.85);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 15;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.theme-light .right-widget-drag-indicator {
+  background: rgba(255, 255, 255, 0.7);
+  color: #272727;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.right-widgets-container__item:hover .right-widget-drag-indicator {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.right-widget-drag-indicator svg {
+  width: 9px;
+  height: 13px;
+}
+
+/* Drop placeholder */
+.right-widget-drop-placeholder {
+  width: 100%;
+  border-radius: 18px;
+  border: 2px dashed var(--theme-selection-color);
+  background: var(--theme-bg-with-opacity-50);
+  box-sizing: border-box;
+  animation: right-widget-pulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes right-widget-pulse {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 0.9;
+  }
+}

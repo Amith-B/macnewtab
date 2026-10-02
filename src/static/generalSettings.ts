@@ -25,3 +25,26 @@ export const SHOW_LAUNCHPAD_LOCAL_STORAGE_KEY = "show_launchpad";
 export const SHOW_GOOGLE_APPS_LOCAL_STORAGE_KEY = "show_google_apps";
 
 export const SHOW_SEARCH_BAR_LOCAL_STORAGE_KEY = "show_search_bar";
+
+export const LEFT_WIDGETS_ORDER_LOCAL_STORAGE_KEY = "left_widgets_order";
+export const RIGHT_WIDGETS_ORDER_LOCAL_STORAGE_KEY = "right_widgets_order";
+
+export const leftWidgetIdsList = ["clock", "calendar"] as const;
+export type LeftWidgetId = (typeof leftWidgetIdsList)[number];
+export const DEFAULT_LEFT_WIDGET_ORDER: LeftWidgetId[] = ["clock", "calendar"];
+
+export const rightWidgetIdsList = [
+  "weather-battery",
+  "greeting",
+  "top-sites",
+  "search-bar",
+  "quick-search",
+] as const;
+export type RightWidgetId = (typeof rightWidgetIdsList)[number];
+export const DEFAULT_RIGHT_WIDGET_ORDER: RightWidgetId[] = [
+  "weather-battery",
+  "greeting",
+  "top-sites",
+  "search-bar",
+  "quick-search",
+];

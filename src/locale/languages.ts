@@ -313,6 +313,9 @@ const enTranslation = {
   layout_reversed: "Reversed",
   drag_and_drop_to_reorder_links: "Drag and drop to reorder links",
   show_google_apps_toggle: "Show Google Apps",
+  reset_calendar_clock_widgets: "Reset Calendar/Clock Widget Order",
+  reset_search_home_widgets: "Reset Search/Home Widget Order",
+  drag_to_reorder: "Drag to reorder",
 };
 export const translation: Record<string, Record<string, string>> & {
   en: typeof enTranslation;
@@ -605,6 +608,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "ಲಿಂಕ್‌ಗಳನ್ನು ಮರುಕ್ರಮಗೊಳಿಸಲು ಎಳೆಯಿರಿ ಮತ್ತು ಬಿಡಿ",
     show_google_apps_toggle: "ಗೂಗಲ್ ಆ್ಯಪ್‌ಗಳನ್ನು ತೋರಿಸಿ",
+    reset_calendar_clock_widgets: "ಕ್ಯಾಲೆಂಡರ್/ಗಡಿಯಾರ ವಿಜೆಟ್‌ಗಳ ಆದೇಶವನ್ನು ಮರುಹೊಂದಿಸಿ",
+    reset_search_home_widgets: "ಹುಡುಕಾಟ/ಹೋಮ್ ವಿಜೆಟ್‌ಗಳ ಆದೇಶವನ್ನು ಮರುಹೊಂದಿಸಿ",
+    drag_to_reorder: "ಮರುಕ್ರಮಗೊಳಿಸಲು ಎಳೆಯಿರಿ",
     my_apps: "ನನ್ನ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು",
     my_apps_description: "ನಿಮ್ಮ ನೆಚ್ಚಿನ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು Launchpad ಗೆ ಸೇರಿಸಿ",
     add_launchpad_links:
@@ -931,6 +937,9 @@ export const translation: Record<string, Record<string, string>> & {
     layout_reversed: "Obráceně",
     drag_and_drop_to_reorder_links: "Přetažením uspořádáte odkazy",
     show_google_apps_toggle: "Zobrazit Google aplikace",
+    reset_calendar_clock_widgets: "Obnovit pořadí widgetů kalendáře/hodin",
+    reset_search_home_widgets: "Obnovit pořadí widgetů vyhledávání/domů",
+    drag_to_reorder: "Přetažením změňte pořadí",
     my_apps: "Moje aplikace",
     my_apps_description: "Přidejte své oblíbené aplikace do Launchpad",
     add_launchpad_links:
@@ -1253,6 +1262,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Bağlantıları yeniden sıralamak için sürükleyip bırakın",
     show_google_apps_toggle: "Google Uygulamalarını Göster",
+    reset_calendar_clock_widgets: "Takvim/Saat Araç Takımları Sırasını Sıfırla",
+    reset_search_home_widgets: "Arama/Ana Sayfa Araç Takımları Sırasını Sıfırla",
+    drag_to_reorder: "Yeniden sıralamak için sürükleyin",
     my_apps: "Uygulamalarım",
     my_apps_description: "Favori uygulamalarınızı Launchpad'e ekleyin",
     add_launchpad_links:
@@ -1574,6 +1586,9 @@ export const translation: Record<string, Record<string, string>> & {
     layout_reversed: "Đảo ngược",
     drag_and_drop_to_reorder_links: "Kéo và thả để sắp xếp lại các liên kết",
     show_google_apps_toggle: "Hiển thị Ứng dụng Google",
+    reset_calendar_clock_widgets: "Đặt lại thứ tự tiện ích lịch/đồng hồ",
+    reset_search_home_widgets: "Đặt lại thứ tự tiện ích tìm kiếm/trang chủ",
+    drag_to_reorder: "Kéo để sắp xếp lại",
     my_apps: "Ứng dụng của tôi",
     my_apps_description: "Thêm các ứng dụng yêu thích của bạn vào Launchpad",
     add_launchpad_links:
@@ -1897,6 +1912,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Havolalarni qayta tartiblash uchun sudrab tashlang",
     show_google_apps_toggle: "Google ilovalarini ko'rsatish",
+    reset_calendar_clock_widgets: "Taqvim/soat vidjetlari tartibini tiklash",
+    reset_search_home_widgets: "Qidiruv/asosiy vidjetlar tartibini tiklash",
+    drag_to_reorder: "Qayta tartiblash uchun suring",
     my_apps: "Mening ilovalarim",
     my_apps_description: "Sevimli ilovalaringizni Launchpad-ga qo'shing",
     add_launchpad_links:
@@ -2206,6 +2224,9 @@ export const translation: Record<string, Record<string, string>> & {
     layout_reversed: "反转",
     drag_and_drop_to_reorder_links: "拖放以重新排序链接",
     show_google_apps_toggle: "显示 Google 应用程序",
+    reset_calendar_clock_widgets: "重置日历/时钟小组件顺序",
+    reset_search_home_widgets: "重置搜索/主页小组件顺序",
+    drag_to_reorder: "拖动以重新排序",
     my_apps: "我的应用",
     my_apps_description: "将您喜欢的应用添加到 Launchpad",
     add_launchpad_links: "未添加任何自定义链接。在下面添加一些。",
@@ -2522,6 +2543,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "लिंक को पुनर्व्यवस्थित करने के लिए खींचें और छोड़ें",
     show_google_apps_toggle: "Google ऐप्स दिखाएं",
+    reset_calendar_clock_widgets: "कैलेंडर/घड़ी विजेट क्रम रीसेट करें",
+    reset_search_home_widgets: "खोज/होम विजेट क्रम रीसेट करें",
+    drag_to_reorder: "पुनः व्यवस्थित करने के लिए खींचें",
     my_apps: "मेरे ऐप्स",
     my_apps_description: "अपने पसंदीदा एप्लिकेशन को Launchpad में जोड़ें",
     add_launchpad_links: "कोई कस्टम लिंक नहीं जोड़ा गया। नीचे कुछ जोड़ें।",
@@ -2845,6 +2869,9 @@ export const translation: Record<string, Record<string, string>> & {
     layout_reversed: "Invertito",
     drag_and_drop_to_reorder_links: "Trascina e rilascia per riordinare i link",
     show_google_apps_toggle: "Mostra App Google",
+    reset_calendar_clock_widgets: "Reimposta ordine widget calendario/orologio",
+    reset_search_home_widgets: "Reimposta ordine widget ricerca/home",
+    drag_to_reorder: "Trascina per riordinare",
     my_apps: "Le mie app",
     my_apps_description: "Aggiungi le tue applicazioni preferite al Launchpad",
     add_launchpad_links:
@@ -3166,6 +3193,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "লিঙ্কগুলি পুনরায় সাজাতে টেনে আনুন এবং ছেড়ে দিন",
     show_google_apps_toggle: "গুগল অ্যাপস দেখান",
+    reset_calendar_clock_widgets: "ক্যালেন্ডার/ঘড়ি উইজেটের ক্রম পুনরায় সেট করুন",
+    reset_search_home_widgets: "অনুসন্ধান/হোম উইজেটের ক্রম পুনরায় সেট করুন",
+    drag_to_reorder: "পুনরায় সাজাতে টেনে আনুন",
     my_apps: "আমার অ্যাপস",
     my_apps_description: "আপনার প্রিয় অ্যাপ্লিকেশনগুলি Launchpad এ যোগ করুন",
     add_launchpad_links: "কোনো কাস্টম লিঙ্ক যোগ করা হয়নি। নিচে কিছু যোগ করুন।",
@@ -3487,6 +3517,9 @@ export const translation: Record<string, Record<string, string>> & {
     layout_reversed: "Invertido",
     drag_and_drop_to_reorder_links: "Arraste e solte para reordenar os links",
     show_google_apps_toggle: "Mostrar Google Apps",
+    reset_calendar_clock_widgets: "Redefinir ordem dos widgets de calendário/relógio",
+    reset_search_home_widgets: "Redefinir ordem dos widgets de pesquisa/início",
+    drag_to_reorder: "Arraste para reordenar",
     my_apps: "Meus Apps",
     my_apps_description: "Adicione seus aplicativos favoritos ao Launchpad",
     add_launchpad_links:
@@ -3810,6 +3843,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Faites glisser et déposez pour réorganiser les liens",
     show_google_apps_toggle: "Afficher les applications Google",
+    reset_calendar_clock_widgets: "Réinitialiser l'ordre des widgets calendrier/horloge",
+    reset_search_home_widgets: "Réinitialiser l'ordre des widgets recherche/accueil",
+    drag_to_reorder: "Glisser pour réorganiser",
     my_apps: "Mes applications",
     my_apps_description: "Ajoutez vos applications préférées au Launchpad",
     add_launchpad_links:
@@ -4131,6 +4167,9 @@ export const translation: Record<string, Record<string, string>> & {
     layout_reversed: "В обратном порядке",
     drag_and_drop_to_reorder_links: "Перетащите, чтобы изменить порядок ссылок",
     show_google_apps_toggle: "Показать Google Приложения",
+    reset_calendar_clock_widgets: "Сбросить порядок виджетов календаря/часов",
+    reset_search_home_widgets: "Сбросить порядок виджетов поиска/главной страницы",
+    drag_to_reorder: "Перетащите для изменения порядка",
     my_apps: "Мои приложения",
     my_apps_description: "Добавьте свои любимые приложения в Launchpad",
     add_launchpad_links:
@@ -4448,6 +4487,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Arrastra y suelta para reordenar los enlaces",
     show_google_apps_toggle: "Mostrar aplicaciones de Google",
+    reset_calendar_clock_widgets: "Restablecer orden de widgets de calendario/reloj",
+    reset_search_home_widgets: "Restablecer orden de widgets de búsqueda/inicio",
+    drag_to_reorder: "Arrastrar para reordenar",
     my_apps: "Mis aplicaciones",
     my_apps_description: "Agrega tus aplicaciones favoritas al Launchpad",
     add_launchpad_links:
@@ -4774,6 +4816,9 @@ export const translation: Record<string, Record<string, string>> & {
     layout_reversed: "反転",
     drag_and_drop_to_reorder_links: "ドラッグ＆ドロップでリンクを並べ替え",
     show_google_apps_toggle: "Googleアプリを表示",
+    reset_calendar_clock_widgets: "カレンダー/時計ウィジェットの順序をリセット",
+    reset_search_home_widgets: "検索/ホームウィジェットの順序をリセット",
+    drag_to_reorder: "ドラッグして並べ替え",
     my_apps: "マイアプリ",
     my_apps_description:
       "お気に入りのアプリケーションを Launchpad に追加します",
@@ -5090,6 +5135,9 @@ export const translation: Record<string, Record<string, string>> & {
     layout_reversed: "반전",
     drag_and_drop_to_reorder_links: "링크를 드래그 앤 드롭하여 순서 변경",
     show_google_apps_toggle: "Google 앱 표시",
+    reset_calendar_clock_widgets: "캘린더/시계 위젯 순서 초기화",
+    reset_search_home_widgets: "검색/홈 위젯 순서 초기화",
+    drag_to_reorder: "드래그하여 재정렬",
     my_apps: "내 앱",
     my_apps_description: "즐겨찾는 애플리케이션을 Launchpad에 추가하세요",
     add_launchpad_links:
@@ -5409,6 +5457,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Seret dan lepas untuk mengatur ulang tautan",
     show_google_apps_toggle: "Tampilkan Google Apps",
+    reset_calendar_clock_widgets: "Atur Ulang Urutan Widget Kalender/Jam",
+    reset_search_home_widgets: "Atur Ulang Urutan Widget Pencarian/Beranda",
+    drag_to_reorder: "Tarik untuk mengatur ulang",
     my_apps: "Aplikasi Saya",
     my_apps_description: "Tambahkan aplikasi favorit Anda ke Launchpad",
     add_launchpad_links:
@@ -5727,6 +5778,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "लिंक्सची क्रमवारी बदलण्यासाठी ड्रॅग आणि ड्रॉप करा",
     show_google_apps_toggle: "Google अ‍ॅप्स दाखवा",
+    reset_calendar_clock_widgets: "कॅलेंडर/घड्याळ विजेट्सचा क्रम रीसेट करा",
+    reset_search_home_widgets: "शोध/मुख्य विजेट्सचा क्रम रीसेट करा",
+    drag_to_reorder: "पुन्हा क्रमवारी लावण्यासाठी ड्रॅग करा",
     my_apps: "माझे ॲप्स",
     my_apps_description: "तुमचे आवडते ॲप्लिकेशन्स Launchpad मध्ये जोडा",
     add_launchpad_links: "कोणत्याही कस्टम लिंक जोडल्या नाहीत. खाली काही जोडा.",
@@ -6048,6 +6102,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Przeciągnij i upuść, aby zmienić kolejność linków",
     show_google_apps_toggle: "Pokaż aplikacje Google",
+    reset_calendar_clock_widgets: "Zresetuj kolejność widżetów kalendarza/zegara",
+    reset_search_home_widgets: "Zresetuj kolejność widżetów wyszukiwania/głównych",
+    drag_to_reorder: "Przeciągnij, aby zmienić kolejność",
     my_apps: "Moje aplikacje",
     my_apps_description: "Dodaj swoje ulubione aplikacje do Launchpad",
     add_launchpad_links:
@@ -6372,6 +6429,9 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Ziehen und ablegen, um Links neu anzuordnen",
     show_google_apps_toggle: "Google Apps anzeigen",
+    reset_calendar_clock_widgets: "Kalender/Uhr-Widget-Reihenfolge zurücksetzen",
+    reset_search_home_widgets: "Such-/Startseiten-Widget-Reihenfolge zurücksetzen",
+    drag_to_reorder: "Ziehen zum Neuanordnen",
     my_apps: "Meine Apps",
     my_apps_description:
       "Fügen Sie Ihre Lieblingsanwendungen zum Launchpad hinzu",
