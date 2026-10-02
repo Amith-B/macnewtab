@@ -7,30 +7,21 @@ import {
   useState,
 } from "react";
 import "./App.css";
-import Clock1 from "./widgets/clock-1/Clock1";
-import Clock2 from "./widgets/clock-2/Clock2";
-import Calendar1 from "./widgets/day-calendar/Calendar1";
-import Calendar from "./widgets/calendar/Calendar";
-import DigitalClock from "./widgets/digital-clock/DigitalClock";
+import WidgetsContainer from "./components/widgets-container/WidgetsContainer";
+import RightWidgetsContainer from "./components/right-widgets/RightWidgetsContainer";
 import FullScreenClock from "./components/fullscreen-clock/FullScreenClock";
-import Search from "./components/search/Search";
-import SearchEngineSwitcher from "./components/search-engine-switcher/SearchEngineSwitcher";
 import {
   SEARCH_ENGINE_LOCAL_STORAGE_KEY,
   searchEngineKeys,
 } from "./static/searchEngine";
 import { getResolvedKey } from "./utils/spacesStorage";
 import { AppContext } from "./context/provider";
-import TopSites from "./components/topsites/TopSites";
 import Translation from "./locale/Translation";
-import { translation } from "./locale/languages";
 import Dock from "./components/dock/Dock";
 import TabManager from "./components/tab-manager/TabManager";
 import StickyNotes from "./components/sticky-notes/StickyNotes";
 import DynamicWallpaper from "./components/wallpaper/DynamicWallpaper";
 import InteractiveWallpaper from "./components/wallpaper/InteractiveWallpaper";
-import Weather from "./widgets/weather/Weather";
-import Battery from "./widgets/battery/Battery";
 import FooterNotice from "./components/footer-notice/FooterNotice";
 
 const App = function App() {
@@ -45,24 +36,15 @@ const App = function App() {
     backgroundImage,
     wallpaperBlur,
     wallpaperFit,
-    showGreeting,
-    showVisitedSites,
-    showSearchBar,
-    showSearchEngines,
-    useSearchDropdown,
-    showMonthView,
     locale,
     showClockAndCalendar,
     showTabManager,
     showStickyNotes,
     dockPosition,
     isWidgetsAwayFromDock,
-    clockStyle,
     wallpaperType,
     dynamicWallpaperTheme,
     interactiveWallpaperTheme,
-    showWeather,
-    showBattery,
     enableLoadAnimation,
     loadAnimationType,
     activeSpaceId,
@@ -313,86 +295,19 @@ const App = function App() {
       >
         {showClockAndCalendar && (
           <div className="section-1">
-            <div className="clock-widget-container">
-              {clockStyle === "digital" ? (
-                <DigitalClock date={time} />
-              ) : clockStyle === "analog-2" ? (
-                <Clock2 date={time} />
-              ) : (
-                <Clock1 date={time} />
-              )}
-              <button
-                className="clock-widget-fullscreen-btn"
-                onClick={handleOpenFullscreenClock}
-                title={
-                  translation[locale]?.fullscreen_clock || "Fullscreen Clock"
-                }
-                aria-label={
-                  translation[locale]?.fullscreen_clock || "Fullscreen Clock"
-                }
-                type="button"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="15 3 21 3 21 9" />
-                  <polyline points="9 21 3 21 3 15" />
-                  <line x1="21" y1="3" x2="14" y2="10" />
-                  <line x1="3" y1="21" x2="10" y2="14" />
-                </svg>
-              </button>
-            </div>
-            {showMonthView ? (
-              <Calendar date={date} />
-            ) : (
-              <Calendar1 date={date} />
-            )}
-            {(showWeather || showBattery) && (
-              <div className="weather-in-widgets">
-                <div className="weather-battery-row">
-                  {showWeather && <Weather />}
-                  {showBattery && <Battery />}
-                </div>
-              </div>
-            )}
+            <WidgetsContainer
+              date={date}
+              time={time}
+              handleOpenFullscreenClock={handleOpenFullscreenClock}
+            />
           </div>
         )}
         <div className="section-2">
-          {(showWeather || showBattery) && (
-            <div className={showClockAndCalendar ? "weather-in-greeting" : ""}>
-              <div className="weather-battery-row">
-                {showWeather && <Weather />}
-                {showBattery && <Battery />}
-              </div>
-            </div>
-          )}
-          {showGreeting && (
-            <h1 className="greeting">
-              <Translation value={greeting} />!
-            </h1>
-          )}
-          {showVisitedSites && <TopSites />}
-          {showSearchBar && (
-            <>
-              <Search
-                selectedSearchEngine={searchEngine}
-                onSelectedEngineChange={handleSearchEngineChange}
-                showSearchEngines={showSearchEngines}
-                useSearchDropdown={useSearchDropdown}
-              />
-              {showSearchEngines && !useSearchDropdown && (
-                <SearchEngineSwitcher
-                  selectedSearchEngine={searchEngine}
-                  onSelectedEngineChange={handleSearchEngineChange}
-                />
-              )}
-            </>
-          )}
+          <RightWidgetsContainer
+            searchEngine={searchEngine}
+            handleSearchEngineChange={handleSearchEngineChange}
+            greeting={greeting}
+          />
         </div>
       </div>
       <Dock />

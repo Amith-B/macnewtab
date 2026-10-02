@@ -20,6 +20,8 @@ import {
   CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY,
   SHOW_LAUNCHPAD_LOCAL_STORAGE_KEY,
   SHOW_GOOGLE_APPS_LOCAL_STORAGE_KEY,
+  LEFT_WIDGETS_ORDER_LOCAL_STORAGE_KEY,
+  RIGHT_WIDGETS_ORDER_LOCAL_STORAGE_KEY,
 } from "./generalSettings";
 import {
   THEME_LOCAL_STORAGE_KEY,
@@ -152,6 +154,9 @@ export const PER_SPACE_KEYS: string[] = [
   SEARCH_ENGINE_LOCAL_STORAGE_KEY, // "default_search_engine"
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY, // "enable_load_animation"
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY, // "load_animation_type"
+  CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY, // "center_widgets_layout"
+  LEFT_WIDGETS_ORDER_LOCAL_STORAGE_KEY, // "left_widgets_order"
+  RIGHT_WIDGETS_ORDER_LOCAL_STORAGE_KEY, // "right_widgets_order"
 
   // Launchpad
   CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY, // "custom_launchpad_links"

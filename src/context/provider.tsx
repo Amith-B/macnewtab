@@ -50,6 +50,14 @@ import {
   CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY,
   CenterWidgetsLayout,
   centerWidgetsLayoutsList,
+  LEFT_WIDGETS_ORDER_LOCAL_STORAGE_KEY,
+  RIGHT_WIDGETS_ORDER_LOCAL_STORAGE_KEY,
+  LeftWidgetId,
+  leftWidgetIdsList,
+  DEFAULT_LEFT_WIDGET_ORDER,
+  RightWidgetId,
+  rightWidgetIdsList,
+  DEFAULT_RIGHT_WIDGET_ORDER,
 } from "../static/generalSettings";
 import { CUSTOM_LAUNCHPAD_LINKS_LOCAL_STORAGE_KEY } from "../static/launchpadSettings";
 import {
@@ -259,6 +267,12 @@ export const AppContext = createContext({
   handleUpdateSpacesConfig: (_: SpacesConfig) => {},
   centerWidgetsLayout: "default" as CenterWidgetsLayout,
   setCenterWidgetsLayout: (_: CenterWidgetsLayout) => {},
+  leftWidgetsOrder: DEFAULT_LEFT_WIDGET_ORDER,
+  setLeftWidgetsOrder: (_: LeftWidgetId[]) => {},
+  resetLeftWidgetsOrder: () => {},
+  rightWidgetsOrder: DEFAULT_RIGHT_WIDGET_ORDER,
+  setRightWidgetsOrder: (_: RightWidgetId[]) => {},
+  resetRightWidgetsOrder: () => {},
 });
 
 export default function AppProvider({ children }: { children: ReactNode }) {
@@ -590,6 +604,58 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       (val) => centerWidgetsLayoutsList.includes(val as any),
       activeSpaceId,
     );
+
+  const [rawLeftWidgetsOrder, setLeftWidgetsOrder] = useLocalStorage<
+    LeftWidgetId[]
+  >(
+    LEFT_WIDGETS_ORDER_LOCAL_STORAGE_KEY,
+    DEFAULT_LEFT_WIDGET_ORDER,
+    (val) =>
+      Array.isArray(val) &&
+      val.length > 0 &&
+      val.every((item) => leftWidgetIdsList.includes(item as any)),
+    activeSpaceId,
+  );
+
+  const leftWidgetsOrder = useMemo(() => {
+    const existing = (rawLeftWidgetsOrder || []).filter((id) =>
+      leftWidgetIdsList.includes(id as any),
+    );
+    const missing = DEFAULT_LEFT_WIDGET_ORDER.filter(
+      (id) => !existing.includes(id),
+    );
+    return [...existing, ...missing];
+  }, [rawLeftWidgetsOrder]);
+
+  const resetLeftWidgetsOrder = useCallback(() => {
+    setLeftWidgetsOrder(DEFAULT_LEFT_WIDGET_ORDER);
+  }, [setLeftWidgetsOrder]);
+
+  const [rawRightWidgetsOrder, setRightWidgetsOrder] = useLocalStorage<
+    RightWidgetId[]
+  >(
+    RIGHT_WIDGETS_ORDER_LOCAL_STORAGE_KEY,
+    DEFAULT_RIGHT_WIDGET_ORDER,
+    (val) =>
+      Array.isArray(val) &&
+      val.length > 0 &&
+      val.every((item) => rightWidgetIdsList.includes(item as any)),
+    activeSpaceId,
+  );
+
+  const rightWidgetsOrder = useMemo(() => {
+    const existing = (rawRightWidgetsOrder || []).filter((id) =>
+      rightWidgetIdsList.includes(id as any),
+    );
+    const missing = DEFAULT_RIGHT_WIDGET_ORDER.filter(
+      (id) => !existing.includes(id),
+    );
+    return [...existing, ...missing];
+  }, [rawRightWidgetsOrder]);
+
+  const resetRightWidgetsOrder = useCallback(() => {
+    setRightWidgetsOrder(DEFAULT_RIGHT_WIDGET_ORDER);
+  }, [setRightWidgetsOrder]);
 
   const [loadAnimationType, setLoadAnimationType] = useLocalStorage(
     LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
@@ -1312,6 +1378,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setLoadAnimationType,
       centerWidgetsLayout,
       setCenterWidgetsLayout,
+      leftWidgetsOrder,
+      setLeftWidgetsOrder,
+      resetLeftWidgetsOrder,
+      rightWidgetsOrder,
+      setRightWidgetsOrder,
+      resetRightWidgetsOrder,
       // Spaces
       spacesConfig,
       activeSpaceId,
@@ -1434,6 +1506,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setLoadAnimationType,
       centerWidgetsLayout,
       setCenterWidgetsLayout,
+      leftWidgetsOrder,
+      setLeftWidgetsOrder,
+      resetLeftWidgetsOrder,
+      rightWidgetsOrder,
+      setRightWidgetsOrder,
+      resetRightWidgetsOrder,
       // Spaces
       spacesConfig,
       activeSpaceId,
