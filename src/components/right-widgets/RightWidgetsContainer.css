@@ -45,6 +45,10 @@
   cursor: auto;
 }
 
+.right-widgets-container__item input {
+  user-select: text;
+}
+
 .right-widgets-container__item button {
   cursor: pointer;
 }
@@ -60,10 +64,13 @@
   transform: scale(1.02) !important;
   pointer-events: none !important;
   transition: none !important;
-  background: var(--theme-bg-with-opacity);
-  border-radius: 20px;
-  padding: 8px 12px;
+  border-radius: 16px;
   box-sizing: border-box;
+}
+
+.right-widgets-container__item.is-being-dragged:not(:has(.search__container)) {
+  background: var(--theme-bg-with-opacity);
+  padding: 8px 12px;
 }
 
 /* Subtle drag indicator on hover */

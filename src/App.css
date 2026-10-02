@@ -709,10 +709,6 @@ body:has(.App.theme-rose) {
   height: 14px;
 }
 
-.weather-in-widgets {
-  display: none;
-}
-
 .weather-battery-row {
   display: flex;
   flex-direction: row;
@@ -895,14 +891,6 @@ to be revisited in future */
   }
   .section-1 {
     flex-direction: row;
-  }
-
-  .weather-in-greeting {
-    display: none;
-  }
-
-  .weather-in-widgets {
-    display: block;
   }
 
   .weather-battery-row {

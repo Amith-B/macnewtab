@@ -66,6 +66,14 @@ export default function WidgetsContainer({
     currentOrder: [],
   });
 
+  const cleanupDragListenersRef = useRef<(() => void) | null>(null);
+
+  useEffect(() => {
+    return () => {
+      cleanupDragListenersRef.current?.();
+    };
+  }, []);
+
   useEffect(() => {
     if (!isDragging) {
       setPreviewOrder(activeWidgets);
@@ -168,10 +176,15 @@ export default function WidgetsContainer({
         }
       };
 
-      const handlePointerUp = () => {
+      const cleanup = () => {
         window.removeEventListener("pointermove", handlePointerMove);
         window.removeEventListener("pointerup", handlePointerUp);
         window.removeEventListener("pointercancel", handlePointerUp);
+        cleanupDragListenersRef.current = null;
+      };
+
+      const handlePointerUp = () => {
+        cleanup();
 
         const info = dragInfoRef.current;
         if (info.isStarted && info.activeId) {
@@ -187,6 +200,8 @@ export default function WidgetsContainer({
         dragInfoRef.current.activeId = null;
         dragInfoRef.current.isStarted = false;
       };
+
+      cleanupDragListenersRef.current = cleanup;
 
       window.addEventListener("pointermove", handlePointerMove);
       window.addEventListener("pointerup", handlePointerUp);
