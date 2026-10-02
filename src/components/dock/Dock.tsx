@@ -245,8 +245,8 @@ const Dock = memo(() => {
               className={`sticky-notes-button accessible tooltip tooltip-${
                 TooltipPosition[dockPosition] || "top"
               }`}
-              data-label={t.show_sticky_notes || "Add Sticky Note"}
-              title={t.show_sticky_notes || "Add Sticky Note"}
+              data-label={t.add_sticky_note || "Add Sticky Note"}
+              title={t.add_sticky_note || "Add Sticky Note"}
               onClick={() => {
                 window.dispatchEvent(new CustomEvent("createStickyNote"));
               }}
@@ -303,8 +303,8 @@ const Dock = memo(() => {
             className={`settings-icon accessible tooltip tooltip-${
               TooltipPosition[dockPosition] || "top"
             }`}
-            data-label={t.appearance || "Settings"}
-            title={t.appearance || "Settings"}
+            data-label={t.settings || "Settings"}
+            title={t.settings || "Settings"}
             onClick={() => {
               setHasOpenedSettings(true);
               setSettingsVisible(true);
