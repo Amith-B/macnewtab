@@ -103,6 +103,7 @@ const Dock = memo(() => {
       setSettingsInitialTab("weather");
       setSettingsVisible(true);
       setLaunchpadVisible(false);
+      setAppStoreVisible(false);
       setOpenSettingsToWeather(false);
     }
   }, [openSettingsToWeather, setOpenSettingsToWeather]);
@@ -332,6 +333,7 @@ const Dock = memo(() => {
               setHasOpenedSettings(true);
               setSettingsVisible(true);
               setLaunchpadVisible(false);
+              setAppStoreVisible(false);
             }}
           >
             <SettingsIcon />

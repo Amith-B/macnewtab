@@ -108,35 +108,12 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
     };
   }, [open, onClose]);
 
+  // URL normalizer helper
+  const normalizeUrl = (u?: string) =>
+    u ? u.trim().replace(/\/+$/, "").toLowerCase() : "";
+
   // Window drag handlers
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (!modalRef.current) return;
-    const target = e.target as HTMLElement;
-    if (
-      target.closest("button") ||
-      target.closest("input") ||
-      target.closest(".app-store__content-body")
-    ) {
-      return;
-    }
-
-    isDragging.current = true;
-    dragScale.current = getBodyZoomScale() || 1;
-    const scale = dragScale.current;
-
-    offset.current = {
-      x:
-        e.clientX / scale -
-        modalRef.current.getBoundingClientRect().left / scale,
-      y:
-        e.clientY / scale - modalRef.current.getBoundingClientRect().top / scale,
-    };
-
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!isDragging.current) return;
     const scale = dragScale.current || 1;
 
@@ -144,13 +121,51 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
       x: `${e.clientX / scale - offset.current.x}px`,
       y: `${e.clientY / scale - offset.current.y}px`,
     });
-  };
+  }, []);
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     isDragging.current = false;
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("mouseup", handleMouseUp);
-  };
+  }, [handleMouseMove]);
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (!modalRef.current) return;
+      const target = e.target as HTMLElement;
+      if (
+        target.closest("button") ||
+        target.closest("input") ||
+        target.closest(".app-store__content-body")
+      ) {
+        return;
+      }
+
+      isDragging.current = true;
+      dragScale.current = getBodyZoomScale() || 1;
+      const scale = dragScale.current;
+
+      offset.current = {
+        x:
+          e.clientX / scale -
+          modalRef.current.getBoundingClientRect().left / scale,
+        y:
+          e.clientY / scale - modalRef.current.getBoundingClientRect().top / scale,
+      };
+
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+    },
+    [handleMouseMove, handleMouseUp],
+  );
+
+  // Clean up drag event listeners on unmount
+  useEffect(() => {
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [handleMouseMove, handleMouseUp]);
 
   // Determine installed status
   const isAppInstalled = useCallback(
@@ -172,8 +187,11 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
         }
       }
       if (!app.url) return false;
+      const appNorm = normalizeUrl(app.url);
       return dockBarSites.some(
-        (site) => site.url === app.url || (site.id && site.id === app.id),
+        (site) =>
+          (site.url && normalizeUrl(site.url) === appNorm) ||
+          (site.id && site.id === app.id),
       );
     },
     [
@@ -211,14 +229,18 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
       }
 
       if (app.url) {
+        const appNorm = normalizeUrl(app.url);
         const isAlreadyAdded = dockBarSites.some(
-          (site) => site.url === app.url || site.id === app.id,
+          (site) =>
+            (site.url && normalizeUrl(site.url) === appNorm) ||
+            site.id === app.id,
         );
         if (!isAlreadyAdded) {
           const newSite = {
             id: generateRandomId(),
             title: app.name,
             url: app.url,
+            type: "link" as const,
             hasCustomIcon: false,
           };
           handleDockSitesChange([...dockBarSites, newSite]);
@@ -262,8 +284,10 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
       }
 
       if (app.url) {
+        const appNorm = normalizeUrl(app.url);
         const updated = dockBarSites.filter(
-          (site) => site.url !== app.url && site.id !== app.id,
+          (site) =>
+            normalizeUrl(site.url) !== appNorm && site.id !== app.id,
         );
         handleDockSitesChange(updated);
       }
@@ -336,15 +360,24 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
       }
     }
 
-    const domain =
-      app.domain || (app.url ? new URL(app.url).hostname : "google.com");
+    let domain = app.domain;
+    if (!domain && app.url) {
+      try {
+        domain = new URL(app.url).hostname;
+      } catch {
+        domain = "google.com";
+      }
+    }
+    domain = domain || "google.com";
+
     return (
       <img
         src={faviconURL(`https://${domain}`, "64")}
         alt={app.name}
         className="app-store__card-icon-img"
-        onError={(e) => {
-          (e.target as HTMLImageElement).src =
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src =
             "https://www.google.com/s2/favicons?sz=64&domain=" + domain;
         }}
       />
