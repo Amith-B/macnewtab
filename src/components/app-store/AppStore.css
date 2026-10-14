@@ -1,0 +1,586 @@
+.app-store__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.app-store__overlay.modal-accessible {
+  visibility: visible;
+}
+
+.app-store__overlay.modal-inaccessible {
+  visibility: hidden;
+}
+
+.app-store__overlay.visible {
+  pointer-events: auto;
+}
+
+.app-store__container {
+  max-width: 960px;
+  width: 92%;
+  height: 82vh;
+  max-height: 840px;
+  border-radius: 20px;
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--theme-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  transform: translate(100vw, 100vh) scale(0.1);
+  transform-origin: bottom center;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background-color: var(--theme-bg);
+  color: var(--theme-clr);
+  user-select: none;
+}
+
+.app-store__container.dock-position-bottom {
+  transform-origin: bottom center;
+}
+
+.app-store__container.dock-position-left {
+  transform: translate(-100vw, 0) scale(0.1);
+  transform-origin: left 20%;
+}
+
+.app-store__container.dock-position-right {
+  transform: translate(100vw, 0) scale(0.1);
+  transform-origin: right 20%;
+}
+
+.app-store__overlay.visible .app-store__container {
+  transform: translate(0, 0) scale(1);
+}
+
+/* ─── Sidebar ───────────────────────────────────────────────────────── */
+.app-store__sidebar {
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+  flex-shrink: 0;
+  height: 100%;
+  background-color: var(--settings-side-panel-bg, rgba(255, 255, 255, 0.45));
+  backdrop-filter: var(--settings-side-panel-blur, blur(50px));
+  -webkit-backdrop-filter: var(--settings-side-panel-blur, blur(50px));
+  border-right: 1px solid var(--theme-border);
+  padding: 16px 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.app-store__sidebar-top {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Window controls (traffic lights) */
+.app-store__window-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0 8px 4px;
+  cursor: grab;
+}
+
+.app-store__window-controls:active {
+  cursor: grabbing;
+}
+
+.app-store__window-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: opacity 0.15s;
+}
+
+.app-store__window-btn svg {
+  opacity: 0;
+  width: 6px;
+  height: 6px;
+  transition: opacity 0.15s;
+}
+
+.app-store__window-controls:hover .app-store__window-btn:not(.expand) svg {
+  opacity: 0.8;
+}
+
+.app-store__window-btn.close {
+  background-color: #ff5f57;
+  border: 1px solid #e0443e;
+}
+
+.app-store__window-btn.minimize {
+  background-color: #febc2e;
+  border: 1px solid #d89e24;
+}
+
+.app-store__window-btn.expand {
+  background-color: var(--window-expand-bg, #959595);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Search bar in sidebar */
+.app-store__search-box {
+  display: flex;
+  align-items: center;
+  background: rgba(120, 120, 128, 0.14);
+  border: 1px solid rgba(120, 120, 128, 0.2);
+  border-radius: 8px;
+  padding: 5px 8px;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.app-store__search-box:focus-within {
+  background: rgba(120, 120, 128, 0.22);
+  border-color: var(--theme-selection-color, #0883fd);
+  box-shadow: 0 0 0 2px rgba(8, 131, 253, 0.25);
+}
+
+.app-store__search-icon {
+  color: var(--theme-clr);
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+.app-store__search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  color: var(--theme-clr);
+  width: 100%;
+  padding: 0;
+  font-family: inherit;
+}
+
+.app-store__search-input::placeholder {
+  color: var(--theme-clr);
+  opacity: 0.5;
+}
+
+.app-store__search-clear {
+  background: none;
+  border: none;
+  color: var(--theme-clr);
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 0;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-store__search-clear:hover {
+  opacity: 0.9;
+}
+
+/* Sidebar navigation menu */
+.app-store__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 4px;
+}
+
+.app-store__nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--theme-clr);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  width: 100%;
+  font-family: inherit;
+}
+
+.app-store__nav-item-left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.app-store__nav-icon {
+  color: #007aff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.95;
+}
+
+.app-store__nav-item:hover {
+  background: rgba(120, 120, 128, 0.12);
+}
+
+.app-store__nav-item.active {
+  background: rgba(120, 120, 128, 0.22);
+  color: var(--theme-clr);
+  font-weight: 600;
+}
+
+/* ─── Main Content ──────────────────────────────────────────────────── */
+.app-store__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--theme-bg);
+}
+
+/* Window Header Bar */
+.app-store__header {
+  height: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--theme-border);
+  padding: 0 24px;
+  position: relative;
+  cursor: grab;
+}
+
+.app-store__header:active {
+  cursor: grabbing;
+}
+
+.app-store__header-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--theme-clr);
+  letter-spacing: -0.2px;
+}
+
+/* Scrollable Content Body */
+.app-store__content-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 30px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.app-store__content-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.app-store__content-body::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 128, 0.3);
+  border-radius: 4px;
+}
+
+/* Section styling */
+.app-store__section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-store__section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-store__section-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--theme-clr);
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.app-store__section-see-all {
+  font-size: 13px;
+  font-weight: 600;
+  color: #007aff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: opacity 0.15s;
+}
+
+.app-store__section-see-all:hover {
+  opacity: 0.75;
+}
+
+/* 2-Column App Grid */
+.app-store__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+}
+
+@media (max-width: 720px) {
+  .app-store__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Individual App Card */
+.app-store__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  transition: background-color 0.15s ease;
+}
+
+.app-store__card:hover {
+  background: rgba(120, 120, 128, 0.08);
+}
+
+.app-store__card-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.app-store__card-icon-wrapper {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(120, 120, 128, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.app-store__card-icon-wrapper svg {
+  width: 100%;
+  height: 100%;
+}
+
+.app-store__card-icon-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.app-store__card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.app-store__card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--theme-clr);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.app-store__card-subtitle {
+  font-size: 12px;
+  color: var(--theme-clr);
+  opacity: 0.65;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Action Button (Pill GET / OPEN) */
+.app-store__card-action {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.app-store__btn {
+  border-radius: 9999px;
+  padding: 5px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 68px;
+  font-family: inherit;
+}
+
+/* GET button: light pill with blue text */
+.app-store__btn.get {
+  background-color: rgba(120, 120, 128, 0.18);
+  color: #007aff;
+}
+
+.app-store__btn.get:hover {
+  background-color: rgba(120, 120, 128, 0.28);
+}
+
+.app-store__btn.get:active {
+  transform: scale(0.97);
+}
+
+/* OPEN button: clean subtle pill */
+.app-store__btn.open {
+  background-color: rgba(120, 120, 128, 0.18);
+  color: #007aff;
+}
+
+.app-store__btn.open:hover {
+  background-color: rgba(120, 120, 128, 0.28);
+}
+
+.app-store__btn.open:active {
+  transform: scale(0.97);
+}
+
+.app-store__uninstall-btn {
+  background: none;
+  border: none;
+  color: var(--theme-clr);
+  opacity: 0.4;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s, color 0.15s;
+}
+
+.app-store__uninstall-btn:hover {
+  opacity: 1;
+  color: #ff3b30;
+}
+
+/* ─── Categories Cards Grid ─────────────────────────────────────────── */
+.app-store__categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 800px) {
+  .app-store__categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.app-store__category-card {
+  background: rgba(120, 120, 128, 0.12);
+  border: 1px solid var(--theme-border);
+  border-radius: 14px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+  text-align: left;
+  font-family: inherit;
+  color: var(--theme-clr);
+}
+
+.app-store__category-card:hover {
+  transform: translateY(-2px);
+  background: rgba(120, 120, 128, 0.18);
+  border-color: #007aff;
+}
+
+.app-store__category-card-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(0, 122, 255, 0.15);
+  color: #007aff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-store__category-card h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.app-store__category-card p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+/* ─── Search Empty State ────────────────────────────────────────────── */
+.app-store__empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  gap: 12px;
+}
+
+.app-store__empty-state-icon {
+  width: 48px;
+  height: 48px;
+  opacity: 0.35;
+  color: var(--theme-clr);
+}
+
+.app-store__empty-state h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--theme-clr);
+}
+
+.app-store__empty-state p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--theme-clr);
+  opacity: 0.6;
+}
