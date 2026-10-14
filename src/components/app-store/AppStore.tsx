@@ -11,7 +11,6 @@ import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
 import { getBodyZoomScale } from "../../utils/zoom";
 import { generateRandomId } from "../../utils/random";
-import { faviconURL } from "../../utils/favicon";
 import {
   APP_STORE_CATALOG,
   AppStoreCategory,
@@ -38,6 +37,7 @@ import {
   SearchIcon,
   TrashIcon,
 } from "./icons/StoreIcons";
+import { DockIcon } from "../dock/DockIcon";
 
 interface AppStoreProps {
   open: boolean;
@@ -61,6 +61,7 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
     showScreenRecorder,
     setShowScreenRecorder,
     separatePageSite,
+    activeSpaceId,
     locale,
   } = useContext(AppContext);
 
@@ -360,26 +361,15 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
       }
     }
 
-    let domain = app.domain;
-    if (!domain && app.url) {
-      try {
-        domain = new URL(app.url).hostname;
-      } catch {
-        domain = "google.com";
-      }
-    }
-    domain = domain || "google.com";
+    const appUrl = app.url || (app.domain ? `https://${app.domain}` : "");
 
     return (
-      <img
-        src={faviconURL(`https://${domain}`, "64")}
-        alt={app.name}
-        className="app-store__card-icon-img"
-        onError={({ currentTarget }) => {
-          currentTarget.onerror = null;
-          currentTarget.src =
-            "https://www.google.com/s2/favicons?sz=64&domain=" + domain;
-        }}
+      <DockIcon
+        id={app.id}
+        url={appUrl}
+        title={app.name}
+        size={64}
+        activeSpaceId={activeSpaceId}
       />
     );
   };

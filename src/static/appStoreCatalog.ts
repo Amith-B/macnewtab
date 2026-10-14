@@ -15,6 +15,7 @@ export interface StoreAppItem {
   category: AppStoreCategory;
   url?: string;
   domain?: string;
+  icon?: string;
   isNative?: boolean;
   nativeId?:
     | "native_todo"

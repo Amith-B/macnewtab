@@ -10,6 +10,7 @@ interface DockIconProps {
   title: string;
   iconDbPrefix?: string;
   activeSpaceId?: string;
+  size?: number;
 }
 
 export const DockIcon = memo(
@@ -20,6 +21,7 @@ export const DockIcon = memo(
     title,
     iconDbPrefix = "dock_icon",
     activeSpaceId,
+    size = 32,
   }: DockIconProps) => {
     const [iconSrc, setIconSrc] = useState<string>("");
 
@@ -56,7 +58,7 @@ export const DockIcon = memo(
               }
             }
             if (hostname) {
-              src = `${SITE_IMAGE_URL}${hostname}?s=32`;
+              src = `${SITE_IMAGE_URL}${hostname}?s=${size}`;
             }
           } catch {}
         }
@@ -71,7 +73,7 @@ export const DockIcon = memo(
       return () => {
         isMounted = false;
       };
-    }, [id, hasCustomIcon, url, iconDbPrefix, activeSpaceId]);
+    }, [id, hasCustomIcon, url, iconDbPrefix, activeSpaceId, size]);
 
     // Fallback if no src found yet, or valid
     // We can render a placeholder or just empty
