@@ -20,6 +20,7 @@ import { ReactComponent as StickyNotesIcon } from "../../assets/sticky-notes.svg
 import { ReactComponent as FreeformIcon } from "../../assets/freeform.svg";
 import { ReactComponent as FocusIcon } from "../../assets/focus.svg";
 import { ReactComponent as ScreenRecorderIcon } from "../../assets/screen-recorder.svg";
+import { ReactComponent as AppStoreIcon } from "../../assets/app-store.svg";
 import Launchpad from "../launchpad/Launchpad";
 
 import "./Dock.css";
@@ -28,6 +29,7 @@ import { translation } from "../../locale/languages";
 import { LinkItem } from "../settings/shared/LinkListEditor";
 
 const SettingsLazy = lazy(() => import("../settings/Settings"));
+const AppStoreLazy = lazy(() => import("../app-store/AppStore"));
 const FreeformLazy = lazy(() => import("../freeform/Freeform"));
 const TodoLazy = lazy(() => import("../todo/Todo"));
 const FocusModeLazy = lazy(() => import("../focus/FocusMode"));
@@ -46,6 +48,8 @@ const Dock = memo(() => {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [hasOpenedSettings, setHasOpenedSettings] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
+  const [appStoreVisible, setAppStoreVisible] = useState(false);
+  const [hasOpenedAppStore, setHasOpenedAppStore] = useState(false);
   const [todoDialogOpen, setTodoDialogOpen] = useState(false);
   const [hasOpenedTodo, setHasOpenedTodo] = useState(false);
   const [focusModeVisible, setFocusModeVisible] = useState(false);
@@ -71,6 +75,7 @@ const Dock = memo(() => {
     activeSpaceId,
     locale,
     showLaunchpad,
+    showAppStore,
     bookmarksVisible,
     showGoogleApps,
     customLaunchpadLinks,
@@ -98,6 +103,7 @@ const Dock = memo(() => {
       setSettingsInitialTab("weather");
       setSettingsVisible(true);
       setLaunchpadVisible(false);
+      setAppStoreVisible(false);
       setOpenSettingsToWeather(false);
     }
   }, [openSettingsToWeather, setOpenSettingsToWeather]);
@@ -219,9 +225,27 @@ const Dock = memo(() => {
               onClick={() => {
                 setLaunchpadVisible(!launchpadVisible);
                 setSettingsVisible(false);
+                setAppStoreVisible(false);
               }}
             >
               <LaunchpadIcon />
+            </button>
+          )}
+          {showAppStore && (
+            <button
+              className={`app-store-icon accessible tooltip tooltip-${
+                TooltipPosition[dockPosition] || "top"
+              }`}
+              data-label={t.app_store || "App Store"}
+              title={t.app_store || "App Store"}
+              onClick={() => {
+                setHasOpenedAppStore(true);
+                setAppStoreVisible(!appStoreVisible);
+                setSettingsVisible(false);
+                setLaunchpadVisible(false);
+              }}
+            >
+              <AppStoreIcon />
             </button>
           )}
           {todoListVisbility && (
@@ -309,6 +333,7 @@ const Dock = memo(() => {
               setHasOpenedSettings(true);
               setSettingsVisible(true);
               setLaunchpadVisible(false);
+              setAppStoreVisible(false);
             }}
           >
             <SettingsIcon />
@@ -396,6 +421,32 @@ const Dock = memo(() => {
             open={settingsVisible}
             onClose={() => setSettingsVisible(false)}
             initialTab={settingsInitialTab}
+          />
+        </Suspense>
+      )}
+      {hasOpenedAppStore && (
+        <Suspense fallback={null}>
+          <AppStoreLazy
+            open={appStoreVisible}
+            onClose={() => setAppStoreVisible(false)}
+            onOpenApp={(appId) => {
+              if (appId === "native_todo") {
+                groupTodosByCheckedStatus();
+                setHasOpenedTodo(true);
+                setTodoDialogOpen(true);
+              } else if (appId === "native_focus_mode") {
+                setHasOpenedFocusMode(true);
+                setFocusModeVisible(true);
+              } else if (appId === "native_freeform") {
+                setHasOpenedFreeform(true);
+                setFreeformVisible(true);
+              } else if (appId === "native_screen_recorder") {
+                setHasOpenedScreenRecorder(true);
+                setScreenRecorderVisible(true);
+              } else if (appId === "native_sticky_notes") {
+                window.dispatchEvent(new CustomEvent("createStickyNote"));
+              }
+            }}
           />
         </Suspense>
       )}
