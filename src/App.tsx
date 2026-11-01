@@ -222,7 +222,7 @@ const App = function App() {
         (backgroundImage ? " has-bg" : "") +
         (!prefersReducedMotion && wallpaperType === "dynamic" ? " has-dynamic-bg" : "") +
         (!prefersReducedMotion && wallpaperType === "interactive" ? " has-interactive-bg" : "") +
-        (isWakingUp ? ` load-animation-${loadAnimationType}` : "")
+        (isWakingUp && loadAnimationType !== "iris-reveal" ? ` load-animation-${loadAnimationType}` : "")
       }
       style={bgStyle}
       lang={locale}
@@ -324,7 +324,8 @@ const App = function App() {
           (showClockAndCalendar ? " has-clock-calendar" : "") +
           (isWidgetsAwayFromDock ? " widgets-away-from-dock" : "") +
           ` dock-${dockPosition}` +
-          ` layout-${centerWidgetsLayout}`
+          ` layout-${centerWidgetsLayout}` +
+          (isWakingUp && loadAnimationType === "iris-reveal" ? " load-animation-iris-reveal" : "")
         }
       >
         {showClockAndCalendar && (
