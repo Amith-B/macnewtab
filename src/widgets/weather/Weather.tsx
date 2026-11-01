@@ -143,7 +143,7 @@ const Weather = memo(function Weather() {
         <div className="weather-forecast-days">
           {weatherData.forecastDays?.map((day, index) => {
             const date = new Date(`${day.date}T12:00:00`);
-            const dayLabel = index === 0 ? "Today" : index === 1 ? "Tomorrow" : date.toLocaleDateString(locale, { weekday: "short" });
+            const dayLabel = index === 0 ? (translation[locale]?.weather_today || "Today") : index === 1 ? (translation[locale]?.weather_tomorrow || "Tomorrow") : date.toLocaleDateString(locale, { weekday: "short" });
             return (
               <div className="weather-forecast-day" key={day.date} title={day.conditionText}>
                 <span className="weather-forecast-day-name">{dayLabel}</span>
