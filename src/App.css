@@ -1013,8 +1013,9 @@ to be revisited in future */
 }
 
 /* Iris Reveal Animation */
-.load-animation-iris-reveal {
+.main-content.load-animation-iris-reveal {
   animation: iris-reveal-anim 0.6s ease-out forwards;
+  will-change: clip-path;
 }
 @keyframes iris-reveal-anim {
   0% {
