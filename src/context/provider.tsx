@@ -72,6 +72,7 @@ import {
   WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
   WEATHER_MANUAL_LOCATION_LOCAL_STORAGE_KEY,
   WEATHER_API_KEY_LOCAL_STORAGE_KEY,
+  WEATHER_FORECAST_DISPLAY_LOCAL_STORAGE_KEY,
 } from "../static/weatherSettings";
 import { BOOKMARK_TOGGLE_STORAGE_KEY } from "../static/bookmarks";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
@@ -152,6 +153,10 @@ const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
 type DockBarSites = Array<LinkItem>;
 type QuickLinksSites = Array<LinkItem>;
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
+type WeatherForecastDisplay = "current" | "3-day" | "hourly" | "both";
+type WeatherForecastHour = { time: string; temperature: number; conditionCode: number; isDay: boolean; chanceOfRain: number };
+type WeatherForecastDay = { date: string; maxTemperature: number; minTemperature: number; conditionCode: number; conditionText: string; chanceOfRain: number };
+type WeatherData = { temperature: number; conditionCode: number; conditionText: string; isDay: boolean; windSpeed: number; cityName: string; latitude: number; longitude: number; timestamp: number; forecastDays: WeatherForecastDay[]; hourlyForecast: WeatherForecastHour[] };
 
 export const AppContext = createContext({
   theme: "system",
@@ -263,6 +268,8 @@ export const AppContext = createContext({
   setShowWeather: (_: boolean) => {},
   weatherTempUnit: "celsius",
   setWeatherTempUnit: (_: string) => {},
+  weatherForecastDisplay: "current" as "current" | "3-day" | "hourly" | "both",
+  setWeatherForecastDisplay: (_: WeatherForecastDisplay) => {},
   weatherLocationMode: "auto",
   setWeatherLocationMode: (_: string) => {},
   weatherManualLocation: null as {
@@ -275,14 +282,7 @@ export const AppContext = createContext({
   ) => {},
   weatherApiKey: "",
   setWeatherApiKey: (_: string) => {},
-  weatherData: null as {
-    temperature: number;
-    conditionCode: number;
-    conditionText: string;
-    isDay: boolean;
-    windSpeed: number;
-    cityName: string;
-  } | null,
+  weatherData: null as WeatherData | null,
   weatherLoading: true,
   weatherError: null as string | null,
   openSettingsToWeather: false,
@@ -769,6 +769,18 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     activeSpaceId,
   );
 
+  const [weatherForecastDisplay, setWeatherForecastDisplay] =
+    useLocalStorage<WeatherForecastDisplay>(
+      WEATHER_FORECAST_DISPLAY_LOCAL_STORAGE_KEY,
+      "current",
+      (val): val is WeatherForecastDisplay =>
+        val === "current" ||
+        val === "3-day" ||
+        val === "hourly" ||
+        val === "both",
+      activeSpaceId,
+    );
+
   const [weatherLocationMode, setWeatherLocationMode] = useLocalStorage(
     WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
     "auto",
@@ -796,17 +808,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
   const [openSettingsToWeather, setOpenSettingsToWeather] = useState(false);
 
-  const [weatherData, setWeatherData] = useState<{
-    temperature: number;
-    conditionCode: number;
-    conditionText: string;
-    isDay: boolean;
-    windSpeed: number;
-    cityName: string;
-    latitude: number;
-    longitude: number;
-    timestamp: number;
-  } | null>(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [weatherLoading, setWeatherLoading] = useState(true);
   const [weatherError, setWeatherError] = useState<string | null>(null);
 
@@ -820,7 +822,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
 
       try {
         const response = await fetch(
-          `https://api.weatherapi.com/v1/current.json?key=${encodeURIComponent(weatherApiKey)}&q=${lat},${lon}&aqi=no`,
+          `https://api.weatherapi.com/v1/forecast.json?key=${encodeURIComponent(weatherApiKey)}&q=${lat},${lon}&days=3&aqi=no&alerts=no`,
         );
         const data = await response.json();
 
@@ -834,7 +836,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
           return;
         }
 
-        if (!data.current) {
+        if (!data.current || !Array.isArray(data.forecast?.forecastday)) {
           throw new Error("No weather data");
         }
 
@@ -853,6 +855,25 @@ export default function AppProvider({ children }: { children: ReactNode }) {
           timestamp: Date.now(),
           latitude: lat,
           longitude: lon,
+          forecastDays: data.forecast.forecastday.slice(0, 3).map((day: any) => ({
+            date: day.date,
+            maxTemperature: Math.round(weatherTempUnit === "fahrenheit" ? day.day.maxtemp_f : day.day.maxtemp_c),
+            minTemperature: Math.round(weatherTempUnit === "fahrenheit" ? day.day.mintemp_f : day.day.mintemp_c),
+            conditionCode: day.day.condition.code,
+            conditionText: day.day.condition.text,
+            chanceOfRain: Math.round(Number(day.day.daily_chance_of_rain) || 0),
+          })),
+          hourlyForecast: data.forecast.forecastday
+            .flatMap((day: any) => day.hour || [])
+            .filter((hour: any) => hour.time_epoch >= (data.current.last_updated_epoch || Math.floor(Date.now() / 1000)))
+            .slice(0, 24)
+            .map((hour: any) => ({
+              time: hour.time,
+              temperature: Math.round(weatherTempUnit === "fahrenheit" ? hour.temp_f : hour.temp_c),
+              conditionCode: hour.condition.code,
+              isDay: hour.is_day === 1,
+              chanceOfRain: Math.round(Number(hour.chance_of_rain) || 0),
+            })),
         };
 
         localStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify(weather));
@@ -885,7 +906,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       if (cached) {
         const cachedData = JSON.parse(cached);
         const age = Date.now() - cachedData.timestamp;
-        if (age < CACHE_DURATION) {
+        if (age < CACHE_DURATION && Array.isArray(cachedData.forecastDays) && Array.isArray(cachedData.hourlyForecast)) {
           setWeatherData(cachedData);
           setWeatherLoading(false);
           return;
@@ -1452,6 +1473,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setShowWeather,
       weatherTempUnit,
       setWeatherTempUnit,
+      weatherForecastDisplay,
+      setWeatherForecastDisplay,
       weatherLocationMode,
       setWeatherLocationMode,
       weatherManualLocation,
@@ -1592,6 +1615,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setShowWeather,
       weatherTempUnit,
       setWeatherTempUnit,
+      weatherForecastDisplay,
+      setWeatherForecastDisplay,
       weatherLocationMode,
       setWeatherLocationMode,
       weatherManualLocation,

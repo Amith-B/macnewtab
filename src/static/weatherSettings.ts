@@ -6,3 +6,6 @@ export const WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY =
 export const WEATHER_MANUAL_LOCATION_LOCAL_STORAGE_KEY =
   "macnewtab_weather_manual_location";
 export const WEATHER_API_KEY_LOCAL_STORAGE_KEY = "macnewtab_weather_api_key";
+
+export const WEATHER_FORECAST_DISPLAY_LOCAL_STORAGE_KEY =
+  "weather_forecast_display";

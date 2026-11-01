@@ -83,3 +83,55 @@
 .weather-api-key-needed:hover {
   opacity: 1;
 }
+
+
+/* Current-only deliberately retains the original widget dimensions. */
+.weather-widget--current { width: fit-content; min-width: 120px; max-width: none; }
+.weather-widget--current .weather-icon { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+.weather-widget--current .weather-main { justify-content: space-between; }
+.weather-widget--current .weather-label { margin-top: -2px; }
+
+/* Forecast modes have a separate bounded layout so the battery keeps its size. */
+.weather-widget--3-day,
+.weather-widget--hourly,
+.weather-widget--both {
+  box-sizing: border-box;
+  width: min(560px, calc(100vw - 220px));
+  min-width: 300px;
+  max-width: 560px;
+  height: fit-content;
+  min-height: 0;
+  padding: 10px 14px;
+  border: 1px solid color-mix(in srgb, var(--theme-clr) 10%, transparent);
+  box-shadow: 0 5px 18px color-mix(in srgb, var(--theme-shadow) 45%, transparent);
+  align-self: start;
+  justify-self: start;
+  overflow: hidden;
+}
+.weather-current { display: flex; flex-direction: column; min-width: 0; }
+.weather-current-top { display: flex; align-items: center; gap: 10px; min-width: 0; width: 100%; }
+.weather-widget--3-day .weather-city, .weather-widget--hourly .weather-city, .weather-widget--both .weather-city { flex: 0 1 auto; min-width: 0; max-width: 30%; overflow: hidden; font-size: 13px; font-weight: 650; line-height: 1.3; text-overflow: ellipsis; white-space: nowrap; opacity: .88; }
+.weather-widget--3-day .weather-main, .weather-widget--hourly .weather-main, .weather-widget--both .weather-main { display: flex; flex: 0 0 auto; align-items: center; gap: 6px; }
+.weather-widget--3-day .weather-temp, .weather-widget--hourly .weather-temp, .weather-widget--both .weather-temp { font-size: 30px; font-weight: 350; letter-spacing: -1.2px; line-height: 1; white-space: nowrap; }
+.weather-widget--3-day .weather-degree, .weather-widget--hourly .weather-degree, .weather-widget--both .weather-degree { font-size: 14px; font-weight: 450; vertical-align: top; }
+.weather-icon-emoji { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: 24px; line-height: 1; filter: drop-shadow(0 1px 1px rgb(0 0 0 / 16%)); }
+.weather-current-icon { font-size: 30px; }
+.weather-forecast-day-icon { font-size: 22px; }
+.weather-forecast-hour-icon { font-size: 25px; }
+.weather-widget--3-day .weather-label, .weather-widget--hourly .weather-label, .weather-widget--both .weather-label { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.weather-forecast-days { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 7px; padding-top: 7px; border-top: 1px solid color-mix(in srgb, var(--theme-clr) 18%, transparent); }
+.weather-forecast-day { display: grid; grid-template-columns: 22px auto; grid-template-areas: "name name" "icon temps" "rain rain"; align-items: center; justify-content: center; justify-items: center; column-gap: 5px; row-gap: 3px; min-width: 0; color: var(--theme-clr); text-align: center; }
+.weather-forecast-day-name { grid-area: name; font-size: 11px; font-weight: 600; line-height: 1.15; opacity: .82; white-space: nowrap; }
+.weather-forecast-day-icon { grid-area: icon; width: 21px; height: 21px; }
+.weather-forecast-day-temps { grid-area: temps; display: flex; align-items: baseline; gap: 4px; font-size: 13px; font-weight: 700; line-height: 1.1; white-space: nowrap; }
+.weather-forecast-day-temps span { font-size: 11px; font-weight: 450; opacity: .68; }
+.weather-forecast-rain { grid-area: rain; font-size: 10px; line-height: 1.1; opacity: .72; white-space: nowrap; }
+.weather-forecast-hourly { display: flex; gap: 0; overflow-x: auto; margin-top: 7px; padding: 7px 0 3px; border-top: 1px solid color-mix(in srgb, var(--theme-clr) 18%, transparent); scrollbar-width: thin; overscroll-behavior-inline: contain; width: 100%; min-width: 0; }
+.weather-forecast-hour { display: flex; flex: 0 0 52px; flex-direction: column; align-items: center; gap: 4px; min-width: 0; padding: 0 5px; color: var(--theme-clr); }
+.weather-forecast-hour-time { font-size: 11px; font-weight: 600; line-height: 1.2; opacity: .8; white-space: nowrap; }
+.weather-forecast-hour-icon { width: 25px; height: 25px; }
+.weather-forecast-hour-temp { font-size: 12px; font-weight: 700; line-height: 1.1; white-space: nowrap; }
+.weather-forecast-hour .weather-forecast-rain { font-size: 9px; }
+@media (max-width: 650px) {
+  .weather-widget--3-day, .weather-widget--hourly, .weather-widget--both { width: calc(100vw - 24px); min-width: 0; max-width: calc(100vw - 24px); }
+}

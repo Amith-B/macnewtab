@@ -1,4 +1,5 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useContext, useEffect, useState } from "react";
+import { AppContext } from "../../context/provider";
 import "./Battery.css";
 import laptopIcon from "./laptop.svg";
 import Translation from "../../locale/Translation";
@@ -16,6 +17,8 @@ const getArcColor = (level: number, charging: boolean): string => {
 };
 
 const Battery = memo(function Battery() {
+  const { weatherForecastDisplay } = useContext(AppContext);
+  const verticalLayout = weatherForecastDisplay !== "current";
   const [battery, setBattery] = useState<BatteryState | null>(null);
   const [supported, setSupported] = useState(true);
 
@@ -86,7 +89,7 @@ const Battery = memo(function Battery() {
   const dashOffset = circumference - battery.level * circumference;
 
   return (
-    <div className="battery-widget">
+    <div className={`battery-widget${verticalLayout ? " battery-widget--vertical" : ""}`}>
       <div className="battery-widget__arc-container">
         <svg className="battery-widget__arc-svg" viewBox="0 0 64 64">
           <circle

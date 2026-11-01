@@ -34,6 +34,8 @@ const WeatherSettings = memo(function WeatherSettings() {
     setShowWeather,
     weatherTempUnit,
     setWeatherTempUnit,
+    weatherForecastDisplay,
+    setWeatherForecastDisplay,
     weatherLocationMode,
     setWeatherLocationMode,
     weatherManualLocation,
@@ -200,6 +202,30 @@ const WeatherSettings = memo(function WeatherSettings() {
           options={temperatureUnitOptions}
           value={weatherTempUnit}
           onChange={(event) => setWeatherTempUnit(event.target.value)}
+        />
+      </div>
+
+      <div
+        className={
+          "weather-settings__row-item" + (!showWeather ? " disabled" : "")
+        }
+      >
+        <label htmlFor="weather-forecast-display">{translation[locale]?.weather_forecast_display || "Forecast display"}</label>
+        <Select
+          id="weather-forecast-display"
+          name="Weather forecast display"
+          options={[
+            { label: translation[locale]?.weather_forecast_current || "Current only", value: "current" },
+            { label: translation[locale]?.weather_forecast_3day || "Next 3 days", value: "3-day" },
+            { label: translation[locale]?.weather_forecast_hourly || "Hourly (24 hours)", value: "hourly" },
+            { label: translation[locale]?.weather_forecast_both || "Both", value: "both" },
+          ]}
+          value={weatherForecastDisplay}
+          onChange={(event) => {
+            setWeatherForecastDisplay(event.target.value as "current" | "3-day" | "hourly" | "both");
+            localStorage.removeItem("macnewtab_weather_cache");
+          }}
+          disabled={!showWeather}
         />
       </div>
 
