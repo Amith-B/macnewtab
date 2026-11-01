@@ -1013,16 +1013,47 @@ to be revisited in future */
 }
 
 /* Iris Reveal Animation */
-.main-content.load-animation-iris-reveal {
-  animation: iris-reveal-anim 0.6s ease-out forwards;
-  will-change: clip-path;
+/* Animate a lightweight cover instead of clipping the live widget tree.
+   This avoids forcing wallpaper/widget layers through clip-path compositing. */
+@property --iris-reveal-radius {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
 }
+
+.main-content.load-animation-iris-reveal {
+  position: relative;
+}
+
+.main-content.load-animation-iris-reveal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: var(--theme-bg);
+  --iris-reveal-radius: 0px;
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    transparent 0,
+    transparent var(--iris-reveal-radius),
+    #000 calc(var(--iris-reveal-radius) + 1px)
+  );
+  mask-image: radial-gradient(
+    circle at 50% 50%,
+    transparent 0,
+    transparent var(--iris-reveal-radius),
+    #000 calc(var(--iris-reveal-radius) + 1px)
+  );
+  animation: iris-reveal-anim 0.6s ease-out forwards;
+}
+
 @keyframes iris-reveal-anim {
-  0% {
-    clip-path: circle(0% at 50% 50%);
+  from {
+    --iris-reveal-radius: 0px;
   }
-  100% {
-    clip-path: circle(150% at 50% 50%);
+  to {
+    --iris-reveal-radius: 150vmax;
   }
 }
 
