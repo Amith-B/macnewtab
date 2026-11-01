@@ -1012,50 +1012,9 @@ to be revisited in future */
   filter: url(#chromatic-shift-filter);
 }
 
-/* Iris Reveal Animation */
-/* Animate a lightweight cover instead of clipping the live widget tree.
-   This avoids forcing wallpaper/widget layers through clip-path compositing. */
-@property --iris-reveal-radius {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
-.main-content.load-animation-iris-reveal {
-  position: relative;
-}
-
-.main-content.load-animation-iris-reveal::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: var(--theme-bg);
-  --iris-reveal-radius: 0px;
-  -webkit-mask-image: radial-gradient(
-    circle at 50% 50%,
-    transparent 0,
-    transparent var(--iris-reveal-radius),
-    #000 calc(var(--iris-reveal-radius) + 1px)
-  );
-  mask-image: radial-gradient(
-    circle at 50% 50%,
-    transparent 0,
-    transparent var(--iris-reveal-radius),
-    #000 calc(var(--iris-reveal-radius) + 1px)
-  );
-  animation: iris-reveal-anim 0.6s ease-out forwards;
-}
-
-@keyframes iris-reveal-anim {
-  from {
-    --iris-reveal-radius: 0px;
-  }
-  to {
-    --iris-reveal-radius: 150vmax;
-  }
-}
+/* Iris Reveal runs on the boot skeleton (public/index.html + boot.js), not on
+   the live page: clipping or masking the whole wallpaper/widget tree caused
+   compositing flicker. App.tsx only sets data-boot-iris on <html>. */
 
 /* Camera Focus Animation */
 .load-animation-camera-focus {

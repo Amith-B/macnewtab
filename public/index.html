@@ -40,6 +40,9 @@
       }
       html[data-boot-dark] #boot-skeleton { --bs-block: rgba(255, 255, 255, 0.14); }
       #boot-skeleton.boot-skeleton--out { opacity: 0; }
+      /* Iris Reveal: boot.js animates a clip-path hole in the skeleton (see dismiss()).
+         Only this lightweight overlay is animated, never the live page. */
+      #boot-skeleton.boot-skeleton--iris { transition: none; }
       /* your own wallpaper, blurred (thumbnail cached by the app) */
       html[data-boot-img] #boot-skeleton::before {
         content: "";

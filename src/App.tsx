@@ -80,9 +80,17 @@ const App = function App() {
     return () => root.classList.remove("motion-reduced");
   }, [prefersReducedMotion]);
 
-  // App is mounted: let the boot skeleton fade out once the wallpaper is ready
+  // App is mounted: let the boot skeleton fade out once the wallpaper is ready.
+  // Iris Reveal is played by the skeleton itself (public/boot.js), so the live
+  // page is never clipped or re-layered and the iris opens exactly when the
+  // skeleton leaves instead of racing it.
   useEffect(() => {
+    document.documentElement.toggleAttribute(
+      "data-boot-iris",
+      isWakingUp && loadAnimationType === "iris-reveal",
+    );
     bootSignal("appMounted");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -324,8 +332,7 @@ const App = function App() {
           (showClockAndCalendar ? " has-clock-calendar" : "") +
           (isWidgetsAwayFromDock ? " widgets-away-from-dock" : "") +
           ` dock-${dockPosition}` +
-          ` layout-${centerWidgetsLayout}` +
-          (isWakingUp && loadAnimationType === "iris-reveal" ? " load-animation-iris-reveal" : "")
+          ` layout-${centerWidgetsLayout}`
         }
       >
         {showClockAndCalendar && (
