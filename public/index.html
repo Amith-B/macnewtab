@@ -43,6 +43,25 @@
       /* Iris Reveal: boot.js animates a clip-path hole in the skeleton (see dismiss()).
          Only this lightweight overlay is animated, never the live page. */
       #boot-skeleton.boot-skeleton--iris { transition: none; }
+      @property --iris-radius {
+        syntax: "<length>";
+        inherits: false;
+        initial-value: 0px;
+      }
+      #boot-skeleton.boot-skeleton--iris {
+        -webkit-mask-image: radial-gradient(
+          circle at 50% 50%,
+          transparent 0,
+          transparent var(--iris-radius),
+          #000 calc(var(--iris-radius) + 1px)
+        );
+        mask-image: radial-gradient(
+          circle at 50% 50%,
+          transparent 0,
+          transparent var(--iris-radius),
+          #000 calc(var(--iris-radius) + 1px)
+        );
+      }
       /* your own wallpaper, blurred (thumbnail cached by the app) */
       html[data-boot-img] #boot-skeleton::before {
         content: "";
