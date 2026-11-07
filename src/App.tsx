@@ -80,17 +80,21 @@ const App = function App() {
     return () => root.classList.remove("motion-reduced");
   }, [prefersReducedMotion]);
 
-  // App is mounted: let the boot skeleton fade out once the wallpaper is ready.
-  // Iris Reveal is played by the skeleton itself (public/boot.js), so the live
-  // page is never clipped or re-layered and the iris opens exactly when the
-  // skeleton leaves instead of racing it.
+  // Keep the boot overlay's animation mode synchronized with the actual
+  // preferences. These values can settle after the first render (for example
+  // when the active space is initialized), so this must not be mount-only.
   useEffect(() => {
     document.documentElement.toggleAttribute(
       "data-boot-iris",
-      isWakingUp && loadAnimationType === "iris-reveal",
+      enableLoadAnimation &&
+        !prefersReducedMotion &&
+        loadAnimationType === "iris-reveal",
     );
+  }, [enableLoadAnimation, prefersReducedMotion, loadAnimationType]);
+
+  // Signal mount separately, after the animation mode has been applied.
+  useEffect(() => {
     bootSignal("appMounted");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
