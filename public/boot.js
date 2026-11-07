@@ -88,6 +88,9 @@
       var gone = function () {
         if (el.parentNode) el.parentNode.removeChild(el);
       };
+      // The mask lives on this class (see public/index.html); without it the
+      // animated radius has nothing to drive and the skeleton just pops out.
+      el.classList.add("boot-skeleton--iris");
       var radius = Math.ceil(Math.sqrt(
         window.innerWidth * window.innerWidth +
         window.innerHeight * window.innerHeight
