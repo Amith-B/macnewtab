@@ -81,37 +81,35 @@
     dismissed = true;
     var el = document.getElementById("boot-skeleton");
     if (!el) return;
-    // Iris Reveal: the skeleton opens a growing hole onto the (untouched) page
-    // instead of fading. The app sets data-boot-iris when that animation is on.
+    // Reveal the live page through an expanding transparent circle.
+    // Animate a registered length on the lightweight skeleton overlay rather
+    // than clipping the wallpaper/widget layers underneath it.
     if (document.documentElement.hasAttribute("data-boot-iris")) {
       var gone = function () {
         if (el.parentNode) el.parentNode.removeChild(el);
       };
-      // A geometric clip-path hole (even-odd) is far cheaper to paint than an
-      // animated full-screen mask, and it interpolates between circle radii.
-      var w = window.innerWidth, h = window.innerHeight;
-      var cx = w / 2, cy = h / 2;
-      var full = Math.sqrt(cx * cx + cy * cy) + 2; // half-diagonal: hole covers the screen
-      var hole = function (r) {
-        return (
-          'path(evenodd, "M0 0H' + w + "V" + h + "H0Z" +
-          "M" + (cx - r) + " " + cy +
-          "A" + r + " " + r + " 0 1 0 " + (cx + r) + " " + cy +
-          "A" + r + " " + r + " 0 1 0 " + (cx - r) + " " + cy + 'Z")'
-        );
-      };
-      el.classList.add("boot-skeleton--iris");
+      var radius = Math.ceil(Math.sqrt(
+        window.innerWidth * window.innerWidth +
+        window.innerHeight * window.innerHeight
+      ));
       try {
-        var anim = el.animate([{ clipPath: hole(0.5) }, { clipPath: hole(full) }], {
-          duration: 600,
-          easing: "ease-out",
-          fill: "forwards",
-        });
+        var anim = el.animate(
+          [
+            { "--iris-radius": "0px" },
+            { "--iris-radius": radius + "px" }
+          ],
+          {
+            duration: 650,
+            easing: "cubic-bezier(0.2, 0.7, 0.2, 1)",
+            fill: "forwards"
+          }
+        );
         anim.onfinish = gone;
+        anim.oncancel = gone;
       } catch (e) {
         gone();
       }
-      setTimeout(gone, 900); // safety net if the animation never finishes
+      setTimeout(gone, 900);
       return;
     }
     el.classList.add("boot-skeleton--out");
