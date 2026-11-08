@@ -627,9 +627,9 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   );
 
   const leftWidgetsOrder = useMemo(() => {
-    const existing = Array.from(
-      new Set(rawLeftWidgetsOrder || []),
-    ).filter((id) => leftWidgetIdsList.includes(id as any));
+    const existing = Array.from(new Set(rawLeftWidgetsOrder || [])).filter(
+      (id) => leftWidgetIdsList.includes(id as any),
+    );
     const missing = DEFAULT_LEFT_WIDGET_ORDER.filter(
       (id) => !existing.includes(id),
     );
@@ -653,9 +653,9 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   );
 
   const rightWidgetsOrder = useMemo(() => {
-    const existing = Array.from(
-      new Set(rawRightWidgetsOrder || []),
-    ).filter((id) => rightWidgetIdsList.includes(id as any));
+    const existing = Array.from(new Set(rawRightWidgetsOrder || [])).filter(
+      (id) => rightWidgetIdsList.includes(id as any),
+    );
     const missing = DEFAULT_RIGHT_WIDGET_ORDER.filter(
       (id) => !existing.includes(id),
     );

@@ -338,6 +338,9 @@ const enTranslation = {
   no_apps_found: "No apps found matching your search",
   in_app_purchases: "In-App Purchases",
   manage_dock_apps_in_store: "Manage dock apps and widgets in the App Store",
+  social_media: "Social Media",
+  social_media_folder: "Social Media Folder",
+  social_media_folder_desc: "Instagram, X, Facebook, Reddit & more",
   open_app_store: "Open App Store",
   see_all: "See All",
 };
@@ -632,7 +635,8 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "ಲಿಂಕ್‌ಗಳನ್ನು ಮರುಕ್ರಮಗೊಳಿಸಲು ಎಳೆಯಿರಿ ಮತ್ತು ಬಿಡಿ",
     show_google_apps_toggle: "ಗೂಗಲ್ ಆ್ಯಪ್‌ಗಳನ್ನು ತೋರಿಸಿ",
-    reset_calendar_clock_widgets: "ಕ್ಯಾಲೆಂಡರ್/ಗಡಿಯಾರ ವಿಜೆಟ್‌ಗಳ ಆದೇಶವನ್ನು ಮರುಹೊಂದಿಸಿ",
+    reset_calendar_clock_widgets:
+      "ಕ್ಯಾಲೆಂಡರ್/ಗಡಿಯಾರ ವಿಜೆಟ್‌ಗಳ ಆದೇಶವನ್ನು ಮರುಹೊಂದಿಸಿ",
     reset_search_home_widgets: "ಹುಡುಕಾಟ/ಹೋಮ್ ವಿಜೆಟ್‌ಗಳ ಆದೇಶವನ್ನು ಮರುಹೊಂದಿಸಿ",
     drag_to_reorder: "ಮರುಕ್ರಮಗೊಳಿಸಲು ಎಳೆಯಿರಿ",
     my_apps: "ನನ್ನ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು",
@@ -683,7 +687,11 @@ export const translation: Record<string, Record<string, string>> & {
     search_apps: "ಆ್ಯಪ್‌ಗಳನ್ನು ಹುಡುಕಿ...",
     no_apps_found: "ಯಾವುದೇ ಆ್ಯಪ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ",
     see_all: "ಎಲ್ಲವನ್ನೂ ನೋಡಿ",
-    manage_dock_apps_in_store: "ಆಪ್ ಸ್ಟೋರ್‌ನಲ್ಲಿ ಡಾಕ್ ಆ್ಯಪ್‌ಗಳು ಮತ್ತು ವಿಜೆಟ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+    manage_dock_apps_in_store:
+      "ಆಪ್ ಸ್ಟೋರ್‌ನಲ್ಲಿ ಡಾಕ್ ಆ್ಯಪ್‌ಗಳು ಮತ್ತು ವಿಜೆಟ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+    social_media: "ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ",
+    social_media_folder: "ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ ಫೋಲ್ಡರ್",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit ಮತ್ತು ಇನ್ನಷ್ಟು",
   },
   cs: {
     show_greetings: "Zobrazit pozdravy",
@@ -1021,6 +1029,9 @@ export const translation: Record<string, Record<string, string>> & {
     no_apps_found: "Nebyly nalezeny žádné aplikace",
     see_all: "Zobrazit vše",
     manage_dock_apps_in_store: "Spravujte aplikace a widgety Docku v App Storu",
+    social_media: "Sociální sítě",
+    social_media_folder: "Složka sociálních sítí",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit a další",
   },
   tr: {
     show_greetings: "Selamlamayı Göster",
@@ -1317,7 +1328,8 @@ export const translation: Record<string, Record<string, string>> & {
       "Bağlantıları yeniden sıralamak için sürükleyip bırakın",
     show_google_apps_toggle: "Google Uygulamalarını Göster",
     reset_calendar_clock_widgets: "Takvim/Saat Araç Takımları Sırasını Sıfırla",
-    reset_search_home_widgets: "Arama/Ana Sayfa Araç Takımları Sırasını Sıfırla",
+    reset_search_home_widgets:
+      "Arama/Ana Sayfa Araç Takımları Sırasını Sıfırla",
     drag_to_reorder: "Yeniden sıralamak için sürükleyin",
     my_apps: "Uygulamalarım",
     my_apps_description: "Favori uygulamalarınızı Launchpad'e ekleyin",
@@ -1360,7 +1372,11 @@ export const translation: Record<string, Record<string, string>> & {
     search_apps: "Uygulamalarda ara...",
     no_apps_found: "Uygulama bulunamadı",
     see_all: "Tümünü Gör",
-    manage_dock_apps_in_store: "Dock uygulamalarını ve araç takımlarını App Store'da yönetin",
+    manage_dock_apps_in_store:
+      "Dock uygulamalarını ve araç takımlarını App Store'da yönetin",
+    social_media: "Sosyal Medya",
+    social_media_folder: "Sosyal Medya Klasörü",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit ve daha fazlası",
   },
   vi: {
     show_greetings: "Hiển thị lời chào",
@@ -1698,7 +1714,11 @@ export const translation: Record<string, Record<string, string>> & {
     search_apps: "Tìm kiếm ứng dụng...",
     no_apps_found: "Không tìm thấy ứng dụng",
     see_all: "Xem tất cả",
-    manage_dock_apps_in_store: "Quản lý ứng dụng và tiện ích Dock trong App Store",
+    manage_dock_apps_in_store:
+      "Quản lý ứng dụng và tiện ích Dock trong App Store",
+    social_media: "Mạng xã hội",
+    social_media_folder: "Thư mục mạng xã hội",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit và nhiều hơn nữa",
   },
   uz: {
     show_greetings: "Salomlarni ko'rsatish",
@@ -2040,7 +2060,11 @@ export const translation: Record<string, Record<string, string>> & {
     search_apps: "Ilovalarni qidirish...",
     no_apps_found: "Ilovalar topilmadi",
     see_all: "Hammasini ko'rish",
-    manage_dock_apps_in_store: "Dock ilovalari va vidjetlarini App Store'da boshqaring",
+    manage_dock_apps_in_store:
+      "Dock ilovalari va vidjetlarini App Store'da boshqaring",
+    social_media: "Ijtimoiy tarmoqlar",
+    social_media_folder: "Ijtimoiy tarmoqlar jildi",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit va boshqalar",
   },
   zh: {
     show_greetings: "显示问候语",
@@ -2364,6 +2388,9 @@ export const translation: Record<string, Record<string, string>> & {
     no_apps_found: "未找到匹配的应用",
     see_all: "查看全部",
     manage_dock_apps_in_store: "在 App Store 中管理程序坞应用与小组件",
+    social_media: "社交媒体",
+    social_media_folder: "社交媒体文件夹",
+    social_media_folder_desc: "Instagram、X、Facebook、Reddit 等",
   },
   hi: {
     show_greetings: "अभिवादन दिखाएँ",
@@ -2701,6 +2728,9 @@ export const translation: Record<string, Record<string, string>> & {
     no_apps_found: "कोई ऐप नहीं मिला",
     see_all: "सभी देखें",
     manage_dock_apps_in_store: "ऐप स्टोर में डॉक ऐप्स और विजेट प्रबंधित करें",
+    social_media: "सोशल मीडिया",
+    social_media_folder: "सोशल मीडिया फ़ोल्डर",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit और अधिक",
   },
   it: {
     show_greetings: "Mostra saluti",
@@ -3042,6 +3072,9 @@ export const translation: Record<string, Record<string, string>> & {
     no_apps_found: "Nessuna app trovata",
     see_all: "Mostra tutto",
     manage_dock_apps_in_store: "Gestisci app e widget del Dock nell'App Store",
+    social_media: "Social Media",
+    social_media_folder: "Cartella Social Media",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit e altri",
   },
   bn: {
     show_greetings: "শুভেচ্ছা দেখান",
@@ -3337,7 +3370,8 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "লিঙ্কগুলি পুনরায় সাজাতে টেনে আনুন এবং ছেড়ে দিন",
     show_google_apps_toggle: "গুগল অ্যাপস দেখান",
-    reset_calendar_clock_widgets: "ক্যালেন্ডার/ঘড়ি উইজেটের ক্রম পুনরায় সেট করুন",
+    reset_calendar_clock_widgets:
+      "ক্যালেন্ডার/ঘড়ি উইজেটের ক্রম পুনরায় সেট করুন",
     reset_search_home_widgets: "অনুসন্ধান/হোম উইজেটের ক্রম পুনরায় সেট করুন",
     drag_to_reorder: "পুনরায় সাজাতে টেনে আনুন",
     my_apps: "আমার অ্যাপস",
@@ -3381,6 +3415,10 @@ export const translation: Record<string, Record<string, string>> & {
     no_apps_found: "কোনো অ্যাপ পাওয়া যায়নি",
     see_all: "সব দেখুন",
     manage_dock_apps_in_store: "অ্যাপ স্টোরে ডক অ্যাপস এবং উইজেট পরিচালনা করুন",
+    social_media: "সোশ্যাল মিডিয়া",
+    social_media_folder: "সোশ্যাল মিডিয়া ফোল্ডার",
+    social_media_folder_desc:
+      "Instagram, X, Facebook, Reddit এবং আরও অনেক কিছু",
   },
   pt: {
     show_greetings: "Mostrar saudações",
@@ -3676,7 +3714,8 @@ export const translation: Record<string, Record<string, string>> & {
     layout_reversed: "Invertido",
     drag_and_drop_to_reorder_links: "Arraste e solte para reordenar os links",
     show_google_apps_toggle: "Mostrar Google Apps",
-    reset_calendar_clock_widgets: "Redefinir ordem dos widgets de calendário/relógio",
+    reset_calendar_clock_widgets:
+      "Redefinir ordem dos widgets de calendário/relógio",
     reset_search_home_widgets: "Redefinir ordem dos widgets de pesquisa/início",
     drag_to_reorder: "Arraste para reordenar",
     my_apps: "Meus Apps",
@@ -3720,6 +3759,9 @@ export const translation: Record<string, Record<string, string>> & {
     no_apps_found: "Nenhum app encontrado",
     see_all: "Ver Tudo",
     manage_dock_apps_in_store: "Gerencie apps e widgets do Dock na App Store",
+    social_media: "Redes Sociais",
+    social_media_folder: "Pasta de Redes Sociais",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit e mais",
   },
   fr: {
     show_greetings: "Afficher les salutations",
@@ -4017,8 +4059,10 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Faites glisser et déposez pour réorganiser les liens",
     show_google_apps_toggle: "Afficher les applications Google",
-    reset_calendar_clock_widgets: "Réinitialiser l'ordre des widgets calendrier/horloge",
-    reset_search_home_widgets: "Réinitialiser l'ordre des widgets recherche/accueil",
+    reset_calendar_clock_widgets:
+      "Réinitialiser l'ordre des widgets calendrier/horloge",
+    reset_search_home_widgets:
+      "Réinitialiser l'ordre des widgets recherche/accueil",
     drag_to_reorder: "Glisser pour réorganiser",
     my_apps: "Mes applications",
     my_apps_description: "Ajoutez vos applications préférées au Launchpad",
@@ -4061,7 +4105,11 @@ export const translation: Record<string, Record<string, string>> & {
     search_apps: "Rechercher des apps...",
     no_apps_found: "Aucune app trouvée",
     see_all: "Tout afficher",
-    manage_dock_apps_in_store: "Gérez les applications et widgets du Dock dans l'App Store",
+    manage_dock_apps_in_store:
+      "Gérez les applications et widgets du Dock dans l'App Store",
+    social_media: "Réseaux sociaux",
+    social_media_folder: "Dossier Réseaux sociaux",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit et plus",
   },
   ru: {
     show_greetings: "Показывать приветствия",
@@ -4134,7 +4182,8 @@ export const translation: Record<string, Record<string, string>> & {
     search: "Поиск",
     browser_search_engine: "Поисковая система браузера по умолчанию",
     choose_wallpaper: "Выбрать обои",
-    voice_search_warning: "Голосовой поиск не поддерживается для этого языка. По умолчанию будет использоваться английский язык.",
+    voice_search_warning:
+      "Голосовой поиск не поддерживается для этого языка. По умолчанию будет использоваться английский язык.",
     dock: "Док-панель",
     settings: "Настройки",
     add: "Добавить",
@@ -4161,7 +4210,8 @@ export const translation: Record<string, Record<string, string>> & {
     privacy_policy: "Политика конфиденциальности",
     todo: "Список задач",
     todo_toggle_title: "Показывать список задач",
-    todo_toggle_description: "Выполненные задачи автоматически удаляются на следующий день",
+    todo_toggle_description:
+      "Выполненные задачи автоматически удаляются на следующий день",
     add_to_list: "Добавить в список",
     wallpaper_blur: "Размытие обоев",
     changelog: "История изменений",
@@ -4179,7 +4229,8 @@ export const translation: Record<string, Record<string, string>> & {
     unmute_all: "Включить звук у всех",
     merge_all: "Объединить все",
     bookmark_toggle: "Показывать закладки в Launchpad",
-    bookmark_toggle_description: "Вы можете переключать закладки браузера по умолчанию с помощью:",
+    bookmark_toggle_description:
+      "Вы можете переключать закладки браузера по умолчанию с помощью:",
     google_apps: "Сервисы Google",
     bookmarks: "Закладки",
     delete_bookmark: "Удалить закладку",
@@ -4193,22 +4244,28 @@ export const translation: Record<string, Record<string, string>> & {
     signing_out: "Выполняется выход...",
     sign_in_with_google: "Войти через Google",
     with_google_account: "через аккаунт Google",
-    sign_in_description: "Для доступа к Google Календарю войдите в свой аккаунт Google.",
+    sign_in_description:
+      "Для доступа к Google Календарю войдите в свой аккаунт Google.",
     google_account: "Аккаунт Google",
     show_calendar_events: "Показывать события календаря",
-    show_calendar_events_description: "При включении наведите курсор на календарь, чтобы развернуть его и посмотреть предстоящие события на ближайшие 30 дней.",
+    show_calendar_events_description:
+      "При включении наведите курсор на календарь, чтобы развернуть его и посмотреть предстоящие события на ближайшие 30 дней.",
     no_events_today: "На сегодня событий нет",
     all_day: "весь день",
     backup_and_restore: "Резервное копирование и восстановление",
     export_data_title: "Экспорт данных",
-    export_data_description: "Скачать резервную копию настроек, задач и заметок.",
+    export_data_description:
+      "Скачать резервную копию настроек, задач и заметок.",
     export_to_json: "Экспорт в JSON",
     import_data_title: "Импорт данных",
-    import_data_description: "Восстановить данные из резервной копии. Это перезапишет текущие данные.",
+    import_data_description:
+      "Восстановить данные из резервной копии. Это перезапишет текущие данные.",
     import_from_json: "Импорт из JSON",
     importing: "Импорт...",
-    import_confirm: "Вы уверены, что хотите импортировать данные? Это перезапишет текущие настройки, задачи и заметки. Это действие нельзя отменить.",
-    import_failed: "Не удалось импортировать данные. Пожалуйста, проверьте формат файла.",
+    import_confirm:
+      "Вы уверены, что хотите импортировать данные? Это перезапишет текущие настройки, задачи и заметки. Это действие нельзя отменить.",
+    import_failed:
+      "Не удалось импортировать данные. Пожалуйста, проверьте формат файла.",
     use_analog_clock_2: "Использовать аналоговые часы 2",
     wallpaper_type: "Тип обоев",
     wallpaper_fit: "Подгонка обоев",
@@ -4259,10 +4316,12 @@ export const translation: Record<string, Record<string, string>> & {
     quick_links_default: "Популярные сайты",
     quick_links_custom: "Собственные ссылки",
     add_quick_links: "Добавить быстрые ссылки",
-    quick_links_default_description: "Показывает наиболее часто посещаемые сайты вашего браузера",
+    quick_links_default_description:
+      "Показывает наиболее часто посещаемые сайты вашего браузера",
     quick_links_custom_description: "Показывает созданные вами ссылки",
     enable_sticky_notes_sync: "Синхронизировать стикеры",
-    enable_sticky_notes_sync_description: "Синхронизировать стикеры между устройствами через аккаунт Chrome",
+    enable_sticky_notes_sync_description:
+      "Синхронизировать стикеры между устройствами через аккаунт Chrome",
     show_battery: "Показывать виджет батареи",
     battery_charging: "Зарядка",
     battery_label: "Батарея",
@@ -4291,7 +4350,8 @@ export const translation: Record<string, Record<string, string>> & {
     freeform_zoom_reset: "Сбросить масштаб",
     freeform_zoom_locked: "Масштабирование доступно в Pro",
     freeform_pro_only: "Только в Pro",
-    freeform_pricing_notice: "✨ Freeform сейчас бесплатен — некоторые функции в будущем могут стать платными. Поддержите нас, чтобы сохранить сервис бесплатным!",
+    freeform_pricing_notice:
+      "✨ Freeform сейчас бесплатен — некоторые функции в будущем могут стать платными. Поддержите нас, чтобы сохранить сервис бесплатным!",
     freeform_tool_select: "Выделение",
     freeform_tool_pen: "Ручка",
     freeform_tool_fine_pen: "Тонкая ручка",
@@ -4311,25 +4371,32 @@ export const translation: Record<string, Record<string, string>> & {
     freeform_shape_star: "Звезда",
     freeform_shape_pentagon: "Пятиугольник",
     freeform_shape_speech: "Выноска",
-    animated_wallpaper_warning: "Анимированные обои могут расходовать чуть больше заряда при работе от батареи.",
+    animated_wallpaper_warning:
+      "Анимированные обои могут расходовать чуть больше заряда при работе от батареи.",
     hide_footer_notice_title: "Заметили панель внизу страницы?",
-    hide_footer_notice_desc: "Её можно скрыть, нажав правой кнопкой мыши по панели и выбрав 'Скрыть подвал на странице новой вкладки'.",
+    hide_footer_notice_desc:
+      "Её можно скрыть, нажав правой кнопкой мыши по панели и выбрав 'Скрыть подвал на странице новой вкладки'.",
     advanced: "Дополнительно",
     enable_load_animation: "Включить анимацию загрузки",
     animation_type: "Тип анимации",
-    support_description: "Mac New Tab бесплатен и всегда будет бесплатным. Если вам нравится расширение, чашка кофе очень поможет поддержке проекта и разработке новых функций!",
+    support_description:
+      "Mac New Tab бесплатен и всегда будет бесплатным. Если вам нравится расширение, чашка кофе очень поможет поддержке проекта и разработке новых функций!",
     spaces: "Рабочие пространства",
-    spaces_description: "Создавайте отдельные рабочие пространства со своими обоями, темами, задачами и заметками",
+    spaces_description:
+      "Создавайте отдельные рабочие пространства со своими обоями, темами, задачами и заметками",
     spaces_enable: "Включить пространства",
     spaces_add: "Добавить пространство",
     spaces_name_placeholder: "Название пространства",
     spaces_delete: "Удалить пространство",
-    spaces_delete_confirm: "Удалить это пространство? Все его настройки, задачи и заметки будут удалены безвозвратно.",
+    spaces_delete_confirm:
+      "Удалить это пространство? Все его настройки, задачи и заметки будут удалены безвозвратно.",
     spaces_cannot_delete_last: "Нельзя удалить последнее пространство",
     spaces_time_sensitive: "Автопереключение по времени",
-    spaces_time_sensitive_description: "Автоматически переключать пространства в зависимости от времени суток",
+    spaces_time_sensitive_description:
+      "Автоматически переключать пространства в зависимости от времени суток",
     spaces_time_range: "Время активности",
-    spaces_time_overlap_error: "Интервалы времени не должны пересекаться с другими пространствами",
+    spaces_time_overlap_error:
+      "Интервалы времени не должны пересекаться с другими пространствами",
     spaces_default_name: "Основное",
     spaces_active: "Активное",
     spaces_rename: "Переименовать",
@@ -4341,11 +4408,13 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links: "Перетащите, чтобы изменить порядок ссылок",
     show_google_apps_toggle: "Показать Google Приложения",
     reset_calendar_clock_widgets: "Сбросить порядок виджетов календаря/часов",
-    reset_search_home_widgets: "Сбросить порядок виджетов поиска/главной страницы",
+    reset_search_home_widgets:
+      "Сбросить порядок виджетов поиска/главной страницы",
     drag_to_reorder: "Перетащите для изменения порядка",
     my_apps: "Мои приложения",
     my_apps_description: "Добавьте свои любимые приложения в Launchpad",
-    add_launchpad_links: "Пользовательские ссылки ещё не добавлены. Добавьте их ниже.",
+    add_launchpad_links:
+      "Пользовательские ссылки ещё не добавлены. Добавьте их ниже.",
     launchpad: "Launchpad",
     show_launchpad_in_dock: "Показывать Launchpad в Dock",
     clock_style: "Стиль часов",
@@ -4382,7 +4451,11 @@ export const translation: Record<string, Record<string, string>> & {
     search_apps: "Поиск приложений...",
     no_apps_found: "Приложения не найдены",
     see_all: "См. все",
-    manage_dock_apps_in_store: "Управляйте приложениями и виджетами Dock в App Store",
+    manage_dock_apps_in_store:
+      "Управляйте приложениями и виджетами Dock в App Store",
+    social_media: "Социальные сети",
+    social_media_folder: "Папка социальных сетей",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit и др.",
   },
   es: {
     show_greetings: "Mostrar saludos",
@@ -4674,8 +4747,10 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Arrastra y suelta para reordenar los enlaces",
     show_google_apps_toggle: "Mostrar aplicaciones de Google",
-    reset_calendar_clock_widgets: "Restablecer orden de widgets de calendario/reloj",
-    reset_search_home_widgets: "Restablecer orden de widgets de búsqueda/inicio",
+    reset_calendar_clock_widgets:
+      "Restablecer orden de widgets de calendario/reloj",
+    reset_search_home_widgets:
+      "Restablecer orden de widgets de búsqueda/inicio",
     drag_to_reorder: "Arrastrar para reordenar",
     my_apps: "Mis aplicaciones",
     my_apps_description: "Agrega tus aplicaciones favoritas al Launchpad",
@@ -4724,7 +4799,11 @@ export const translation: Record<string, Record<string, string>> & {
     search_apps: "Buscar apps...",
     no_apps_found: "No se encontraron apps",
     see_all: "Ver todo",
-    manage_dock_apps_in_store: "Administra apps y widgets del Dock en App Store",
+    manage_dock_apps_in_store:
+      "Administra apps y widgets del Dock en App Store",
+    social_media: "Redes sociales",
+    social_media_folder: "Carpeta de redes sociales",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit y más",
   },
   ja: {
     show_greetings: "挨拶を表示",
@@ -5063,6 +5142,9 @@ export const translation: Record<string, Record<string, string>> & {
     no_apps_found: "一致するアプリが見つかりません",
     see_all: "すべて表示",
     manage_dock_apps_in_store: "App StoreでDockのアプリとウィジェットを管理",
+    social_media: "ソーシャルメディア",
+    social_media_folder: "ソーシャルメディアフォルダ",
+    social_media_folder_desc: "Instagram、X、Facebook、Reddit など",
   },
   ko: {
     show_greetings: "인사말 표시",
@@ -5396,6 +5478,9 @@ export const translation: Record<string, Record<string, string>> & {
     no_apps_found: "앱을 찾을 수 없습니다",
     see_all: "모두 보기",
     manage_dock_apps_in_store: "App Store에서 Dock 앱 및 위젯 관리",
+    social_media: "소셜 미디어",
+    social_media_folder: "소셜 미디어 폴더",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit 등",
   },
   id: {
     show_greetings: "Tampilkan Salam",
@@ -5733,6 +5818,9 @@ export const translation: Record<string, Record<string, string>> & {
     no_apps_found: "Aplikasi tidak ditemukan",
     see_all: "Lihat Semua",
     manage_dock_apps_in_store: "Kelola aplikasi dan widget Dock di App Store",
+    social_media: "Media Sosial",
+    social_media_folder: "Folder Media Sosial",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit & lainnya",
   },
   mr: {
     show_greetings: "ग्रीटिंग्ज दाखवा",
@@ -6068,7 +6156,11 @@ export const translation: Record<string, Record<string, string>> & {
     search_apps: "अ‍ॅप्स शोधा...",
     no_apps_found: "कोणतेही अ‍ॅप्स सापडले नाहीत",
     see_all: "सर्व पहा",
-    manage_dock_apps_in_store: "ॲप स्टोअरमध्ये डॉक ॲप्स आणि विजेट्स व्यवस्थापित करा",
+    manage_dock_apps_in_store:
+      "ॲप स्टोअरमध्ये डॉक ॲप्स आणि विजेट्स व्यवस्थापित करा",
+    social_media: "सोशल मीडिया",
+    social_media_folder: "सोशल मीडिया फोल्डर",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit आणि बरेच काही",
   },
   pl: {
     show_greetings: "Pokaż pozdrowienia",
@@ -6364,8 +6456,10 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Przeciągnij i upuść, aby zmienić kolejność linków",
     show_google_apps_toggle: "Pokaż aplikacje Google",
-    reset_calendar_clock_widgets: "Zresetuj kolejność widżetów kalendarza/zegara",
-    reset_search_home_widgets: "Zresetuj kolejność widżetów wyszukiwania/głównych",
+    reset_calendar_clock_widgets:
+      "Zresetuj kolejność widżetów kalendarza/zegara",
+    reset_search_home_widgets:
+      "Zresetuj kolejność widżetów wyszukiwania/głównych",
     drag_to_reorder: "Przeciągnij, aby zmienić kolejność",
     my_apps: "Moje aplikacje",
     my_apps_description: "Dodaj swoje ulubione aplikacje do Launchpad",
@@ -6407,7 +6501,11 @@ export const translation: Record<string, Record<string, string>> & {
     search_apps: "Szukaj aplikacji...",
     no_apps_found: "Nie znaleziono aplikacji",
     see_all: "Pokaż wszystko",
-    manage_dock_apps_in_store: "Zarządzaj aplikacjami i widżetami Docka w App Store",
+    manage_dock_apps_in_store:
+      "Zarządzaj aplikacjami i widżetami Docka w App Store",
+    social_media: "Media społecznościowe",
+    social_media_folder: "Folder mediów społecznościowych",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit i więcej",
   },
   de: {
     show_greetings: "Grüße anzeigen",
@@ -6706,8 +6804,10 @@ export const translation: Record<string, Record<string, string>> & {
     drag_and_drop_to_reorder_links:
       "Ziehen und ablegen, um Links neu anzuordnen",
     show_google_apps_toggle: "Google Apps anzeigen",
-    reset_calendar_clock_widgets: "Kalender/Uhr-Widget-Reihenfolge zurücksetzen",
-    reset_search_home_widgets: "Such-/Startseiten-Widget-Reihenfolge zurücksetzen",
+    reset_calendar_clock_widgets:
+      "Kalender/Uhr-Widget-Reihenfolge zurücksetzen",
+    reset_search_home_widgets:
+      "Such-/Startseiten-Widget-Reihenfolge zurücksetzen",
     drag_to_reorder: "Ziehen zum Neuanordnen",
     my_apps: "Meine Apps",
     my_apps_description:
@@ -6752,6 +6852,9 @@ export const translation: Record<string, Record<string, string>> & {
     no_apps_found: "Keine Apps gefunden",
     see_all: "Alle anzeigen",
     manage_dock_apps_in_store: "Verwalte Dock-Apps und Widgets im App Store",
+    social_media: "Soziale Medien",
+    social_media_folder: "Social-Media-Ordner",
+    social_media_folder_desc: "Instagram, X, Facebook, Reddit & mehr",
   },
 };
 export const languages = Object.keys(

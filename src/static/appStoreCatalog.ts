@@ -4,6 +4,7 @@ export type AppStoreCategory =
   | "create"
   | "work"
   | "entertainment"
+  | "social"
   | "develop"
   | "categories";
 
@@ -24,12 +25,23 @@ export interface StoreAppItem {
     | "native_freeform"
     | "native_screen_recorder";
   featured?: boolean;
-  section?: "macos_updated" | "we_love" | "native_tools" | "arcade_favorites";
+  section?:
+    | "macos_updated"
+    | "we_love"
+    | "native_tools"
+    | "arcade_favorites"
+    | "social_favorites";
   version?: string;
   rating?: number;
   badge?: string;
   pricing?: string; // e.g. "Get", "₹ 4,999", etc. Default "Get"
   inAppPurchases?: boolean;
+  isFolder?: boolean;
+  folderTitle?: string;
+  folderLinks?: Array<{
+    title: string;
+    url: string;
+  }>;
 }
 
 export const STORE_SECTIONS = [
@@ -42,6 +54,11 @@ export const STORE_SECTIONS = [
     id: "native_tools",
     title: "Built-in Mac Tools & Widgets",
     seeAllCategory: "discover" as AppStoreCategory,
+  },
+  {
+    id: "social_favorites",
+    title: "Social Media & Networks",
+    seeAllCategory: "social" as AppStoreCategory,
   },
   {
     id: "we_love",
@@ -61,7 +78,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "native_todo",
     name: "Daily To-Do List",
     subtitle: "Stay organized with daily tasks & checklists",
-    description: "macOS style daily checklist to track and complete your tasks.",
+    description:
+      "macOS style daily checklist to track and complete your tasks.",
     category: "work",
     isNative: true,
     nativeId: "native_todo",
@@ -75,7 +93,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "native_sticky_notes",
     name: "Sticky Notes",
     subtitle: "Quick notes anywhere on your desktop",
-    description: "Draggable, persistent colorful sticky notes right on your new tab.",
+    description:
+      "Draggable, persistent colorful sticky notes right on your new tab.",
     category: "create",
     isNative: true,
     nativeId: "native_sticky_notes",
@@ -89,7 +108,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "native_focus_mode",
     name: "Focus Studio",
     subtitle: "Pomodoro timer, ambient sounds & tasks",
-    description: "Immersive focus environment with binaural beats, ambient soundscapes, and timer.",
+    description:
+      "Immersive focus environment with binaural beats, ambient soundscapes, and timer.",
     category: "work",
     isNative: true,
     nativeId: "native_focus_mode",
@@ -103,7 +123,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "native_freeform",
     name: "Freeform Canvas",
     subtitle: "Visual whiteboard, drawing & infinite ideas",
-    description: "Infinite collaborative whiteboard to draw, sketch, diagram, and brainstorm.",
+    description:
+      "Infinite collaborative whiteboard to draw, sketch, diagram, and brainstorm.",
     category: "create",
     isNative: true,
     nativeId: "native_freeform",
@@ -117,7 +138,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "native_screen_recorder",
     name: "Screen Recorder",
     subtitle: "Capture screenshots and record video",
-    description: "Built-in macOS style screen and audio capture studio with one click.",
+    description:
+      "Built-in macOS style screen and audio capture studio with one click.",
     category: "create",
     isNative: true,
     nativeId: "native_screen_recorder",
@@ -133,7 +155,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_things3",
     name: "Things 3",
     subtitle: "Organize your life",
-    description: "Award-winning personal task manager that helps you achieve your goals.",
+    description:
+      "Award-winning personal task manager that helps you achieve your goals.",
     category: "work",
     url: "https://culturedcode.com/things/",
     domain: "culturedcode.com",
@@ -145,7 +168,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_fantastical",
     name: "Fantastical",
     subtitle: "Calendar & Reminders",
-    description: "Multiple award-winning calendar and tasks app with natural language parsing.",
+    description:
+      "Multiple award-winning calendar and tasks app with natural language parsing.",
     category: "work",
     url: "https://flexibits.com/fantastical",
     domain: "flexibits.com",
@@ -157,7 +181,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_notion",
     name: "Notion",
     subtitle: "Connected workspace for wiki, docs & tasks",
-    description: "All-in-one workspace for notes, documentation, project management and wikis.",
+    description:
+      "All-in-one workspace for notes, documentation, project management and wikis.",
     category: "work",
     url: "https://www.notion.so/",
     domain: "notion.so",
@@ -169,7 +194,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_slack",
     name: "Slack",
     subtitle: "Team communication & chat",
-    description: "Workplace messaging platform connecting people to the information they need.",
+    description:
+      "Workplace messaging platform connecting people to the information they need.",
     category: "work",
     url: "https://slack.com/",
     domain: "slack.com",
@@ -181,7 +207,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_linear",
     name: "Linear",
     subtitle: "Issue tracking built for high-performance teams",
-    description: "Streamline issues, sprints, and product roadmaps with unmatched speed.",
+    description:
+      "Streamline issues, sprints, and product roadmaps with unmatched speed.",
     category: "work",
     url: "https://linear.app/",
     domain: "linear.app",
@@ -192,7 +219,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_chatgpt",
     name: "ChatGPT",
     subtitle: "Get answers, find inspiration, be productive",
-    description: "Conversational AI model trained to answer questions, write copy, and assist.",
+    description:
+      "Conversational AI model trained to answer questions, write copy, and assist.",
     category: "work",
     url: "https://chatgpt.com/",
     domain: "chatgpt.com",
@@ -204,7 +232,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_claude",
     name: "Claude",
     subtitle: "Next-generation AI assistant by Anthropic",
-    description: "Helpful, honest, and harmless assistant for writing, coding, and thinking.",
+    description:
+      "Helpful, honest, and harmless assistant for writing, coding, and thinking.",
     category: "work",
     url: "https://claude.ai/",
     domain: "claude.ai",
@@ -215,7 +244,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_google_docs",
     name: "Google Docs",
     subtitle: "Online documents & real-time collaboration",
-    description: "Create and edit web-based documents, spreadsheets, and presentations.",
+    description:
+      "Create and edit web-based documents, spreadsheets, and presentations.",
     category: "work",
     url: "https://docs.google.com/",
     domain: "docs.google.com",
@@ -226,7 +256,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_trello",
     name: "Trello",
     subtitle: "Visual boards, lists & cards",
-    description: "Collaborate, manage projects, and reach new productivity peaks.",
+    description:
+      "Collaborate, manage projects, and reach new productivity peaks.",
     category: "work",
     url: "https://trello.com/",
     domain: "trello.com",
@@ -249,7 +280,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_stoic",
     name: "stoic.",
     subtitle: "journal & mental health tracker",
-    description: "Daily mental health companion with journaling, breathing, and quotes.",
+    description:
+      "Daily mental health companion with journaling, breathing, and quotes.",
     category: "work",
     url: "https://www.stoicroutine.com/",
     domain: "stoicroutine.com",
@@ -263,7 +295,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_figma",
     name: "Figma",
     subtitle: "Collaborative interface design tool",
-    description: "The leading collaborative design platform for modern product teams.",
+    description:
+      "The leading collaborative design platform for modern product teams.",
     category: "create",
     url: "https://www.figma.com/",
     domain: "figma.com",
@@ -275,7 +308,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_canva",
     name: "Canva",
     subtitle: "Design anything, publish anywhere",
-    description: "Visual design platform empowering anyone to create professional graphics.",
+    description:
+      "Visual design platform empowering anyone to create professional graphics.",
     category: "create",
     url: "https://www.canva.com/",
     domain: "canva.com",
@@ -297,7 +331,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_photopea",
     name: "Photopea",
     subtitle: "Advanced online photo & raster editor",
-    description: "Full-featured web-based photo editor supporting PSD, AI, and Sketch formats.",
+    description:
+      "Full-featured web-based photo editor supporting PSD, AI, and Sketch formats.",
     category: "create",
     url: "https://www.photopea.com/",
     domain: "photopea.com",
@@ -308,7 +343,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_dribbble",
     name: "Dribbble",
     subtitle: "Discover the world's top design talent",
-    description: "Design portfolio community for graphic designers, illustrators, and artists.",
+    description:
+      "Design portfolio community for graphic designers, illustrators, and artists.",
     category: "create",
     url: "https://dribbble.com/",
     domain: "dribbble.com",
@@ -319,7 +355,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_unsplash",
     name: "Unsplash",
     subtitle: "Freely usable high-res imagery",
-    description: "Over 3 million curated high-resolution photos provided by top photographers.",
+    description:
+      "Over 3 million curated high-resolution photos provided by top photographers.",
     category: "create",
     url: "https://unsplash.com/",
     domain: "unsplash.com",
@@ -332,7 +369,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_github",
     name: "GitHub",
     subtitle: "Where the world builds software",
-    description: "The complete developer platform to build, scale, and deliver secure code.",
+    description:
+      "The complete developer platform to build, scale, and deliver secure code.",
     category: "develop",
     url: "https://github.com/",
     domain: "github.com",
@@ -344,7 +382,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_gitlab",
     name: "GitLab",
     subtitle: "The One DevOps Platform",
-    description: "Complete AI-powered DevSecOps platform for software development.",
+    description:
+      "Complete AI-powered DevSecOps platform for software development.",
     category: "develop",
     url: "https://gitlab.com/",
     domain: "gitlab.com",
@@ -355,7 +394,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_stackoverflow",
     name: "Stack Overflow",
     subtitle: "Knowledge sharing community for programmers",
-    description: "Find answers to technical coding questions and collaborate with developers.",
+    description:
+      "Find answers to technical coding questions and collaborate with developers.",
     category: "develop",
     url: "https://stackoverflow.com/",
     domain: "stackoverflow.com",
@@ -366,7 +406,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_codepen",
     name: "CodePen",
     subtitle: "Social development environment for front-end",
-    description: "An online code playground to test HTML, CSS, and modern JavaScript.",
+    description:
+      "An online code playground to test HTML, CSS, and modern JavaScript.",
     category: "develop",
     url: "https://codepen.io/",
     domain: "codepen.io",
@@ -377,7 +418,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_vercel",
     name: "Vercel",
     subtitle: "Build and deploy the modern web",
-    description: "Frontend cloud platform for developing, previewing, and shipping fast sites.",
+    description:
+      "Frontend cloud platform for developing, previewing, and shipping fast sites.",
     category: "develop",
     url: "https://vercel.com/",
     domain: "vercel.com",
@@ -388,10 +430,177 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_devdocs",
     name: "DevDocs",
     subtitle: "Fast, offline developer API documentation",
-    description: "Combines 100+ API documentations in a fast, searchable interface.",
+    description:
+      "Combines 100+ API documentations in a fast, searchable interface.",
     category: "develop",
     url: "https://devdocs.io/",
     domain: "devdocs.io",
+    pricing: "Get",
+    inAppPurchases: false,
+  },
+
+  // ─── Social Media & Networks ───────────────────────────────────
+  {
+    id: "folder_social_media",
+    name: "Social Media Folder",
+    subtitle: "Instagram, X, Facebook, Reddit & more",
+    description:
+      "Curated Dock folder with Instagram, X, Facebook, Reddit, LinkedIn, YouTube, TikTok, Threads, and Pinterest.",
+    category: "social",
+    isFolder: true,
+    folderTitle: "Social Media",
+    featured: true,
+    section: "social_favorites",
+    badge: "Folder",
+    pricing: "Get",
+    folderLinks: [
+      {
+        title: "Instagram",
+        url: "https://www.instagram.com/",
+      },
+      {
+        title: "X",
+        url: "https://x.com/",
+      },
+      {
+        title: "Facebook",
+        url: "https://www.facebook.com/",
+      },
+      {
+        title: "Reddit",
+        url: "https://www.reddit.com/",
+      },
+      {
+        title: "LinkedIn",
+        url: "https://www.linkedin.com/",
+      },
+      {
+        title: "YouTube",
+        url: "https://www.youtube.com/",
+      },
+      {
+        title: "TikTok",
+        url: "https://www.tiktok.com/",
+      },
+      {
+        title: "Threads",
+        url: "https://www.threads.net/",
+      },
+      {
+        title: "Pinterest",
+        url: "https://www.pinterest.com/",
+      },
+    ],
+  },
+  {
+    id: "app_instagram",
+    name: "Instagram",
+    subtitle: "Capture and share what you love",
+    description:
+      "Connect with friends, share what you're up to, or see what's new from others worldwide.",
+    category: "social",
+    url: "https://www.instagram.com/",
+    domain: "instagram.com",
+    section: "social_favorites",
+    pricing: "Get",
+    inAppPurchases: false,
+  },
+  {
+    id: "app_x",
+    name: "X",
+    subtitle: "What's happening in the world right now",
+    description:
+      "Real-time news, commentary, and conversations on trending global topics.",
+    category: "social",
+    url: "https://x.com/",
+    domain: "x.com",
+    section: "social_favorites",
+    pricing: "Get",
+    inAppPurchases: false,
+  },
+  {
+    id: "app_facebook",
+    name: "Facebook",
+    subtitle: "Connect with friends and the world around you",
+    description:
+      "Stay in touch with family, join communities, and discover engaging content.",
+    category: "social",
+    url: "https://www.facebook.com/",
+    domain: "facebook.com",
+    pricing: "Get",
+    inAppPurchases: false,
+  },
+  {
+    id: "app_reddit",
+    name: "Reddit",
+    subtitle: "Dive into topics, tech & discussions",
+    description:
+      "Network of communities where people share knowledge and discuss topics.",
+    category: "social",
+    url: "https://www.reddit.com/",
+    domain: "reddit.com",
+    section: "social_favorites",
+    pricing: "Get",
+    inAppPurchases: false,
+  },
+  {
+    id: "app_tiktok",
+    name: "TikTok",
+    subtitle: "Make your day with short-form video",
+    description:
+      "Discover real, short videos that make your day and spark creativity.",
+    category: "social",
+    url: "https://www.tiktok.com/",
+    domain: "tiktok.com",
+    section: "social_favorites",
+    pricing: "Get",
+    inAppPurchases: false,
+  },
+  {
+    id: "app_threads",
+    name: "Threads",
+    subtitle: "Say more with Threads by Instagram",
+    description:
+      "Where communities come together to discuss everything from today's topics to tomorrow's.",
+    category: "social",
+    url: "https://www.threads.net/",
+    domain: "threads.net",
+    pricing: "Get",
+    inAppPurchases: false,
+  },
+  {
+    id: "app_pinterest",
+    name: "Pinterest",
+    subtitle: "Discover recipes, home ideas, style inspiration",
+    description:
+      "Visual discovery engine for finding ideas like recipes, home and style inspiration.",
+    category: "social",
+    url: "https://www.pinterest.com/",
+    domain: "pinterest.com",
+    pricing: "Get",
+    inAppPurchases: false,
+  },
+  {
+    id: "app_linkedin",
+    name: "LinkedIn",
+    subtitle: "Professional network & career community",
+    description:
+      "Manage your professional identity, build your network, and find opportunities.",
+    category: "social",
+    url: "https://www.linkedin.com/",
+    domain: "linkedin.com",
+    pricing: "Get",
+    inAppPurchases: false,
+  },
+  {
+    id: "app_discord",
+    name: "Discord",
+    subtitle: "Talk, chat, hang out with team & friends",
+    description:
+      "Voice, video, and text communication platform for communities and teams.",
+    category: "social",
+    url: "https://discord.com/app",
+    domain: "discord.com",
     pricing: "Get",
     inAppPurchases: false,
   },
@@ -401,7 +610,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_spotify",
     name: "Spotify",
     subtitle: "Music & Podcasts for everyone",
-    description: "Millions of songs and podcasts on demand across all your devices.",
+    description:
+      "Millions of songs and podcasts on demand across all your devices.",
     category: "entertainment",
     url: "https://open.spotify.com/",
     domain: "spotify.com",
@@ -413,7 +623,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_youtube",
     name: "YouTube",
     subtitle: "Watch, listen & stream videos",
-    description: "Enjoy videos, music, tutorials, and streams uploaded by creators worldwide.",
+    description:
+      "Enjoy videos, music, tutorials, and streams uploaded by creators worldwide.",
     category: "entertainment",
     url: "https://www.youtube.com/",
     domain: "youtube.com",
@@ -425,7 +636,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_netflix",
     name: "Netflix",
     subtitle: "Movies, TV shows & documentaries",
-    description: "Stream unlimited award-winning TV shows, movies, anime, and specials.",
+    description:
+      "Stream unlimited award-winning TV shows, movies, anime, and specials.",
     category: "entertainment",
     url: "https://www.netflix.com/",
     domain: "netflix.com",
@@ -436,32 +648,11 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_twitch",
     name: "Twitch",
     subtitle: "Live gaming, esports & streaming",
-    description: "Interactive live streaming platform for communities and creators.",
-    category: "work",
+    description:
+      "Interactive live streaming platform for communities and creators.",
+    category: "entertainment",
     url: "https://www.twitch.tv/",
     domain: "twitch.tv",
-    pricing: "Get",
-    inAppPurchases: false,
-  },
-  {
-    id: "app_discord",
-    name: "Discord",
-    subtitle: "Talk, chat, hang out with team & friends",
-    description: "Voice, video, and text communication platform for communities and teams.",
-    category: "work",
-    url: "https://discord.com/app",
-    domain: "discord.com",
-    pricing: "Get",
-    inAppPurchases: false,
-  },
-  {
-    id: "app_reddit",
-    name: "Reddit",
-    subtitle: "Dive into topics, tech & discussions",
-    description: "Network of communities where people share knowledge and discuss topics.",
-    category: "work",
-    url: "https://www.reddit.com/",
-    domain: "reddit.com",
     pricing: "Get",
     inAppPurchases: false,
   },
@@ -471,7 +662,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_2048",
     name: "2048",
     subtitle: "Classic tile sliding puzzle game",
-    description: "Join the numbers and get to the 2048 tile in this legendary browser puzzle.",
+    description:
+      "Join the numbers and get to the 2048 tile in this legendary browser puzzle.",
     category: "arcade",
     url: "https://play2048.co/",
     domain: "play2048.co",
@@ -483,7 +675,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_chess",
     name: "Chess.com",
     subtitle: "Play chess online against friends & bots",
-    description: "Play chess online, solve daily puzzles, and learn interactive master strategies.",
+    description:
+      "Play chess online, solve daily puzzles, and learn interactive master strategies.",
     category: "arcade",
     url: "https://www.chess.com/play",
     domain: "chess.com",
@@ -495,7 +688,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_wordle",
     name: "Wordle",
     subtitle: "Daily 5-letter word puzzle",
-    description: "Guess the hidden five-letter word in six tries in this viral daily challenge.",
+    description:
+      "Guess the hidden five-letter word in six tries in this viral daily challenge.",
     category: "arcade",
     url: "https://www.nytimes.com/games/wordle/index.html",
     domain: "nytimes.com",
@@ -507,7 +701,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_pacman",
     name: "PAC-MAN Doodle",
     subtitle: "Official Google 30th Anniversary PAC-MAN",
-    description: "Eat all the pac-dots while avoiding the ghosts in this retro arcade classic.",
+    description:
+      "Eat all the pac-dots while avoiding the ghosts in this retro arcade classic.",
     category: "arcade",
     url: "https://www.google.com/logos/2010/pacman10-i.html",
     domain: "google.com",
@@ -519,7 +714,8 @@ export const APP_STORE_CATALOG: StoreAppItem[] = [
     id: "app_quickdraw",
     name: "Quick, Draw!",
     subtitle: "AI doodling experiment by Google",
-    description: "Can a neural network recognize your doodle before time runs out?",
+    description:
+      "Can a neural network recognize your doodle before time runs out?",
     category: "arcade",
     url: "https://quickdraw.withgoogle.com/",
     domain: "quickdraw.withgoogle.com",

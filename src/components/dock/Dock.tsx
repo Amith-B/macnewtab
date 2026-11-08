@@ -445,6 +445,20 @@ const Dock = memo(() => {
                 setScreenRecorderVisible(true);
               } else if (appId === "native_sticky_notes") {
                 window.dispatchEvent(new CustomEvent("createStickyNote"));
+              } else if (
+                appId === "folder_social_media" ||
+                appId.startsWith("folder_")
+              ) {
+                const folder = dockBarSites.find(
+                  (s) =>
+                    s.type === "folder" &&
+                    (s.id === appId ||
+                      s.title.toLowerCase() === "social media" ||
+                      s.title.toLowerCase() === "social media folder"),
+                );
+                if (folder) {
+                  setOpenedFolder(folder);
+                }
               }
             }}
           />

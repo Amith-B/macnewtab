@@ -32,12 +32,14 @@ import {
   CreateIcon,
   WorkIcon,
   EntertainmentIcon,
+  SocialIcon,
   DevelopIcon,
   CategoriesIcon,
   SearchIcon,
   TrashIcon,
 } from "./icons/StoreIcons";
 import { DockIcon } from "../dock/DockIcon";
+import { LinkItem } from "../settings/shared/LinkListEditor";
 
 interface AppStoreProps {
   open: boolean;
@@ -151,7 +153,8 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
           e.clientX / scale -
           modalRef.current.getBoundingClientRect().left / scale,
         y:
-          e.clientY / scale - modalRef.current.getBoundingClientRect().top / scale,
+          e.clientY / scale -
+          modalRef.current.getBoundingClientRect().top / scale,
       };
 
       document.addEventListener("mousemove", handleMouseMove);
@@ -187,6 +190,20 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
             return false;
         }
       }
+
+      if (app.isFolder) {
+        return dockBarSites.some(
+          (site) =>
+            site.type === "folder" &&
+            (site.id === app.id ||
+              site.title.toLowerCase() === app.name.toLowerCase() ||
+              site.title.toLowerCase() ===
+                (app.folderTitle || "").toLowerCase() ||
+              site.title.toLowerCase() === "social media" ||
+              site.title.toLowerCase() === "social media folder"),
+        );
+      }
+
       if (!app.url) return false;
       const appNorm = normalizeUrl(app.url);
       return dockBarSites.some(
@@ -229,6 +246,40 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
         return;
       }
 
+      if (app.isFolder && app.folderLinks) {
+        const isAlreadyAdded = dockBarSites.some(
+          (site) =>
+            site.type === "folder" &&
+            (site.id === app.id ||
+              site.title.toLowerCase() === app.name.toLowerCase() ||
+              site.title.toLowerCase() ===
+                (app.folderTitle || "").toLowerCase() ||
+              site.title.toLowerCase() === "social media" ||
+              site.title.toLowerCase() === "social media folder"),
+        );
+        if (!isAlreadyAdded) {
+          const folderTitle =
+            app.id === "folder_social_media" && t.social_media
+              ? t.social_media
+              : app.folderTitle || app.name;
+          const newFolder: LinkItem = {
+            id: app.id,
+            title: folderTitle,
+            url: "",
+            type: "folder",
+            links: app.folderLinks.map((link) => ({
+              id: generateRandomId(),
+              title: link.title,
+              url: link.url,
+              type: "link" as const,
+              hasCustomIcon: false,
+            })),
+          };
+          handleDockSitesChange([...dockBarSites, newFolder]);
+        }
+        return;
+      }
+
       if (app.url) {
         const appNorm = normalizeUrl(app.url);
         const isAlreadyAdded = dockBarSites.some(
@@ -256,6 +307,7 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
       setShowFocusMode,
       setShowFreeform,
       setShowScreenRecorder,
+      t.social_media,
     ],
   );
 
@@ -284,11 +336,27 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
         return;
       }
 
+      if (app.isFolder) {
+        const updated = dockBarSites.filter(
+          (site) =>
+            !(
+              site.type === "folder" &&
+              (site.id === app.id ||
+                site.title.toLowerCase() === app.name.toLowerCase() ||
+                site.title.toLowerCase() ===
+                  (app.folderTitle || "").toLowerCase() ||
+                site.title.toLowerCase() === "social media" ||
+                site.title.toLowerCase() === "social media folder")
+            ) && site.id !== app.id,
+        );
+        handleDockSitesChange(updated);
+        return;
+      }
+
       if (app.url) {
         const appNorm = normalizeUrl(app.url);
         const updated = dockBarSites.filter(
-          (site) =>
-            normalizeUrl(site.url) !== appNorm && site.id !== app.id,
+          (site) => normalizeUrl(site.url) !== appNorm && site.id !== app.id,
         );
         handleDockSitesChange(updated);
       }
@@ -315,6 +383,14 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
         return;
       }
 
+      if (app.isFolder) {
+        onClose();
+        if (onOpenApp) {
+          onOpenApp(app.id);
+        }
+        return;
+      }
+
       if (app.url) {
         window.open(app.url, separatePageSite ? "_blank" : "_self");
       }
@@ -331,7 +407,14 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
           app.name.toLowerCase().includes(q) ||
           app.subtitle.toLowerCase().includes(q) ||
           (app.description && app.description.toLowerCase().includes(q)) ||
-          app.category.toLowerCase().includes(q),
+          app.category.toLowerCase().includes(q) ||
+          (app.folderTitle && app.folderTitle.toLowerCase().includes(q)) ||
+          (app.folderLinks &&
+            app.folderLinks.some(
+              (l) =>
+                l.title.toLowerCase().includes(q) ||
+                l.url.toLowerCase().includes(q),
+            )),
       );
     }
 
@@ -361,6 +444,25 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
       }
     }
 
+    if (app.isFolder && app.folderLinks) {
+      const previewLinks = app.folderLinks.slice(0, 9);
+      return (
+        <div className="app-store__folder-preview-grid">
+          {previewLinks.map((link, idx) => (
+            <div key={idx} className="app-store__folder-preview-item">
+              <DockIcon
+                id={`${app.id}_preview_${idx}`}
+                url={link.url}
+                title={link.title}
+                size={16}
+                activeSpaceId={activeSpaceId}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    }
+
     const appUrl = app.url || (app.domain ? `https://${app.domain}` : "");
 
     return (
@@ -377,16 +479,35 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
   // Render single app card
   const renderAppCard = (app: StoreAppItem) => {
     const installed = isAppInstalled(app);
+    const title =
+      app.id === "folder_social_media" && t.social_media_folder
+        ? t.social_media_folder
+        : app.name;
+    const subtitle =
+      app.id === "folder_social_media" && t.social_media_folder_desc
+        ? t.social_media_folder_desc
+        : app.subtitle;
 
     return (
-      <div key={app.id} className="app-store__card">
+      <div key={app.id} className="app-store__card" title={app.description}>
         <div className="app-store__card-left">
-          <div className="app-store__card-icon-wrapper">
+          <div
+            className={`app-store__card-icon-wrapper${
+              app.isFolder ? " is-folder" : ""
+            }`}
+          >
             {renderAppIcon(app)}
           </div>
           <div className="app-store__card-info">
-            <h4 className="app-store__card-title">{app.name}</h4>
-            <p className="app-store__card-subtitle">{app.subtitle}</p>
+            <div className="app-store__card-title-row">
+              <h4 className="app-store__card-title">{title}</h4>
+              {app.isFolder && (
+                <span className="app-store__card-badge">
+                  {t.folder || "Folder"}
+                </span>
+              )}
+            </div>
+            <p className="app-store__card-subtitle">{subtitle}</p>
           </div>
         </div>
         <div className="app-store__card-action">
@@ -424,13 +545,34 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
 
   const navItems = useMemo(
     () => [
-      { key: "discover" as const, label: t.discover || "Discover", icon: DiscoverIcon },
+      {
+        key: "discover" as const,
+        label: t.discover || "Discover",
+        icon: DiscoverIcon,
+      },
       { key: "arcade" as const, label: t.arcade || "Arcade", icon: ArcadeIcon },
       { key: "create" as const, label: t.create || "Create", icon: CreateIcon },
       { key: "work" as const, label: t.work || "Work", icon: WorkIcon },
-      { key: "entertainment" as const, label: t.entertainment || "Entertainment", icon: EntertainmentIcon },
-      { key: "develop" as const, label: t.develop || "Develop", icon: DevelopIcon },
-      { key: "categories" as const, label: t.categories || "Categories", icon: CategoriesIcon },
+      {
+        key: "entertainment" as const,
+        label: t.entertainment || "Entertainment",
+        icon: EntertainmentIcon,
+      },
+      {
+        key: "social" as const,
+        label: t.social_media || "Social Media",
+        icon: SocialIcon,
+      },
+      {
+        key: "develop" as const,
+        label: t.develop || "Develop",
+        icon: DevelopIcon,
+      },
+      {
+        key: "categories" as const,
+        label: t.categories || "Categories",
+        icon: CategoriesIcon,
+      },
     ],
     [t],
   );
@@ -607,11 +749,42 @@ export default function AppStore({ open, onClose, onOpenApp }: AppStoreProps) {
                 </div>
                 <div className="app-store__categories-grid">
                   {[
-                    { key: "work" as const, title: "Work & Productivity", desc: "Notes, tasks, documents & chat", icon: WorkIcon },
-                    { key: "create" as const, title: "Create & Design", desc: "Whiteboards, sketching & visual tools", icon: CreateIcon },
-                    { key: "develop" as const, title: "Developer Tools", desc: "Code, repos, APIs & cloud platforms", icon: DevelopIcon },
-                    { key: "entertainment" as const, title: "Entertainment", desc: "Music, videos, streaming & podcasts", icon: EntertainmentIcon },
-                    { key: "arcade" as const, title: "Arcade Games", desc: "Classic browser puzzles & retro games", icon: ArcadeIcon },
+                    {
+                      key: "work" as const,
+                      title: "Work & Productivity",
+                      desc: "Notes, tasks, documents & chat",
+                      icon: WorkIcon,
+                    },
+                    {
+                      key: "create" as const,
+                      title: "Create & Design",
+                      desc: "Whiteboards, sketching & visual tools",
+                      icon: CreateIcon,
+                    },
+                    {
+                      key: "develop" as const,
+                      title: "Developer Tools",
+                      desc: "Code, repos, APIs & cloud platforms",
+                      icon: DevelopIcon,
+                    },
+                    {
+                      key: "entertainment" as const,
+                      title: "Entertainment",
+                      desc: "Music, videos, streaming & podcasts",
+                      icon: EntertainmentIcon,
+                    },
+                    {
+                      key: "social" as const,
+                      title: t.social_media || "Social Media",
+                      desc: "Connect, share, chat & discover",
+                      icon: SocialIcon,
+                    },
+                    {
+                      key: "arcade" as const,
+                      title: "Arcade Games",
+                      desc: "Classic browser puzzles & retro games",
+                      icon: ArcadeIcon,
+                    },
                   ].map((cat) => {
                     const CatIcon = cat.icon;
                     return (
